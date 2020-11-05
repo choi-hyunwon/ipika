@@ -1,12 +1,29 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <a @click="go('/')">Home</a> |
+      <a @click="go('/canvas')">Canvas</a> |
+      <a @click="go('/view1')">View1</a> |
+      <a @click="go('/view2')">View2</a> |
+      <a @click="go('/view3')">View3</a>
     </div>
     <router-view/>
   </div>
 </template>
+
+<script>
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+export default {
+  name: 'App',
+  methods: {
+    go(path) {
+      if(path === '/canvas') localStorage.setItem('isReload', true)
+      this.$router.push({ path: path })
+    }
+  }
+}
+</script>
 
 <style>
 #app {

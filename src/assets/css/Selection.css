@@ -1,0 +1,58 @@
+.Selection {position: absolute; cursor: context-menu; z-index: 100;} /* min-width: 90px; min-height: 90px; */
+.Selection {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+.Selection.PathSelection {border: 1px solid #C1C1C1;}
+
+.Selection .DragHandle {position: absolute; width: 44px; height: 44px; line-height: 44px; text-align: center; border-radius: 50%; background-color: #A09D9C; opacity: 0.9; cursor: move;}
+.Selection .DragHandle:hover {opacity: 1;}
+.Selection .DragHandle img {vertical-align: middle;}
+
+.Selection .RotateHandle {position: absolute; width: 24px; height: 24px; border-radius: 50%; background-color: #A09D9C; opacity: 0.9; cursor: all-scroll;}
+.Selection .RotateHandle:hover, .Selection.Pressed .RotateHandle {opacity: 1;}
+.Selection .RotateHandle.Top {top: 5px; right: 5px;}
+.Selection .RotateHandle.Bottom {bottom: 5px; left: 5px;}
+
+.Selection .ResizeHandle {border-radius: 50%; background-color: #868686;}
+
+.Selection .ResizeHandle.TL {width: 10px; height: 10px; top: -5px; left: -5px;}
+.Selection .ResizeHandle.TR {width: 10px; height: 10px; top: -5px; right: -5px;}
+.Selection .ResizeHandle.BL {width: 10px; height: 10px; bottom: -5px; left: -5px;}
+.Selection .ResizeHandle.BR {width: 10px; height: 10px; bottom: -5px; right: -5px;}
+
+.Selection .ResizeHandle.T {width: 8px; height: 8px; left: 50%; top: -4px;}
+.Selection .ResizeHandle.B {width: 8px; height: 8px; left: 50%; bottom: -4px;}
+.Selection .ResizeHandle.L {width: 8px; height: 8px; left: -4px; top: 50%;}
+.Selection .ResizeHandle.R {width: 8px; height: 8px; right: -4px; top: 50%;}
+
+.Selection svg rect, .Selection svg path {
+	fill: none;
+	stroke: #868686;
+	stroke-width: 1;
+	stroke-dasharray: 5;
+	-webkit-animation: dash 4s linear infinite;
+	animation: dash 4s linear infinite;
+} /*stroke-dashoffset: 10;*/
+
+@-webkit-keyframes dash {
+	from {
+		stroke-dashoffset: 100;
+	}
+	to {
+		stroke-dashoffset: 0;
+	}
+}
+
+@keyframes dash {
+	from {
+		stroke-dashoffset: 100;
+	}
+	to {
+		stroke-dashoffset: 0;
+	}
+}

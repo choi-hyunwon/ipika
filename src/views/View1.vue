@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>홈</div>
+    <div>VIEW1</div>
     <div>
       <b-card no-body>
         <b-tabs card>
@@ -13,29 +13,13 @@
         </b-tabs>
       </b-card>
     </div>
-    <div class="a">
-      <p>scss 테스트 : $aColor</p>
-      <span class="b">scss 테스트 : $bColor</span>
-    </div>
   </div>
 </template>
 
 <script>
+
 export default {
-  name: 'Home'
+  name: 'VIEW1'
 }
 </script>
-
-
-<style lang="scss" scoped>
-@import '@/assets/scss/list';
-  .a{
-    color: $aColor ;
-    .b {
-      color: $bColor ;
-    }
-  }
-</style>
-
-
 
