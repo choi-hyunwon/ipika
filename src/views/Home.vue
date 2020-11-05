@@ -1,21 +1,8 @@
 <template>
   <div>
-    <div>홈</div>
-    <div>
-      <b-card no-body>
-        <b-tabs card>
-          <b-tab title="Tab 1" active>
-            <b-card-text>Tab contents 1</b-card-text>
-          </b-tab>
-          <b-tab title="Tab 2">
-            <b-card-text>Tab contents 2</b-card-text>
-          </b-tab>
-        </b-tabs>
-      </b-card>
-    </div>
+    <div>HOME</div>
     <div class="a">
-      <p>scss 테스트 : $aColor</p>
-      <span class="b">scss 테스트 : $bColor</span>
+      scss 테스트 : $aColor <span class="b">scss 테스트 : $bColor</span>
     </div>
   </div>
 </template>
