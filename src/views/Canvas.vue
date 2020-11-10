@@ -1,6 +1,20 @@
 <template>
-  <div>
-    <nav v-if="isLoading" style="visibility: visible;">
+  <div class="wrap bg-ivory">
+    <div class="header canvas">
+      <div class="timer red"><!-- 1분 미만일 경우, red 클래스 추가 -->
+<!--        <div class="img"><img src="@/assets/images/common/timer-black@2x.png" alt=""></div>-->
+        <div class="img"><img src="@/assets/images/common/timer@2x.png" alt=""></div> <!-- 1분 미만일 경우 -->
+        <div class="time">02 : 00</div>
+      </div>
+      <div class="symbol">
+        <span class="img"><img src="@/assets/images/common/Symbol@2x.png" alt=""></span>
+        <span class="text">자유롭게 나무를 그려보세요</span>
+      </div>
+      <div class="box-close">
+        <button class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></button>
+      </div>
+    </div>
+    <nav v-if="isLoading" style="visibility: visible;position: absolute;bottom: 20px;left: 20px;z-index: 1;">
       <div>
         <img src="https://developer-demos.wacom.com/Images/btn_paper_02.jpg" title="Paper" class="Item Paper" onclick="dropDown.toggle('Papers')" alt="">
         <span class="CONFIGURATOR_HIDDEN">
@@ -13,7 +27,7 @@
 
         <span class="ColorBox Delimiter" onclick="dropDown.toggle('Colors');" title="Color">
 				<a href="javascript:void(0)" class="Item Color" style="background-color: #4A4A4A;"></a>
-				<input type="color" value="#4A4A4A" class="Button" onchange="layout.selectColor(this);">
+				<input type="color" value="#4A4A4A" class="Button" onchange="layout.selectColor(this);" title="canvas">
 			</span>
 
         <span class="VECTOR CONFIGURATOR_HIDDEN">
@@ -46,9 +60,8 @@
     <div class="DropDown Papers" style="display: none;">
       <img src="https://developer-demos.wacom.com/Images/dropdown_arrow.png" class="Arrow" alt="">
       <img id="paper_01" src="https://developer-demos.wacom.com/Images/btn_paper_01.jpg" class="Item Paper" alt="">
-      <img id="paper_02" src="https://developer-demos.wacom.com/Images/btn_paper_02.jpg" class="Item Paper Selected"
-           alt="">
-      <img id="paper_03" src="https://developer-demos.wacom.com/Images/btn_paper_03.jpg" class="Item Paper" alt="">
+      <img id="paper_02" src="https://developer-demos.wacom.com/Images/btn_paper_02.jpg" class="Item Paper" alt="">
+      <img id="paper_03" src="https://developer-demos.wacom.com/Images/btn_paper_03.jpg" class="Item Paper Selected" alt="">
     </div>
     <div class="DropDown Colors" style="display: none;">
       <img src="https://developer-demos.wacom.com/Images/dropdown_arrow.png" class="Arrow" alt="">
@@ -84,8 +97,70 @@
           <img src="https://developer-demos.wacom.com/Images/btn_rotate_bottom.png" alt="">
         </div>
       </div>
+      <div class="btn-wrap">
+<!--        <b-button variant="dark" class="btn-lg disabled">다 그렸어요!</b-button>-->
+        <b-button variant="dark" class="btn-lg">다 그렸어요!</b-button> <!-- 1분 미만일 경우 -->
+      </div>
     </div>
     <div id="notifications" style="bottom: 127px;"></div>
+
+    <!-- s 팝업  -->
+    <b-button v-b-modal.canvasPopup style="position: absolute; top: 200px; left: 50px;">진단테스트_3_시간 초과 시 1</b-button>
+    <b-modal id="canvasPopup" centered title="마케팅 관련 정보 수신 동의" modal-class="canvasPopup">
+      <template #modal-header>
+        <div class="symbol"><img src="@/assets/images/common/timer@2x.png" alt=""></div>
+      </template>
+      <p class="text">시간이 초과되었어요!<br/>
+        제출하시겠어요?</p>
+      <p class="text-sm">다시 그리면 먼저 그린 그림은 사라져요</p>
+      <template #modal-footer="{ cancel }">
+        <b-button variant="blue" class="btn-half">다시 그릴래요!</b-button>
+        <b-button variant="black" class="btn-half">제출할게요</b-button>
+      </template>
+    </b-modal>
+
+    <b-button v-b-modal.canvasPopup2 style="position: absolute; top: 200px; left: 200px;">진단테스트_3_시간 초과 시 2</b-button>
+    <b-modal id="canvasPopup2" centered title="마케팅 관련 정보 수신 동의" modal-class="canvasPopup">
+      <template #modal-header>
+        <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>
+      </template>
+      <p class="text">다시 그리시겠어요?<br/>
+        지금 그린 그림이 지워져요</p>
+      <p class="text-sm">제출하면 파블로가 그림을 분석할 거예요 :)</p>
+      <template #modal-footer="{ cancel }">
+        <b-button variant="blue" class="btn-half">제출할게요</b-button>
+        <b-button variant="black" class="btn-half">다시 그릴게요!</b-button>
+      </template>
+    </b-modal>
+
+    <b-button v-b-modal.canvasPopup3 style="position: absolute; top: 200px; left: 350px;">진단테스트_3_제출팝업</b-button>
+    <b-modal id="canvasPopup3" centered title="마케팅 관련 정보 수신 동의" modal-class="canvasPopup">
+      <template #modal-header>
+        <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>
+      </template>
+      <p class="text">다 그렸나요?<br/>
+        제출하면 수정할 수 없어요!</p>
+      <p class="text-sm">더 그리고 싶은 것은 없는지 생각해봐요</p>
+      <template #modal-footer="{ cancel }">
+        <b-button variant="gray" class="btn-half">제출할게요</b-button>
+        <b-button variant="black" class="btn-half">더 그릴게요!</b-button>
+      </template>
+    </b-modal>
+
+    <b-button v-b-modal.canvasPopup4 style="position: absolute; top: 200px; left: 480px;">진단테스트_3_제출 완료 팝업</b-button>
+    <b-modal id="canvasPopup4" centered title="마케팅 관련 정보 수신 동의" modal-class="canvasPopup">
+      <template #modal-header>
+        <div class="symbol"><img src="@/assets/images/common/check_green@2x.png" alt=""></div>
+      </template>
+      <p class="text">성공적으로<br/>
+        제출되었어요 :)</p>
+      <p class="text-sm">결과를 확인해보세요!</p>
+      <template #modal-footer="{ cancel }">
+        <b-button variant="black" class="btn-block">내 스테이지 확인하러 가기</b-button>
+      </template>
+    </b-modal>
+    <!-- e 팝업  -->
+
   </div>
 </template>
 
@@ -114,3 +189,18 @@ export default {
 <style scoped src="@/assets/css/Demo.Navigation.css"></style>
 <style scoped src="@/assets/css/Selection.css"></style>
 <style scoped src="@/assets/css/Footer.css"></style>
+
+<style>
+.Wrapper {
+  width: 100% !important;
+  height: 108rem !important;
+}
+#canvas {
+  height: 100% !important;
+}
+.btn-wrap {
+  position: absolute;
+  right: 4.8rem;
+  bottom: 4.8rem;
+}
+</style>

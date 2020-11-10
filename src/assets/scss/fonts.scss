@@ -1,0 +1,51 @@
+@charset "UTF-8";
+/**
+fonts
+ */
+@font-face {
+  font-family: 'Noto Sans CJK KR Regular';
+  font-style: normal;
+  src: local('Noto Sans CJK KR Regular'), url('~@/assets/fonts/NotoSansCJKkr-Regular.woff') format('woff'),
+  url('~@/assets/fonts/NotoSansCJKkr-Regular.eot') format('embedded-opentype');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'Noto Sans CJK KR Medium';
+  font-style: normal;
+  font-weight: 500;
+  src: local('Noto Sans CJK KR Medium'), url('~@/assets/fonts/NotoSansCJKkr-Medium.woff') format('woff'),
+  url('~@/assets/fonts/NotoSansCJKkr-Medium.eot') format('embedded-opentype');
+}
+
+@font-face {
+  font-family: 'Noto Sans CJK KR Bold';
+  font-style: normal;
+  font-weight: bold;
+  src: local('Noto Sans CJK KR Bold'), url('~@/assets/fonts/NotoSansCJKkr-Bold.woff') format('woff'),
+  url('~@/assets/fonts/NotoSansCJKkr-Bold.eot') format('embedded-opentype');
+}
+
+@font-face {
+  font-family: Inter;
+  src: local(Inter-SemiBold),
+  url('~@/assets/fonts/Inter-SemiBold.woff') format("woff"),
+  url('~@/assets/fonts/Inter-SemiBold.woff2') format("woff2"),
+  url('~@/assets/fonts/Inter-SemiBold.ttf') format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+}
+
+@font-face {
+  font-family: Inter;
+  src: local(Inter-Bold),
+  url('~@/assets/fonts/Inter-Bold.woff') format("woff"),
+  url('~@/assets/fonts/Inter-Bold.woff2') format("woff2"),
+  url('~@/assets/fonts/Inter-Bold.eot') format('embedded-opentype'),
+  url('~@/assets/fonts/Inter-bold.ttf') format("truetype");
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+}
+
