@@ -98,7 +98,7 @@
 <script>
 
 export default {
-  name: 'VIEW1',
+  name: 'Agreement',
   data () {
     return {
       i1: false,

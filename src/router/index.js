@@ -2,10 +2,12 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '@/views/Home'
 import Canvas from '@/views/Canvas'
-import View1 from '@/views/View1'
-import View2 from '@/views/View2'
-import View3 from '@/views/View3'
-import View4 from '@/views/View4'
+import Agreement from '@/views/Agreement'
+import LoadingSpinnerWaiting from '@/views/LoadingSpinnerWaiting'
+import TestingResult from '@/views/TestingResult'
+import Layout from '@/views/Layout'
+import PabloMain from '@/views/PabloMain'
+import PabloStudy1 from '@/views/PabloStudy1'
 
 Vue.use(VueRouter)
 
@@ -21,24 +23,34 @@ const routes = [
     component: Canvas
   },
   {
-    path: '/view1',
-    name: 'View1',
-    component: View1
+    path: '/Agreement',
+    name: 'Agreement',
+    component: Agreement
   },
   {
-    path: '/view2',
-    name: 'View2',
-    component: View2
+    path: '/LoadingSpinnerWaiting',
+    name: 'LoadingSpinnerWaiting',
+    component: LoadingSpinnerWaiting
   },
   {
-    path: '/view3',
-    name: 'View3',
-    component: View3
+    path: '/TestingResult',
+    name: 'TestingResult',
+    component: TestingResult
   },
   {
-    path: '/view4',
-    name: 'View4',
-    component: View4
+    path: '/Layout',
+    name: 'Layout',
+    component: Layout
+  },
+  {
+    path: '/PabloMain',
+    name: 'PabloMain',
+    component: PabloMain
+  },
+  {
+    path: '/PabloStudy1',
+    name: 'PabloStudy1',
+    component: PabloStudy1
   }
 ]
 

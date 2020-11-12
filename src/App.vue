@@ -1,12 +1,17 @@
 <template>
   <div id="app">
-    <div id="nav">
+    <div class="navigation">
+      진단테스트 :
       <a @click="go('/')">초기화면</a> |
-      <a @click="go('/view1')">약관동의</a> |
+      <a @click="go('/Agreement')">약관동의</a> |
       <a @click="go('/canvas')">캔버스</a> |
-      <a @click="go('/view2')">로딩스피너 제작 예정</a> |
-      <a @click="go('/view3')">View3</a> |
-      <a @click="go('/view4')">View4</a>
+      <a @click="go('/LoadingSpinnerWaiting')">로딩스피너 제작 예정</a> |
+      <a @click="go('/TestingResult')">테스팅 결과</a>
+    </div>
+    <div class="navigation pb-5">
+      파블로레터 :
+      <a @click="go('/PabloMain')">학습메인</a> |
+      <a @click="go('/PabloStudy1')">파블로학습1</a> |
     </div>
     <router-view/>
   </div>
@@ -34,23 +39,17 @@ export default {
 </style>
 
 <style>
-#app {
-  //font-family: Avenir, Helvetica, Arial, sans-serif;
-  //-webkit-font-smoothing: antialiased;
-  //-moz-osx-font-smoothing: grayscale;
-  //text-align: center;
-  //color: #2c3e50;
+.navigation {
+  padding: 10px 10px 0 10px;
 }
-#nav {
-  padding: 30px;
+.navigation:last-child {
 }
-
-#nav a {
+.navigation a {
   font-weight: bold;
   color: #2c3e50;
 }
 
-#nav a.router-link-exact-active {
+.navigation a.router-link-exact-active {
   color: #42b983;
 }
 </style>
