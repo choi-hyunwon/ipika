@@ -1,11 +1,9 @@
 <template>
   <div class="wrap">
     <div class="header">
-      <div class="symbol">
-        <button><img src="@/assets/images/common/Symbol@2x.png" alt=""></button>
-      </div>
+      <div class="symbol"><img src="@/assets/images/common/Symbol@2x.png" alt=""></div>
       <div class="box-close">
-        <button class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></button>
+        <router-link to="/" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>
       </div>
     </div>
     <div class="row">
@@ -19,7 +17,7 @@
         <p class="desc">트윙클 스테이지는 눈과 손의 협응이 일어나고<br/>
           무의식적으로 표현하는 단계입니다.</p>
         <div class="btn-group">
-          <b-button class="btn btn-dark">무료체험 3개월 시작하기</b-button>
+          <router-link to="/" class="btn btn-dark">무료체험 3개월 시작하기</router-link>
         </div>
       </div>
       <div class="col col-6">

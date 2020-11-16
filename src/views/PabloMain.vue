@@ -4,46 +4,46 @@
       <div class="col col-6 left">
         <div class="symbol"><img src="@/assets/images/common/Symbol@2x.png" alt=""></div>
         <ul class="dot-list">
-          <li class="on"><a href="#"></a></li>
-          <li><a href="#"></a></li>
-          <li><a href="#"></a></li>
-          <li><a href="#"></a></li>
-          <li><a href="#"></a></li>
-          <li><a href="#"></a></li>
+          <li class="on"><router-link to=""></router-link></li>
+          <li><router-link to=""></router-link></li>
+          <li><router-link to=""></router-link></li>
+          <li><router-link to=""></router-link></li>
+          <li><router-link to=""></router-link></li>
+          <li><router-link to=""></router-link></li>
         </ul>
         <ul class="title-list">
           <li class="active badge-new"><!-- badge-new / badge-start -->
-            <router-link to="/home">
+            <router-link to="/">
               <span class="num">01</span>
               <span class="title">Pablo Letter</span>
             </router-link>
           </li>
           <li>
-            <router-link>
+            <router-link to="/">
               <span class="num">02</span>
               <span class="title">Pablo Classic</span>
             </router-link>
           </li>
           <li>
-            <router-link>
+            <router-link to="/">
               <span class="num">03</span>
               <span class="title">Canvas</span>
             </router-link>
           </li>
           <li>
-            <router-link >
+            <router-link to="/">
               <span class="num">04</span>
               <span class="title">My Gallery</span>
             </router-link>
           </li>
           <li>
-            <router-link>
+            <router-link to="/">
               <span class="num">05</span>
               <span class="title">Open Gallery</span>
             </router-link>
           </li>
           <li>
-            <router-link>
+            <router-link to="/">
               <span class="num">06</span>
               <span class="title">My Page</span>
             </router-link>
@@ -52,11 +52,11 @@
         <div class="message">
           <span class="symbol"><img src="@/assets/images/common/Symbol-white@2x.png" alt=""></span>
           <span class="text">새로운 학습이 도착했어요! 지금 바로 시작해보세요 😃</span>
-          <a href="#" class="btn-close"></a>
+          <router-link to="/" class="btn-close"></router-link>
         </div>
       </div>
       <div class="col col-6 right">
-        <a href="#" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></a>
+        <router-link to="/" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>
         <div class="img"><img src="@/assets/images/temp/sample_img_01.jpg" alt=""></div>
       </div>
     </div>

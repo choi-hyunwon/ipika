@@ -1,11 +1,9 @@
 <template>
   <div class="wrap bg-ivory">
     <div class="header">
-      <div class="symbol">
-        <button><img src="@/assets/images/common/Symbol@2x.png" alt=""></button>
-      </div>
+      <div class="symbol"><img src="@/assets/images/common/Symbol@2x.png" alt=""></div>
       <div class="box-close">
-        <button class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></button>
+        <router-link to="/" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>
       </div>
     </div>
     <div class="contents">
