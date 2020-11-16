@@ -51,7 +51,11 @@
         </div>
       </div>
       <div class="box-btn">
-        <router-link to="/" class="btn btn-gray btn-block disabled">드로잉 테스트 시작하기</router-link><!-- disabled일 경우, disabled 클래스 추가  -->
+        <router-link to="/canvas" class="btn btn-gray btn-block"
+                     :class="{'disabled': !check.essential}"
+        >
+          드로잉 테스트 시작하기
+        </router-link><!-- disabled일 경우, disabled 클래스 추가  -->
       </div>
     </div>
 
