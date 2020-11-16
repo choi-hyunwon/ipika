@@ -10,6 +10,11 @@ import PabloMain from '@/views/PabloMain'
 import PabloStudy1 from '@/views/PabloStudy1'
 import PabloStudy2 from '@/views/PabloStudy2'
 import PabloStudy3 from '@/views/PabloStudy3'
+import PabloStudy4 from '@/views/PabloStudy4'
+import PabloStudy5 from '@/views/PabloStudy5'
+import PabloPopup1 from '@/views/PabloPopup1'
+import PabloPopup2 from '@/views/PabloPopup2'
+import PabloPopup3 from '@/views/PabloPopup3'
 
 Vue.use(VueRouter)
 
@@ -63,6 +68,31 @@ const routes = [
     path: '/PabloStudy3',
     name: 'PabloStudy3',
     component: PabloStudy3
+  },
+  {
+    path: '/PabloStudy4',
+    name: 'PabloStudy4',
+    component: PabloStudy4
+  },
+  {
+    path: '/PabloStudy5',
+    name: 'PabloStudy5',
+    component: PabloStudy5
+  },
+  {
+    path: '/PabloPopup1',
+    name: 'PabloPopup1',
+    component: PabloPopup1
+  },
+  {
+    path: '/PabloPopup2',
+    name: 'PabloPopup2',
+    component: PabloPopup2
+  },
+  {
+    path: '/PabloPopup3',
+    name: 'PabloPopup3',
+    component: PabloPopup3
   }
 ]
 

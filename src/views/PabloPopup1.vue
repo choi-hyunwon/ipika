@@ -32,12 +32,12 @@
       <!-- s 영상 재생 중_화면 탭 시 -->
       <div class="inner">
         <div class="video">
-          <p class="text">생각 제시하는 생각 과제 제시하는 텍스트 영역입니다.</p>
-          <div class="play-wrap">
-            <button class="btn-rewind"><img src="@/assets/images/common/5s_rewind@2x.png" alt=""></button>
-            <button class="btn-pause"><img src="@/assets/images/common/pause@2x.png" alt=""></button>
-            <button class="btn-forward"><img src="@/assets/images/common/5s_forward@2x.png" alt=""></button>
-          </div>
+<!--          <p class="text">생각 제시하는 생각 과제 제시하는 텍스트 영역입니다.</p>-->
+<!--          <div class="play-wrap">-->
+<!--            <button class="btn-rewind"><img src="@/assets/images/common/5s_rewind@2x.png" alt=""></button>-->
+<!--            <button class="btn-pause"><img src="@/assets/images/common/pause@2x.png" alt=""></button>-->
+<!--            <button class="btn-forward"><img src="@/assets/images/common/5s_forward@2x.png" alt=""></button>-->
+<!--          </div>-->
           <div class="progress-wrap">
             <div class="inner">
               <span class="time">2:40</span>
@@ -53,12 +53,40 @@
       <!-- e 영상 재생 중_화면 탭 시 -->
 
     </div>
+    <b-button v-b-modal.normalPopup3 style="position: absolute; top: 200px; left: 350px;">진단테스트_3_제출팝업</b-button>
+    <b-modal :visible="modalShow" id="normalPopup3" ref="normalPopup3" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">
+      <template #modal-header>
+        <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>
+      </template>
+
+      <p class="text">다 보셨나요? 영상은 다음<br/>
+        단계에서도 볼 수 있어요</p>
+      <p class="text-sm">보지 못한 부분이 있어도 괜찮아요 :)</p>
+      <template #modal-footer="{ cancel }">
+        <b-button variant="gray" class="btn-half">다시 볼래요</b-button>
+        <b-button variant="black" class="btn-half">넘어갈게요</b-button>
+      </template>
+
+<!--      <p class="text">뒤로 가시겠어요?<br/>-->
+<!--        처음부터 다시 봐야해요</p>-->
+<!--      <p class="text-sm">주제보기를 누르면 학습주제를 다시 볼 수 있어요</p>-->
+<!--      <template #modal-footer="{ cancel }">-->
+<!--        <b-button variant="gray" class="btn-half">뒤로 갈래요</b-button>-->
+<!--        <b-button variant="black" class="btn-half">계속 볼게요!</b-button>-->
+<!--      </template>-->
+
+    </b-modal>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'PabloStudy3'
+  name: 'PabloStudy3',
+  data() {
+    return {
+      modalShow: true
+    }
+  }
 }
 </script>
 

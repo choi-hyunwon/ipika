@@ -1,34 +1,8 @@
 <template>
   <div class="wrap">
-    <div class="header ivory">
-      <router-link to="/PabloStudy2" class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt=""></router-link>
-      <div class="flex-box">
-        <router-link to="/" class="btn-view">
-          <span class="img"><img src="@/assets/images/common/ic-drawing@2x.png" alt=""></span>
-          <span class="tit">주제보기</span>
-        </router-link>
-        <div class="box-close">
-          <router-link to="/PabloMain" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>
-        </div>
-      </div>
-    </div>
-    <div class="bg"><img src="@/assets/images/temp/sample_img_02.png" alt=""></div>
-    <div class="dim">
-
-      <!-- s default -->
-<!--      <div class="inner">-->
-<!--        <div class="symbol-wrap">-->
-<!--          <div class="symbol"><img src="@/assets/images/common/Stage_Twinkle @2x.png" alt=""></div>-->
-<!--          <span class="text">Twinkle Stage 4</span></div>-->
-<!--        <div class="title">생각 제시하는<br/>-->
-<!--          생각 과제 제시하는<br/>-->
-<!--          텍스트 영역입니다.</div>-->
-<!--        <div class="btn-group">-->
-<!--          <b-button class="btn btn-dark"><i class="ic-play"><img src="@/assets/images/common/play@2x.png" alt=""></i><span>재생하기</span></b-button>-->
-<!--        </div>-->
-<!--      </div>-->
-      <!-- e default -->
-
+    <div class="bg full-screen"><img src="@/assets/images/temp/sample_img_02.png" alt=""></div><!-- full-screen 클래스 추가 -->
+    <button class="btn-dim-close"><img src="@/assets/images/common/close_dim@2x.png" alt=""></button>
+    <div class="dim full-screen"><!-- full-screen 클래스 추가 -->
       <!-- s 영상 재생 중_화면 탭 시 -->
       <div class="inner">
         <div class="video">
@@ -58,7 +32,7 @@
 
 <script>
 export default {
-  name: 'PabloStudy3'
+  name: 'PabloStudy4'
 }
 </script>
 
@@ -228,6 +202,7 @@ export default {
     height: 7.2rem;
     right: 2.4rem;
     top: 2.4rem;
+    z-index: 5;
     img {
       width: 100%;
       height: 100%;

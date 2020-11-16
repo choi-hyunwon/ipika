@@ -107,8 +107,8 @@
     <div id="notifications" style="bottom: 127px;"></div>
 
     <!-- s 팝업  -->
-    <b-button v-b-modal.canvasPopup style="position: absolute; top: 200px; left: 50px;">진단테스트_3_시간 초과 시 1</b-button>
-    <b-modal id="canvasPopup" centered title="마케팅 관련 정보 수신 동의" modal-class="canvasPopup">
+    <b-button v-b-modal.normalPopup style="position: absolute; top: 200px; left: 50px;">진단테스트_3_시간 초과 시 1</b-button>
+    <b-modal id="normalPopup" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">
       <template #modal-header>
         <div class="symbol"><img src="@/assets/images/common/timer@2x.png" alt=""></div>
       </template>
@@ -121,8 +121,8 @@
       </template>
     </b-modal>
 
-    <b-button v-b-modal.canvasPopup2 style="position: absolute; top: 200px; left: 200px;">진단테스트_3_시간 초과 시 2</b-button>
-    <b-modal id="canvasPopup2" centered title="마케팅 관련 정보 수신 동의" modal-class="canvasPopup">
+    <b-button v-b-modal.normalPopup2 style="position: absolute; top: 200px; left: 200px;">진단테스트_3_시간 초과 시 2</b-button>
+    <b-modal id="normalPopup2" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">
       <template #modal-header>
         <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>
       </template>
@@ -135,8 +135,8 @@
       </template>
     </b-modal>
 
-    <b-button v-b-modal.canvasPopup3 style="position: absolute; top: 200px; left: 350px;">진단테스트_3_제출팝업</b-button>
-    <b-modal id="canvasPopup3" centered title="마케팅 관련 정보 수신 동의" modal-class="canvasPopup">
+    <b-button v-b-modal.normalPopup3 style="position: absolute; top: 200px; left: 350px;">진단테스트_3_제출팝업</b-button>
+    <b-modal id="normalPopup3" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">
       <template #modal-header>
         <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>
       </template>
@@ -149,8 +149,8 @@
       </template>
     </b-modal>
 
-    <b-button v-b-modal.canvasPopup4 style="position: absolute; top: 200px; left: 480px;">진단테스트_3_제출 완료 팝업</b-button>
-    <b-modal id="canvasPopup4" centered title="마케팅 관련 정보 수신 동의" modal-class="canvasPopup">
+    <b-button v-b-modal.normalPopup4 style="position: absolute; top: 200px; left: 480px;">진단테스트_3_제출 완료 팝업</b-button>
+    <b-modal id="normalPopup4" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">
       <template #modal-header>
         <div class="symbol"><img src="@/assets/images/common/check_green@2x.png" alt=""></div>
       </template>

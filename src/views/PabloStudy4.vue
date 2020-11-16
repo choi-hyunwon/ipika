@@ -1,64 +1,65 @@
 <template>
   <div class="wrap">
-    <div class="header ivory">
-      <router-link to="/PabloStudy2" class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt=""></router-link>
-      <div class="flex-box">
-        <router-link to="/" class="btn-view">
-          <span class="img"><img src="@/assets/images/common/ic-drawing@2x.png" alt=""></span>
-          <span class="tit">주제보기</span>
-        </router-link>
-        <div class="box-close">
-          <router-link to="/PabloMain" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>
-        </div>
-      </div>
-    </div>
-    <div class="bg"><img src="@/assets/images/temp/sample_img_02.png" alt=""></div>
-    <div class="dim">
-
-      <!-- s default -->
-<!--      <div class="inner">-->
-<!--        <div class="symbol-wrap">-->
-<!--          <div class="symbol"><img src="@/assets/images/common/Stage_Twinkle @2x.png" alt=""></div>-->
-<!--          <span class="text">Twinkle Stage 4</span></div>-->
-<!--        <div class="title">생각 제시하는<br/>-->
-<!--          생각 과제 제시하는<br/>-->
-<!--          텍스트 영역입니다.</div>-->
-<!--        <div class="btn-group">-->
-<!--          <b-button class="btn btn-dark"><i class="ic-play"><img src="@/assets/images/common/play@2x.png" alt=""></i><span>재생하기</span></b-button>-->
+<!--    <div class="header ivory">-->
+<!--      <router-link to="/PabloStudy2" class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt=""></router-link>-->
+<!--      <div class="flex-box">-->
+<!--        <router-link to="/" class="btn-view">-->
+<!--          <span class="img"><img src="@/assets/images/common/ic-drawing@2x.png" alt=""></span>-->
+<!--          <span class="tit">주제보기</span>-->
+<!--        </router-link>-->
+<!--        <div class="box-close">-->
+<!--          <router-link to="/PabloMain" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>-->
 <!--        </div>-->
 <!--      </div>-->
-      <!-- e default -->
+<!--    </div>-->
+    <div class="bg full-screen"><img src="@/assets/images/temp/sample_img_02.png" alt=""></div><!-- full-screen 클래스 추가 -->
+    <button class="btn-dim-close"><img src="@/assets/images/common/close_dim@2x.png" alt=""></button>
+<!--    <div class="dim">-->
 
-      <!-- s 영상 재생 중_화면 탭 시 -->
-      <div class="inner">
-        <div class="video">
-          <p class="text">생각 제시하는 생각 과제 제시하는 텍스트 영역입니다.</p>
-          <div class="play-wrap">
-            <button class="btn-rewind"><img src="@/assets/images/common/5s_rewind@2x.png" alt=""></button>
-            <button class="btn-pause"><img src="@/assets/images/common/pause@2x.png" alt=""></button>
-            <button class="btn-forward"><img src="@/assets/images/common/5s_forward@2x.png" alt=""></button>
-          </div>
-          <div class="progress-wrap">
-            <div class="inner">
-              <span class="time">2:40</span>
-              <div class="progress-inner">
-                <span class="bar" style="width: 30%"></span>
-              </div>
-              <span class="playtime">2:40</span>
-              <button class="btn-full-screen"><img src="@/assets/images/common/btn_full_screen@2x.png" alt=""></button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- e 영상 재생 중_화면 탭 시 -->
+<!--      &lt;!&ndash; s default &ndash;&gt;-->
+<!--&lt;!&ndash;      <div class="inner">&ndash;&gt;-->
+<!--&lt;!&ndash;        <div class="symbol-wrap">&ndash;&gt;-->
+<!--&lt;!&ndash;          <div class="symbol"><img src="@/assets/images/common/Stage_Twinkle @2x.png" alt=""></div>&ndash;&gt;-->
+<!--&lt;!&ndash;          <span class="text">Twinkle Stage 4</span></div>&ndash;&gt;-->
+<!--&lt;!&ndash;        <div class="title">생각 제시하는<br/>&ndash;&gt;-->
+<!--&lt;!&ndash;          생각 과제 제시하는<br/>&ndash;&gt;-->
+<!--&lt;!&ndash;          텍스트 영역입니다.</div>&ndash;&gt;-->
+<!--&lt;!&ndash;        <div class="btn-group">&ndash;&gt;-->
+<!--&lt;!&ndash;          <b-button class="btn btn-dark"><i class="ic-play"><img src="@/assets/images/common/play@2x.png" alt=""></i><span>재생하기</span></b-button>&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;      </div>&ndash;&gt;-->
+<!--      &lt;!&ndash; e default &ndash;&gt;-->
 
-    </div>
+<!--      &lt;!&ndash; s 영상 재생 중_화면 탭 시 &ndash;&gt;-->
+<!--      <div class="inner">-->
+<!--        <div class="video">-->
+<!--          <p class="text">생각 제시하는 생각 과제 제시하는 텍스트 영역입니다.</p>-->
+<!--          <div class="play-wrap">-->
+<!--            <button class="btn-rewind"><img src="@/assets/images/common/5s_rewind@2x.png" alt=""></button>-->
+<!--            <button class="btn-pause"><img src="@/assets/images/common/pause@2x.png" alt=""></button>-->
+<!--            <button class="btn-forward"><img src="@/assets/images/common/5s_forward@2x.png" alt=""></button>-->
+<!--          </div>-->
+<!--          <div class="progress-wrap">-->
+<!--            <div class="inner">-->
+<!--              <span class="time">2:40</span>-->
+<!--              <div class="progress-inner">-->
+<!--                <span class="bar" style="width: 30%"></span>-->
+<!--              </div>-->
+<!--              <span class="playtime">2:40</span>-->
+<!--              <button class="btn-full-screen"><img src="@/assets/images/common/btn_full_screen@2x.png" alt=""></button>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      &lt;!&ndash; e 영상 재생 중_화면 탭 시 &ndash;&gt;-->
+
+<!--    </div>-->
   </div>
 </template>
 
 <script>
 export default {
-  name: 'PabloStudy3'
+  name: 'PabloStudy4'
 }
 </script>
 
