@@ -70,9 +70,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.example {
-  background-color: red;
-}
 .wrap {
   .left {
     position: relative;

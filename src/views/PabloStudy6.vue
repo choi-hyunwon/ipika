@@ -1,23 +1,21 @@
 <template>
   <div class="wrap bg-ivory">
     <div class="header">
-      <div class="symbol"><img src="@/assets/images/common/Symbol@2x.png" alt=""></div>
+      <router-link to="/PabloMain" class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt=""></router-link>
       <div class="box-close">
-        <router-link to="/" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>
+        <router-link to="" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>
       </div>
     </div>
     <div class="row">
       <div class="col col-6">
         <div class="symbol-wrap">
           <div class="symbol"><img src="@/assets/images/common/Vector@2x.png" alt=""></div>
-          <span class="text">Twinkle Stage</span></div>
-        <div class="title">정윤님은 무의식의 세계,<br/>
-          트윙클 스테이지네요!<br/>
-          학습을 시작하세요 😉</div>
-        <p class="desc">트윙클 스테이지는 눈과 손의 협응이 일어나고<br/>
-          무의식적으로 표현하는 단계입니다.</p>
+          <span class="text">Stage 4 Clear!</span></div>
+        <div class="title">트윙클 스테이지<br/>
+          4번째 학습을 완료했어요!</div>
         <div class="btn-group">
-          <router-link to="/" class="btn btn-dark">무료체험 3개월 시작하기</router-link>
+          <router-link to="/PabloStudy2" class="btn btn-dark mr">마이갤러리</router-link>
+          <router-link to="/PabloStudy1" class="btn btn-gray">메인으로</router-link>
         </div>
       </div>
       <div class="col col-6">
@@ -29,7 +27,7 @@
 
 <script>
 export default {
-  name: 'TestingResult'
+  name: 'PabloStudy6'
 }
 </script>
 
@@ -83,24 +81,19 @@ export default {
     margin-bottom: 2rem;
   }
 
-  .desc {
-    font-size: 2.4rem;
-    font-family: "Noto Sans CJK KR Medium";
-    font-family: var(--medium);
-    font-weight: 500;
-    line-height: 4rem;
-    letter-spacing: -0.03rem;
-    color: var(--gray-700);
-    padding-left: 10rem;
-  }
-
   .btn-group {
     position: absolute;
     left: 10rem;
     bottom: 10rem;
-  }
-  .btn {
-    width: 72rem;
+    .mr {
+      margin-right: 1.2rem;
+    }
+    .btn-gray {
+      height: 8rem;
+      line-height: 7.8rem;
+      background-color: var(--gray-300);
+      color: var(--gray-600);
+    }
   }
 
   .img {

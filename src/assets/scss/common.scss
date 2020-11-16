@@ -433,13 +433,22 @@ template {
   line-height: 8rem;
   padding: 0 0.5rem;
 }
+
+.btn-group > .btn:not(:last-child):not(.dropdown-toggle), .btn-group > .btn-group:not(:last-child) > .btn {
+  border-top-right-radius: .8rem;
+  border-bottom-right-radius: .8rem;
+}
+.btn-group > .btn:not(:first-child), .btn-group > .btn-group:not(:first-child) > .btn {
+  border-top-left-radius: .8rem;
+  border-bottom-left-radius: .8rem;
+}
 .btn-lg {
   min-width: 20rem;
 }
 .btn-gray {
   background-color: var(--gray-black);
   height: 8.8rem;
-  line-height: 8.8rem;
+  line-height: 8.6rem;
   font-size: 2.4rem;
   font-weight: bold;
   color: var(--gray-white);
@@ -453,7 +462,6 @@ template {
 }
 .btn-dark {
   background-color: var(--gray-black);
-  font-family: "Noto Sans CJK KR Bold";
   font-family: var(--bold);
   font-size: 2.4rem;
   &:focus, &:active, &:hover {

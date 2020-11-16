@@ -14,7 +14,9 @@ import PabloStudy4 from '@/views/PabloStudy4'
 import PabloStudy5 from '@/views/PabloStudy5'
 import PabloPopup1 from '@/views/PabloPopup1'
 import PabloPopup2 from '@/views/PabloPopup2'
-import PabloPopup3 from '@/views/PabloPopup3'
+import thoughtRecords from '@/views/thoughtRecords'
+import PabloStudy6 from '@/views/PabloStudy6'
+
 
 Vue.use(VueRouter)
 
@@ -90,9 +92,14 @@ const routes = [
     component: PabloPopup2
   },
   {
-    path: '/PabloPopup3',
-    name: 'PabloPopup3',
-    component: PabloPopup3
+    path: '/thoughtRecords',
+    name: 'thoughtRecords',
+    component: thoughtRecords
+  },
+  {
+    path: '/PabloStudy6',
+    name: 'PabloStudy6',
+    component: PabloStudy6
   }
 ]
 

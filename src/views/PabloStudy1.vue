@@ -1,5 +1,5 @@
 <template>
-  <div class="wrap">
+  <div class="wrap bg-ivory">
     <div class="header">
       <router-link to="/PabloMain" class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt=""></router-link>
       <div class="box-close">
@@ -33,7 +33,6 @@ export default {
 
 <style lang="scss" scoped>
 .wrap {
-  background-color: var(--ivory-200);
   > .row {
     height: calc(120rem - 12rem);
   }

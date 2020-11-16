@@ -116,7 +116,7 @@
         제출하시겠어요?</p>
       <p class="text-sm">다시 그리면 먼저 그린 그림은 사라져요</p>
       <template #modal-footer="{ cancel }">
-        <b-button variant="blue" class="btn-half">다시 그릴래요!</b-button>
+        <b-button variant="blue" class="btn-half" @click="cancel()">다시 그릴래요!</b-button>
         <b-button variant="black" class="btn-half">제출할게요</b-button>
       </template>
     </b-modal>
@@ -131,7 +131,7 @@
       <p class="text-sm">제출하면 파블로가 그림을 분석할 거예요 :)</p>
       <template #modal-footer="{ cancel }">
         <b-button variant="blue" class="btn-half">제출할게요</b-button>
-        <b-button variant="black" class="btn-half">다시 그릴게요!</b-button>
+        <b-button variant="black" class="btn-half" @click="cancel()">다시 그릴게요!</b-button>
       </template>
     </b-modal>
 
@@ -145,7 +145,7 @@
       <p class="text-sm">더 그리고 싶은 것은 없는지 생각해봐요</p>
       <template #modal-footer="{ cancel }">
         <b-button variant="gray" class="btn-half">제출할게요</b-button>
-        <b-button variant="black" class="btn-half">더 그릴게요!</b-button>
+        <b-button variant="black" class="btn-half" @click="cancel()">더 그릴게요!</b-button>
       </template>
     </b-modal>
 
@@ -157,7 +157,7 @@
       <p class="text">성공적으로<br/>
         제출되었어요 :)</p>
       <p class="text-sm">결과를 확인해보세요!</p>
-      <template #modal-footer="{ cancel }">
+      <template #modal-footer="{ }">
         <b-button variant="black" class="btn-block">내 스테이지 확인하러 가기</b-button>
       </template>
     </b-modal>

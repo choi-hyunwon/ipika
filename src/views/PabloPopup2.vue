@@ -1,9 +1,9 @@
 <template>
-  <div class="wrap">
+  <div class="wrap bg-ivory">
     <div class="header ivory">
       <router-link to="/PabloStudy2" class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt=""></router-link>
       <div class="flex-box">
-        <router-link to="/" class="btn-view">
+        <router-link to="/" class="btn-right">
           <span class="img"><img src="@/assets/images/common/ic-drawing@2x.png" alt=""></span>
           <span class="tit">주제보기</span>
         </router-link>
@@ -16,28 +16,28 @@
     <div class="dim">
 
       <!-- s default -->
-<!--      <div class="inner">-->
-<!--        <div class="symbol-wrap">-->
-<!--          <div class="symbol"><img src="@/assets/images/common/Stage_Twinkle @2x.png" alt=""></div>-->
-<!--          <span class="text">Twinkle Stage 4</span></div>-->
-<!--        <div class="title">생각 제시하는<br/>-->
-<!--          생각 과제 제시하는<br/>-->
-<!--          텍스트 영역입니다.</div>-->
-<!--        <div class="btn-group">-->
-<!--          <b-button class="btn btn-dark"><i class="ic-play"><img src="@/assets/images/common/play@2x.png" alt=""></i><span>재생하기</span></b-button>-->
-<!--        </div>-->
-<!--      </div>-->
+      <!--      <div class="inner">-->
+      <!--        <div class="symbol-wrap">-->
+      <!--          <div class="symbol"><img src="@/assets/images/common/Stage_Twinkle @2x.png" alt=""></div>-->
+      <!--          <span class="text">Twinkle Stage 4</span></div>-->
+      <!--        <div class="title">생각 제시하는<br/>-->
+      <!--          생각 과제 제시하는<br/>-->
+      <!--          텍스트 영역입니다.</div>-->
+      <!--        <div class="btn-group">-->
+      <!--          <b-button class="btn btn-dark"><i class="ic-play"><img src="@/assets/images/common/play@2x.png" alt=""></i><span>재생하기</span></b-button>-->
+      <!--        </div>-->
+      <!--      </div>-->
       <!-- e default -->
 
       <!-- s 영상 재생 중_화면 탭 시 -->
       <div class="inner">
         <div class="video">
-          <p class="text">생각 제시하는 생각 과제 제시하는 텍스트 영역입니다.</p>
-          <div class="play-wrap">
-            <button class="btn-rewind"><img src="@/assets/images/common/5s_rewind@2x.png" alt=""></button>
-            <button class="btn-pause"><img src="@/assets/images/common/pause@2x.png" alt=""></button>
-            <button class="btn-forward"><img src="@/assets/images/common/5s_forward@2x.png" alt=""></button>
-          </div>
+          <!--          <p class="text">생각 제시하는 생각 과제 제시하는 텍스트 영역입니다.</p>-->
+          <!--          <div class="play-wrap">-->
+          <!--            <button class="btn-rewind"><img src="@/assets/images/common/5s_rewind@2x.png" alt=""></button>-->
+          <!--            <button class="btn-pause"><img src="@/assets/images/common/pause@2x.png" alt=""></button>-->
+          <!--            <button class="btn-forward"><img src="@/assets/images/common/5s_forward@2x.png" alt=""></button>-->
+          <!--          </div>-->
           <div class="progress-wrap">
             <div class="inner">
               <span class="time">2:40</span>
@@ -53,18 +53,46 @@
       <!-- e 영상 재생 중_화면 탭 시 -->
 
     </div>
+    <b-button v-b-modal.normalPopup2 style="position: absolute; top: 200px; left: 350px;">시청 완료시/뒤로가기</b-button>
+    <b-modal :visible="modalShow" id="normalPopup2" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">
+      <template #modal-header>
+        <div class="symbol"><img src="@/assets/images/common/drawing@2x.png" alt=""></div>
+      </template>
+
+      <p class="text">학습 주제 영역입니다.<br/>
+        학습 주제는 최대 세 문장까지<br/>
+        가능합니다.</p>
+      <p class="text-sm">생각 제시하는 생각 과제 제시하는 텍스트<br/>
+        영역으로 최대 두줄 이상을 생각합니다.</p>
+      <template #modal-footer="{ cancel }">
+        <b-button class="btn btn-block btn-black" @click="cancel()">닫기</b-button>
+      </template>
+
+      <!--      <p class="text">뒤로 가시겠어요?<br/>-->
+      <!--        처음부터 다시 봐야해요</p>-->
+      <!--      <p class="text-sm">주제보기를 누르면 학습주제를 다시 볼 수 있어요</p>-->
+      <!--      <template #modal-footer="{ cancel }">-->
+      <!--        <b-button variant="gray" class="btn-half">뒤로 갈래요</b-button>-->
+      <!--        <b-button variant="black" class="btn-half">계속 볼게요!</b-button>-->
+      <!--      </template>-->
+
+    </b-modal>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'PabloStudy3'
+  name: 'PabloPopup2',
+  data () {
+    return {
+      modalShow: true
+    }
+  }
 }
 </script>
 
 <style lang="scss" scoped>
 .wrap {
-  background-color: var(--ivory-200);
   .bg {
     width: 100%;
     height: calc(120rem - 12rem);

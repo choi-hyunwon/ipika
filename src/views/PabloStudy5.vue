@@ -1,5 +1,5 @@
 <template>
-  <div class="wrap">
+  <div class="wrap bg-ivory">
     <div class="bg full-screen"><img src="@/assets/images/temp/sample_img_02.png" alt=""></div><!-- full-screen 클래스 추가 -->
     <button class="btn-dim-close"><img src="@/assets/images/common/close_dim@2x.png" alt=""></button>
     <div class="dim full-screen"><!-- full-screen 클래스 추가 -->
@@ -38,7 +38,6 @@ export default {
 
 <style lang="scss" scoped>
 .wrap {
-  background-color: var(--ivory-200);
   .bg {
     width: 100%;
     height: calc(120rem - 12rem);

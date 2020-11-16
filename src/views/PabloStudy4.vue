@@ -1,9 +1,9 @@
 <template>
-  <div class="wrap">
+  <div class="wrap bg-ivory">
 <!--    <div class="header ivory">-->
 <!--      <router-link to="/PabloStudy2" class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt=""></router-link>-->
 <!--      <div class="flex-box">-->
-<!--        <router-link to="/" class="btn-view">-->
+<!--        <router-link to="/" class="btn-right">-->
 <!--          <span class="img"><img src="@/assets/images/common/ic-drawing@2x.png" alt=""></span>-->
 <!--          <span class="tit">주제보기</span>-->
 <!--        </router-link>-->
@@ -65,7 +65,6 @@ export default {
 
 <style lang="scss" scoped>
 .wrap {
-  background-color: var(--ivory-200);
   .bg {
     width: 100%;
     height: calc(120rem - 12rem);

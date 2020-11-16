@@ -1,9 +1,9 @@
 <template>
-  <div class="wrap">
+  <div class="wrap bg-ivory">
     <div class="header ivory">
       <router-link to="/PabloStudy2" class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt=""></router-link>
       <div class="flex-box">
-        <router-link to="/" class="btn-view">
+        <router-link to="/" class="btn-right">
           <span class="img"><img src="@/assets/images/common/ic-drawing@2x.png" alt=""></span>
           <span class="tit">주제보기</span>
         </router-link>
@@ -53,8 +53,8 @@
       <!-- e 영상 재생 중_화면 탭 시 -->
 
     </div>
-    <b-button v-b-modal.normalPopup3 style="position: absolute; top: 200px; left: 350px;">진단테스트_3_제출팝업</b-button>
-    <b-modal :visible="modalShow" id="normalPopup3" ref="normalPopup3" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">
+    <b-button v-b-modal.normalPopup1 style="position: absolute; top: 200px; left: 350px;">시청 완료시/뒤로가기</b-button>
+    <b-modal :visible="modalShow" id="normalPopup1" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">
       <template #modal-header>
         <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>
       </template>
@@ -63,7 +63,7 @@
         단계에서도 볼 수 있어요</p>
       <p class="text-sm">보지 못한 부분이 있어도 괜찮아요 :)</p>
       <template #modal-footer="{ cancel }">
-        <b-button variant="gray" class="btn-half">다시 볼래요</b-button>
+        <b-button variant="gray" class="btn-half" @click="cancel()">다시 볼래요</b-button>
         <b-button variant="black" class="btn-half">넘어갈게요</b-button>
       </template>
 
@@ -81,8 +81,8 @@
 
 <script>
 export default {
-  name: 'PabloStudy3',
-  data() {
+  name: 'PabloPopup1',
+  data () {
     return {
       modalShow: true
     }
@@ -92,7 +92,6 @@ export default {
 
 <style lang="scss" scoped>
 .wrap {
-  background-color: var(--ivory-200);
   .bg {
     width: 100%;
     height: calc(120rem - 12rem);
