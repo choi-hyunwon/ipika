@@ -13,44 +13,44 @@
         </ul>
         <ul class="title-list">
           <li class="active badge-new"><!-- badge-new / badge-start -->
-            <a href="#">
+            <router-link to="/home">
               <span class="num">01</span>
               <span class="title">Pablo Letter</span>
-            </a>
+            </router-link>
           </li>
           <li>
-            <a href="#">
+            <router-link>
               <span class="num">02</span>
               <span class="title">Pablo Classic</span>
-            </a>
+            </router-link>
           </li>
           <li>
-            <a href="#">
+            <router-link>
               <span class="num">03</span>
               <span class="title">Canvas</span>
-            </a>
+            </router-link>
           </li>
           <li>
-            <a href="#">
+            <router-link >
               <span class="num">04</span>
               <span class="title">My Gallery</span>
-            </a>
+            </router-link>
           </li>
           <li>
-            <a href="#">
+            <router-link>
               <span class="num">05</span>
               <span class="title">Open Gallery</span>
-            </a>
+            </router-link>
           </li>
           <li>
-            <a href="#">
+            <router-link>
               <span class="num">06</span>
               <span class="title">My Page</span>
-            </a>
+            </router-link>
           </li>
         </ul>
         <div class="message">
-          <span class="symbol"><img src="@/assets/images/common/Symbol@2x.png" alt=""></span>
+          <span class="symbol"><img src="@/assets/images/common/Symbol-white@2x.png" alt=""></span>
           <span class="text">새로운 학습이 도착했어요! 지금 바로 시작해보세요 😃</span>
           <a href="#" class="btn-close"></a>
         </div>
@@ -70,6 +70,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.example {
+  background-color: red;
+}
 .wrap {
   .left {
     position: relative;

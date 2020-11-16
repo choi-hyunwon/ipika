@@ -12,6 +12,8 @@
       파블로레터 :
       <a @click="go('/PabloMain')">학습메인</a> |
       <a @click="go('/PabloStudy1')">파블로학습1</a> |
+      <a @click="go('/PabloStudy2')">파블로학습2</a> |
+      <a @click="go('/PabloStudy3')">파블로학습3</a> |
     </div>
     <router-view/>
   </div>

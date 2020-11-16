@@ -8,6 +8,8 @@ import TestingResult from '@/views/TestingResult'
 import Layout from '@/views/Layout'
 import PabloMain from '@/views/PabloMain'
 import PabloStudy1 from '@/views/PabloStudy1'
+import PabloStudy2 from '@/views/PabloStudy2'
+import PabloStudy3 from '@/views/PabloStudy3'
 
 Vue.use(VueRouter)
 
@@ -51,6 +53,16 @@ const routes = [
     path: '/PabloStudy1',
     name: 'PabloStudy1',
     component: PabloStudy1
+  },
+  {
+    path: '/PabloStudy2',
+    name: 'PabloStudy2',
+    component: PabloStudy2
+  },
+  {
+    path: '/PabloStudy3',
+    name: 'PabloStudy3',
+    component: PabloStudy3
   }
 ]
 
