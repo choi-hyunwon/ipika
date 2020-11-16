@@ -3,10 +3,10 @@
     <div class="header ivory">
       <router-link to="/PabloStudy2" class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt=""></router-link>
       <div class="flex-box">
-        <div class="btn-view">
+        <router-link to="/" class="btn-view">
           <span class="img"><img src="@/assets/images/common/ic-drawing@2x.png" alt=""></span>
           <span class="tit">주제보기</span>
-        </div>
+        </router-link>
         <div class="box-close">
           <router-link to="/PabloMain" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>
         </div>
