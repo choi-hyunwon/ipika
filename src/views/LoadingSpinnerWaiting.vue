@@ -19,6 +19,11 @@
 
 export default {
   name: 'LoadingSpinnerWaiting',
+  mounted() {
+    setTimeout(() => {
+      this.$router.push('/TestingResult')
+    }, 1000 *  2)
+  },
 }
 </script>
 

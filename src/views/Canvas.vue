@@ -98,8 +98,10 @@
         </div>
       </div>
       <div class="btn-wrap">
-<!--        <b-button variant="dark" class="btn-lg disabled">다 그렸어요!</b-button>-->
-        <b-button variant="dark" class="btn-lg">다 그렸어요!</b-button> <!-- 1분 미만일 경우 -->
+        <router-link to="/LoadingSpinnerWaiting" class="btn btn-dark btn-lg">
+          다 그렸어요!<!-- 1분 미만일 경우 -->
+        </router-link>
+        <!--<b-button variant="dark" class="btn-lg">다 그렸어요!</b-button> &lt;!&ndash; 1분 미만일 경우 &ndash;&gt;-->
       </div>
     </div>
     <div id="notifications" style="bottom: 127px;"></div>

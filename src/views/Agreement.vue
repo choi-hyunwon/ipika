@@ -14,8 +14,8 @@
         <div class="wrap-checkbox">
           <b-form-checkbox
             id="checkbox-1"
-            v-model="i1"
-            :class="{'checked': i1}"
+            v-model="checkAll"
+            :class="{'checked': checkAll}"
             name="checkbox-1"
           >모두 동의합니다
           </b-form-checkbox>
@@ -27,8 +27,8 @@
         <div class="wrap-checkbox">
           <b-form-checkbox
             id="checkbox-2"
-            v-model="i2"
-            :class="{'checked': i2}"
+            v-model="check.essential"
+            :class="{'checked': check.essential}"
             name="checkbox-2"
           >서비스 이용약관(필수)
           </b-form-checkbox>
@@ -42,8 +42,8 @@
         <div class="wrap-checkbox">
           <b-form-checkbox
             id="checkbox-3"
-            v-model="i3"
-            :class="{'checked': i3}"
+            v-model="check.optional"
+            :class="{'checked': check.optional}"
             name="checkbox-3"
           >마케팅 관련 정보 수신 동의(선택)
           </b-form-checkbox>
@@ -51,7 +51,11 @@
         </div>
       </div>
       <div class="box-btn">
-        <router-link to="/" class="btn btn-gray btn-block disabled">드로잉 테스트 시작하기</router-link><!-- disabled일 경우, disabled 클래스 추가  -->
+        <router-link to="/canvas" class="btn btn-gray btn-block"
+                     :class="{'disabled': !check.essential}"
+        >
+          드로잉 테스트 시작하기
+        </router-link><!-- disabled일 경우, disabled 클래스 추가  -->
       </div>
     </div>
 
@@ -102,9 +106,17 @@ export default {
   name: 'Agreement',
   data () {
     return {
-      i1: false,
-      i2: false,
-      i3: false
+      checkAll: false,
+      check: {
+        essential: false,
+        optional: false
+      }
+    }
+  },
+  watch: {
+    "checkAll": function (val) {
+      this.check.essential = val;
+      this.check.optional = val;
     }
   }
 }
