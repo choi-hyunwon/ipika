@@ -14,6 +14,8 @@
     </div>
     <div class="bg"><img src="@/assets/images/temp/sample_img_02.png" alt=""></div>
     <div class="dim">
+
+      <!-- s default -->
 <!--      <div class="inner">-->
 <!--        <div class="symbol-wrap">-->
 <!--          <div class="symbol"><img src="@/assets/images/common/Stage_Twinkle @2x.png" alt=""></div>-->
@@ -25,7 +27,10 @@
 <!--          <b-button class="btn btn-dark"><i class="ic-play"><img src="@/assets/images/common/play@2x.png" alt=""></i><span>재생하기</span></b-button>-->
 <!--        </div>-->
 <!--      </div>-->
-      <div class="inner"> <!-- 영상 재생 중_화면 탭 시 -->
+      <!-- e default -->
+
+      <!-- s 영상 재생 중_화면 탭 시 -->
+      <div class="inner">
         <div class="video">
           <p class="text">생각 제시하는 생각 과제 제시하는 텍스트 영역입니다.</p>
           <div class="play-wrap">
@@ -34,15 +39,19 @@
             <button class="btn-forward"><img src="@/assets/images/common/5s_forward@2x.png" alt=""></button>
           </div>
           <div class="progress-wrap">
-            <span class="time">2:40</span>
-            <div class="progress-bar">
-              <span class="bar"></span>
+            <div class="inner">
+              <span class="time">2:40</span>
+              <div class="progress-bar">
+                <span class="bar" style="width: 30%"></span>
+              </div>
+              <span class="playtime">2:40</span>
+              <button class="btn-full-screen"><img src="@/assets/images/common/btn_full_screen@2x.png" alt=""></button>
             </div>
-            <span class="playtime">2:40</span>
-            <button class="btn-full-screen"><img src="@/assets/images/common/btn_full_screen@2x.png" alt=""></button>
           </div>
         </div>
       </div>
+      <!-- e 영상 재생 중_화면 탭 시 -->
+
     </div>
   </div>
 </template>
@@ -71,7 +80,7 @@ export default {
     top: 12rem;
     left: 0;
     background-color: rgba(20,20,20,.6);
-    .inner {
+    >.inner {
       position: relative;
       width: 100%;
       height: calc(120rem - 12rem);
@@ -118,6 +127,65 @@ export default {
           position: absolute;
           width: 100%;
           height: 4rem;
+          bottom: 4rem;
+          .inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+          }
+          .time {
+            display: inline-block;
+            width: 8rem;
+            font-family: var(--Inter);
+            font-size: 2.4rem;
+            font-weight: bold;
+            line-height: 4rem;
+            letter-spacing: -0.03rem;
+            color: var(--gray-white);
+            padding-left: 4rem;
+            vertical-align: middle;
+          }
+
+          .progress-bar {
+            position: relative;
+            display: inline-block;
+            width: 161.8rem;
+            height: .4rem;
+            opacity: 0.3;
+            background-color: var(--gray-black);
+            vertical-align: middle;
+            .bar {
+              &::after {
+                content: '';
+                width: 2.4rem;
+                height: 2.4rem;
+                background-color: var(--gray-white);
+              }
+            }
+          }
+          .playtime {
+            display: inline-block;
+            width: 8rem;
+            font-family: var(--Inter);
+            font-size: 2.4rem;
+            font-weight: bold;
+            line-height: 4rem;
+            letter-spacing: -0.03rem;
+            text-align: right;
+            color: var(--gray-white);
+            vertical-align: middle;
+
+          }
+          .btn-full-screen {
+            display: inline-block;
+            width: 3.2rem;
+            height: 3.2rem;
+            vertical-align: middle;
+            img {
+              width: 100%;
+              height: 100%;
+            }
+          }
         }
       }
     }
