@@ -1,16 +1,14 @@
 <template>
   <div class="wrap">
     <div class="header ivory">
-      <div class="symbol">
-        <button><img src="@/assets/images/common/arrow_left@2x.png" alt=""></button>
-      </div>
+      <router-link to="/PabloStudy1" class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt=""></router-link>
       <div class="flex-box">
-        <div class="btn-view">
+        <router-link to="/" class="btn-view">
           <span class="img"><img src="@/assets/images/common/ic-drawing@2x.png" alt=""></span>
           <span class="tit">주제보기</span>
-        </div>
+        </router-link>
         <div class="box-close">
-          <button class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></button>
+          <router-link to="" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>
         </div>
       </div>
     </div>
@@ -24,7 +22,7 @@
           생각 과제 제시하는<br/>
           텍스트 영역입니다.</div>
         <div class="btn-group">
-          <b-button class="btn btn-dark"><i class="ic-play"><img src="@/assets/images/common/play@2x.png" alt=""></i><span>재생하기</span></b-button>
+          <router-link to="/" class="btn btn-dark"><i class="ic-play"><img src="@/assets/images/common/play@2x.png" alt=""></i><span>재생하기</span></router-link>
         </div>
       </div>
     </div>
@@ -106,15 +104,19 @@ export default {
       position: absolute;
       left: 10rem;
       bottom: 10rem;
-      button {
+      .btn {
+        display: block;
         min-width: 18rem;
+        height: auto;
       }
       .ic-play {
         display: inline-block;
         width: 3.2rem;
         height: 3.2rem;
         margin-right: 1.2rem;
+        vertical-align: middle;
         img {
+          display: block;
           width: 100%;
           height: 100%;
         }

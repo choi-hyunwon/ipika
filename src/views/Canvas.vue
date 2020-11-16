@@ -11,7 +11,7 @@
         <span class="text">자유롭게 나무를 그려보세요</span>
       </div>
       <div class="box-close">
-        <button class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></button>
+        <router-link to="/" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>
       </div>
     </div>
     <nav v-if="isLoading" style="visibility: visible;position: absolute;bottom: 20px;left: 20px;z-index: 1;">

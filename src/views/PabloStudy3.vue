@@ -1,16 +1,14 @@
 <template>
   <div class="wrap">
     <div class="header ivory">
-      <div class="symbol">
-        <button><img src="@/assets/images/common/arrow_left@2x.png" alt=""></button>
-      </div>
+      <router-link to="/PabloStudy2" class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt=""></router-link>
       <div class="flex-box">
         <div class="btn-view">
           <span class="img"><img src="@/assets/images/common/ic-drawing@2x.png" alt=""></span>
           <span class="tit">주제보기</span>
         </div>
         <div class="box-close">
-          <button class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></button>
+          <router-link to="/PabloMain" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>
         </div>
       </div>
     </div>
@@ -31,9 +29,9 @@
         <div class="video">
           <p class="text">생각 제시하는 생각 과제 제시하는 텍스트 영역입니다.</p>
           <div class="play-wrap">
-            <a href="#" class="btn-rewind"><img src="@/assets/images/common/5s_rewind@2x.png" alt=""></a>
-            <a href="#" class="btn-pause"><img src="@/assets/images/common/pause@2x.png" alt=""></a>
-            <a href="#" class="btn-forward"><img src="@/assets/images/common/5s_forward@2x.png" alt=""></a>
+            <button class="btn-rewind"><img src="@/assets/images/common/5s_rewind@2x.png" alt=""></button>
+            <button class="btn-pause"><img src="@/assets/images/common/pause@2x.png" alt=""></button>
+            <button class="btn-forward"><img src="@/assets/images/common/5s_forward@2x.png" alt=""></button>
           </div>
           <div class="progress-wrap">
             <span class="time">2:40</span>
@@ -41,7 +39,7 @@
               <span class="bar"></span>
             </div>
             <span class="playtime">2:40</span>
-            <a href="#" class="btn-full-screen"><img src="@/assets/images/common/btn_full_screen@2x.png" alt=""></a>
+            <button class="btn-full-screen"><img src="@/assets/images/common/btn_full_screen@2x.png" alt=""></button>
           </div>
         </div>
       </div>
@@ -98,7 +96,7 @@ export default {
           top: 48rem;
           transform: translateX(-50%);
           text-align: center;
-          a {
+          button {
             display: inline-block;
           }
           .btn-rewind, .btn-forward {

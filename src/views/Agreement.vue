@@ -2,10 +2,10 @@
   <div class="wrap bg-ivory">
     <div class="header">
       <div class="symbol">
-        <button><img src="@/assets/images/common/Symbol@2x.png" alt=""></button>
+        <router-link to="/"><img src="@/assets/images/common/Symbol@2x.png" alt=""></router-link>
       </div>
       <div class="box-close">
-        <button class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></button>
+        <router-link to="/" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>
       </div>
     </div>
     <div class="wrap-a">
@@ -32,7 +32,8 @@
             name="checkbox-2"
           >서비스 이용약관(필수)
           </b-form-checkbox>
-          <b-button variant="link">상세보기</b-button>
+<!--          <router-link to="/" class="btn btn-link">상세보기</router-link>-->
+          <button class="btn-link" v-b-modal.marketing>상세보기</button>
         </div>
       </div>
       <div class="box">
@@ -46,11 +47,11 @@
             name="checkbox-3"
           >마케팅 관련 정보 수신 동의(선택)
           </b-form-checkbox>
-          <button class="btn-link">상세보기</button>
+          <button class="btn-link" v-b-modal.marketing>상세보기</button>
         </div>
       </div>
       <div class="box-btn">
-        <b-button block variant="gray" class="disabled">드로잉 테스트 시작하기</b-button><!-- disabled일 경우, disabled 클래스 추가  -->
+        <router-link to="/" class="btn btn-gray btn-block disabled">드로잉 테스트 시작하기</router-link><!-- disabled일 경우, disabled 클래스 추가  -->
       </div>
     </div>
 

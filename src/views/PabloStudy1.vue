@@ -1,11 +1,9 @@
 <template>
   <div class="wrap">
     <div class="header">
-      <div class="symbol">
-        <button><img src="@/assets/images/common/arrow_left@2x.png" alt=""></button>
-      </div>
+      <router-link to="/PabloMain" class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt=""></router-link>
       <div class="box-close">
-        <button class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></button>
+        <router-link to="" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>
       </div>
     </div>
     <div class="row">
@@ -17,7 +15,7 @@
           학습 주제는 최대 세 문장까지<br/>
           가능합니다.</div>
         <div class="btn-group">
-          <b-button class="btn btn-dark">시작하기</b-button>
+          <router-link to="/PabloStudy2" class="btn btn-dark">시작하기</router-link>
         </div>
       </div>
       <div class="col col-6">
