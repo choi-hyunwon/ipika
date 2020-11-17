@@ -97,11 +97,16 @@
           <img src="https://developer-demos.wacom.com/Images/btn_rotate_bottom.png" alt="">
         </div>
       </div>
-      <div class="btn-wrap">
-        <router-link to="/LoadingSpinnerWaiting" class="btn btn-dark btn-lg">
-          다 그렸어요!<!-- 1분 미만일 경우 -->
-        </router-link>
-        <!--<b-button variant="dark" class="btn-lg">다 그렸어요!</b-button> &lt;!&ndash; 1분 미만일 경우 &ndash;&gt;-->
+    </div>
+    <div class="nav show"><!-- show/hide -->
+      <div class="inner">
+        <button class="btn-drawer"><img src="@/assets/images/common/slide_down@2x.png" alt=""></button>
+        <div class="btn-wrap">
+          <router-link to="/LoadingSpinnerWaiting" class="btn btn-dark btn-lg">
+            다 그렸어요!<!-- 1분 미만일 경우 -->
+          </router-link>
+          <!--<b-button variant="dark" class="btn-lg">다 그렸어요!</b-button> &lt;!&ndash; 1분 미만일 경우 &ndash;&gt;-->
+        </div>
       </div>
     </div>
     <div id="notifications" style="bottom: 127px;"></div>
@@ -116,7 +121,7 @@
         제출하시겠어요?</p>
       <p class="text-sm">다시 그리면 먼저 그린 그림은 사라져요</p>
       <template #modal-footer="{ cancel }">
-        <b-button variant="blue" class="btn-half" @click="cancel()">다시 그릴래요!</b-button>
+        <b-button variant="blue" class="btn-half">다시 그릴래요!</b-button>
         <b-button variant="black" class="btn-half">제출할게요</b-button>
       </template>
     </b-modal>
@@ -131,7 +136,7 @@
       <p class="text-sm">제출하면 파블로가 그림을 분석할 거예요 :)</p>
       <template #modal-footer="{ cancel }">
         <b-button variant="blue" class="btn-half">제출할게요</b-button>
-        <b-button variant="black" class="btn-half" @click="cancel()">다시 그릴게요!</b-button>
+        <b-button variant="black" class="btn-half">다시 그릴게요!</b-button>
       </template>
     </b-modal>
 
@@ -145,7 +150,7 @@
       <p class="text-sm">더 그리고 싶은 것은 없는지 생각해봐요</p>
       <template #modal-footer="{ cancel }">
         <b-button variant="gray" class="btn-half">제출할게요</b-button>
-        <b-button variant="black" class="btn-half" @click="cancel()">더 그릴게요!</b-button>
+        <b-button variant="black" class="btn-half">더 그릴게요!</b-button>
       </template>
     </b-modal>
 
@@ -157,7 +162,7 @@
       <p class="text">성공적으로<br/>
         제출되었어요 :)</p>
       <p class="text-sm">결과를 확인해보세요!</p>
-      <template #modal-footer="{ }">
+      <template #modal-footer="{ cancel }">
         <b-button variant="black" class="btn-block">내 스테이지 확인하러 가기</b-button>
       </template>
     </b-modal>
@@ -192,7 +197,7 @@ export default {
 <style scoped src="@/assets/css/Selection.css"></style>
 <style scoped src="@/assets/css/Footer.css"></style>
 
-<style>
+<style lang="scss" scoped>
 .Wrapper {
   width: 100% !important;
   height: 108rem !important;
@@ -200,9 +205,59 @@ export default {
 #canvas {
   height: 100% !important;
 }
-.btn-wrap {
-  position: absolute;
-  right: 4.8rem;
-  bottom: 4.8rem;
+
+.nav {
+  &.show {
+    position: absolute;
+    width: 182.4rem;
+    height: 22rem;
+    border-radius: 2rem;
+    border: solid 1px var(--ivory-500);
+    background-color: var(--ivory-200);
+    left: 4.8rem;
+    bottom: 4.8rem;
+    .inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      .btn-drawer {
+        position: absolute;
+        width: 12rem;
+        height: 4.8rem;
+        background-color: var(--ivory-300);
+        border-radius: 2rem 2rem 0 0;
+        margin: 0 auto;
+        top: -4.8rem;
+        left: 50%;
+        transform: translateX(-50%);
+        img {
+          width: 4.8rem;
+          height: 4.8rem;
+        }
+      }
+      .btn-wrap {
+        position: absolute;
+        right: 4.9rem;
+        bottom: 7rem;
+      }
+    }
+  }
+  &.hide {
+    .btn-drawer {
+      position: absolute;
+      width: 12rem;
+      height: 4.8rem;
+      background-color: var(--ivory-300);
+      border-radius: 2rem 2rem 0 0;
+      margin: 0 auto;
+      top: auto;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .btn-wrap {
+      display: none;
+    }
+  }
 }
 </style>

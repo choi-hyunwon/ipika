@@ -19,8 +19,10 @@
       <a @click="go('/PabloPopup1')" class="ml-5 pl-5">파블로학습2(시청 완료 시/뒤로가기)</a> |
       <a @click="go('/PabloPopup2')">파블로학습2(주제보기)</a> |
       <a @click="go('/thoughtRecords')">파블로학습3(생각녹음하기/들어보기/새로고침(팝업)/뒤로가기(팝업))</a> |
+      <a @click="go('/videoReview')">파블로학습3_영상다시보기</a> |
+      <a @click="go('/peopleThinking')">파블로학습4_사람들 생각듣기</a> |
       <a @click="go('/PabloStudy6')">파블로학습6_제출완료</a> |
-      <a @click="go('/videoReview')">영상 다시보기 팝업</a> |
+
     </div>
     <router-view/>
   </div>

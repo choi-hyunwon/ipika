@@ -17,6 +17,7 @@ import PabloPopup2 from '@/views/PabloPopup2'
 import thoughtRecords from '@/views/thoughtRecords'
 import PabloStudy6 from '@/views/PabloStudy6'
 import videoReview from '@/views/videoReview'
+import peopleThinking from '@/views/peopleThinking'
 
 
 Vue.use(VueRouter)
@@ -106,6 +107,11 @@ const routes = [
     path: '/videoReview',
     name: 'videoReview',
     component: videoReview
+  },
+  {
+    path: '/peopleThinking',
+    name: 'peopleThinking',
+    component: peopleThinking
   }
 ]
 
