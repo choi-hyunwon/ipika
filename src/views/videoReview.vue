@@ -1,7 +1,8 @@
 <template>
   <div class="wrap bg-ivory">
     <div class="header ivory">
-      <router-link to="/PabloStudy3" class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt=""></router-link>
+      <router-link to="/PabloStudy3" class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt="">
+      </router-link>
       <div class="flex-box">
         <router-link to="/" class="btn-right">
           <span class="img"><img src="@/assets/images/common/ic-play@2x.png" alt=""></span>
@@ -41,31 +42,37 @@
         <button class="btn btn-dark disabled">다했어요!</button>
       </div>
     </div>
-    <b-button v-b-modal.refreshPopup style="position: absolute; top: 200px; left: 700px;">새로고침 팝업</b-button>
-    <b-modal id="refreshPopup" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">
-      <template #modal-header>
-        <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>
-      </template>
-      <p class="text">다시 녹음하시겠어요?<br/>
-        지금 녹음한 내용은 지워져요</p>
-      <p class="text-sm">지워진 녹음은 다시 들을 수 없어요</p>
-      <template #modal-footer="{ cancel }">
-        <b-button variant="gray" class="btn-half">다시 녹음할게요</b-button>
-        <b-button variant="black" class="btn-half" @click="cancel()">닫기</b-button>
-      </template>
-    </b-modal>
+    <b-button v-b-modal.videoReviewPopup style="position: absolute; top: 200px; left: 700px;">다시보기 팝업</b-button>
+    <b-modal :visible="modalShow" id="videoReviewPopup" centered hide-footer modal-class="videoReviewPopup">
+      <template #default="{ hide }">
+        <div class="bg"><img src="@/assets/images/temp/sample_img_02.png" alt=""></div>
+        <div class="dim full-screen">
+          <div class="inner">
+            <div class="video">
+              <p class="text">생각 제시하는 생각 과제 제시하는 텍스트 영역입니다.</p>
+              <button class="btn-close" @click="hide()"><img src="@/assets/images/common/close_dim@2x.png" alt=""></button>
+              <div class="play-wrap">
+                <button class="btn-rewind"><img src="@/assets/images/common/5s_rewind@2x.png" alt=""></button>
+                <button class="btn-pause"><img src="@/assets/images/common/pause@2x.png" alt=""></button>
+                <button class="btn-play"><img src="@/assets/images/common/btn_play@2x.png" alt=""></button>
+                <button class="btn-forward"><img src="@/assets/images/common/5s_forward@2x.png" alt=""></button>
+              </div>
+              <div class="progress-wrap">
+                <div class="inner">
+                  <span class="time">2:40</span>
+                  <div class="progress-inner">
+                    <span class="bar" style="width: 30%"></span>
+                  </div>
+                  <span class="playtime">2:40</span>
+                  <button class="btn-full-screen"><img src="@/assets/images/common/btn_full_screen@2x.png" alt="">
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- e 영상 재생 중_화면 탭 시 -->
 
-    <b-button v-b-modal.goBackPopup style="position: absolute; top: 200px; left: 820px;">뒤로가기 팝업</b-button>
-    <b-modal id="goBackPopup" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">
-      <template #modal-header>
-        <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>
-      </template>
-      <p class="text">뒤로 가시겠어요?<br/>
-        지금 녹음한 내용은 지워져요</p>
-      <p class="text-sm">지워진 녹음은 다시 들을 수 없어요</p>
-      <template #modal-footer="{ cancel }">
-        <b-button variant="gray" class="btn-half">뒤로 갈래요</b-button>
-        <b-button variant="black" class="btn-half" @click="cancel()">닫기</b-button>
+        </div>
       </template>
     </b-modal>
   </div>
@@ -73,7 +80,12 @@
 
 <script>
 export default {
-  name: 'thoughtRecords'
+  name: 'videoReview',
+  data () {
+    return {
+      modalShow: true
+    }
+  }
 }
 </script>
 
@@ -82,10 +94,12 @@ export default {
   position: relative;
   width: 100%;
   height: calc(100% - 12rem);
+
   .txt-area {
     padding-top: 8rem;
     padding-left: 10rem;
     margin-bottom: 55.2rem;
+
     .txt-lg {
       font-family: var(--bold);
       font-size: 4rem;
@@ -94,6 +108,7 @@ export default {
       letter-spacing: -0.03rem;
       margin-bottom: 1.2rem;
     }
+
     .txt-sm {
       font-size: 3.2rem;
       line-height: 4.8rem;
@@ -101,6 +116,7 @@ export default {
       color: var(--gray-black);
     }
   }
+
   .record-area {
     position: absolute;
     width: 100%;
@@ -108,19 +124,23 @@ export default {
     background-color: pink;
     top: 40.8rem;
   }
+
   .play-area {
     padding-left: 10rem;
+
     button {
       display: inline-block;
       width: 12rem;
       height: 12rem;
       margin-left: 2.4rem;
+
       img {
         width: 100%;
         height: 100%;
       }
     }
   }
+
   .btn-area {
     position: absolute;
     bottom: 10rem;

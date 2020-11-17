@@ -172,7 +172,7 @@ export default {
               font-family: var(--Inter);
               font-size: 2rem;
               font-weight: 600;
-              line-height: 5rem;
+              line-height: 4.9rem;
               padding: 0 1.8rem;
               letter-spacing: -0.03rem;
               text-align: center;
@@ -194,7 +194,7 @@ export default {
               font-family: var(--Inter);
               font-size: 2rem;
               font-weight: 600;
-              line-height: 5rem;
+              line-height: 4.9rem;
               padding: 0 1.8rem;
               letter-spacing: -0.03rem;
               text-align: center;

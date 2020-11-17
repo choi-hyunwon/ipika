@@ -141,4 +141,197 @@
       }
     }
   }
+  &.videoReviewPopup {
+    .modal-dialog {
+      max-width: 160rem;
+      min-height: 100rem;
+      width: 160rem;
+      height: 100rem;
+      .modal-content {
+        height: 100rem;
+        padding: 0;
+      }
+    }
+    .bg {
+      width: 160rem;
+      height: 100rem;
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .dim {
+      width: 160rem;
+      height: 100rem;
+      position: absolute;
+      top: 12rem;
+      left: 0;
+      background-color: rgba(20,20,20,.4);
+      >.inner {
+        position: relative;
+        width: 160rem;
+        height: 100rem;
+        .video {
+          position: relative;
+          width: 160rem;
+          height: 100rem;
+          .text {
+            font-family: var(--bold);
+            font-size: 4rem;
+            font-weight: bold;
+            line-height: 5.6rem;
+            letter-spacing: -0.03rem;
+            color: var(--gray-white);
+            padding: 6rem 6rem 0;
+          }
+          .btn-close {
+            position: absolute;
+            width: 7.2rem;
+            height: 7.2rem;
+            right: 2rem;
+            top: 2rem;
+            img {
+              width: 100%;
+              height: 100%;
+            }
+          }
+
+          .play-wrap {
+            width: 100%;
+            height: 12rem;
+            position: absolute;
+            left: 50%;
+            top: 48rem;
+            transform: translateX(-50%);
+            text-align: center;
+            button {
+              display: inline-block;
+            }
+            .btn-rewind, .btn-forward {
+              width: 10rem;
+              height: 10rem;
+              margin-right: 6.4rem;
+            }
+            .btn-pause,.btn-play {
+              width: 12rem;
+              height: 12rem;
+              margin-right: 6.4rem;
+            }
+            img {
+              width: 100%;
+              height: 100%;
+            }
+          }
+          .progress-wrap {
+            position: absolute;
+            width: 100%;
+            height: 4rem;
+            bottom: 4rem;
+            .inner {
+              position: relative;
+              width: 100%;
+              height: 100%;
+            }
+            .time {
+              display: inline-block;
+              width: 8rem;
+              font-family: var(--Inter);
+              font-size: 2.4rem;
+              font-weight: bold;
+              line-height: 4rem;
+              letter-spacing: -0.03rem;
+              text-align: left;
+              color: var(--gray-white);
+              margin-left: 4rem;
+              vertical-align: middle;
+            }
+
+            .progress-inner {
+              position: relative;
+              display: inline-block;
+              width: 129.8rem;
+              height: 4rem;
+              vertical-align: middle;
+              &::before {
+                content: '';
+                position: absolute;
+                width: 129.8rem;
+                height: .4rem;
+                background-color: rgba(20,20,20,.3);
+                top: calc((4rem - .4rem) / 2);
+              }
+              .bar {
+                position: absolute;
+                display: block;
+                height: .4rem;
+                top: calc((4rem - .4rem) / 2);
+                left: 0;
+                background-color: var(--gray-white);
+                &::after {
+                  content: '';
+                  display: block;
+                  position: absolute;
+                  width: 2.4rem;
+                  height: 2.4rem;
+                  border-radius: 50%;
+                  background-color: var(--gray-white);
+                  right: 0;
+                  bottom: -1.1rem;
+                }
+              }
+            }
+            .playtime {
+              display: inline-block;
+              width: 8rem;
+              font-family: var(--Inter);
+              font-size: 2.4rem;
+              font-weight: bold;
+              line-height: 4rem;
+              letter-spacing: -0.03rem;
+              text-align: right;
+              color: var(--gray-white);
+              vertical-align: middle;
+              margin-right: 3rem;
+
+            }
+            .btn-full-screen {
+              display: inline-block;
+              width: 3.2rem;
+              height: 3.2rem;
+              vertical-align: middle;
+              img {
+                width: 100%;
+                height: 100%;
+              }
+            }
+          }
+        }
+      }
+      &.full-screen {
+        width: 160rem;
+        position: absolute;
+        left: 0;
+        height: 100%;
+        top: 0;
+        .inner {
+          height: 100%;
+        }
+        .video {
+          height: 100%;
+        }
+      }
+    }
+    .btn-dim-close {
+      position: absolute;
+      width: 7.2rem;
+      height: 7.2rem;
+      right: 2.4rem;
+      top: 2.4rem;
+      z-index: 5;
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
 }

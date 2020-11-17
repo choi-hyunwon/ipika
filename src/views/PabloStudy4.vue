@@ -116,7 +116,7 @@ export default {
             height: 10rem;
             margin-right: 6.4rem;
           }
-          .btn-pause {
+          .btn-pause, .btn-play {
             width: 12rem;
             height: 12rem;
             margin-right: 6.4rem;
