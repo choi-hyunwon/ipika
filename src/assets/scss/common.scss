@@ -474,7 +474,26 @@ template {
     color: var(--gray-600);
   }
 }
-
+.btn-white {
+  background-color: var(--gray-white);
+  font-family: var(--bold);
+  font-size: 2.4rem;
+  color: var(--gray-500);
+  &:focus, &:active, &:hover {
+    background-color: var(--gray-white);
+    border-color: var(--gray-white);
+  }
+}
+.btn-blue {
+  background-color: var(--blue-500);
+  font-family: var(--bold);
+  font-size: 2.4rem;
+  color: var(--gray-white);
+  &:focus, &:active, &:hover {
+    background-color: var(--blue-500);
+    border-color: var(--blue-500);
+  }
+}
 .wrap-checkbox {
   .custom-checkbox {
     width: 100%;

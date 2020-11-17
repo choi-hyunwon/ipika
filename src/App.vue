@@ -21,7 +21,8 @@
       <a @click="go('/thoughtRecords')">파블로학습3(생각녹음하기/들어보기/새로고침(팝업)/뒤로가기(팝업))</a> |
       <a @click="go('/videoReview')">파블로학습3_영상다시보기</a> |
       <a @click="go('/peopleThinking')">파블로학습4_사람들 생각듣기</a> |
-      <a @click="go('/PabloStudy6')">파블로학습6_제출완료</a> |
+      <a @click="go('/pabloCanvas')">파블로학습5_캔버스</a> |
+      <a @click="go('/PabloStudy6')">파블로학습6_제출완료</a>
 
     </div>
     <router-view/>

@@ -169,6 +169,24 @@ export default {
         }
       }
       &.play {
+        a {
+          &::after {
+            content: '';
+            position: absolute;
+            display: block;
+            width: 6rem;
+            height: 6rem;
+            border-radius: 50%;
+            background-color: rgba(21, 133, 255,.6);
+            background-image: url("~@/assets/images/common/ic-pause-white@2x.png");
+            background-size: 2.4rem 2.4rem;
+            background-position: center;
+            background-repeat: no-repeat;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+          }
+        }
         .img {
           box-shadow: 0 16px 24px 0 rgba(0, 0, 0, 0.08), 0 40px 60px 0 rgba(0, 0, 0, 0.2);
         }

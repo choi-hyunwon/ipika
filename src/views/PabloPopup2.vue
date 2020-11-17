@@ -54,12 +54,12 @@
 
     </div>
     <b-button v-b-modal.normalPopup2 style="position: absolute; top: 200px; left: 350px;">시청 완료시/뒤로가기</b-button>
-    <b-modal :visible="modalShow" id="normalPopup2" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">
+    <b-modal :visible="modalShow" id="normalPopup2" centered modal-class="normalPopup">
       <template #modal-header>
         <div class="symbol"><img src="@/assets/images/common/drawing@2x.png" alt=""></div>
       </template>
 
-      <p class="text">학습 주제 영역입니다.<br/>
+      <p class="text text-md">학습 주제 영역입니다.<br/>
         학습 주제는 최대 세 문장까지<br/>
         가능합니다.</p>
       <p class="text-sm">생각 제시하는 생각 과제 제시하는 텍스트<br/>
