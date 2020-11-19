@@ -19,7 +19,7 @@ import PabloStudy6 from '@/views/PabloStudy6'
 import videoReview from '@/views/videoReview'
 import peopleThinking from '@/views/peopleThinking'
 import pabloCanvas from '@/views/pabloCanvas'
-
+import List from '@/views/List'
 
 Vue.use(VueRouter)
 
@@ -28,6 +28,11 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/list',
+    name: 'List',
+    component: List
   },
   {
     path: '/canvas',
