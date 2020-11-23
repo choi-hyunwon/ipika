@@ -32,7 +32,7 @@
             name="checkbox-2"
           >서비스 이용약관(필수)
           </b-form-checkbox>
-<!--          <router-link to="/" class="btn btn-link">상세보기</router-link>-->
+<!--          <router-link to="/" class="btn btn-link">상세보기</router-link> -->
           <button class="btn-link" v-b-modal.marketing>상세보기</button>
         </div>
       </div>
