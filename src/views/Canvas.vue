@@ -361,6 +361,17 @@
     </b-modal>
     <!-- e 팝업  -->
 
+    <b-modal  id="oderPopup" centered title="안내" modal-class="textPopup" scrollable ok-only ok-title="네 그려볼게요!" ok-variant="black btn-block">
+      <template #modal-header>
+        <div class="symbol"><img src="@/assets/images/common/Symbol@2x.png" alt=""></div>
+      </template>
+      <p class="text">2분안에 자유롭게<br/>
+        나무를 그려보세요</p>
+      <template #modal-footer="{ cancel }">
+        <button size="sm" variant="btn black btn-block" @click="cancel()">알겠어요!</button>
+      </template>
+    </b-modal>
+
   </div>
 </template>
 
@@ -371,6 +382,11 @@ export default {
   data () {
     return {
       isLoading: false
+    }
+  },
+  computed: {
+    isStart() {
+      this.$bvModal.show('oderPopup')
     }
   },
   mounted () {
