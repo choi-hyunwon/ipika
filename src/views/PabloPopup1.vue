@@ -63,10 +63,11 @@
         단계에서도 볼 수 있어요</p>
       <p class="text-sm">보지 못한 부분이 있어도 괜찮아요 :)</p>
       <template #modal-footer="{ cancel }">
-        <b-button variant="gray" class="btn-half" @click="cancel()">다시 볼래요</b-button>
-        <b-button variant="black" class="btn-half">넘어갈게요</b-button>
+        <router-link to="/PabloStudy3" class="btn btn-gray btn-half" @click="cancel()">다시 볼래요</router-link>
+        <router-link to="/thoughtRecords" class="btn btn-black btn-half">넘어갈게요</router-link>
+        <!--        <router-link to="/PabloStudy3"><b-button variant="gray" class="btn-half" @click="cancel()">다시 볼래요</b-button></router-link>-->
+        <!--        <router-link to="/thoughtRecords"><b-button variant="black" class="btn-half">넘어갈게요</b-button></router-link>-->
       </template>
-
 <!--      <p class="text">뒤로 가시겠어요?<br/>-->
 <!--        처음부터 다시 봐야해요</p>-->
 <!--      <p class="text-sm">주제보기를 누르면 학습주제를 다시 볼 수 있어요</p>-->

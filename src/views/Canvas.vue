@@ -297,7 +297,7 @@
           <div class="btn-wrap">
             <!--          <button class="btn btn-dark btn-lg">다 그렸어요!</button>-->
             <!--          <button class="btn btn-white btn-lg">다 그렸어요!</button>-->
-            <button class="btn btn-blue btn-lg">다 그렸어요!</button>
+            <router-link to="/PabloStudy6" class="btn btn-blue btn-lg">다 그렸어요!</router-link>
           </div>
         </div>
       </div>

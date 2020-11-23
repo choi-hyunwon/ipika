@@ -14,7 +14,6 @@
     </div>
     <div class="bg"><img src="@/assets/images/temp/sample_img_02.png" alt=""></div>
     <div class="dim">
-
       <!-- s default -->
       <!--      <div class="inner">-->
       <!--        <div class="symbol-wrap">-->
@@ -53,7 +52,7 @@
       <!-- e 영상 재생 중_화면 탭 시 -->
 
     </div>
-    <b-button v-b-modal.normalPopup2 style="position: absolute; top: 200px; left: 350px;">시청 완료시/뒤로가기</b-button>
+    <router-link to="PabloStudy3"><b-button v-b-modal.normalPopup2 style="position: absolute; top: 200px; left: 350px;">시청 완료시/뒤로가기</b-button></router-link>
     <b-modal :visible="modalShow" id="normalPopup2" centered modal-class="normalPopup">
       <template #modal-header>
         <div class="symbol"><img src="@/assets/images/common/drawing@2x.png" alt=""></div>
@@ -67,7 +66,6 @@
       <template #modal-footer="{ cancel }">
         <b-button class="btn btn-block btn-black" @click="cancel()">닫기</b-button>
       </template>
-
       <!--      <p class="text">뒤로 가시겠어요?<br/>-->
       <!--        처음부터 다시 봐야해요</p>-->
       <!--      <p class="text-sm">주제보기를 누르면 학습주제를 다시 볼 수 있어요</p>-->
@@ -75,12 +73,12 @@
       <!--        <b-button variant="gray" class="btn-half">뒤로 갈래요</b-button>-->
       <!--        <b-button variant="black" class="btn-half">계속 볼게요!</b-button>-->
       <!--      </template>-->
-
     </b-modal>
   </div>
 </template>
 
 <script>
+
 export default {
   name: 'PabloPopup2',
   data () {

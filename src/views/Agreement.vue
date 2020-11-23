@@ -51,7 +51,7 @@
         </div>
       </div>
       <div class="box-btn">
-        <router-link to="/canvas" class="btn btn-gray btn-block"
+        <router-link to='/PabloStudy1' class="btn btn-gray btn-block"
                      :class="{'disabled': !check.essential}"
         >
           드로잉 테스트 시작하기

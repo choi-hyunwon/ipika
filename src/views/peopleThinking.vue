@@ -69,7 +69,7 @@
         <button class="swipe"><img src="@/assets/images/common/swipe_left_active@2x.png" alt=""></button>
         <button class="swipe"><img src="@/assets/images/common/swipe_right_active@2x.png" alt=""></button>
       </div>
-      <div class="btn-wrap"><button class="btn btn-dark">다 들었어요!</button></div>
+      <div class="btn-wrap"><router-link to="Canvas" class="btn btn-dark">다 들었어요!</router-link></div>
 <!--      <div class="btn-wrap"><button class="btn btn-dark disabled">다 들었어요!</button></div>-->
     </div>
   </div>

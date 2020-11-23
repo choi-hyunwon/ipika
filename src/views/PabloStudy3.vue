@@ -45,8 +45,9 @@
                 <span class="bar" style="width: 30%"></span>
               </div>
               <span class="playtime">2:40</span>
-              <button class="btn-full-screen"><img src="@/assets/images/common/btn_full_screen@2x.png" alt=""></button>
+              <router-link to="/PabloStudy4"><button class="btn-full-screen"><img src="@/assets/images/common/btn_full_screen@2x.png" alt=""></button></router-link>
             </div>
+          </div>
           </div>
         </div>
       </div>
@@ -58,7 +59,10 @@
 
 <script>
 export default {
-  name: 'PabloStudy3'
+  name: 'PabloStudy3',
+  created(){
+    setTimeout( ()=> { this.$router.push({ path: '/PabloPopup1'})},2000);
+  }
 }
 </script>
 

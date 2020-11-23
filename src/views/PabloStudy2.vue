@@ -22,7 +22,7 @@
           생각 과제 제시하는<br/>
           텍스트 영역입니다.</div>
         <div class="btn-group">
-          <router-link to="/" class="btn btn-dark"><i class="ic-play"><img src="@/assets/images/common/play@2x.png" alt=""></i><span>재생하기</span></router-link>
+          <router-link to="/PabloPopup2" class="btn btn-dark"><i class="ic-play"><img src="@/assets/images/common/play@2x.png" alt=""></i><span>재생하기</span></router-link>
         </div>
       </div>
     </div>
