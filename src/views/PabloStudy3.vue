@@ -1,14 +1,40 @@
 <template>
   <div class="wrap bg-ivory">
     <div class="header ivory">
-      <router-link to="/PabloStudy2" class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt=""></router-link>
+      <div v-b-modal.goBackPopup class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt=""></div>
+      <b-modal id="goBackPopup" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">
+        <template #modal-header>
+          <router-link to="/" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>
+        </template>
+        <p class="text">뒤로 가시겠어요?<br/>
+          </p>
+        <p class="text-sm">영상이 아직 끝나지 않았습니다.</p>
+        <template #modal-footer="{ cancel }">
+          <router-link to="PabloStudy2" class="btn btn-gray btn-half">뒤로 갈래요</router-link>
+          <!--        <b-button variant="gray" class="btn-half">뒤로 갈래요</b-button>-->
+          <b-button variant="black" class="btn-half" @click="cancel()">닫기</b-button>
+        </template>
+      </b-modal>
       <div class="flex-box">
-        <router-link to="/" class="btn-right">
+        <div v-b-modal.normalPopup2 class="btn-right">
           <span class="img"><img src="@/assets/images/common/ic-drawing@2x.png" alt=""></span>
           <span class="tit">주제보기</span>
-        </router-link>
+          <b-modal id="normalPopup2" centered modal-class="normalPopup">
+            <template #modal-header>
+              <div class="symbol"><img src="@/assets/images/common/drawing@2x.png" alt=""></div>
+            </template>
+            <p class="text text-md">학습 주제 영역입니다.<br/>
+              학습 주제는 최대 세 문장까지<br/>
+              가능합니다.</p>
+            <p class="text-sm">생각 제시하는 생각 과제 제시하는 텍스트<br/>
+              영역으로 최대 두줄 이상을 생각합니다.</p>
+            <template #modal-footer="{ cancel }">
+              <b-button class="btn btn-block btn-black" @click="cancel()">닫기</b-button>
+            </template>
+          </b-modal>
+        </div>
         <div class="box-close">
-          <router-link to="/PabloMain" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>
+          <router-link to="/" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>
         </div>
       </div>
     </div>
@@ -33,6 +59,19 @@
       <div class="inner">
         <div class="video">
           <p class="text">생각 제시하는 생각 과제 제시하는 텍스트 영역입니다.</p>
+          <b-button v-b-modal.normalPopup1 style="position: absolute; top: 200px; left: 350px;">시청 완료</b-button>
+          <b-modal id="normalPopup1" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">
+            <template #modal-header>
+              <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>
+            </template>
+            <p class="text">다 보셨나요? 영상은 다음<br/>
+              단계에서도 볼 수 있어요</p>
+            <p class="text-sm">보지 못한 부분이 있어도 괜찮아요 :)</p>
+            <template #modal-footer="{ cancel }">
+              <b-button variant="gray" class="btn-half"  @click="cancel()">다시 볼래요</b-button>
+              <router-link to="/thoughtRecords" class="btn btn-black btn-half">넘어갈게요</router-link>
+            </template>
+          </b-modal>
           <div class="play-wrap">
             <button class="btn-rewind"><img src="@/assets/images/common/5s_rewind@2x.png" alt=""></button>
             <button class="btn-pause"><img src="@/assets/images/common/pause@2x.png" alt=""></button>
@@ -54,15 +93,14 @@
       <!-- e 영상 재생 중_화면 탭 시 -->
 
     </div>
-  </div>
 </template>
 
 <script>
 export default {
   name: 'PabloStudy3',
-  created(){
-    setTimeout( ()=> { this.$router.push({ path: '/PabloPopup1'})},2000);
-  }
+  // created(){
+  //   setTimeout( ()=> { this.$router.push({ path: '/PabloPopup1'})},7000);
+  // }
 }
 </script>
 

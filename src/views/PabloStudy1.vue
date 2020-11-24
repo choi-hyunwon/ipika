@@ -3,7 +3,7 @@
     <div class="header">
       <router-link to="/PabloMain" class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt=""></router-link>
       <div class="box-close">
-        <router-link to="" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>
+        <router-link to="/" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>
       </div>
     </div>
     <div class="row">
@@ -98,5 +98,3 @@ export default {
   }
 }
 </style>
-
-

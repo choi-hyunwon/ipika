@@ -1,12 +1,25 @@
 <template>
   <div class="wrap bg-ivory">
     <div class="header ivory">
-      <router-link to="/PabloStudy2" class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt=""></router-link>
+      <div v-b-modal.goToBack class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt="">
+        <b-modal id="goToBack" modal-class="normalPopup">
+          <template #modal-header>
+            <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>
+          </template>
+          <p class="text">정말 뒤로 가시겠어요?</p>
+          <br/>
+          <template #modal-footer="{ cancel }">
+            <b-button variant="gray" class="btn-half"  @click="cancel()">아니요</b-button>
+            <router-link to="/PabloStudy2" class="btn btn-black btn-half">네</router-link>
+          </template>
+        </b-modal>
+      </div>
       <div class="flex-box">
-        <router-link to="/" class="btn-right">
+        <button v-b-modal.normalPopup2 class="btn-right">
           <span class="img"><img src="@/assets/images/common/ic-drawing@2x.png" alt=""></span>
           <span class="tit">주제보기</span>
-        </router-link>
+        </button>
+
         <div class="box-close">
           <router-link to="/PabloMain" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>
         </div>
@@ -52,12 +65,11 @@
       <!-- e 영상 재생 중_화면 탭 시 -->
 
     </div>
-    <router-link to="PabloStudy3"><b-button v-b-modal.normalPopup2 style="position: absolute; top: 200px; left: 350px;">시청 완료시/뒤로가기</b-button></router-link>
+    <router-link to="PabloPopup1"><b-button v-b-modal.normalPopup2 style="position: absolute; top: 200px; left: 350px;">시청 완료시</b-button></router-link>
     <b-modal :visible="modalShow" id="normalPopup2" centered modal-class="normalPopup">
       <template #modal-header>
         <div class="symbol"><img src="@/assets/images/common/drawing@2x.png" alt=""></div>
       </template>
-
       <p class="text text-md">학습 주제 영역입니다.<br/>
         학습 주제는 최대 세 문장까지<br/>
         가능합니다.</p>
@@ -65,6 +77,7 @@
         영역으로 최대 두줄 이상을 생각합니다.</p>
       <template #modal-footer="{ cancel }">
         <b-button class="btn btn-block btn-black" @click="cancel()">닫기</b-button>
+<!--        <router-link to="/PabloStudy2" class="btn btn-block btn-black">닫기</router-link>-->
       </template>
       <!--      <p class="text">뒤로 가시겠어요?<br/>-->
       <!--        처음부터 다시 봐야해요</p>-->

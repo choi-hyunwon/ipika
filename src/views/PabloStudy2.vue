@@ -1,14 +1,39 @@
 <template>
   <div class="wrap bg-ivory">
     <div class="header ivory">
-      <router-link to="/PabloStudy1" class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt=""></router-link>
+      <div v-b-modal.goToBack class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt="">
+        <b-modal id="goToBack" modal-class="normalPopup">
+          <template #modal-header>
+            <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>
+          </template>
+          <p class="text">정말 뒤로 가시겠어요?</p>
+          <br/>
+          <template #modal-footer="{ cancel }">
+            <b-button variant="gray" class="btn-half"  @click="cancel()">아니요</b-button>
+            <router-link to="/PabloStudy1" class="btn btn-black btn-half">네</router-link>
+          </template>
+        </b-modal>
+      </div>
       <div class="flex-box">
-        <router-link to="/" class="btn-right">
+        <div v-b-modal.normalPopup2 class="btn-right">
           <span class="img"><img src="@/assets/images/common/ic-drawing@2x.png" alt=""></span>
           <span class="tit">주제보기</span>
-        </router-link>
+          <b-modal id="normalPopup2" centered modal-class="normalPopup">
+            <template #modal-header>
+              <div class="symbol"><img src="@/assets/images/common/drawing@2x.png" alt=""></div>
+            </template>
+            <p class="text text-md">학습 주제 영역입니다.<br/>
+              학습 주제는 최대 세 문장까지<br/>
+              가능합니다.</p>
+            <p class="text-sm">생각 제시하는 생각 과제 제시하는 텍스트<br/>
+              영역으로 최대 두줄 이상을 생각합니다.</p>
+            <template #modal-footer="{ cancel }">
+              <b-button class="btn btn-block btn-black" @click="cancel()">닫기</b-button>
+            </template>
+          </b-modal>
+        </div>
         <div class="box-close">
-          <router-link to="" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>
+          <router-link to="/" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>
         </div>
       </div>
     </div>
@@ -22,7 +47,7 @@
           생각 과제 제시하는<br/>
           텍스트 영역입니다.</div>
         <div class="btn-group">
-          <router-link to="/PabloPopup2" class="btn btn-dark"><i class="ic-play"><img src="@/assets/images/common/play@2x.png" alt=""></i><span>재생하기</span></router-link>
+          <router-link to="/PabloStudy3" class="btn btn-dark"><i class="ic-play"><img src="@/assets/images/common/play@2x.png" alt=""></i><span>재생하기</span></router-link>
         </div>
       </div>
     </div>
@@ -31,7 +56,7 @@
 
 <script>
 export default {
-  name: 'PabloStudy2'
+  name: 'PabloStudy2',
 }
 </script>
 
