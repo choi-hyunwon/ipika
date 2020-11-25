@@ -6,7 +6,7 @@
         <div class="title">Ai Art Tutor<br/>PABLO</div>
         <p class="desc">생각을 표현해보는 미술교육 서비스</p>
         <div class="btn-group">
-          <router-link to="/Agreement" class="btn btn-dark">진단테스트 시작하기</router-link>
+          <router-link to="/Agreement" class="btn btn-dark mr-3">진단테스트 시작하기</router-link>
           <router-link to="/PabloStudy1" class="btn btn-dark">학습 시작하기</router-link>
         </div>
       </div>
