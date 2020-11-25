@@ -26,8 +26,8 @@ import List from '@/views/List'
 Vue.use(VueRouter)
 
 const requireAuth = () => (from, to, next) => {
-  if(from.path === '/canvas') {
-    if(localStorage.getItem('isReload') === 'false') localStorage.setItem('isReload', true)
+  if(from.path === '/canvas' || from.path === '/pabloCanvas') {
+    if(localStorage.getItem('isReload') !== 'true') localStorage.setItem('isReload', true)
     else localStorage.setItem('isReload', false)
     return next();
   }
@@ -133,7 +133,8 @@ const routes = [
   {
     path: '/pabloCanvas',
     name: 'pabloCanvas',
-    component: pabloCanvas
+    component: pabloCanvas,
+    beforeEnter : requireAuth()
   }
 ]
 

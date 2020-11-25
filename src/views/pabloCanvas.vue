@@ -426,19 +426,15 @@
 <script>
 
 export default {
-  name: 'Canvas',
+  name: 'pabloCanvas',
   data () {
     return {
       isLoading: false
     }
   },
   mounted () {
-    if (localStorage.getItem('isReload') === 'true') {
-      window.location.reload()
-      localStorage.setItem('isReload', false)
-    } else {
-      this.isLoading = true
-    }
+    if (localStorage.getItem('isReload') === 'true' || localStorage.getItem('isReload') === undefined) window.location.reload()
+    else this.isLoading = true
   }
 }
 </script>

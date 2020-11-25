@@ -391,7 +391,7 @@ export default {
     }
   },
   mounted () {
-    if (localStorage.getItem('isReload') === 'true' || undefined) window.location.reload()
+    if (localStorage.getItem('isReload') === 'true' || localStorage.getItem('isReload') === undefined) window.location.reload()
     else this.isLoading = true
     this.timerStart()
   },
