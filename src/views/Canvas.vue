@@ -397,7 +397,6 @@ export default {
     } else {
       this.isLoading = true
     }
-
     this.timerStart()
   },
   computed: {

@@ -14,7 +14,6 @@
     </div>
     <div class="bg"><img src="@/assets/images/temp/sample_img_02.png" alt=""></div>
     <div class="dim">
-
       <!-- s default -->
 <!--      <div class="inner">-->
 <!--        <div class="symbol-wrap">-->
