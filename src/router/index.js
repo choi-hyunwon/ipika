@@ -130,12 +130,12 @@ const routes = [
     name: 'peopleThinking',
     component: peopleThinking
   },
-  {
-    path: '/pabloCanvas',
-    name: 'pabloCanvas',
-    component: pabloCanvas,
-    beforeEnter : requireAuth()
-  }
+  // {
+  //   path: '/pabloCanvas',
+  //   name: 'pabloCanvas',
+  //   component: pabloCanvas,
+  //   beforeEnter : requireAuth()
+  // }
 ]
 
 const router = new VueRouter({

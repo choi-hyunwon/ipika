@@ -8,7 +8,7 @@
         <router-link to="/" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>
       </div>
     </div>
-    <div class="wrap-a">
+      <div class="wrap-a">
       <div class="box-all">
         <div class="title">약관동의</div>
         <div class="wrap-checkbox">
@@ -33,7 +33,7 @@
           >서비스 이용약관(필수)
           </b-form-checkbox>
 <!--          <router-link to="/" class="btn btn-link">상세보기</router-link>-->
-          <button class="btn-link" v-b-modal.policy>상세보기</button>
+          <button class="btn btn-link" v-b-modal.policy>상세보기</button>
         </div>
       </div>
       <div class="box">
@@ -47,7 +47,7 @@
             name="checkbox-3"
           >마케팅 관련 정보 수신 동의(선택)
           </b-form-checkbox>
-          <button class="btn-link" v-b-modal.marketing>상세보기</button>
+          <button class="btn btn-link" v-b-modal.marketing>상세보기</button>
         </div>
       </div>
       <div class="box-btn">
@@ -94,7 +94,7 @@
         드로잉을 시작해볼까요?
       </p>
       <template #modal-footer="{ cancel }">
-        <router-link to="/pabloCanvas">
+        <router-link to="/canvas?page=diagnose">
           <button size="sm" variant="btn black btn-block" @click="cancel()">네 그려볼게요!!</button>
         </router-link>
       </template>

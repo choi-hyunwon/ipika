@@ -435,7 +435,6 @@ export default {
       timeInitVal : 60*2,
       time : 60*2,
       timer:null,
-      isPopup : false
     }
   },
   mounted () {

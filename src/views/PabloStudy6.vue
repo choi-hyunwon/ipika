@@ -10,12 +10,12 @@
           <br/>
           <template #modal-footer="{ cancel }">
             <b-button variant="gray" class="btn-half" @click="cancel()">아니요</b-button>
-            <router-link to="/canvas" class="btn btn-black btn-half">네</router-link>
+            <router-link to="/canvas?page=study" class="btn btn-black btn-half">네</router-link>
           </template>
         </b-modal>
       </div>
       <div class="box-close">
-        <router-link to="" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>
+        <router-link to="/" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>
       </div>
     </div>
     <div class="row">
