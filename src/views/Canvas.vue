@@ -9,14 +9,15 @@
       <div class="timer red"><!-- 1분 미만일 경우, red 클래스 추가 -->
         <!--        <div class="img"><img src="@/assets/images/common/timer-black@2x.png" alt=""></div>-->
         <div class="img"><img src="@/assets/images/common/timer@2x.png" alt=""></div> <!-- 1분 미만일 경우 -->
-        <div class="time">02 : 00</div>
+        <div class="time">{{timeRemains}}</div>
       </div>
       <div class="symbol">
         <span class="img"><img src="@/assets/images/common/Symbol@2x.png" alt=""></span>
         <span class="text">자유롭게 나무를 그려보세요</span>
       </div>
       <div class="box-close">
-        <router-link to="/" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>
+        <!--<router-link to="/" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>-->
+        <button @click="go('/')" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></button>
       </div>
     </div>
     <nav v-if="isLoading" style="visibility: visible;position: absolute;bottom: 20px;left: 20px;z-index: 1; display: none">
@@ -297,7 +298,8 @@
           <div class="btn-wrap">
             <!--          <button class="btn btn-dark btn-lg">다 그렸어요!</button>-->
             <!--          <button class="btn btn-white btn-lg">다 그렸어요!</button>-->
-            <router-link to="/PabloStudy6" class="btn btn-blue btn-lg">다 그렸어요!</router-link>
+<!--            <router-link to="/PabloStudy6" class="btn btn-blue btn-lg">다 그렸어요!</router-link>-->
+            <button @click="go('/PabloStudy6')" class="btn btn-blue btn-lg">다 그렸어요!</button>
           </div>
         </div>
       </div>
@@ -370,7 +372,11 @@ export default {
   name: 'Canvas',
   data () {
     return {
-      isLoading: false
+      isLoading: false,
+
+      timeInitVal: 4,
+      time: 4, // TODO: default 60*2
+      timer: null,
     }
   },
   mounted () {
@@ -380,6 +386,38 @@ export default {
     } else {
       this.isLoading = true
     }
+
+    this.timerStart()
+  },
+  computed: {
+    timeRemains() {
+      let mm = Math.floor(this.time / 60)
+      mm = mm < 10 ? '0' + mm : mm
+      let ss = this.time % 60
+      ss = ss < 10 ? '0' + ss : ss
+
+      return `${mm} : ${ss}`
+    }
+  },
+  methods: {
+    timerStart() {
+      this.timer = setInterval(() => {
+        if (this.time === 0) {
+          clearInterval(this.timer)
+          this.$router.push('/PabloStudy6')
+        }
+        this.time--
+      }, 1000)
+    },
+    reset() {
+      this.time = this.timeInitVal
+      clearInterval(this.timer)
+      this.timer = null
+    },
+    go(to) {
+      this.reset()
+      this.$router.push(to)
+    },
   }
 }
 </script>
