@@ -385,14 +385,9 @@ export default {
     return {
       isLoading: false,
 
-      timeInitVal: 4,
-      time: 4, // TODO: default 60*2
+      timeInitVal: 60 * 2,
+      time: 60 * 2, // TODO: default 60*2
       timer: null,
-    }
-  },
-  computed: {
-    isStart() {
-      this.$bvModal.show('oderPopup')
     }
   },
   mounted () {

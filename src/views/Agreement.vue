@@ -51,11 +51,12 @@
         </div>
       </div>
       <div class="box-btn">
-        <router-link to='/PabloStudy1' class="btn btn-gray btn-block"
-                     :class="{'disabled': !check.essential}"
+        <span class="btn btn-gray btn-block"
+              :class="{'disabled': !check.essential}"
+              @click=openPopup()
         >
           드로잉 테스트 시작하기
-        </router-link><!-- disabled일 경우, disabled 클래스 추가  -->
+        </span>
       </div>
     </div>
 
@@ -93,7 +94,7 @@
         드로잉을 시작해볼까요?
       </p>
       <template #modal-footer="{ cancel }">
-        <router-link to="/canvas">
+        <router-link to="/pabloCanvas">
           <button size="sm" variant="btn black btn-block" @click="cancel()">네 그려볼게요!!</button>
         </router-link>
       </template>
