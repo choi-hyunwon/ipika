@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '@/views/Home'
@@ -23,6 +25,14 @@ import List from '@/views/List'
 
 Vue.use(VueRouter)
 
+const requireAuth = () => (from, to, next) => {
+  if(from.path === '/canvas') {
+    if(localStorage.getItem('isReload') === 'false') localStorage.setItem('isReload', true)
+    else localStorage.setItem('isReload', false)
+    return next();
+  }
+};
+
 const routes = [
   {
     path: '/',
@@ -37,7 +47,8 @@ const routes = [
   {
     path: '/canvas',
     name: 'Canvas',
-    component: Canvas
+    component: Canvas,
+    beforeEnter : requireAuth()
   },
   {
     path: '/Agreement',

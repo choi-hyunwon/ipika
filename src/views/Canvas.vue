@@ -390,12 +390,8 @@ export default {
     }
   },
   mounted () {
-    if (localStorage.getItem('isReload') === 'true') {
-      window.location.reload()
-      localStorage.setItem('isReload', false)
-    } else {
-      this.isLoading = true
-    }
+    if (localStorage.getItem('isReload') === 'true' || undefined) window.location.reload()
+    else this.isLoading = true
   }
 }
 </script>
