@@ -6,10 +6,12 @@
     <!-- E guide -->
 
     <div class="header ivory">
+
       <router-link to="/thoughtRecords" class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt=""></router-link>
       <div class="btn-wrap">
         <button><img src="@/assets/images/common/img_delete@2x.png" alt=""></button>
         <button><img src="@/assets/images/common/img_invisible@2x.png" alt=""></button>
+          <div class="time">{{ timeRemains }}</div>
       </div>
       <div class="flex-box">
         <router-link to="/" class="btn-right">
@@ -308,7 +310,7 @@
           <div class="btn-wrap">
             <!--          <button class="btn btn-dark btn-lg">다 그렸어요!</button>-->
             <!--          <button class="btn btn-white btn-lg">다 그렸어요!</button>-->
-            <button class="btn btn-blue btn-lg">다 그렸어요!</button>
+            <button class="btn btn-blue btn-lg" v-on:click="reset()">다 그렸어요!</button>
           </div>
         </div>
       </div>
@@ -332,8 +334,8 @@
       </template>
     </b-modal>
 
-    <b-button v-b-modal.refreshPopup style="position: absolute; top: 200px; left: 200px;">새로고침 시</b-button>
-    <b-modal id="refreshPopup" centered modal-class="normalPopup">
+    <b-button v-b-modal.refreshPopup style="position: absolute; top: 200px; left: 200px;" v-on:click="popUpOpen">새로고침 시</b-button>
+    <b-modal @hide="hideInfo" id="refreshPopup" centered modal-class="normalPopup" >
       <template #modal-header>
         <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>
       </template>
@@ -341,13 +343,13 @@
         지금 그린 그림이 지워져요</p>
       <p class="text-sm">지워진 그림은 복구할 수 없어요</p>
       <template #modal-footer="{ cancel }">
-        <b-button variant="gray" class="btn-half">다시 그릴게요</b-button>
-        <b-button variant="black" class="btn-half">계속 그릴래요!</b-button>
+        <b-button variant="gray" class="btn-half" v-on:click="reWrite" @click="cancel()">다시 그릴게요</b-button>
+        <b-button variant="black" class="btn-half" @click="cancel()">계속 그릴래요!</b-button>
       </template>
     </b-modal>
 
-    <b-button v-b-modal.normalPopup3 style="position: absolute; top: 200px; left: 350px;">캔버스_제출하기</b-button>
-    <b-modal id="normalPopup3" centered modal-class="normalPopup">
+    <b-button v-b-modal.normalPopup3 style="position: absolute; top: 200px; left: 350px;" v-on:click="popUpOpen">캔버스_제출하기</b-button>
+    <b-modal id="normalPopup3" centered modal-class="normalPopup" @hide="hideInfo">
       <template #modal-header>
         <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>
       </template>
@@ -355,13 +357,13 @@
         제출하면 수정할 수 없어요!</p>
       <p class="text-sm">더 그리고 싶은 것은 없는지 생각해봐요</p>
       <template #modal-footer="{ cancel }">
-        <b-button variant="gray" class="btn-half">제출할게요</b-button>
-        <b-button variant="black" class="btn-half">더 그릴게요!</b-button>
+        <b-button variant="gray" class="btn-half" v-on:click="go('/')">제출할게요</b-button>
+        <b-button variant="black" class="btn-half"  @click="cancel()">더 그릴게요!</b-button>
       </template>
     </b-modal>
 
-    <b-button v-b-modal.studyBookPopup style="position: absolute; top: 200px; left: 350px;">배경교제</b-button>
-    <b-modal id="studyBookPopup" centered hide-footer modal-class="studyBookPopup">
+    <b-button v-b-modal.studyBookPopup style="position: absolute; top: 200px; left: 500px;" @click="popUpOpen">배경교제</b-button>
+    <b-modal @hide="hideInfo"id="studyBookPopup" centered hide-footer modal-class="studyBookPopup">
       <template #default="{ hide }">
         <button class="btn-close" @click="hide()"><img src="@/assets/images/common/close_dim@2x.png" alt=""></button>
         <div class="content">
@@ -429,12 +431,60 @@ export default {
   name: 'pabloCanvas',
   data () {
     return {
-      isLoading: false
+      isLoading: false,
+      timeInitVal : 60*2,
+      time : 60*2,
+      timer:null,
+      isPopup : false
     }
   },
   mounted () {
     if (localStorage.getItem('isReload') === 'true' || localStorage.getItem('isReload') === undefined) window.location.reload()
     else this.isLoading = true
+
+    this.timerStart();
+  },
+  computed :{
+    timeRemains(){
+      let mm=Math.floor(this.time/60)
+      mm = mm<10 ? '0'+mm : mm
+      let ss=this.time % 60
+      ss = ss<10 ? '0'+ss : ss
+
+      return `${mm} : ${ss}`
+    }
+  },
+  methods:{
+    timerStart(){
+      this.timer=setInterval(()=>{
+        if(this.time===0){
+          clearInterval(this.timer)
+          this.$router.push('/')
+        }
+        this.time--
+      },1000)
+    },
+    reset(){
+      this.time=this.timeInitVal
+      clearInterval(this.timer)
+      this.timer=null
+    },
+    go(to){
+      this.reset()
+      this.$router.push(to)
+    },
+    popUpOpen(){
+      clearInterval(this.timer)
+    },
+    reWrite(){
+      this.reset()
+      this.timerStart()
+    },
+    hideInfo(e){
+      if(e.trigger==="backdrop"||"esc"){
+        this.timerStart()
+      }
+    },
   }
 }
 </script>
