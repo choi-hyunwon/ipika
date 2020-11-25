@@ -1,7 +1,19 @@
 <template>
   <div class="wrap bg-ivory">
     <div class="header">
-      <router-link to="/PabloMain" class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt=""></router-link>
+      <div v-b-modal.goToBack class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt="">
+        <b-modal id="goToBack" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">
+          <template #modal-header>
+            <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>
+          </template>
+          <p class="text">정말 뒤로 가시겠어요?</p>
+          <br/>
+          <template #modal-footer="{ cancel }">
+            <b-button variant="gray" class="btn-half" @click="cancel()">아니요</b-button>
+            <router-link to="/canvas" class="btn btn-black btn-half">네</router-link>
+          </template>
+        </b-modal>
+      </div>
       <div class="box-close">
         <router-link to="" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>
       </div>
@@ -14,8 +26,8 @@
         <div class="title">트윙클 스테이지<br/>
           4번째 학습을 완료했어요!</div>
         <div class="btn-group">
-          <router-link to="/PabloStudy2" class="btn btn-dark mr">마이갤러리</router-link>
-          <router-link to="/PabloStudy1" class="btn btn-gray">메인으로</router-link>
+          <button class="btn btn-dark mr">마이갤러리</button>
+          <router-link to="/PabloMain" class="btn btn-gray">메인으로</router-link>
         </div>
       </div>
       <div class="col col-6">

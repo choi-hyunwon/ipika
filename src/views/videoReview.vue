@@ -1,10 +1,10 @@
 <template>
   <div class="wrap bg-ivory">
     <div class="header ivory">
-      <router-link to="/PabloStudy3" class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt="">
+      <router-link to="/" class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt="">
       </router-link>
       <div class="flex-box">
-        <router-link to="/" class="btn-right">
+        <router-link to="/videoReview" class="btn-right">
           <span class="img"><img src="@/assets/images/common/ic-play@2x.png" alt=""></span>
           <span class="tit">영상보기</span>
         </router-link>
@@ -38,7 +38,7 @@
         <button><img src="@/assets/images/common/refresh_default@2x.png" alt=""></button><!-- 새로고침 버튼 -->
       </div>
       <div class="btn-area">
-        <button class="btn btn-dark">다했어요!</button>
+        <router-link to="/peopleThinking" class="btn btn-dark">다했어요!</router-link>
         <button class="btn btn-dark disabled">다했어요!</button>
       </div>
     </div>

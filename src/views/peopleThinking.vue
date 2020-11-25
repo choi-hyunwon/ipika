@@ -1,18 +1,77 @@
 <template>
   <div class="wrap bg-ivory">
     <div class="header ivory">
-      <router-link to="/thoughtRecords" class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt=""></router-link>
+      <div v-b-modal.goToBack class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt="">
+        <b-modal id="goToBack" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">
+          <template #modal-header>
+            <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>
+          </template>
+          <p class="text">정말 뒤로 가시겠어요?</p>
+          <br/>
+          <template #modal-footer="{ cancel }">
+            <b-button variant="gray" class="btn-half"  @click="cancel()">아니요</b-button>
+            <router-link to="/thoughtRecords" class="btn btn-black btn-half">네</router-link>
+          </template>
+        </b-modal>
+      </div>
       <div class="flex-box">
-        <router-link to="/" class="btn-right">
+        <div v-b-modal.videoReviewPopup class="btn-right">
           <span class="img"><img src="@/assets/images/common/ic-play@2x.png" alt=""></span>
           <span class="tit">영상보기</span>
-        </router-link>
-        <router-link to="/" class="btn-right">
+          <b-modal id="videoReviewPopup" centered hide-footer modal-class="videoReviewPopup">
+            <template #default="{ hide }">
+              <div class="bg"><img src="@/assets/images/temp/sample_img_02.png" alt=""></div>
+              <div class="full-screen dim"><!-- 전체 화면시 dim 제거 -->
+                <div class="inner">
+                  <div class="video">
+                    <p class="text">생각 제시하는 생각 과제 제시하는 텍스트 영역입니다.</p>
+                    <button class="btn-close" @click="hide()"><img src="@/assets/images/common/close_dim@2x.png" alt=""></button>
+                    <!-- s 전체 화면시 hide -->
+                    <div class="play-wrap">
+                      <button class="btn-rewind"><img src="@/assets/images/common/5s_rewind@2x.png" alt=""></button>
+                      <button class="btn-pause"><img src="@/assets/images/common/pause@2x.png" alt=""></button>
+                      <button class="btn-play"><img src="@/assets/images/common/btn_play@2x.png" alt=""></button>
+                      <button class="btn-forward"><img src="@/assets/images/common/5s_forward@2x.png" alt=""></button>
+                    </div>
+                    <div class="progress-wrap">
+                      <div class="inner">
+                        <span class="time">2:40</span>
+                        <div class="progress-inner">
+                          <span class="bar" style="width: 30%"></span>
+                        </div>
+                        <span class="playtime">2:40</span>
+                        <button class="btn-full-screen"><img src="@/assets/images/common/btn_full_screen@2x.png" alt="">
+                        </button>
+                      </div>
+                    </div>
+                    <!-- e 전체 화면시 hide -->
+                  </div>
+                </div>
+                <!-- e 영상 재생 중_화면 탭 시 -->
+
+              </div>
+            </template>
+          </b-modal>
+        </div>
+        <div v-b-modal.normalPopup2 class="btn-right">
           <span class="img"><img src="@/assets/images/common/ic-drawing@2x.png" alt=""></span>
           <span class="tit">주제보기</span>
-        </router-link>
+          <b-modal id="normalPopup2" centered modal-class="normalPopup">
+            <template #modal-header>
+              <div class="symbol"><img src="@/assets/images/common/drawing@2x.png" alt=""></div>
+            </template>
+            <p class="text text-md">학습 주제 영역입니다.<br/>
+              학습 주제는 최대 세 문장까지<br/>
+              가능합니다.</p>
+            <p class="text-sm">생각 제시하는 생각 과제 제시하는 텍스트<br/>
+              영역으로 최대 두줄 이상을 생각합니다.</p>
+            <template #modal-footer="{ cancel }">
+              <b-button class="btn btn-block btn-black" @click="cancel()">닫기</b-button>
+            </template>
+          </b-modal>
+        </div>
         <div class="box-close">
-          <router-link to="" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>
+          <router-link to="/" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>
         </div>
       </div>
     </div>
@@ -69,7 +128,7 @@
         <button class="swipe"><img src="@/assets/images/common/swipe_left_active@2x.png" alt=""></button>
         <button class="swipe"><img src="@/assets/images/common/swipe_right_active@2x.png" alt=""></button>
       </div>
-      <div class="btn-wrap"><button class="btn btn-dark">다 들었어요!</button></div>
+      <div class="btn-wrap"><router-link to="Canvas" class="btn btn-dark">다 들었어요!</router-link></div>
 <!--      <div class="btn-wrap"><button class="btn btn-dark disabled">다 들었어요!</button></div>-->
     </div>
   </div>

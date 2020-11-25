@@ -60,6 +60,7 @@
       </div>
     </div>
 
+    <b-button v-b-modal.marketing class="mx-4">마케팅 관련 정보 수신 동의</b-button>
     <b-modal id="marketing" centered title="마케팅 관련 정보 수신 동의" modal-class="marketing" scrollable ok-only ok-title="닫기" ok-variant="black btn-block">
       <p>
         싸인 이것이야말로 우리 앞이 피다. 몸이 못할 풍부하게 피가 사막이다. 불어 인간은 아니더면, 몸이 심장의 수 풀이 일월과 약동하다. 안고, 그들의 생명을 얼마나 이것이다. 온갖 봄날의 청춘 동력은
@@ -93,7 +94,7 @@
         드로잉을 시작해볼까요?
       </p>
       <template #modal-footer="{ cancel }">
-        <router-link to="/canvas">
+        <router-link to="/pabloCanvas">
           <button size="sm" variant="btn black btn-block" @click="cancel()">네 그려볼게요!!</button>
         </router-link>
       </template>
@@ -128,9 +129,9 @@ export default {
     }
   },
   watch: {
-    checkAll: function (val) {
-      this.check.essential = val
-      this.check.optional = val
+    "checkAll": function (val) {
+      this.check.essential = val;
+      this.check.optional = val;
     }
   }
 }
