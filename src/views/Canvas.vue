@@ -37,18 +37,19 @@
         <div class="time">{{ timeRemains }}</div>
       </div>
       <div class="flex-box">
-        <router-link to="/" class="btn-right">
+        <button v-b-modal.videoReviewPopup class="btn-right" @click="popUpOpen" >
           <span class="img"><img src="@/assets/images/common/ic-play@2x.png" alt=""></span>
           <span class="tit">영상보기</span>
-        </router-link>
-        <router-link to="/" class="btn-right">
+        </button>
+
+        <button v-b-modal.watchSubject class="btn-right" @click="popUpOpen">
           <span class="img"><img src="@/assets/images/common/drawing@2x.png" alt=""></span>
           <span class="tit">주제보기</span>
-        </router-link>
-        <router-link to="/" class="btn-right">
-          <span class="img"><img src="@/assets/images/common/ic-img@2x.png" alt=""></span>
+        </button>
+        <button v-b-modal.studyBookPopup class="btn-right" @click="popUpOpen">
+          <span class="img"><img src="@/assets/images/common/ic-img@2x.png" alt="" ></span>
           <span class="tit">배경교재</span>
-        </router-link>
+        </button>
         <div class="box-close">
           <!--<router-link to="" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>-->
 
@@ -65,7 +66,6 @@
         <span class="CONFIGURATOR_HIDDEN">
     				<img src="https://developer-demos.wacom.com/Images/btn_export.png" title="Export"
                  onclick="WILL.exportPNG();" alt="">
-
     				<img src="https://developer-demos.wacom.com/Images/btn_clear.png" title="Clear" onclick="WILL.clear(); "
                  alt="">
     				<img src="https://developer-demos.wacom.com/Images/btn_undo.png" title="Undo" onclick="WILL.undo(); "
@@ -330,11 +330,11 @@
             <div class="btn-tool">
               <button><img src="@/assets/images/common/btn_undo@2x.png" alt=""></button>
               <button><img src="@/assets/images/common/btn_redo@2x.png" alt=""></button>
-              <button><img src="@/assets/images/common/btn_refresh@2x.png" alt=""></button>
+              <button v-b-modal.normalPopup2><img src="@/assets/images/common/btn_refresh@2x.png" alt=""></button>
             </div>
           </div>
-          <div class="btn-wrap">
-            <button @click="goNext()" class="btn btn-blue btn-lg">다 그렸어요!</button>
+          <div v-if="page==='diagnose'||'study'" class="btn-wrap">
+            <b-button v-b-modal.normalPopup3 class="btn btn-blue btn-lg">다 그렸어요!</b-button>
           </div>
         </div>
       </div>
@@ -343,8 +343,8 @@
 
     <!-- 진단 테스트 -->
     <!-- s 팝업  -->
-    <b-button v-if="page === 'diagnose'" v-b-modal.normalPopup style="position: absolute; top: 200px; left: 50px;">진단테스트_3_시간 초과 시 1</b-button>
-    <b-modal v-if="page === 'diagnose'" id="normalPopup" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">
+<!--    <b-button v-if="page === 'diagnose'"  v-b-modal.normalPopup style="position: absolute; top: 200px; left: 50px;">진단테스트_3_시간 초과 시 1</b-button>-->
+    <b-modal v-if="page === 'diagnose'" :visible="timeOver" id="normalPopup" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">
       <template #modal-header>
         <div class="symbol"><img src="@/assets/images/common/timer@2x.png" alt=""></div>
       </template>
@@ -352,13 +352,13 @@
         제출하시겠어요?</p>
       <p class="text-sm">다시 그리면 먼저 그린 그림은 사라져요</p>
       <template #modal-footer="{ cancel }">
-        <b-button variant="blue" class="btn-half">다시 그릴래요!</b-button>
-        <b-button variant="black" class="btn-half">제출할게요</b-button>
+        <b-button @click="reload" variant="blue" class="btn-half">다시 그릴래요!</b-button>
+        <b-button v-b-modal.normalPopup4 @click="cancel" variant="black" class="btn-half">제출할게요</b-button>
       </template>
     </b-modal>
 
-    <b-button v-if="page === 'diagnose'" v-b-modal.normalPopup2 style="position: absolute; top: 200px; left: 200px;">진단테스트_3_시간 초과 시 2</b-button>
-    <b-modal v-if="page === 'diagnose'" id="normalPopup2" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">
+<!--    <b-button v-if="page === 'diagnose'" v-b-modal.normalPopup2 style="position: absolute; top: 200px; left: 200px;">진단테스트_3_시간 초과 시 2</b-button>-->
+    <b-modal v-if="page === 'diagnose'||'study'" @show="popUpOpen" @hide="hideInfo" id="normalPopup2" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">
       <template #modal-header>
         <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>
       </template>
@@ -366,13 +366,13 @@
         지금 그린 그림이 지워져요</p>
       <p class="text-sm">제출하면 파블로가 그림을 분석할 거예요 :)</p>
       <template #modal-footer="{ cancel }">
-        <b-button variant="blue" class="btn-half">제출할게요</b-button>
-        <b-button variant="black" class="btn-half">다시 그릴게요!</b-button>
+        <b-button v-b-modal.normalPopup4 @click="cancel" variant="blue" class="btn-half">제출할게요</b-button>
+        <b-button @click="reload" variant="black" class="btn-half">다시 그릴게요!</b-button>
       </template>
     </b-modal>
 
-    <b-button v-if="page === 'diagnose'" v-b-modal.normalPopup3 style="position: absolute; top: 200px; left: 350px;">진단테스트_3_제출팝업</b-button>
-    <b-modal v-if="page === 'diagnose'" id="normalPopup3" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">
+<!--    <b-button v-if="page === 'diagnose'" v-b-modal.normalPopup3 style="position: absolute; top: 200px; left: 350px;">진단테스트_3_제출팝업</b-button>-->
+    <b-modal v-if="page === 'diagnose'||'study'" @hide="timerStart" @show="popUpOpen" id="normalPopup3" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">
       <template #modal-header>
         <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>
       </template>
@@ -380,13 +380,13 @@
         제출하면 수정할 수 없어요!</p>
       <p class="text-sm">더 그리고 싶은 것은 없는지 생각해봐요</p>
       <template #modal-footer="{ cancel }">
-        <b-button variant="gray" class="btn-half">제출할게요</b-button>
-        <b-button variant="black" class="btn-half">더 그릴게요!</b-button>
+        <b-button v-b-modal.normalPopup4 variant="gray" class="btn-half" @click="cancel">제출할게요</b-button>
+        <b-button variant="black" class="btn-half" @click=cancel() >더 그릴게요!</b-button>
       </template>
     </b-modal>
 
-    <b-button v-if="page === 'diagnose'" v-b-modal.normalPopup4 style="position: absolute; top: 200px; left: 480px;">진단테스트_3_제출 완료 팝업</b-button>
-    <b-modal v-if="page === 'diagnose'" id="normalPopup4" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">
+<!--    <b-button v-if="page === 'diagnose'" v-b-modal.normalPopup4 style="position: absolute; top: 200px; left: 480px;">진단테스트_3_제출 완료 팝업</b-button>-->
+    <b-modal v-if="page === 'diagnose'||'study'" no-close-on-backdrop @show="popUpOpen" @hide="timerStart" id="normalPopup4" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">
       <template #modal-header>
         <div class="symbol"><img src="@/assets/images/common/check_green@2x.png" alt=""></div>
       </template>
@@ -394,60 +394,60 @@
         제출되었어요 :)</p>
       <p class="text-sm">결과를 확인해보세요!</p>
       <template #modal-footer="{ cancel }">
-        <b-button variant="black" class="btn-block">내 스테이지 확인하러 가기</b-button>
+        <b-button variant="black" class="btn-block" @click="goNext">내 스테이지 확인하러 가기</b-button>
       </template>
     </b-modal>
     <!-- e 팝업  -->
 
     <!-- 학습 -->
     <!-- s 팝업  -->
-    <b-button v-if="page === 'study'" v-b-modal.studySubjectPopup style="position: absolute; top: 200px; left: 50px;">시청 완료시/뒤로가기</b-button>
-    <b-modal v-if="page === 'study'" id="studySubjectPopup" centered modal-class="normalPopup">
-      <template #modal-header>
-        <div class="symbol"><img src="@/assets/images/common/drawing@2x.png" alt=""></div>
-      </template>
+<!--    <b-button v-if="page === 'study'" v-b-modal.studySubjectPopup style="position: absolute; top: 200px; left: 50px;">시청 완료시/뒤로가기</b-button>-->
+<!--    <b-modal v-if="page === 'study'" id="studySubjectPopup" centered modal-class="normalPopup">-->
+<!--      <template #modal-header>-->
+<!--        <div class="symbol"><img src="@/assets/images/common/drawing@2x.png" alt=""></div>-->
+<!--      </template>-->
 
-      <p class="text text-md">배경교재 학습 주제 영역입니다.<br/>
-        학습 주제는 최대 세 문장까지<br/>
-        가능합니다.</p>
-      <p class="text-sm">생각 제시하는 생각 과제 제시하는 텍스트<br/>
-        영역으로 최대 두줄 이상을 생각합니다.</p>
-      <template #modal-footer="{ cancel }">
-        <b-button class="btn btn-block btn-black" @click="cancel()">닫기</b-button>
-      </template>
-    </b-modal>
+<!--      <p class="text text-md">배경교재 학습 주제 영역입니다.<br/>-->
+<!--        학습 주제는 최대 세 문장까지<br/>-->
+<!--        가능합니다.</p>-->
+<!--      <p class="text-sm">생각 제시하는 생각 과제 제시하는 텍스트<br/>-->
+<!--        영역으로 최대 두줄 이상을 생각합니다.</p>-->
+<!--      <template #modal-footer="{ cancel }">-->
+<!--        <b-button class="btn btn-block btn-black" @click="cancel()">닫기</b-button>-->
+<!--      </template>-->
+<!--    </b-modal>-->
 
-    <b-button v-if="page === 'study'" v-b-modal.refreshPopup style="position: absolute; top: 200px; left: 200px;" v-on:click="popUpOpen">새로고침 시</b-button>
-    <b-modal v-if="page === 'study'" @hide="hideInfo" id="refreshPopup" centered modal-class="normalPopup" >
-      <template #modal-header>
-        <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>
-      </template>
-      <p class="text">다시 그리시겠어요?<br/>
-        지금 그린 그림이 지워져요</p>
-      <p class="text-sm">지워진 그림은 복구할 수 없어요</p>
-      <template #modal-footer="{ cancel }">
-        <b-button variant="gray" class="btn-half" v-on:click="reWrite" @click="cancel()">다시 그릴게요</b-button>
-        <b-button variant="black" class="btn-half" @click="cancel()">계속 그릴래요!</b-button>
-      </template>
-    </b-modal>
+<!--    <b-button v-if="page === 'study'" v-b-modal.refreshPopup style="position: absolute; top: 200px; left: 200px;" v-on:click="popUpOpen">새로고침 시</b-button>-->
+<!--    <b-modal v-if="page === 'study'" @hide="hideInfo" id="refreshPopup" centered modal-class="normalPopup" >-->
+<!--      <template #modal-header>-->
+<!--        <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>-->
+<!--      </template>-->
+<!--      <p class="text">다시 그리시겠어요?<br/>-->
+<!--        지금 그린 그림이 지워져요</p>-->
+<!--      <p class="text-sm">지워진 그림은 복구할 수 없어요</p>-->
+<!--      <template #modal-footer="{ cancel }">-->
+<!--        <b-button variant="gray" class="btn-half" v-on:click="reWrite" @click="cancel()">다시 그릴게요</b-button>-->
+<!--        <b-button variant="black" class="btn-half" @click="cancel()">계속 그릴래요!</b-button>-->
+<!--      </template>-->
+<!--    </b-modal>-->
 
-    <b-button v-if="page === 'study'" v-b-modal.normalPopup3 style="position: absolute; top: 200px; left: 350px;" v-on:click="popUpOpen">캔버스_제출하기</b-button>
-    <b-modal v-if="page === 'study'" id="normalPopup3" centered modal-class="normalPopup" @hide="hideInfo">
-      <template #modal-header>
-        <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>
-      </template>
-      <p class="text">다 그렸나요?<br/>
-        제출하면 수정할 수 없어요!</p>
-      <p class="text-sm">더 그리고 싶은 것은 없는지 생각해봐요</p>
-      <template #modal-footer="{ cancel }">
-        <b-button variant="gray" class="btn-half" v-on:click="go('/')">제출할게요</b-button>
-        <b-button variant="black" class="btn-half"  @click="cancel()">더 그릴게요!</b-button>
-      </template>
-    </b-modal>
+<!--    <b-button v-if="page === 'study'" v-b-modal.normalPopup3 style="position: absolute; top: 200px; left: 350px;">캔버스_제출하기</b-button>-->
+<!--    <b-modal v-if="page === 'study'" @show="popUpOpen" id="normalPopup3" centered modal-class="normalPopup" @hide="hideInfo">-->
+<!--      <template #modal-header>-->
+<!--        <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>-->
+<!--      </template>-->
+<!--      <p class="text">다 그렸나요?<br/>-->
+<!--        제출하면 수정할 수 없어요!</p>-->
+<!--      <p class="text-sm">더 그리고 싶은 것은 없는지 생각해봐요</p>-->
+<!--      <template #modal-footer="{ cancel }">-->
+<!--        <b-button variant="gray" class="btn-half" v-on:click="go('/')">제출할게요</b-button>-->
+<!--        <b-button variant="black" class="btn-half"  @click="cancel()">더 그릴게요!</b-button>-->
+<!--      </template>-->
+<!--    </b-modal>-->
 
-    <b-button v-if="page === 'study'" v-b-modal.studyBookPopup style="position: absolute; top: 200px; left: 500px;" @click="popUpOpen">배경교제</b-button>
-    <b-modal v-if="page === 'study'" @hide="hideInfo"id="studyBookPopup" centered hide-footer modal-class="studyBookPopup">
-      <template #default="{ hide }">
+<!--    <b-button v-if="page === 'study'" v-b-modal.studyBookPopup style="position: absolute; top: 200px; left: 500px;" @click="popUpOpen">배경교제</b-button>-->
+    <b-modal v-if="page === 'study'" :visible="true" @show="popUpOpen" @hide="hideInfo" id="studyBookPopup" centered hide-footer modal-class="studyBookPopup">
+      <template #default="{ hide,cancel }">
         <button class="btn-close" @click="hide()"><img src="@/assets/images/common/close_dim@2x.png" alt=""></button>
         <div class="content">
           <div class="c-header">
@@ -457,46 +457,46 @@
           <div class="c-body">
             <ul class="scroll">
               <li>
-                <router-link to="">
+                <div @click="cancel">
                   <span class="img"><img src="@/assets/images/temp/sample_img_02.png" alt=""></span>
                   <span class="tit-sm">배경교재1</span>
                   <span class="tit">사람들이 오늘은 무슨 신발을 신었을까?</span>
-                </router-link>
+                </div>
               </li>
               <li>
-                <router-link to="">
+                <div @click="cancel">
                   <span class="img"><img src="@/assets/images/temp/sample_img_02.png" alt=""></span>
                   <span class="tit-sm">배경교재1</span>
                   <span class="tit">사람들이 오늘은 무슨 신발을 신었을까?사람들이 오늘은 무슨 신발을 신었을까?</span>
-                </router-link>
+                </div>
               </li>
               <li>
-                <router-link to="">
+                <div @click="cancel">
                   <span class="img"><img src="@/assets/images/temp/sample_img_02.png" alt=""></span>
                   <span class="tit-sm">배경교재1</span>
                   <span class="tit">사람들이 오늘은 무슨 신발을 신었을까?</span>
-                </router-link>
+                </div>
               </li>
               <li>
-                <router-link to="">
+                <div @click="cancel">
                   <span class="img"><img src="@/assets/images/temp/sample_img_02.png" alt=""></span>
                   <span class="tit-sm">배경교재1</span>
                   <span class="tit">사람들이 오늘은 무슨 신발을 신었을까?</span>
-                </router-link>
+                </div>
               </li>
               <li>
-                <router-link to="">
+                <div @click="cancel">
                   <span class="img"><img src="@/assets/images/temp/sample_img_02.png" alt=""></span>
                   <span class="tit-sm">배경교재1</span>
                   <span class="tit">사람들이 오늘은 무슨 신발을 신었을까?</span>
-                </router-link>
+                </div>
               </li>
               <li>
-                <router-link to="">
+                <div @click="cancel">
                   <span class="img"><img src="@/assets/images/temp/sample_img_02.png" alt=""></span>
                   <span class="tit-sm">배경교재1</span>
                   <span class="tit">사람들이 오늘은 무슨 신발을 신었을까?</span>
-                </router-link>
+                </div>
               </li>
             </ul>
           </div>
@@ -505,7 +505,7 @@
     </b-modal>
     <!-- e 팝업  -->
 
-    <b-modal  id="oderPopup" centered title="안내" modal-class="textPopup" scrollable ok-only ok-title="네 그려볼게요!" ok-variant="black btn-block">
+    <b-modal v-if="page==='diagnose'" :visible="true" @show="popUpOpen" @hide="timerStart" id="oderPopup" centered title="안내" modal-class="textPopup" scrollable ok-only ok-title="네 그려볼게요!" ok-variant="black btn-block">
       <template #modal-header>
         <div class="symbol"><img src="@/assets/images/common/Symbol@2x.png" alt=""></div>
       </template>
@@ -513,6 +513,56 @@
         나무를 그려보세요</p>
       <template #modal-footer="{ cancel }">
         <button size="sm" variant="btn black btn-block" @click="cancel()">알겠어요!</button>
+      </template>
+    </b-modal>
+<!--주제보기-->
+    <b-modal id="watchSubject" centered modal-class="normalPopup" @hide="hideInfo">
+      <template #modal-header>
+        <div class="symbol"><img src="@/assets/images/common/drawing@2x.png" alt=""></div>
+      </template>
+      <p class="text text-md">학습 주제 영역입니다.<br/>
+        학습 주제는 최대 세 문장까지<br/>
+        가능합니다.</p>
+      <p class="text-sm">생각 제시하는 생각 과제 제시하는 텍스트<br/>
+        영역으로 최대 두줄 이상을 생각합니다.</p>
+      <template #modal-footer="{ cancel }">
+        <b-button class="btn btn-block btn-black" @click="cancel()">닫기</b-button>
+      </template>
+    </b-modal>
+
+<!--    영상보기-->
+    <b-modal id="videoReviewPopup" centered hide-footer modal-class="videoReviewPopup" @hide="hideInfo">
+      <template #default="{ hide }">
+        <div class="bg"><img src="@/assets/images/temp/sample_img_02.png" alt=""></div>
+        <div class="full-screen dim"><!-- 전체 화면시 dim 제거 -->
+          <div class="inner">
+            <div class="video">
+              <p class="text">생각 제시하는 생각 과제 제시하는 텍스트 영역입니다.</p>
+              <button class="btn-close" @click="hide()"><img src="@/assets/images/common/close_dim@2x.png" alt=""></button>
+              <!-- s 전체 화면시 hide -->
+              <div class="play-wrap">
+                <button class="btn-rewind"><img src="@/assets/images/common/5s_rewind@2x.png" alt=""></button>
+                <button class="btn-pause"><img src="@/assets/images/common/pause@2x.png" alt=""></button>
+                <button class="btn-play"><img src="@/assets/images/common/btn_play@2x.png" alt=""></button>
+                <button class="btn-forward"><img src="@/assets/images/common/5s_forward@2x.png" alt=""></button>
+              </div>
+              <div class="progress-wrap">
+                <div class="inner">
+                  <span class="time">2:40</span>
+                  <div class="progress-inner">
+                    <span class="bar" style="width: 30%"></span>
+                  </div>
+                  <span class="playtime">2:40</span>
+                  <button class="btn-full-screen"><img src="@/assets/images/common/btn_full_screen@2x.png" alt="">
+                  </button>
+                </div>
+              </div>
+              <!-- e 전체 화면시 hide -->
+            </div>
+          </div>
+          <!-- e 영상 재생 중_화면 탭 시 -->
+
+        </div>
       </template>
     </b-modal>
 
@@ -525,10 +575,10 @@ export default {
   data () {
     return {
       isLoading: false,
-
-      timeInitVal: 60 * 2,
-      time: 60 * 2, // TODO: default 60*2
+      timeInitVal: 60*2,
+      time: 60*2, // TODO: default 60*2
       timer: null,
+      timeOver : false
     }
   },
   mounted () {
@@ -546,26 +596,31 @@ export default {
       mm = mm < 10 ? '0' + mm : mm
       let ss = this.time % 60
       ss = ss < 10 ? '0' + ss : ss
-
       return `${mm} : ${ss}`
     },
 
   },
   methods: {
+    reload(){
+      window.location.reload()
+    },
     timerStart() {
+      this.timeOver=false
       this.timer = setInterval(() => {
         if (this.time === 0) {
+          this.timeOver=true
           clearInterval(this.timer)
-
-          if (this.page === 'diagnose') {
-            this.$router.push('/LoadingSpinnerWaiting')
-          }
-          else if (this.page === 'study') {
+          // if (this.page === 'diagnose') {
+          //   this.$router.push('/LoadingSpinnerWaiting')
+          // }
+          if (this.page === 'study') {
             this.$router.push('/PabloStudy6')
           }
-
         }
-        this.time--
+        if(this.time>0){
+          this.time--
+        }
+
       }, 1000)
     },
     reset() {
@@ -575,7 +630,6 @@ export default {
     },
     goNext() {
       this.reset()
-
       if (this.page === 'diagnose') {
         this.$router.push('/LoadingSpinnerWaiting')
       }
@@ -595,7 +649,7 @@ export default {
       this.$router.push('/')
     },
     popUpOpen(){
-      clearInterval(this.timer)
+        clearInterval(this.timer)
     },
     reWrite(){
       this.reset()
@@ -608,6 +662,7 @@ export default {
     },
   }
 }
+
 </script>
 
 <style scoped src="@/assets/css/Transform.css"></style>

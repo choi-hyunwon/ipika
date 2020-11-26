@@ -17,7 +17,7 @@
         <p class="desc">트윙클 스테이지는 눈과 손의 협응이 일어나고<br/>
           무의식적으로 표현하는 단계입니다.</p>
         <div class="btn-group">
-          <router-link to="/" class="btn btn-dark">무료체험 3개월 시작하기</router-link>
+          <router-link to="/PabloMain" class="btn btn-dark">무료체험 3개월 시작하기</router-link>
         </div>
       </div>
       <div class="col col-6">
