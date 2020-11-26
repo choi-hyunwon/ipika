@@ -2,19 +2,7 @@
   <div class="wrap bg-ivory">
     <div class="header ivory">
       <div v-b-modal.goBackPopup class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt=""></div>
-      <b-modal id="goBackPopup" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">
-        <template #modal-header>
-          <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>
-        </template>
-        <p class="text">뒤로 가시겠어요?<br/>
-          </p>
-        <p class="text-sm">영상이 아직 끝나지 않았습니다.</p>
-        <template #modal-footer="{ cancel }">
-          <router-link to="PabloStudy2" class="btn btn-gray btn-half">뒤로 갈래요</router-link>
-          <!--        <b-button variant="gray" class="btn-half">뒤로 갈래요</b-button>-->
-          <b-button variant="black" class="btn-half" @click="cancel()">닫기</b-button>
-        </template>
-      </b-modal>
+
       <div class="flex-box">
         <div v-b-modal.normalPopup2 class="btn-right">
           <span class="img"><img src="@/assets/images/common/ic-drawing@2x.png" alt=""></span>
@@ -55,6 +43,20 @@
 <!--      </div>-->
       <!-- e default -->
 
+      <!--뒤로가기-->
+      <b-modal id="goBackPopup" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">
+        <template #modal-header>
+          <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>
+        </template>
+        <p class="text">뒤로 가시겠어요?<br/>
+        </p>
+        <p class="text-sm">영상이 아직 끝나지 않았습니다.</p>
+        <template #modal-footer="{ cancel }">
+          <router-link to="PabloStudy2" class="btn btn-gray btn-half">뒤로 갈래요</router-link>
+          <!--        <b-button variant="gray" class="btn-half">뒤로 갈래요</b-button>-->
+          <b-button variant="black" class="btn-half" @click="cancel()">닫기</b-button>
+        </template>
+      </b-modal>
       <!-- s 영상 재생 중_화면 탭 시 -->
       <div class="inner">
         <div class="video">

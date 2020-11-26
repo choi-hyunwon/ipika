@@ -1,7 +1,7 @@
 <template>
   <div class="wrap bg-ivory">
     <div class="bg full-screen"><img src="@/assets/images/temp/sample_img_02.png" alt=""></div><!-- full-screen 클래스 추가 -->
-    <button class="btn-dim-close"><img src="@/assets/images/common/close_dim@2x.png" alt=""></button>
+    <router-link to="/PabloPopup1" class="btn-dim-close"><img src="@/assets/images/common/close_dim@2x.png" alt=""></router-link>
     <div class="dim full-screen"><!-- full-screen 클래스 추가 -->
       <!-- s 영상 재생 중_화면 탭 시 -->
       <div class="inner">

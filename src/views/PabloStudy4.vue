@@ -13,7 +13,7 @@
 <!--      </div>-->
 <!--    </div>-->
     <div class="bg full-screen"><img src="@/assets/images/temp/sample_img_02.png" alt=""></div><!-- full-screen 클래스 추가 -->
-    <router-link to="/PabloStudy3"><button class="btn-dim-close"><img src="@/assets/images/common/close_dim@2x.png" alt=""></button></router-link>
+    <router-link to="/PabloStudy5"><button class="btn-dim-close"><img src="@/assets/images/common/close_dim@2x.png" alt=""></button></router-link>
 <!--    <div class="dim">-->
 
 <!--      &lt;!&ndash; s default &ndash;&gt;-->

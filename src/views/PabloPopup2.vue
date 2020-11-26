@@ -66,7 +66,7 @@
 
     </div>
     <router-link to="PabloPopup1"><b-button v-b-modal.normalPopup2 style="position: absolute; top: 200px; left: 350px;">시청 완료시</b-button></router-link>
-    <b-modal :visible="modalShow" id="normalPopup2" centered modal-class="normalPopup">
+    <b-modal :visible="modalShow" no-close-on-backdrop id="normalPopup2" centered modal-class="normalPopup">
       <template #modal-header>
         <div class="symbol"><img src="@/assets/images/common/drawing@2x.png" alt=""></div>
       </template>
@@ -76,7 +76,7 @@
       <p class="text-sm">생각 제시하는 생각 과제 제시하는 텍스트<br/>
         영역으로 최대 두줄 이상을 생각합니다.</p>
       <template #modal-footer="{ cancel }">
-        <b-button class="btn btn-block btn-black" @click="cancel()">닫기</b-button>
+        <router-link to="/thoughtRecords" class="btn btn-block btn-black" @click="cancel()">닫기</router-link>
 <!--        <router-link to="/PabloStudy2" class="btn btn-block btn-black">닫기</router-link>-->
       </template>
       <!--      <p class="text">뒤로 가시겠어요?<br/>-->

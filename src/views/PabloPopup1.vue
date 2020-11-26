@@ -1,7 +1,7 @@
 <template>
   <div class="wrap bg-ivory">
     <div class="header ivory">
-      <router-link to="/PabloStudy2" class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt=""></router-link>
+      <div v-b-modal.goBackPopup class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt=""></div>
       <div class="flex-box">
         <router-link to="/" class="btn-right">
           <span class="img"><img src="@/assets/images/common/ic-drawing@2x.png" alt=""></span>
@@ -54,7 +54,7 @@
 
     </div>
     <b-button v-b-modal.normalPopup1 style="position: absolute; top: 200px; left: 350px;">시청 완료시/뒤로가기</b-button>
-    <b-modal :visible="modalShow" id="normalPopup1" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">
+    <b-modal :visible="modalShow" no-close-on-backdrop id="normalPopup1" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">
       <template #modal-header>
         <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>
       </template>
@@ -63,8 +63,8 @@
         단계에서도 볼 수 있어요</p>
       <p class="text-sm">보지 못한 부분이 있어도 괜찮아요 :)</p>
       <template #modal-footer="{ cancel }">
-        <router-link to="/PabloStudy3" class="btn btn-gray btn-half" @click="cancel()">다시 볼래요</router-link>
-        <router-link to="/thoughtRecords" class="btn btn-black btn-half">넘어갈게요</router-link>
+        <b-button v-b-modal.goBackPopup variant="gray" class="btn-half" @click="cancel()">다시 볼래요</b-button>
+        <router-link to="/PabloPopup2" class="btn btn-black btn-half">넘어갈게요</router-link>
         <!--        <router-link to="/PabloStudy3"><b-button variant="gray" class="btn-half" @click="cancel()">다시 볼래요</b-button></router-link>-->
         <!--        <router-link to="/thoughtRecords"><b-button variant="black" class="btn-half">넘어갈게요</b-button></router-link>-->
       </template>
@@ -75,7 +75,21 @@
 <!--        <b-button variant="gray" class="btn-half">뒤로 갈래요</b-button>-->
 <!--        <b-button variant="black" class="btn-half">계속 볼게요!</b-button>-->
 <!--      </template>-->
+    </b-modal>
 
+    <!--뒤로가기-->
+    <b-modal id="goBackPopup" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">
+      <template #modal-header>
+        <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>
+      </template>
+      <p class="text">뒤로 가시겠어요?<br/>
+      </p>
+      <p class="text-sm">영상이 아직 끝나지 않았습니다.</p>
+      <template #modal-footer="{ cancel }">
+        <router-link to="PabloStudy3" class="btn btn-gray btn-half">뒤로 갈래요</router-link>
+        <!--        <b-button variant="gray" class="btn-half">뒤로 갈래요</b-button>-->
+        <b-button variant="black" class="btn-half" @click="cancel()">닫기</b-button>
+      </template>
     </b-modal>
   </div>
 </template>

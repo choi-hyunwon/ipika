@@ -1,13 +1,13 @@
 <template>
   <div class="wrap bg-ivory">
     <div class="header ivory">
-      <router-link to="/" class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt="">
-      </router-link>
+      <div v-b-modal.goToBack class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt="">
+      </div>
       <div class="flex-box">
-        <router-link to="/videoReview" class="btn-right">
+        <div v-b-modal.videoReviewPopup class="btn-right">
           <span class="img"><img src="@/assets/images/common/ic-play@2x.png" alt=""></span>
           <span class="tit">영상보기</span>
-        </router-link>
+        </div>
         <router-link to="/" class="btn-right">
           <span class="img"><img src="@/assets/images/common/ic-drawing@2x.png" alt=""></span>
           <span class="tit">주제보기</span>
@@ -77,6 +77,20 @@
         </div>
       </template>
     </b-modal>
+<!--  뒤로가기-->
+    <div v-b-modal.goToBack class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt="">
+      <b-modal id="goToBack" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">
+        <template #modal-header>
+          <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>
+        </template>
+        <p class="text">정말 뒤로 가시겠어요?</p>
+        <br/>
+        <template #modal-footer="{ cancel }">
+          <b-button variant="gray" class="btn-half"  @click="cancel()">아니요</b-button>
+          <router-link to="/PabloStudy2" class="btn btn-black btn-half">네</router-link>
+        </template>
+      </b-modal>
+    </div>
   </div>
 </template>
 
