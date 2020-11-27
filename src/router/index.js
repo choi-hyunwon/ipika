@@ -130,6 +130,11 @@ const routes = [
     name: 'peopleThinking',
     component: peopleThinking
   },
+  {
+    path:'/myGallery1',
+    name:'myGallery1',
+    component: myGallery1
+  }
   // {
   //   path: '/pabloCanvas',
   //   name: 'pabloCanvas',
