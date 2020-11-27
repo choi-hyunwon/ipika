@@ -6,11 +6,27 @@
       font-size: 2.4rem;
       position: absolute;
       top: 4.8rem;
+      font-weight: 700;
       left: 90rem;
     }
   }
 
   .contents {
+    height: 600px;
+    overflow-y: scroll;
+    overflow-x: inherit;
+    .nav-link{
+    color: var(--gray-500);
+    &active{
+       color: var(--gray-black);
+      font-family: 'Noto Sans CJK KR Bold';
+    }
+    }
+
+    .nav-tabs {
+      font-size: 2.8rem;
+      line-height: 30px !important;
+    }
     .bgc-section{
       .bg{
         width: 192rem;
@@ -19,11 +35,28 @@
     }
     .info-section {
       height: 35.4rem;
-      border: 1px solid red;
+      position: relative;
+      justify-content: center;
+      .profile{
+        position: absolute;
+        width: 16rem;
+        height: 16rem;
+        top: -8rem;
+        .name{
+          margin-top: 1.6rem;
+          font-size: 2.4rem;
+          letter-spacing: 0.03rem;
+          margin-bottom:0.2rem
+        }
+        .english-name{
+          font-size: 2rem;
+          color: #a5a5a5;
+        }
+      }
       .infomation{
         text-align: center;
+        margin-top: 21.4rem;
         .info{
-
           margin-right: 6.4rem;
           div{
             &:first-child{
@@ -38,5 +71,106 @@
         }
       }
     }
+    .tab-section{
+      .nav-item{
+        border-top: 0.1rem solid var(--gray-300);
+        border-bottom:  0.1rem solid var(--gray-300);
+        line-height: 12rem;
+        border-bottom: 0;
+      }
+      .tab{
+        font-size: 2.8rem;
+      }
+
+
+      .btns_group{
+        padding: 0;
+        margin-top: 6.4rem;
+        border-radius: 0.6rem;
+        margin-bottom: 5.6rem;
+
+        .btn-left{
+          margin-left: 6.4rem;
+          color: var(--gray-500);
+
+          .all_button{
+            background-color: var(--gray-900);
+            min-width: 10.7rem;
+            margin-left: 1.2rem;
+            padding: 0;
+          }
+          .drawing_button{
+            min-width: 20.6rem;
+            background-color: var(--gray-200);
+            margin-left: 1.2rem;
+            color: var(--gray-500);
+            border: none;
+            padding: 0;
+            &:hover{
+              background-color: var(--gray-900);
+            }
+          }
+          .classic_button{
+            min-width: 19.6rem;
+            color: var(--gray-500);
+            background-color: var(--gray-200);
+            margin-left: 1.2rem;
+            border: none;
+            padding: 0;
+            &:hover{
+              background-color: var(--gray-900);
+            }
+          }
+          .canvas_button{
+            background-color: var(--gray-200);
+            color: var(--gray-500);
+            border: none;
+            min-width: 14.1rem;
+            margin-left: 1.2rem;
+            padding: 0;
+            &:hover{
+              background-color: var(--gray-900);
+            }
+          }
+        }
+
+        .btn-rigth{
+          margin-right: 6.4rem;
+          .gallery_drop{
+          }
+        }
+      }
+    }
+    .gallery-section{
+        .gallery-line{
+          margin: 0 6.4rem 8rem;
+          justify-content: space-between;
+          .gallery-img{
+            position: relative;
+            width: 57.6rem;
+            height: 32.4rem;
+            margin-bottom: 2.4rem;
+            img{
+              border-radius: 1.2rem;
+            }
+            .download-img{
+              position: absolute;
+              top: 2rem;
+              right: 2rem;
+            }
+          }
+          .gallery-title{
+            font-family: 'Noto Sans CJK KR Regular';
+            font-size: 2rem;
+            letter-spacing: -0.03rem;
+            margin-bottom: 0.2rem;
+          }
+          .gallery-sub{
+            font-family: 'Noto Sans CJK KR Bold';
+            font-size: 2.4rem;
+            letter-spacing: -0.03rem;
+          }
+        }
+      }
+    }
   }
-}
