@@ -36,8 +36,8 @@ const requireAuth = () => (from, to, next) => {
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    name: 'List',
+    component: List
   },
   {
     path: '/list',
