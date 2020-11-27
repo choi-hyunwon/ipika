@@ -22,6 +22,7 @@ import videoReview from '@/views/videoReview'
 import peopleThinking from '@/views/peopleThinking'
 import pabloCanvas from '@/views/pabloCanvas'
 import List from '@/views/List'
+import MyGallery1 from '@/views/myGallery1'
 
 Vue.use(VueRouter)
 
@@ -131,9 +132,9 @@ const routes = [
     component: peopleThinking
   },
   {
-    path:'/myGallery1',
-    name:'myGallery1',
-    component: myGallery1
+    path:'/MyGallery1',
+    name:'Mygallery1',
+    component: MyGallery1
   }
   // {
   //   path: '/pabloCanvas',

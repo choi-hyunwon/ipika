@@ -1,5 +1,7 @@
 <template>
-
+  <div class="wrap">
+    <div>안녕하세요</div>
+  </div>
 </template>
 
 <script>
