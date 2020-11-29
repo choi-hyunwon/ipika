@@ -29,6 +29,10 @@ import MyGallery1 from '@/views/myGallery1'
 import myGallery2 from '@/views/myGallery2'
 import MyGallery6 from '@/views/myGallery6'
 import MyGallery7 from '@/views/myGallery7'
+import MyGallery8 from '@/views/myGallery8'
+import MyGallery9 from '@/views/myGallery9'
+import MyGallery10 from '@/views/myGallery10'
+
 
 
 Vue.use(VueRouter)
@@ -167,6 +171,21 @@ const routes = [
     path:'/MyGallery7',
     name:'Mygallery7',
     component: MyGallery7
+  },
+  {
+    path:'/MyGallery8',
+    name:'Mygallery8',
+    component: MyGallery8
+  },
+  {
+    path:'/MyGallery9',
+    name:'Mygallery9',
+    component: MyGallery9
+  },
+  {
+    path:'/MyGallery10',
+    name:'Mygallery10',
+    component: MyGallery10
   }
 
   // {

@@ -60,11 +60,11 @@
                   <img src="@/assets/images/common/all.png" alt="모든이미지" class="img">
                   <span>Pablo Drawing</span>
                 </b-button>
-                <b-button class="classic_button active">
+                <b-button class="classic_button">
                   <img src="@/assets/images/common/all.png" alt="모든이미지" class="img" style="width: 1.57rem; height: 2rem;">
                   <span>Pablo Classic</span>
                 </b-button>
-                <b-button class="canvas_button">
+                <b-button class="canvas_button active">
                   <img src="@/assets/images/common/all.png" alt="모든이미지" class="img">
                   <span>Canvas</span>
                 </b-button>
@@ -81,7 +81,7 @@
                   <div class="gallery_img size-img">
                     <img src="@/assets/images/temp/sample_img_01.jpg" alt="갤러리사진" class="img-m">
                   </div>
-                  <div class="img_download">
+                  <div v-b-modal.normalPopup1 class="img_download">
                     <img src="@/assets/images/common/share.png" alt="다운로드" class="img-m">
                   </div>
                   <div class="img_title">2020.10.02</div>
@@ -93,7 +93,7 @@
                   </div>
                   <div class="img_title">2020.09.28</div>
                   <div class="img_desc">내가 좋아하는 꽃을 그려봐!</div>
-                  <div class="img_download">
+                  <div v-b-modal.normalPopup1 class="img_download">
                     <img src="@/assets/images/common/share.png" alt="다운로드" class="img-m">
                   </div>
                 </li>
@@ -103,7 +103,7 @@
                   </div>
                   <div class="img_title">2020.08.31</div>
                   <div class="img_desc">내가 좋아하는 꽃을 그려봐!</div>
-                  <div class="img_download">
+                  <div v-b-modal.normalPopup1 class="img_download">
                     <img src="@/assets/images/common/share.png" alt="다운로드" class="img-m">
                   </div>
                 </li>
@@ -116,12 +116,23 @@
         </b-tabs>
       </div>
     </div>
+    <b-modal id="normalPopup1" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">
+      <template #modal-header>
+        <div class="symbol"><img src="@/assets/images/common/check_green@2x.png" alt=""></div>
+      </template>
+      <p class="text">그림이 친구들에게<br/>공개되었습니다!<br/></p>
+      <p class="text-sm">오픈갤러리에서 확인해보세요!</p>
+      <template #modal-footer="{ cancel }">
+        <b-button variant="gray" class="btn-half"  @click="cancel()">닫기</b-button>
+        <router-link to="/thoughtRecords" class="btn btn-black  btn-half">오픈갤러리 가기</router-link>
+      </template>
+    </b-modal>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'myGallery7'
+  name: 'myGallery10'
 }
 </script>
 

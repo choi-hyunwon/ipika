@@ -20,17 +20,6 @@
         <div class="setting-img">
           <img v-b-modal.normalPopup1 src="@/assets/images/common/setting_default.png" alt="세팅" class=" img-m">
         </div>
-        <b-modal id="normalPopup1" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">
-          <template #modal-header>
-            <div class="symbol"><img src="@/assets/images/common/emoji@2x.png" alt=""></div>
-          </template>
-          <p class="text">직접 그린 그림으로만<br/> 배경을 설정할 수 있어요<br/></p>
-          <p class="text-sm">파블로 학습을 시작해보세요!</p>
-          <template #modal-footer="{ cancel }">
-            <b-button variant="gray" class="btn-half"  @click="cancel()">닫기</b-button>
-            <router-link to="/thoughtRecords" class="btn btn-blue5  btn-half">시작하기</router-link>
-          </template>
-        </b-modal>
       </div>
       <div class="info-section d-flex">
         <div class="profile profile_r">
@@ -81,6 +70,17 @@
         </b-tabs>
       </div>
     </div>
+    <b-modal id="normalPopup1" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">
+      <template #modal-header>
+        <div class="symbol"><img src="@/assets/images/common/emoji@2x.png" alt=""></div>
+      </template>
+      <p class="text">직접 그린 그림으로만<br/> 배경을 설정할 수 있어요<br/></p>
+      <p class="text-sm">파블로 학습을 시작해보세요!</p>
+      <template #modal-footer="{ cancel }">
+        <b-button variant="gray" class="btn-half"  @click="cancel()">닫기</b-button>
+        <router-link to="/thoughtRecords" class="btn btn-blue5  btn-half">시작하기</router-link>
+      </template>
+    </b-modal>
   </div>
 </template>
 

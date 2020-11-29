@@ -52,7 +52,8 @@
             <b-tab title="내그림" class="tab active">
               <div class="clearfix btns_group">
                 <div class="float-left btn-left">
-                  <b-button class="all_button">
+                  <b-button class="all_button active">
+<!--                    active 들어가면 배경색 var(--gray-900) 변경-->
                     <img src="@/assets/images/common/all.png" alt="모든이미지" class="img">
                     <span>ALL</span>
                   </b-button>
