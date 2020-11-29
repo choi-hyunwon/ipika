@@ -46,7 +46,7 @@
       <!--뒤로가기-->
       <b-modal id="goBackPopup" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">
         <template #modal-header>
-          <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>
+          <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt="" class="img-m"></div>
         </template>
         <p class="text">뒤로 가시겠어요?<br/>
         </p>

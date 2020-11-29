@@ -23,7 +23,13 @@ import peopleThinking from '@/views/peopleThinking'
 import pabloCanvas from '@/views/pabloCanvas'
 import List from '@/views/List'
 
+import MyGalleryMain from '@/views/MyGalleryMain'
+import MyGallery from '@/views/myGallery'
 import MyGallery1 from '@/views/myGallery1'
+import myGallery2 from '@/views/myGallery2'
+import MyGallery6 from '@/views/myGallery6'
+import MyGallery7 from '@/views/myGallery7'
+
 
 Vue.use(VueRouter)
 
@@ -133,10 +139,36 @@ const routes = [
     component: peopleThinking
   },
   {
+    path:'/MyGalleryMain',
+    name:'MyGalleryMain',
+    component:MyGalleryMain
+  },
+  {
+    path:'/MyGallery',
+    name:'Mygallery',
+    component: MyGallery
+  },
+  {
     path:'/MyGallery1',
     name:'Mygallery1',
     component: MyGallery1
+  },
+  {
+    path:'/myGallery2',
+    name:'myGallery2',
+    component: myGallery2
+  },
+  {
+    path:'/MyGallery6',
+    name:'Mygallery6',
+    component: MyGallery6
+  },
+  {
+    path:'/MyGallery7',
+    name:'Mygallery7',
+    component: MyGallery7
   }
+
   // {
   //   path: '/pabloCanvas',
   //   name: 'pabloCanvas',

@@ -18,23 +18,12 @@
           <div class="img-m" style="width:192rem; height: 40rem; background-color:#a1ceff;"></div>
         </div>
         <div class="setting-img">
-          <img v-b-modal.normalPopup1 src="@/assets/images/common/setting_default.png" alt="세팅" class=" img-m">
+          <img src="@/assets/images/common/setting_default.png" alt="세팅" class=" img-m">
         </div>
-        <b-modal id="normalPopup1" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">
-          <template #modal-header>
-            <div class="symbol"><img src="@/assets/images/common/emoji@2x.png" alt=""></div>
-          </template>
-          <p class="text">직접 그린 그림으로만<br/> 배경을 설정할 수 있어요<br/></p>
-          <p class="text-sm">파블로 학습을 시작해보세요!</p>
-          <template #modal-footer="{ cancel }">
-            <b-button variant="gray" class="btn-half"  @click="cancel()">닫기</b-button>
-            <router-link to="/thoughtRecords" class="btn btn-blue5  btn-half">시작하기</router-link>
-          </template>
-        </b-modal>
       </div>
       <div class="info-section d-flex">
         <div class="profile profile_r">
-          <!--          <img src="@/assets/images/common/check_default@2x.png" alt="프로필사진수정" class="img-m profile_a">-->
+<!--          <img src="@/assets/images/common/check_default@2x.png" alt="프로필사진수정" class="img-m profile_a">-->
           <img src="@/assets/images/common/Group 426@2x.png" alt="프로필사진" class="img-m">
           <div class="text-center name">김정윤</div>
           <div class="text-center english-name">Twinkle Stage</div>
@@ -63,15 +52,15 @@
           <b-tab title="내그림" class="tab active">
             <div class="gallery-section">
               <ul class="gallerys d-flex">
-                <li class="gallery-default">
-                  <div class="emoji-icon">
-                    <img src="@/assets/images/common/emoji@2x.png" alt="이모티콘" class="img-m">
-                  </div>
-                  <div class="emoji-desc">아직 그린 그림이 없어요,<br>학습을 시작해보세요!</div>
-                  <div class="emoji-button">
-                    <b-button>시작하기</b-button>
-                  </div>
-                </li>
+               <li class="gallery-default">
+                 <div class="emoji-icon">
+                   <img src="@/assets/images/common/emoji@2x.png" alt="이모티콘" class="img-m">
+                 </div>
+                 <div class="emoji-desc">아직 그린 그림이 없어요,<br>학습을 시작해보세요!</div>
+                 <div class="emoji-button">
+                   <b-button>시작하기</b-button>
+                 </div>
+               </li>
               </ul>
             </div>
           </b-tab>
