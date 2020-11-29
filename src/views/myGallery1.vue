@@ -13,13 +13,18 @@
       </div>
     <div class="contents">
       <div class="bgc-section">
-        <div class="img-m bg">
-          <img src="@/assets/images/temp/sample_img_02.png" alt="" class="img-m">
+        <div class="bg">
+<!--          <img src="@/assets/images/temp/sample_img_02.png" alt="배경화면" class="img-m">-->
+          <div class="img-m" style="width:192rem; height: 40rem; background-color:#a1ceff;"></div>
+        </div>
+        <div class="setting-img">
+          <img src="@/assets/images/common/setting_default.png" alt="세팅" class=" img-m">
         </div>
       </div>
       <div class="info-section d-flex">
-        <div class="img-m profile text-center">
-          <img src="@/assets/images/common/check_default@2x.png" alt="">
+        <div class="profile profile_r">
+          <img src="@/assets/images/common/Group 426@2x.png" alt="프로필사진" class="img-m profile_a">
+          <img src="@/assets/images/common/check_default@2x.png" alt="프로필사진수정" class="img-m">
           <div class="text-center name">김정윤</div>
           <div class="text-center english-name">Twinkle Stage</div>
         </div>
@@ -33,7 +38,7 @@
             <div>32</div>
           </li>
           <li class="info">
-            <div>조회수</div>
+            <div>조회 수</div>
             <div>64K</div>
           </li>
           <li class="info">
@@ -43,129 +48,118 @@
         </ul>
       </div>
       <div class="tab-section">
-          <b-tabs justified >
-            <b-tab title="내그림" active class="tab">
+          <b-tabs justified>
+            <b-tab title="내그림" class="tab active">
               <div class="clearfix btns_group">
                 <div class="float-left btn-left">
-                  <b-button class="all_button">ALL</b-button>
-                  <b-button class="drawing_button">Pablo Drawing</b-button>
-                  <b-button class="classic_button">Pablo Classic</b-button>
-                  <b-button class="canvas_button">Canvas</b-button>
+                  <b-button class="all_button">
+                    <img src="@/assets/images/common/all.png" alt="모든이미지" class="img">
+                    <span>ALL</span>
+                  </b-button>
+                  <b-button class="drawing_button">
+                    <img src="@/assets/images/common/all.png" alt="모든이미지" class="img">
+                    <span>Pablo Drawing</span>
+                  </b-button>
+                  <b-button class="classic_button">
+                    <img src="@/assets/images/common/all.png" alt="모든이미지" class="img" style="width: 1.57rem; height: 2rem;">
+                    <span>Pablo Classic</span>
+                  </b-button>
+                  <b-button class="canvas_button">
+                    <img src="@/assets/images/common/all.png" alt="모든이미지" class="img">
+                    <span>Canvas</span>
+                  </b-button>
                 </div>
-               <div class="float-right btn-rigth">
-                   <b-dropdown id="dropdown-left" text="최신순" class="gallery_drop">
-                     <b-dropdown-item href="#">오래된 순</b-dropdown-item>
-                   </b-dropdown>
+                <div class="float-right btn-rigth">
+                  <b-dropdown id="dropdown-1" text="최신 순">
+                    <b-dropdown-item style="top: 0.4rem">오래된 순</b-dropdown-item>
+                  </b-dropdown>
                </div>
               </div>
-            </b-tab>
-            <b-tab title="공개한 그림" class="tab">
-              <div class="clearfix">
-                <div class="float-left">
-                  <b-button><img src="@/assets/images/common/all@2x.png" alt="" class="all_icon">ALL</b-button>
-                  <b-button variant="danger"><img src="@/assets/images/common/all@2x.png" alt="" class="drawing_icon">Pablo Drawing</b-button>
-                  <b-button variant="success"><img src="@/assets/images/common/all@2x.png" alt="" class="classic_icon">Pablo Classic</b-button>
-                  <b-button variant="outline-primary"><img src="@/assets/images/common/all@2x.png" alt="" class="canvas_icon">Canvas</b-button>
-                </div>
-                <ul class="float-right">
-                  <li>최신순</li>
-                  <li>오래된 순</li>
+              <div class="gallery-section">
+                <ul class="gallerys d-flex">
+                  <li class="gallery-g" >
+                    <div class="gallery_img size-img">
+                      <img src="@/assets/images/temp/sample_img_01.jpg" alt="갤러리사진" class="img-m">
+                    </div>
+                    <div class="img_title">Curious Stage</div>
+                    <div class="img_desc">최초의 사람은 어떤 사람이었을까요?</div>
+                  </li>
+                  <li class="gallery-g">
+                    <div class="gallery_img size-img">
+                      <img src="@/assets/images/temp/sample_img_01.jpg" alt="갤러리사진" class="img-m">
+                    </div>
+                    <div class="img_title">Curious Stage2</div>
+                    <div class="img_desc">최초의 사람은 어떤 사람이었을까요?</div>
+                  </li>
+                  <li class="gallery-g">
+                    <div class="gallery_img size-img">
+                      <img src="@/assets/images/temp/sample_img_01.jpg" alt="갤러리사진" class="img-m">
+                    </div>
+                    <div class="img_title">Curious Stage 3</div>
+                    <div class="img_desc">최초의 사람은 어떤 사람이었을까요?</div>
+                    <div class="img_download">
+                      <img src="@/assets/images/common/share.png" alt="다운로드" class="img-m">
+                    </div>
+                  </li>
+                  <li class="gallery-g">
+                    <div class="gallery_img size-img">
+                      <img src="@/assets/images/temp/sample_img_01.jpg" alt="갤러리사진" class="img-m">
+                    </div>
+                    <div class="img_title">Curious Stage 12</div>
+                    <div class="img_desc">최초의 사람은 어떤 사람이었을까요?</div>
+                    <div class="img_download">
+                      <img src="@/assets/images/common/share.png" alt="다운로드" class="img-m">
+                    </div>
+                  </li>
+                  <li class="gallery-g">
+                    <div class="gallery_img size-img">
+                      <img src="@/assets/images/temp/sample_img_01.jpg" alt="갤러리사진" class="img-m">
+                    </div>
+                    <div class="img_title">Curious Stage 13</div>
+                    <div class="img_desc">최초의 사람은 어떤 사람이었을까요?</div>
+                    <div class="img_download">
+                      <img src="@/assets/images/common/share.png" alt="다운로드" class="img-m">
+                    </div>
+                  </li>
+                  <li class="gallery-g">
+                    <div class="gallery_img size-img">
+                      <img src="@/assets/images/temp/sample_img_01.jpg" alt="갤러리사진" class="img-m">
+                    </div>
+                    <div class="img_title">Curious Stage 14</div>
+                    <div class="img_desc">최초의 사람은 어떤 사람이었을까요?</div>
+                    <div class="img_download">
+                      <img src="@/assets/images/common/share.png" alt="다운로드" class="img-m">
+                    </div>
+                  </li>
+                  <li class="gallery-g">
+                    <div class="gallery_img size-img">
+                      <img src="@/assets/images/temp/sample_img_01.jpg" alt="갤러리사진" class="img-m">
+                    </div>
+                    <div class="img_title">Curious Stage 3</div>
+                    <div class="img_desc">최초의 사람은 어떤 사람이었을까요?</div>
+                  </li>
+                  <li class="gallery-g">
+                    <div class="gallery_img size-img">
+                      <img src="@/assets/images/temp/sample_img_01.jpg" alt="갤러리사진" class="img-m">
+                    </div>
+                    <div class="img_title">Curious Stage 3</div>
+                    <div class="img_desc">최초의 사람은 어떤 사람이었을까요?</div>
+                  </li>
+                  <li class="gallery-g">
+                    <div class="gallery_img size-img">
+                      <img src="@/assets/images/temp/sample_img_01.jpg" alt="갤러리사진" class="img-m">
+                    </div>
+                    <div class="img_title">Curious Stage 3</div>
+                    <div class="img_desc">최초의 사람은 어떤 사람이었을까요?</div>
+                  </li>
                 </ul>
               </div>
             </b-tab>
+            <b-tab title="공개한 그림" class="tab"></b-tab>
             <b-tab title="내 녹음 듣기" class="tab">
-              <div class="clearfix">
-                <div class="float-left">
-                  <b-button>ALL</b-button>
-                  <b-button variant="danger">Pablo Drawing</b-button>
-                  <b-button variant="success">Pablo Classic</b-button>
-                  <b-button variant="outline-primary">Canvas</b-button>
-                </div>
-                <ul class="float-right">
-                  <li>최신순</li>
-                  <li>오래된 순</li>
-                </ul>
-              </div>
             </b-tab>
           </b-tabs>
         </div>
-      <div class="gallery-section">
-        <div class="gallery-layout">
-          <div class="gallery-line d-flex">
-            <div class="gallery-desc">
-              <div class="gallery-img">
-                <img src="@/assets/images/temp/sample_img_01.jpg" alt="갤러리 사진" class="img-m">
-              </div>
-              <div class="gallery-title">Curious Stage 3</div>
-              <div class="gallery-sub">최초의 사람은 어떤 사람이었을까요?</div>
-            </div>
-            <div class="gallery-desc">
-              <div class="gallery-img">
-                <img src="@/assets/images/temp/sample_img_01.jpg" alt="갤러리 사진" class="img-m">
-              </div>
-              <div class="gallery-title">Curious Stage 2</div>
-              <div class="gallery-sub">내가 좋아하는 꽃을 그려봐!</div>
-            </div>
-            <div class="gallery-desc">
-              <div class="gallery-img">
-                <img src="@/assets/images/common/share@2x.png" alt="다운로드 사진" class="img-m download-img" style="width: 6.4rem; height: 6.4rem;">
-                <img src="@/assets/images/temp/sample_img_01.jpg" alt="갤러리 사진" class="img-m">
-              </div>
-              <div class="gallery-title">Curious Stage 1</div>
-              <div class="gallery-sub">내가 좋아하는 꽃을 그려봐</div>
-            </div>
-          </div>
-          <div class="gallery-line d-flex">
-            <div class="gallery-desc">
-              <div class="gallery-img">
-                <img src="@/assets/images/temp/sample_img_01.jpg" alt="갤러리 사진" class="img-m">
-                <img src="@/assets/images/common/share@2x.png" alt="다운로드 사진" class="img-m download-img" style="width: 6.4rem; height: 6.4rem;">
-              </div>
-              <div class="gallery-title">Curious Stage 14</div>
-              <div class="gallery-sub">최초의 사람은 어떤 사람이었을까요?</div>
-            </div>
-            <div class="gallery-desc">
-              <div class="gallery-img">
-                <img src="@/assets/images/common/share@2x.png" alt="다운로드 사진" class="img-m download-img" style="width: 6.4rem; height: 6.4rem;">
-                <img src="@/assets/images/temp/sample_img_01.jpg" alt="갤러리 사진" class="img-m">
-              </div>
-              <div class="gallery-title">Curious Stage 13</div>
-              <div class="gallery-sub">내가 좋아하는 꽃을 그려봐!</div>
-            </div>
-            <div class="gallery-desc">
-              <div class="gallery-img">
-                <img src="@/assets/images/common/share@2x.png" alt="다운로드 사진" class="img-m download-img" style="width: 6.4rem; height: 6.4rem;">
-                <img src="@/assets/images/temp/sample_img_01.jpg" alt="갤러리 사진" class="img-m">
-              </div>
-              <div class="gallery-title">Curious Stage 12</div>
-              <div class="gallery-sub">내가 좋아하는 꽃을 그려봐</div>
-            </div>
-          </div>
-          <div class="gallery-line d-flex">
-            <div class="gallery-desc">
-              <div class="gallery-img">
-                <img src="@/assets/images/temp/sample_img_01.jpg" alt="갤러리 사진" class="img-m">
-              </div>
-              <div class="gallery-title">Curious Stage 3</div>
-              <div class="gallery-sub">최초의 사람은 어떤 사람이었을까요?</div>
-            </div>
-            <div class="gallery-desc">
-              <div class="gallery-img">
-                <img src="@/assets/images/temp/sample_img_01.jpg" alt="갤러리 사진" class="img-m">
-              </div>
-              <div class="gallery-title">Curious Stage 2</div>
-              <div class="gallery-sub">내가 좋아하는 꽃을 그려봐!</div>
-            </div>
-            <div class="gallery-desc">
-              <div class="gallery-img">
-                <img src="@/assets/images/temp/sample_img_01.jpg" alt="갤러리 사진" class="img-m">
-              </div>
-              <div class="gallery-title">Curious Stage 1</div>
-              <div class="gallery-sub">내가 좋아하는 꽃을 그려봐</div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </template>

@@ -22,6 +22,7 @@ import videoReview from '@/views/videoReview'
 import peopleThinking from '@/views/peopleThinking'
 import pabloCanvas from '@/views/pabloCanvas'
 import List from '@/views/List'
+
 import MyGallery1 from '@/views/myGallery1'
 
 Vue.use(VueRouter)
