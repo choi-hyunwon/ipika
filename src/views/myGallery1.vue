@@ -86,7 +86,7 @@
 
 <script>
 export default {
-  name: 'myGallery'
+  name: 'myGallery1'
 }
 </script>
 
