@@ -1,24 +1,24 @@
 <template>
   <div class="wrap">
     <div class="header ivory bg-ivory d-flex">
-      <div v-b-modal.goBackPopup class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt=""></div>
+      <router-link to="/MyGalleryMain" v-b-modal.goBackPopup class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt=""></router-link>
       <div class="gallery-title">
         <router-link to="/">
           <span class="title-center">My Gallery</span>
         </router-link>
       </div>
       <div class="box-close">
-        <router-link to="/PabloMain" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>
+        <router-link to="/MyGalleryMain" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>
       </div>
     </div>
     <div class="contents">
       <div class="bgc-section">
         <div class="bg">
           <!--          <img src="@/assets/images/temp/sample_img_02.png" alt="배경화면" class="img-m">-->
-          <div class="img-m" style="width:192rem; height: 40rem; background-color:#a1ceff;"></div>
+          <div class="img-m" style="width:192rem; height: 40rem; background-color:#eee9e3;"></div>
         </div>
         <div class="setting-img">
-          <img src="@/assets/images/common/setting_default.png" alt="세팅" class=" img-m">
+          <router-link to="/myGallery1"><img v-b-modal.normalPopup1 src="@/assets/images/common/setting_default.png" alt="세팅" class=" img-m"></router-link>
         </div>
       </div>
       <div class="info-section d-flex">
@@ -51,7 +51,7 @@
         <b-tabs justified>
           <b-tab title="내그림" class="tab active">
             <div class="gallery-section">
-              <ul class="gallerys d-flex">
+              <ul class="gallerys">
                <li class="gallery-default">
                  <div class="emoji-icon">
                    <img src="@/assets/images/common/emoji@2x.png" alt="이모티콘" class="img-m">

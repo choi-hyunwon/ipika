@@ -14,23 +14,34 @@
     <div class="contents no_scroll">
       <div class="bg_gallery">
         <div class="gallery_img">
-        <img src="@/assets/images/temp/sample_img_01.jpg" alt="img-m">
+          <img src="@/assets/images/temp/sample_img_02.png" alt="img-m" style="width: 192rem">
         </div>
         <div class="btn_group">
-          <b-button>삭제하기</b-button>
-          <b-button>오픈갤러리 공개하기</b-button>
+          <b-button class="">삭제하기</b-button>
+          <b-button class="" v-b-modal.normalPopup1>오픈갤러리 공개하기</b-button>
         </div>
       </div>
     </div>
+    <b-modal id="normalPopup1" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">
+      <template #modal-header>
+        <div class="symbol"><img src="@/assets/images/common/check_green@2x.png" alt=""></div>
+      </template>
+      <p class="text">그림이 친구들에게<br/>공개되었습니다!<br/></p>
+      <p class="text-sm">오픈갤러리에서 확인해보세요</p>
+      <template #modal-footer="{ cancel }">
+        <b-button variant="gray" class="btn-half"  @click="cancel()">닫기</b-button>
+        <router-link to="/thoughtRecords" class="btn btn-black  btn-half">오픈갤러리 가기</router-link>
+      </template>
+    </b-modal>
   </div>
-
 </template>
+
 <script>
 export default {
   name: 'MyGallery11'
 }
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 
 </style>

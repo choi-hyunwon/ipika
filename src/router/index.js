@@ -28,9 +28,11 @@ import MyGalleryMain from '@/views/MyGalleryMain'
 import MyGallery from '@/views/myGallery'
 import MyGallery1 from '@/views/myGallery1'
 import myGallery2 from '@/views/myGallery2'
+import MyGallery3 from '@/views/myGallery3'
+import MyGallery4 from '@/views/myGallery4'
+import MyGallery5 from '@/views/myGallery5'
 import MyGallery6 from '@/views/myGallery6'
 import MyGallery7 from '@/views/myGallery7'
-import MyGallery8 from '@/views/myGallery8'
 import MyGallery9 from '@/views/myGallery9'
 import MyGallery10 from '@/views/myGallery10'
 import MyGallery11 from '@/views/myGallery11'
@@ -40,8 +42,7 @@ import MyGallery14 from '@/views/myGallery14'
 import MyGallery15 from '@/views/myGallery15'
 import MyGallery16 from '@/views/myGallery16'
 import MyGallery17 from '@/views/myGallery17'
-import MyGallery18 from '@/views/myGallery18'
-import MyGallery19 from '@/views/myGallery19'
+
 
 
 
@@ -158,8 +159,8 @@ const routes = [
     component:MyGalleryMain
   },
   {
-    path:'/MyGallery',
-    name:'Mygallery',
+    path:'/myGallery',
+    name:'myGallery',
     component: MyGallery
   },
   {
@@ -173,6 +174,21 @@ const routes = [
     component: myGallery2
   },
   {
+    path:'/MyGallery3',
+    name:'MyGallery3',
+    component: MyGallery3
+  },
+  {
+    path:'/MyGallery4',
+    name:'Mygallery4',
+    component: MyGallery4
+  },
+  {
+    path:'/MyGallery5',
+    name:'Mygallery5',
+    component: MyGallery5
+  },
+  {
     path:'/MyGallery6',
     name:'Mygallery6',
     component: MyGallery6
@@ -183,18 +199,13 @@ const routes = [
     component: MyGallery7
   },
   {
-    path:'/MyGallery8',
-    name:'Mygallery8',
-    component: MyGallery8
-  },
-  {
     path:'/MyGallery9',
-    name:'Mygallery9',
+    name:'MyGallery9',
     component: MyGallery9
   },
   {
     path:'/MyGallery10',
-    name:'Mygallery10',
+    name:'MyGallery10',
     component: MyGallery10
   },
   {
@@ -231,16 +242,6 @@ const routes = [
     path:'/MyGallery17',
     name:'MyGallery17',
     component: MyGallery17
-  },
-  {
-    path:'/MyGallery18',
-    name:'MyGallery18',
-    component: MyGallery18
-  },
-  {
-    path:'/MyGallery19',
-    name:'MyGallery19',
-    component: MyGallery19
   }
 
 

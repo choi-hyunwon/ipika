@@ -48,11 +48,13 @@
         </ul>
       </div>
       <div class="tab-section">
-        <b-tabs justified>
+        <b-tabs justified v-model="tabIndex">
           <b-tab title="내그림" class="tab">
+          </b-tab>
+          <b-tab title="공개한 그림" class="tab">
             <div class="clearfix btns_group">
               <div class="float-left btn-left">
-                <b-button class="all_button">
+                <b-button class="all_button active">
                   <img src="@/assets/images/common/all.png" alt="모든이미지" class="img">
                   <span>ALL</span>
                 </b-button>
@@ -60,7 +62,7 @@
                   <img src="@/assets/images/common/all.png" alt="모든이미지" class="img">
                   <span>Pablo Drawing</span>
                 </b-button>
-                <b-button class="classic_button active">
+                <b-button class="classic_button">
                   <img src="@/assets/images/common/all.png" alt="모든이미지" class="img" style="width: 1.57rem; height: 2rem;">
                   <span>Pablo Classic</span>
                 </b-button>
@@ -71,46 +73,119 @@
               </div>
               <div class="float-right btn-rigth">
                 <b-dropdown id="dropdown-1" text="최신 순">
-                  <b-dropdown-item style="top: 0.4rem">오래된 순</b-dropdown-item>
+                  <b-dropdown-item>오래된 순</b-dropdown-item>
+                  <b-dropdown-item>좋아요 순</b-dropdown-item>
+                  <b-dropdown-item>조회 순</b-dropdown-item>
                 </b-dropdown>
               </div>
             </div>
             <div class="gallery-section">
-              <ul class="gallerys d-flex">
-                <li class="gallery-g" >
+              <ul class="gallerys clearfix">
+                <li class="gallery-g">
                   <div class="gallery_img size-img">
+                    <div class="img_icon">
+                      <img src="@/assets/images/common/like_small active@2x.png" alt="다운로드" class="img-m">
+                    </div>
                     <img src="@/assets/images/temp/sample_img_01.jpg" alt="갤러리사진" class="img-m">
                   </div>
-                  <div class="img_download">
-                    <img src="@/assets/images/common/share.png" alt="다운로드" class="img-m">
+                  <div class="img_title">Curious Stage</div>
+                  <div class="img_desc">최초의 사람은 어떤 사람이었을까요?</div>
+                  <div class="openPinfo d-flex">
+                    <div class="heart_icon">
+                      <img src="@/assets/images/common/like@2x.png" alt="" class="img-m">
+                    </div>
+                    <div class="heart_number text">1,245</div>
+                    <div class="eye_icon">
+                      <img src="@/assets/images/common/view count@2x.png" alt="" class="img-m">
+                    </div>
+                    <div class="eye_number text">3,882</div>
                   </div>
-                  <div class="img_title">2020.10.02</div>
-                  <div class="img_desc">유명한 음악가의 음악을 그림으로 표현해봐!</div>
+                </li>
+                <li class="gallery-g">
+                  <div class="gallery_img size-img">
+                    <div class="img_icon">
+                      <img src="@/assets/images/common/like_small active@2x.png" alt="다운로드" class="img-m">
+                    </div>
+                    <img src="@/assets/images/temp/sample_img_01.jpg" alt="갤러리사진" class="img-m">
+                  </div>
+                  <div class="img_title">Curious Stage2</div>
+                  <div class="img_desc">최초의 사람은 어떤 사람이었을까요?</div>
+                  <div class="openPinfo d-flex">
+                    <div class="heart_icon">
+                      <img src="@/assets/images/common/like@2x.png" alt="" class="img-m">
+                    </div>
+                    <div class="heart_number text">1,245</div>
+                    <div class="eye_icon">
+                      <img src="@/assets/images/common/view count@2x.png" alt="" class="img-m">
+                    </div>
+                    <div class="eye_number text">3,882</div>
+                  </div>
+
                 </li>
                 <li class="gallery-g">
                   <div class="gallery_img size-img">
                     <img src="@/assets/images/temp/sample_img_01.jpg" alt="갤러리사진" class="img-m">
+                    <div class="img_icon">
+                      <img src="@/assets/images/common/like_small active@2x.png" alt="다운로드" class="img-m">
+                    </div>
                   </div>
-                  <div class="img_title">2020.09.28</div>
-                  <div class="img_desc">내가 좋아하는 꽃을 그려봐!</div>
-                  <div class="img_download">
-                    <img src="@/assets/images/common/share.png" alt="다운로드" class="img-m">
+                  <div class="img_title">Curious Stage 3</div>
+                  <div class="img_desc">최초의 사람은 어떤 사람이었을까요?</div>
+                  <div class="openPinfo d-flex">
+                    <div class="heart_icon">
+                      <img src="@/assets/images/common/like@2x.png" alt="" class="img-m">
+                    </div>
+                    <div class="heart_number text">1,245</div>
+                    <div class="eye_icon">
+                      <img src="@/assets/images/common/view count@2x.png" alt="" class="img-m">
+                    </div>
+
+                    <div class="eye_number text">3,882</div>
                   </div>
                 </li>
                 <li class="gallery-g">
                   <div class="gallery_img size-img">
                     <img src="@/assets/images/temp/sample_img_01.jpg" alt="갤러리사진" class="img-m">
+                    <div class="img_icon">
+                      <img src="@/assets/images/common/like_small active@2x.png" alt="" class="img-m">
+                    </div>
                   </div>
-                  <div class="img_title">2020.08.31</div>
-                  <div class="img_desc">내가 좋아하는 꽃을 그려봐!</div>
-                  <div class="img_download">
-                    <img src="@/assets/images/common/share.png" alt="다운로드" class="img-m">
+                  <div class="img_title">Curious Stage 12</div>
+                  <div class="img_desc">최초의 사람은 어떤 사람이었을까요?</div>
+                  <div class="openPinfo d-flex">
+                    <div class="heart_icon">
+                      <img src="@/assets/images/common/like@2x.png" alt="" class="img-m">
+                    </div>
+                    <div class="heart_number text">1,245</div>
+                    <div class="eye_icon">
+                      <img src="@/assets/images/common/view count@2x.png" alt="" class="img-m">
+                    </div>
+                    <div class="eye_number text">3,882</div>
+                  </div>
+                </li>
+                <li class="gallery-g">
+                  <div class="gallery_img size-img">
+                    <img src="@/assets/images/temp/sample_img_01.jpg" alt="갤러리사진" class="img-m">
+                    <div class="img_icon">
+                      <img src="@/assets/images/common/like_small default@2x.png" alt="" class="img-m">
+                    </div>
+                  </div>
+                  <div class="img_title">Curious Stage 13</div>
+                  <div class="img_desc">최초의 사람은 어떤 사람이었을까요?</div>
+                  <div class="openPinfo d-flex">
+                    <div class="heart_icon">
+                      <img src="@/assets/images/common/like@2x.png" alt="" class="img-m">
+                    </div>
+                    <div class="heart_number text">1,245</div>
+                    <div class="eye_icon">
+                      <img src="@/assets/images/common/view count@2x.png" alt="" class="img-m">
+                    </div>
+                    <div class="eye_number text">3,882</div>
                   </div>
                 </li>
               </ul>
             </div>
           </b-tab>
-          <b-tab title="공개한 그림" class="tab"></b-tab>
           <b-tab title="내 녹음 듣기" class="tab">
           </b-tab>
         </b-tabs>
@@ -121,7 +196,12 @@
 
 <script>
 export default {
-  name: 'myGallery7'
+  name: 'myGallery7',
+  data(){
+    return {
+      tabIndex: 1
+    }
+  }
 }
 </script>
 

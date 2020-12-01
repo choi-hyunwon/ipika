@@ -14,8 +14,7 @@
     <div class="contents">
       <div class="bgc-section">
         <div class="bg">
-          <!--          <img src="@/assets/images/temp/sample_img_02.png" alt="배경화면" class="img-m">-->
-          <div class="img-m" style="width:192rem; height: 40rem; background-color:#a1ceff;"></div>
+          <img src="@/assets/images/temp/sample_img_02.png" alt="배경화면" class="img-m">
         </div>
         <div class="setting-img">
           <img src="@/assets/images/common/setting_default.png" alt="세팅" class=" img-m">
@@ -52,22 +51,22 @@
           <b-tab title="내그림" class="tab">
             <div class="clearfix btns_group">
               <div class="float-left btn-left">
-                <b-button class="all_button">
+                <router-link to="/mygallery2"><b-button  class="all_button" aria-pressed="true">
                   <img src="@/assets/images/common/all.png" alt="모든이미지" class="img">
                   <span>ALL</span>
-                </b-button>
-                <b-button class="drawing_button">
+                </b-button></router-link>
+                <router-link to="/mygallery3"><b-button class="drawing_button">
                   <img src="@/assets/images/common/all.png" alt="모든이미지" class="img">
                   <span>Pablo Drawing</span>
-                </b-button>
-                <b-button class="classic_button">
+                </b-button></router-link>
+                <router-link to="/mygallery4"><b-button class="classic_button">
                   <img src="@/assets/images/common/all.png" alt="모든이미지" class="img" style="width: 1.57rem; height: 2rem;">
                   <span>Pablo Classic</span>
-                </b-button>
-                <b-button class="canvas_button active">
+                </b-button></router-link>
+                <router-link to="/mygallery6"><b-button :pressed="true" class="canvas_button">
                   <img src="@/assets/images/common/all.png" alt="모든이미지" class="img">
                   <span>Canvas</span>
-                </b-button>
+                </b-button></router-link>
               </div>
               <div class="float-right btn-rigth">
                 <b-dropdown id="dropdown-1" text="최신 순">
@@ -76,13 +75,10 @@
               </div>
             </div>
             <div class="gallery-section">
-              <ul class="gallerys d-flex">
+              <ul class="gallerys">
                 <li class="gallery-g" >
                   <div class="gallery_img size-img">
                     <img src="@/assets/images/temp/sample_img_01.jpg" alt="갤러리사진" class="img-m">
-                  </div>
-                  <div class="img_download">
-                    <img src="@/assets/images/common/share.png" alt="다운로드" class="img-m">
                   </div>
                   <div class="img_title">2020.10.02</div>
                   <div class="img_desc">유명한 음악가의 음악을 그림으로 표현해봐!</div>
@@ -90,22 +86,24 @@
                 <li class="gallery-g">
                   <div class="gallery_img size-img">
                     <img src="@/assets/images/temp/sample_img_01.jpg" alt="갤러리사진" class="img-m">
+                    <div v-b-modal.normalPopup1 class="img_icon">
+                      <img src="@/assets/images/common/share.png" alt="다운로드" class="img-m">
+                    </div>
                   </div>
                   <div class="img_title">2020.09.28</div>
                   <div class="img_desc">내가 좋아하는 꽃을 그려봐!</div>
-                  <div v-b-modal.normalPopup1 class="img_download">
-                    <img src="@/assets/images/common/share.png" alt="다운로드" class="img-m">
-                  </div>
+
                 </li>
                 <li class="gallery-g">
                   <div class="gallery_img size-img">
                     <img src="@/assets/images/temp/sample_img_01.jpg" alt="갤러리사진" class="img-m">
+                    <div  class="img_icon">
+                      <img src="@/assets/images/common/share.png" alt="다운로드" class="img-m">
+                    </div>
                   </div>
                   <div class="img_title">2020.08.31</div>
                   <div class="img_desc">내가 좋아하는 꽃을 그려봐!</div>
-                  <div  class="img_download">
-                    <img src="@/assets/images/common/share.png" alt="다운로드" class="img-m">
-                  </div>
+
                 </li>
               </ul>
             </div>
@@ -121,7 +119,7 @@
 
 <script>
 export default {
-  name: 'myGallery8'
+  name: 'myGallery5'
 }
 </script>
 

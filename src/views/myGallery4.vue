@@ -51,7 +51,7 @@
           <b-tab title="내그림" class="tab">
             <div class="clearfix btns_group">
               <div class="float-left btn-left">
-                <router-link to="/mygallery2"><b-button  class="all_button" aria-pressed="true">
+                <router-link to="/mygallery2"><b-button class="all_button" aria-pressed="true">
                   <img src="@/assets/images/common/all.png" alt="모든이미지" class="img">
                   <span>ALL</span>
                 </b-button></router-link>
@@ -59,11 +59,11 @@
                   <img src="@/assets/images/common/all.png" alt="모든이미지" class="img">
                   <span>Pablo Drawing</span>
                 </b-button></router-link>
-                <router-link to="/mygallery4"><b-button class="classic_button">
+                <router-link to="/mygallery4"><b-button :pressed="true" class="classic_button">
                   <img src="@/assets/images/common/all.png" alt="모든이미지" class="img" style="width: 1.57rem; height: 2rem;">
                   <span>Pablo Classic</span>
                 </b-button></router-link>
-                <router-link to="/mygallery6"><b-button :pressed="true" class="canvas_button">
+                <router-link to="/mygallery6"><b-button  class="canvas_button">
                   <img src="@/assets/images/common/all.png" alt="모든이미지" class="img">
                   <span>Canvas</span>
                 </b-button></router-link>
@@ -86,7 +86,7 @@
                 <li class="gallery-g">
                   <div class="gallery_img size-img">
                     <img src="@/assets/images/temp/sample_img_01.jpg" alt="갤러리사진" class="img-m">
-                    <div v-b-modal.normalPopup1 class="img_icon">
+                    <div class="img_icon">
                       <img src="@/assets/images/common/share.png" alt="다운로드" class="img-m">
                     </div>
                   </div>
@@ -97,7 +97,7 @@
                 <li class="gallery-g">
                   <div class="gallery_img size-img">
                     <img src="@/assets/images/temp/sample_img_01.jpg" alt="갤러리사진" class="img-m">
-                    <div v-b-modal.normalPopup1 class="img_icon">
+                    <div class="img_icon">
                       <img src="@/assets/images/common/share.png" alt="다운로드" class="img-m">
                     </div>
                   </div>
@@ -114,35 +114,12 @@
         </b-tabs>
       </div>
     </div>
-    <b-modal id="normalPopup1" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">
-      <template #modal-header>
-        <div class="symbol"><img src="@/assets/images/common/check_blue@2x.png" alt=""></div>
-      </template>
-      <p class="text">오픈갤러리에 그림을<br/>공개하시겠어요?<br/></p>
-      <p class="text-sm">친구들에게 그림을 보여주세요!</p>
-      <template #modal-footer="{ cancel }">
-        <b-button variant="gray" class="btn-half"  @click="cancel()">닫기</b-button>
-        <b-button v-b-modal.normalPopup1-1  class="btn btn-black  btn-half" >공개하기</b-button>
-      </template>
-    </b-modal>
-    <b-modal id="normalPopup1-1" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">
-      <template #modal-header>
-        <div class="symbol"><img src="@/assets/images/common/check_green@2x.png" alt=""></div>
-      </template>
-      <p class="text">그림이 친구들에게<br/>공개되었습니다!<br/></p>
-      <p class="text-sm">오픈갤러리에서 확인해보세요!</p>
-      <template #modal-footer="{ cancel }">
-        <b-button variant="gray" class="btn-half"  @click="cancel()">닫기</b-button>
-        <router-link to="/mygallery7" class="btn btn-black  btn-half">오픈갤러리 가기</router-link>
-      </template>
-    </b-modal>
-
   </div>
 </template>
 
 <script>
 export default {
-  name: 'myGallery6'
+  name: 'myGallery4'
 }
 </script>
 
