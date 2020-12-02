@@ -1,5 +1,9 @@
 <template>
   <div>
+    <div class="navigation pb-5">
+      <p>TTS 기능 테스트 :<br></p>
+      <button id="btn-read" @click="tts.speak('TTS 테스트')">TTS 기능 테스트</button>
+    </div>
     <div class="navigation">
       <p>진단테스트 :<br></p>
       <router-link to="/home">초기화면</router-link>
@@ -26,7 +30,7 @@
     </div>
 
     <div class="navigation pb-5">
-      <p>파블로레터 :<br></p>
+      <p>마이갤러리 :<br></p>
       <router-link to="/MyGalleryMain">학습메인_마이페이지</router-link>
       <router-link to="/myGallery">마이갤러리(default)</router-link>
       <router-link to="/myGallery1">마이갤러리_default 배경그림 설정 버튼 탭 시</router-link>

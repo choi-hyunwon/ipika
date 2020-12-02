@@ -1,6 +1,5 @@
 <template>
   <div class="wrap">
-    <button id="btn-read" @click="tts.speak('TTS 테스트')">TTS 기능 테스트</button>
     <div class="row">
       <div class="col col-6">
         <div class="symbol"><img src="@/assets/images/common/Symbol@2x.png" alt=""></div>
