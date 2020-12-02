@@ -4,7 +4,7 @@
       <div class="col col-6">
         <div class="symbol"><img src="@/assets/images/common/Symbol@2x.png" alt=""></div>
         <div class="title">Ai Art Tutor<br/>PABLO</div>
-        <p class="desc">생각을 표현해보는 미술교육 서비스</p>
+        <p class="desc" @click="fetchMainMenu">생각을 표현해보는 미술교육 서비스</p>
         <div class="btn-group">
           <router-link to="/Agreement" class="btn btn-dark mr-3">진단테스트 시작하기</router-link>
           <router-link to="/PabloStudy1" class="btn btn-dark">학습 시작하기</router-link>
@@ -19,8 +19,31 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
+
 export default {
-  name: 'Home'
+  name: 'Home',
+  mounted () {
+    this.fetchMainMenu()
+  },
+  computed: {
+    ...mapGetters({
+      session: 'getSession'
+    })
+  },
+  methods: {
+    ...mapActions({
+      getUserInfo: 'getUserInfo',
+      getMainMenu: 'getMainMenu'
+    }),
+    // 메인 메뉴 조회
+    fetchMainMenu () {
+      this.getMainMenu({})
+        .then(result => {
+          console.log(`fetchCategoryItems :`, result)
+        })
+    }
+  }
 }
 </script>
 

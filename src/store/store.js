@@ -27,7 +27,12 @@ export const store = new Vuex.Store({
         age: 0
       }
     },
-    myGallery: {}
+    session: {
+      user_id: 'testplan56',
+      user_auth_key: 'abcdefghijklmnopqrstuvwxyz0123456789',
+      Content_Language: 'ko',
+      device_type: '1001'
+    }
   },
   /**
    * global로 사용하는 getters
@@ -40,8 +45,8 @@ export const store = new Vuex.Store({
     getUserInfo: state => {
       return state.userinfo
     },
-    getMygallery: state => {
-      return state.myGallery
+    getSession: state => {
+      return state.session
     }
   },
   /**
