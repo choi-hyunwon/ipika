@@ -22,7 +22,7 @@
         </div>
       </div>
     </div>
-    <b-modal id="ImgDelete" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">
+    <b-modal id="ImgDelete" centered title="파블로 알림" modal-class="normalPopup">
       <template #modal-header>
         <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>
       </template>
@@ -33,7 +33,7 @@
         <b-button class="btn btn-black  btn-half" @click="cancel()">닫기</b-button>
       </template>
     </b-modal>
-    <b-modal id="GalleryPublic" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">
+    <b-modal id="GalleryPublic" centered title="파블로 알림" modal-class="normalPopup">
       <template #modal-header>
         <div class="symbol"><img src="@/assets/images/common/check_green@2x.png" alt=""></div>
       </template>
