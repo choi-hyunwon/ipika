@@ -179,7 +179,7 @@ export default {
           a {
             position: relative;
             &::after {
-              content: 'Strat';
+              content: 'start';
               position: absolute;
               display: inline-block;
               right: -47px;
