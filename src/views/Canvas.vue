@@ -1,5 +1,5 @@
 <template>
-  <div class="wrap bg-ivory">
+  <div class="wrap">
 
     <!-- s guide -->
 <!--    <div class="guide"><img src="@/assets/images/common/test_guide@2x.png" alt=""></div>-->
@@ -122,21 +122,6 @@
       </div>
     </nav>
 
-    <div class="DropDown Papers" style="display: none;">
-      <img src="https://developer-demos.wacom.com/Images/dropdown_arrow.png" class="Arrow" alt="">
-      <img id="paper_01" src="https://developer-demos.wacom.com/Images/btn_paper_01.jpg" class="Item Paper" alt="">
-      <img id="paper_02" src="https://developer-demos.wacom.com/Images/btn_paper_02.jpg" class="Item Paper" alt="">
-      <img id="paper_03" src="https://developer-demos.wacom.com/Images/btn_paper_03.jpg" class="Item Paper Selected"
-           alt="">
-    </div>
-    <div class="DropDown Colors" style="display: none;">
-      <img src="https://developer-demos.wacom.com/Images/dropdown_arrow.png" class="Arrow" alt="">
-      <a href="javascript:void(0)" class="Item Color" style="background-color: #BF0058;"></a>
-      <a href="javascript:void(0)" class="Item Color" style="background-color: #0097d4;"></a>
-      <a href="javascript:void(0)" class="Item Color" style="background-color: #89AE00;"></a>
-      <a href="javascript:void(0)" class="Item Color" style="background-color: #E2B800;"></a>
-      <a href="javascript:void(0)" class="Item Color Selected" style="background-color: #4A4A4A;"></a>
-    </div>
 
     <div class="Wrapper" style="height: 100%;">
       <canvas id="canvas_images" oncontextmenu="event.preventDefault();"
@@ -165,9 +150,12 @@
         </div>
       </div>
     </div>
-    <div class="nav show"><!-- show/hide -->
+    <div class="nav" :class="{'show': drawer === true, 'hide': drawer=== false}"><!-- show/hide -->
       <div class="inner">
-        <button class="btn-drawer"><img src="@/assets/images/common/slide_down@2x.png" alt=""></button>
+        <button class="btn-drawer" @click="toggleDrawer">
+          <img v-if="drawer === true" src="@/assets/images/common/slide_down@2x.png" alt="">
+          <img v-else src="@/assets/images/common/slide_up@2x.png" alt="">
+        </button>
         <div class="tool-wrap">
           <div class="background-color">
             <button class="color" id="paper_01" style="background-color: #ffffff"
@@ -231,7 +219,7 @@
     <!-- 진단 테스트 -->
     <!-- s 팝업  -->
 <!--    <b-button v-if="page === 'diagnose'"  v-b-modal.normalPopup style="position: absolute; top: 200px; left: 50px;">진단테스트_3_시간 초과 시 1</b-button>-->
-    <b-modal v-if="page === 'diagnose'" :visible="timeOver" id="clearPopup" centered title="전체 지우기 팝업" modal-class="normalPopup">
+    <b-modal v-if="page === 'diagnose'" :visible="timeOver" id="timeoverPopup" centered title="진단테스트 : 타임오버" modal-class="normalPopup">
       <template #modal-header>
         <div class="symbol"><img src="@/assets/images/common/timer@2x.png" alt=""></div>
       </template>
@@ -240,7 +228,7 @@
       <p class="text-sm">다시 그리면 먼저 그린 그림은 사라져요</p>
       <template #modal-footer="{ cancel }">
         <b-button @click="clear" variant="blue" class="btn-half">다시 그릴래요!</b-button>
-        <b-button @click="cancel" variant="black" class="btn-half">제출할게요</b-button>
+        <b-button @click="exportPNG" variant="black" class="btn-half">제출할게요</b-button>
       </template>
     </b-modal>
 
@@ -253,7 +241,7 @@
         지금 그린 그림이 지워져요</p>
       <p class="text-sm">제출하면 파블로가 그림을 분석할 거예요 :)</p>
       <template #modal-footer="{ cancel }">
-        <b-button @click="cancel" variant="blue" class="btn-half">제출할게요</b-button>
+        <b-button @click="exportPNG" variant="blue" class="btn-half">제출할게요</b-button>
         <b-button @click="clear" variant="black" class="btn-half">다시 그릴게요!</b-button>
       </template>
     </b-modal>
@@ -267,8 +255,8 @@
         제출하면 수정할 수 없어요!</p>
       <p class="text-sm">더 그리고 싶은 것은 없는지 생각해봐요</p>
       <template #modal-footer="{ cancel }">
-        <b-button variant="gray" class="btn-half" @click="cancel">제출할게요</b-button>
-        <b-button variant="black" class="btn-half" @click=cancel() >더 그릴게요!</b-button>
+        <b-button variant="gray" class="btn-half" @click="exportPNG">제출할게요</b-button>
+        <b-button variant="black" class="btn-half" @click=cancel >더 그릴게요!</b-button>
       </template>
     </b-modal>
 
@@ -341,7 +329,7 @@
       <p class="text">2분안에 자유롭게<br/>
         나무를 그려보세요</p>
       <template #modal-footer="{ cancel }">
-        <button size="sm" variant="btn black btn-block" @click="cancel()">알겠어요!</button>
+        <button size="sm" class="btn btn-black btn-block" @click="cancel()">알겠어요!</button>
       </template>
     </b-modal>
 <!--주제보기-->
@@ -408,20 +396,13 @@ export default {
       time: 60*2, // TODO: default 60*2
       timer: null,
       timeOver : false,
-
-      color:{
-        size : 5
-      }
-
-
-
+      drawer : true
     }
   },
   mounted () {
     if (localStorage.getItem('isReload') === 'true' || localStorage.getItem('isReload') === undefined) window.location.reload()
     else this.isLoading = true
     this.timerStart()
-
   },
   computed: {
     page() {
@@ -518,7 +499,22 @@ export default {
     clear(){
       WILL.clear()
       this.$bvModal.hide('clearAllPopup')
+      this.time = 120
     },
+    toggleDrawer(){
+      this.drawer = !this.drawer
+    },
+    exportPNG(e){
+      WILL.getImageCanvas().toBlob(function(blob) {
+        const href = URL.createObjectURL(blob);
+        console.log(href)
+        /**
+         * todo : API날리기
+         */
+
+      });
+
+    }
 
 
 
@@ -541,7 +537,7 @@ export default {
   width: 100% !important;
   height: 108rem !important;
   position: absolute;
-  top: 140px;
+  top: 80px;
 }
 .header {
   .btn-wrap {

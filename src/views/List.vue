@@ -8,7 +8,7 @@
       <p>진단테스트 :<br></p>
       <router-link to="/home">초기화면</router-link>
       <router-link to="/Agreement">약관동의</router-link>
-      <router-link to="/canvas">캔버스</router-link>
+      <router-link to="/canvas?page=diagnose">캔버스</router-link>
       <router-link to="/LoadingSpinnerWaiting">로딩스피너 제작 예정</router-link>
       <router-link to="/TestingResult">테스팅 결과</router-link>
     </div>

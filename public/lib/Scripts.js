@@ -50,19 +50,20 @@ var tools = {
 			href = URL.createObjectURL(blob);
 		}
 
-		var a = document.createElement("a");
-		a.href = href;
-		a.download = filename;
-
-		a.appendChild(document.createTextNode(filename));
-		a.style.display = "none";
-
-		document.body.appendChild(a);
-		a.click();
-
-		setTimeout(function() {
-			URL.revokeObjectURL(href);
-		}, 911);
+		return href;
+		// var a = document.createElement("a");
+		// a.href = href;
+		// a.download = filename;
+    //
+		// a.appendChild(document.createTextNode(filename));
+		// a.style.display = "none";
+    //
+		// document.body.appendChild(a);
+		// a.click();
+    //
+		// setTimeout(function() {
+		// 	URL.revokeObjectURL(href);
+		// }, 911);
 	},
 
 	getFlags: function(mask) {
@@ -507,7 +508,7 @@ function initEngine() {
 		if (WILL.mode == WILL.Mode["2D"])
 			WILL.setBackground(Module.Color.TRANSPERENT);
 		else
-			WILL.setBackground($(".Papers .Paper.Selected").first()[0].id);
+			// WILL.setBackground($(".Papers .Paper.Selected").first()[0].id);
 		// WILL.setBackground(Module.Color.from(0, 151, 212));
 
 
