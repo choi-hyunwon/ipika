@@ -18,7 +18,7 @@
           <div class="img-m" style="width:192rem; height: 40rem; background-color:#eee9e3;"></div>
         </div>
         <div class="setting-img">
-          <router-link to="/myGallery1"><img v-b-modal.normalPopup1 src="@/assets/images/common/setting_default.png" alt="세팅" class=" img-m"></router-link>
+        <img v-b-modal.GalleryBgSet src="@/assets/images/common/setting_default.png" alt="세팅" class=" img-m">
         </div>
       </div>
       <div class="info-section d-flex">
@@ -64,12 +64,21 @@
               </ul>
             </div>
           </b-tab>
-          <b-tab title="공개한 그림" class="tab"></b-tab>
-          <b-tab title="내 녹음 듣기" class="tab">
-          </b-tab>
+          <b-tab title="내 녹음 듣기" class="tab"></b-tab>
         </b-tabs>
       </div>
     </div>
+    <b-modal id="GalleryBgSet" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">
+      <template #modal-header>
+        <div class="symbol"><img src="@/assets/images/common/emoji@2x.png" alt=""></div>
+      </template>
+      <p class="text">직접 그린 그림으로만<br/> 배경을 설정할 수 있어요<br/></p>
+      <p class="text-sm">파블로 학습을 시작해보세요!</p>
+      <template #modal-footer="{ cancel }">
+        <b-button variant="gray" class="btn-half"  @click="cancel()">닫기</b-button>
+        <b-button class="btn btn-blue5 btn-half">시작하기</b-button>
+      </template>
+    </b-modal>
   </div>
 </template>
 

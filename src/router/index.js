@@ -26,7 +26,6 @@ import List from '@/views/List'
 
 import MyGalleryMain from '@/views/MyGalleryMain'
 import MyGallery from '@/views/myGallery'
-import MyGallery1 from '@/views/myGallery1'
 import myGallery2 from '@/views/myGallery2'
 import MyGallery3 from '@/views/myGallery3'
 import MyGallery4 from '@/views/myGallery4'
@@ -34,14 +33,10 @@ import MyGallery5 from '@/views/myGallery5'
 import MyGallery6 from '@/views/myGallery6'
 import MyGallery7 from '@/views/myGallery7'
 import MyGallery9 from '@/views/myGallery9'
-import MyGallery10 from '@/views/myGallery10'
-import MyGallery11 from '@/views/myGallery11'
 import MyGallery12 from '@/views/myGallery12'
 import MyGallery13 from '@/views/myGallery13'
 import MyGallery14 from '@/views/myGallery14'
 import MyGallery15 from '@/views/myGallery15'
-import MyGallery16 from '@/views/myGallery16'
-import MyGallery17 from '@/views/myGallery17'
 
 
 
@@ -164,11 +159,6 @@ const routes = [
     component: MyGallery
   },
   {
-    path:'/MyGallery1',
-    name:'Mygallery1',
-    component: MyGallery1
-  },
-  {
     path:'/myGallery2',
     name:'myGallery2',
     component: myGallery2
@@ -204,16 +194,6 @@ const routes = [
     component: MyGallery9
   },
   {
-    path:'/MyGallery10',
-    name:'MyGallery10',
-    component: MyGallery10
-  },
-  {
-    path:'/MyGallery11',
-    name:'MyGallery11',
-    component: MyGallery11
-  },
-  {
     path:'/MyGallery12',
     name:'MyGallery12',
     component: MyGallery12
@@ -232,16 +212,6 @@ const routes = [
     path:'/MyGallery15',
     name:'MyGallery15',
     component: MyGallery15
-  },
-  {
-    path:'/MyGallery16',
-    name:'MyGallery16',
-    component: MyGallery16
-  },
-  {
-    path:'/MyGallery17',
-    name:'MyGallery17',
-    component: MyGallery17
   }
 
 
