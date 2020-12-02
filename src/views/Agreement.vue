@@ -130,8 +130,8 @@ export default {
   },
   watch: {
     "checkAll": function (val) {
-      this.check.essential = val;
-      this.check.optional = val;
+      this.check.essential = val
+      this.check.optional = val
     }
   }
 }
