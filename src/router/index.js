@@ -35,7 +35,6 @@ import MyGallery9 from '@/views/myGallery9'
 import MyGallery12 from '@/views/myGallery12'
 import MyGallery13 from '@/views/myGallery13'
 import MyGallery14 from '@/views/myGallery14'
-import MyGallery15 from '@/views/myGallery15'
 
 
 
@@ -207,11 +206,6 @@ const routes = [
     name:'MyGallery14',
     component: MyGallery14
   },
-  {
-    path:'/MyGallery15',
-    name:'MyGallery15',
-    component: MyGallery15
-  }
 
 
 
