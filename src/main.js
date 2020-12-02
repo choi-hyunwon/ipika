@@ -3,11 +3,11 @@ import App from './App.vue'
 import router from './router'
 import store from './store/store'
 import { BootstrapVue } from 'bootstrap-vue'
-import { TTS } from './utils/tts';
+import { TTS } from './utils/tts'
 
 Vue.config.productionTip = false
 
-Vue.prototype.tts = new TTS();
+Vue.prototype.tts = new TTS()
 
 Vue.use(BootstrapVue)
 

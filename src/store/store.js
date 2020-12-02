@@ -10,7 +10,7 @@ Vue.use(Vuex)
  * 컴포넌트 간의 통신이나 데이터 전달을 좀 더 유기적으로 관리
  * 컴포넌트 간 데이터 전달 및 이벤트 통신 등의 여러 컴포넌트의 공통 데이터 상태를 관리함
  */
-export const store = new Vuex.Store({
+export default new Vuex.Store({
   /**
    * global로 사용하는 state
    * component 간 공유될 전역 data를 관리
@@ -18,6 +18,10 @@ export const store = new Vuex.Store({
    * this.$store.state.CONSTANTS;
    */
   state: {
+    isDummy : true,
+    /**
+     * userinfo는 단말기(안드로이드)기에서 받아온다.
+     */
     userinfo: {
       name: '길동아',
       key: '',
@@ -32,7 +36,8 @@ export const store = new Vuex.Store({
       user_auth_key: 'abcdefghijklmnopqrstuvwxyz0123456789',
       Content_Language: 'ko',
       device_type: '1001'
-    }
+    },
+    subject: {}
   },
   /**
    * global로 사용하는 getters
@@ -47,6 +52,12 @@ export const store = new Vuex.Store({
     },
     getSession: state => {
       return state.session
+    },
+    getSubject: state => {
+      return state.subject
+    },
+    getIsDummy: state => {
+      return state.isDummy
     }
   },
   /**

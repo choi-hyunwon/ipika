@@ -1,5 +1,9 @@
 import axios from 'axios'
-import { store } from '../store/store'
+import store from '../store/store'
+
+axios.defaults.baseURL = 'http://localhost:8001'
+axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8'
+axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*'
 
 export default class WebApi {
   constructor () {
@@ -21,24 +25,39 @@ export default class WebApi {
       })
   }
 
-
   /**
    * 카테고리 대메뉴 조회
    *
    * <br> - {String}      account     - ID
    *
    */
-  getMainmenu () {
-    debugger;
-    return this.request(`/api/main/menu`, {
+  getMainmenu (options) {
+    // console.log(store.getters.getSession)
+    return this.request('api/main/menu', {
       method: 'GET',
       data: {
         user_id: store.getters.getSession.user_id,
-        SystemCode: store.getters.getSession.CP,
-        StoreCode: store.getters.getSession.TM,
-        TerminalCode: store.getters.getSession.TM,
-        QrCode: store.getters.getSession.DATA,
-        SendUniqueCode: store.getters.getSession.UniqueCode,
+        user_auth_key: store.getters.getSession.user_auth_key,
+        Content_Language: store.getters.getSession.Content_Language,
+        device_type: store.getters.getSession.device_type
+      }
+    })
+  }
+  /**
+   * 진단 테스트 : 주제 조회
+   *
+   * api/test/subject
+   *
+   */
+  getSubject (options) {
+    // console.log(store.getters.getSession)
+    return this.request('api/test/subject', {
+      method: 'GET',
+      data: {
+        user_id: store.getters.getSession.user_id,
+        user_auth_key: store.getters.getSession.user_auth_key,
+        Content_Language: store.getters.getSession.Content_Language,
+        device_type: store.getters.getSession.device_type
       }
     })
   }

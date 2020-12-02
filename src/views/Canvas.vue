@@ -14,7 +14,7 @@
       </div>
       <div class="symbol">
         <span class="img"><img src="@/assets/images/common/Symbol@2x.png" alt=""></span>
-        <span class="text">자유롭게 나무를 그려보세요</span>
+        <span class="text">{{subject.subject}}</span>
       </div>
       <div class="box-close">
         <!--<router-link to="/" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>-->
@@ -326,8 +326,7 @@
       <template #modal-header>
         <div class="symbol"><img src="@/assets/images/common/Symbol@2x.png" alt=""></div>
       </template>
-      <p class="text">2분안에 자유롭게<br/>
-        나무를 그려보세요</p>
+      <p class="text">{{subject.subject}}</p>
       <template #modal-footer="{ cancel }">
         <button size="sm" class="btn btn-black btn-block" @click="cancel()">알겠어요!</button>
       </template>
@@ -387,6 +386,11 @@
 </template>
 
 <script>
+
+import { mapActions, mapGetters } from 'vuex'
+
+
+
 export default {
   name: 'Canvas',
   data () {
@@ -396,19 +400,26 @@ export default {
       time: 60*2, // TODO: default 60*2
       timer: null,
       timeOver : false,
-      drawer : true
+      drawer : true,
+      subject : {}
     }
   },
   mounted () {
     if (localStorage.getItem('isReload') === 'true' || localStorage.getItem('isReload') === undefined) window.location.reload()
     else this.isLoading = true
     this.timerStart()
+    this.fetchSubject()
   },
   computed: {
+    ...mapGetters({
+      session: 'getSession'
+    }),
     page() {
       return this.$router.currentRoute.query.page
     },
-
+    timeSetting(){
+      return this.time = this.subject.limitMinute * 60
+    },
     timeRemains() {
       let mm = Math.floor(this.time / 60)
       mm = mm < 10 ? '0' + mm : mm
@@ -419,6 +430,10 @@ export default {
 
   },
   methods: {
+    ...mapActions({
+      getUserInfo: 'getUserInfo',
+      getSubject: 'getSubject'
+    }),
     reload(){
       window.location.reload()
     },
@@ -477,6 +492,20 @@ export default {
         this.timerStart()
       }
     },
+    // 메인 메뉴 조회
+    fetchSubject () {
+      this.getSubject()
+        .then(result => {
+          console.log('fetchSubject :', result)
+          if(result !== undefined) this.subject = result;
+        })
+    },
+
+
+
+    /**
+     * 캔버스 툴 조작
+     */
     setBgColorSelect(e){
       WILL.setBackground(e.target.id)
     },
@@ -511,7 +540,6 @@ export default {
         /**
          * todo : API날리기
          */
-
       });
 
     }
