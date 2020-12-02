@@ -24,7 +24,6 @@ import pabloCanvas from '@/views/pabloCanvas'
 import List from '@/views/List'
 
 
-import MyGalleryMain from '@/views/MyGalleryMain'
 import MyGallery from '@/views/myGallery'
 import MyGallery1 from '@/views/myGallery1'
 import myGallery2 from '@/views/myGallery2'
@@ -66,6 +65,11 @@ const routes = [
     path: '/list',
     name: 'List',
     component: List
+  },
+  {
+    path: '/home',
+    name: 'Home',
+    component: Home
   },
   {
     path: '/canvas',
@@ -152,11 +156,6 @@ const routes = [
     path: '/peopleThinking',
     name: 'peopleThinking',
     component: peopleThinking
-  },
-  {
-    path:'/MyGalleryMain',
-    name:'MyGalleryMain',
-    component:MyGalleryMain
   },
   {
     path:'/myGallery',

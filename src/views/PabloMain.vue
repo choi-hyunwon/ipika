@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col col-6 left">
         <div class="symbol"><img src="@/assets/images/common/Symbol@2x.png" alt=""></div>
-        <ul class="dot-list">
+        <ul class="dot-list" v-if="slider">
           <li class="on"><router-link to=""></router-link></li>
           <li><router-link to=""></router-link></li>
           <li><router-link to=""></router-link></li>
@@ -12,44 +12,44 @@
           <li><router-link to=""></router-link></li>
         </ul>
         <ul class="title-list">
-          <li class="active badge-new"><!-- badge-new / badge-start -->
+          <li class="active"><!-- badge-new / badge-start -->
             <router-link to="/PabloStudy1">
               <span class="num">01</span>
               <span class="title">Pablo Letter</span>
             </router-link>
           </li>
           <li>
-            <router-link to="/">
+            <span>
               <span class="num">02</span>
               <span class="title">Pablo Classic</span>
-            </router-link>
+            </span>
           </li>
-          <li>
-            <router-link to="/">
+          <li class="active">
+            <router-link to="/canvas">
               <span class="num">03</span>
               <span class="title">Canvas</span>
             </router-link>
           </li>
-          <li>
-            <router-link to="/">
+          <li class="active">
+            <router-link to="/myGallery">
               <span class="num">04</span>
               <span class="title">My Gallery</span>
             </router-link>
           </li>
           <li>
-            <router-link to="/">
+            <span>
               <span class="num">05</span>
               <span class="title">Open Gallery</span>
-            </router-link>
+            </span>
           </li>
           <li>
-            <router-link to="/">
+            <span>
               <span class="num">06</span>
               <span class="title">My Page</span>
-            </router-link>
+            </span>
           </li>
         </ul>
-        <div class="message">
+        <div class="message" v-if="message">
           <span class="symbol"><img src="@/assets/images/common/Symbol-white@2x.png" alt=""></span>
           <span class="text">새로운 학습이 도착했어요! 지금 바로 시작해보세요 😃</span>
           <router-link to="/" class="btn-close"></router-link>
@@ -65,7 +65,13 @@
 
 <script>
 export default {
-  name: 'PabloMain'
+  name: 'PabloMain',
+  data () {
+    return {
+      message: false,
+      slider: false,
+    }
+  }
 }
 </script>
 
@@ -125,7 +131,7 @@ export default {
         position: relative;
         line-height: 9.6px;
         margin-bottom: 2.8rem;
-        a {
+        > a, >span {
           display: inline-block;
           .num {
             display: none;
