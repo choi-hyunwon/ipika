@@ -50,7 +50,6 @@ export default class WebApi {
    *
    */
   getSubject (options) {
-    // console.log(store.getters.getSession)
     return this.request('api/test/subject', {
       method: 'GET',
       data: {
@@ -58,6 +57,106 @@ export default class WebApi {
         user_auth_key: store.getters.getSession.user_auth_key,
         Content_Language: store.getters.getSession.Content_Language,
         device_type: store.getters.getSession.device_type
+      }
+    })
+  }
+
+
+  /**
+   * 사용자 정보 조회
+   *
+   * 사용자 스테이지 티어 및 정보 조회
+   * stageId:int-스테이지ID
+   * stageName:String-스테이지명
+   * trialRecommendation:String-무료체험 추천여부
+   *
+   */
+  getResult (options) {
+    return this.request('api/test/result', {
+      method: 'GET',
+      data: {
+        user_id: store.getters.getSession.user_id,
+        user_auth_key: store.getters.getSession.user_auth_key,
+        Content_Language: store.getters.getSession.Content_Language,
+        device_type: store.getters.getSession.device_type
+      }
+    })
+  }
+
+
+
+  /**
+   * 마이갤러리 정보 조회
+   *
+   * 마이갤러리 상단 부분의 정보 조회
+   * userName:String-스테이지ID
+   * backgroundImage:String-배경화면
+   * totalCount:String-전체그림수
+   * totalSharedCount:String-전체공유그림수
+   * totalViewCount:String-전체공유그림조회수
+   * totalReactionCount:String-전체공유그림좋아요수
+   */
+  getUesrGallery (options) {
+    return this.request('/api/users/gallery', {
+      method: 'GET',
+      data: {
+        user_id: store.getters.getSession.user_id,
+        user_auth_key: store.getters.getSession.user_auth_key,
+        Content_Language: store.getters.getSession.Content_Language,
+        device_type: store.getters.getSession.device_type
+      }
+    })
+  }
+  /**
+   * 마이갤러리 : 내 그림 리스트
+   *
+   * 마이갤러리 이미지 및 음성 정보 조회
+   * pictures:List
+   */
+  getUesrGalleryMypicture (options) {
+    return this.request('/api/users/gallery/mypicture', {
+      method: 'GET',
+      data: {
+        user_id: store.getters.getSession.user_id,
+        user_auth_key: store.getters.getSession.user_auth_key,
+        Content_Language: store.getters.getSession.Content_Language,
+        device_type: store.getters.getSession.device_type
+      }
+    })
+  }
+  /**
+   * 마이갤러리 : 배경변경
+   *
+   * 마이갤러리 상단 부분의 정보 조회
+   * code:String - 코드
+   * message:String - 메시지
+   */
+  getUesrGalleryBackground (options) {
+    return this.request('/api/users/gallery/background', {
+      method: 'POST',
+      data: {
+        user_id: store.getters.getSession.user_id,
+        user_auth_key: store.getters.getSession.user_auth_key,
+        Content_Language: store.getters.getSession.Content_Language,
+        device_type: store.getters.getSession.device_type
+      }
+    })
+  }
+  /**
+   * 마이갤러리 : 그림 삭제
+   *
+   * 마이갤러리 상단 부분의 정보 조회
+   * pictureId:String-그림ID
+   */
+  getUesrGalleryDetele (options) {
+    return this.request('/api/users/gallery/delete', {
+      method: 'DELETE',
+      data: {
+        user_id: store.getters.getSession.user_id,
+        user_auth_key: store.getters.getSession.user_auth_key,
+        Content_Language: store.getters.getSession.Content_Language,
+        device_type: store.getters.getSession.device_type,
+        pictureId : options.pictureId
       }
     })
   }

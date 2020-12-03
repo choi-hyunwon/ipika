@@ -19,25 +19,40 @@ export default new Vuex.Store({
    */
   state: {
     isDummy : true,
+
     /**
      * userinfo는 단말기(안드로이드)기에서 받아온다.
+     *
+     * func : getInitVariables()
+     * return : {"grade":"0","name":"홈런초등테스트1","key":"1604311","device_type":"1002"}
+     *
+     * DEVICE_TYPE_N = "1001"    // N형 디바이스
+     * DEVICE_TYPE_AI = "1002"   // AI 신형 디바이스
+     * DEVICE_TYPE_LH = "1003"   // 리틀홈런 디바이스
+     * DEVICE_TYPE_WEB = "1004"   // 독립웹
+     * DEVICE_TYPE_MB = "1005"   // 하이브리드 앱(android or ios)
+     *
      */
     userinfo: {
-      name: '길동아',
-      key: '',
-      grade: {
-        stage: '',
-        program: '',
-        age: 0
-      }
+      name: '홈런초등테스트1',
+      key: '1604311',
+      grade: 0,
+      device_type: "1002"
     },
+    /**
+     * API session options
+     */
+
     session: {
       user_id: 'testplan56',
       user_auth_key: 'abcdefghijklmnopqrstuvwxyz0123456789',
       Content_Language: 'ko',
       device_type: '1001'
     },
-    subject: {}
+    subject: {},
+    result: {},
+    userGallery: {},
+    uesrGalleryMypicture: {},
   },
   /**
    * global로 사용하는 getters
@@ -58,7 +73,16 @@ export default new Vuex.Store({
     },
     getIsDummy: state => {
       return state.isDummy
-    }
+    },
+    getResult: state => {
+      return state.result
+    },
+    getUserGallery: state => {
+      return state.userGallery
+    },
+    getUesrGalleryMypicture: state => {
+      return state.uesrGalleryMypicture
+    },
   },
   /**
    * global로 사용하는 Mutations
