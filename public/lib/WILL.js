@@ -229,7 +229,7 @@ var WILL = {
 		if (typeof paperORcolor == "string") {
 			var paper = paperORcolor;
 
-			Module.GLTools.prepareTexture(Module.GLTools.createTexture(GLctx.REPEAT, GLctx.LINEAR), WILL.PAPERS_PATH + "/" + paper + ".jpg", function(texture) {
+			Module.GLTools.prepareTexture(Module.GLTools.createTexture(GLctx.REPEAT, GLctx.LINEAR), WILL.PAPERS_PATH + "/" + paper + ".png", function(texture) {
 				if (this.backgroundLayer) this.backgroundLayer.delete();
 
 				this.backgroundLayer = this.canvas.createLayer({texture: texture});
@@ -507,7 +507,7 @@ var WILL = {
 	 */
 	setTool: function(tool) {
 		this.writer.setTool(tool);
-	},
+  },
 
 	/**
 	 * Color setter for primary writer in canvas

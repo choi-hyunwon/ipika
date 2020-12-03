@@ -1,5 +1,5 @@
-nav {background-color: #363636; height: 60px; text-align: center; position: relative;}
-nav > div:first-child {display: inline-block; height: 44px; padding: 8px 0;}
+/*nav {background-color: #363636; height: 60px; text-align: center; position: relative;}*/
+nav > div:first-child {display: inline-block; height: 44px; padding: 0;}
 nav > div:first-child > span {display: inline-block;}
 nav img {cursor: pointer;}
 nav .Paper {border-radius: 4px;}
