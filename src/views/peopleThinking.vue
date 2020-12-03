@@ -1,19 +1,25 @@
 <template>
   <div class="wrap bg-ivory">
     <div class="header ivory">
-      <div v-b-modal.goToBack class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt="">
-        <b-modal id="goToBack" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">
-          <template #modal-header>
-            <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>
-          </template>
-          <p class="text">정말 뒤로 가시겠어요?</p>
-          <br/>
-          <template #modal-footer="{ cancel }">
-            <b-button variant="gray" class="btn-half"  @click="cancel()">아니요</b-button>
-            <router-link to="/thoughtRecords" class="btn btn-black btn-half">네</router-link>
-          </template>
-        </b-modal>
-      </div>
+      <Confirm v-slot="slotProps"
+               :okText="'네'"
+               :cancelText="'아니요'"
+               :text="'정말 뒤로 가시겠어요?'"
+      >
+      <button class="symbol" @click="showConfirm(slotProps,1)"><img src="@/assets/images/common/arrow_left@2x.png" alt="">
+  <!--        <b-modal id="goToBack" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">-->
+  <!--          <template #modal-header>-->
+  <!--            <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>-->
+  <!--          </template>-->
+  <!--          <p class="text">정말 뒤로 가시겠어요?</p>-->
+  <!--          <br/>-->
+  <!--          <template #modal-footer="{ cancel }">-->
+  <!--            <b-button variant="gray" class="btn-half"  @click="cancel()">아니요</b-button>-->
+  <!--            <router-link to="/thoughtRecords" class="btn btn-black btn-half">네</router-link>-->
+  <!--          </template>-->
+  <!--        </b-modal>-->
+        </button>
+      </Confirm>
       <div class="flex-box">
         <div v-b-modal.videoReviewPopup class="btn-right">
           <span class="img"><img src="@/assets/images/common/ic-play@2x.png" alt=""></span>
@@ -136,8 +142,26 @@
 
 <script>
 
+import Confirm from '@/components/popup/Confirm'
 export default {
-  name: 'peopleThinking'
+  name: 'peopleThinking',
+  components: { Confirm },
+  created() {
+    this.$EventBus.$on('back',this.goToBack)
+  },
+
+  methods : {
+    showConfirm(slotProps,number){
+      if(number===1){
+        slotProps.toggleConfirm('goToBack','peopleThinking');
+      }else if(number===2){
+        slotProps.toggleConfirm('thinkingComplete','peopleThinking');
+      }
+    },
+    goToBack(){
+      this.$router.push('/thoughtRecords')
+    }
+  }
 }
 </script>
 

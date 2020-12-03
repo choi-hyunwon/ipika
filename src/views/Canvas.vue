@@ -18,10 +18,8 @@
       </div>
       <div class="box-close">
         <!--<router-link to="/" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>-->
-
         <!-- TODO: inline-style 추가함 확인 필요 -->
         <button @click="close" style="padding-top: 0;" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></button>
-
       </div>
     </div>
 
@@ -29,7 +27,16 @@
     <div v-if="page === 'study'" class="header ivory">
 
       <!--<router-link to="/thoughtRecords" class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt=""></router-link>-->
-      <button @click="goBack" class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt=""></button>
+      <Confirm v-slot="slotProps"
+               :okText="'뒤로 갈래요'"
+               :cancelText="'닫기'"
+               :backText="'그림은 저장되지 않습니다.'"
+      >
+
+      <button class="symbol" @click="showConfirm(slotProps,1)">
+          <img src="@/assets/images/common/arrow_left@2x.png" alt="">
+        </button>
+      </Confirm>
 
       <div class="btn-wrap">
         <button><img src="@/assets/images/common/img_delete@2x.png" alt=""></button>
@@ -236,11 +243,13 @@
 
 import { mapActions, mapGetters } from 'vuex'
 import Wacom from '@/components/Wacom'
+import Confirm from '@/components/popup/Confirm'
 
 
 export default {
   name: 'Canvas',
   components :{
+    Confirm,
     Wacom
   },
   data () {
@@ -258,6 +267,7 @@ export default {
     this.$EventBus.$on('toggleDrawer', (drawer) => {
       this.drawer = drawer;
     });
+    this.$EventBus.$on('back',this.goToBack)
   },
   mounted () {
     if (localStorage.getItem('isReload') === 'true' || localStorage.getItem('isReload') === undefined) window.location.reload()
@@ -360,6 +370,16 @@ export default {
          */
       });
       this.goNext()
+    },
+    goToBack(){
+      this.$router.push('/peopleThinking')
+    },
+    showConfirm(slotProps,number){
+      if(number===1){
+        slotProps.toggleConfirm('goToBack','canvas');
+      }else if(number===2){
+        slotProps.toggleConfirm('canvasComplete','canvas');
+      }
     },
     // 메인 메뉴 조회
     fetchSubject () {

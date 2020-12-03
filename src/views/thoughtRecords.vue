@@ -2,28 +2,37 @@
   <div class="wrap bg-ivory">
     <div class="header ivory">
 <!--      < style="position: absolute; top: 200px; left: 820px;">뒤로가기 팝업</b-button>-->
-      <div v-b-modal.goBackPopup class="symbol" ><img src="@/assets/images/common/arrow_left@2x.png" alt=""></div>
+      <Confirm v-slot="slotProps"
+               :okText="'뒤로 갈래요'"
+               :cancelText="'닫기'"
+               :text ="'지워진 녹음은 다시 들을 수 없어요'"
+      >
+      <button class="symbol" @click="showConfirm(slotProps,1)">
+        <img src="@/assets/images/common/arrow_left@2x.png" alt="">
+      </button>
+      </Confirm>
       <div class="flex-box">
         <router-link to="/videoReview" class="btn-right">
           <span class="img"><img src="@/assets/images/common/ic-play@2x.png" alt=""></span>
           <span class="tit">영상보기</span>
         </router-link>
+
         <div v-b-modal.normalPopup2 class="btn-right">
           <span class="img"><img src="@/assets/images/common/ic-drawing@2x.png" alt=""></span>
           <span class="tit">주제보기</span>
-          <b-modal id="normalPopup2" centered modal-class="normalPopup">
-            <template #modal-header>
-              <div class="symbol"><img src="@/assets/images/common/drawing@2x.png" alt=""></div>
-            </template>
-            <p class="text text-md">학습 주제 영역입니다.<br/>
-              학습 주제는 최대 세 문장까지<br/>
-              가능합니다.</p>
-            <p class="text-sm">생각 제시하는 생각 과제 제시하는 텍스트<br/>
-              영역으로 최대 두줄 이상을 생각합니다.</p>
-            <template #modal-footer="{ cancel }">
-              <b-button class="btn btn-block btn-black" @click="cancel()">닫기</b-button>
-            </template>
-          </b-modal>
+<!--          <b-modal id="normalPopup2" centered modal-class="normalPopup">-->
+<!--            <template #modal-header>-->
+<!--              <div class="symbol"><img src="@/assets/images/common/drawing@2x.png" alt=""></div>-->
+<!--            </template>-->
+<!--            <p class="text text-md">학습 주제 영역입니다.<br/>-->
+<!--              학습 주제는 최대 세 문장까지<br/>-->
+<!--              가능합니다.</p>-->
+<!--            <p class="text-sm">생각 제시하는 생각 과제 제시하는 텍스트<br/>-->
+<!--              영역으로 최대 두줄 이상을 생각합니다.</p>-->
+<!--            <template #modal-footer="{ cancel }">-->
+<!--              <b-button class="btn btn-block btn-black" @click="cancel()">닫기</b-button>-->
+<!--            </template>-->
+<!--          </b-modal>-->
         </div>
         <div class="box-close">
           <router-link to="/" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>
@@ -55,40 +64,77 @@
         <button class="btn btn-dark disabled">다했어요!</button>
       </div>
     </div>
-    <b-button v-b-modal.refreshPopup style="position: absolute; top: 200px; left: 700px;">새로고침 팝업</b-button>
-    <b-modal id="refreshPopup" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">
-      <template #modal-header>
-        <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>
-      </template>
-      <p class="text">다시 녹음하시겠어요?<br/>
-        지금 녹음한 내용은 지워져요</p>
-      <p class="text-sm">지워진 녹음은 다시 들을 수 없어요</p>
-      <template #modal-footer="{ cancel }">
-        <b-button variant="gray" class="btn-half">다시 녹음할게요</b-button>
-        <b-button variant="black" class="btn-half" @click="cancel()">닫기</b-button>
-      </template>
-    </b-modal>
+    <Confirm v-slot="slotProps"
+             :complete-text="`다시 녹음하시겠어요? 지금 녹음한 내용은 지워져요`"
+             :text="`지워진 녹음은 다시 들을 수 없어요`"
+             :cancelText="`닫기`"
+             :okText="`다시 녹음할게요`"
+    >
+      <b-button @click="showConfirm(slotProps,3)" style="position: absolute; top: 200px; left: 700px;">새로고침 팝업</b-button>
+    </Confirm>
+<!--    <b-modal id="refreshPopup" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">-->
+<!--      <template #modal-header>-->
+<!--        <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>-->
+<!--      </template>-->
+<!--      <p class="text">다시 녹음하시겠어요?<br/>-->
+<!--        지금 녹음한 내용은 지워져요</p>-->
+<!--      <p class="text-sm">지워진 녹음은 다시 들을 수 없어요</p>-->
+<!--      <template #modal-footer="{ cancel }">-->
+<!--        <b-button variant="gray" class="btn-half">다시 녹음할게요</b-button>-->
+<!--        <b-button variant="black" class="btn-half" @click="cancel()">닫기</b-button>-->
+<!--      </template>-->
+<!--    </b-modal>-->
 
 <!--    <b-button v-b-modal.goBackPopup style="position: absolute; top: 200px; left: 820px;">뒤로가기 팝업</b-button>-->
-    <b-modal id="goBackPopup" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">
-      <template #modal-header>
-        <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>
-      </template>
-      <p class="text">뒤로 가시겠어요?<br/>
-        지금 녹음한 내용은 지워져요</p>
-      <p class="text-sm">지워진 녹음은 다시 들을 수 없어요</p>
-      <template #modal-footer="{ cancel }">
-        <router-link to="PabloStudy2" class="btn btn-gray btn-half">뒤로 갈래요</router-link>
-<!--        <b-button variant="gray" class="btn-half">뒤로 갈래요</b-button>-->
-        <b-button variant="black" class="btn-half" @click="cancel()">닫기</b-button>
-      </template>
-    </b-modal>
+<!--    <b-modal id="goBackPopup" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">-->
+<!--      <template #modal-header>-->
+<!--        <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>-->
+<!--      </template>-->
+<!--      <p class="text">뒤로 가시겠어요?<br/>-->
+<!--        지금 녹음한 내용은 지워져요</p>-->
+<!--      <p class="text-sm">지워진 녹음은 다시 들을 수 없어요</p>-->
+<!--      <template #modal-footer="{ cancel }">-->
+<!--        <router-link to="PabloStudy2" class="btn btn-gray btn-half">뒤로 갈래요</router-link>-->
+<!--&lt;!&ndash;        <b-button variant="gray" class="btn-half">뒤로 갈래요</b-button>&ndash;&gt;-->
+<!--        <b-button variant="black" class="btn-half" @click="cancel()">닫기</b-button>-->
+<!--      </template>-->
+<!--    </b-modal>-->
   </div>
 </template>
 
 <script>
+import Confirm from '@/components/popup/Confirm'
 export default {
-  name: 'thoughtRecords'
+  name: 'thoughtRecords',
+  components: { Confirm },
+  data(){
+    return{
+
+    }
+  },
+  created() {
+    this.$EventBus.$on('back',this.goToBack)
+  },
+
+  methods : {
+    showConfirm(slotProps,number){
+      if(number===1){
+        slotProps.toggleConfirm('goToBack','thoughtRecords');
+      }else if(number===2){
+        slotProps.toggleConfirm('Complete','thoughtRecords');
+      }else if(number===3){
+        slotProps.toggleConfirm('refresh','thoughtRecords');
+      }
+    },
+    showAlert(slotProps,number){
+      if(number===1){
+        slotProps.toggleAlert('normalPopup')
+      }
+    },
+    goToBack(){
+      this.$router.push('/PabloStudy3')
+    }
+  }
 }
 </script>
 

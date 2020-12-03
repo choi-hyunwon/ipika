@@ -28,9 +28,6 @@ import MainGallery from '@/views/MainGallery'
 import MainGalleryDetail from '@/views/MainGalleryDetail'
 
 
-
-
-
 Vue.use(VueRouter)
 
 const requireAuth = () => (from, to, next) => {

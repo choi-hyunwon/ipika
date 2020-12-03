@@ -2,9 +2,14 @@
   <div class="wrap bg-ivory">
     <div class="header ivory">
       <div class="symbol">
-        <Confirm v-slot="slotProps">
+        <Confirm v-slot="slotProps"
+                 :okText="'뒤로 갈래요'"
+                 :cancelText="'닫기'"
+                 :backText ="'영상이 아직 끝나지 않았습니다.'"
+        >
           <button @click="showConfirm(slotProps,1)"><img src="@/assets/images/common/arrow_left@2x.png" alt=""></button>
         </Confirm>
+<!--        <b-button variant="black" @click="goToBack">버튼</b-button>-->
       </div>
       <div class="flex-box">
         <Alert v-slot="slotProps">
@@ -66,19 +71,25 @@
       <div class="inner">
         <div class="video">
           <p class="text">생각 제시하는 생각 과제 제시하는 텍스트 영역입니다.</p>
-          <b-button v-b-modal.normalPopup1 style="position: absolute; top: 200px; left: 350px;">시청 완료</b-button>
-          <b-modal id="normalPopup1" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">
-            <template #modal-header>
-              <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>
-            </template>
-            <p class="text">다 보셨나요? 영상은 다음<br/>
-              단계에서도 볼 수 있어요</p>
-            <p class="text-sm">보지 못한 부분이 있어도 괜찮아요 :)</p>
-            <template #modal-footer="{ cancel }">
-              <b-button variant="gray" class="btn-half"  @click="cancel()">다시 볼래요</b-button>
-              <router-link to="/thoughtRecords" class="btn btn-black btn-half">넘어갈게요</router-link>
-            </template>
-          </b-modal>
+          <Confirm v-slot="slotProps"
+                   :text="'보지못한 부분이 있어도 괜찮아요:)'"
+                   :completeText ="'다 보셨나요? 영상은 다음단계에서도 볼 수 있어요'"
+                    :ok-text="'넘어갈게요'"
+                  :cancel-text="'다시 볼래요'">
+            <b-button @click="showConfirm(slotProps,2)" style="position: absolute; top: 200px; left: 350px;">시청 완료</b-button>
+          </Confirm>
+<!--          <b-modal id="normalPopup1" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">-->
+<!--            <template #modal-header>-->
+<!--              <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>-->
+<!--            </template>-->
+<!--            <p class="text">다 보셨나요? 영상은 다음<br/>-->
+<!--              단계에서도 볼 수 있어요</p>-->
+<!--            <p class="text-sm">보지 못한 부분이 있어도 괜찮아요 :)</p>-->
+<!--            <template #modal-footer="{ cancel }">-->
+<!--              <b-button variant="gray" class="btn-half"  @click="cancel()">다시 볼래요</b-button>-->
+<!--              <router-link to="/thoughtRecords" class="btn btn-black btn-half">넘어갈게요</router-link>-->
+<!--            </template>-->
+<!--          </b-modal>-->
           <div class="play-wrap">
             <button class="btn-rewind"><img src="@/assets/images/common/5s_rewind@2x.png" alt=""></button>
             <button class="btn-pause"><img src="@/assets/images/common/pause@2x.png" alt=""></button>
@@ -98,7 +109,6 @@
         </div>
       </div>
       <!-- e 영상 재생 중_화면 탭 시 -->
-
     </div>
 </template>
 
@@ -110,18 +120,31 @@ export default {
   components: { Alert, Confirm },
   // created(){
   //   setTimeout( ()=> { this.$router.push({ path: '/PabloPopup1'})},7000);
-  // }
+  // },
+  created () {
+    this.$EventBus.$on('back',this.goToBack)
+    this.$EventBus.$on('next',this.goToNext)
+  },
   methods : {
     showConfirm(slotProps,number){
       if(number===1){
-        slotProps.toggleConfirm('goToBack2');
+        slotProps.toggleConfirm('goToBack','pabloStudy3');
+      }else if(number===2){
+        slotProps.toggleConfirm('Complete','pabloStudy3');
       }
     },
     showAlert(slotProps,number){
       if(number===1){
         slotProps.toggleAlert('normalPopup')
       }
+    },
+    goToBack(){
+      this.$router.push('/PabloStudy2')
+    },
+    goToNext(){
+      this.$router.push('/thoughtRecords')
     }
+
   }
 }
 </script>

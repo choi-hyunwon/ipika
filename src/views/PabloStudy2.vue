@@ -2,7 +2,10 @@
   <div class="wrap bg-ivory">
     <div class="header ivory">
       <div class="symbol">
-        <Confirm v-slot="slotProps">
+        <Confirm v-slot="slotProps"
+                  :cancelText="'아니요'"
+                  :okText="'네'"
+        >
         <button @click="showConfirm(slotProps,1)"><img src="@/assets/images/common/arrow_left@2x.png" alt="" ></button>
 <!--        <b-modal id="goToBack" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">-->
 <!--          <template #modal-header>-->
@@ -66,16 +69,22 @@ import Alert from '@/components/popup/Alert'
 export default {
   name: 'PabloStudy2',
   components: { Alert, Confirm },
+  created() {
+    this.$EventBus.$on('back',this.goToBack)
+  },
   methods : {
     showConfirm(slotProps,number){
       if(number===1){
-        slotProps.toggleConfirm('goToBack');
+        slotProps.toggleConfirm('goToBack','pabloStudy2');
       }
     },
     showAlert(slotProps,number){
       if(number===1){
         slotProps.toggleAlert('normalPopup')
       }
+    },
+    goToBack(){
+      this.$router.push('/PabloStudy1')
     }
   }
 }
