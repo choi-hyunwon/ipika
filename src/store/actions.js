@@ -7,7 +7,7 @@ export const actions = {
   getUserInfo ({ commit }, options) {
     let data = {}
     commit('setUserInfo', data.data)
-    return data.result
+    return data
   },
   getMainMenu ({ commit }, options) {
     console.log(`getMainMenu`)
@@ -64,7 +64,7 @@ export const actions = {
         "totalViewCount": "352",
         "totalReactionCount": "34"
       }
-      commit('getUesrGallery', data)
+      commit('setUesrGallery', data)
       return data
     } else {
       webApi.getUesrGallery(options)
