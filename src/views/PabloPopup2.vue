@@ -2,17 +2,20 @@
   <div class="wrap bg-ivory">
     <div class="header ivory">
       <div v-b-modal.goToBack class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt="">
-        <b-modal id="goToBack" modal-class="normalPopup">
-          <template #modal-header>
-            <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>
-          </template>
-          <p class="text">정말 뒤로 가시겠어요?</p>
-          <br/>
-          <template #modal-footer="{ cancel }">
-            <b-button variant="gray" class="btn-half"  @click="cancel()">아니요</b-button>
-            <router-link to="/PabloStudy2" class="btn btn-black btn-half">네</router-link>
-          </template>
-        </b-modal>
+<!--        <b-modal id="goToBack" modal-class="normalPopup">-->
+<!--          <template #modal-header>-->
+<!--            <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>-->
+<!--          </template>-->
+<!--          <p class="text">정말 뒤로 가시겠어요?</p>-->
+<!--          <br/>-->
+<!--          <template #modal-footer="{ cancel }">-->
+<!--            <b-button variant="gray" class="btn-half"  @click="cancel()">아니요</b-button>-->
+<!--            <router-link to="/PabloStudy2" class="btn btn-black btn-half">네</router-link>-->
+<!--          </template>-->
+<!--        </b-modal>-->
+        <Confirm v-slot="slotProps">
+          slotProps.toggleConfirm()
+        </Confirm>
       </div>
       <div class="flex-box">
         <button v-b-modal.normalPopup2 class="btn-right">
@@ -92,8 +95,10 @@
 
 <script>
 
+import Confirm from '@/components/popup/Confirm'
 export default {
   name: 'PabloPopup2',
+  components: { Confirm },
   data () {
     return {
       modalShow: true

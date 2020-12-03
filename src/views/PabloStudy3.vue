@@ -1,26 +1,31 @@
 <template>
   <div class="wrap bg-ivory">
     <div class="header ivory">
-      <div v-b-modal.goBackPopup class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt=""></div>
-
+      <div class="symbol">
+        <Confirm v-slot="slotProps">
+          <button @click="showConfirm(slotProps,1)"><img src="@/assets/images/common/arrow_left@2x.png" alt=""></button>
+        </Confirm>
+      </div>
       <div class="flex-box">
-        <div v-b-modal.normalPopup2 class="btn-right">
+        <Alert v-slot="slotProps">
+        <button class="btn-right" @click="showAlert(slotProps,1)">
           <span class="img"><img src="@/assets/images/common/ic-drawing@2x.png" alt=""></span>
           <span class="tit">주제보기</span>
-          <b-modal id="normalPopup2" centered modal-class="normalPopup">
-            <template #modal-header>
-              <div class="symbol"><img src="@/assets/images/common/drawing@2x.png" alt=""></div>
-            </template>
-            <p class="text text-md">학습 주제 영역입니다.<br/>
-              학습 주제는 최대 세 문장까지<br/>
-              가능합니다.</p>
-            <p class="text-sm">생각 제시하는 생각 과제 제시하는 텍스트<br/>
-              영역으로 최대 두줄 이상을 생각합니다.</p>
-            <template #modal-footer="{ cancel }">
-              <b-button class="btn btn-block btn-black" @click="cancel()">닫기</b-button>
-            </template>
-          </b-modal>
-        </div>
+<!--          <b-modal id="normalPopup2" centered modal-class="normalPopup">-->
+<!--            <template #modal-header>-->
+<!--              <div class="symbol"><img src="@/assets/images/common/drawing@2x.png" alt=""></div>-->
+<!--            </template>-->
+<!--            <p class="text text-md">학습 주제 영역입니다.<br/>-->
+<!--              학습 주제는 최대 세 문장까지<br/>-->
+<!--              가능합니다.</p>-->
+<!--            <p class="text-sm">생각 제시하는 생각 과제 제시하는 텍스트<br/>-->
+<!--              영역으로 최대 두줄 이상을 생각합니다.</p>-->
+<!--            <template #modal-footer="{ cancel }">-->
+<!--              <b-button class="btn btn-block btn-black" @click="cancel()">닫기</b-button>-->
+<!--            </template>-->
+<!--          </b-modal>-->
+          </button>
+        </Alert>
         <div class="box-close">
           <router-link to="/" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>
         </div>
@@ -44,19 +49,19 @@
       <!-- e default -->
 
       <!--뒤로가기-->
-      <b-modal id="goBackPopup" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">
-        <template #modal-header>
-          <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt="" class="img-m"></div>
-        </template>
-        <p class="text">뒤로 가시겠어요?<br/>
-        </p>
-        <p class="text-sm">영상이 아직 끝나지 않았습니다.</p>
-        <template #modal-footer="{ cancel }">
-          <router-link to="PabloStudy2" class="btn btn-gray btn-half">뒤로 갈래요</router-link>
-          <!--        <b-button variant="gray" class="btn-half">뒤로 갈래요</b-button>-->
-          <b-button variant="black" class="btn-half" @click="cancel()">닫기</b-button>
-        </template>
-      </b-modal>
+<!--      <b-modal id="goBackPopup" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">-->
+<!--        <template #modal-header>-->
+<!--          <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt="" class="img-m"></div>-->
+<!--        </template>-->
+<!--        <p class="text">뒤로 가시겠어요?<br/>-->
+<!--        </p>-->
+<!--        <p class="text-sm">영상이 아직 끝나지 않았습니다.</p>-->
+<!--        <template #modal-footer="{ cancel }">-->
+<!--          <router-link to="PabloStudy2" class="btn btn-gray btn-half">뒤로 갈래요</router-link>-->
+<!--          &lt;!&ndash;        <b-button variant="gray" class="btn-half">뒤로 갈래요</b-button>&ndash;&gt;-->
+<!--          <b-button variant="black" class="btn-half" @click="cancel()">닫기</b-button>-->
+<!--        </template>-->
+<!--      </b-modal>-->
       <!-- s 영상 재생 중_화면 탭 시 -->
       <div class="inner">
         <div class="video">
@@ -98,11 +103,26 @@
 </template>
 
 <script>
+import Confirm from '@/components/popup/Confirm'
+import Alert from '@/components/popup/Alert'
 export default {
   name: 'PabloStudy3',
+  components: { Alert, Confirm },
   // created(){
   //   setTimeout( ()=> { this.$router.push({ path: '/PabloPopup1'})},7000);
   // }
+  methods : {
+    showConfirm(slotProps,number){
+      if(number===1){
+        slotProps.toggleConfirm('goToBack2');
+      }
+    },
+    showAlert(slotProps,number){
+      if(number===1){
+        slotProps.toggleAlert('normalPopup')
+      }
+    }
+  }
 }
 </script>
 

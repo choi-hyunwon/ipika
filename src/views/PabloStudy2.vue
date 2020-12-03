@@ -1,37 +1,43 @@
 <template>
   <div class="wrap bg-ivory">
     <div class="header ivory">
-      <div v-b-modal.goToBack class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt="">
-        <b-modal id="goToBack" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">
-          <template #modal-header>
-            <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>
-          </template>
-          <p class="text">정말 뒤로 가시겠어요?</p>
-          <br/>
-          <template #modal-footer="{ cancel }">
-            <b-button variant="gray" class="btn-half"  @click="cancel()">아니요</b-button>
-            <router-link to="/PabloStudy1" class="btn btn-black btn-half">네</router-link>
-          </template>
-        </b-modal>
+      <div class="symbol">
+        <Confirm v-slot="slotProps">
+        <button @click="showConfirm(slotProps,1)"><img src="@/assets/images/common/arrow_left@2x.png" alt="" ></button>
+<!--        <b-modal id="goToBack" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">-->
+<!--          <template #modal-header>-->
+<!--            <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>-->
+<!--          </template>-->
+<!--          <p class="text">정말 뒤로 가시겠어요?</p>-->
+<!--          <br/>-->
+<!--          <template #modal-footer="{ cancel }">-->
+<!--            <b-button variant="gray" class="btn-half"  @click="cancel()">아니요</b-button>-->
+<!--            <router-link to="/PabloStudy1" class="btn btn-black btn-half">네</router-link>-->
+<!--          </template>-->
+<!--        </b-modal>-->
+        </Confirm>
       </div>
       <div class="flex-box">
-        <div v-b-modal.normalPopup2 class="btn-right">
-          <span class="img"><img src="@/assets/images/common/ic-drawing@2x.png" alt=""></span>
-          <span class="tit">주제보기</span>
-          <b-modal id="normalPopup2" centered modal-class="normalPopup">
-            <template #modal-header>
-              <div class="symbol"><img src="@/assets/images/common/drawing@2x.png" alt=""></div>
-            </template>
-            <p class="text text-md">학습 주제 영역입니다.<br/>
-              학습 주제는 최대 세 문장까지<br/>
-              가능합니다.</p>
-            <p class="text-sm">생각 제시하는 생각 과제 제시하는 텍스트<br/>
-              영역으로 최대 두줄 이상을 생각합니다.</p>
-            <template #modal-footer="{ cancel }">
-              <b-button class="btn btn-block btn-black" @click="cancel()">닫기</b-button>
-            </template>
-          </b-modal>
-        </div>
+          <Alert v-slot="slotProps">
+            <button class="btn-right" @click="showAlert(slotProps,1)">
+            <span class="img"><img src="@/assets/images/common/ic-drawing@2x.png" alt=""></span>
+            <span class="tit">주제보기</span>
+            </button>
+          </Alert>
+<!--          <b-modal id="normalPopup2" centered modal-class="normalPopup">-->
+<!--            <template #modal-header>-->
+<!--              <div class="symbol"><img src="@/assets/images/common/drawing@2x.png" alt=""></div>-->
+<!--            </template>-->
+<!--            <p class="text text-md">학습 주제 영역입니다.<br/>-->
+<!--              학습 주제는 최대 세 문장까지<br/>-->
+<!--              가능합니다.</p>-->
+<!--            <p class="text-sm">생각 제시하는 생각 과제 제시하는 텍스트<br/>-->
+<!--              영역으로 최대 두줄 이상을 생각합니다.</p>-->
+<!--            <template #modal-footer="{ cancel }">-->
+<!--              <b-button class="btn btn-block btn-black" @click="cancel()">닫기</b-button>-->
+<!--            </template>-->
+<!--          </b-modal>-->
+
         <div class="box-close">
           <router-link to="/" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>
         </div>
@@ -55,8 +61,23 @@
 </template>
 
 <script>
+import Confirm from '@/components/popup/Confirm'
+import Alert from '@/components/popup/Alert'
 export default {
   name: 'PabloStudy2',
+  components: { Alert, Confirm },
+  methods : {
+    showConfirm(slotProps,number){
+      if(number===1){
+        slotProps.toggleConfirm('goToBack');
+      }
+    },
+    showAlert(slotProps,number){
+      if(number===1){
+        slotProps.toggleAlert('normalPopup')
+      }
+    }
+  }
 }
 </script>
 
