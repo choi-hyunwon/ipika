@@ -34,6 +34,25 @@ WILL.tools = {
 
 		this[tool.id] = tool;
 
+		/* ********* H o l y ********* */
+		tool = new WILL.Tool("Holy", WILL.Tool.Type.STROKE);
+		tool.brush = this.brush;
+		// tool.createBrush(WILL.Tool.BrushType.SOLID_COLOR);
+
+		tool.createPathBuilder(WILL.Tool.PathBuilderType.SPEED);
+		tool.configureNormalization(5, 100);
+		tool.configureWidthChanel(1, 3.2, NaN, NaN, Module.PropertyFunction.Sigmoid, 0.6191646, true);
+		tool.createSmoothener();
+
+		tool.createPathBuilder(WILL.Tool.PathBuilderType.PRESSURE);
+		tool.configureNormalization(0.195, 1);
+		tool.configureWidthChanel(1, 3.2, NaN, NaN, Module.PropertyFunction.Sigmoid, 0.6191646, false);
+		tool.createSmoothener();
+
+		this[tool.id] = tool;
+
+
+
 		/* ********* F E L T ********* */
 		tool = new WILL.Tool("Felt", WILL.Tool.Type.STROKE);
 		tool.brush = this.brush;
@@ -116,7 +135,9 @@ WILL.tools = {
 		tool.color = Module.Color.from(0, 151, 212);
 		tool.whole = true;
 		this[tool.id] = tool;
-	},
+
+
+  },
 
 	rasters: function() {
 		var tool;
@@ -197,6 +218,53 @@ WILL.tools = {
 
 		this[tool.id] = tool;
 
+
+    tool = new WILL.Tool("Marker", WILL.Tool.Type.STROKE);
+    tool.brush = this.brush;
+
+    tool.createPathBuilder(WILL.Tool.PathBuilderType.SPEED);
+    tool.configureNormalization(182, 3547);
+    tool.configureWidthChanel(3.396277*2, 3.396277*2, NaN, NaN, Module.PropertyFunction.Power, 1.029754, false);
+    tool.createSmoothener();
+
+    tool.createPathBuilder(WILL.Tool.PathBuilderType.PRESSURE);
+    tool.configureNormalization(0.195, 0.88);
+    tool.configureWidthChanel(3.396277*2, 3.396277*2, NaN, NaN, Module.PropertyFunction.Power, 1.029754, false);
+    tool.createSmoothener();
+
+    tool.alpha = 0.3;
+    this[tool.id] = tool;
+
+    /* ********* F E L T ********* */
+    tool = new WILL.Tool("Felt", WILL.Tool.Type.STROKE);
+    tool.brush = this.brush;
+
+    tool.createPathBuilder(WILL.Tool.PathBuilderType.SPEED);
+    tool.configureNormalization(33, 628);
+    tool.configureWidthChanel(1.026596*2, 2.430851*2, 0, 0, Module.PropertyFunction.Periodic, 3, true);
+    tool.createSmoothener();
+
+    tool.createPathBuilder(WILL.Tool.PathBuilderType.PRESSURE);
+    tool.configureNormalization(0.195, 0.88);
+    tool.configureWidthChanel(1.026596*2, 2.430851*2, 0, 0, Module.PropertyFunction.Periodic, 3, false);
+    tool.createSmoothener();
+
+    this[tool.id] = tool;/* ********* B R U S H ********* */
+    tool = new WILL.Tool("Brush", WILL.Tool.Type.STROKE);
+    tool.brush = this.solidColorBrush;
+
+    tool.createPathBuilder(WILL.Tool.PathBuilderType.SPEED);
+    tool.configureNormalization(182, 3547);
+    tool.configureWidthChanel(1.026596*2, 17.2633*2, 0.7194245, NaN, Module.PropertyFunction.Power, 1.186609, false);
+    tool.createSmoothener();
+
+    tool.createPathBuilder(WILL.Tool.PathBuilderType.PRESSURE);
+    tool.configureNormalization(0.195, 0.88);
+    tool.configureWidthChanel(1.026596*2, 17.2633*2, 0.7194245, NaN, Module.PropertyFunction.Power, 1.186609, false);
+    tool.createSmoothener();
+
+    this[tool.id] = tool;
+
 		/* ********* E R A S E R ********* */
 		tool = new WILL.Tool("Eraser - Magic", WILL.Tool.Type.STROKE, "Eraser");
 		tool.brush = this.brush;
@@ -205,7 +273,7 @@ WILL.tools = {
 
 		tool.createPathBuilder(WILL.Tool.PathBuilderType.SPEED);
 		tool.configureNormalization(720, 3900);
-		tool.configureWidthChanel(8, 112, 4, 4, Module.PropertyFunction.Power, 1, false);
+		tool.configureWidthChanel(8, 30, 4, 4, Module.PropertyFunction.Power, 1, false);
 		tool.createSmoothener();
 
 		tool.strokeLayerBlendMode = Module.BlendMode.ERASE;

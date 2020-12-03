@@ -165,7 +165,7 @@
                   </defs>
                 </svg>
               </button>
-              <button id="WaterBrush" @click.capture="setTool"  class="tool-item ballpen">
+              <button id="Felt" @click.capture="setTool"  class="tool-item ballpen">
                 <svg xmlns="http://www.w3.org/2000/svg" width="80" height="172" fill="none" viewBox="0 0 80 172">
                   <path fill="url(#paint0_linear20)" d="M18 94H62V172H18z"/>
                   <path fill="url(#paint1_linear20)" d="M37.52 13.941L18.274 91.755C18.092 92.489 18 93.243 18 94h44c0-.757-.092-1.511-.274-2.246L42.48 13.94C42.198 12.802 41.175 12 40 12s-2.198.801-2.48 1.941z"/>
@@ -244,7 +244,7 @@
                   </defs>
                 </svg>
               </button>
-              <button id="Crayon" @click.capture="setTool"  class="tool-item marker">
+              <button id="Marker" @click.capture="setTool"  class="tool-item marker">
                 <svg xmlns="http://www.w3.org/2000/svg" width="80" height="172" fill="none" viewBox="0 0 80 172">
                   <path fill="#E7686F" d="M27 25.694V38h24V13.647c0-.75-.796-1.233-1.461-.887L28.077 23.92c-.662.344-1.077 1.028-1.077 1.774z"/>
                   <path class="topColor" fill="url(#paint0_linear40)" d="M27 25.694V38h24V13.647c0-.75-.796-1.233-1.461-.887L28.077 23.92c-.662.344-1.077 1.028-1.077 1.774z"/>
@@ -510,7 +510,7 @@
                   </defs>
                 </svg>
               </button>
-              <button id="WaterBrush" @click.stop="setTool"  class="tool-item brush_style2">
+              <button id="Crayon" @click.stop="setTool"  class="tool-item brush_style2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="80" height="172" fill="none" viewBox="0 0 80 172">
                   <g filter="url(#filter0_d60)">
                     <path class="topColor" fill="url(#paint0_linear60)" d="M63 19.5c-.451-3.04-46.774-3.103-47 .5 0 6 5.554 37.66 6.005 44.527 0 .45.113.9.226 1.35.339.789 1.129.789 1.693 1.014l32.163 3.152C57.554 60.811 63.45 22.54 63 19.5z"/>
@@ -743,9 +743,9 @@ export default {
     },
     setColorSelect (e) {
       Array.from(document.querySelectorAll('.pallet .color')).forEach((el) => el.classList.remove('selected'))
-      e.target.classList.add('selected')
-      dropDown.selectColor(e.target)
-      let color = e.target.style.backgroundColor
+      e.currentTarget.classList.add('selected')
+      dropDown.selectColor(e.currentTarget)
+      let color = e.currentTarget.style.backgroundColor
       Array.from(document.querySelectorAll('.topColor')).forEach((el) => el.style.fill = color)
     },
     setTool (e) {
@@ -907,7 +907,9 @@ export default {
             height: calc(22rem - .2rem);
             line-height: calc(22rem - .2rem);
             margin-right: 5.5rem;
-
+            > span {
+              display: inline-block;
+            }
             .tool-item {
               position: relative;
               display: inline-block;
