@@ -12,15 +12,7 @@
       </div>
     </div>
     <div class="contents">
-      <div class="bgc-section">
-        <div class="bg">
-          <!--          <img src="@/assets/images/temp/sample_img_02.png" alt="배경화면" class="img-m">-->
-          <div class="img-m" style="width:192rem; height: 40rem; background-color:#eee9e3;"></div>
-        </div>
-        <div class="setting-img">
-          <img src="@/assets/images/common/setting_default.png" alt="세팅" class=" img-m" @click="settingPopup">
-        </div>
-      </div>
+      <myGalleryBG v-on:popup="settingPopup"></myGalleryBG>
       <myGalleryInfo></myGalleryInfo>
       <div class="tab-section">
         <b-tabs justified>
@@ -148,7 +140,8 @@
 <script>
 import myGalleryPicture from '@/components/myGalleryPicture'
 import myGalleryVoice from '@/components/myGalleryVoice'
-import myGalleryInfo from '@/components/myGallery'
+import myGalleryInfo from '@/components/myGalleryInfo'
+import myGalleryBG from '@/components/myGalleryBG'
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
@@ -156,7 +149,8 @@ export default {
   components: {
     myGalleryPicture,
     myGalleryVoice,
-    myGalleryInfo
+    myGalleryInfo,
+    myGalleryBG
   },
   data () {
     return {

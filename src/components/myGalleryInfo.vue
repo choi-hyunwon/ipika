@@ -44,31 +44,16 @@ export default {
         stageName: '',
         stageId: 0,
       },
-      name : '',
       galleryInfo:{
 
       }
     }
   },
-
   computed: {
-    getStageName () {
-      return this.stageName = this.$store.state.result.stageName
-    },
-    getStageId () {
-      return this.stageId = this.$store.state.result.stageId
-    },
-    Name () {
-      return this.name = this.$store.state.userinfo.name
+    name () {
+      return this.$store.state.userinfo.name
     }
   },
-
-  watch: {
-    Name () {
-      return this.name = this.$store.state.userinfo.name
-    }
-  },
-
   mounted () {
     this.fetchResult();
     this.fetchUesrGallery();
