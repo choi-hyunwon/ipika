@@ -478,7 +478,7 @@
 
 <script>
 export default {
-  name: 'myGallery',
+  name: 'MainGallery',
   data () {
     return {
       myTab: {

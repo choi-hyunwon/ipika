@@ -31,25 +31,8 @@
 
     <div class="navigation pb-5">
       <p>마이갤러리 :<br></p>
-      <router-link to="/MyGalleryMain">학습메인_마이페이지</router-link>
-      <router-link to="/myGallery">마이갤러리(default)</router-link>
-      <router-link to="/myGallery1">마이갤러리_default 배경그림 설정 버튼 탭 시</router-link>
-      <router-link to="/myGallery2">마이갤러리_학습 중인 유저_배경그림 설정_스크롤 시</router-link>
-      <router-link to="/myGallery3">마이갤러리_학습 중인 유저_내 그림 탭_drawing</router-link>
-      <router-link to="/myGallery4">마이갤러리_내 그림 탭_classic</router-link><br/>
-      <router-link to="/myGallery5">마이갤러리_내 그림 탭_canvas</router-link>
-      <router-link to="/myGallery6">마이갤러리_내 그림 탭_canvas_공개버튼 클릭시</router-link>
-      <router-link to="/myGallery7">마이갤러리_내 그림 탭_canvas_공개하기 클릭 시</router-link>
-      <router-link to="/myGallery9')" >마이갤러리_공개한_그림</router-link>
-      <router-link to="/myGallery10">마이갤러리_내가 그린 그림 이미지</router-link>
-      <router-link to="/myGallery11">마이갤러리_내가 그린 그림 이미지_삭제하기 탭 시</router-link>
-      <router-link to="/myGallery12">마이갤러리_내가 그린 그림 이미지_오픈갤러리에 공개하기 탭 시</router-link>
-      <router-link to="/myGallery13">마이갤러리_공개한 그림 이미지</router-link>
-      <router-link to="/myGallery14">마이갤러리_공개한 그림 이미지_공개취소 탭 시</router-link>
-      <router-link to="/myGallery15">마이갤러리_공개한 그림 이미지_삭제하기 탭 시</router-link>
-      <router-link to="/myGallery16">마이갤러리_내 녹음 듣기_default</router-link>
-      <router-link to="/myGallery17">마이갤러리_내 녹음 듣기_재생시</router-link>
-      <router-link to="/myGallery18">마이갤러리_내 녹음 듣기_이미지 영역 롱프레스시</router-link>
+      <router-link to="/MainGallery">마이갤러리(default)</router-link>
+      <router-link to="/MainGalleryDetail" >마이갤러리-상세보기</router-link>
     </div>
   </div>
 </template>

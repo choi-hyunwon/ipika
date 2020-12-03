@@ -24,17 +24,9 @@ import pabloCanvas from '@/views/pabloCanvas'
 import List from '@/views/List'
 
 
-import MyGallery from '@/views/myGallery'
-import myGallery2 from '@/views/myGallery2'
-import MyGallery3 from '@/views/myGallery3'
-import MyGallery4 from '@/views/myGallery4'
-import MyGallery5 from '@/views/myGallery5'
-import MyGallery6 from '@/views/myGallery6'
-import MyGallery7 from '@/views/myGallery7'
-import MyGallery9 from '@/views/myGallery9'
-import MyGallery12 from '@/views/myGallery12'
-import MyGallery13 from '@/views/myGallery13'
-import MyGallery14 from '@/views/myGallery14'
+import MainGallery from '@/views/MainGallery'
+import MainGalleryDetail from '@/views/MainGalleryDetail'
+
 
 
 
@@ -152,59 +144,14 @@ const routes = [
     component: peopleThinking
   },
   {
-    path:'/myGallery',
-    name:'myGallery',
-    component: MyGallery
+    path:'/MainGallery',
+    name:'MainGallery',
+    component: MainGallery
   },
   {
-    path:'/myGallery2',
-    name:'myGallery2',
-    component: myGallery2
-  },
-  {
-    path:'/MyGallery3',
-    name:'MyGallery3',
-    component: MyGallery3
-  },
-  {
-    path:'/MyGallery4',
-    name:'Mygallery4',
-    component: MyGallery4
-  },
-  {
-    path:'/MyGallery5',
-    name:'Mygallery5',
-    component: MyGallery5
-  },
-  {
-    path:'/MyGallery6',
-    name:'Mygallery6',
-    component: MyGallery6
-  },
-  {
-    path:'/MyGallery7',
-    name:'Mygallery7',
-    component: MyGallery7
-  },
-  {
-    path:'/MyGallery9',
-    name:'MyGallery9',
-    component: MyGallery9
-  },
-  {
-    path:'/MyGallery12',
-    name:'MyGallery12',
-    component: MyGallery12
-  },
-  {
-    path:'/MyGallery13',
-    name:'MyGallery13',
-    component: MyGallery13
-  },
-  {
-    path:'/MyGallery14',
-    name:'MyGallery14',
-    component: MyGallery14
+    path:'/MainGalleryDetail',
+    name:'MainGalleryDetail',
+    component: MainGalleryDetail
   },
 
 

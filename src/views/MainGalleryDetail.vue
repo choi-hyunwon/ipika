@@ -18,7 +18,6 @@
         </div>
         <div class="btn_group">
           <b-button v-b-modal.ImgDelete>삭제하기</b-button>
-          <b-button v-b-modal.GalleryPublic>오픈갤러리 공개하기</b-button>
         </div>
       </div>
     </div>
@@ -49,7 +48,7 @@
 </template>
 <script>
 export default {
-  name: 'MyGallery9'
+  name: 'MainGalleryDetail'
 }
 </script>
 
