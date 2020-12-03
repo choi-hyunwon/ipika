@@ -9,6 +9,8 @@ Vue.config.productionTip = false
 
 Vue.prototype.tts = new TTS()
 
+Vue.prototype.$EventBus = new Vue();
+
 Vue.use(BootstrapVue)
 
 new Vue({
