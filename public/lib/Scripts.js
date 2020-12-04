@@ -523,8 +523,8 @@ function initEngine() {
 		else {
 
 		  if(window.location.pathname === '/canvas'){
-        WILL.setTool($("nav ." + WILL.type.name + " .Tool").first()[0].id);
-        WILL.setColor(tools.extractColor($("nav .Color")[0]));
+        WILL.setTool($("nav .tool button").first()[0].id);
+        WILL.setColor(tools.extractColor($("nav .tool-box .color")[7]));
       }
 			// if (location.pathname.containsIgnoreCase("ToolConfigurator"))
 			// 	WILL.setColor(Module.Color.from(74, 74, 74, 0.25));
