@@ -19,6 +19,7 @@ export default new Vuex.Store({
    */
   state: {
     isDummy : false,
+    diagnose : false,
 
     /**
      * userinfo는 단말기(안드로이드)기에서 받아온다.
@@ -70,9 +71,6 @@ export default new Vuex.Store({
     getSubject: state => {
       return state.subject
     },
-    getIsDummy: state => {
-      return state.isDummy
-    },
     getResult: state => {
       return state.result
     },
@@ -82,6 +80,14 @@ export default new Vuex.Store({
     getUesrGalleryMypicture: state => {
       return state.uesrGalleryMypicture
     },
+
+
+    getIsDummy: state => {
+      return state.isDummy
+    },
+    getDiagnose: state => {
+      return state.diagnose
+    }
   },
   /**
    * global로 사용하는 Mutations

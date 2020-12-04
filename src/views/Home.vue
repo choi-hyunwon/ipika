@@ -12,7 +12,9 @@
       <img src="@/assets/images/common/Group 1388@2x.png" alt="" class="img">
       </div>
         <div class="btn-group">
-          <router-link to="/PabloStudy1" class="btn btn-dark">시작하기</router-link>
+
+          <router-link v-if="diagnose" to="/PabloStudy1" class="btn btn-dark">시작하기</router-link>
+          <router-link  v-else to="/PabloMain" class="btn btn-dark">시작하기</router-link>
         </div>
       </div>
   </div>
@@ -22,7 +24,12 @@
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
-  name: 'Home'
+  name: 'Home',
+  computed: {
+    ...mapGetters({
+      diagnose: 'getDiagnose'
+    })
+  }
 }
 </script>
 
