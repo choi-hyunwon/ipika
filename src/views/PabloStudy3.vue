@@ -7,7 +7,7 @@
                  :cancelText="'닫기'"
                  :backText ="'영상이 아직 끝나지 않았습니다.'"
         >
-          <button @click="showPopup.confirm(slotProps,'goToBack')"><img src="@/assets/images/common/arrow_left@2x.png" alt=""></button>
+          <button @click="globalUtils.confirm(slotProps,'goToBack')"><img src="@/assets/images/common/arrow_left@2x.png" alt=""></button>
         </Confirm>
       </div>
       <div class="flex-box">
@@ -15,7 +15,7 @@
                 :boldText="`학습주제`"
                 :text="`학습주제`"
                 :buttonText ="'닫기'">
-        <button class="btn-right" @click="showPopup.alert(slotProps,'subject')">
+        <button class="btn-right" @click="globalUtils.alert(slotProps,'subject')">
           <span class="img"><img src="@/assets/images/common/ic-drawing@2x.png" alt=""></span>
           <span class="tit">주제보기</span>
           </button>
@@ -36,7 +36,7 @@
                    :completeText ="'다 보셨나요? 영상은 다음단계에서도 볼 수 있어요'"
                     :ok-text="'넘어갈게요'"
                   :cancel-text="'다시 볼래요'">
-            <b-button @click="showPopup.confirm(slotProps,'Complete')" style="position: absolute; top: 200px; left: 350px;">시청 완료</b-button>
+            <b-button @click="globalUtils.confirm(slotProps,'Complete')" style="position: absolute; top: 200px; left: 350px;">시청 완료</b-button>
           </Confirm>
           <div class="play-wrap">
             <button class="btn-rewind"><img src="@/assets/images/common/5s_rewind@2x.png" alt=""></button>

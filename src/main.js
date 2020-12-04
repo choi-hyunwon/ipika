@@ -3,13 +3,11 @@ import App from './App.vue'
 import router from './router'
 import store from './store/store'
 import { BootstrapVue } from 'bootstrap-vue'
-import { TTS } from './utils/tts'
-import { Popup } from './utils/popup'
+import { GlobalUtils } from './utils/globalUtils'
 
 Vue.config.productionTip = false
 
-Vue.prototype.tts = new TTS()
-Vue.prototype.showPopup = new Popup()
+Vue.prototype.globalUtils= new GlobalUtils()
 Vue.prototype.$EventBus = new Vue();
 
 Vue.use(BootstrapVue)

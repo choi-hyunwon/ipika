@@ -90,7 +90,18 @@
     <!-- 진단 테스트 -->
     <!-- s 팝업  -->
 <!--    <b-button v-if="page === 'diagnose'"  v-b-modal.normalPopup style="position: absolute; top: 200px; left: 50px;">진단테스트_3_시간 초과 시 1</b-button>-->
-
+    <b-modal v-if="page === 'diagnose'" :visible="timeOver" id="timeoverPopup" centered title="진단테스트 : 타임오버" modal-class="normalPopup">
+      <template #modal-header>
+        <div class="symbol"><img src="@/assets/images/common/timer@2x.png" alt=""></div>
+      </template>
+      <p class="text">시간이 초과되었어요!<br/>
+        제출하시겠어요?</p>
+      <p class="text-sm">다시 그리면 먼저 그린 그림은 사라져요</p>
+      <template #modal-footer="{ cancel }">
+        <b-button @click="clear" variant="blue" class="btn-half">다시 그릴래요!</b-button>
+        <b-button @click="exportPNG" variant="black" class="btn-half">제출할게요</b-button>
+      </template>
+    </b-modal>
 
 <!--    <b-button v-if="page === 'diagnose'" v-b-modal.normalPopup2 style="position: absolute; top: 200px; left: 200px;">진단테스트_3_시간 초과 시 2</b-button>-->
     <b-modal v-if="page === 'diagnose'||'study'" @show="popUpOpen" @hide="hideInfo" id="clearAllPopup" centered title="진단테스트 : 전체 그림 지우기" modal-class="normalPopup">
@@ -255,14 +266,14 @@ import Confirm from '@/components/popup/Confirm'
 export default {
   name: 'Canvas',
   components :{
-    Confirm,
-    Wacom
+    Wacom,
+    Confirm
   },
   data () {
     return {
       isLoading: false,
-      timeInitVal: 5,
-      time: 5, // TODO: default 60*2
+      timeInitVal: 60*2,
+      time: 60*2, // TODO: default 60*2
       timer: null,
       timeOver : false,
       drawer : true,

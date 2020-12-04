@@ -2,7 +2,7 @@
   <div>
     <div class="navigation pb-5">
       <p>TTS 기능 테스트 :<br></p>
-      <button id="btn-read" @click="tts.speak('TTS 테스트')">TTS 기능 테스트</button>
+      <button id="btn-read" @click="globalUtils.tts('TTS 테스트')">TTS 기능 테스트</button>
     </div>
     <div class="navigation">
       <p>진단테스트 :<br></p>
