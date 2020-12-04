@@ -35,7 +35,7 @@ export default class WebApi {
     // console.log(store.getters.getSession)
     return this.request('api/main/menu', {
       method: 'GET',
-      data: {
+      headers: {
         user_id: store.getters.getSession.user_id,
         user_auth_key: store.getters.getSession.user_auth_key,
         device_type: store.getters.getSession.device_type
@@ -75,7 +75,7 @@ export default class WebApi {
   getResult (options) {
     return this.request('api/test/result', {
       method: 'GET',
-      data: {
+      headers: {
         user_id: store.getters.getSession.user_id,
         user_auth_key: store.getters.getSession.user_auth_key,
         device_type: store.getters.getSession.device_type
@@ -99,7 +99,7 @@ export default class WebApi {
   getUesrGallery (options) {
     return this.request('api/users/gallery', {
       method: 'GET',
-      data: {
+      headers: {
         user_id: store.getters.getSession.user_id,
         user_auth_key: store.getters.getSession.user_auth_key,
         device_type: store.getters.getSession.device_type
@@ -115,7 +115,7 @@ export default class WebApi {
   getUesrGalleryMypicture (options) {
     return this.request('api/users/gallery/mypicture', {
       method: 'GET',
-      data: {
+      headers: {
         user_id: store.getters.getSession.user_id,
         user_auth_key: store.getters.getSession.user_auth_key,
         device_type: store.getters.getSession.device_type
@@ -132,7 +132,7 @@ export default class WebApi {
   getUesrGalleryBackground (options) {
     return this.request('api/users/gallery/background', {
       method: 'POST',
-      data: {
+      headers: {
         user_id: store.getters.getSession.user_id,
         user_auth_key: store.getters.getSession.user_auth_key,
         device_type: store.getters.getSession.device_type
@@ -148,10 +148,12 @@ export default class WebApi {
   getUesrGalleryDetele (options) {
     return this.request('api/users/gallery/delete', {
       method: 'DELETE',
-      data: {
+      headers: {
         user_id: store.getters.getSession.user_id,
         user_auth_key: store.getters.getSession.user_auth_key,
         device_type: store.getters.getSession.device_type,
+      },
+      data: {
         pictureId : options.pictureId
       }
     })

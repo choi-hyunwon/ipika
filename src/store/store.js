@@ -18,7 +18,7 @@ export default new Vuex.Store({
    * this.$store.state.CONSTANTS;
    */
   state: {
-    isDummy : false,
+    isDummy : true,
 
     /**
      * userinfo는 단말기(안드로이드)기에서 받아온다.
@@ -43,7 +43,7 @@ export default new Vuex.Store({
      * API session options
      */
     session: {
-      'user_id': 'testplan56',
+      'user_id': 'test107',
       'user_auth_key': 'abcdefghijklmnopqrstuvwxyz0123456789',
       'Content_Language': 'ko',
       'device_type': '1001'

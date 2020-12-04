@@ -86,11 +86,12 @@ export const actions = {
             "stepName": "4",
             "stepSubject": "사물을 그려보아요.",
             "ideaKeyword": "사과를 그려봅시다.",
-            "userPicture": "http:///images/users/gallery/20201106_0023.png",
+            "pictureUrl": "https://vuejs.org/images/logo.png",
             "shareStatus": "Y",
             "viewCount": 23,
             "reactionCount": 6,
-            "createdDate": "2020-11-06T18:25:43.511Z"
+            "createdDate": "2020-11-06T18:25:43.511Z",
+            "pictureId": "987654321"
           },
           {
             "drawingType": 3,
@@ -100,24 +101,41 @@ export const actions = {
             "stepName": null,
             "stepSubject": null,
             "ideaKeyword": null,
-            "userPicture": "http://cdn.mcocoa.com/edu//images/users/gallery/20201107_0032.png",
+            "pictureUrl": "https://nodejs.org/static/images/logo.svg",
             "shareStatus": "Y",
             "viewCount": 16,
             "reactionCount": 4,
-            "createdDate": "2020-11-07T12:25:43.511Z"
+            "createdDate": "2020-11-07T12:25:43.511Z",
+            "pictureId": "123465789"
           }
         ],
+        "code": "string",
+        "message": "string",
         "audio":[
           {
+            "audioUrl": "string",
+            "createdDate": "2020-11-07T12:25:43.511Z",
+            "drawingType": 2,
+            "pictureId": 0,
+            "stageId": 1,
+            "stageName": "Twinkle Stage",
+            "stepId": 1,
+            "title": "string",
             "userAudioId": 1,
-            "audioUrl": "http://cdn.mcocoa.com/audio/20201106_0023.mp3",
-            "createdDate": "2020-11-06T18:25:43.511Z"
+            "userCode": 0
           },
           {
-            "userAudioId": 3,
-            "audioUrl": "http://cdn.mcocoa.com/audio/20201106_0024.mp3",
-            "createdDate": "2020-11-07T12:25:43.511Z"
-          }
+            "audioUrl": "string",
+            "createdDate": "2020-11-01T12:25:43.511Z",
+            "drawingType": 1,
+            "pictureId": 0,
+            "stageId": 1,
+            "stageName": "Grow Stage",
+            "stepId": 1,
+            "title": "string",
+            "userAudioId": 1,
+            "userCode": 0
+          },
         ]
       }
       commit('setUesrGalleryMypicture', data)
