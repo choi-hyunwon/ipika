@@ -41,18 +41,13 @@ const requireAuth = () => (from, to, next) => {
 const routes = [
   {
     path: '/',
-    name: 'List',
-    component: List
+    name: 'home',
+    component: Home
   },
   {
     path: '/list',
     name: 'List',
     component: List
-  },
-  {
-    path: '/home',
-    name: 'Home',
-    component: Home
   },
   {
     path: '/canvas',
