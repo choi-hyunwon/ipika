@@ -1,18 +1,19 @@
 <template>
   <div>
  <slot :toggleAlert="toggleAlert"></slot>
-    <b-modal centered modal-class="normalPopup" v-model="showAlert">
+    <b-modal v-if="type==='subject'" centered modal-class="normalPopup" v-model="showAlert">
       <template #modal-header>
-        <div v-if="type==='subject'" class="symbol"><img src="@/assets/images/common/drawing@2x.png" alt=""></div>
+        <div class="symbol"><img src="@/assets/images/common/drawing@2x.png" alt=""></div>
       </template>
-      <template v-if="type==='subject'" >
+      <template  >
         <p class="text text-md">{{boldText}}</p>
         <p class="text-sm">{{text}}</p>
       </template>
-      <template v-if="type==='subject'" #modal-footer="{ cancel }">
+      <template #modal-footer="{ cancel }">
         <b-button class="btn btn-block btn-black" @click="cancel()">{{ buttonText }}</b-button>
       </template>
     </b-modal>
+
     <b-modal v-if="type==='video'" centered hide-footer modal-class="videoReviewPopup" v-model="showAlert">
       <template  #default="{ hide }">
         <div class="bg"><img src="@/assets/images/temp/sample_img_02.png" alt=""></div>
@@ -44,6 +45,24 @@
           </div>
           <!-- e 영상 재생 중_화면 탭 시 -->
         </div>
+      </template>
+    </b-modal>
+
+    <b-modal v-if="type==='agreement1'" centered :title=boldText modal-class="marketing" scrollable ok-only ok-title="닫기" ok-variant="black btn-block" v-model="showAlert">
+      <p>
+        {{text}}
+      </p>
+    </b-modal>
+
+    <b-modal v-if="type==='agreement2'"  id="startPopup" centered modal-class="textPopup" v-model="showAlert">
+      <template #modal-header>
+        <div class="symbol"><img src="@/assets/images/common/Symbol@2x.png" alt=""></div>
+      </template>
+      <p class="text" v-html="text"></p>
+      <template #modal-footer="{ cancel }">
+        <router-link to="/canvas?page=diagnose">
+          <button size="sm" variant="btn black btn-block" @click="cancel()">네 그려볼게요!!</button>
+        </router-link>
       </template>
     </b-modal>
   </div>
