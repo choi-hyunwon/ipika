@@ -11,7 +11,7 @@ export const actions = {
   },
   getMainMenu ({ commit }, options) {
     console.log(`getMainMenu`)
-    webApi.getMainmenu(options)
+    return webApi.getMainmenu(options)
       .then(data => {
         commit('setCategoryItems', data)
         return data
@@ -28,7 +28,7 @@ export const actions = {
       commit('setSubject', data)
       return data
     } else {
-      webApi.getSubject(options)
+      return webApi.getSubject(options)
         .then(data => {
           commit('setSubject', data)
           return data
@@ -47,7 +47,7 @@ export const actions = {
       commit('setResult', data)
       return data
     } else {
-      webApi.getResult(options)
+      return webApi.getResult(options)
         .then(data => {
           commit('setResult', data)
           return data
@@ -67,7 +67,7 @@ export const actions = {
       commit('setUesrGallery', data)
       return data
     } else {
-      webApi.getUesrGallery(options)
+      return webApi.getUesrGallery(options)
         .then(data => {
           commit('setUesrGallery', data)
           return data
@@ -123,7 +123,7 @@ export const actions = {
       commit('setUesrGalleryMypicture', data)
       return data
     } else {
-      webApi.getUesrGalleryMypicture(options)
+      return webApi.getUesrGalleryMypicture(options)
         .then(data => {
           commit('setUesrGalleryMypicture', data)
           return data
@@ -131,13 +131,13 @@ export const actions = {
     }
   },
   getUesrGalleryBackground ({ commit }, options) {
-    webApi.getUesrGalleryBackground(options)
+    return webApi.getUesrGalleryBackground(options)
       .then(data => {
         return data
       })
   },
   getUesrGalleryDetele ({ commit }, options) {
-    webApi.getUesrGalleryDetele(options)
+    return webApi.getUesrGalleryDetele(options)
       .then(data => {
         return data
       })

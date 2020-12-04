@@ -14,7 +14,7 @@
       </div>
       <div class="symbol">
         <span class="img"><img src="@/assets/images/common/Symbol@2x.png" alt=""></span>
-        <span class="text">{{Subject.subject}}</span>
+        <span class="text">{{subject.subject}}</span>
       </div>
       <div class="box-close">
         <!--<router-link to="/" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>-->
@@ -173,7 +173,7 @@
       <template #modal-header>
         <div class="symbol"><img src="@/assets/images/common/Symbol@2x.png" alt=""></div>
       </template>
-      <p class="text">{{Subject.subject}}</p>
+      <p class="text">{{subject.subject}}</p>
       <template #modal-footer="{ cancel }">
         <button size="sm" class="btn btn-black btn-block" @click="cancel()">알겠어요!</button>
       </template>
