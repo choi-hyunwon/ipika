@@ -21,7 +21,11 @@
         </Confirm>
       </div>
       <div class="flex-box">
-          <Alert v-slot="slotProps">
+          <Alert v-slot="slotProps"
+                  :boldText="'학습주제영역입니다.\n 학습주제는 최대 세 문장까지 \n 가능합니다'"
+                  :text="`생각 제시하는 생각 과제 제시하는 텍스트 \n 영역으로 최대 두줄 이상을 생각합니다.`"
+                  :buttonText="'닫기'"
+          >
             <button class="btn-right" @click="showAlert(slotProps,1)">
             <span class="img"><img src="@/assets/images/common/ic-drawing@2x.png" alt=""></span>
             <span class="tit">주제보기</span>
@@ -80,7 +84,7 @@ export default {
     },
     showAlert(slotProps,number){
       if(number===1){
-        slotProps.toggleAlert('normalPopup')
+        slotProps.toggleAlert('subject','pabloStudy2')
       }
     },
     goToBack(){

@@ -17,16 +17,6 @@
         <div class="btn-group">
           <router-link to="/PabloStudy2" class="btn btn-dark">시작하기</router-link>
         </div>
-        <div>
-          <Alert v-slot="slotProps">
-            <b-button @click="showAlert(slotProps)">Alert</b-button>
-          </Alert>
-        </div>
-        <div>
-          <Confirm v-slot="slotProps">
-            <b-button @click="showConfirm(slotProps)">Confirm</b-button>
-          </Confirm>
-        </div>
       </div>
       <div class="col col-6">
         <div class="img"><img src="@/assets/images/temp/sample_img_01.jpg" alt=""></div>

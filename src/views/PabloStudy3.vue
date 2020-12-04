@@ -12,7 +12,10 @@
 <!--        <b-button variant="black" @click="goToBack">버튼</b-button>-->
       </div>
       <div class="flex-box">
-        <Alert v-slot="slotProps">
+        <Alert v-slot="slotProps"
+                :boldText="`학습주제`"
+                :text="`학습주제`"
+                :buttonText ="'닫기'">
         <button class="btn-right" @click="showAlert(slotProps,1)">
           <span class="img"><img src="@/assets/images/common/ic-drawing@2x.png" alt=""></span>
           <span class="tit">주제보기</span>
@@ -135,7 +138,7 @@ export default {
     },
     showAlert(slotProps,number){
       if(number===1){
-        slotProps.toggleAlert('normalPopup')
+        slotProps.toggleAlert('subject','PabloStudy3')
       }
     },
     goToBack(){

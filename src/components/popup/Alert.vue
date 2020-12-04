@@ -3,15 +3,50 @@
  <slot :toggleAlert="toggleAlert"></slot>
     <b-modal centered modal-class="normalPopup" v-model="showAlert">
       <template #modal-header>
-        <div class="symbol"><img src="@/assets/images/common/drawing@2x.png" alt=""></div>
+        <div v-if="type==='subject'" class="symbol"><img src="@/assets/images/common/drawing@2x.png" alt=""></div>
       </template>
-      <p class="text text-md">학습 주제 영역입니다.<br/>
-        학습 주제는 최대 세 문장까지<br/>
-        가능합니다.</p>
-      <p class="text-sm">생각 제시하는 생각 과제 제시하는 텍스트<br/>
-        영역으로 최대 두줄 이상을 생각합니다.</p>
-      <template #modal-footer="{ cancel }">
-        <b-button class="btn btn-block btn-black" @click="cancel()">닫기</b-button>
+
+      <template v-if="type==='subject'" >
+        <p class="text text-md">{{boldText}}</p>
+        <p class="text-sm">{{text}}</p>
+      </template>
+
+      <template v-if="type==='subject'" #modal-footer="{ cancel }">
+        <b-button class="btn btn-block btn-black" @click="cancel()">{{ buttonText }}</b-button>
+      </template>
+    </b-modal>
+
+    <b-modal v-if="type==='video'" centered hide-footer modal-class="videoReviewPopup" v-model="showAlert">
+      <template  #default="{ hide }">
+        <div class="bg"><img src="@/assets/images/temp/sample_img_02.png" alt=""></div>
+        <div class="full-screen dim"><!-- 전체 화면시 dim 제거 -->
+          <div class="inner">
+            <div class="video">
+              <p class="text">생각 제시하는 생각 과제 제시하는 텍스트 영역입니다.</p>
+              <button class="btn-close" @click="hide()"><img src="@/assets/images/common/close_dim@2x.png" alt=""></button>
+              <!-- s 전체 화면시 hide -->
+              <div class="play-wrap">
+                <button class="btn-rewind"><img src="@/assets/images/common/5s_rewind@2x.png" alt=""></button>
+                <button class="btn-pause"><img src="@/assets/images/common/pause@2x.png" alt=""></button>
+                <button class="btn-play"><img src="@/assets/images/common/btn_play@2x.png" alt=""></button>
+                <button class="btn-forward"><img src="@/assets/images/common/5s_forward@2x.png" alt=""></button>
+              </div>
+              <div class="progress-wrap">
+                <div class="inner">
+                  <span class="time">2:40</span>
+                  <div class="progress-inner">
+                    <span class="bar" style="width: 30%"></span>
+                  </div>
+                  <span class="playtime">2:40</span>
+                  <button class="btn-full-screen"><img src="@/assets/images/common/btn_full_screen@2x.png" alt="">
+                  </button>
+                </div>
+              </div>
+              <!-- e 전체 화면시 hide -->
+            </div>
+          </div>
+          <!-- e 영상 재생 중_화면 탭 시 -->
+        </div>
       </template>
     </b-modal>
   </div>
@@ -23,17 +58,31 @@ export default {
   data(){
     return{
       showAlert : false,
-      type : '',
-      text :{
-
-      }
+      type : "",
+      topic : "",
+      modalShow : true
+    }
+  },
+  props:{
+    boldText:{
+      String,
+      default(){return ''}
+    },
+    text : {
+      String,
+      default(){return ''}
+    },
+    buttonText : {
+      String,
+      default(){return ''}
     }
   },
   methods : {
-    toggleAlert(type){
+    toggleAlert(type,topic){
       this.showAlert = !this.showAlert;
-      this.type = type
-    }
+      this.type = type;
+      this.topic= topic;
+    },
   }
 }
 </script>

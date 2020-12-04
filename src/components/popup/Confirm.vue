@@ -9,9 +9,16 @@
         </div>
       </template>
 
+<!--      canvase time header-->
+<!--      <template v-if="type==='canvasComplete'" #modal-header>-->
+<!--        <div class="symbol">-->
+<!--          <img src="@/assets/images/common/timer@2x.png" alt="">-->
+<!--        </div>-->
+<!--      </template>-->
+
 <!--     본문  -->
       <template v-if= "type==='goToBack'">
-        <p class="text">뒤로 가시겠어요?</p>
+        <p class="text">정말 뒤로 가시겠어요?</p>
         <p class="text-sm">{{backText}}</p>
       </template>
 
@@ -59,9 +66,6 @@ export default {
       topic : "",
       text : {
       },
-      src : {
-        check_red : "@/assets/images/common/check_red@2x.png"
-      }
     }
   },
   props:{
