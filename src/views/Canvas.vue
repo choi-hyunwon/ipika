@@ -14,7 +14,7 @@
       </div>
       <div class="symbol">
         <span class="img"><img src="@/assets/images/common/Symbol@2x.png" alt=""></span>
-        <span class="text">{{subject.subject}}</span>
+        <span class="text">{{Subject.subject}}</span>
       </div>
       <div class="box-close">
         <!--<router-link to="/" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>-->
@@ -173,7 +173,7 @@
       <template #modal-header>
         <div class="symbol"><img src="@/assets/images/common/Symbol@2x.png" alt=""></div>
       </template>
-      <p class="text">{{subject.subject}}</p>
+      <p class="text">{{Subject.subject}}</p>
       <template #modal-footer="{ cancel }">
         <button size="sm" class="btn btn-black btn-block" @click="cancel()">알겠어요!</button>
       </template>
@@ -258,22 +258,23 @@ export default {
     this.$EventBus.$on('toggleDrawer', (drawer) => {
       this.drawer = drawer;
     });
+
   },
   mounted () {
     if (localStorage.getItem('isReload') === 'true' || localStorage.getItem('isReload') === undefined) window.location.reload()
     else this.isLoading = true
-    this.timerStart()
     this.fetchSubject()
   },
   computed: {
     ...mapGetters({
-      session: 'getSession'
+      session: 'getSession',
+      Subject: 'getSubject'
     }),
     page() {
       return this.$router.currentRoute.query.page
     },
     timeSetting(){
-      return this.time = this.subject.limitMinute * 60
+      return this.time = this.Subject.limitMinute * 60
     },
     timeRemains() {
       let mm = Math.floor(this.time / 60)
@@ -282,6 +283,9 @@ export default {
       ss = ss < 10 ? '0' + ss : ss
       return `${mm} : ${ss}`
     }
+  },
+  watch:{
+
   },
   methods: {
     ...mapActions({
@@ -363,6 +367,7 @@ export default {
     },
     // 메인 메뉴 조회
     fetchSubject () {
+      //todo : @최현원 then이 먼저 일어나는 버그 확인 필요
       this.getSubject()
         .then(result => {
           console.log('fetchSubject :', result)

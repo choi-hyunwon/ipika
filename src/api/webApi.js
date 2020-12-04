@@ -1,7 +1,6 @@
 import axios from 'axios'
 import store from '../store/store'
 
-axios.defaults.baseURL = 'http://localhost:8001'
 axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8'
 axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*'
 
@@ -14,6 +13,7 @@ export default class WebApi {
     console.error(config)
     return axios({
       url: `http://ec2-15-165-50-157.ap-northeast-2.compute.amazonaws.com:8996/${url}`,
+
       ...config
     }).then(result => result.data)
       .catch(error => {
@@ -38,7 +38,6 @@ export default class WebApi {
       data: {
         user_id: store.getters.getSession.user_id,
         user_auth_key: store.getters.getSession.user_auth_key,
-        Content_Language: store.getters.getSession.Content_Language,
         device_type: store.getters.getSession.device_type
       }
     })
@@ -52,11 +51,13 @@ export default class WebApi {
   getSubject (options) {
     return this.request('api/test/subject', {
       method: 'GET',
-      data: {
+      headers: {
         user_id: store.getters.getSession.user_id,
         user_auth_key: store.getters.getSession.user_auth_key,
-        Content_Language: store.getters.getSession.Content_Language,
-        device_type: store.getters.getSession.device_type
+        device_type: store.getters.getSession.device_type,
+      },
+      data: {
+        content_language: store.getters.getSession.Content_Language
       }
     })
   }
@@ -77,7 +78,6 @@ export default class WebApi {
       data: {
         user_id: store.getters.getSession.user_id,
         user_auth_key: store.getters.getSession.user_auth_key,
-        Content_Language: store.getters.getSession.Content_Language,
         device_type: store.getters.getSession.device_type
       }
     })
@@ -97,12 +97,11 @@ export default class WebApi {
    * totalReactionCount:String-전체공유그림좋아요수
    */
   getUesrGallery (options) {
-    return this.request('/api/users/gallery', {
+    return this.request('api/users/gallery', {
       method: 'GET',
       data: {
         user_id: store.getters.getSession.user_id,
         user_auth_key: store.getters.getSession.user_auth_key,
-        Content_Language: store.getters.getSession.Content_Language,
         device_type: store.getters.getSession.device_type
       }
     })
@@ -114,12 +113,11 @@ export default class WebApi {
    * pictures:List
    */
   getUesrGalleryMypicture (options) {
-    return this.request('/api/users/gallery/mypicture', {
+    return this.request('api/users/gallery/mypicture', {
       method: 'GET',
       data: {
         user_id: store.getters.getSession.user_id,
         user_auth_key: store.getters.getSession.user_auth_key,
-        Content_Language: store.getters.getSession.Content_Language,
         device_type: store.getters.getSession.device_type
       }
     })
@@ -132,12 +130,11 @@ export default class WebApi {
    * message:String - 메시지
    */
   getUesrGalleryBackground (options) {
-    return this.request('/api/users/gallery/background', {
+    return this.request('api/users/gallery/background', {
       method: 'POST',
       data: {
         user_id: store.getters.getSession.user_id,
         user_auth_key: store.getters.getSession.user_auth_key,
-        Content_Language: store.getters.getSession.Content_Language,
         device_type: store.getters.getSession.device_type
       }
     })
@@ -149,12 +146,11 @@ export default class WebApi {
    * pictureId:String-그림ID
    */
   getUesrGalleryDetele (options) {
-    return this.request('/api/users/gallery/delete', {
+    return this.request('api/users/gallery/delete', {
       method: 'DELETE',
       data: {
         user_id: store.getters.getSession.user_id,
         user_auth_key: store.getters.getSession.user_auth_key,
-        Content_Language: store.getters.getSession.Content_Language,
         device_type: store.getters.getSession.device_type,
         pictureId : options.pictureId
       }

@@ -1,5 +1,14 @@
 <template>
   <div>
+    <div class="bgc-section">
+      <div class="bg">
+        <!--        <div class="img-m" style="width:192rem; height: 40rem; background-color:#eee9e3;" :style="{backgroundImage: 'url(' + galleryInfo.backgroundImage + ')'}"></div>-->
+        <div class="img-m" style="width:192rem; height: 40rem; background-color:#eee9e3;" :style="{backgroundImage: 'url(https://kr.vuejs.org/images/stdlib.png)'}"></div>
+      </div>
+      <div class="setting-img">
+        <img src="@/assets/images/common/setting_default.png" alt="세팅" class=" img-m" @click="$emit('popup')">
+      </div>
+    </div>
     <div class="info-section d-flex">
       <div class="profile profile_r">
         <img v-if="result.stageId === 0" src="@/assets/images/common/img_thum_stage_01@2x.png" alt="프로필사진" class="img-m">

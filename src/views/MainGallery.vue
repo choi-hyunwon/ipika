@@ -12,8 +12,7 @@
       </div>
     </div>
     <div class="contents">
-      <myGalleryBG v-on:popup="settingPopup"></myGalleryBG>
-      <myGalleryInfo></myGalleryInfo>
+      <myGalleryInfo v-on:popup="settingPopup"></myGalleryInfo>
       <div class="tab-section">
         <b-tabs justified>
           <b-tab title="내그림" class="tab">
@@ -25,7 +24,6 @@
         </b-tabs>
       </div>
     </div>
-
     <!--modal-->
     <b-modal id="galleryBGChangeEmpty" centered title="배경 설정 : 없을 경우" modal-class="galleryBGChangeEmpty">
       <template #modal-header>
@@ -138,19 +136,17 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 import myGalleryPicture from '@/components/myGalleryPicture'
 import myGalleryVoice from '@/components/myGalleryVoice'
 import myGalleryInfo from '@/components/myGalleryInfo'
-import myGalleryBG from '@/components/myGalleryBG'
-import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'MainGallery',
   components: {
     myGalleryPicture,
     myGalleryVoice,
-    myGalleryInfo,
-    myGalleryBG
+    myGalleryInfo
   },
   data () {
     return {
@@ -164,8 +160,12 @@ export default {
   },
   computed: {
     ...mapGetters({
-      session: 'getSession'
+      session: 'getSession',
+      uesrGalleryMypicture: 'getUesrGalleryMypicture'
     })
+  },
+  mounted () {
+    this.fetchUesrGalleryMypicture();
   },
   methods: {
     ...mapActions({
@@ -180,6 +180,12 @@ export default {
       } else {
         this.$bvModal.show('galleryBgChange')
       }
+    },
+    fetchUesrGalleryMypicture(){
+      this.getUesrGalleryMypicture()
+        .then(result => {
+          console.log('getUesrGalleryMypicture :', result)
+        })
     }
   }
 }

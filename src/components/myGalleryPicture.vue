@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="empty" v-if="myTab.empty">
+    <div class="empty" v-if="empty">
       <div class="gallery-section">
         <ul class="gallerys">
           <li class="gallery-default">
@@ -18,22 +18,18 @@
     <div class="list" v-else>
       <div class="clearfix btns_group">
         <div class="float-left btn-left">
-          <b-button class="all_button" aria-pressed="true">
-            <img src="@/assets/images/common/all.png" alt="모든이미지" class="img">
-            <span>ALL</span>
-          </b-button>
-          <b-button class="drawing_button">
-            <img src="@/assets/images/common/all.png" alt="모든이미지" class="img">
-            <span>Pablo Drawing</span>
-          </b-button>
-          <b-button class="classic_button">
-            <img src="@/assets/images/common/all.png" alt="모든이미지" class="img" style="width: 1.57rem; height: 2rem;">
-            <span>Pablo Classic</span>
-          </b-button>
-          <b-button class="canvas_button">
-            <img src="@/assets/images/common/all.png" alt="모든이미지" class="img">
-            <span>Canvas</span>
-          </b-button>
+
+            <b-button v-for="(filterItem, index) in filter"
+                      :key="index"
+                      aria-pressed="true"
+                      :data="filterItem"
+                      :class="{'selected' : activeIndex === index}"
+                      @click="onClick(index)"
+            >
+              <img v-if="filterItem.src" src="@/assets/images/common/all.png" alt="모든이미지" class="img">
+              <span>{{ filterItem.title }}</span>
+            </b-button>
+
         </div>
         <div class="float-right btn-rigth">
           <b-dropdown id="dropdown-1" text="최신 순">
@@ -43,83 +39,15 @@
       </div>
       <div class="gallery-section">
         <ul class="gallerys">
-          <li class="gallery-g">
+          <li class="gallery-g" v-for="(item, index) in userGalleryMypicture.pictures">
             <div class="gallery_img size-img">
-              <img src="@/assets/images/temp/sample_img_01.jpg" alt="갤러리사진" class="img-m">
-            </div>
-            <div class="img_title">Curious Stage</div>
-            <div class="img_desc">최초의 사람은 어떤 사람이었을까요?</div>
-          </li>
-          <li class="gallery-g">
-            <div class="gallery_img size-img">
-              <img src="@/assets/images/temp/sample_img_01.jpg" alt="갤러리사진" class="img-m">
-            </div>
-            <div class="img_title">Curious Stage2</div>
-            <div class="img_desc">최초의 사람은 어떤 사람이었을까요?</div>
-          </li>
-          <li class="gallery-g">
-            <div class="gallery_img size-img">
-              <img src="@/assets/images/temp/sample_img_01.jpg" alt="갤러리사진" class="img-m">
+              <img :src="item.userPicture" alt="갤러리사진" class="img-m">
               <div class="img_icon" v-b-modal.normalPopup1>
                 <img src="@/assets/images/common/share.png" alt="다운로드" class="img-m" v-b-modal.normalPopup1>
               </div>
             </div>
-            <div class="img_title">Curious Stage 3</div>
-            <div class="img_desc">최초의 사람은 어떤 사람이었을까요?</div>
-
-          </li>
-          <li class="gallery-g">
-            <div class="gallery_img size-img">
-              <img src="@/assets/images/temp/sample_img_01.jpg" alt="갤러리사진" class="img-m">
-              <div class="img_icon" v-b-modal.normalPopup1>
-                <img src="@/assets/images/common/share.png" alt="다운로드" class="img-m" v-b-modal.normalPopup1>
-              </div>
-            </div>
-            <div class="img_title">Curious Stage 12</div>
-            <div class="img_desc">최초의 사람은 어떤 사람이었을까요?</div>
-
-          </li>
-          <li class="gallery-g">
-            <div class="gallery_img size-img">
-              <img src="@/assets/images/temp/sample_img_01.jpg" alt="갤러리사진" class="img-m">
-              <div class="img_icon">
-                <img src="@/assets/images/common/share.png" alt="다운로드" class="img-m" v-b-modal.normalPopup1>
-              </div>
-            </div>
-            <div class="img_title">Curious Stage 13</div>
-            <div class="img_desc">최초의 사람은 어떤 사람이었을까요?</div>
-
-          </li>
-          <li class="gallery-g">
-            <div class="gallery_img size-img">
-              <img src="@/assets/images/temp/sample_img_01.jpg" alt="갤러리사진" class="img-m">
-              <div class="img_icon">
-                <img src="@/assets/images/common/share.png" alt="다운로드" class="img-m" v-b-modal.normalPopup1>
-              </div>
-            </div>
-            <div class="img_title">Curious Stage 14</div>
-            <div class="img_desc">최초의 사람은 어떤 사람이었을까요?</div>
-          </li>
-          <li class="gallery-g">
-            <div class="gallery_img size-img">
-              <img src="@/assets/images/temp/sample_img_01.jpg" alt="갤러리사진" class="img-m">
-            </div>
-            <div class="img_title">Curious Stage 3</div>
-            <div class="img_desc">최초의 사람은 어떤 사람이었을까요?</div>
-          </li>
-          <li class="gallery-g">
-            <div class="gallery_img size-img">
-              <img src="@/assets/images/temp/sample_img_01.jpg" alt="갤러리사진" class="img-m">
-            </div>
-            <div class="img_title">Curious Stage 3</div>
-            <div class="img_desc">최초의 사람은 어떤 사람이었을까요?</div>
-          </li>
-          <li class="gallery-g">
-            <div class="gallery_img size-img">
-              <img src="@/assets/images/temp/sample_img_01.jpg" alt="갤러리사진" class="img-m">
-            </div>
-            <div class="img_title">Curious Stage 3</div>
-            <div class="img_desc">최초의 사람은 어떤 사람이었을까요?</div>
+            <div class="img_title">{{ item.stageName || 'stage'}} {{ item.stageId || 'step'}}</div>
+            <div class="img_desc">{{ item.stepSubject || '설명을 찾을 수 없습니다'}}</div>
           </li>
         </ul>
       </div>
@@ -133,28 +61,66 @@ import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'myGalleryPicture',
 
-  components: {},
-
-  mixins: [],
-
-  props: {},
-
   data () {
     return {
-      myTab: {
-        empty: false
-      },
+      empty: null,
+      activeIndex : 0,
+      filter : [
+        {
+          'title' : 'ALL',
+          'src' : '@/assets/images/common/all.png',
+          'click' : 'filterAll'
+        },
+        {
+          'title' : 'Pablo Drawing',
+          'click' : 'filterLetter'
+        },
+        {
+          'title' : 'Pablo Classic',
+          'click' : 'filterTest'
+        },
+        {
+          'title' : 'Canvas',
+          'click' : 'filterFree'
+        }
+      ]
     }
   },
 
-  computed: {},
-
-  watch: {},
-
-  created () {
+  computed: {
+    ...mapGetters({
+      userGalleryMypicture: 'getUesrGalleryMypicture'
+    }),
+    isEmpty() {
+       if (this.userGalleryMypicture.pictures.length === 0){
+        this.empty = true;
+      } else {
+        this.empty = false;
+      }
+      return this.empty
+    }
   },
 
-  methods: {}
+  watch: {
+
+  },
+
+  mounted () {
+  },
+
+  methods: {
+    onClick (index) {
+      if (this.activeIndex === index) {
+        this.activeIndex = null;
+      } else {
+        this.activeIndex = index;
+      }
+      this.setfilter(index)
+    },
+    setfilter (index){
+
+    }
+  }
 }
 
 </script>
