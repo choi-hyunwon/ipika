@@ -5,22 +5,24 @@
                :okText="'네'"
                :cancelText="'아니요'"
                :text="'정말 뒤로 가시겠어요?'">
-      <button class="symbol" @click="showConfirm(slotProps,1)">
+      <button class="symbol" @click="showPopup.confirm(slotProps,'goToBack')">
         <img src="@/assets/images/common/arrow_left@2x.png" alt="">
       </button>
       </Confirm>
 
       <div class="flex-box">
-        <button v-b-modal.videoReviewPopup class="btn-right">
-          <span class="img"><img src="@/assets/images/common/ic-play@2x.png" alt=""></span>
-          <span class="tit">영상보기</span>
-        </button>
+        <Alert v-slot="slotProps">
+            <button @click="showPopup.alert(slotProps,'video')" class="btn-right">
+              <span class="img"><img src="@/assets/images/common/ic-play@2x.png" alt=""></span>
+              <span class="tit">영상보기</span>
+            </button>
+        </Alert>
 
         <Alert v-slot="slotProps"
                 :boldText="'주제보기'"
                 :text="'주제보기'"
                 :buttonText="'닫기'">
-          <button @click="showAlert(slotProps,1)" class="btn-right">
+          <button @click="showPopup.alert(slotProps,'subject')" class="btn-right">
             <span class="img"><img src="@/assets/images/common/ic-drawing@2x.png" alt=""></span>
             <span class="tit">주제보기</span>
           </button>
@@ -101,18 +103,6 @@ export default {
     this.$EventBus.$on('back',this.goToBack)
   },
   methods : {
-    showConfirm(slotProps,number){
-      if(number===1){
-        slotProps.toggleConfirm('goToBack','peopleThinking');
-      }else if(number===2){
-        slotProps.toggleConfirm('thinkingComplete','peopleThinking');
-      }
-    },
-    showAlert(slotProps,number){
-      if(number===1){
-        slotProps.toggleAlert('subject','poipleThinking')
-      }
-    },
     goToBack(){
       this.$router.push('/thoughtRecords')
     }

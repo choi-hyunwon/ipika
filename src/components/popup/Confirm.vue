@@ -1,7 +1,7 @@
 <template>
   <div>
     <slot :toggleConfirm="toggleConfirm"></slot>
-    <b-modal centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup" v-model="showConfirm">
+    <b-modal :visible="autoModal" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup" v-model="showConfirm">
 <!--      header -->
       <template #modal-header>
         <div class="symbol">
@@ -32,6 +32,7 @@
         <p class="text-sm">{{text}}</p>
       </template>
 
+
 <!--      footer  -->
       <template v-if="type==='goToBack'" #modal-footer="{ cancel }">
         <b-button variant="gray" class="btn-half" @click="cancel()">{{cancelText}}</b-button>
@@ -48,10 +49,11 @@
         <b-button @click="goToNext" variant="black" class="btn-black btn-half">{{okText}}</b-button>
       </template>
 
-<!--      <template v-else-if="type==='watchComplete'" #modal-footer="{ cancel }">-->
-<!--        <b-button variant="gray" class="btn-half"  @click="cancel()">다시 볼래요</b-button>-->
-<!--        <router-link to="/thoughtRecords" class="btn btn-black btn-half">넘어갈게요</router-link>-->
-<!--      </template>-->
+      <template v-else-if="type==='watchComplete'" #modal-footer="{ cancel }">
+        <b-button variant="gray" class="btn-half"  @click="cancel()">다시 볼래요</b-button>
+        <router-link to="/thoughtRecords" class="btn btn-black btn-half">넘어갈게요</router-link>
+      </template>
+
     </b-modal>
   </div>
 </template>
@@ -62,6 +64,7 @@ export default {
   data(){
     return{
       showConfirm : false,
+      autoModal : false,
       type : "",
     }
   },
@@ -90,6 +93,11 @@ export default {
   methods:{
     toggleConfirm(type,topic){
       this.showConfirm  = !this.showConfirm;
+      if(topic==='visible'){
+       this.autoModal = true
+      }else{
+        this.autoModal = false
+      }
       this.type = type;
     },
     goToBack(){

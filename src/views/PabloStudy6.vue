@@ -1,19 +1,13 @@
 <template>
   <div class="wrap bg-ivory">
     <div class="header">
-      <div v-b-modal.goToBack class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt="">
-        <b-modal id="goToBack" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">
-          <template #modal-header>
-            <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>
-          </template>
-          <p class="text">정말 뒤로 가시겠어요?</p>
-          <br/>
-          <template #modal-footer="{ cancel }">
-            <b-button variant="gray" class="btn-half" @click="cancel()">아니요</b-button>
-            <router-link to="/canvas?page=study" class="btn btn-black btn-half">네</router-link>
-          </template>
-        </b-modal>
-      </div>
+      <Confirm v-slot="slotProps"
+              :boldText="'정말 뒤로 가시겠어요?'"
+              :okText="'네'"
+              :cancelText="'아니요'">
+        <button @click="showPopup.confirm(slotProps,'goToBack')" class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt="">
+        </button>
+      </Confirm>
       <div class="box-close">
         <router-link to="/" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>
       </div>
@@ -38,8 +32,10 @@
 </template>
 
 <script>
+import Confirm from '@/components/popup/Confirm'
 export default {
-  name: 'PabloStudy6'
+  name: 'PabloStudy6',
+  components: { Confirm }
 }
 </script>
 

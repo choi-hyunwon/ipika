@@ -5,25 +5,23 @@
                cancelText="아니요"
                okText="네"
                 >
-        <button class="symbol" @click="showConfirm(slotProps,1)"><img src="@/assets/images/common/arrow_left@2x.png" alt="">
+        <button class="symbol" @click="showPopup.confirm(slotProps,'goToBack')"><img src="@/assets/images/common/arrow_left@2x.png" alt="">
         </button>
       </Confirm>
 
       <div class="flex-box">
         <Alert v-slot="slotProps">
-        <button @click="showAlert(slotProps,2)" class="btn-right">
+        <button @click="showPopup.alert(slotProps,'video')" class="btn-right">
           <span class="img"><img src="@/assets/images/common/ic-play@2x.png" alt=""></span>
           <span class="tit">영상보기</span>
         </button>
         </Alert>
 
-
         <Alert v-slot="slotProps"
               :boldText="'주제보기'"
                :text ="'주제보기'"
               :buttonText = "'닫기'">
-
-          <button class="btn-right" @click="showAlert(slotProps,1)">
+          <button class="btn-right" @click="showPopup.alert(slotProps,'subject')">
             <span class="img"><img src="@/assets/images/common/ic-drawing@2x.png" alt=""></span>
             <span class="tit">주제보기</span>
           </button>
@@ -60,55 +58,8 @@
       </div>
     </div>
     <Alert v-slot="slotProps">
-      <button @click="showAlert(slotProps,2)" style="position: absolute; top: 200px; left: 700px;">다시보기 팝업</button>
+      <button @click="showPopup.alert(slotProps,'video')" style="position: absolute; top: 200px; left: 700px;">다시보기 팝업</button>
     </Alert>
-<!--    <b-modal :visible="modalShow" id="videoReviewPopup" centered hide-footer modal-class="videoReviewPopup">-->
-<!--      <template #default="{ hide }">-->
-<!--        <div class="bg"><img src="@/assets/images/temp/sample_img_02.png" alt=""></div>-->
-<!--        <div class="full-screen dim">&lt;!&ndash; 전체 화면시 dim 제거 &ndash;&gt;-->
-<!--          <div class="inner">-->
-<!--            <div class="video">-->
-<!--              <p class="text">생각 제시하는 생각 과제 제시하는 텍스트 영역입니다.</p>-->
-<!--              <button class="btn-close" @click="hide()"><img src="@/assets/images/common/close_dim@2x.png" alt=""></button>-->
-<!--              &lt;!&ndash; s 전체 화면시 hide &ndash;&gt;-->
-<!--              <div class="play-wrap">-->
-<!--                <button class="btn-rewind"><img src="@/assets/images/common/5s_rewind@2x.png" alt=""></button>-->
-<!--                <button class="btn-pause"><img src="@/assets/images/common/pause@2x.png" alt=""></button>-->
-<!--                <button class="btn-play"><img src="@/assets/images/common/btn_play@2x.png" alt=""></button>-->
-<!--                <button class="btn-forward"><img src="@/assets/images/common/5s_forward@2x.png" alt=""></button>-->
-<!--              </div>-->
-<!--              <div class="progress-wrap">-->
-<!--                <div class="inner">-->
-<!--                  <span class="time">2:40</span>-->
-<!--                  <div class="progress-inner">-->
-<!--                    <span class="bar" style="width: 30%"></span>-->
-<!--                  </div>-->
-<!--                  <span class="playtime">2:40</span>-->
-<!--                  <button class="btn-full-screen"><img src="@/assets/images/common/btn_full_screen@2x.png" alt="">-->
-<!--                  </button>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--              &lt;!&ndash; e 전체 화면시 hide &ndash;&gt;-->
-<!--            </div>-->
-<!--          </div>-->
-<!--          &lt;!&ndash; e 영상 재생 중_화면 탭 시 &ndash;&gt;-->
-<!--        </div>-->
-<!--      </template>-->
-<!--    </b-modal>-->
-<!--  뒤로가기-->
-<!--    <div v-b-modal.goToBack class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt="">-->
-<!--      <b-modal id="goToBack" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">-->
-<!--        <template #modal-header>-->
-<!--          <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>-->
-<!--        </template>-->
-<!--        <p class="text">정말 뒤로 가시겠어요?</p>-->
-<!--        <br/>-->
-<!--        <template #modal-footer="{ cancel }">-->
-<!--          <b-button variant="gray" class="btn-half"  @click="cancel()">아니요</b-button>-->
-<!--          <router-link to="/PabloStudy2" class="btn btn-black btn-half">네</router-link>-->
-<!--        </template>-->
-<!--      </b-modal>-->
-<!--    </div>-->
   </div>
 </template>
 
@@ -127,18 +78,7 @@ export default {
     this.$EventBus.$on('back',this.goToBack)
   },
   methods :{
-    showAlert(slotProps,number){
-      if(number===1){
-        slotProps.toggleAlert('subject','videoReview')
-      }else if(number===2){
-        slotProps.toggleAlert('video','videoReivew')
-      }
-    },
-    showConfirm(slotProps,number){
-      if(number===1){
-        slotProps.toggleConfirm('goToBack','videoReview')
-      }
-    },
+
     goToBack(){
       this.$router.push('/PabloStudy2')
     }

@@ -20,6 +20,7 @@
           <span class="tit">주제보기</span>
           </button>
         </Alert>
+
         <div class="box-close">
           <router-link to="/" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>
         </div>
