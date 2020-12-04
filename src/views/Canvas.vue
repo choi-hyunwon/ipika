@@ -266,7 +266,8 @@ import Confirm from '@/components/popup/Confirm'
 export default {
   name: 'Canvas',
   components :{
-    Wacom
+    Wacom,
+    Confirm
   },
   data () {
     return {
