@@ -28,24 +28,24 @@
           <div class="text-center name">김정윤</div>
           <div class="text-center english-name">Twinkle Stage</div>
         </div>
-        <ul class="infomation d-flex">
-          <li class="info">
-            <div>내 그림</div>
-            <div>0</div>
-          </li>
-          <li class="info">
-            <div>공개한 그림</div>
-            <div>0</div>
-          </li>
-          <li class="info">
-            <div>조회 수</div>
-            <div>0</div>
-          </li>
-          <li class="info">
-            <div>좋아요 수</div>
-            <div>0</div>
-          </li>
-        </ul>
+<!--        <ul class="infomation d-flex">-->
+<!--          <li class="info">-->
+<!--            <div>내 그림</div>-->
+<!--            <div>0</div>-->
+<!--          </li>-->
+<!--          <li class="info">-->
+<!--            <div>공개한 그림</div>-->
+<!--            <div>0</div>-->
+<!--          </li>-->
+<!--          <li class="info">-->
+<!--            <div>조회 수</div>-->
+<!--            <div>0</div>-->
+<!--          </li>-->
+<!--          <li class="info">-->
+<!--            <div>좋아요 수</div>-->
+<!--            <div>0</div>-->
+<!--          </li>-->
+<!--        </ul>-->
       </div>
       <div class="tab-section">
         <b-tabs justified>
@@ -73,16 +73,10 @@
                       <span>ALL</span>
                     </b-button>
                     <b-button class="drawing_button">
-                      <img src="@/assets/images/common/all.png" alt="모든이미지" class="img">
-                      <span>Pablo Drawing</span>
+                      <span>Pablo Pablo Letter(60)</span>
                     </b-button>
                     <b-button class="classic_button">
-                      <img src="@/assets/images/common/all.png" alt="모든이미지" class="img" style="width: 1.57rem; height: 2rem;">
-                      <span>Pablo Classic</span>
-                    </b-button>
-                    <b-button class="canvas_button">
-                      <img src="@/assets/images/common/all.png" alt="모든이미지" class="img">
-                      <span>Canvas</span>
+                      <span>Free Drawing(40)</span>
                     </b-button>
                 </div>
                 <div class="float-right btn-rigth">
@@ -199,16 +193,10 @@
                   <span>ALL</span>
                 </b-button>
                 <b-button class="drawing_button">
-                  <img src="@/assets/images/common/all.png" alt="모든이미지" class="img">
-                  <span>Pablo Drawing</span>
+                  <span>Pablo Letter(60)</span>
                 </b-button>
                 <b-button class="classic_button">
-                  <img src="@/assets/images/common/all.png" alt="모든이미지" class="img" style="width: 1.57rem; height: 2rem;">
-                  <span>Pablo Classic</span>
-                </b-button>
-                <b-button class="canvas_button">
-                  <img src="@/assets/images/common/all.png" alt="모든이미지" class="img">
-                  <span>Canvas</span>
+                  <span>Free Drawing(40)</span>
                 </b-button>
               </div>
               <div class="float-right btn-rigth">
@@ -393,16 +381,10 @@
               <span>ALL</span>
             </b-button>
             <b-button class="drawing_button">
-              <img src="@/assets/images/common/all.png" alt="모든이미지" class="img">
               <span>Pablo Drawing</span>
             </b-button>
             <b-button class="classic_button">
-              <img src="@/assets/images/common/all.png" alt="모든이미지" class="img" style="width: 1.57rem; height: 2rem;">
-              <span>Pablo Classic</span>
-            </b-button>
-            <b-button class="canvas_button">
-              <img src="@/assets/images/common/all.png" alt="모든이미지" class="img">
-              <span>Canvas</span>
+              <span>Free Drawing</span>
             </b-button>
           </div>
           <ul class="scroll d-flex">
