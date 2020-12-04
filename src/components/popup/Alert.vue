@@ -5,17 +5,14 @@
       <template #modal-header>
         <div v-if="type==='subject'" class="symbol"><img src="@/assets/images/common/drawing@2x.png" alt=""></div>
       </template>
-
       <template v-if="type==='subject'" >
         <p class="text text-md">{{boldText}}</p>
         <p class="text-sm">{{text}}</p>
       </template>
-
       <template v-if="type==='subject'" #modal-footer="{ cancel }">
         <b-button class="btn btn-block btn-black" @click="cancel()">{{ buttonText }}</b-button>
       </template>
     </b-modal>
-
     <b-modal v-if="type==='video'" centered hide-footer modal-class="videoReviewPopup" v-model="showAlert">
       <template  #default="{ hide }">
         <div class="bg"><img src="@/assets/images/temp/sample_img_02.png" alt=""></div>
@@ -59,7 +56,6 @@ export default {
     return{
       showAlert : false,
       type : "",
-      topic : "",
       modalShow : true
     }
   },
@@ -81,7 +77,6 @@ export default {
     toggleAlert(type,topic){
       this.showAlert = !this.showAlert;
       this.type = type;
-      this.topic= topic;
     },
   }
 }

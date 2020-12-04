@@ -7,31 +7,17 @@
                  :cancelText="'닫기'"
                  :backText ="'영상이 아직 끝나지 않았습니다.'"
         >
-          <button @click="showConfirm(slotProps,1)"><img src="@/assets/images/common/arrow_left@2x.png" alt=""></button>
+          <button @click="showPopup.confirm(slotProps,'goToBack')"><img src="@/assets/images/common/arrow_left@2x.png" alt=""></button>
         </Confirm>
-<!--        <b-button variant="black" @click="goToBack">버튼</b-button>-->
       </div>
       <div class="flex-box">
         <Alert v-slot="slotProps"
                 :boldText="`학습주제`"
                 :text="`학습주제`"
                 :buttonText ="'닫기'">
-        <button class="btn-right" @click="showAlert(slotProps,1)">
+        <button class="btn-right" @click="showPopup.alert(slotProps,'subject')">
           <span class="img"><img src="@/assets/images/common/ic-drawing@2x.png" alt=""></span>
           <span class="tit">주제보기</span>
-<!--          <b-modal id="normalPopup2" centered modal-class="normalPopup">-->
-<!--            <template #modal-header>-->
-<!--              <div class="symbol"><img src="@/assets/images/common/drawing@2x.png" alt=""></div>-->
-<!--            </template>-->
-<!--            <p class="text text-md">학습 주제 영역입니다.<br/>-->
-<!--              학습 주제는 최대 세 문장까지<br/>-->
-<!--              가능합니다.</p>-->
-<!--            <p class="text-sm">생각 제시하는 생각 과제 제시하는 텍스트<br/>-->
-<!--              영역으로 최대 두줄 이상을 생각합니다.</p>-->
-<!--            <template #modal-footer="{ cancel }">-->
-<!--              <b-button class="btn btn-block btn-black" @click="cancel()">닫기</b-button>-->
-<!--            </template>-->
-<!--          </b-modal>-->
           </button>
         </Alert>
         <div class="box-close">
@@ -41,36 +27,6 @@
     </div>
     <div class="bg"><img src="@/assets/images/temp/sample_img_02.png" alt=""></div>
     <div class="dim">
-
-      <!-- s default -->
-<!--      <div class="inner">-->
-<!--        <div class="symbol-wrap">-->
-<!--          <div class="symbol"><img src="@/assets/images/common/Stage_Twinkle @2x.png" alt=""></div>-->
-<!--          <span class="text">Twinkle Stage 4</span></div>-->
-<!--        <div class="title">생각 제시하는<br/>-->
-<!--          생각 과제 제시하는<br/>-->
-<!--          텍스트 영역입니다.</div>-->
-<!--        <div class="btn-group">-->
-<!--          <b-button class="btn btn-dark"><i class="ic-play"><img src="@/assets/images/common/play@2x.png" alt=""></i><span>재생하기</span></b-button>-->
-<!--        </div>-->
-<!--      </div>-->
-      <!-- e default -->
-
-      <!--뒤로가기-->
-<!--      <b-modal id="goBackPopup" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">-->
-<!--        <template #modal-header>-->
-<!--          <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt="" class="img-m"></div>-->
-<!--        </template>-->
-<!--        <p class="text">뒤로 가시겠어요?<br/>-->
-<!--        </p>-->
-<!--        <p class="text-sm">영상이 아직 끝나지 않았습니다.</p>-->
-<!--        <template #modal-footer="{ cancel }">-->
-<!--          <router-link to="PabloStudy2" class="btn btn-gray btn-half">뒤로 갈래요</router-link>-->
-<!--          &lt;!&ndash;        <b-button variant="gray" class="btn-half">뒤로 갈래요</b-button>&ndash;&gt;-->
-<!--          <b-button variant="black" class="btn-half" @click="cancel()">닫기</b-button>-->
-<!--        </template>-->
-<!--      </b-modal>-->
-      <!-- s 영상 재생 중_화면 탭 시 -->
       <div class="inner">
         <div class="video">
           <p class="text">생각 제시하는 생각 과제 제시하는 텍스트 영역입니다.</p>
@@ -79,20 +35,8 @@
                    :completeText ="'다 보셨나요? 영상은 다음단계에서도 볼 수 있어요'"
                     :ok-text="'넘어갈게요'"
                   :cancel-text="'다시 볼래요'">
-            <b-button @click="showConfirm(slotProps,2)" style="position: absolute; top: 200px; left: 350px;">시청 완료</b-button>
+            <b-button @click="showPopup.confirm(slotProps,'Complete')" style="position: absolute; top: 200px; left: 350px;">시청 완료</b-button>
           </Confirm>
-<!--          <b-modal id="normalPopup1" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">-->
-<!--            <template #modal-header>-->
-<!--              <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>-->
-<!--            </template>-->
-<!--            <p class="text">다 보셨나요? 영상은 다음<br/>-->
-<!--              단계에서도 볼 수 있어요</p>-->
-<!--            <p class="text-sm">보지 못한 부분이 있어도 괜찮아요 :)</p>-->
-<!--            <template #modal-footer="{ cancel }">-->
-<!--              <b-button variant="gray" class="btn-half"  @click="cancel()">다시 볼래요</b-button>-->
-<!--              <router-link to="/thoughtRecords" class="btn btn-black btn-half">넘어갈게요</router-link>-->
-<!--            </template>-->
-<!--          </b-modal>-->
           <div class="play-wrap">
             <button class="btn-rewind"><img src="@/assets/images/common/5s_rewind@2x.png" alt=""></button>
             <button class="btn-pause"><img src="@/assets/images/common/pause@2x.png" alt=""></button>
@@ -129,18 +73,6 @@ export default {
     this.$EventBus.$on('next',this.goToNext)
   },
   methods : {
-    showConfirm(slotProps,number){
-      if(number===1){
-        slotProps.toggleConfirm('goToBack','pabloStudy3');
-      }else if(number===2){
-        slotProps.toggleConfirm('Complete','pabloStudy3');
-      }
-    },
-    showAlert(slotProps,number){
-      if(number===1){
-        slotProps.toggleAlert('subject','PabloStudy3')
-      }
-    },
     goToBack(){
       this.$router.push('/PabloStudy2')
     },

@@ -63,9 +63,6 @@ export default {
     return{
       showConfirm : false,
       type : "",
-      topic : "",
-      text : {
-      },
     }
   },
   props:{
@@ -94,7 +91,6 @@ export default {
     toggleConfirm(type,topic){
       this.showConfirm  = !this.showConfirm;
       this.type = type;
-      this.topic = topic
     },
     goToBack(){
       this.$EventBus.$emit('back')
