@@ -4,28 +4,22 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '@/views/Home'
 import Canvas from '@/views/Canvas'
-import Agreement from '@/views/Agreement'
-import LoadingSpinnerWaiting from '@/views/LoadingSpinnerWaiting'
-import TestingResult from '@/views/TestingResult'
-import Layout from '@/views/Layout'
+import Agreement from '@/views/useLater/Agreement'
+import LoadingSpinnerWaiting from '@/views/useLater/LoadingSpinnerWaiting'
+import TestingResult from '@/views/diagnose/TestingResult'
 import PabloMain from '@/views/PabloMain'
-import PabloStudy1 from '@/views/PabloStudy1'
-import PabloStudy2 from '@/views/PabloStudy2'
-import PabloStudy3 from '@/views/PabloStudy3'
-import PabloStudy4 from '@/views/PabloStudy4'
-import PabloStudy5 from '@/views/PabloStudy5'
-import PabloPopup1 from '@/views/PabloPopup1'
-import PabloPopup2 from '@/views/PabloPopup2'
-import thoughtRecords from '@/views/thoughtRecords'
-import PabloStudy6 from '@/views/PabloStudy6'
-import videoReview from '@/views/videoReview'
-import peopleThinking from '@/views/peopleThinking'
-import pabloCanvas from '@/views/pabloCanvas'
+import PabloStudy1 from '@/views/letter/Intro'
+import PabloStudy3 from '@/views/letter/Watching'
+import PabloPopup1 from '@/views/letter/PabloPopup1'
+import PabloPopup2 from '@/views/letter/PabloPopup2'
+import thoughtRecords from '@/views/letter/Recording'
+import PabloStudy6 from '@/views/letter/Completion'
+import peopleThinking from '@/views/letter/Listening'
 import List from '@/views/List'
 
 
-import MainGallery from '@/views/MainGallery'
-import MainGalleryDetail from '@/views/MainGalleryDetail'
+import MainGallery from '@/views/myGallery/MainGallery'
+import MainGalleryDetail from '@/views/myGallery/MainGalleryDetail'
 
 
 Vue.use(VueRouter)
@@ -71,11 +65,6 @@ const routes = [
     component: TestingResult
   },
   {
-    path: '/Layout',
-    name: 'Layout',
-    component: Layout
-  },
-  {
     path: '/PabloMain',
     name: 'PabloMain',
     component: PabloMain
@@ -86,24 +75,9 @@ const routes = [
     component: PabloStudy1
   },
   {
-    path: '/PabloStudy2',
-    name: 'PabloStudy2',
-    component: PabloStudy2
-  },
-  {
     path: '/PabloStudy3',
     name: 'PabloStudy3',
     component: PabloStudy3
-  },
-  {
-    path: '/PabloStudy4',
-    name: 'PabloStudy4',
-    component: PabloStudy4
-  },
-  {
-    path: '/PabloStudy5',
-    name: 'PabloStudy5',
-    component: PabloStudy5
   },
   {
     path: '/PabloPopup1',
@@ -126,11 +100,6 @@ const routes = [
     component: PabloStudy6
   },
   {
-    path: '/videoReview',
-    name: 'videoReview',
-    component: videoReview
-  },
-  {
     path: '/peopleThinking',
     name: 'peopleThinking',
     component: peopleThinking
@@ -144,16 +113,7 @@ const routes = [
     path:'/MainGalleryDetail',
     name:'MainGalleryDetail',
     component: MainGalleryDetail
-  },
-
-
-
-  // {
-  //   path: '/pabloCanvas',
-  //   name: 'pabloCanvas',
-  //   component: pabloCanvas,
-  //   beforeEnter : requireAuth()
-  // }
+  }
 ]
 
 const router = new VueRouter({

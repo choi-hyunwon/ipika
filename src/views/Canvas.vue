@@ -11,19 +11,6 @@
     </Confirm>
     <div v-if="page === 'diagnose'" class="header canvas">
 
-<!--        <b-modal v-if="page === 'diagnose'" :visible="timeOver" id="timeoverPopup" centered title="진단테스트 : 타임오버" modal-class="normalPopup">-->
-<!--          <template #modal-header>-->
-<!--            <div class="symbol"><img src="@/assets/images/common/timer@2x.png" alt=""></div>-->
-<!--          </template>-->
-<!--          <p class="text">시간이 초과되었어요!<br/>-->
-<!--            제출하시겠어요?</p>-->
-<!--          <p class="text-sm">다시 그리면 먼저 그린 그림은 사라져요</p>-->
-<!--          <template #modal-footer="{ cancel }">-->
-<!--            <b-button @click="clear" variant="blue" class="btn-half">다시 그릴래요!</b-button>-->
-<!--            <b-button @click="exportPNG" variant="black" class="btn-half">제출할게요</b-button>-->
-<!--          </template>-->
-<!--        </b-modal>-->
-
       <div class="timer red"><!-- 1분 미만일 경우, red 클래스 추가 -->
         <!--        <div class="img"><img src="@/assets/images/common/timer-black@2x.png" alt=""></div>-->
         <div class="img"><img src="@/assets/images/common/timer@2x.png" alt=""></div> <!-- 1분 미만일 경우 -->

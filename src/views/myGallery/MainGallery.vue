@@ -137,9 +137,9 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import myGalleryPicture from '@/components/myGalleryPicture'
-import myGalleryVoice from '@/components/myGalleryVoice'
-import myGalleryInfo from '@/components/myGalleryInfo'
+import myGalleryPicture from '@/components/myGallery/myGalleryPicture'
+import myGalleryVoice from '@/components/myGallery/myGalleryVoice'
+import myGalleryInfo from '@/components/myGallery/myGalleryInfo'
 
 export default {
   name: 'MainGallery',

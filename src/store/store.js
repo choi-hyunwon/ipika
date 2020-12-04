@@ -19,7 +19,7 @@ export default new Vuex.Store({
    */
   state: {
     isDummy : false,
-    diagnose : true,
+    diagnose : false,
 
     /**
      * userinfo는 단말기(안드로이드)기에서 받아온다.
