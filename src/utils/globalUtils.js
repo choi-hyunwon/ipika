@@ -1,6 +1,11 @@
-
-export class TTS {
-  speak(text){
+export class GlobalUtils {
+  confirm(slotProps,type) {
+    slotProps.toggleConfirm(type);
+  }
+  alert(slotProps,type){
+    slotProps.toggleAlert(type)
+  }
+  tts(text){
     if (typeof SpeechSynthesisUtterance === "undefined" || typeof window.speechSynthesis === "undefined") {
       alert("이 브라우저는 음성 합성을 지원하지 않습니다.")
       return

@@ -33,7 +33,7 @@
           <Alert v-slot="slotProps"
                  :boldText="`서비스 이용약관`"
                  :text="`서비스 이용약관 안내 문구`">
-            <button class="btn btn-link" @click="showPopup.alert(slotProps,'agreement1')">상세보기</button>
+            <button class="btn btn-link" @click="globalUtils.alert(slotProps,'agreement1')">상세보기</button>
           </Alert>
         </div>
       </div>
@@ -49,7 +49,7 @@
           <Alert v-slot="slotProps"
                  :boldText="`마케팅 관련 정보 수신 동의`"
                  :text="`마케팅 관련 정보 수신 동의 안내 문구`">
-          <button class="btn btn-link" @click="showPopup.alert(slotProps,'agreement1')">상세보기</button>
+          <button class="btn btn-link" @click="globalUtils.alert(slotProps,'agreement1')">상세보기</button>
           </Alert>
         </div>
       </div>
@@ -59,7 +59,7 @@
                :text="`환영해요 길동아! </br> 드로잉을 시작해볼까요?`">
         <span class="btn btn-gray btn-block"
               :class="{'disabled': !check.essential}"
-              @click=" !check.essential ? '' : showPopup.alert(slotProps,'agreement2')">드로잉 테스트 시작하기</span>
+              @click=" !check.essential ? '' : globalUtils.alert(slotProps,'agreement2')">드로잉 테스트 시작하기</span>
         </Alert>
       </div>
     </div>
