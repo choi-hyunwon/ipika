@@ -7,14 +7,14 @@
                :cancelText="'닫기'"
                :text ="'지워진 녹음은 다시 들을 수 없어요'"
       >
-      <button class="symbol" @click="showPopup.confirm(slotProps,'goToBack')">
+      <button class="symbol" @click="globalUtils.confirm(slotProps,'goToBack')">
         <img src="@/assets/images/common/arrow_left@2x.png" alt="">
       </button>
       </Confirm>
 
       <div class="flex-box">
         <Alert v-slot="slotProps">
-          <button @click="showPopup.alert(slotProps,'video')" class="btn-right">
+          <button @click="globalUtils.alert(slotProps,'video')" class="btn-right">
             <span class="img"><img src="@/assets/images/common/ic-play@2x.png" alt=""></span>
             <span class="tit">영상보기</span>
           </button>
@@ -24,7 +24,7 @@
                 :boldText="'주제보기'"
                 :text="'주제보기'"
                 :buttonText="'닫기'">
-          <button @click="showPopup.alert(slotProps,'subject')" class="btn-right">
+          <button @click="globalUtils.alert(slotProps,'subject')" class="btn-right">
             <span class="img"><img src="@/assets/images/common/ic-drawing@2x.png" alt=""></span>
             <span class="tit">주제보기</span>
           </button>

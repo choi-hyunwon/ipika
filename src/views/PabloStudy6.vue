@@ -5,7 +5,7 @@
               :boldText="'정말 뒤로 가시겠어요?'"
               :okText="'네'"
               :cancelText="'아니요'">
-        <button @click="showPopup.confirm(slotProps,'goToBack')" class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt="">
+        <button @click="globalUtils.confirm(slotProps,'goToBack')" class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt="">
         </button>
       </Confirm>
       <div class="box-close">

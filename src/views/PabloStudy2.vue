@@ -6,7 +6,7 @@
                   :cancelText="'아니요'"
                   :okText="'네'"
         >
-        <button @click="showPopup.confirm(slotProps,'goToBack')"><img src="@/assets/images/common/arrow_left@2x.png" alt="" ></button>
+        <button @click="globalUtils.confirm(slotProps,'goToBack')"><img src="@/assets/images/common/arrow_left@2x.png" alt="" ></button>
         </Confirm>
       </div>
       <div class="flex-box">
@@ -15,7 +15,7 @@
                   :text="`생각 제시하는 생각 과제 제시하는 텍스트 \n 영역으로 최대 두줄 이상을 생각합니다.`"
                   :buttonText="'닫기'"
           >
-            <button class="btn-right" @click="showPopup.alert(slotProps,'subject')">
+            <button class="btn-right" @click="globalUtils.alert(slotProps,'subject')">
             <span class="img"><img src="@/assets/images/common/ic-drawing@2x.png" alt=""></span>
             <span class="tit">주제보기</span>
             </button>

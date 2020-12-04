@@ -5,13 +5,13 @@
                cancelText="아니요"
                okText="네"
                 >
-        <button class="symbol" @click="showPopup.confirm(slotProps,'goToBack')"><img src="@/assets/images/common/arrow_left@2x.png" alt="">
+        <button class="symbol" @click="globalUtils.confirm(slotProps,'goToBack')"><img src="@/assets/images/common/arrow_left@2x.png" alt="">
         </button>
       </Confirm>
 
       <div class="flex-box">
         <Alert v-slot="slotProps">
-        <button @click="showPopup.alert(slotProps,'video')" class="btn-right">
+        <button @click="globalUtils.alert(slotProps,'video')" class="btn-right">
           <span class="img"><img src="@/assets/images/common/ic-play@2x.png" alt=""></span>
           <span class="tit">영상보기</span>
         </button>
@@ -21,7 +21,7 @@
               :boldText="'주제보기'"
                :text ="'주제보기'"
               :buttonText = "'닫기'">
-          <button class="btn-right" @click="showPopup.alert(slotProps,'subject')">
+          <button class="btn-right" @click="globalUtils.alert(slotProps,'subject')">
             <span class="img"><img src="@/assets/images/common/ic-drawing@2x.png" alt=""></span>
             <span class="tit">주제보기</span>
           </button>
@@ -58,7 +58,7 @@
       </div>
     </div>
     <Alert v-slot="slotProps">
-      <button @click="showPopup.alert(slotProps,'video')" style="position: absolute; top: 200px; left: 700px;">다시보기 팝업</button>
+      <button @click="globalUtils.alert(slotProps,'video')" style="position: absolute; top: 200px; left: 700px;">다시보기 팝업</button>
     </Alert>
   </div>
 </template>
