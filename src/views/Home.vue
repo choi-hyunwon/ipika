@@ -12,7 +12,7 @@
       <img src="@/assets/images/common/Group 1388@2x.png" alt="" class="img">
       </div>
         <div class="btn-group">
-          <router-link to="/Agreement" class="btn btn-dark">시작하기</router-link>
+          <router-link to="/PabloStudy1" class="btn btn-dark">시작하기</router-link>
         </div>
       </div>
   </div>
