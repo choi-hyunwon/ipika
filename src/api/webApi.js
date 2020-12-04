@@ -11,9 +11,16 @@ export default class WebApi {
   request (url, config) {
     console.error(url)
     console.error(config)
+
+
+
     return axios({
       url: `http://ec2-15-165-50-157.ap-northeast-2.compute.amazonaws.com:8996/${url}`,
-
+      headers: {
+        user_id: store.getters.getSession.user_id,
+        user_auth_key: store.getters.getSession.user_auth_key,
+        device_type: store.getters.getSession.device_type,
+      },
       ...config
     }).then(result => result.data)
       .catch(error => {
@@ -32,14 +39,9 @@ export default class WebApi {
    *
    */
   getMainmenu (options) {
-    // console.log(store.getters.getSession)
     return this.request('api/main/menu', {
       method: 'GET',
-      data: {
-        user_id: store.getters.getSession.user_id,
-        user_auth_key: store.getters.getSession.user_auth_key,
-        device_type: store.getters.getSession.device_type
-      }
+      data : {}
     })
   }
   /**
@@ -51,14 +53,7 @@ export default class WebApi {
   getSubject (options) {
     return this.request('api/test/subject', {
       method: 'GET',
-      headers: {
-        user_id: store.getters.getSession.user_id,
-        user_auth_key: store.getters.getSession.user_auth_key,
-        device_type: store.getters.getSession.device_type,
-      },
-      data: {
-        content_language: store.getters.getSession.Content_Language
-      }
+      data: {}
     })
   }
 
@@ -75,14 +70,9 @@ export default class WebApi {
   getResult (options) {
     return this.request('api/test/result', {
       method: 'GET',
-      data: {
-        user_id: store.getters.getSession.user_id,
-        user_auth_key: store.getters.getSession.user_auth_key,
-        device_type: store.getters.getSession.device_type
-      }
+      data : {}
     })
   }
-
 
 
   /**
@@ -99,11 +89,8 @@ export default class WebApi {
   getUesrGallery (options) {
     return this.request('api/users/gallery', {
       method: 'GET',
-      data: {
-        user_id: store.getters.getSession.user_id,
-        user_auth_key: store.getters.getSession.user_auth_key,
-        device_type: store.getters.getSession.device_type
-      }
+      data : {}
+
     })
   }
   /**
@@ -115,11 +102,7 @@ export default class WebApi {
   getUesrGalleryMypicture (options) {
     return this.request('api/users/gallery/mypicture', {
       method: 'GET',
-      data: {
-        user_id: store.getters.getSession.user_id,
-        user_auth_key: store.getters.getSession.user_auth_key,
-        device_type: store.getters.getSession.device_type
-      }
+      data: {}
     })
   }
   /**
@@ -132,11 +115,7 @@ export default class WebApi {
   getUesrGalleryBackground (options) {
     return this.request('api/users/gallery/background', {
       method: 'POST',
-      data: {
-        user_id: store.getters.getSession.user_id,
-        user_auth_key: store.getters.getSession.user_auth_key,
-        device_type: store.getters.getSession.device_type
-      }
+      data: {}
     })
   }
   /**
@@ -148,12 +127,7 @@ export default class WebApi {
   getUesrGalleryDetele (options) {
     return this.request('api/users/gallery/delete', {
       method: 'DELETE',
-      data: {
-        user_id: store.getters.getSession.user_id,
-        user_auth_key: store.getters.getSession.user_auth_key,
-        device_type: store.getters.getSession.device_type,
-        pictureId : options.pictureId
-      }
+      data: {}
     })
   }
 }
