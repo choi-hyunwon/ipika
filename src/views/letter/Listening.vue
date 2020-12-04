@@ -104,7 +104,7 @@ export default {
   },
   methods : {
     goToBack(){
-      this.$router.push('/thoughtRecords')
+      this.$router.push('/Recording')
     }
   }
 }

@@ -13,7 +13,7 @@
         </ul>
         <ul class="title-list">
           <li class="active"><!-- badge-new / badge-start -->
-            <router-link to="/PabloStudy1">
+            <router-link to="/Intro">
               <span class="num">01</span>
               <span class="title">Pablo Letter</span>
             </router-link>

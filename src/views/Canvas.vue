@@ -9,67 +9,8 @@
     <Confirm v-slot="slotProps">
       <div :visible="showConfirm(slotProps,2)" ></div>
     </Confirm>
-    <div v-if="page === 'diagnose'" class="header canvas">
 
-      <div class="timer red"><!-- 1분 미만일 경우, red 클래스 추가 -->
-        <!--        <div class="img"><img src="@/assets/images/common/timer-black@2x.png" alt=""></div>-->
-        <div class="img"><img src="@/assets/images/common/timer@2x.png" alt=""></div> <!-- 1분 미만일 경우 -->
-        <div class="time">{{timeRemains}}</div>
-      </div>
-      <div class="symbol">
-        <span class="img"><img src="@/assets/images/common/Symbol@2x.png" alt=""></span>
-        <span class="text">{{subject.subject}}</span>
-      </div>
-      <div class="box-close">
-        <!--<router-link to="/" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>-->
-        <!-- TODO: inline-style 추가함 확인 필요 -->
-        <button @click="close" style="padding-top: 0;" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></button>
-      </div>
-    </div>
-
-    <!-- 학습 -->
-    <div v-if="page === 'study'" class="header ivory">
-
-      <!--<router-link to="/thoughtRecords" class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt=""></router-link>-->
-      <Confirm v-slot="slotProps"
-               :okText="'뒤로 갈래요'"
-               :cancelText="'닫기'"
-               :backText="'그림은 저장되지 않습니다.'"
-      >
-
-      <button class="symbol" @click="showConfirm(slotProps,1)">
-          <img src="@/assets/images/common/arrow_left@2x.png" alt="">
-        </button>
-      </Confirm>
-
-      <div class="btn-wrap">
-        <button><img src="@/assets/images/common/img_delete@2x.png" alt=""></button>
-        <button><img src="@/assets/images/common/img_invisible@2x.png" alt=""></button>
-        <div class="time">{{ timeRemains }}</div>
-      </div>
-      <div class="flex-box">
-        <button v-b-modal.videoReviewPopup class="btn-right" @click="popUpOpen" >
-          <span class="img"><img src="@/assets/images/common/ic-play@2x.png" alt=""></span>
-          <span class="tit">영상보기</span>
-        </button>
-
-        <button v-b-modal.watchSubject class="btn-right" @click="popUpOpen">
-          <span class="img"><img src="@/assets/images/common/drawing@2x.png" alt=""></span>
-          <span class="tit">주제보기</span>
-        </button>
-        <button v-b-modal.studyBookPopup class="btn-right" @click="popUpOpen">
-          <span class="img"><img src="@/assets/images/common/ic-img@2x.png" alt="" ></span>
-          <span class="tit">배경교재</span>
-        </button>
-        <div class="box-close">
-          <!--<router-link to="" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>-->
-
-          <!-- TODO: inline-style 추가함 확인 필요 -->
-          <button @click="close" style="padding-top: 0;" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></button>
-        </div>
-      </div>
-    </div>
-
+    <CanvasHeader></CanvasHeader>
     <Wacom :isLoading="isLoading" :drawer="drawer"></Wacom>
 
 
@@ -248,13 +189,15 @@
 import { mapActions, mapGetters } from 'vuex'
 import Wacom from '@/components/Wacom'
 import Confirm from '@/components/popup/Confirm'
+import CanvasHeader from '@/components/CanvasHeader'
 
 
 export default {
   name: 'Canvas',
   components :{
     Wacom,
-    Confirm
+    Confirm,
+    CanvasHeader
   },
   data () {
     return {
@@ -332,10 +275,10 @@ export default {
     goNext() {
       this.reset()
       if (this.page === 'diagnose') {
-        this.$router.push('/LoadingSpinnerWaiting')
+        this.$router.push('/TestingResult')
       }
       else if (this.page === 'study') {
-        this.$router.push('/PabloStudy6')
+        this.$router.push('/Completion')
       }
     },
     goBack(){
@@ -366,13 +309,13 @@ export default {
       this.time = 120
     },
     exportPNG(e){
-      WILL.getImageCanvas().toBlob(function(blob) {
+      /*WILL.getImageCanvas().toBlob(function(blob) {
         const href = URL.createObjectURL(blob);
         console.log(href)
-        /**
+        /!**
          * todo : API날리기
-         */
-      });
+         *!/
+      });*/
       this.goNext()
     },
     goToBack(){
@@ -401,26 +344,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.header {
-  .btn-wrap {
-    position: absolute;
-    display: inline-block;
-    top: 3rem;
-    left: 12rem;
-    button {
-      display: inline-block;
-      width: 12.7rem;
-      height: 6rem;
-      img {
-        width: 100%;
-        height: 100%;
-      }
-      &:first-child {
-        margin-right: 1.2rem;
-      }
-    }
-  }
-}
 .guide {
   position: absolute;
   width: 192rem;

@@ -56,7 +56,7 @@
         <button><img src="@/assets/images/common/refresh_default@2x.png" alt=""></button><!-- 새로고침 버튼 -->
       </div>
       <div class="btn-area">
-        <router-link to="/peopleThinking" class="btn btn-dark">다했어요!</router-link>
+        <router-link to="/Listening" class="btn btn-dark">다했어요!</router-link>
         <button class="btn btn-dark disabled">다했어요!</button>
       </div>
     </div>
@@ -89,7 +89,7 @@ export default {
   methods : {
 
     goToBack(){
-      this.$router.push('/PabloStudy3')
+      this.$router.push('/Watching')
     }
   }
 }

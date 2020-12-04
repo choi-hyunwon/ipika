@@ -75,10 +75,10 @@ export default {
   },
   methods : {
     goToBack(){
-      this.$router.push('/PabloStudy2')
+      this.$router.push('/Intro')
     },
     goToNext(){
-      this.$router.push('/thoughtRecords')
+      this.$router.push('/Recording')
     }
 
   }
