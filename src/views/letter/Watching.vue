@@ -1,6 +1,9 @@
 <template>
   <div class="wrap bg-ivory">
-    <div class="header ivory">
+    <!-- videojs-test -->
+    <Player :options="playerOptions"/>
+
+    <!--<div class="header ivory">
       <div class="symbol">
         <Confirm v-slot="slotProps"
                  :okText="'뒤로 갈래요'"
@@ -55,20 +58,38 @@
           </div>
           </div>
         </div>
-      </div>
-      <!-- e 영상 재생 중_화면 탭 시 -->
-    </div>
+      </div>-->
+    <!-- e 영상 재생 중_화면 탭 시 -->
+
+  </div>
 </template>
 
 <script>
 import Confirm from '@/components/popup/Confirm'
 import Alert from '@/components/popup/Alert'
+
+import Player from '@/components/letter/Player'
+// import video from '@/assets/videos/file_example_MP4_640_3MG.mp4'
+
 export default {
   name: 'PabloStudy3',
-  components: { Alert, Confirm },
-  // created(){
-  //   setTimeout( ()=> { this.$router.push({ path: '/PabloPopup1'})},7000);
-  // },
+  components: { Alert, Confirm, Player },
+  data(){
+    return {
+      playerOptions: {
+        autoplay: true,
+        controls: true,
+        sources: [
+          {
+            src: "https://file-examples-com.github.io/uploads/2017/04/file_example_MP4_640_3MG.mp4",
+            // src: "/videos/file_example_MP4_640_3MG.mp4",
+            type: "video/mp4"
+          }
+        ],
+        width: '500'
+      }
+    }
+  },
   created () {
     this.$EventBus.$on('back',this.goToBack)
     this.$EventBus.$on('next',this.goToNext)
