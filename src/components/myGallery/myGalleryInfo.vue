@@ -65,13 +65,13 @@ export default {
   },
   mounted () {
     this.fetchResult();
-    this.fetchUesrGallery();
+    this.fetchUserGallery();
   },
 
   methods: {
     ...mapActions({
       getResult: "getResult",
-      getUesrGallery: "getUesrGallery"
+      getUserGallery: "getUserGallery"
     }),
     fetchResult(){
       this.getResult()
@@ -80,10 +80,10 @@ export default {
           if(result !== undefined) this.result = result;
         })
     },
-    fetchUesrGallery(){
-      this.getUesrGallery()
+    fetchUserGallery(){
+      this.getUserGallery()
         .then(result => {
-          console.log('fetchUesrGallery :', result)
+          console.log('fetchUserGallery :', result)
           if(result !== undefined) this.galleryInfo = result;
         })
     },

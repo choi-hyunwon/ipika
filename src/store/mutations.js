@@ -14,10 +14,10 @@ export const mutations = {
   setResult (state, result) {
     state.result = result
   },
-  setUesrGallery (state, userGallery) {
+  setUserGallery (state, userGallery) {
     state.userGallery = userGallery
   },
-  setUesrGalleryMypicture (state, mypicture) {
-    state.uesrGalleryMypicture = mypicture
+  setUserGalleryMypicture (state, mypicture) {
+    state.UserGalleryMypicture = mypicture
   }
 }

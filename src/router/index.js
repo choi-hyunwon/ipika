@@ -18,8 +18,8 @@ import peopleThinking from '@/views/letter/Listening'
 import List from '@/views/List'
 
 
-import MainGallery from '@/views/myGallery/MainGallery'
-import MainGalleryDetail from '@/views/myGallery/MainGalleryDetail'
+import MainGallery from '@/views/myGallery/MyGallery'
+import MainGalleryDetail from '@/views/myGallery/MyGalleryDetail'
 
 
 Vue.use(VueRouter)
@@ -105,14 +105,14 @@ const routes = [
     component: peopleThinking
   },
   {
-    path:'/MainGallery',
-    name:'MainGallery',
-    component: MainGallery
+    path:'/MyGallery',
+    name:'MyGallery',
+    component: MyGallery
   },
   {
-    path:'/MainGalleryDetail',
-    name:'MainGalleryDetail',
-    component: MainGalleryDetail
+    path:'/MyGalleryDetail',
+    name:'MyGalleryDetail',
+    component: MyGalleryDetail
   }
 ]
 

@@ -39,8 +39,14 @@ export default class WebApi {
    *
    */
   getMainmenu (options) {
+    // console.log(store.getters.getSession)
     return this.request('api/main/menu', {
       method: 'GET',
+      headers: {
+        user_id: store.getters.getSession.user_id,
+        user_auth_key: store.getters.getSession.user_auth_key,
+        device_type: store.getters.getSession.device_type
+      },
       data : {}
     })
   }
@@ -70,9 +76,15 @@ export default class WebApi {
   getResult (options) {
     return this.request('api/test/result', {
       method: 'GET',
+      headers: {
+        user_id: store.getters.getSession.user_id,
+        user_auth_key: store.getters.getSession.user_auth_key,
+        device_type: store.getters.getSession.device_type
+      }
       data : {}
     })
   }
+
 
 
   /**
@@ -89,6 +101,11 @@ export default class WebApi {
   getUesrGallery (options) {
     return this.request('api/users/gallery', {
       method: 'GET',
+      headers: {
+        user_id: store.getters.getSession.user_id,
+        user_auth_key: store.getters.getSession.user_auth_key,
+        device_type: store.getters.getSession.device_type
+      }
       data : {}
 
     })
@@ -102,6 +119,11 @@ export default class WebApi {
   getUesrGalleryMypicture (options) {
     return this.request('api/users/gallery/mypicture', {
       method: 'GET',
+      headers: {
+        user_id: store.getters.getSession.user_id,
+        user_auth_key: store.getters.getSession.user_auth_key,
+        device_type: store.getters.getSession.device_type
+      }
       data: {}
     })
   }
@@ -115,6 +137,11 @@ export default class WebApi {
   getUesrGalleryBackground (options) {
     return this.request('api/users/gallery/background', {
       method: 'POST',
+      headers: {
+        user_id: store.getters.getSession.user_id,
+        user_auth_key: store.getters.getSession.user_auth_key,
+        device_type: store.getters.getSession.device_type
+      }
       data: {}
     })
   }
@@ -124,9 +151,17 @@ export default class WebApi {
    * 마이갤러리 상단 부분의 정보 조회
    * pictureId:String-그림ID
    */
-  getUesrGalleryDetele (options) {
+  getUserGalleryDetele (options) {
     return this.request('api/users/gallery/delete', {
       method: 'DELETE',
+      headers: {
+        user_id: store.getters.getSession.user_id,
+        user_auth_key: store.getters.getSession.user_auth_key,
+        device_type: store.getters.getSession.device_type,
+      },
+      data: {
+        pictureId : options.pictureId
+      }
       data: {}
     })
   }
