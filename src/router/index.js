@@ -24,8 +24,8 @@ import pabloCanvas from '@/views/pabloCanvas'
 import List from '@/views/List'
 
 
-import MainGallery from '@/views/MainGallery'
-import MainGalleryDetail from '@/views/MainGalleryDetail'
+import MyGallery from '@/views/MyGallery'
+import MyGalleryDetail from '@/views/MyGalleryDetail'
 
 
 
@@ -128,6 +128,7 @@ const routes = [
     name: 'thoughtRecords',
     component: thoughtRecords
   },
+
   {
     path: '/PabloStudy6',
     name: 'PabloStudy6',
@@ -144,14 +145,14 @@ const routes = [
     component: peopleThinking
   },
   {
-    path:'/MainGallery',
-    name:'MainGallery',
-    component: MainGallery
+    path:'/MyGallery',
+    name:'MyGallery',
+    component: MyGallery
   },
   {
-    path:'/MainGalleryDetail',
-    name:'MainGalleryDetail',
-    component: MainGalleryDetail
+    path:'/MyGalleryDetail',
+    name:'MyGalleryDetail',
+    component: MyGalleryDetail
   },
 
 

@@ -54,7 +54,7 @@ export const actions = {
         })
     }
   },
-  getUesrGallery ({ commit }, options) {
+  getUserGallery ({ commit }, options) {
     if (store.getters.getIsDummy) {
       const data = {
         "userName": "궁예",
@@ -64,17 +64,17 @@ export const actions = {
         "totalViewCount": "352",
         "totalReactionCount": "34"
       }
-      commit('setUesrGallery', data)
+      commit('setUserGallery', data)
       return data
     } else {
-      return webApi.getUesrGallery(options)
+      return webApi.getUserGallery(options)
         .then(data => {
-          commit('setUesrGallery', data)
+          commit('setUserGallery', data)
           return data
         })
     }
   },
-  getUesrGalleryMypicture ({ commit }, options) {
+  getUserGalleryMypicture ({ commit }, options) {
     if (store.getters.getIsDummy) {
       const data =    {
         "pictures":[
@@ -138,24 +138,24 @@ export const actions = {
           },
         ]
       }
-      commit('setUesrGalleryMypicture', data)
+      commit('setUserGalleryMypicture', data)
       return data
     } else {
-      return webApi.getUesrGalleryMypicture(options)
+      return webApi.getUserGalleryMypicture(options)
         .then(data => {
-          commit('setUesrGalleryMypicture', data)
+          commit('setUserGalleryMypicture', data)
           return data
         })
     }
   },
-  getUesrGalleryBackground ({ commit }, options) {
-    return webApi.getUesrGalleryBackground(options)
+  getUserGalleryBackground ({ commit }, options) {
+    return webApi.getUserGalleryBackground(options)
       .then(data => {
         return data
       })
   },
-  getUesrGalleryDetele ({ commit }, options) {
-    return webApi.getUesrGalleryDetele(options)
+  getUserGalleryDetele ({ commit }, options) {
+    return webApi.getUserGalleryDetele(options)
       .then(data => {
         return data
       })

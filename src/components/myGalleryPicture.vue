@@ -37,7 +37,7 @@
       <div class="gallery-section">
         <ul class="gallerys">
           <li class="gallery-g" v-for="(item, index) in list">
-            <router-link :to="getURL(item)">
+            <router-link :to="getURL(item)" @click.prevent="log">
               <div class="gallery_img size-img">
                 <img :src="item.pictureUrl" alt="갤러리사진" class="img-m">
                 <div class="img_icon" v-b-modal.normalPopup1>
@@ -93,7 +93,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      userGalleryMypicture: 'getUesrGalleryMypicture'
+      userGalleryMypicture: 'getUserGalleryMypicture'
     }),
     isEmpty(){
       if (this.userGalleryMypicture.pictures.length === 0){
@@ -155,9 +155,10 @@ export default {
       }
     },
     getURL(item){
-      console.log(item.pictureId)
-
-      return 'MainGalleryDetail?' +'pictureId=' + item.pictureId + '&' +'pictureUrl=' + item.pictureUrl
+      return 'MyGalleryDetail?' +'pictureId=' + item.pictureId
+    },
+    log(e){
+      console.log(e.currentTarget)
     }
   }
 }

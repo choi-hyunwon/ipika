@@ -51,7 +51,7 @@ export default new Vuex.Store({
     subject: {},
     result: {},
     userGallery: {},
-    uesrGalleryMypicture: {},
+    UserGalleryMypicture: {},
   },
   /**
    * global로 사용하는 getters
@@ -79,8 +79,8 @@ export default new Vuex.Store({
     getUserGallery: state => {
       return state.userGallery
     },
-    getUesrGalleryMypicture: state => {
-      return state.uesrGalleryMypicture
+    getUserGalleryMypicture: state => {
+      return state.UserGalleryMypicture
     },
   },
   /**

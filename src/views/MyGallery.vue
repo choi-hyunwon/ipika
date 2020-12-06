@@ -1,7 +1,7 @@
 <template>
   <div class="wrap">
     <div class="header ivory bg-ivory d-flex">
-      <router-link to="/PabloMain" v-b-modal.goBackPopup class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt=""></router-link>
+      <a href="#" @click.prevent="goBack" v-b-modal.goBackPopup class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt=""></a>
       <div class="gallery-title">
         <router-link to="/">
           <span class="title-center">My Gallery</span>
@@ -142,7 +142,7 @@ import myGalleryVoice from '@/components/myGalleryVoice'
 import myGalleryInfo from '@/components/myGalleryInfo'
 
 export default {
-  name: 'MainGallery',
+  name: 'MyGallery',
   components: {
     myGalleryPicture,
     myGalleryVoice,
@@ -161,18 +161,18 @@ export default {
   computed: {
     ...mapGetters({
       session: 'getSession',
-      uesrGalleryMypicture: 'getUesrGalleryMypicture'
+      UserGalleryMypicture: 'getUserGalleryMypicture'
     })
   },
   mounted () {
-    this.fetchUesrGalleryMypicture();
+    this.fetchUserGalleryMypicture();
   },
   methods: {
     ...mapActions({
-      getUesrGallery : 'getUesrGallery',
-      getUesrGalleryMypicture: 'getUesrGalleryMypicture',
-      getUesrGalleryBackground: 'getUesrGalleryBackground',
-      getUesrGalleryDetele: 'getUesrGalleryDetele'
+      getUserGallery : 'getUserGallery',
+      getUserGalleryMypicture: 'getUserGalleryMypicture',
+      getUserGalleryBackground: 'getUserGalleryBackground',
+      getUserGalleryDetele: 'getUserGalleryDetele'
     }),
     settingPopup () {
       if (!this.myTab.empty) {
@@ -181,13 +181,16 @@ export default {
         this.$bvModal.show('galleryBgChange')
       }
     },
-    fetchUesrGalleryMypicture(){
-      this.getUesrGalleryMypicture()
+    fetchUserGalleryMypicture(){
+      this.getUserGalleryMypicture()
         .then(result => {
-          console.log('getUesrGalleryMypicture :', result)
+          console.log('getUserGalleryMypicture :', result)
         })
     }
-  }
+  },
+  goBack(){
+    this.$router.go(-1)
+  },
 }
 </script>
 

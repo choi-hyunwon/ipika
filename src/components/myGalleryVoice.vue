@@ -94,7 +94,7 @@ export default {
 
   computed: {
     ...mapGetters({
-      userGalleryMypicture: 'getUesrGalleryMypicture'
+      userGalleryMypicture: 'getUserGalleryMypicture'
     }),
     isEmpty(){
       if (this.userGalleryMypicture.audio.length === 0){

@@ -31,8 +31,8 @@
 
     <div class="navigation pb-5">
       <p>마이갤러리 :<br></p>
-      <router-link to="/MainGallery">마이갤러리(default)</router-link>
-      <router-link to="/MainGalleryDetail" >마이갤러리-상세보기</router-link>
+      <router-link to="/MyGallery">마이갤러리(default)</router-link>
+      <router-link to="/MyGalleryDetail" >마이갤러리-상세보기</router-link>
     </div>
   </div>
 </template>
