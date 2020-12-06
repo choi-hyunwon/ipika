@@ -32,7 +32,7 @@
     </b-modal>
 
 <!--    <b-button v-if="page === 'diagnose'" v-b-modal.normalPopup2 style="position: absolute; top: 200px; left: 200px;">진단테스트_3_시간 초과 시 2</b-button>-->
-    <b-modal v-if="page === 'diagnose'||'study'" @show="popUpOpen" @hide="hideInfo" id="clearAllPopup" centered title="진단테스트 : 전체 그림 지우기" modal-class="normalPopup">
+    <b-modal v-if="page === 'diagnose'||'letter'" @show="popUpOpen" @hide="hideInfo" id="clearAllPopup" centered title="진단테스트 : 전체 그림 지우기" modal-class="normalPopup">
       <template #modal-header>
         <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>
       </template>
@@ -46,7 +46,7 @@
     </b-modal>
 
 <!--    <b-button v-if="page === 'diagnose'" v-b-modal.normalPopup3 style="position: absolute; top: 200px; left: 350px;">진단테스트_3_제출팝업</b-button>-->
-    <b-modal v-if="page === 'diagnose'||'study'" @hide="timerStart" @show="popUpOpen" id="normalPopup3" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">
+    <b-modal v-if="page === 'diagnose'||'letter'" @hide="timerStart" @show="popUpOpen" id="normalPopup3" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">
       <template #modal-header>
         <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>
       </template>
@@ -61,8 +61,8 @@
 
     <!-- s 팝업  -->
 
-<!--    <b-button v-if="page === 'study'" v-b-modal.studyBookPopup style="position: absolute; top: 200px; left: 500px;" @click="popUpOpen">배경교제</b-button>-->
-    <b-modal v-if="page === 'study'" :visible="true" @show="popUpOpen" @hide="hideInfo" id="studyBookPopup" centered hide-footer modal-class="studyBookPopup">
+<!--    <b-button v-if="page === 'letter'" v-b-modal.studyBookPopup style="position: absolute; top: 200px; left: 500px;" @click="popUpOpen">배경교제</b-button>-->
+    <b-modal v-if="page === 'letter'" :visible="true" @show="popUpOpen" @hide="hideInfo" id="studyBookPopup" centered hide-footer modal-class="studyBookPopup">
       <template #default="{ hide,cancel }">
         <button class="btn-close" @click="hide()"><img src="@/assets/images/common/close_dim@2x.png" alt=""></button>
         <div class="content">
@@ -257,7 +257,7 @@ export default {
           // if (this.page === 'diagnose') {
           //   this.$router.push('/LoadingSpinnerWaiting')
           // }
-          if (this.page === 'study') {
+          if (this.page === 'letter') {
             this.$router.push('/PabloStudy6')
           }
         }
@@ -277,13 +277,13 @@ export default {
       if (this.page === 'diagnose') {
         this.$router.push('/TestingResult')
       }
-      else if (this.page === 'study') {
+      else if (this.page === 'letter') {
         this.$router.push('/Completion')
       }
     },
     goBack(){
       this.reset()
-      if (this.page === 'study') {
+      if (this.page === 'letter') {
         this.$router.push('/peopleThinking')
       }
     },

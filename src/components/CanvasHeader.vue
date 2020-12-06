@@ -1,5 +1,5 @@
 <template>
-  <Letter v-if="page === 'study'" ></Letter>
+  <Letter v-if="page === 'letter'" ></Letter>
   <Diagnose v-else-if="page === 'diagnose'"></Diagnose>
 </template>
 
