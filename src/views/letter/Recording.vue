@@ -7,7 +7,7 @@
                :cancelText="'닫기'"
                :text ="'지워진 녹음은 다시 들을 수 없어요'"
       >
-      <button class="symbol" @click="globalUtils.confirm(slotProps,'goToBack')">
+      <button class="symbol" @click="globalUtils.confirm(slotProps,'goBack')">
         <img src="@/assets/images/common/arrow_left@2x.png" alt="">
       </button>
       </Confirm>
@@ -83,12 +83,12 @@ export default {
     }
   },
   created() {
-    this.$EventBus.$on('back',this.goToBack)
+    this.$EventBus.$on('back',this.goBack)
   },
 
   methods : {
 
-    goToBack(){
+    goBack(){
       this.$router.push('/Watching')
     }
   }
