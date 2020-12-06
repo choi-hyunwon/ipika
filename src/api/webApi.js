@@ -5,6 +5,7 @@ axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8'
 axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*'
 
 export default class WebApi {
+  // eslint-disable-next-line no-useless-constructor
   constructor () {
   }
 
@@ -12,14 +13,12 @@ export default class WebApi {
     console.error(url)
     console.error(config)
 
-
-
     return axios({
       url: `http://ec2-15-165-50-157.ap-northeast-2.compute.amazonaws.com:8996/${url}`,
       headers: {
         user_id: store.getters.getSession.user_id,
         user_auth_key: store.getters.getSession.user_auth_key,
-        device_type: store.getters.getSession.device_type,
+        device_type: store.getters.getSession.device_type
       },
       ...config
     }).then(result => result.data)
@@ -47,9 +46,10 @@ export default class WebApi {
         user_auth_key: store.getters.getSession.user_auth_key,
         device_type: store.getters.getSession.device_type
       },
-      data : {}
+      data: {}
     })
   }
+
   /**
    * 진단 테스트 : 주제 조회
    *
@@ -63,7 +63,6 @@ export default class WebApi {
     })
   }
 
-
   /**
    * 사용자 정보 조회
    *
@@ -76,16 +75,9 @@ export default class WebApi {
   getResult (options) {
     return this.request('api/test/result', {
       method: 'GET',
-      headers: {
-        user_id: store.getters.getSession.user_id,
-        user_auth_key: store.getters.getSession.user_auth_key,
-        device_type: store.getters.getSession.device_type
-      }
-      data : {}
+      data: {}
     })
   }
-
-
 
   /**
    * 마이갤러리 정보 조회
@@ -101,15 +93,11 @@ export default class WebApi {
   getUesrGallery (options) {
     return this.request('api/users/gallery', {
       method: 'GET',
-      headers: {
-        user_id: store.getters.getSession.user_id,
-        user_auth_key: store.getters.getSession.user_auth_key,
-        device_type: store.getters.getSession.device_type
-      }
-      data : {}
+      data: {}
 
     })
   }
+
   /**
    * 마이갤러리 : 내 그림 리스트
    *
@@ -119,14 +107,10 @@ export default class WebApi {
   getUesrGalleryMypicture (options) {
     return this.request('api/users/gallery/mypicture', {
       method: 'GET',
-      headers: {
-        user_id: store.getters.getSession.user_id,
-        user_auth_key: store.getters.getSession.user_auth_key,
-        device_type: store.getters.getSession.device_type
-      }
       data: {}
     })
   }
+
   /**
    * 마이갤러리 : 배경변경
    *
@@ -137,14 +121,10 @@ export default class WebApi {
   getUesrGalleryBackground (options) {
     return this.request('api/users/gallery/background', {
       method: 'POST',
-      headers: {
-        user_id: store.getters.getSession.user_id,
-        user_auth_key: store.getters.getSession.user_auth_key,
-        device_type: store.getters.getSession.device_type
-      }
       data: {}
     })
   }
+
   /**
    * 마이갤러리 : 그림 삭제
    *
@@ -154,15 +134,9 @@ export default class WebApi {
   getUserGalleryDetele (options) {
     return this.request('api/users/gallery/delete', {
       method: 'DELETE',
-      headers: {
-        user_id: store.getters.getSession.user_id,
-        user_auth_key: store.getters.getSession.user_auth_key,
-        device_type: store.getters.getSession.device_type,
-      },
       data: {
-        pictureId : options.pictureId
+        pictureId: options.pictureId
       }
-      data: {}
     })
   }
 }
