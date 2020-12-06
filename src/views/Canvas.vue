@@ -315,7 +315,7 @@ export default {
       //     if(result !== undefined) {
       //       this.subject = result
       //       this.setTimeInit(this.subject.limitMinute * 60)
-            this.setTimeInit(55 * 60)
+            this.setTimeInit(1.2 * 60)
       //     }
       //   })
     }
