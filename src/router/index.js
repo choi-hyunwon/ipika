@@ -18,8 +18,8 @@ import peopleThinking from '@/views/letter/Listening'
 import List from '@/views/List'
 
 
-import MainGallery from '@/views/myGallery/MyGallery'
-import MainGalleryDetail from '@/views/myGallery/MyGalleryDetail'
+import MyGallery from '@/views/myGallery/MyGallery'
+import MyGalleryDetail from '@/views/myGallery/MyGalleryDetail'
 
 
 Vue.use(VueRouter)
