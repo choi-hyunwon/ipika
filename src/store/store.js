@@ -53,6 +53,13 @@ export default new Vuex.Store({
     result: {},
     userGallery: {},
     uesrGalleryMypicture: {},
+
+    canvasTimer: {
+      timeInitVal: 60*1,
+      time: 60*1,
+      timer: null,
+      timeOver : false,
+    },
   },
   /**
    * global로 사용하는 getters
@@ -87,7 +94,12 @@ export default new Vuex.Store({
     },
     getDiagnose: state => {
       return state.diagnose
-    }
+    },
+
+
+    getCanvasTimer: state => {
+      return state.canvasTimer
+    },
   },
   /**
    * global로 사용하는 Mutations

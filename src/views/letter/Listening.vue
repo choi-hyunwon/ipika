@@ -5,7 +5,7 @@
                :okText="'네'"
                :cancelText="'아니요'"
                :text="'정말 뒤로 가시겠어요?'">
-      <button class="symbol" @click="globalUtils.confirm(slotProps,'goToBack')">
+      <button class="symbol" @click="globalUtils.confirm(slotProps,'goBack')">
         <img src="@/assets/images/common/arrow_left@2x.png" alt="">
       </button>
       </Confirm>
@@ -100,10 +100,10 @@ export default {
   name: 'peopleThinking',
   components: { Alert, Confirm },
   created() {
-    this.$EventBus.$on('back',this.goToBack)
+    this.$EventBus.$on('back',this.goBack)
   },
   methods : {
-    goToBack(){
+    goBack(){
       this.$router.push('/Recording')
     }
   }
