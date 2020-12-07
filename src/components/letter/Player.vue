@@ -98,9 +98,7 @@ export default {
     // 영상 종료
     videoEnd() {
       this.isPlaying = false
-
-      // TODO;
-      alert('The End')
+      this.$EventBus.$emit('videoEnd')
     },
 
     // 화면 탭
@@ -118,6 +116,9 @@ export default {
 
     // 화면 탭 상태 시작
     startTap() {
+      // TODO: progress bar 보이도록 작업 필요
+      // TODO: progress bar 에서 duration time 우측으로 이동
+
       this.isTap = true
       this.tapTimer = setTimeout(() => {
         this.resetTap()
