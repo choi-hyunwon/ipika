@@ -56,12 +56,9 @@ export default class WebApi {
   }
 
   /**
-   * 사용자 정보 조회
+   * 진단테스트 : 결과 조회
    *
-   * 사용자 스테이지 티어 및 정보 조회
-   * stageId:int-스테이지ID
-   * stageName:String-스테이지명
-   * trialRecommendation:String-무료체험 추천여부
+   * api/test/result
    *
    */
   getResult (options) {
@@ -129,6 +126,19 @@ export default class WebApi {
       data: {
         pictureId: options.pictureId
       }
+    })
+  }
+
+  /**
+   * 학습 : 학습 정보 조회
+   *
+   * api/learning/info
+   *
+   */
+  getLetter (options) {
+    return this.request('api/learning/info', {
+      method: 'GET',
+      data: {}
     })
   }
 }

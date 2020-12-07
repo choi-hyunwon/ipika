@@ -18,7 +18,7 @@
 
 <!--     본문  -->
       <template v-if= "type==='goBack'">
-        <p class="text">정말 뒤로 가시겠어요?</p>
+        <p class="text">이전 화면으로 이동할까요? </br> 진행중인 학습 내용은 </br> 저장되지 않아요!</p>
         <p class="text-sm">{{backText}}</p>
       </template>
 

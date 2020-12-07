@@ -4,9 +4,8 @@
 
       <div class="symbol">
         <Confirm v-slot="slotProps"
-                 :okText="'뒤로 갈래요'"
-                 :cancelText="'닫기'"
-                 :backText ="'영상이 아직 끝나지 않았습니다.'"
+                 :okText="'네'"
+                 :cancelText="'아니오'"
         >
           <button @click="globalUtils.confirm(slotProps,'goBack')"><img src="@/assets/images/common/arrow_left@2x.png" alt=""></button>
         </Confirm>
@@ -22,7 +21,7 @@
           </button>
         </Alert>
         <div class="box-close">
-          <router-link to="/" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>
+          <router-link to="/PabloMain" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>
         </div>
       </div>
     </div>
@@ -48,7 +47,7 @@ import { mapGetters } from 'vuex'
 // import video from '@/assets/videos/file_example_MP4_640_3MG.mp4'
 
 export default {
-  name: 'PabloStudy3',
+  name: 'Watching',
   components: { Alert, Confirm, Player },
   data(){
     return {

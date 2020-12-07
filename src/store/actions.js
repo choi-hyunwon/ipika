@@ -16,41 +16,16 @@ export const actions = {
       })
   },
   getSubject ({ commit }, options) {
-    if (store.getters.getIsDummy) {
-      const data = {
-        code: '0000',
-        message: '',
-        subject: '5 분안에 자유롭게 나무를 그려보세요.',
-        limitMinute: 5
-      }
-      commit('setSubject', data)
-      return data
-    } else {
-      return webApi.getSubject(options)
-        .then(data => {
-          commit('setSubject', data)
-          return data
-        })
-    }
+    return webApi.getSubject(options)
+      .then(data => {
+        return data
+      })
   },
   getResult ({ commit }, options) {
-    if (store.getters.getIsDummy) {
-      const data = {
-        "code": "0000",
-        "message": null,
-        "stageId": 3,
-        "stageName": "Growing-up",
-        "trialRecommendation": "Y"
-      }
-      commit('setResult', data)
-      return data
-    } else {
-      return webApi.getResult(options)
-        .then(data => {
-          commit('setResult', data)
-          return data
-        })
-    }
+    return webApi.getResult(options)
+      .then(data => {
+        return data
+      })
   },
   getUserGallery ({ commit }, options) {
     if (store.getters.getIsDummy) {
@@ -157,5 +132,13 @@ export const actions = {
       .then(data => {
         return data
       })
-  }
+  },
+
+  getLetter({ commit }, options) {
+    return webApi.getLetter(options)
+      .then(data => {
+        commit('setLetter', data)
+        commit('setPlayerUrl', {sources: [{ src: data.stepVideoUrl}],Thumnail :  data.stepVideoThumnailUrl})
+      })
+  },
 }
