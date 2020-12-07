@@ -15,7 +15,7 @@
           학습 주제는 최대 세 문장까지<br/>
           가능합니다.</div>
         <div class="btn-group">
-          <router-link to="/PabloStudy2" class="btn btn-dark">시작하기</router-link>
+          <router-link to="/Watching" class="btn btn-dark">시작하기</router-link>
         </div>
       </div>
       <div class="col col-6">

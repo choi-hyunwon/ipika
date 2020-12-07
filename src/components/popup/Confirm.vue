@@ -17,7 +17,7 @@
 <!--      </template>-->
 
 <!--     본문  -->
-      <template v-if= "type==='goToBack'">
+      <template v-if= "type==='goBack'">
         <p class="text">정말 뒤로 가시겠어요?</p>
         <p class="text-sm">{{backText}}</p>
       </template>
@@ -34,9 +34,9 @@
 
 
 <!--      footer  -->
-      <template v-if="type==='goToBack'" #modal-footer="{ cancel }">
+      <template v-if="type==='goBack'" #modal-footer="{ cancel }">
         <b-button variant="gray" class="btn-half" @click="cancel()">{{cancelText}}</b-button>
-        <b-button @click="goToBack" variant="black" class="btn-black btn-half">{{okText}}</b-button>
+        <b-button @click="goBack" variant="black" class="btn-black btn-half">{{okText}}</b-button>
       </template>
 
       <template v-else-if="type==='Complete'" #modal-footer="{ cancel }">
@@ -46,7 +46,7 @@
 
       <template v-else-if="type==='refresh'" #modal-footer="{ cancel }">
         <b-button variant="gray" class="btn-half" @click="cancel()">{{cancelText}}</b-button>
-        <b-button @click="goToNext" variant="black" class="btn-black btn-half">{{okText}}</b-button>
+        <b-button @click="cancel()" variant="black" class="btn-black btn-half">{{okText}}</b-button>
       </template>
 
       <template v-else-if="type==='watchComplete'" #modal-footer="{ cancel }">
@@ -100,7 +100,7 @@ export default {
       }
       this.type = type;
     },
-    goToBack(){
+    goBack(){
       this.$EventBus.$emit('back')
     },
     goToNext(){

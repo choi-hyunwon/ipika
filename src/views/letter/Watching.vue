@@ -7,7 +7,7 @@
                  :cancelText="'닫기'"
                  :backText ="'영상이 아직 끝나지 않았습니다.'"
         >
-          <button @click="globalUtils.confirm(slotProps,'goToBack')"><img src="@/assets/images/common/arrow_left@2x.png" alt=""></button>
+          <button @click="globalUtils.confirm(slotProps,'goBack')"><img src="@/assets/images/common/arrow_left@2x.png" alt=""></button>
         </Confirm>
       </div>
       <div class="flex-box">
@@ -70,15 +70,15 @@ export default {
   //   setTimeout( ()=> { this.$router.push({ path: '/PabloPopup1'})},7000);
   // },
   created () {
-    this.$EventBus.$on('back',this.goToBack)
+    this.$EventBus.$on('back',this.goBack)
     this.$EventBus.$on('next',this.goToNext)
   },
   methods : {
-    goToBack(){
-      this.$router.push('/PabloStudy2')
+    goBack(){
+      this.$router.push('/Intro')
     },
     goToNext(){
-      this.$router.push('/thoughtRecords')
+      this.$router.push('/Recording')
     }
 
   }
