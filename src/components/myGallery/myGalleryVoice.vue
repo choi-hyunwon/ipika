@@ -78,10 +78,10 @@ export default {
           'title': 'Free Free(40)',
           'click': 'filterTest'
         },
-        // {
-        //   'title': 'Canvas',
-        //   'click': 'filterFree'
-        // }
+        {
+          'title': 'Canvas',
+          'click': 'filterFree'
+        }
       ],
       list: [],
       selected: 1,

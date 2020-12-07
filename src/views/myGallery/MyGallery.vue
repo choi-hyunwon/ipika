@@ -29,11 +29,10 @@
       <template #modal-header>
         <div class="symbol"><img src="@/assets/images/common/emoji@2x.png" alt=""></div>
       </template>
-      <p class="text">직접 그린 그림으로만<br/> 배경을 설정할 수 있어요<br/></p>
-      <p class="text-sm">파블로 학습을 시작해보세요!</p>
+      <p class="text">직접 그린 그림으로만<br/> 배경을 설정할 수 있어요<br/>파블로학습을 시작해보세요!</p>
       <template #modal-footer="{ cancel }">
         <b-button variant="gray" class="btn-half" @click="cancel()">닫기</b-button>
-        <router-link to="/canvas" class="btn btn-blue5 btn-half">시작하기</router-link>
+        <router-link to="/canvas" class="btn btn-black btn-half">시작하기</router-link>
       </template>
     </b-modal>
     <b-modal id="galleryBgChange" centered title="배경 그림 선택" hide-header hide-footer modal-class="galleryBgChange">
@@ -151,10 +150,10 @@ export default {
   data () {
     return {
       myTab: {
-        empty: true
+        empty: false
       },
       closeBtn:{
-        ModalClose: true
+        ModalClose: false
       }
     }
   },

@@ -46,6 +46,7 @@
               </div>
               <div class="img_title">{{ item.stageName || '스테이지'}} {{ item.stageId || '단계'}}</div>
               <div class="img_desc">{{ item.title || '제목을 불러 올수 없습니다'}}</div>
+              <div class="icon_delete"><img src="@/assets/images/common/btn_delete@2x.png" alt="" class="img-m"></div>
             </router-link>
           </li>
         </ul>
@@ -78,10 +79,10 @@ export default {
           'title': 'Free Drawing(40)',
           'click': 'filterTest'
         },
-        // {
-        //   'title': 'Canvas',
-        //   'click': 'filterFree'
-        // }
+        {
+          'title': 'Canvas',
+          'click': 'filterFree'
+        }
       ],
       list: [],
       selected: 1,
@@ -217,7 +218,11 @@ export default {
         color: var(--gray-700);
         padding: 0;
         padding-left: 2rem;
+        option{
+          padding: 0;
+        }
       }
+
     }
     .btn-left {
       margin-left: 6.4rem;
@@ -335,54 +340,21 @@ export default {
       }
     }
     .gallery-g{
-      .openPinfo{
-        margin-top: 1.6rem;
-        align-items: center;
-        .heart_icon{
-          width: 3.2rem;
-          height: 3.2rem;
-          margin-right: 1rem;
-        }
-        .heart_number{
-          font-family: 'Inter';
-          font-size: 2.4rem;
-          font-weight: 600;
-          line-height: 4.0px;
-          letter-spacing: -0.3px;
-          color: var(--gray-900);
-          margin-right: 2.4rem;
-        }
-        .eye_icon{
-          width: 3.2rem;
-          height: 3.2rem;
-          margin-right: 1rem;
-        }
-        .eye_number{
-          font-family: 'Inter';
-          font-size: 2.4rem;
-          font-weight: 600;
-          line-height: 4.0px;
-          letter-spacing: -0.3px;
-          color: var(--gray-900);
-
-        }
-      }
-
-
       width: calc(100% / 3);
       float: left;
       margin-bottom: 8rem;
       position: relative;
-      .dark_bg{
+
+      .icon_delete{
         position: absolute;
-        top: 0;
-        left: 0;
-        width: 57.6rem;
-        height: 32.3rem;
-        opacity: 0.5;
-        border-radius: 1.2rem;
-        background-color: var(--gray-black);
+        top: 1.5rem;
+        right: 3.5rem;
+        height: 0;
+        z-index: 999;
+        width: 5rem;
+        height: 5rem;
       }
+
       .play_icon , .pause_icon{
         position: absolute;
         top: 12.2rem;
