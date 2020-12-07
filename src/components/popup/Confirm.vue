@@ -30,7 +30,6 @@
         <p class="text-sm">{{text}}</p>
       </template>
 
-
 <!--      footer  -->
       <template v-if="type==='goBack'" #modal-footer="{ cancel }">
         <b-button variant="gray" class="btn-half" @click="cancel()">{{cancelText}}</b-button>
@@ -56,7 +55,6 @@
         <b-button variant="gray" class="btn-half"  @click="cancel()">{{cancelText}}</b-button>
         <router-link to="/TestingResult" class="btn btn-black btn-half">{{okText}}</router-link>
       </template>
-
     </b-modal>
 
 <!--    <b-modal v-if="this.getCanvasTimer.timer===50">-->
@@ -75,8 +73,7 @@
 <!--      </template>-->
 <!--    </b-modal>-->
 
-
-    <b-modal v-if="type === 'diagnose'" id="timeoverPopup" centered title="진단테스트 : 타임오버" modal-class="normalPopup" v-model="showConfirm">
+    <b-modal v-if="type === 'timeOut'" id="timeoverPopup" centered title="진단테스트 : 타임오버" modal-class="normalPopup" v-model="showConfirm">
       <template #modal-header>
         <div class="symbol"><img src="@/assets/images/common/timer@2x.png" alt=""></div>
       </template>
@@ -123,18 +120,10 @@ export default {
   },
   computed:{
     ...mapGetters({
-      canvasTimer : 'getCanvasTimer',
-    }),
+      canvasTimer:'getCanvasTimer'
+    })
   },
-  watch:{
-    'canvasTimer.timeOver':function(){
-      if(this.canvasTimer.timeOver){
-        console.log("timeOver")
-        this.type="diagnose"
-        this.showConfirm = true
-      }
-    }
-  },
+
   props:{
     okText: {
       String,
@@ -187,6 +176,7 @@ export default {
       WILL.clear()
       this.$refs['confirmModal'].hide()
       this.setTimerReset();
+      this.setTimerStart();
     },
   }
 }

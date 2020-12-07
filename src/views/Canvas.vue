@@ -224,7 +224,6 @@ export default {
     else this.isLoading = true
     ;(async () => {
       await this.fetchSubject()
-
     })()
   },
   computed: {
@@ -241,7 +240,13 @@ export default {
     //   return this.canvasTimer.timeOver
     // }
   },
+  watch:{
+    'canvasTimer.timeOver':function(){
+      if(this.canvasTimer.timeOver===true){
 
+      }
+    }
+  },
   methods: {
     ...mapMutations({
       setTimeInit: 'setTimeInit',
