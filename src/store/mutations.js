@@ -39,6 +39,7 @@ export const mutations = {
       }
       if (state.canvasTimer.time > 55) {
         state.canvasTimer.time--
+        console.log(state.canvasTimer.timeOver)
       }
     }, 1000)
   },
