@@ -19,7 +19,7 @@ export default new Vuex.Store({
    */
   state: {
     isDummy : false,
-    diagnose : false,
+    diagnose : true,
 
     /**
      * userinfo는 단말기(안드로이드)기에서 받아온다.
@@ -60,6 +60,19 @@ export default new Vuex.Store({
       timer: null,
       timeOver : false,
     },
+    playerOptions: {
+      autoplay: false,
+      controls: true,
+      sources: [
+        {
+          src: "https://file-examples-com.github.io/uploads/2017/04/file_example_MP4_640_3MG.mp4",
+          type: "video/mp4"
+        }
+      ],
+      width: 0,
+      height: 0,
+      liveui: false,
+    }
   },
   /**
    * global로 사용하는 getters
@@ -99,6 +112,9 @@ export default new Vuex.Store({
 
     getCanvasTimer: state => {
       return state.canvasTimer
+    },
+    getPlayerOptions: state => {
+      return state.playerOptions
     },
   },
   /**

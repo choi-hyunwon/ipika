@@ -1,6 +1,7 @@
 <template>
   <div class="wrap bg-ivory">
     <div class="header ivory">
+
       <div class="symbol">
         <Confirm v-slot="slotProps"
                  :okText="'뒤로 갈래요'"
@@ -20,58 +21,54 @@
           <span class="tit">주제보기</span>
           </button>
         </Alert>
-
         <div class="box-close">
           <router-link to="/" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>
         </div>
       </div>
     </div>
-    <div class="bg"><img src="@/assets/images/temp/sample_img_02.png" alt=""></div>
+
     <div class="dim">
-      <div class="inner">
-        <div class="video">
-          <p class="text">생각 제시하는 생각 과제 제시하는 텍스트 영역입니다.</p>
-          <Confirm v-slot="slotProps"
-                   :text="'보지못한 부분이 있어도 괜찮아요:)'"
-                   :completeText ="'다 보셨나요? 영상은 다음단계에서도 볼 수 있어요'"
-                    :ok-text="'넘어갈게요'"
-                  :cancel-text="'다시 볼래요'">
-            <b-button @click="globalUtils.confirm(slotProps,'Complete')" style="position: absolute; top: 200px; left: 350px;">시청 완료</b-button>
-          </Confirm>
-          <div class="play-wrap">
-            <button class="btn-rewind"><img src="@/assets/images/common/5s_rewind@2x.png" alt=""></button>
-            <button class="btn-pause"><img src="@/assets/images/common/pause@2x.png" alt=""></button>
-            <button class="btn-forward"><img src="@/assets/images/common/5s_forward@2x.png" alt=""></button>
-          </div>
-          <div class="progress-wrap">
-            <div class="inner">
-              <span class="time">2:40</span>
-              <div class="progress-inner">
-                <span class="bar" style="width: 30%"></span>
-              </div>
-              <span class="playtime">2:40</span>
-              <router-link to="/PabloStudy4"><button class="btn-full-screen"><img src="@/assets/images/common/btn_full_screen@2x.png" alt=""></button></router-link>
-            </div>
-          </div>
-          </div>
-        </div>
+      <div class="inner"
+           ref="playerArea"
+      >
+        <Player v-if="isMounted" :options="playerOptions"/>
       </div>
-      <!-- e 영상 재생 중_화면 탭 시 -->
     </div>
+    <!-- e 영상 재생 중_화면 탭 시 -->
+
+  </div>
 </template>
 
 <script>
 import Confirm from '@/components/popup/Confirm'
 import Alert from '@/components/popup/Alert'
+
+import Player from '@/components/letter/Player'
+import { mapGetters } from 'vuex'
+// import video from '@/assets/videos/file_example_MP4_640_3MG.mp4'
+
 export default {
   name: 'PabloStudy3',
-  components: { Alert, Confirm },
-  // created(){
-  //   setTimeout( ()=> { this.$router.push({ path: '/PabloPopup1'})},7000);
-  // },
+  components: { Alert, Confirm, Player },
+  data(){
+    return {
+      isMounted: false
+    }
+  },
   created () {
     this.$EventBus.$on('back',this.goBack)
     this.$EventBus.$on('next',this.goToNext)
+    this.$EventBus.$on('videoEnd', this.goToNext)
+  },
+  mounted () {
+    this.playerOptions.width = this.$refs.playerArea.clientWidth
+    this.playerOptions.height = this.$refs.playerArea.clientHeight
+    this.isMounted = true
+  },
+  computed:{
+    ...mapGetters({
+      playerOptions: 'getPlayerOptions'
+    })
   },
   methods : {
     goBack(){
@@ -79,8 +76,7 @@ export default {
     },
     goToNext(){
       this.$router.push('/Recording')
-    }
-
+    },
   }
 }
 </script>
@@ -109,10 +105,19 @@ export default {
       position: relative;
       width: 100%;
       height: calc(120rem - 12rem);
-      .video {
+      /*.video {
         position: relative;
         width: 100%;
         height: calc(120rem - 12rem);
+
+        // TODO: css 추가
+        >.video-js {
+          .vjs_video_3-dimensions {
+            width: 100%;
+            height: 100%;
+          }
+        }
+
         .text {
           font-family: var(--bold);
           font-size: 4rem;
@@ -231,7 +236,7 @@ export default {
             }
           }
         }
-      }
+      }*/
     }
     &.full-screen {
       height: 100%;

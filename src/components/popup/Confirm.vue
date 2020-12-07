@@ -46,7 +46,7 @@
 
       <template v-else-if="type==='refresh'" #modal-footer="{ cancel }">
         <b-button variant="gray" class="btn-half" @click="cancel()">{{cancelText}}</b-button>
-        <b-button @click="cancel()" variant="black" class="btn-black btn-half">{{okText}}</b-button>
+        <b-button @click="goToNext" variant="black" class="btn-black btn-half">{{okText}}</b-button>
       </template>
 
       <template v-else-if="type==='watchComplete'" #modal-footer="{ cancel }">
@@ -104,6 +104,7 @@ export default {
       this.$EventBus.$emit('back')
     },
     goToNext(){
+      this.showConfirm = false
       this.$EventBus.$emit('next')
     }
   }

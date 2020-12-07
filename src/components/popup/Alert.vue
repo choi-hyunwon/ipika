@@ -16,34 +16,18 @@
 
     <b-modal v-if="type==='video'" centered hide-footer modal-class="videoReviewPopup" v-model="showAlert">
       <template  #default="{ hide }">
-        <div class="bg"><img src="@/assets/images/temp/sample_img_02.png" alt=""></div>
         <div class="full-screen dim"><!-- 전체 화면시 dim 제거 -->
           <div class="inner">
             <div class="video">
-              <p class="text">생각 제시하는 생각 과제 제시하는 텍스트 영역입니다.</p>
               <button class="btn-close" @click="hide()"><img src="@/assets/images/common/close_dim@2x.png" alt=""></button>
-              <!-- s 전체 화면시 hide -->
-              <div class="play-wrap">
-                <button class="btn-rewind"><img src="@/assets/images/common/5s_rewind@2x.png" alt=""></button>
-                <button class="btn-pause"><img src="@/assets/images/common/pause@2x.png" alt=""></button>
-                <button class="btn-play"><img src="@/assets/images/common/btn_play@2x.png" alt=""></button>
-                <button class="btn-forward"><img src="@/assets/images/common/5s_forward@2x.png" alt=""></button>
-              </div>
-              <div class="progress-wrap">
-                <div class="inner">
-                  <span class="time">2:40</span>
-                  <div class="progress-inner">
-                    <span class="bar" style="width: 30%"></span>
-                  </div>
-                  <span class="playtime">2:40</span>
-                  <button class="btn-full-screen"><img src="@/assets/images/common/btn_full_screen@2x.png" alt="">
-                  </button>
+              <div class="dim" >
+                <div class="inner"
+                     ref="playerArea">
+                  <Player :options="playerOptions"/>
                 </div>
               </div>
-              <!-- e 전체 화면시 hide -->
             </div>
           </div>
-          <!-- e 영상 재생 중_화면 탭 시 -->
         </div>
       </template>
     </b-modal>
@@ -69,8 +53,11 @@
 </template>
 
 <script>
+import Player from '@/components/letter/Player'
+import { mapGetters } from 'vuex'
 export default {
   name: 'Alert',
+  components : {Player},
   data(){
     return{
       showAlert : false,
@@ -91,6 +78,11 @@ export default {
       String,
       default(){return ''}
     }
+  },
+  computed:{
+    ...mapGetters({
+      playerOptions: 'getPlayerOptions'
+    })
   },
   methods : {
     toggleAlert(type,topic){
