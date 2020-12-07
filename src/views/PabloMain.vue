@@ -31,7 +31,7 @@
             </router-link>
           </li>
           <li class="active">
-            <router-link to="/MainGallery">
+            <router-link to="/MyGallery">
               <span class="num">04</span>
               <span class="title">My Gallery</span>
             </router-link>

@@ -3,7 +3,7 @@
     <div class="header d-flex">
       <div v-b-modal.goBackPopup class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt=""></div>
       <div class="box-close">
-        <router-link to="/PabloMain" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>
+        <div to="" class="btn-close" @click="todo"><img src="@/assets/images/common/close@2x.png" alt=""></div>
       </div>
     </div>
     <div class="content">
@@ -12,7 +12,8 @@
       <img src="@/assets/images/common/Group 1388@2x.png" alt="" class="img">
       </div>
         <div class="btn-group">
-          <router-link to="/PabloStudy1" class="btn btn-dark">시작하기</router-link>
+          <router-link v-if="diagnose" to="/PabloMain" class="btn btn-dark">시작하기</router-link>
+          <router-link  v-else to="/canvas?page=diagnose" class="btn btn-dark">시작하기</router-link>
         </div>
       </div>
   </div>
@@ -22,7 +23,17 @@
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
-  name: 'Home'
+  name: 'Home',
+  computed: {
+    ...mapGetters({
+      diagnose: 'getDiagnose'
+    })
+  },
+  methods :{
+    todo(){
+      alert('종료 안내 팝업 노출 (퍼블리싱 필요)')
+    }
+  }
 }
 </script>
 

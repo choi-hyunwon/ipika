@@ -2,7 +2,7 @@
   <div>
     <div class="navigation pb-5">
       <p>TTS 기능 테스트 :<br></p>
-      <button id="btn-read" @click="tts.speak('TTS 테스트')">TTS 기능 테스트</button>
+      <button id="btn-read" @click="globalUtils.tts('TTS 테스트')">TTS 기능 테스트</button>
     </div>
     <div class="navigation">
       <p>진단테스트 :<br></p>
@@ -31,8 +31,8 @@
 
     <div class="navigation pb-5">
       <p>마이갤러리 :<br></p>
-      <router-link to="/MainGallery">마이갤러리(default)</router-link>
-      <router-link to="/MainGalleryDetail" >마이갤러리-상세보기</router-link>
+      <router-link to="/MyGallery">마이갤러리(default)</router-link>
+      <router-link to="/MyGalleryDetail" >마이갤러리-상세보기</router-link>
     </div>
   </div>
 </template>
