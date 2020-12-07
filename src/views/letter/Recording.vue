@@ -65,7 +65,7 @@
                  :text="`지워진 녹음은 다시 들을 수 없어요`"
                  :cancelText="`닫기`"
                  :okText="`다시 녹음할게요`">
-        <button v-if="!record" @click="globalUtils.confirm(slotProps,'refresh')" style="position: absolute; bottom: 0"><img src="@/assets/images/common/refresh_active@2x.png" alt=""></button>
+        <button v-if="!record" @click="globalUtils.confirm(slotProps,'checkRed')" style="position: absolute; bottom: 0"><img src="@/assets/images/common/refresh_active@2x.png" alt=""></button>
         <button v-if="record" style="position: absolute; bottom: 0"><img src="@/assets/images/common/refresh_default@2x.png" alt=""></button>
         </Confirm>
         <!--<button><img src="@/assets/images/common/record@2x.png" alt=""></button>

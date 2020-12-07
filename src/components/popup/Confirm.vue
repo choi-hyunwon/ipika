@@ -27,7 +27,7 @@
         <p class="text-sm">{{text}}</p>
       </template>
 
-      <template v-else-if="type==='refresh'">
+      <template v-else-if="type==='checkRed'">
         <p class="text">{{completeText}}</p>
         <p class="text-sm">{{text}}</p>
       </template>
@@ -44,14 +44,14 @@
         <b-button @click="goToNext" variant="black" class="btn-black btn-half">{{okText}}</b-button>
       </template>
 
-      <template v-else-if="type==='refresh'" #modal-footer="{ cancel }">
+      <template v-else-if="type==='checkRed'" #modal-footer="{ cancel }">
         <b-button variant="gray" class="btn-half" @click="cancel()">{{cancelText}}</b-button>
         <b-button @click="goToNext" variant="black" class="btn-black btn-half">{{okText}}</b-button>
       </template>
 
       <template v-else-if="type==='watchComplete'" #modal-footer="{ cancel }">
         <b-button variant="gray" class="btn-half"  @click="cancel()">다시 볼래요</b-button>
-        <router-link to="/thoughtRecords" class="btn btn-black btn-half">넘어갈게요</router-link>
+        <router-link to="/Recording" class="btn btn-black btn-half">넘어갈게요</router-link>
       </template>
 
     </b-modal>
