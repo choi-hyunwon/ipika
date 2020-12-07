@@ -10,6 +10,8 @@
           <li><router-link to=""></router-link></li>
           <li><router-link to=""></router-link></li>
           <li><router-link to=""></router-link></li>
+          <li><router-link to=""></router-link></li>
+          <li><router-link to=""></router-link></li>
         </ul>
         <ul class="title-list">
           <li class="active"><!-- badge-new / badge-start -->
@@ -24,27 +26,39 @@
               <span class="title">Pablo Classic</span>
             </span>
           </li>
+          <li class="">
+            <router-link to="/Pablo Park">
+              <span class="num">03</span>
+              <span class="title">Pablo Park</span>
+            </router-link>
+          </li>
+          <li class="">
+            <router-link to="/">
+              <span class="num">04</span>
+              <span class="title">Pablo Sea</span>
+            </router-link>
+          </li>
           <li class="active">
             <router-link to="/canvas">
-              <span class="num">03</span>
-              <span class="title">Canvas</span>
+              <span class="num">05</span>
+              <span class="title">Free Drawing</span>
             </router-link>
           </li>
           <li class="active">
             <router-link to="/MyGallery">
-              <span class="num">04</span>
+              <span class="num">06</span>
               <span class="title">My Gallery</span>
             </router-link>
           </li>
           <li>
             <span>
-              <span class="num">05</span>
+              <span class="num">07</span>
               <span class="title">Open Gallery</span>
             </span>
           </li>
           <li>
             <span>
-              <span class="num">06</span>
+              <span class="num">08</span>
               <span class="title">My Page</span>
             </span>
           </li>
@@ -126,7 +140,7 @@ export default {
     }
     .title-list {
       padding-left: 19.5rem;
-      padding-top: 24.2rem;
+      padding-top: 11.8rem;
       li {
         position: relative;
         line-height: 9.6px;

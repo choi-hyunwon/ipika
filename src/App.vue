@@ -18,7 +18,6 @@ export default {
 @import '@/assets/scss/fonts';
 @import '@/assets/scss/layout';
 @import '@/assets/scss/popup';
-@import '@/assets/scss/gallery';
 </style>
 
 <style>

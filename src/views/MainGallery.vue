@@ -48,7 +48,7 @@
         </ul>
       </div>
       <div class="tab-section">
-        <b-tabs justified>
+        <b-tabs justified active-nav-item-class="border-bottom-0 border-dark">
           <b-tab title="내그림" class="tab">
             <div class="empty" v-if="myTab.empty">
               <div class="gallery-section">

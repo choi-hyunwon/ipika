@@ -36,7 +36,7 @@
         <router-link to="/canvas" class="btn btn-blue5 btn-half">시작하기</router-link>
       </template>
     </b-modal>
-    <b-modal id="galleryBgChange" centered title="배경 그림 선택" hide-footer modal-class="galleryBgChange">
+    <b-modal id="galleryBgChange" centered title="배경 그림 선택" hide-header hide-footer modal-class="galleryBgChange">
       <template #default="{hide}">
         <button class="btn-close" @click="hide"><img src="@/assets/images/common/close_dim@2x.png" alt=""></button>
         <div class="content">
@@ -151,10 +151,10 @@ export default {
   data () {
     return {
       myTab: {
-        empty: false
+        empty: true
       },
       closeBtn:{
-        ModalClose: false
+        ModalClose: true
       }
     }
   },
