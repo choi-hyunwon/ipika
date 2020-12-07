@@ -2,7 +2,7 @@
 
   <div class="wrap bg-ivory">
     <div class="header ivory">
-      <!--      < style="position: absolute; top: 200px; left: 820px;">뒤로가기 팝업</b-button>-->
+<!--            < style="position: absolute; top: 200px; left: 820px;">뒤로가기 팝업</b-button>-->
       <Confirm v-slot="slotProps"
                :okText="'뒤로 갈래요'"
                :cancelText="'닫기'"
@@ -20,7 +20,6 @@
             <span class="tit">영상보기</span>
           </button>
         </Alert>
-
         <Alert v-slot="slotProps"
                :boldText="'주제보기'"
                :text="'주제보기'"
@@ -30,7 +29,6 @@
             <span class="tit">주제보기</span>
           </button>
         </Alert>
-
         <div class="box-close">
           <router-link to="/" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>
         </div>
@@ -39,9 +37,8 @@
     <div class="contents">
       <div class="txt-area">
         <p class="txt-lg">
-          정윤님은<br/>
-          이 주제에 대해 어떻게 생각해요?<br/>
-          생각을 들려주세요
+          이그림이 무엇을 표현했는지<br/>
+          생각을 들려주세요<br/>
         </p>
         <p class="txt-sm">
           자유롭게 본인의 생각을 말해보세요
@@ -50,7 +47,13 @@
       <div class="record-area">
         <av-media type="frequ" :media="media" line-color="darkorange"/>
       </div>
-      <div class="play-area">
+      <div class="btn-area">
+        <router-link to="/Listening" class="btn btn-dark">다했어요!</router-link>
+        <!--        <button class="btn btn-dark disabled">다했어요!</button>-->
+      </div>
+      <b-button style="width: 12rem; height: 12rem">
+        <img src="@/assets/images/common/refresh_active@2x.png" alt="" class="img-m">
+      </b-button>
         <audio-recorder
           ref="recorder"
           :before-recording="startRecord"
@@ -64,14 +67,8 @@
                  :complete-text="`다시 녹음하시겠어요? 지금 녹음한 내용은 지워져요`"
                  :text="`지워진 녹음은 다시 들을 수 없어요`"
                  :cancelText="`닫기`"
-                 :okText="`다시 녹음할게요`"
-        >
-        <button><img src="@/assets/images/common/refresh_active@2x.png" alt=""></button>
+                 :okText="`다시 녹음할게요`">
         </Confirm>
-      </div>
-      <div class="btn-area">
-        <router-link to="/Listening" class="btn btn-dark">다했어요!</router-link>
-        <!--        <button class="btn btn-dark disabled">다했어요!</button>-->
       </div>
     </div>
 
@@ -219,12 +216,12 @@ export default {
     position: absolute;
     bottom: 10rem;
     right: 10rem;
+    z-index: 99;
   }
 }
 
 [data-v-4f14517c] div.ar {
-  margin-left: 2.4rem;
-  width: 100%;
+  margin-left: 10rem;
   max-width: 51rem;
   box-shadow:none;
   background-color: var(--ivory-200);
