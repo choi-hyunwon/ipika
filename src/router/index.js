@@ -21,8 +21,8 @@ import PabloPopup1 from '@/views/letter/PabloPopup1'
 import PabloPopup2 from '@/views/letter/PabloPopup2'
 import Completion from '@/views/letter/Completion'
 
-import MainGallery from '@/views/myGallery/MainGallery'
-import MainGalleryDetail from '@/views/myGallery/MainGalleryDetail'
+import MyGallery from '@/views/myGallery/MyGallery'
+import MyGalleryDetail from '@/views/myGallery/MyGalleryDetail'
 
 import Agreement from '@/views/useLater/Agreement'
 import LoadingSpinnerWaiting from '@/views/useLater/LoadingSpinnerWaiting'
@@ -110,14 +110,14 @@ const routes = [
     component: Listening
   },
   {
-    path:'/MainGallery',
-    name:'MainGallery',
-    component: MainGallery
+    path:'/MyGallery',
+    name:'MyGallery',
+    component: MyGallery
   },
   {
-    path:'/MainGalleryDetail',
-    name:'MainGalleryDetail',
-    component: MainGalleryDetail
+    path:'/MyGalleryDetail',
+    name:'MyGalleryDetail',
+    component: MyGalleryDetail
   }
 ]
 

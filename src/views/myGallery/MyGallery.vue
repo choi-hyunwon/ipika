@@ -1,7 +1,7 @@
 <template>
   <div class="wrap">
     <div class="header ivory bg-ivory d-flex">
-      <router-link to="/PabloMain" v-b-modal.goBackPopup class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt=""></router-link>
+      <a href="#" @click.prevent="goBack" v-b-modal.goBackPopup class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt=""></a>
       <div class="gallery-title">
         <router-link to="/">
           <span class="title-center">My Gallery</span>
@@ -38,64 +38,64 @@
     </b-modal>
     <b-modal id="galleryBgChange" centered title="배경 그림 선택" hide-footer modal-class="galleryBgChange">
       <template #default="{hide}">
-      <button class="btn-close" @click="hide"><img src="@/assets/images/common/close_dim@2x.png" alt=""></button>
-      <div class="content">
-        <div class="c-header">
-          <p class="title">배경 그림 선택하기</p>
-          <p class="desc">그림의 중앙부분이 배경그림으로 보여져요!</p>
-        </div>
-        <div class="c-body">
-          <div class="btns_group d-flex">
-            <b-button class="all_button">
-              <img src="@/assets/images/common/all.png" alt="모든이미지" class="img">
-              <span>ALL</span>
-            </b-button>
-            <b-button class="drawing_button">
-              <img src="@/assets/images/common/all.png" alt="모든이미지" class="img">
-              <span>Pablo Drawing</span>
-            </b-button>
-            <b-button class="classic_button">
-              <img src="@/assets/images/common/all.png" alt="모든이미지" class="img" style="width: 1.57rem; height: 2rem;">
-              <span>Pablo Classic</span>
-            </b-button>
-            <b-button class="canvas_button">
-              <img src="@/assets/images/common/all.png" alt="모든이미지" class="img">
-              <span>Canvas</span>
-            </b-button>
+        <button class="btn-close" @click="hide"><img src="@/assets/images/common/close_dim@2x.png" alt=""></button>
+        <div class="content">
+          <div class="c-header">
+            <p class="title">배경 그림 선택하기</p>
+            <p class="desc">그림의 중앙부분이 배경그림으로 보여져요!</p>
           </div>
-          <ul class="scroll d-flex">
-            <li class="background-img">
+          <div class="c-body">
+            <div class="btns_group d-flex">
+              <b-button class="all_button">
+                <img src="@/assets/images/common/all.png" alt="모든이미지" class="img">
+                <span>ALL</span>
+              </b-button>
+              <b-button class="drawing_button">
+                <img src="@/assets/images/common/all.png" alt="모든이미지" class="img">
+                <span>Pablo Drawing</span>
+              </b-button>
+              <b-button class="classic_button">
+                <img src="@/assets/images/common/all.png" alt="모든이미지" class="img" style="width: 1.57rem; height: 2rem;">
+                <span>Pablo Classic</span>
+              </b-button>
+              <b-button class="canvas_button">
+                <img src="@/assets/images/common/all.png" alt="모든이미지" class="img">
+                <span>Canvas</span>
+              </b-button>
+            </div>
+            <ul class="scroll d-flex">
+              <li class="background-img">
+                <router-link to="">
+                  <img src="@/assets/images/temp/sample_img_01.jpg" alt="" class="img-m">
+                </router-link>
+              </li>
+              <li class="background-img">
+                <router-link to="">
+                  <img src="@/assets/images/temp/sample_img_01.jpg" alt="" class="img-m">
+                </router-link>
+              </li>  <li class="background-img">
               <router-link to="">
                 <img src="@/assets/images/temp/sample_img_01.jpg" alt="" class="img-m">
               </router-link>
             </li>
-            <li class="background-img">
-              <router-link to="">
-                <img src="@/assets/images/temp/sample_img_01.jpg" alt="" class="img-m">
-              </router-link>
-            </li>  <li class="background-img">
-            <router-link to="">
-              <img src="@/assets/images/temp/sample_img_01.jpg" alt="" class="img-m">
-            </router-link>
-          </li>
-            <li class="background-img">
-              <router-link to="">
-                <img src="@/assets/images/temp/sample_img_01.jpg" alt="" class="img-m">
-              </router-link>
-            </li>
-            <li class="background-img">
-              <router-link to="">
-                <img src="@/assets/images/temp/sample_img_01.jpg" alt="" class="img-m">
-              </router-link>
-            </li>
-            <li class="background-img">
-              <router-link to="">
-                <img src="@/assets/images/temp/sample_img_01.jpg" alt="" class="img-m">
-              </router-link>
-            </li>
-          </ul>
+              <li class="background-img">
+                <router-link to="">
+                  <img src="@/assets/images/temp/sample_img_01.jpg" alt="" class="img-m">
+                </router-link>
+              </li>
+              <li class="background-img">
+                <router-link to="">
+                  <img src="@/assets/images/temp/sample_img_01.jpg" alt="" class="img-m">
+                </router-link>
+              </li>
+              <li class="background-img">
+                <router-link to="">
+                  <img src="@/assets/images/temp/sample_img_01.jpg" alt="" class="img-m">
+                </router-link>
+              </li>
+            </ul>
+          </div>
         </div>
-      </div>
       </template>
     </b-modal>
     <b-modal id="delete" centered title="완전히 삭제" modal-class="delete">
@@ -142,7 +142,7 @@ import myGalleryVoice from '@/components/myGallery/myGalleryVoice'
 import myGalleryInfo from '@/components/myGallery/myGalleryInfo'
 
 export default {
-  name: 'MainGallery',
+  name: 'MyGallery',
   components: {
     myGalleryPicture,
     myGalleryVoice,
@@ -161,18 +161,18 @@ export default {
   computed: {
     ...mapGetters({
       session: 'getSession',
-      uesrGalleryMypicture: 'getUesrGalleryMypicture'
+      UserGalleryMypicture: 'getUserGalleryMypicture'
     })
   },
   mounted () {
-    this.fetchUesrGalleryMypicture();
+    this.fetchUserGalleryMypicture();
   },
   methods: {
     ...mapActions({
-      getUesrGallery : 'getUesrGallery',
-      getUesrGalleryMypicture: 'getUesrGalleryMypicture',
-      getUesrGalleryBackground: 'getUesrGalleryBackground',
-      getUesrGalleryDetele: 'getUesrGalleryDetele'
+      getUserGallery : 'getUserGallery',
+      getUserGalleryMypicture: 'getUserGalleryMypicture',
+      getUserGalleryBackground: 'getUserGalleryBackground',
+      getUserGalleryDetele: 'getUserGalleryDetele'
     }),
     settingPopup () {
       if (!this.myTab.empty) {
@@ -181,13 +181,16 @@ export default {
         this.$bvModal.show('galleryBgChange')
       }
     },
-    fetchUesrGalleryMypicture(){
-      this.getUesrGalleryMypicture()
+    fetchUserGalleryMypicture(){
+      this.getUserGalleryMypicture()
         .then(result => {
-          console.log('getUesrGalleryMypicture :', result)
+          console.log('getUserGalleryMypicture :', result)
         })
     }
-  }
+  },
+  goBack(){
+    this.$router.go(-1)
+  },
 }
 </script>
 

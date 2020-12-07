@@ -104,6 +104,7 @@ export default {
       this.$EventBus.$emit('back')
     },
     goToNext(){
+      this.showConfirm = false
       this.$EventBus.$emit('next')
     }
   }

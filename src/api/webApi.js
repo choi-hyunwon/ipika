@@ -5,6 +5,7 @@ axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8'
 axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*'
 
 export default class WebApi {
+  // eslint-disable-next-line no-useless-constructor
   constructor () {
   }
 
@@ -12,14 +13,12 @@ export default class WebApi {
     console.error(url)
     console.error(config)
 
-
-
     return axios({
       url: `http://ec2-15-165-50-157.ap-northeast-2.compute.amazonaws.com:8996/${url}`,
       headers: {
         user_id: store.getters.getSession.user_id,
         user_auth_key: store.getters.getSession.user_auth_key,
-        device_type: store.getters.getSession.device_type,
+        device_type: store.getters.getSession.device_type
       },
       ...config
     }).then(result => result.data)
@@ -39,11 +38,18 @@ export default class WebApi {
    *
    */
   getMainmenu (options) {
+    // console.log(store.getters.getSession)
     return this.request('api/main/menu', {
       method: 'GET',
-      data : {}
+      headers: {
+        user_id: store.getters.getSession.user_id,
+        user_auth_key: store.getters.getSession.user_auth_key,
+        device_type: store.getters.getSession.device_type
+      },
+      data: {}
     })
   }
+
   /**
    * 진단 테스트 : 주제 조회
    *
@@ -57,7 +63,6 @@ export default class WebApi {
     })
   }
 
-
   /**
    * 사용자 정보 조회
    *
@@ -70,10 +75,9 @@ export default class WebApi {
   getResult (options) {
     return this.request('api/test/result', {
       method: 'GET',
-      data : {}
+      data: {}
     })
   }
-
 
   /**
    * 마이갤러리 정보 조회
@@ -86,25 +90,27 @@ export default class WebApi {
    * totalViewCount:String-전체공유그림조회수
    * totalReactionCount:String-전체공유그림좋아요수
    */
-  getUesrGallery (options) {
+  getUserGallery (options) {
     return this.request('api/users/gallery', {
       method: 'GET',
-      data : {}
+      data: {}
 
     })
   }
+
   /**
    * 마이갤러리 : 내 그림 리스트
    *
    * 마이갤러리 이미지 및 음성 정보 조회
    * pictures:List
    */
-  getUesrGalleryMypicture (options) {
+  getUserGalleryMypicture (options) {
     return this.request('api/users/gallery/mypicture', {
       method: 'GET',
       data: {}
     })
   }
+
   /**
    * 마이갤러리 : 배경변경
    *
@@ -112,22 +118,25 @@ export default class WebApi {
    * code:String - 코드
    * message:String - 메시지
    */
-  getUesrGalleryBackground (options) {
+  getUserGalleryBackground (options) {
     return this.request('api/users/gallery/background', {
       method: 'POST',
       data: {}
     })
   }
+
   /**
    * 마이갤러리 : 그림 삭제
    *
    * 마이갤러리 상단 부분의 정보 조회
    * pictureId:String-그림ID
    */
-  getUesrGalleryDetele (options) {
+  getUserGalleryDetele (options) {
     return this.request('api/users/gallery/delete', {
       method: 'DELETE',
-      data: {}
+      data: {
+        pictureId: options.pictureId
+      }
     })
   }
 }
