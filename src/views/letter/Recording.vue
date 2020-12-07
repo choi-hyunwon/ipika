@@ -60,7 +60,14 @@
           :before-upload="callback"
           :successful-upload="callback"
           :failed-upload="callback"/>
-        <button style="position: absolute; bottom: 0"><img src="@/assets/images/common/refresh_active@2x.png" alt=""></button>
+        <Confirm v-slot="slotProps"
+                 :complete-text="`다시 녹음하시겠어요? 지금 녹음한 내용은 지워져요`"
+                 :text="`지워진 녹음은 다시 들을 수 없어요`"
+                 :cancelText="`닫기`"
+                 :okText="`다시 녹음할게요`"
+        >
+        <button @click="globalUtils.confirm(slotProps,'refresh')" style="position: absolute; bottom: 0"><img src="@/assets/images/common/refresh_active@2x.png" alt=""></button>
+        </Confirm>
         <!--<button><img src="@/assets/images/common/record@2x.png" alt=""></button>
         <button><img src="@/assets/images/common/record_play@2x.png" alt=""></button>
         <button><img src="@/assets/images/common/refresh_active@2x.png" alt=""></button>
@@ -71,14 +78,6 @@
         <button class="btn btn-dark disabled">다했어요!</button>
       </div>
     </div>
-    <Confirm v-slot="slotProps"
-             :complete-text="`다시 녹음하시겠어요? 지금 녹음한 내용은 지워져요`"
-             :text="`지워진 녹음은 다시 들을 수 없어요`"
-             :cancelText="`닫기`"
-             :okText="`다시 녹음할게요`"
-    >
-      <b-button @click="globalUtils.confirm(slotProps,'refresh')" style="position: absolute; top: 200px; left: 700px;">새로고침 팝업</b-button>
-    </Confirm>
   </div>
 </template>
 
@@ -105,7 +104,6 @@ export default {
     navigator.mediaDevices.getUserMedia(constraints)
       .then(media => {
         this.media = media
-        audio.srcObject = media
       })
   },
   methods : {
