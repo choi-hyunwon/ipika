@@ -44,6 +44,7 @@ import Confirm from '@/components/popup/Confirm'
 import Alert from '@/components/popup/Alert'
 
 import Player from '@/components/letter/Player'
+import { mapGetters } from 'vuex'
 // import video from '@/assets/videos/file_example_MP4_640_3MG.mp4'
 
 export default {
@@ -51,21 +52,7 @@ export default {
   components: { Alert, Confirm, Player },
   data(){
     return {
-      isMounted: false,
-      playerOptions: {
-        autoplay: false,
-        controls: true,
-        sources: [
-          {
-            src: "https://file-examples-com.github.io/uploads/2017/04/file_example_MP4_640_3MG.mp4",
-            // src: "/videos/file_example_MP4_640_3MG.mp4",
-            type: "video/mp4"
-          }
-        ],
-        width: 0,
-        height: 0,
-        liveui: false,
-      }
+      isMounted: false
     }
   },
   created () {
@@ -77,6 +64,11 @@ export default {
     this.playerOptions.width = this.$refs.playerArea.clientWidth
     this.playerOptions.height = this.$refs.playerArea.clientHeight
     this.isMounted = true
+  },
+  computed:{
+    ...mapGetters({
+      playerOptions: 'getPlayerOptions'
+    })
   },
   methods : {
     goBack(){
