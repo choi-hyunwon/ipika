@@ -2,25 +2,30 @@
 
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '@/views/Home'
-import Canvas from '@/views/Canvas'
-import Agreement from '@/views/useLater/Agreement'
-import LoadingSpinnerWaiting from '@/views/useLater/LoadingSpinnerWaiting'
-import TestingResult from '@/views/diagnose/TestingResult'
-import PabloMain from '@/views/PabloMain'
-import PabloStudy1 from '@/views/letter/Intro'
-import PabloStudy3 from '@/views/letter/Watching'
-import PabloPopup1 from '@/views/letter/PabloPopup1'
-import PabloPopup2 from '@/views/letter/PabloPopup2'
-import thoughtRecords from '@/views/letter/Recording'
-import PabloStudy6 from '@/views/letter/Completion'
-import peopleThinking from '@/views/letter/Listening'
+
 import List from '@/views/List'
 
+import Home from '@/views/Home'
+
+import PabloMain from '@/views/PabloMain'
+
+import Canvas from '@/views/Canvas'
+
+import TestingResult from '@/views/diagnose/TestingResult'
+
+import Intro from '@/views/letter/Intro'
+import Watching from '@/views/letter/Watching'
+import Recording from '@/views/letter/Recording'
+import Listening from '@/views/letter/Listening'
+import PabloPopup1 from '@/views/letter/PabloPopup1'
+import PabloPopup2 from '@/views/letter/PabloPopup2'
+import Completion from '@/views/letter/Completion'
 
 import MyGallery from '@/views/myGallery/MyGallery'
 import MyGalleryDetail from '@/views/myGallery/MyGalleryDetail'
 
+import Agreement from '@/views/useLater/Agreement'
+import LoadingSpinnerWaiting from '@/views/useLater/LoadingSpinnerWaiting'
 
 Vue.use(VueRouter)
 
@@ -70,14 +75,14 @@ const routes = [
     component: PabloMain
   },
   {
-    path: '/PabloStudy1',
-    name: 'PabloStudy1',
-    component: PabloStudy1
+    path: '/Intro',
+    name: 'Intro',
+    component: Intro
   },
   {
-    path: '/PabloStudy3',
-    name: 'PabloStudy3',
-    component: PabloStudy3
+    path: '/Watching',
+    name: 'Watching',
+    component: Watching
   },
   {
     path: '/PabloPopup1',
@@ -90,19 +95,19 @@ const routes = [
     component: PabloPopup2
   },
   {
-    path: '/thoughtRecords',
-    name: 'thoughtRecords',
-    component: thoughtRecords
+    path: '/Recording',
+    name: 'Recording',
+    component: Recording
   },
   {
-    path: '/PabloStudy6',
-    name: 'PabloStudy6',
-    component: PabloStudy6
+    path: '/Completion',
+    name: 'Completion',
+    component: Completion
   },
   {
-    path: '/peopleThinking',
-    name: 'peopleThinking',
-    component: peopleThinking
+    path: '/Listening',
+    name: 'Listening',
+    component: Listening
   },
   {
     path:'/MyGallery',

@@ -5,7 +5,7 @@
                :okText="'네'"
                :cancelText="'아니요'"
                :text="'정말 뒤로 가시겠어요?'">
-      <button class="symbol" @click="globalUtils.confirm(slotProps,'goToBack')">
+      <button class="symbol" @click="globalUtils.confirm(slotProps,'goBack')">
         <img src="@/assets/images/common/arrow_left@2x.png" alt="">
       </button>
       </Confirm>
@@ -86,7 +86,7 @@
         <button class="swipe"><img src="@/assets/images/common/swipe_left_active@2x.png" alt=""></button>
         <button class="swipe"><img src="@/assets/images/common/swipe_right_active@2x.png" alt=""></button>
       </div>
-      <div class="btn-wrap"><router-link to="/canvas?page=study" class="btn btn-dark">다 들었어요!</router-link></div>
+      <div class="btn-wrap"><router-link to="/canvas?page=letter" class="btn btn-dark">다 들었어요!</router-link></div>
 <!--      <div class="btn-wrap"><button class="btn btn-dark disabled">다 들었어요!</button></div>-->
     </div>
   </div>
@@ -100,11 +100,11 @@ export default {
   name: 'peopleThinking',
   components: { Alert, Confirm },
   created() {
-    this.$EventBus.$on('back',this.goToBack)
+    this.$EventBus.$on('back',this.goBack)
   },
   methods : {
-    goToBack(){
-      this.$router.push('/thoughtRecords')
+    goBack(){
+      this.$router.push('/Recording')
     }
   }
 }

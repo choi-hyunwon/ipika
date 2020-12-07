@@ -701,7 +701,7 @@
               <button v-b-modal.clearAllPopup><img src="@/assets/images/common/btn_refresh@2x.png" alt=""></button>
             </div>
           </div>
-          <div v-if="page==='diagnose'||'study'" class="btn-wrap">
+          <div v-if="page==='diagnose'||'letter'" class="btn-wrap">
             <b-button v-b-modal.normalPopup3 class="btn btn-blue btn-lg">다 그렸어요!</b-button>
           </div>
         </div>

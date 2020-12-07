@@ -5,7 +5,7 @@
               :boldText="'정말 뒤로 가시겠어요?'"
               :okText="'네'"
               :cancelText="'아니요'">
-        <button @click="globalUtils.confirm(slotProps,'goToBack')" class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt="">
+        <button @click="globalUtils.confirm(slotProps,'goBack')" class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt="">
         </button>
       </Confirm>
       <div class="box-close">
@@ -20,7 +20,7 @@
         <div class="title">트윙클 스테이지<br/>
           4번째 학습을 완료했어요!</div>
         <div class="btn-group">
-          <button class="btn btn-dark mr">마이갤러리</button>
+          <router-link to="/MainGallery" class="btn btn-dark mr">마이갤러리</router-link>
           <router-link to="/PabloMain" class="btn btn-gray">메인으로</router-link>
         </div>
       </div>

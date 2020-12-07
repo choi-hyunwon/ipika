@@ -6,77 +6,18 @@
     <!-- E guide -->
 
     <!-- 진단 테스트 -->
-    <Confirm v-slot="slotProps">
+    <!--<Confirm v-slot="slotProps">
       <div :visible="showConfirm(slotProps,2)" ></div>
-    </Confirm>
-    <div v-if="page === 'diagnose'" class="header canvas">
+    </Confirm>-->
 
-      <div class="timer red"><!-- 1분 미만일 경우, red 클래스 추가 -->
-        <!--        <div class="img"><img src="@/assets/images/common/timer-black@2x.png" alt=""></div>-->
-        <div class="img"><img src="@/assets/images/common/timer@2x.png" alt=""></div> <!-- 1분 미만일 경우 -->
-        <div class="time">{{timeRemains}}</div>
-      </div>
-      <div class="symbol">
-        <span class="img"><img src="@/assets/images/common/Symbol@2x.png" alt=""></span>
-        <span class="text">{{subject.subject}}</span>
-      </div>
-      <div class="box-close">
-        <!--<router-link to="/" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>-->
-        <!-- TODO: inline-style 추가함 확인 필요 -->
-        <button @click="close" style="padding-top: 0;" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></button>
-      </div>
-    </div>
-
-    <!-- 학습 -->
-    <div v-if="page === 'study'" class="header ivory">
-
-      <!--<router-link to="/thoughtRecords" class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt=""></router-link>-->
-      <Confirm v-slot="slotProps"
-               :okText="'뒤로 갈래요'"
-               :cancelText="'닫기'"
-               :backText="'그림은 저장되지 않습니다.'"
-      >
-
-      <button class="symbol" @click="showConfirm(slotProps,1)">
-          <img src="@/assets/images/common/arrow_left@2x.png" alt="">
-        </button>
-      </Confirm>
-
-      <div class="btn-wrap">
-        <button><img src="@/assets/images/common/img_delete@2x.png" alt=""></button>
-        <button><img src="@/assets/images/common/img_invisible@2x.png" alt=""></button>
-        <div class="time">{{ timeRemains }}</div>
-      </div>
-      <div class="flex-box">
-        <button v-b-modal.videoReviewPopup class="btn-right" @click="popUpOpen" >
-          <span class="img"><img src="@/assets/images/common/ic-play@2x.png" alt=""></span>
-          <span class="tit">영상보기</span>
-        </button>
-
-        <button v-b-modal.watchSubject class="btn-right" @click="popUpOpen">
-          <span class="img"><img src="@/assets/images/common/drawing@2x.png" alt=""></span>
-          <span class="tit">주제보기</span>
-        </button>
-        <button v-b-modal.studyBookPopup class="btn-right" @click="popUpOpen">
-          <span class="img"><img src="@/assets/images/common/ic-img@2x.png" alt="" ></span>
-          <span class="tit">배경교재</span>
-        </button>
-        <div class="box-close">
-          <!--<router-link to="" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>-->
-
-          <!-- TODO: inline-style 추가함 확인 필요 -->
-          <button @click="close" style="padding-top: 0;" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></button>
-        </div>
-      </div>
-    </div>
-
+    <CanvasHeader></CanvasHeader>
     <Wacom :isLoading="isLoading" :drawer="drawer"></Wacom>
 
 
 
     <!-- 진단 테스트 -->
     <!-- s 팝업  -->
-<!--    <b-button v-if="page === 'diagnose'"  v-b-modal.normalPopup style="position: absolute; top: 200px; left: 50px;">진단테스트_3_시간 초과 시 1</b-button>-->
+    <!--<b-button v-if="page === 'diagnose'"  v-b-modal.normalPopup style="position: absolute; top: 200px; left: 50px;">진단테스트_3_시간 초과 시 1</b-button>-->
     <b-modal v-if="page === 'diagnose'" :visible="timeOver" id="timeoverPopup" centered title="진단테스트 : 타임오버" modal-class="normalPopup">
       <template #modal-header>
         <div class="symbol"><img src="@/assets/images/common/timer@2x.png" alt=""></div>
@@ -90,8 +31,8 @@
       </template>
     </b-modal>
 
-<!--    <b-button v-if="page === 'diagnose'" v-b-modal.normalPopup2 style="position: absolute; top: 200px; left: 200px;">진단테스트_3_시간 초과 시 2</b-button>-->
-    <b-modal v-if="page === 'diagnose'||'study'" @show="popUpOpen" @hide="hideInfo" id="clearAllPopup" centered title="진단테스트 : 전체 그림 지우기" modal-class="normalPopup">
+    <!--<b-button v-if="page === 'diagnose'" v-b-modal.normalPopup2 style="position: absolute; top: 200px; left: 200px;">진단테스트_3_시간 초과 시 2</b-button>-->
+    <b-modal v-if="page === 'diagnose'||'letter'" @show="popUpOpen" @hide="hideInfo" id="clearAllPopup" centered title="진단테스트 : 전체 그림 지우기" modal-class="normalPopup">
       <template #modal-header>
         <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>
       </template>
@@ -104,8 +45,8 @@
       </template>
     </b-modal>
 
-<!--    <b-button v-if="page === 'diagnose'" v-b-modal.normalPopup3 style="position: absolute; top: 200px; left: 350px;">진단테스트_3_제출팝업</b-button>-->
-    <b-modal v-if="page === 'diagnose'||'study'" @hide="timerStart" @show="popUpOpen" id="normalPopup3" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">
+    <!--<b-button v-if="page === 'diagnose'" v-b-modal.normalPopup3 style="position: absolute; top: 200px; left: 350px;">진단테스트_3_제출팝업</b-button>-->
+    <b-modal v-if="page === 'diagnose'||'letter'" @hide="setTimerResume" @show="popUpOpen" id="normalPopup3" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">
       <template #modal-header>
         <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>
       </template>
@@ -117,11 +58,10 @@
         <b-button variant="black" class="btn-half" @click=cancel >더 그릴게요!</b-button>
       </template>
     </b-modal>
-
     <!-- s 팝업  -->
 
-<!--    <b-button v-if="page === 'study'" v-b-modal.studyBookPopup style="position: absolute; top: 200px; left: 500px;" @click="popUpOpen">배경교제</b-button>-->
-    <b-modal v-if="page === 'study'" :visible="true" @show="popUpOpen" @hide="hideInfo" id="studyBookPopup" centered hide-footer modal-class="studyBookPopup">
+    <!--<b-button v-if="page === 'letter'" v-b-modal.studyBookPopup style="position: absolute; top: 200px; left: 500px;" @click="popUpOpen">배경교제</b-button>-->
+    <b-modal v-if="page === 'letter'" :visible="true" @show="popUpOpen" @hide="hideInfo" id="studyBookPopup" centered hide-footer modal-class="studyBookPopup">
       <template #default="{ hide,cancel }">
         <button class="btn-close" @click="hide()"><img src="@/assets/images/common/close_dim@2x.png" alt=""></button>
         <div class="content">
@@ -180,7 +120,7 @@
     </b-modal>
     <!-- e 팝업  -->
 
-    <b-modal v-if="page==='diagnose'" :visible="true" @show="popUpOpen" @hide="timerStart" id="oderPopup" centered title="안내" modal-class="textPopup" scrollable ok-only ok-title="네 그려볼게요!" ok-variant="black btn-block">
+    <b-modal v-if="page==='diagnose' && isLoading" :visible="true" @show="popUpOpen" @hide="setTimerResume" id="oderPopup" centered title="안내" modal-class="textPopup" scrollable ok-only ok-title="네 그려볼게요!" ok-variant="black btn-block">
       <template #modal-header>
         <div class="symbol"><img src="@/assets/images/common/Symbol@2x.png" alt=""></div>
       </template>
@@ -189,7 +129,8 @@
         <button size="sm" class="btn btn-black btn-block" @click="cancel()">알겠어요!</button>
       </template>
     </b-modal>
-<!-- 주제보기-->
+
+    <!--주제보기-->
     <b-modal id="watchSubject" centered modal-class="normalPopup" @hide="hideInfo">
       <template #modal-header>
         <div class="symbol"><img src="@/assets/images/common/drawing@2x.png" alt=""></div>
@@ -204,7 +145,7 @@
       </template>
     </b-modal>
 
-<!--    영상보기-->
+    <!--영상보기-->
     <b-modal id="videoReviewPopup" centered hide-footer modal-class="videoReviewPopup" @hide="hideInfo">
       <template #default="{ hide }">
         <div class="bg"><img src="@/assets/images/temp/sample_img_02.png" alt=""></div>
@@ -245,155 +186,138 @@
 
 <script>
 
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 import Wacom from '@/components/Wacom'
 import Confirm from '@/components/popup/Confirm'
+import CanvasHeader from '@/components/CanvasHeader'
 
 
 export default {
   name: 'Canvas',
   components :{
     Wacom,
-    Confirm
+    Confirm,
+    CanvasHeader
   },
   data () {
     return {
       isLoading: false,
-      timeInitVal: 60*2,
-      time: 60*2, // TODO: default 60*2
-      timer: null,
-      timeOver : false,
       drawer : true,
-      subject : {}
+      subject : {},
     }
   },
   created(){
     this.$EventBus.$on('toggleDrawer', (drawer) => {
       this.drawer = drawer;
     });
-    this.$EventBus.$on('back',this.goToBack)
+    this.$EventBus.$on('back',this.goBack)
+    this.$EventBus.$on('close', this.close);
   },
   mounted () {
     if (localStorage.getItem('isReload') === 'true' || localStorage.getItem('isReload') === undefined) window.location.reload()
     else this.isLoading = true
-    this.timerStart()
-    this.fetchSubject()
+
+    ;(async () => {
+      await this.fetchSubject()
+      this.setTimerStart()
+    })()
+
   },
   computed: {
     ...mapGetters({
-      session: 'getSession'
+      session: 'getSession',
+      canvasTimer: 'getCanvasTimer'
     }),
+
     page() {
       return this.$router.currentRoute.query.page
     },
-    timeSetting(){
-      return this.time = this.subject.limitMinute * 60
-    },
-    timeRemains() {
-      let mm = Math.floor(this.time / 60)
-      mm = mm < 10 ? '0' + mm : mm
-      let ss = this.time % 60
-      ss = ss < 10 ? '0' + ss : ss
-      return `${mm} : ${ss}`
+
+    timeOver() {
+      return this.canvasTimer.timeOver
     }
   },
   methods: {
+    ...mapMutations({
+      setTimeInit: 'setTimeInit',
+      setTimerStart: 'setTimerStart',
+      setTimerReset: 'setTimerReset',
+      setTimerPause: 'setTimerPause',
+      setTimerResume: 'setTimerResume'
+    }),
     ...mapActions({
       getUserInfo: 'getUserInfo',
       getSubject: 'getSubject'
     }),
+
     reload(){
       window.location.reload()
     },
-    timerStart() {
-      this.timeOver=false
-      this.timer = setInterval(() => {
-        if (this.time === 0) {
-          this.timeOver=true
-          clearInterval(this.timer)
-          // if (this.page === 'diagnose') {
-          //   this.$router.push('/LoadingSpinnerWaiting')
-          // }
-          if (this.page === 'study') {
-            this.$router.push('/PabloStudy6')
-          }
-        }
-        if(this.time>0){
-          this.time--
-        }
-
-      }, 1000)
-    },
-    reset() {
-      this.time = this.timeInitVal
-      clearInterval(this.timer)
-      this.timer = null
-    },
     goNext() {
-      this.reset()
+      this.setTimerReset()
       if (this.page === 'diagnose') {
-        this.$router.push('/LoadingSpinnerWaiting')
+        this.$router.push('/TestingResult')
       }
-      else if (this.page === 'study') {
-        this.$router.push('/PabloStudy6')
+      else if (this.page === 'letter') {
+        this.$router.push('/Completion')
       }
     },
     goBack(){
-      this.reset()
-      if (this.page === 'study') {
-        this.$router.push('/peopleThinking')
-      }
+      this.$router.push('/peopleThinking')
     },
     close(){
-      this.reset()
+      this.setTimerReset()
       this.$router.push('/')
     },
+
+
     popUpOpen(){
-      clearInterval(this.timer)
-    },
-    reWrite(){
-      this.reset()
-      this.timerStart()
+      this.setTimerPause()
     },
     hideInfo(e){
       if(e.trigger==="backdrop"||"esc"){
-        this.timerStart()
+        this.setTimerResume()
       }
     },
     clear(){
       WILL.clear()
       this.$bvModal.hide('clearAllPopup')
-      this.time = 120
+      this.setTimerReset()
     },
     exportPNG(e){
-      WILL.getImageCanvas().toBlob(function(blob) {
+      /*WILL.getImageCanvas().toBlob(function(blob) {
         const href = URL.createObjectURL(blob);
         console.log(href)
-        /**
+        /!**
          * todo : API날리기
-         */
-      });
+         *!/
+      });*/
       this.goNext()
     },
-    goToBack(){
-      this.$router.push('/peopleThinking')
-    },
     showConfirm(slotProps,number){
-      if(number===1){
-        slotProps.toggleConfirm('goToBack','canvas');
-      }else if(number===2){
-        if(this.time<=0){
+      if(number === 1){
+        slotProps.toggleConfirm('goBack','canvas');
+      }else if(number === 2){
+        if(this.time <= 0){
           slotProps.toggleConfirm('canvasComplete','canvas');
         }
       }
     },
+
+
+    // TODO::
     // 메인 메뉴 조회
-    fetchSubject () {
-      this.getSubject()
-        .then(result => {
-          console.log('fetchSubject :', result)
-          if(result !== undefined) this.subject = result;
-        })
+    async fetchSubject () {
+      // this.getSubject()
+      //   .then(result => {
+      //     console.log('fetchSubject :', result)
+      //
+      //     if(result !== undefined) {
+      //       this.subject = result
+      //       this.setTimeInit(this.subject.limitMinute * 60)
+            this.setTimeInit(1.2 * 60)
+      //     }
+      //   })
     }
   }
 }
@@ -401,26 +325,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.header {
-  .btn-wrap {
-    position: absolute;
-    display: inline-block;
-    top: 3rem;
-    left: 12rem;
-    button {
-      display: inline-block;
-      width: 12.7rem;
-      height: 6rem;
-      img {
-        width: 100%;
-        height: 100%;
-      }
-      &:first-child {
-        margin-right: 1.2rem;
-      }
-    }
-  }
-}
 .guide {
   position: absolute;
   width: 192rem;

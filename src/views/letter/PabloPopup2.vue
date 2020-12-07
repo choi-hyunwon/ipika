@@ -1,8 +1,8 @@
 <template>
   <div class="wrap bg-ivory">
     <div class="header ivory">
-      <div v-b-modal.goToBack class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt="">
-<!--        <b-modal id="goToBack" modal-class="normalPopup">-->
+      <div v-b-modal.goBack class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt="">
+<!--        <b-modal id="goBack" modal-class="normalPopup">-->
 <!--          <template #modal-header>-->
 <!--            <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>-->
 <!--          </template>-->

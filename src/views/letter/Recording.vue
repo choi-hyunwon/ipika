@@ -1,4 +1,5 @@
 <template>
+
   <div class="wrap bg-ivory">
     <div class="header ivory">
 <!--      < style="position: absolute; top: 200px; left: 820px;">뒤로가기 팝업</b-button>-->
@@ -7,7 +8,7 @@
                :cancelText="'닫기'"
                :text ="'지워진 녹음은 다시 들을 수 없어요'"
       >
-      <button class="symbol" @click="globalUtils.confirm(slotProps,'goToBack')">
+      <button class="symbol" @click="globalUtils.confirm(slotProps,'goBack')">
         <img src="@/assets/images/common/arrow_left@2x.png" alt="">
       </button>
       </Confirm>
@@ -47,27 +48,32 @@
         </p>
       </div>
       <div class="record-area">
-        <!-- todo! svg 녹음? -->
+        <av-media type="frequ" :media="media" line-color="darkorange"/>
       </div>
       <div class="play-area">
-        <button><img src="@/assets/images/common/record@2x.png" alt=""></button><!-- 녹음 버튼 -->
-        <button><img src="@/assets/images/common/record_play@2x.png" alt=""></button><!-- 재생 버튼 -->
-        <button><img src="@/assets/images/common/refresh_active@2x.png" alt=""></button><!-- 새로고침 활성화 버튼 -->
-        <button><img src="@/assets/images/common/refresh_default@2x.png" alt=""></button><!-- 새로고침 버튼 -->
+        <audio-recorder
+          ref="recorder"
+          :before-recording="startRecord"
+          :pause-recording="callback"
+          :after-recording="setRecorded"
+          :select-record="callback"
+          :before-upload="callback"
+          :successful-upload="callback"
+          :failed-upload="callback"/>
       </div>
       <div class="btn-area">
-        <router-link to="/peopleThinking" class="btn btn-dark">다했어요!</router-link>
-        <button class="btn btn-dark disabled">다했어요!</button>
+        <router-link to="/Listening" class="btn btn-dark">다했어요!</router-link>
+<!--        <button class="btn btn-dark disabled">다했어요!</button>-->
       </div>
     </div>
-    <Confirm v-slot="slotProps"
-             :complete-text="`다시 녹음하시겠어요? 지금 녹음한 내용은 지워져요`"
-             :text="`지워진 녹음은 다시 들을 수 없어요`"
-             :cancelText="`닫기`"
-             :okText="`다시 녹음할게요`"
-    >
-      <b-button @click="showConfirm(slotProps,3)" style="position: absolute; top: 200px; left: 700px;">새로고침 팝업</b-button>
-    </Confirm>
+<!--    <Confirm v-slot="slotProps"-->
+<!--             :complete-text="`다시 녹음하시겠어요? 지금 녹음한 내용은 지워져요`"-->
+<!--             :text="`지워진 녹음은 다시 들을 수 없어요`"-->
+<!--             :cancelText="`닫기`"-->
+<!--             :okText="`다시 녹음할게요`"-->
+<!--    >-->
+<!--      <b-button @click="globalUtils.confirm(slotProps,'refresh')" style="position: absolute; top: 200px; left: 700px;">새로고침 팝업</b-button>-->
+<!--    </Confirm>-->
   </div>
 </template>
 
@@ -75,21 +81,77 @@
 import Confirm from '@/components/popup/Confirm'
 import Alert from '@/components/popup/Alert'
 export default {
-  name: 'thoughtRecords',
+  name: 'recording',
   components: { Alert, Confirm },
   data(){
     return{
-
+      media: null
     }
   },
   created() {
-    this.$EventBus.$on('back',this.goToBack)
+    this.$EventBus.$on('back',this.goBack)
   },
-
+  mounted () {
+    const audio = this.$refs.player
+    const constraints = {
+      audio: true,
+      video: false
+    }
+    navigator.mediaDevices.getUserMedia(constraints)
+      .then(media => {
+        this.media = media
+        audio.srcObject = media
+      })
+  },
   methods : {
+    goBack () {
+      this.$router.push('/Watching')
+    },
+    callback (data) {
+      console.debug(data)
+    },
+    setPlayerDisabled() {
+      const $player = this.$refs.recorder.$el.querySelector('.ar-player');
+      $player.classList.remove('abled');
+    },
+    setPlayerAbled() {
+      const $player = this.$refs.recorder.$el.querySelector('.ar-player');
+      $player.classList.add('abled');
+    },
+    hideStopBtn() {
+      const $stopBtn = this.$refs.recorder.$el.querySelector('.ar-recorder__stop');
+      $stopBtn.style.display = 'none';
+    },
+    showStopBtn() {
+      const $stopBtn = this.$refs.recorder.$el.querySelector('.ar-recorder__stop');
+      $stopBtn.style.display = 'block';
+    },
+    setRecentRecord() {
+      const recorder = this.$refs.recorder;
+      if (recorder) {
+        const top = recorder.recordList.length - 1;
+        recorder.selected = recorder.recordList[top];
+      }
+    },
 
-    goToBack(){
-      this.$router.push('/PabloStudy3')
+    // 녹음 끝 <audio-recorder ... :after-recording="setRecorded" ... />
+    setRecorded() {
+      // 중지 버튼 hide
+      this.hideStopBtn();
+
+      // 녹음본 저장 및 교체
+      this.setPlayerDisabled();
+      setTimeout(() => {
+        // 마지막 List요소를 selected 오브젝트로 설정해 준다.
+        this.setRecentRecord();
+        this.setPlayerAbled();
+      }, 800);
+    },
+
+    // 녹음 시작 <audio-recorder ... :before-recording="startRecord" ... />
+    startRecord() {
+      // 중지 버튼 show
+      this.showStopBtn();
     }
   }
 }
@@ -97,6 +159,7 @@ export default {
 
 <style lang="scss" scoped>
 .contents {
+  overflow-y: inherit;
   position: relative;
   width: 100%;
   height: calc(100% - 12rem);
@@ -127,12 +190,24 @@ export default {
     top: 40.8rem;
   }
   .play-area {
+    top: 0;
+    left: 0;
     padding-left: 10rem;
-    button {
+    position: relative;
+    .btn_group{
+      position: absolute;
+      top: 0;
+      left: 10rem;
+      .btn-secondary{
+        background-color:initial;
+        border: none;
+      }
+    }
+    .btn {
       display: inline-block;
       width: 12rem;
       height: 12rem;
-      margin-left: 2.4rem;
+      margin-right: 2.4rem;
       img {
         width: 100%;
         height: 100%;
@@ -145,4 +220,140 @@ export default {
     right: 10rem;
   }
 }
+
+[data-v-4f14517c] div.ar {
+  margin-left: 2.4rem;
+  width: 100%;
+  max-width: 51rem;
+  box-shadow:none;
+  background-color: var(--ivory-200);
+  border:none;
+}
+::v-deep .ar-player{
+  display: block;
+  opacity: 1;
+}
+
+
+
+
+::v-deep .ar-icon__lg.ar-player__play {
+  width: 12rem;
+  height: 12rem;
+  background-image: url("~@/assets/images/common/refresh_default@2x.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  cursor: pointer;
+  &.ar-player__play--active {
+    width: 12rem;
+    height: 12rem;
+    background-image: url("~@/assets/images/common/refresh_active@2x.png");
+    background-color: #fff!important;
+    background-repeat: no-repeat;
+    background-size: cover;
+    cursor: pointer;
+  }
+}
+
+::v-deep .ar-icon {
+  border: none;
+  box-shadow: none;
+
+}
+
+::v-deep .ar-icon__lg {
+  background-image: url("~@/assets/images/common/record@2x.png");
+  width: 12rem;
+  height: 12rem;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+
+::v-deep svg {
+  vertical-align: baseline;
+  display: none;
+}
+
+::v-deep div.ar {
+  margin: auto;
+  width: 100%;
+  max-width: 51rem;
+  box-shadow: 0 0.75rem 1.5rem rgba(18, 38, 63, 0.03);
+  background-color: #fff;
+  border: 1px solid #eff2f7;
+  border-radius: 0.375rem;
+}
+
+::v-deep .ar-player {
+  width: 100%;
+}
+
+/* disalbed 처리 */
+::v-deep .ar-player {
+  opacity: 1;
+  cursor: default;
+  &.abled {
+    opacity: 1;
+    cursor: pointer;
+  }
+}
+
+::v-deep .ar-player__time {
+  width: 3.2rem;
+  margin: 0 0.4rem;
+}
+
+::v-deep .ar-records {
+  display: none;
+}
+
+::v-deep .ar-records__record {
+  min-width: 25rem;
+}
+::v-deep .ar-recorder{
+  width: 12rem;
+  height: 12rem;
+  margin-right: 2.4rem;
+}
+
+::v-deep .ar-recorder__duration {
+  font-size: 1.3rem;
+  margin: 0.3rem 0 0 0;
+  display: none;
+}
+
+::v-deep .ar-player-actions {
+  width: 12rem;
+  height: 12rem;
+}
+
+::v-deep .ar-content{
+  padding: 0;
+  flex-direction: row;
+
+}
+
+::v-deep .ar-player > .ar-player-bar{
+  display: none;
+}
+::v-deep .ar-player > .ar-player-bar > .ar-player__progress {
+  max-width: 11rem;
+  display: none;
+}
+
+/* 중지 버튼 레코딩 버튼과 겹치기 */
+
+::v-deep .ar-recorder__stop {
+  top: 0;
+  right: 0;
+  width: 12rem;
+  height: 12rem;
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: none;
+  background-image: url("~@/assets/images/common/record_play@2x.png");
+}
 </style>
+
+
