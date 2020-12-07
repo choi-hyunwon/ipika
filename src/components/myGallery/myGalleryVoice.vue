@@ -47,6 +47,7 @@
             </div>
             <div class="img_title">{{ item.stageName || '스테이지'}} {{ item.stageId || '단계'}}</div>
             <div class="img_desc">{{ item.title || '제목을 불러 올수 없습니다'}}</div>
+
           </li>
         </ul>
       </div>
