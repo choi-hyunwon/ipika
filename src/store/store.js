@@ -18,7 +18,7 @@ export default new Vuex.Store({
    * this.$store.state.CONSTANTS;
    */
   state: {
-    isDummy : false,
+    isDummy : true,
     diagnose : false,
 
     /**

@@ -90,7 +90,7 @@ export default class WebApi {
    * totalViewCount:String-전체공유그림조회수
    * totalReactionCount:String-전체공유그림좋아요수
    */
-  getUesrGallery (options) {
+  getUserGallery (options) {
     return this.request('api/users/gallery', {
       method: 'GET',
       data: {}
@@ -104,7 +104,7 @@ export default class WebApi {
    * 마이갤러리 이미지 및 음성 정보 조회
    * pictures:List
    */
-  getUesrGalleryMypicture (options) {
+  getUserGalleryMypicture (options) {
     return this.request('api/users/gallery/mypicture', {
       method: 'GET',
       data: {}
@@ -118,7 +118,7 @@ export default class WebApi {
    * code:String - 코드
    * message:String - 메시지
    */
-  getUesrGalleryBackground (options) {
+  getUserGalleryBackground (options) {
     return this.request('api/users/gallery/background', {
       method: 'POST',
       data: {}
