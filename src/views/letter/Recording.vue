@@ -48,19 +48,23 @@
         </p>
       </div>
       <div class="record-area">
-        <av-media v-if="ing" ref="media" type="frequ" :media="media" line-color="darkorange"/>
+        <div v-if="!ing">
+          <div v-if="record" style="width: 100%; height: 5px; background-color: #2fca56;"></div>
+          <div v-else style="width: 100%; height: 5px; background-color: #1585ff;"></div>
+        </div>
+        <av-media class="_media" ref="media" type="frequ" :media="media" line-color="#f53c32"/>
       </div>
       <div class="play-area">
         <audio-recorder
           ref="recorder"
           :before-recording="startRecord"
-          :after-recording="setRecorded"/>
+          :after-recording="stopRecord"/>
         <Confirm v-slot="slotProps"
                  :complete-text="`다시 녹음하시겠어요? 지금 녹음한 내용은 지워져요`"
                  :text="`지워진 녹음은 다시 들을 수 없어요`"
                  :cancelText="`닫기`"
                  :okText="`다시 녹음할게요`">
-          <button v-if="!record" @click="globalUtils.confirm(slotProps,'refresh')" style="position: absolute; bottom: 0"><img src="@/assets/images/common/refresh_active@2x.png" alt=""></button>
+          <button v-if="!record" @click="globalUtils.confirm(slotProps,'checkRed')" style="position: absolute; bottom: 0"><img src="@/assets/images/common/refresh_active@2x.png" alt=""></button>
           <button v-if="record" style="position: absolute; bottom: 0"><img src="@/assets/images/common/refresh_default@2x.png" alt=""></button>
         </Confirm>
       </div>
@@ -81,27 +85,31 @@ export default {
   data(){
     return{
       media: null,
+      constraints : {
+        audio: true,
+        video: false
+      },
       ing : false,
       record : true
     }
   },
   created() {
     this.$EventBus.$on('back',this.goBack)
-    this.$EventBus.$on('next', () => {
-      this.record = true
-      $('.ar-recorder').show()
-      $('.ar-player').hide()
-    });
+    this.$EventBus.$on('next', this.todoRemove);
   },
   mounted () {
-    this.setPlayer();
-    this.globalUtils.tts('정윤님은 이 주제에 대해 어떻게 생각해요? 생각을 들려주세요')
-    navigator.mediaDevices.getUserMedia({ audio: true, video: false })
+    this.todoRemove()
+    this.globalUtils.tts('파블로하기싫어!!!!!!!!')
+    navigator.mediaDevices.getUserMedia(this.constraints)
       .then(media => {
         this.media = media
       })
   },
   watch :{
+    'ing':function (){ // TODO 퍼블리싱 완료 후 제거
+      if(this.ing) $('._media').show()
+      else $('._media').hide()
+    },
     'record':function (){ // TODO 퍼블리싱 완료 후 제거
       if(this.record) {
         $('.ar-recorder').show()
@@ -116,19 +124,16 @@ export default {
     goBack () {
       this.$router.push('/Watching')
     },
-    callback (data) {
-      console.debug(data)
-    },
     startRecord() {
       this.ing = true
-      this.showStopBtn();
+      this.setRecordAbled()
     },
-    setRecorded() {
+    stopRecord() {
       this.ing = false
       this.record = false
-      this.setRecord()
+      this.setPlayerAbled()
       setTimeout(() => {
-        this.setRecentRecord()
+        this.setRecentRecord();
       }, 800);
     },
     setRecentRecord() {
@@ -138,19 +143,21 @@ export default {
         recorder.selected = recorder.recordList[top];
       }
     },
-    setPlayer() {
-      const $player = this.$refs.recorder.$el.querySelector('.ar-player');
-      $player.style.display = 'none';
-    },
-    setRecord() {
-      const $stopBtn = this.$refs.recorder.$el.querySelector('.ar-recorder__stop');
-      $stopBtn.style.display = 'none';
+    setPlayerAbled() { // TODO 퍼블리싱 완료 후 제거
       const $player = this.$refs.recorder.$el.querySelector('.ar-player');
       $player.classList.add('abled');
+      const $stopBtn = this.$refs.recorder.$el.querySelector('.ar-recorder__stop');
+      $stopBtn.style.display = 'none';
     },
-    showStopBtn() { // TODO 퍼블리싱 완료 후 제거
+    setRecordAbled() { // TODO 퍼블리싱 완료 후 제거
       const $stopBtn = this.$refs.recorder.$el.querySelector('.ar-recorder__stop');
       $stopBtn.style.display = 'block';
+    },
+    todoRemove(){ // TODO 퍼블리싱 완료 후 제거
+      this.record = true
+      $('._media').hide()
+      $('.ar-player').hide()
+      $('.ar-recorder').show()
     }
   }
 }
@@ -184,7 +191,7 @@ export default {
     position: absolute;
     width: 100%;
     height: 27.1rem;
-    background-color: pink;
+    background-color: var(--ivory-200);
     top: 40.8rem;
   }
   .play-area {
@@ -306,8 +313,9 @@ export default {
 ::v-deep .ar-player > .ar-player-bar{
   display: none;
 }
-
-
+::v-deep .ar-player > .ar-player-bar > .ar-player__progress {
+  max-width: 110px;
+}
 ::v-deep .ar-recorder__duration {
   font-size: 1.3rem;
   margin: 0.3rem 0 0 0;
