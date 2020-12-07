@@ -116,9 +116,12 @@
              autoOpen=true></Confirm>
     <div class="flex-box">
       <Alert v-slot="slotProps"
-             text="subject"
-              autoOpen="true">
+             :text="'subject'"
+              :autoOpen=true>
       </Alert>
+      <Confirm v-slot="slotProps">
+      </Confirm>
+
     </div>
 <!--    <b-modal v-if="page==='diagnose' && isLoading" :visible="true" @show="popUpOpen" @hide="setTimerResume" id="oderPopup" centered title="안내" modal-class="textPopup" scrollable ok-only ok-title="네 그려볼게요!" ok-variant="black btn-block">-->
 <!--      <template #modal-header>-->
@@ -219,12 +222,9 @@ export default {
   mounted () {
     if (localStorage.getItem('isReload') === 'true' || localStorage.getItem('isReload') === undefined) window.location.reload()
     else this.isLoading = true
-
     ;(async () => {
       await this.fetchSubject()
-      if(this.isLoading){
-        this.setTimerStart()
-      }
+
     })()
   },
   computed: {
@@ -237,20 +237,11 @@ export default {
       return this.$router.currentRoute.query.page
     },
 
-    timeOver() {
-      return this.canvasTimer.timeOver
-    }
+    // timeOver() {
+    //   return this.canvasTimer.timeOver
+    // }
   },
-  watch:{
-    'this.canvasTimer.timeOver':function(){
-      if(this.canvasTimer.timeOver){
-        console.log('true!!!!!!!!!!!!!!!!!!!!!!!!')
-      }else{
-        console.log('false!!!!!!!!!!!!!!!!!!!!!!!!!!!')
-      }
 
-    }
-  },
   methods: {
     ...mapMutations({
       setTimeInit: 'setTimeInit',

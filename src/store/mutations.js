@@ -32,15 +32,9 @@ export const mutations = {
   setTimerStart (state) {
     state.canvasTimer.timeOver = false
     state.canvasTimer.time = state.canvasTimer.timeInitVal
-    console.error("&&&&&&&&&&&&&&&&&&&&&&&&")
-    console.error(state.canvasTimer.timeOver)
     state.canvasTimer.timer = setInterval(() => {
-      if (state.canvasTimer.time === 0) {
-        console.error("#########################")
-        console.error(state.canvasTimer.timeOver)
+      if (state.canvasTimer.time === 55) {
         state.canvasTimer.timeOver = true
-        console.error("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
-        console.error(state.canvasTimer.timeOver)
         clearInterval(this.timer)
       }
       if (state.canvasTimer.time > 55) {
@@ -69,6 +63,6 @@ export const mutations = {
         state.canvasTimer.time--
       }
     }, 1000)
-  },
+  }
   /* // timer */
 }

@@ -9,12 +9,6 @@
         </div>
       </template>
 
-<!--      canvase time header-->
-<!--      <template v-if="type==='canvasComplete'" #modal-header>-->
-<!--        <div class="symbol">-->
-<!--          <img src="@/assets/images/common/timer@2x.png" alt="">-->
-<!--        </div>-->
-<!--      </template>-->
 <!--     본문  -->
       <template v-if= "type==='goBack'">
         <p class="text">정말 뒤로 가시겠어요?</p>
@@ -82,7 +76,7 @@
 <!--    </b-modal>-->
 
 
-    <b-modal v-if="type === 'diagnose'" id="timeoverPopup" centered title="진단테스트 : 타임오버" modal-class="normalPopup">
+    <b-modal v-if="type === 'diagnose'" id="timeoverPopup" centered title="진단테스트 : 타임오버" modal-class="normalPopup" v-model="showConfirm">
       <template #modal-header>
         <div class="symbol"><img src="@/assets/images/common/timer@2x.png" alt=""></div>
       </template>
@@ -91,7 +85,7 @@
       <p class="text-sm">다시 그리면 먼저 그린 그림은 사라져요</p>
       <template #modal-footer="{ cancel }">
         <b-button @click="clear" variant="blue" class="btn-half">다시 그릴래요!</b-button>
-        <b-button @click="exportPNG" variant="black" class="btn-half">제출할게요</b-button>
+        <b-button @click="goToNext()" variant="black" class="btn-half">제출할게요</b-button>
       </template>
     </b-modal>
 
@@ -129,10 +123,16 @@ export default {
   },
   computed:{
     ...mapGetters({
-      getCanvasTimer : 'getCanvasTimer',
+      canvasTimer : 'getCanvasTimer',
     }),
-    timeOver(){
-      return this.getCanvasTimer.timeOver
+  },
+  watch:{
+    'canvasTimer.timeOver':function(){
+      if(this.canvasTimer.timeOver){
+        console.log("timeOver")
+        this.type="diagnose"
+        this.showConfirm = true
+      }
     }
   },
   props:{
@@ -165,7 +165,8 @@ export default {
     ...mapMutations({
       setTimeInit : 'setTimeInit',
       setTimerReset : 'setTimerReset',
-      setTimerStart : 'setTimerStart'
+      setTimerStart : 'setTimerStart',
+      setTimerPause : 'setTimerPause'
     }),
     toggleConfirm(type,topic){
       this.showConfirm  = !this.showConfirm;
@@ -186,7 +187,6 @@ export default {
       WILL.clear()
       this.$refs['confirmModal'].hide()
       this.setTimerReset();
-      this.setTimerStart();
     },
   }
 }
