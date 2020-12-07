@@ -18,7 +18,7 @@ export default new Vuex.Store({
    * this.$store.state.CONSTANTS;
    */
   state: {
-    isDummy : false,
+    isDummy : true,
     diagnose : false,
 
     /**
@@ -44,7 +44,7 @@ export default new Vuex.Store({
      * API session options
      */
     session: {
-      'user_id': 'testplan56',
+      'user_id': 'test107',
       'user_auth_key': 'abcdefghijklmnopqrstuvwxyz0123456789',
       'Content_Language': 'ko',
       'device_type': '1001'
@@ -52,7 +52,7 @@ export default new Vuex.Store({
     subject: {},
     result: {},
     userGallery: {},
-    uesrGalleryMypicture: {},
+    UserGalleryMypicture: {},
   },
   /**
    * global로 사용하는 getters
@@ -77,8 +77,8 @@ export default new Vuex.Store({
     getUserGallery: state => {
       return state.userGallery
     },
-    getUesrGalleryMypicture: state => {
-      return state.uesrGalleryMypicture
+    getUserGalleryMypicture: state => {
+      return state.UserGalleryMypicture
     },
 
 
