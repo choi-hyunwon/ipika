@@ -99,7 +99,7 @@ export default {
   },
   mounted () {
     this.todoRemove()
-    this.globalUtils.tts('파블로하기싫어!!!!!!!!')
+    this.globalUtils.tts('정윤님은 이 주제에 대해 어떻게 생각해요? 생각을 들려주세요')
     navigator.mediaDevices.getUserMedia(this.constraints)
       .then(media => {
         this.media = media
