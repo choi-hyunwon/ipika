@@ -18,32 +18,25 @@
     <!-- 진단 테스트 -->
     <!-- s 팝업  -->
     <!--<b-button v-if="page === 'diagnose'"  v-b-modal.normalPopup style="position: absolute; top: 200px; left: 50px;">진단테스트_3_시간 초과 시 1</b-button>-->
-    <b-modal v-if="page === 'diagnose'" :visible="timeOver" id="timeoverPopup" centered title="진단테스트 : 타임오버" modal-class="normalPopup">
-      <template #modal-header>
-        <div class="symbol"><img src="@/assets/images/common/timer@2x.png" alt=""></div>
-      </template>
-      <p class="text">시간이 초과되었어요!<br/>
-        제출하시겠어요?</p>
-      <p class="text-sm">다시 그리면 먼저 그린 그림은 사라져요</p>
-      <template #modal-footer="{ cancel }">
-        <b-button @click="clear" variant="blue" class="btn-half">다시 그릴래요!</b-button>
-        <b-button @click="exportPNG" variant="black" class="btn-half">제출할게요</b-button>
-      </template>
-    </b-modal>
+
+    <Confirm v-slot="slotProps">
+
+    </Confirm>
+
 
     <!--<b-button v-if="page === 'diagnose'" v-b-modal.normalPopup2 style="position: absolute; top: 200px; left: 200px;">진단테스트_3_시간 초과 시 2</b-button>-->
-    <b-modal v-if="page === 'diagnose'||'letter'" @show="popUpOpen" @hide="hideInfo" id="clearAllPopup" centered title="진단테스트 : 전체 그림 지우기" modal-class="normalPopup">
-      <template #modal-header>
-        <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>
-      </template>
-      <p class="text">다시 그리시겠어요?<br/>
-        지금 그린 그림이 지워져요</p>
-      <p class="text-sm">제출하면 파블로가 그림을 분석할 거예요 :)</p>
-      <template #modal-footer="{ cancel }">
-        <b-button @click="exportPNG" variant="blue" class="btn-half">제출할게요</b-button>
-        <b-button @click="clear" variant="black" class="btn-half">다시 그릴게요!</b-button>
-      </template>
-    </b-modal>
+<!--    <b-modal v-if="page === 'diagnose'||'letter'" @show="popUpOpen" @hide="hideInfo" id="clearAllPopup" centered title="진단테스트 : 전체 그림 지우기" modal-class="normalPopup">-->
+<!--      <template #modal-header>-->
+<!--        <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>-->
+<!--      </template>-->
+<!--      <p class="text">다시 그리시겠어요?<br/>-->
+<!--        지금 그린 그림이 지워져요</p>-->
+<!--      <p class="text-sm">제출하면 파블로가 그림을 분석할 거예요 :)</p>-->
+<!--      <template #modal-footer="{ cancel }">-->
+<!--        <b-button @click="exportPNG" variant="blue" class="btn-half">제출할게요</b-button>-->
+<!--        <b-button @click="clear" variant="black" class="btn-half">다시 그릴게요!</b-button>-->
+<!--      </template>-->
+<!--    </b-modal>-->
 
     <!--<b-button v-if="page === 'diagnose'" v-b-modal.normalPopup3 style="position: absolute; top: 200px; left: 350px;">진단테스트_3_제출팝업</b-button>-->
     <b-modal v-if="page === 'diagnose'||'letter'" @hide="setTimerResume" @show="popUpOpen" id="normalPopup3" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">
@@ -119,16 +112,23 @@
       </template>
     </b-modal>
     <!-- e 팝업  -->
-
-    <b-modal v-if="page==='diagnose' && isLoading" :visible="true" @show="popUpOpen" @hide="setTimerResume" id="oderPopup" centered title="안내" modal-class="textPopup" scrollable ok-only ok-title="네 그려볼게요!" ok-variant="black btn-block">
-      <template #modal-header>
-        <div class="symbol"><img src="@/assets/images/common/Symbol@2x.png" alt=""></div>
-      </template>
-      <p class="text">{{subject.subject}}</p>
-      <template #modal-footer="{ cancel }">
-        <button size="sm" class="btn btn-black btn-block" @click="cancel()">알겠어요!</button>
-      </template>
-    </b-modal>
+    <Confirm v-slot="slotProps"
+             autoOpen=true></Confirm>
+    <div class="flex-box">
+      <Alert v-slot="slotProps"
+             text="subject"
+              autoOpen="true">
+      </Alert>
+    </div>
+<!--    <b-modal v-if="page==='diagnose' && isLoading" :visible="true" @show="popUpOpen" @hide="setTimerResume" id="oderPopup" centered title="안내" modal-class="textPopup" scrollable ok-only ok-title="네 그려볼게요!" ok-variant="black btn-block">-->
+<!--      <template #modal-header>-->
+<!--        <div class="symbol"><img src="@/assets/images/common/Symbol@2x.png" alt=""></div>-->
+<!--      </template>-->
+<!--      <p class="text">{{subject.subject}}</p>-->
+<!--      <template #modal-footer="{ cancel }">-->
+<!--        <button size="sm" class="btn btn-black btn-block" @click="cancel()">알겠어요!</button>-->
+<!--      </template>-->
+<!--    </b-modal>-->
 
     <!--주제보기-->
     <b-modal id="watchSubject" centered modal-class="normalPopup" @hide="hideInfo">
@@ -190,11 +190,13 @@ import { mapActions, mapGetters, mapMutations } from 'vuex'
 import Wacom from '@/components/Wacom'
 import Confirm from '@/components/popup/Confirm'
 import CanvasHeader from '@/components/CanvasHeader'
+import Alert from '@/components/popup/Alert'
 
 
 export default {
   name: 'Canvas',
   components :{
+    Alert,
     Wacom,
     Confirm,
     CanvasHeader
@@ -212,6 +214,7 @@ export default {
     });
     this.$EventBus.$on('back',this.goBack)
     this.$EventBus.$on('close', this.close);
+
   },
   mounted () {
     if (localStorage.getItem('isReload') === 'true' || localStorage.getItem('isReload') === undefined) window.location.reload()
@@ -219,9 +222,10 @@ export default {
 
     ;(async () => {
       await this.fetchSubject()
-      this.setTimerStart()
+      if(this.isLoading){
+        this.setTimerStart()
+      }
     })()
-
   },
   computed: {
     ...mapGetters({
@@ -235,6 +239,16 @@ export default {
 
     timeOver() {
       return this.canvasTimer.timeOver
+    }
+  },
+  watch:{
+    'this.canvasTimer.timeOver':function(){
+      if(this.canvasTimer.timeOver){
+        console.log('true!!!!!!!!!!!!!!!!!!!!!!!!')
+      }else{
+        console.log('false!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+      }
+
     }
   },
   methods: {
@@ -270,7 +284,6 @@ export default {
       this.$router.push('/')
     },
 
-
     popUpOpen(){
       this.setTimerPause()
     },
@@ -294,15 +307,15 @@ export default {
       });*/
       this.goNext()
     },
-    showConfirm(slotProps,number){
-      if(number === 1){
-        slotProps.toggleConfirm('goBack','canvas');
-      }else if(number === 2){
-        if(this.time <= 0){
-          slotProps.toggleConfirm('canvasComplete','canvas');
-        }
-      }
-    },
+    // showConfirm(slotProps,number){
+    //   if(number === 1){
+    //     slotProps.toggleConfirm('goBack','canvas');
+    //   }else if(number === 2){
+    //     if(this.time <= 0){
+    //       slotProps.toggleConfirm('canvasComplete','canvas');
+    //     }
+    //   }
+    // },
 
 
     // TODO::
@@ -315,7 +328,7 @@ export default {
       //     if(result !== undefined) {
       //       this.subject = result
       //       this.setTimeInit(this.subject.limitMinute * 60)
-            this.setTimeInit(1.2 * 60)
+            this.setTimeInit(1 * 60)
       //     }
       //   })
     }

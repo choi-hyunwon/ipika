@@ -65,6 +65,16 @@
         </router-link>
       </template>
     </b-modal>
+
+    <b-modal v-if="type==='diagnose'" id="oderPopup" centered title="안내" modal-class="textPopup" ok-variant="black btn-block" v-model="showAlert">
+      <template #modal-header>
+        <div class="symbol"><img src="@/assets/images/common/Symbol@2x.png" alt=""></div>
+      </template>
+      <p class="text">{{text}}</p>
+      <template #modal-footer="{ cancel }">
+        <button size="sm" class="btn btn-black btn-block" @click="cancel()">알겠어요!</button>
+      </template>
+    </b-modal>
   </div>
 </template>
 
@@ -78,6 +88,13 @@ export default {
       modalShow : true
     }
   },
+  created () {
+    if(this.autoOpen === 'true'){
+      this.showAlert = true
+      this.type='diagnose'
+      console.log('ok')
+    }
+  },
   props:{
     boldText:{
       String,
@@ -88,6 +105,10 @@ export default {
       default(){return ''}
     },
     buttonText : {
+      String,
+      default(){return ''}
+    },
+    autoOpen : {
       String,
       default(){return ''}
     }
