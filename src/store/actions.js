@@ -10,10 +10,8 @@ export const actions = {
     return data
   },
   getMainMenu ({ commit }, options) {
-    console.log(`getMainMenu`)
     return webApi.getMainmenu(options)
       .then(data => {
-        commit('setCategoryItems', data)
         return data
       })
   },
