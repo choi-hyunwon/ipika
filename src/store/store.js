@@ -121,6 +121,12 @@ export default new Vuex.Store({
         stepAudioMainText : state.letter.stepAudioMainText,
         stepAudioSubText : state.letter.stepAudioSubText
       }
+    },
+    getLetterAudioList : state => {
+      return state.letter.audioCharacterList
+    },
+    getLetterCanvasList : state => {
+      return state.letter.canvasList
     }
   },
   /**
