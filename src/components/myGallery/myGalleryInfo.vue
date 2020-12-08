@@ -19,24 +19,24 @@
         <div class="text-center name">{{ name }}</div>
         <div class="text-center english-name">{{ result.stageName }}</div>
       </div>
-      <ul class="infomation d-flex">
-        <li class="info">
-          <div>내 그림</div>
-          <div>{{ galleryInfo.totalCount }}</div>
-        </li>
-        <li class="info">
-          <div>공개한 그림</div>
-          <div>{{ galleryInfo.totalSharedCount }}</div>
-        </li>
-        <li class="info">
-          <div>조회 수</div>
-          <div>{{ galleryInfo.totalViewCount }}</div>
-        </li>
-        <li class="info">
-          <div>좋아요 수</div>
-          <div>{{ galleryInfo.totalReactionCount }}</div>
-        </li>
-      </ul>
+<!--      <ul class="infomation d-flex">-->
+<!--        <li class="info">-->
+<!--          <div>내 그림</div>-->
+<!--          <div>{{ galleryInfo.totalCount }}</div>-->
+<!--        </li>-->
+<!--        <li class="info">-->
+<!--          <div>공개한 그림</div>-->
+<!--          <div>{{ galleryInfo.totalSharedCount }}</div>-->
+<!--        </li>-->
+<!--        <li class="info">-->
+<!--          <div>조회 수</div>-->
+<!--          <div>{{ galleryInfo.totalViewCount }}</div>-->
+<!--        </li>-->
+<!--        <li class="info">-->
+<!--          <div>좋아요 수</div>-->
+<!--          <div>{{ galleryInfo.totalReactionCount }}</div>-->
+<!--        </li>-->
+<!--      </ul>-->
     </div>
   </div>
 </template>
@@ -92,7 +92,83 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 
+.bgc-section {
+  position: relative;
+  .bg {
+    width: 192rem;
+    height: 40rem;
+  }
+  .setting-img{
+    cursor:pointer;
+    position: absolute;
+    bottom: 4rem;
+    right: 4rem;
+    width: 8rem;
+    height: 8rem;
+
+  }
+}
+.info-section {
+  height: 24rem;
+  position: relative;
+  justify-content: center;
+  .profile_r{
+    position: relative;
+    .profile_a{
+      position: absolute;
+      width: 4.8rem;
+      height: 4.8rem;
+      bottom: 0.4rem;
+      right: 0.4rem;
+    }
+  }
+  .profile {
+    position: absolute;
+    width: 16rem;
+    height: 16rem;
+    top: -8rem;
+    .name {
+      margin-top: 1.6rem;
+      line-height: 4rem;
+      font-size: 2.4rem;
+      letter-spacing: -0.03rem;
+      margin-bottom: 0.2rem;
+      position: relative;
+      overflow: hidden;
+      height: 4rem;
+    }
+
+    .english-name {
+      font-size: 2rem;
+      line-height: 3.6rem;
+      color: var(--greyish);
+    }
+  }
+
+  .infomation {
+    text-align: center;
+    margin-top: 21.4rem;
+    width: 67.2rem;
+    justify-content: space-between;
+    .info {
+      div {
+        letter-spacing: -0.03rem;
+        &:first-child {
+          font-size: 2.4rem;
+          color: var(--greyish);
+          line-height: 4rem;
+        }
+
+        &:last-child {
+          font-size: 2.8rem;
+          margin-top: 0.8rem;
+          line-height: 4.4rem;
+          font-family: 'Inter';
+        }
+      }
+    }
+  }
+}
 </style>
-

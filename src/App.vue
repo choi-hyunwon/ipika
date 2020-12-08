@@ -13,12 +13,10 @@ export default {
 </script>
 
 <style lang="scss">
-@import '@/assets/scss/galleryPopup.scss';
 @import '@/assets/scss/common';
 @import '@/assets/scss/fonts';
 @import '@/assets/scss/layout';
 @import '@/assets/scss/popup';
-@import '@/assets/scss/gallery';
 </style>
 
 <style>
