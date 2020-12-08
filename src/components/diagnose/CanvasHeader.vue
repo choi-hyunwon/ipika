@@ -9,7 +9,7 @@
     </div>
     <div class="symbol">
       <span class="img"><img src="@/assets/images/common/Symbol@2x.png" alt=""></span>
-      <span class="text">{{subject.subject}}</span>
+      <span class="text"></span>
     </div>
     <div class="box-close">
       <!-- TODO: inline-style 추가함 확인 필요 -->

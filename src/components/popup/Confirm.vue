@@ -32,7 +32,17 @@
         <p class="text-sm">{{text}}</p>
       </template>
 
+      <template v-else-if="type==='refresh'">
+        <p class="text">{{completeText}}</p>
+        <p class="text-sm">{{text}}</p>
+      </template>
+
       <template v-else-if="type==='diagnose'">
+        <p class="text">{{completeText}}</p>
+        <p class="text-sm">{{text}}</p>
+      </template>
+
+      <template v-else-if="type==='letter'">
         <p class="text">{{completeText}}</p>
         <p class="text-sm">{{text}}</p>
       </template>
@@ -54,6 +64,11 @@
         <b-button @click="goToNext" variant="black" class="btn-black btn-half">{{okText}}</b-button>
       </template>
 
+      <template v-else-if="type==='refresh'" #modal-footer="{ cancel }">
+        <b-button variant="gray" class="btn-half" @click="cancel()">{{cancelText}}</b-button>
+        <b-button @click="clear" variant="black" class="btn-black btn-half">{{okText}}</b-button>
+      </template>
+
       <template v-else-if="type==='watchComplete'" #modal-footer="{ cancel }">
         <b-button variant="gray" class="btn-half"  @click="cancel()">다시 볼래요</b-button>
         <router-link to="/Recording" class="btn btn-black btn-half">넘어갈게요</router-link>
@@ -62,6 +77,11 @@
       <template v-else-if="type==='diagnose'"  #modal-footer="{ cancel }">
         <b-button variant="gray" class="btn-half"  @click="modalCancel">{{cancelText}}</b-button>
         <router-link to="/TestingResult" class="btn btn-black btn-half">{{okText}}</router-link>
+      </template>
+
+      <template v-else-if="type==='letter'"  #modal-footer="{ cancel }">
+        <button @click="isComplete" class="btn btn-black btn-half">{{cancelText}}</button>
+        <b-button variant="gray" class="btn-half" @click="modalCancel">{{okText}}</b-button>
       </template>
     </b-modal>
 
@@ -161,6 +181,14 @@ export default {
     modalCancel(){
       this.$refs.confirmModal.hide()
       this.setTimerResume();
+    },
+    isComplete(){
+      // if(complete){
+      //   return this.$route.push('/pablomain')
+      // }else{
+      //   return this.$route.push('/pablomain')
+      // }
+      return this.$router.push('/pablomain')
     }
   }
 }
