@@ -9,7 +9,7 @@
     </div>
     <div class="symbol">
       <span class="img"><img src="@/assets/images/common/Symbol@2x.png" alt=""></span>
-      <span class="text">주제 노출 필요</span>
+      <span class="text">{{subject.subject}}</span>
     </div>
     <div class="box-close">
       <!-- TODO: inline-style 추가함 확인 필요 -->
@@ -23,15 +23,18 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'CanvasHeader',
+  data(){
+    return{
+    }
+  },
   computed: {
     ...mapGetters({
-      canvasTimer: 'getCanvasTimer'
+      canvasTimer: 'getCanvasTimer',
+      subject : 'getSubject'
     }),
-
     timeInit() {
       return this.canvasTimer.timeInitVal
     },
-
     time() {
       let mm = Math.floor(this.canvasTimer.time / 60)
       mm = mm < 10 ? '0' + mm : mm

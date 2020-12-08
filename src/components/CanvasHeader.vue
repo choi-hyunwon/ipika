@@ -14,6 +14,12 @@ export default {
     page () {
       return this.$router.currentRoute.query.page
     }
+  },
+  props:{
+    timer : {
+      Number,
+      default(){return null}
+    }
   }
 }
 </script>

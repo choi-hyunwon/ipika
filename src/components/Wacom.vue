@@ -696,6 +696,8 @@
               </button>
             </div>
             <div class="btn-tool">
+
+
               <Confirm v-slot="slotProps"
                        :completeText="'다시 그리시겠어요?'"
                        :text="'조금 전 그림은 사라져요'"
