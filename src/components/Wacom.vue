@@ -796,7 +796,7 @@ export default {
     toggleConfirm(type,topic){
       this.showConfirm = !this.showConfirm;
       this.type = type
-    },
+    }
   }
 }
 </script>

@@ -72,13 +72,6 @@ export default {
     return{
       showAlert : false,
       type : "",
-      modalShow : true
-    }
-  },
-  created () {
-    if(this.autoOpen === true){
-      this.showAlert = true
-      this.type='diagnose'
     }
   },
   props:{
@@ -94,14 +87,6 @@ export default {
       String,
       default(){return ''}
     },
-    autoOpen : {
-      Boolean,
-      default(){return false}
-    },
-    isLoading :{
-      Boolean,
-      default(){return false}
-    }
   },
   watch : {
     'type' :function (){
