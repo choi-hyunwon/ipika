@@ -717,14 +717,13 @@
                       :cancelText = "'아니요'"
                       :okText = "'제출하기'">
               <b-button v-if="page==='diagnose'" @click="globalUtils.confirm(slotProps,'diagnose')" class="btn btn-blue btn-lg">완료</b-button>
-              <b-button v-if="page==='letter'" @click="globalUtils.confirm(slotProps,'letter')" class="btn btn-blue btn-lg">완료</b-button>
             </Confirm>
             <Confirm v-slot="slotProps"
                      :completeText="'배경교재1이 저장되었어요 남은 그림도 더 그려볼까요?'"
                      :text="'모든 배경교재를 그려야 학습과정이 완료돼요'"
                      :cancelText = "'아니요'"
                      :okText = "'네'">
-              <b-button v-if="page==='letter'" @click="globalUtils.confirm(slotProps,'letter')" class="btn btn-blue btn-lg">다 그렸어요!</b-button>
+              <b-button v-if="page==='letter'" @click="globalUtils.confirm(slotProps,'letter')" class="btn btn-blue btn-lg">완료</b-button>
             </Confirm>
           </div>
         </div>
