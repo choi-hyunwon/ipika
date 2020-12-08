@@ -716,8 +716,8 @@
                       :text="'제출하면 수정할 수 없어요!'"
                       :cancelText = "'아니요'"
                       :okText = "'제출하기'">
-              <b-button v-if="page==='diagnose'" @click="globalUtils.confirm(slotProps,'diagnose')" class="btn btn-blue btn-lg">다 그렸어요!</b-button>
-              <b-button v-if="page==='letter'" @click="globalUtils.confirm(slotProps,'letter')" class="btn btn-blue btn-lg">다 그렸어요!</b-button>
+              <b-button v-if="page==='diagnose'" @click="globalUtils.confirm(slotProps,'diagnose')" class="btn btn-blue btn-lg">완료</b-button>
+              <b-button v-if="page==='letter'" @click="globalUtils.confirm(slotProps,'letter')" class="btn btn-blue btn-lg">완료</b-button>
             </Confirm>
           </div>
         </div>
