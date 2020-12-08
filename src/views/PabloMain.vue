@@ -94,6 +94,11 @@ export default {
 .wrap {
   .left {
     position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 800px;
+    justify-content: center;
     .symbol {
       position: absolute;
       width: 4rem;
@@ -140,8 +145,7 @@ export default {
       }
     }
     .title-list {
-      padding-left: 19.5rem;
-      padding-top: 24.2rem;
+
       li {
         position: relative;
         line-height: 9.6px;
