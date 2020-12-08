@@ -1,18 +1,11 @@
 <template>
-  <!--학습하기-->
   <Letter v-if="page === 'letter'" ></Letter>
-  <!--진단하기-->
   <Diagnose v-else-if="page === 'diagnose'"></Diagnose>
-  <!--프리드로잉-->
   <div v-else class="header ivory">
-    <router-link to="/Pablomain" class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt=""></router-link>
+    <router-link to="/PabloMain" class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt=""></router-link>
     <div class="flex-box">
       <div class="box-close">
-        <router-link to="/Pablomain">
-          <button style="padding-top: 0;" class="btn-close">
-            <img src="@/assets/images/common/close@2x.png" alt="">
-          </button>
-        </router-link>
+        <router-link to="/PabloMain" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>
       </div>
     </div>
   </div>

@@ -73,7 +73,13 @@ export default new Vuex.Store({
       liveui: false,
       Thumnail : ''
     },
-    letter : {}
+    letter : {},
+    bg : {
+      imgUrl : '',
+      subject : '',
+      active : false,
+      type : 'hide'
+    }
   },
   /**
    * global로 사용하는 getters
@@ -127,6 +133,9 @@ export default new Vuex.Store({
     },
     getLetterCanvasList : state => {
       return state.letter.canvasList
+    },
+    getBg :state => {
+      return state.bg
     }
   },
   /**
