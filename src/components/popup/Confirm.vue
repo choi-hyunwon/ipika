@@ -123,18 +123,23 @@ export default {
     ok(){
       if(this.type==='goBack'){
         this.goBack()
+        this.showConfirm = false
       }else if(this.type==='Complete'||this.type==='checkRed'||this.type==='diagnose'||this.type==='refresh'){
         this.goToNext()
       }else if(this.type==='watchComplete'){
         this.$route.push('/Recording')
       }else if(this.type==='letter'){
         this.modalCancel()
+        this.showConfirm = false
       }
     },
-    cancleA() {
+    cancelA() {
       if(this.type === 'diagnose') this.modalCancel()
       else if(this.type === 'letter') this.isComplete()
       else if(this.type==='refresh')  this.clear()
+      else if(this.type==='timeOut') {
+        this.$EventBus.$emit('refresh')
+      }
       else this.showConfirm = false
     }
   }
