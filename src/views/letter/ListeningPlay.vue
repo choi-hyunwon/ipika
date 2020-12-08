@@ -96,14 +96,18 @@
       <router-link to="" class="img">
         <img src="@/assets/images/temp/sample_img_03.png" alt="">
         <!--        큰 원-->
-        <img src="@/assets/images/common/pause_blue@2x.png" alt="" class="btn_toggle">
-        <img src="@/assets/images/common/play_blue@2x.png" alt="" class="btn_toggle">
+        <img v-if="isShowing" :src="IljungPlus" @click="isShowing = !isShowing"  alt="" class="btn_toggle">
         <!--  이미지 같은 위치에 존재함  이미지만 변경하시면되요 토글버튼-->
       </router-link>
       <p class="title">김정윤</p>
     </div>
   </div>
 </template>
+
+
+<!--"@/assets/images/common/pause_blue@2x.png"-->
+<!--"@/assets/images/common/play_blue@2x.png"-->
+
 
 <script>
 import Confirm from '@/components/popup/Confirm'
