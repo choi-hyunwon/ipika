@@ -3,49 +3,15 @@
     <LetterHeader/>
     <div class="contents">
       <div class="txt-area">
-        <p class="txt-lg">다른 친구들은 어떻게<br/>
-          생각하는지 들어볼까요?</p>
-        <p class="txt-sm">
-          친구들의 생각을 듣고, 내 생각과 비교해봐요!
-        </p>
+        <p class="txt-lg">다른 친구들은 어떻게<br/>생각하는지 들어볼까요?</p>
+        <p class="txt-sm">친구들의 생각을 듣고, 내 생각과 비교해봐요!</p>
       </div>
-      <!-- todo! slider? scroll? -->
       <div class="img-slider">
         <ul>
-          <li class="item play">
-            <router-link to="" class="img">
-              <img src="@/assets/images/temp/sample_img_03.png" alt="">
-            </router-link>
-            <p class="title">김정윤</p>
-            <p class="time">00:59</p>
-          </li>
-          <li class="item pause">
-            <router-link to="" class="img">
-              <img src="@/assets/images/temp/sample_img_03.png" alt="">
-            </router-link>
-            <p class="title">김정윤</p>
-            <p class="time">00:59</p>
-          </li>
-          <li class="item pause">
-            <router-link to="" class="img">
-              <img src="@/assets/images/temp/sample_img_03.png" alt="">
-            </router-link>
-            <p class="title">김정윤</p>
-            <p class="time">00:59</p>
-          </li>
-          <li class="item pause">
-            <router-link to="" class="img">
-              <img src="@/assets/images/temp/sample_img_03.png" alt="">
-            </router-link>
-            <p class="title">김정윤</p>
-            <p class="time">00:59</p>
-          </li>
-          <li class="item pause">
-            <router-link to="" class="img">
-              <img src="@/assets/images/temp/sample_img_03.png" alt="">
-            </router-link>
-            <p class="title">김정윤</p>
-            <p class="time">00:59</p>
+          <li v-for="(audio, i) in audioList" class="item pause">
+            <router-link to="" class="img"><img :src=audio.characterImageUrl alt=""></router-link>
+            <p class="title">{{audio.characterName}}</p>
+            <p class="time">00:00</p>
           </li>
         </ul>
       </div>
@@ -55,19 +21,30 @@
         <button class="swipe"><img src="@/assets/images/common/swipe_right_active@2x.png" alt=""></button>
       </div>
       <div class="btn-wrap"><router-link to="/canvas?page=letter" class="btn btn-dark">다 들었어요!</router-link></div>
-<!--      <div class="btn-wrap"><button class="btn btn-dark disabled">다 들었어요!</button></div>-->
+<!--      <div class="btn-wrap"><button class="btn btn-dark ">다 들었어요!</button></div>-->
     </div>
   </div>
 </template>
 
 <script>
 import LetterHeader from '@/components/letter/LetterHeader'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'peopleThinking',
-  components: {LetterHeader },
+  components: {LetterHeader},
+  data () {
+    return {
+      focusIdx : 0
+    }
+  },
   created() {
     this.$EventBus.$on('back',this.goBack)
+  },
+  computed:{
+    ...mapGetters({
+      audioList: 'getLetterAudioList'
+    })
   },
   methods : {
     goBack(){
