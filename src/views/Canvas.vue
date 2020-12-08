@@ -20,21 +20,6 @@
 <!--   진단테스트 canvas 타이머 완료 시 popup-->
     <Confirm v-if="page==='diagnose'" ref="timerConfirm"></Confirm>
 
-    <!-- s 팝업  -->
-<!--    <b-modal v-if="page === 'diagnose'||'letter'" @hide="setTimerResume" @show="popUpOpen" id="normalPopup3" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">-->
-<!--      <template #modal-header>-->
-<!--        <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>-->
-<!--      </template>-->
-<!--      <p class="text">다 그렸나요?<br/>-->
-<!--        제출하면 수정할 수 없어요!</p>-->
-<!--      <p class="text-sm">더 그리고 싶은 것은 없는지 생각해봐요</p>-->
-<!--      <template #modal-footer="{ cancel }">-->
-<!--        <b-button variant="gray" class="btn-half" @click="exportPNG">제출할게요</b-button>-->
-<!--        <b-button variant="black" class="btn-half" @click=cancel >더 그릴게요!</b-button>-->
-<!--      </template>-->
-<!--    </b-modal>-->
-    <!-- s 팝업  -->
-
     <b-modal v-if="page === 'letter'" :visible="true" @show="popUpOpen" @hide="hideInfo" id="studyBookPopup" centered hide-footer modal-class="studyBookPopup">
       <template #default="{ hide,cancel }">
         <button class="btn-close" @click="hide()"><img src="@/assets/images/common/close_dim@2x.png" alt=""></button>

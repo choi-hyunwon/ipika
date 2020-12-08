@@ -20,8 +20,6 @@
         <b-button variant="gray" class="btn-half" @click="cancleA(cancel)">{{cancelText}}</b-button>
         <b-button variant="black" class="btn-black btn-half" @click="ok()">{{okText}}</b-button>
       </template>
-
-
     </b-modal>
 
     <b-modal v-if="type === 'timeOut'" no-close-on-backdrop id="timeoverPopup" centered title="진단테스트 : 타임오버" modal-class="normalPopup" v-model="showConfirm">
@@ -35,7 +33,6 @@
         <b-button @click="goToNext" variant="black" class="btn-half">제출하기</b-button>
       </template>
     </b-modal>
-
   </div>
 </template>
 
