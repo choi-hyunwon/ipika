@@ -17,7 +17,7 @@
 
       <!--  footer  -->
       <template #modal-footer="{ cancel }">
-        <b-button variant="gray" class="btn-half" @click="cancleA">{{cancelText}}</b-button>
+        <b-button variant="gray" class="btn-half" @click="cancelA">{{cancelText}}</b-button>
         <b-button variant="black" class="btn-black btn-half" @click="ok">{{okText}}</b-button>
       </template>
     </b-modal>
@@ -29,8 +29,8 @@
       <p class="text">시간이 초과되었어요!<br/>이대로 그림을 제출할까요?</p>
       <p class="text-sm"></p>
       <template #modal-footer="{ cancel }">
-        <b-button @click="clear" variant="gray" class="btn-half">아니오</b-button>
-        <b-button @click="goToNext" variant="black" class="btn-half">제출하기</b-button>
+        <b-button @click="cancelA" variant="gray" class="btn-half">아니오</b-button>
+        <b-button @click="ok" variant="black" class="btn-half">제출하기</b-button>
       </template>
     </b-modal>
   </div>
@@ -48,10 +48,7 @@ export default {
     }
   },
   created () {
-    if(this.autoOpen===true){
-      this.showConfirm = true
-      this.type='diagnose'
-    }
+
   },
   computed:{
     ...mapGetters({
@@ -87,61 +84,70 @@ export default {
       default(){return false}
     }
   },
-  methods:{
+  methods: {
     ...mapMutations({
-      setTimeInit : 'setTimeInit',
-      setTimerReset : 'setTimerReset',
-      setTimerStart : 'setTimerStart',
-      setTimerPause : 'setTimerPause',
-      setTimerResume : 'setTimerResume'
+      setTimeInit: 'setTimeInit',
+      setTimerReset: 'setTimerReset',
+      setTimerStart: 'setTimerStart',
+      setTimerPause: 'setTimerPause',
+      setTimerResume: 'setTimerResume'
     }),
-    toggleConfirm(type,topic){
-      this.showConfirm  = !this.showConfirm;
+    toggleConfirm (type, topic) {
+      this.showConfirm = !this.showConfirm;
       this.type = type;
       this.setTimerPause()
     },
-    goBack(){
+    goBack () {
       this.$EventBus.$emit('back')
     },
-    goToNext(){
+    goToNext () {
       this.showConfirm = false
       this.$EventBus.$emit('next')
     },
-    clear(){
+    clear () {
       WILL.clear()
-      this.$refs.confirmModal.hide()
+      this.showConfirm = false
       this.setTimerReset();
       this.setTimerStart();
     },
-    modalCancel(){
-      this.$refs.confirmModal.hide()
+    modalCancel () {
+      this.showConfirm = false
       this.setTimerResume();
     },
-    isComplete(){
+    isComplete () {
       return this.$router.push('/pablomain')
     },
-    ok(){
-      if(this.type==='goBack'){
+    ok () {
+      if (this.type === 'goBack') {
         this.goBack()
-      }else if(this.type==='Complete'||this.type==='diagnose'||this.type==='refresh' || this.type==='record'){
+      } else if (this.type === 'Complete' || this.type === 'diagnose' || this.type === 'refresh' || this.type === 'record') {
         this.goToNext()
-      }else if(this.type==='watchComplete'){
+      } else if (this.type === 'watchComplete') {
         this.$route.push('/Recording')
-      }else if(this.type==='letter'){
+      } else if (this.type === 'letter') {
         this.modalCancel()
-      }else if(this.type==='checkRed'){
+      } else if (this.type === 'checkRed') {
         this.showConfirm = false
         alert('파블로 서비스 종료 연동 필요')
+      } else if (this.type === 'timeOut') {
+        this.type = 'Complete'
+        this.$props.completeText = "다 그리셨어요? </br> 제출하면 수정할수 없어요"
+        this.$props.cancelText = "다시그리기"
+        this.$props.okText = "제출하기"
+        this.showConfirm = true
       }
     },
-    cancelA() {
-      if(this.type === 'diagnose') this.modalCancel()
-      else if(this.type === 'letter') this.isComplete()
-      else if(this.type==='refresh')  this.clear()
-      else if(this.type==='timeOut') {
-        this.$EventBus.$emit('refresh')
-      }
-      else this.showConfirm = false
+    cancelA () {
+      if (this.type === 'diagnose') this.modalCancel()
+      else if (this.type === 'letter') this.isComplete()
+      else if (this.type === 'refresh') this.clear()
+      else if (this.type === 'timeOut') {
+        this.type = 'refresh'
+        this.$props.completeText = "다시 그리시겠어요? </br> 조금 전 그림은 사라져요"
+        this.$props.cancelText = "다시그리기"
+        this.$props.okText = "제출하기"
+        this.showConfirm = true
+      } else this.showConfirm = false
     }
   }
 }

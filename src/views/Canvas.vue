@@ -7,14 +7,13 @@
     <CanvasHeader></CanvasHeader>
 
     <!--   wacom 라이브러리 -->
-    <Wacom :isLoading="isLoading" :drawer="drawer"></Wacom>
+    <Wacom ref="wacom" :isLoading="isLoading" :drawer="drawer"></Wacom>
 
     <!--   진단테스트 canvas 첫 진입시 Alert-->
-    <Alert v-if="page==='diagnose'"
+    <Alert ref="autoOpen"
+            v-if="page==='diagnose'"
             v-slot="slotProps"
-            :autoOpen=true
-            :text=subject.subject
-            :isLoading="isLoading"></Alert>
+            :text=subject.subject></Alert>
 
     <!--   진단테스트 canvas 타이머 완료 시 popup-->
     <Confirm v-if="page==='diagnose'" ref="timerConfirm"></Confirm>
@@ -44,6 +43,7 @@ export default {
       drawer : true
     }
   },
+
   created(){
     this.$EventBus.$on('toggleDrawer', (drawer) => {
       this.drawer = drawer;
@@ -51,6 +51,7 @@ export default {
     this.$EventBus.$on('back',this.goBack)
     this.$EventBus.$on('close', this.close);
     this.$EventBus.$on('next', this.exportPNG);
+    this.$EventBuus.$on('refresh',this.refreshAgain())
   },
   mounted () {
     if (localStorage.getItem('isReload') === 'true' || localStorage.getItem('isReload') === undefined) window.location.reload()
@@ -78,6 +79,12 @@ export default {
       if(this.canvasTimer.timeOver===true)
       this.$refs.timerConfirm.showConfirm=true
       this.$refs.timerConfirm.type='timeOut'
+    },
+    'isLoading':function(){
+      if(this.isLoading){
+        this.$refs.autoOpen.showAlert=true
+        this.$refs.autoOpen.type='diagnose'
+      }
     }
   },
   methods: {
@@ -137,6 +144,9 @@ export default {
         .then(result => {
           this.setTimeInit(this.subject.limitTime)
         })
+    },
+    refreshAgain(){
+      this.$refs.wacom.globalUtils.confirm(slotProps,'refresh')
     }
   }
 }

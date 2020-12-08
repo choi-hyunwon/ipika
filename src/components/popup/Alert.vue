@@ -72,15 +72,9 @@ export default {
     return{
       showAlert : false,
       type : "",
-      modalShow : true
     }
   },
-  created () {
-    if(this.autoOpen === true){
-      this.showAlert = true
-      this.type='diagnose'
-    }
-  },
+  created () {},
   props:{
     boldText:{
       String,
@@ -94,14 +88,6 @@ export default {
       String,
       default(){return ''}
     },
-    autoOpen : {
-      Boolean,
-      default(){return false}
-    },
-    isLoading :{
-      Boolean,
-      default(){return false}
-    }
   },
   computed:{
     ...mapGetters({
@@ -119,6 +105,7 @@ export default {
     timeStart(){
       this.setTimerStart()
       this.$refs['alertModal'].hide()
+      this.isLoading=false
     }
   }
 }

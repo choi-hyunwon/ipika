@@ -758,9 +758,6 @@ export default {
       return this.$router.currentRoute.query.page
     }
   },
-  created () {
-    this.$EventBuus.$on('refresh',this.refreshAgain)
-  },
   methods : {
     setLayerBgSelect (e) {
       // todo : 학습 배경 선택시 캔버스는 투명하게 만들고, 배경 레이어에 BG image 넣어야함
@@ -796,9 +793,6 @@ export default {
     toggleConfirm(type,topic){
       this.showConfirm = !this.showConfirm;
       this.type = type
-    },
-    refreshAgain(){
-      globalUtils.confirm(slotProps,'refresh')
     }
   }
 }
