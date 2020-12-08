@@ -3,45 +3,55 @@
     <div class="header">
       <router-link to="/PabloMain" class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt=""></router-link>
       <div class="box-close">
-        <router-link to="/" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>
+        <router-link to="/PabloMain" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>
       </div>
     </div>
     <div class="row">
       <div class="col col-6">
         <div class="symbol-wrap">
-          <div class="symbol"><img src="@/assets/images/common/Vector@2x.png" alt=""></div>
-          <span class="text">Twinkle Stage 4</span></div>
-        <div class="title">학습 주제 영역입니다.<br/>
-          학습 주제는 최대 세 문장까지<br/>
-          가능합니다.</div>
+          <div class="symbol" :class="`stage_0${letter.stageId}`"></div>
+          <span class="text">{{letter.stageName}} Stage {{letter.stageId}}</span></div>
+        <div class="title">{{letter.stepSubejct}}</div>
         <div class="btn-group">
           <router-link to="/Watching" class="btn btn-dark">시작하기</router-link>
         </div>
       </div>
       <div class="col col-6">
-        <div class="img"><img src="@/assets/images/temp/sample_img_01.jpg" alt=""></div>
+        <div class="img"><img :src=letter.stepImageUrl alt=""></div>
       </div>
     </div>
   </div>
 </template>
 <script>
-import Alert from '@/components/popup/Alert'
-import Confirm from '@/components/popup/Confirm'
+import { mapActions, mapGetters } from 'vuex'
+
 export default {
-  name: 'PabloStudy1',
-  components: {
-    Confirm,
-    Alert
+  name: 'Intro',
+  data () {
+    return {
+      isLoading : false
+    }
+  },
+  mounted () {
+    this.fetchLetter();
+  },
+  computed:{
+    ...mapGetters({
+      letter: 'getLetterIntro'
+    })
   },
   methods:{
-    showAlert(slotProps){
-      slotProps.toggleAlert();
-    },
-    showConfirm(slotProps){
-      slotProps.toggleConfirm();
+    ...mapActions({
+      getLetter : 'getLetter'
+    }),
+    fetchLetter(){
+      this.getLetter()
+        .then(result => {
+          this.isLoading = true;
+          this.globalUtils.tts(this.letter.stepSubejct)
+        })
     }
   }
-
 }
 </script>
 
@@ -63,9 +73,23 @@ export default {
       height: 4rem;
       vertical-align: middle;
       margin-right: 0.8rem;
-      img {
-        width: 100%;
-        height: 100%;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 100%;
+      &.stage_01{
+        background-image: url("~@/assets/images/common/img_ic_stage_01@2x.png");
+      }
+      &.stage_02{
+        background-image: url("~@/assets/images/common/img_ic_stage_02@2x.png");
+      }
+      &.stage_03{
+        background-image: url("~@/assets/images/common/img_ic_stage_03@2x.png");
+      }
+      &.stage_04{
+        background-image: url("~@/assets/images/common/img_ic_stage_04@2x.png");
+      }
+      &.stage_05{
+       background-image: url("~@/assets/images/common/img_ic_stage_05@2x.png");
       }
     }
     .text {

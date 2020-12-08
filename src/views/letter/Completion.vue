@@ -2,9 +2,10 @@
   <div class="wrap bg-ivory">
     <div class="header">
       <Confirm v-slot="slotProps"
-              :boldText="'정말 뒤로 가시겠어요?'"
-              :okText="'네'"
-              :cancelText="'아니요'">
+               :okText="'네'"
+               :cancelText="'아니요'"
+               :text = "'이전 화면으로 이동할까요? </br> 진행중인 학습 내용은 </br> 저장되지 않아요!'"
+      >
         <button @click="globalUtils.confirm(slotProps,'goBack')" class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt="">
         </button>
       </Confirm>

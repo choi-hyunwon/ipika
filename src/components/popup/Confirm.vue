@@ -1,64 +1,46 @@
 <template>
   <div>
     <slot :toggleConfirm="toggleConfirm"></slot>
-    <b-modal :visible="autoModal" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup" v-model="showConfirm">
-<!--      header -->
+    <b-modal no-close-on-backdrop ref="confirmModal" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup" v-model="showConfirm">
+      <!--  header -->
       <template #modal-header>
         <div class="symbol">
           <img src="@/assets/images/common/check_red@2x.png" alt="">
         </div>
       </template>
 
-<!--      canvase time header-->
-<!--      <template v-if="type==='canvasComplete'" #modal-header>-->
-<!--        <div class="symbol">-->
-<!--          <img src="@/assets/images/common/timer@2x.png" alt="">-->
-<!--        </div>-->
-<!--      </template>-->
-
-<!--     본문  -->
-      <template v-if= "type==='goBack'">
-        <p class="text">정말 뒤로 가시겠어요?</p>
-        <p class="text-sm">{{backText}}</p>
+      <!--     본문  -->
+      <template>
+        <p class="text" v-html="completeText"></p>
+        <p class="text-sm" v-html="text"></p>
       </template>
 
-      <template v-else-if="type==='Complete'">
-        <p class="text">{{completeText}}</p>
-        <p class="text-sm">{{text}}</p>
+      <!--  footer  -->
+      <template #modal-footer="{ cancel }">
+        <b-button variant="gray" class="btn-half" @click="cancleA(cancel)">{{cancelText}}</b-button>
+        <b-button variant="black" class="btn-black btn-half" @click="ok()">{{okText}}</b-button>
       </template>
 
-      <template v-else-if="type==='checkRed'">
-        <p class="text">{{completeText}}</p>
-        <p class="text-sm">{{text}}</p>
-      </template>
-
-
-<!--      footer  -->
-      <template v-if="type==='goBack'" #modal-footer="{ cancel }">
-        <b-button variant="gray" class="btn-half" @click="cancel()">{{cancelText}}</b-button>
-        <b-button @click="goBack" variant="black" class="btn-black btn-half">{{okText}}</b-button>
-      </template>
-
-      <template v-else-if="type==='Complete'" #modal-footer="{ cancel }">
-        <b-button variant="gray" class="btn-half" @click="cancel()">{{cancelText}}</b-button>
-        <b-button @click="goToNext" variant="black" class="btn-black btn-half">{{okText}}</b-button>
-      </template>
-
-      <template v-else-if="type==='checkRed'" #modal-footer="{ cancel }">
-        <b-button variant="gray" class="btn-half" @click="cancel()">{{cancelText}}</b-button>
-        <b-button @click="goToNext" variant="black" class="btn-black btn-half">{{okText}}</b-button>
-      </template>
-
-      <template v-else-if="type==='watchComplete'" #modal-footer="{ cancel }">
-        <b-button variant="gray" class="btn-half"  @click="cancel()">다시 볼래요</b-button>
-        <router-link to="/Recording" class="btn btn-black btn-half">넘어갈게요</router-link>
-      </template>
 
     </b-modal>
+
+    <b-modal v-if="type === 'timeOut'" no-close-on-backdrop id="timeoverPopup" centered title="진단테스트 : 타임오버" modal-class="normalPopup" v-model="showConfirm">
+      <template #modal-header>
+        <div class="symbol"><img src="@/assets/images/common/timer@2x.png" alt=""></div>
+      </template>
+      <p class="text">시간이 초과되었어요!<br/>이대로 그림을 제출할까요?</p>
+      <p class="text-sm"></p>
+      <template #modal-footer="{ cancel }">
+        <b-button @click="clear" variant="gray" class="btn-half">아니오</b-button>
+        <b-button @click="goToNext" variant="black" class="btn-half">제출하기</b-button>
+      </template>
+    </b-modal>
+
   </div>
 </template>
 
 <script>
+import {mapMutations,mapGetters} from 'vuex'
 export default {
   name: 'Confirm',
   data(){
@@ -66,6 +48,20 @@ export default {
       showConfirm : false,
       autoModal : false,
       type : "",
+    }
+  },
+  created () {
+    if(this.autoOpen===true){
+      this.showConfirm = true
+      this.type='diagnose'
+    }
+  },
+  computed:{
+    ...mapGetters({
+      getCanvasTimer : 'getCanvasTimer',
+    }),
+    timeOver(){
+      return this.getCanvasTimer.timeOver
     }
   },
   props:{
@@ -85,20 +81,27 @@ export default {
       String,
       default(){return ''}
     },
-  completeText: {
-    String,
-    default () {return ''}
+    completeText: {
+      String,
+      default () {return ''}
+    },
+    autoOpen:{
+      Boolean,
+      default(){return false}
     }
   },
   methods:{
+    ...mapMutations({
+      setTimeInit : 'setTimeInit',
+      setTimerReset : 'setTimerReset',
+      setTimerStart : 'setTimerStart',
+      setTimerPause : 'setTimerPause',
+      setTimerResume : 'setTimerResume'
+    }),
     toggleConfirm(type,topic){
       this.showConfirm  = !this.showConfirm;
-      if(topic==='visible'){
-       this.autoModal = true
-      }else{
-        this.autoModal = false
-      }
       this.type = type;
+      this.setTimerPause()
     },
     goBack(){
       this.$EventBus.$emit('back')
@@ -106,9 +109,41 @@ export default {
     goToNext(){
       this.showConfirm = false
       this.$EventBus.$emit('next')
+    },
+    clear(){
+      WILL.clear()
+      this.$refs.confirmModal.hide()
+      this.setTimerReset();
+      this.setTimerStart();
+    },
+    modalCancel(){
+      this.$refs.confirmModal.hide()
+      this.setTimerResume();
+    },
+    isComplete(){
+      return this.$router.push('/pablomain')
+    },
+    ok(){
+      if(this.type==='goBack'){
+        this.goBack()
+      }else if(this.type==='Complete'||this.type==='checkRed'){
+        this.goToNext()
+      }else if(this.type==='refresh'){
+        this.clear()
+      }else if(this.type==='watchComplete'){
+        this.$route.push('/Recording')
+      }else if(this.type==='diagnose'){
+        this.$router.push('/TestingResult')
+      }else if(this.type==='letter'){
+        this.modalCancel()
+      }
+    },
+    cancleA(cancle) {
+      if(this.type === 'diagnose') this.modalCancel()
+      else if(this.type === 'letter') this.isComplete()
+      else cancle()
     }
   }
-
 }
 </script>
 

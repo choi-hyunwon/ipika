@@ -2,15 +2,15 @@
 
   <div class="wrap bg-ivory">
     <div class="header ivory">
-<!--      < style="position: absolute; top: 200px; left: 820px;">뒤로가기 팝업</b-button>-->
+      <!--      < style="position: absolute; top: 200px; left: 820px;">뒤로가기 팝업</b-button>-->
       <Confirm v-slot="slotProps"
-               :okText="'뒤로 갈래요'"
-               :cancelText="'닫기'"
-               :text ="'지워진 녹음은 다시 들을 수 없어요'"
+               :okText="'네'"
+               :cancelText="'아니오'"
+               :text = "'이전 화면으로 이동할까요? </br> 진행중인 학습 내용은 </br> 저장되지 않아요!'"
       >
-      <button class="symbol" @click="globalUtils.confirm(slotProps,'goBack')">
-        <img src="@/assets/images/common/arrow_left@2x.png" alt="">
-      </button>
+        <button class="symbol" @click="globalUtils.confirm(slotProps,'goBack')">
+          <img src="@/assets/images/common/arrow_left@2x.png" alt="">
+        </button>
       </Confirm>
 
       <div class="flex-box">
@@ -22,9 +22,9 @@
         </Alert>
 
         <Alert v-slot="slotProps"
-                :boldText="'주제보기'"
-                :text="'주제보기'"
-                :buttonText="'닫기'">
+               :boldText="'주제보기'"
+               :text="'주제보기'"
+               :buttonText="'닫기'">
           <button @click="globalUtils.alert(slotProps,'subject')" class="btn-right">
             <span class="img"><img src="@/assets/images/common/ic-drawing@2x.png" alt=""></span>
             <span class="tit">주제보기</span>
@@ -48,30 +48,25 @@
         </p>
       </div>
       <div class="record-area">
-        <av-media class="_test" ref="media" type="frequ" :media="media" line-color="darkorange"/>
+        <div v-if="!ing">
+          <div v-if="record" style="width: 100%; height: 5px; background-color: #2fca56;"></div>
+          <div v-else style="width: 100%; height: 5px; background-color: #1585ff;"></div>
+        </div>
+        <av-media class="_media" ref="media" type="frequ" :media="media" line-color="#f53c32"/>
       </div>
       <div class="play-area">
         <audio-recorder
           ref="recorder"
           :before-recording="startRecord"
-          :pause-recording="callback"
-          :after-recording="setRecorded"
-          :select-record="callback"
-          :before-upload="callback"
-          :successful-upload="callback"
-          :failed-upload="callback"/>
+          :after-recording="stopRecord"/>
         <Confirm v-slot="slotProps"
                  :complete-text="`다시 녹음하시겠어요? 지금 녹음한 내용은 지워져요`"
                  :text="`지워진 녹음은 다시 들을 수 없어요`"
                  :cancelText="`닫기`"
                  :okText="`다시 녹음할게요`">
-        <button v-if="!record" @click="globalUtils.confirm(slotProps,'checkRed')" style="position: absolute; bottom: 0"><img src="@/assets/images/common/refresh_active@2x.png" alt=""></button>
-        <button v-if="record" style="position: absolute; bottom: 0"><img src="@/assets/images/common/refresh_default@2x.png" alt=""></button>
+          <button v-if="!record" @click="globalUtils.confirm(slotProps,'checkRed')" style="position: absolute; bottom: 0"><img src="@/assets/images/common/refresh_active@2x.png" alt=""></button>
+          <button v-if="record" style="position: absolute; bottom: 0"><img src="@/assets/images/common/refresh_default@2x.png" alt=""></button>
         </Confirm>
-        <!--<button><img src="@/assets/images/common/record@2x.png" alt=""></button>
-        <button><img src="@/assets/images/common/record_play@2x.png" alt=""></button>
-        <button><img src="@/assets/images/common/refresh_active@2x.png" alt=""></button>
-        <button><img src="@/assets/images/common/refresh_default@2x.png" alt=""></button>-->
       </div>
       <div class="btn-area">
         <router-link v-if="!record" to="/Listening" class="btn btn-dark">다했어요!</router-link>
@@ -100,16 +95,11 @@ export default {
   },
   created() {
     this.$EventBus.$on('back',this.goBack)
-    this.$EventBus.$on('next', () => {
-      this.record = true
-      $('._test').hide()
-      $('.ar-recorder').show()
-      $('.ar-player').hide()
-    });
+    this.$EventBus.$on('next', this.todoRemove);
   },
   mounted () {
     this.todoRemove()
-    this.globalUtils.tts('정윤님은 이 주제에 대해 어떻게 생각해요? 생각을 들려주세요')
+    this.globalUtils.tts('정윤님은 이 주제에 대해 어떻게 생각해요? 생각을 들려주세요 자유롭게 자신의 생각을 말해보세요')
     navigator.mediaDevices.getUserMedia(this.constraints)
       .then(media => {
         this.media = media
@@ -117,8 +107,8 @@ export default {
   },
   watch :{
     'ing':function (){ // TODO 퍼블리싱 완료 후 제거
-      if(this.ing) $('._test').show()
-      else $('._test').hide()
+      if(this.ing) $('._media').show()
+      else $('._media').hide()
     },
     'record':function (){ // TODO 퍼블리싱 완료 후 제거
       if(this.record) {
@@ -134,38 +124,17 @@ export default {
     goBack () {
       this.$router.push('/Watching')
     },
-    callback (data) {
-      console.debug(data)
-    },
     startRecord() {
       this.ing = true
-      this.showStopBtn();
+      this.setRecordAbled()
     },
-    setRecorded() {
+    stopRecord() {
       this.ing = false
       this.record = false
-      this.hideStopBtn();
-      this.setPlayerDisabled();
+      this.setPlayerAbled()
       setTimeout(() => {
         this.setRecentRecord();
-        this.setPlayerAbled();
       }, 800);
-    },
-    setPlayerDisabled() { // TODO 퍼블리싱 완료 후 제거
-      const $player = this.$refs.recorder.$el.querySelector('.ar-player');
-      $player.classList.remove('abled');
-    },
-    setPlayerAbled() { // TODO 퍼블리싱 완료 후 제거
-      const $player = this.$refs.recorder.$el.querySelector('.ar-player');
-      $player.classList.add('abled');
-    },
-    hideStopBtn() { // TODO 퍼블리싱 완료 후 제거
-      const $stopBtn = this.$refs.recorder.$el.querySelector('.ar-recorder__stop');
-      $stopBtn.style.display = 'none';
-    },
-    showStopBtn() { // TODO 퍼블리싱 완료 후 제거
-      const $stopBtn = this.$refs.recorder.$el.querySelector('.ar-recorder__stop');
-      $stopBtn.style.display = 'block';
     },
     setRecentRecord() {
       const recorder = this.$refs.recorder;
@@ -174,11 +143,21 @@ export default {
         recorder.selected = recorder.recordList[top];
       }
     },
+    setPlayerAbled() { // TODO 퍼블리싱 완료 후 제거
+      const $player = this.$refs.recorder.$el.querySelector('.ar-player');
+      $player.classList.add('abled');
+      const $stopBtn = this.$refs.recorder.$el.querySelector('.ar-recorder__stop');
+      $stopBtn.style.display = 'none';
+    },
+    setRecordAbled() { // TODO 퍼블리싱 완료 후 제거
+      const $stopBtn = this.$refs.recorder.$el.querySelector('.ar-recorder__stop');
+      $stopBtn.style.display = 'block';
+    },
     todoRemove(){ // TODO 퍼블리싱 완료 후 제거
-      $('._test').hide()
+      this.record = true
+      $('._media').hide()
       $('.ar-player').hide()
-      $('.ar-recorder__duration').hide()
-      $('.ar-player-bar').hide()
+      $('.ar-recorder').show()
     }
   }
 }
@@ -212,7 +191,7 @@ export default {
     position: absolute;
     width: 100%;
     height: 27.1rem;
-    background-color: pink;
+    background-color: var(--ivory-200);
     top: 40.8rem;
   }
   .play-area {
@@ -328,6 +307,18 @@ export default {
   right: 0;
   width: 38px;
   height: 38px;
+  display: none;
+}
+
+::v-deep .ar-player > .ar-player-bar{
+  display: none;
+}
+::v-deep .ar-player > .ar-player-bar > .ar-player__progress {
+  max-width: 110px;
+}
+::v-deep .ar-recorder__duration {
+  font-size: 1.3rem;
+  margin: 0.3rem 0 0 0;
   display: none;
 }
 </style>

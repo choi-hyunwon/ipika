@@ -18,7 +18,4 @@ export class GlobalUtils {
     speechMsg.text = text
     window.speechSynthesis.speak(speechMsg)
   }
-  ttsReader(tts){
-    this.tts(tts)
-  }
 }
