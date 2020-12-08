@@ -9,7 +9,7 @@
     <div class="flex-box">
       <div class="box-close">
         <router-link to="/Pablomain">
-          <button @click="close" style="padding-top: 0;" class="btn-close">
+          <button style="padding-top: 0;" class="btn-close">
             <img src="@/assets/images/common/close@2x.png" alt="">
           </button>
         </router-link>
