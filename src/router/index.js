@@ -17,11 +17,15 @@ import Intro from '@/views/letter/Intro'
 import Watching from '@/views/letter/Watching'
 import Recording from '@/views/letter/Recording'
 import Listening from '@/views/letter/Listening'
+import ListeningPlay from '@/views/letter/ListeningPlay'
 import PabloPopup1 from '@/views/letter/PabloPopup1'
 import Completion from '@/views/letter/Completion'
 
 import MyGallery from '@/views/myGallery/MyGallery'
 import MyGalleryDetail from '@/views/myGallery/MyGalleryDetail'
+
+import DrawingGuide from '@/views/DrawingGuide/DrawingGuide'
+import TimerDrawingGuide from '@/views/DrawingGuide/TimerDrawingGuide'
 
 import Agreement from '@/views/useLater/Agreement'
 import LoadingSpinnerWaiting from '@/views/useLater/LoadingSpinnerWaiting'
@@ -112,6 +116,33 @@ const routes = [
     path:'/MyGalleryDetail',
     name:'MyGalleryDetail',
     component: MyGalleryDetail
+  },
+
+  {
+    path:'/DrawingGuide',
+    name:'DrawingGuide',
+    component:DrawingGuide
+  },
+  {
+    path:'/TimerDrawingGuide',
+    name:'/TimerDrawingGuide',
+    component:TimerDrawingGuide
+  },
+  {
+    path:'/ListeningPlay',
+    name:'/ListeningPlay',
+    component:ListeningPlay
+  },
+
+  {
+    path:'/DrawingGuide',
+    name:'DrawingGuide',
+    component:DrawingGuide
+  },
+  {
+    path:'/TimerDrawingGuide',
+    name:'/TimerDrawingGuide',
+    component:TimerDrawingGuide
   }
 ]
 
