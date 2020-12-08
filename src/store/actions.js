@@ -18,7 +18,7 @@ export const actions = {
   getSubject ({ commit }, options) {
     return webApi.getSubject(options)
       .then(data => {
-        return data
+        commit('setSubject', data)
       })
   },
   getResult ({ commit }, options) {
