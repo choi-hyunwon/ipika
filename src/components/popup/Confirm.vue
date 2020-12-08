@@ -2,21 +2,14 @@
   <div>
     <slot :toggleConfirm="toggleConfirm"></slot>
     <b-modal no-close-on-backdrop ref="confirmModal" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup" v-model="showConfirm">
-<!--      header -->
+      <!--  header -->
       <template #modal-header>
         <div class="symbol">
           <img src="@/assets/images/common/check_red@2x.png" alt="">
         </div>
       </template>
 
-<!--      canvase time header-->
-<!--      <template v-if="type==='canvasComplete'" #modal-header>-->
-<!--        <div class="symbol">-->
-<!--          <img src="@/assets/images/common/timer@2x.png" alt="">-->
-<!--        </div>-->
-<!--      </template>-->
-
-<!--     본문  -->
+      <!--     본문  -->
       <template v-if= "type==='goBack'">
         <p class="text">이전 화면으로 이동할까요? </br> 진행중인 학습 내용은 </br> 저장되지 않아요!</p>
         <p class="text-sm">{{backText}}</p>
@@ -48,7 +41,7 @@
       </template>
 
 
-<!--      footer  -->
+      <!--  footer  -->
       <template v-if="type==='goBack'" #modal-footer="{ cancel }">
         <b-button variant="gray" class="btn-half" @click="cancel()">{{cancelText}}</b-button>
         <b-button @click="goBack" variant="black" class="btn-black btn-half">{{okText}}</b-button>
@@ -89,12 +82,11 @@
       <template #modal-header>
         <div class="symbol"><img src="@/assets/images/common/timer@2x.png" alt=""></div>
       </template>
-      <p class="text">시간이 초과되었어요!<br/>
-        제출하시겠어요?</p>
-      <p class="text-sm">다시 그리면 먼저 그린 그림은 사라져요</p>
+      <p class="text">시간이 초과되었어요!<br/>이대로 그림을 제출할까요?</p>
+      <p class="text-sm"></p>
       <template #modal-footer="{ cancel }">
-        <b-button @click="clear" variant="blue" class="btn-half">다시 그릴래요!</b-button>
-        <b-button @click="goToNext" variant="black" class="btn-half">제출할게요</b-button>
+        <b-button @click="clear" variant="blue" class="btn-half">아니오</b-button>
+        <b-button @click="goToNext" variant="black" class="btn-half">제출하기</b-button>
       </template>
     </b-modal>
 
