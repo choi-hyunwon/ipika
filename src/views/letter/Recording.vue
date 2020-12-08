@@ -4,9 +4,9 @@
     <div class="header ivory">
       <!--      < style="position: absolute; top: 200px; left: 820px;">뒤로가기 팝업</b-button>-->
       <Confirm v-slot="slotProps"
-               :okText="'뒤로 갈래요'"
-               :cancelText="'닫기'"
-               :text ="'지워진 녹음은 다시 들을 수 없어요'"
+               :okText="'네'"
+               :cancelText="'아니오'"
+               :text = "'이전 화면으로 이동할까요? </br> 진행중인 학습 내용은 </br> 저장되지 않아요!'"
       >
         <button class="symbol" @click="globalUtils.confirm(slotProps,'goBack')">
           <img src="@/assets/images/common/arrow_left@2x.png" alt="">

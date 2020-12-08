@@ -10,39 +10,18 @@
       </template>
 
       <!--     본문  -->
-      <template v-if= "type==='goBack'">
-        <p class="text">이전 화면으로 이동할까요? </br> 진행중인 학습 내용은 </br> 저장되지 않아요!</p>
-        <p class="text-sm">{{backText}}</p>
-      </template>
-
-      <template v-else-if="type==='Complete'">
+      <template>
         <p class="text">{{completeText}}</p>
         <p class="text-sm">{{text}}</p>
       </template>
-
-      <template v-else-if="type==='checkRed'">
-        <p class="text">{{completeText}}</p>
-        <p class="text-sm">{{text}}</p>
-      </template>
-
-      <template v-else-if="type==='refresh'">
-        <p class="text">{{completeText}}</p>
-        <p class="text-sm">{{text}}</p>
-      </template>
-
-      <template v-else-if="type==='diagnose'">
-        <p class="text">{{completeText}}</p>
-        <p class="text-sm">{{text}}</p>
-      </template>
-
-      <template v-else-if="type==='letter'">
-        <p class="text">{{completeText}}</p>
-        <p class="text-sm">{{text}}</p>
-      </template>
-
 
       <!--  footer  -->
-      <template v-if="type==='goBack'" #modal-footer="{ cancel }">
+      <template #modal-footer="{ cancel }">
+        <b-button variant="gray" class="btn-half" @click="cancleA(cancel)">{{cancelText}}</b-button>
+        <b-button @click="ok" variant="black" class="btn-black btn-half">{{okText}}</b-button>
+      </template>
+
+     <!-- <template v-if="type==='goBack'" #modal-footer="{ cancel }">
         <b-button variant="gray" class="btn-half" @click="cancel()">{{cancelText}}</b-button>
         <b-button @click="goBack" variant="black" class="btn-black btn-half">{{okText}}</b-button>
       </template>
@@ -73,9 +52,9 @@
       </template>
 
       <template v-else-if="type==='letter'"  #modal-footer="{ cancel }">
-        <button @click="isComplete" class="btn btn-black btn-half">{{cancelText}}</button>
+        <button class="btn btn-black btn-half" @click="isComplete">{{cancelText}}</button>
         <b-button variant="gray" class="btn-half" @click="modalCancel">{{okText}}</b-button>
-      </template>
+      </template>-->
     </b-modal>
 
     <b-modal v-if="type === 'timeOut'" no-close-on-backdrop id="timeoverPopup" centered title="진단테스트 : 타임오버" modal-class="normalPopup" v-model="showConfirm">
@@ -175,12 +154,16 @@ export default {
       this.setTimerResume();
     },
     isComplete(){
-      // if(complete){
-      //   return this.$route.push('/pablomain')
-      // }else{
-      //   return this.$route.push('/pablomain')
-      // }
       return this.$router.push('/pablomain')
+    },
+    ok(){
+
+
+    },
+    cancleA(cancle) {
+      if(this.type === 'diagnose') this.modalCancel()
+      else if(this.type === 'letter') this.isComplete()
+      else cancle()
     }
   }
 }
