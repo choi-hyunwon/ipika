@@ -123,14 +123,12 @@ export default {
     ok(){
       if(this.type==='goBack'){
         this.goBack()
-      }else if(this.type==='Complete'||this.type==='checkRed'){
+      }else if(this.type==='Complete'||this.type==='checkRed'||this.type==='diagnose'){
         this.goToNext()
       }else if(this.type==='refresh'){
         this.clear()
       }else if(this.type==='watchComplete'){
         this.$route.push('/Recording')
-      }else if(this.type==='diagnose'){
-        this.$router.push('/TestingResult')
       }else if(this.type==='letter'){
         this.modalCancel()
       }
