@@ -51,7 +51,6 @@ export default {
     this.$EventBus.$on('back',this.goBack)
     this.$EventBus.$on('close', this.close);
     this.$EventBus.$on('next', this.exportPNG);
-    this.$EventBuus.$on('refresh',this.refreshAgain())
   },
   mounted () {
     if (localStorage.getItem('isReload') === 'true' || localStorage.getItem('isReload') === undefined) window.location.reload()
@@ -82,7 +81,7 @@ export default {
       this.$refs.timerConfirm.type='timeOut'
     },
     'isLoading':function(){
-      if(this.isLoading){
+      if(this.isLoading&&this.page==='diagnose'){
         this.$refs.autoOpen.showAlert=true
         this.$refs.autoOpen.type='diagnose'
       }
@@ -152,9 +151,6 @@ export default {
         .then(result => {
 
         })
-    },
-    refreshAgain(){
-      this.$refs.wacom.globalUtils.confirm(slotProps,'refresh')
     }
   }
 }
