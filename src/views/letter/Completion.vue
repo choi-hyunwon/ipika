@@ -1,18 +1,6 @@
 <template>
   <div class="wrap bg-ivory">
-    <div class="header">
-      <Confirm v-slot="slotProps"
-               :okText="'네'"
-               :cancelText="'아니요'"
-               :completeText = "'이전 화면으로 이동할까요? </br> 진행중인 학습 내용은 </br> 저장되지 않아요!'"
-      >
-        <button @click="globalUtils.confirm(slotProps,'goBack')" class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt="">
-        </button>
-      </Confirm>
-      <div class="box-close">
-        <router-link to="/" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>
-      </div>
-    </div>
+    <LetterHeader/>
     <div class="row">
       <div class="col col-6">
         <div class="symbol-wrap">
@@ -34,9 +22,11 @@
 
 <script>
 import Confirm from '@/components/popup/Confirm'
+import LetterHeader from '@/components/letter/LetterHeader'
+
 export default {
   name: 'PabloStudy6',
-  components: { Confirm }
+  components: { Confirm, LetterHeader}
 }
 </script>
 
