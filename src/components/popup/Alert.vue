@@ -103,6 +103,11 @@ export default {
       default(){return false}
     }
   },
+  watch : {
+    'type' :function (){
+      if(this.type === 'video') this.setPlayerOptions()
+    }
+  },
   computed:{
     ...mapGetters({
       playerOptions: 'getPlayerOptions'
@@ -110,7 +115,8 @@ export default {
   },
   methods : {
     ...mapMutations({
-      setTimerStart:'setTimerStart'
+      setTimerStart:'setTimerStart',
+      setPlayerSize: 'setPlayerSize'
     }),
     toggleAlert(type,topic){
       this.showAlert = !this.showAlert;
@@ -119,6 +125,9 @@ export default {
     timeStart(){
       this.setTimerStart()
       this.$refs['alertModal'].hide()
+    },
+    setPlayerOptions(){
+      this.setPlayerSize({width: 1065, height: 666})
     }
   }
 }

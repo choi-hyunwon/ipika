@@ -67,6 +67,9 @@ export const mutations = {
   },
   setPlayerUrl(state, url){
     state.playerOptions = {...state.playerOptions, ...url}
+  },
+  setPlayerSize(state, size){
+    state.playerOptions = {...state.playerOptions, ...size}
   }
 
 }

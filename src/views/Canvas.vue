@@ -61,6 +61,7 @@ export default {
     }
     ;(async () => {
       if(this.page ==='diagnose') await this.fetchSubject()
+      else if(this.page === 'letter') await this.fetchLetter()
     })()
   },
   computed: {
@@ -90,7 +91,8 @@ export default {
     }),
     ...mapActions({
       getUserInfo: 'getUserInfo',
-      getSubject: 'getSubject'
+      getSubject: 'getSubject',
+      getLetter : 'getLetter'
     }),
 
     reload(){
@@ -106,7 +108,7 @@ export default {
       }
     },
     goBack(){
-      this.$router.push('/peopleThinking')
+      this.$router.push('/Listening')
     },
     close(){
       this.setTimerReset()
@@ -136,6 +138,12 @@ export default {
       this.getSubject()
         .then(result => {
           this.setTimeInit(this.subject.limitTime)
+        })
+    },
+    async fetchLetter(){
+      this.getLetter()
+        .then(result => {
+
         })
     }
   }
