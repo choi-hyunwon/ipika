@@ -3,7 +3,12 @@
     <div class="header d-flex">
       <div v-b-modal.goBackPopup class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt=""></div>
       <div class="box-close">
-        <div to="" class="btn-close" @click="todo"><img src="@/assets/images/common/close@2x.png" alt=""></div>
+        <Confirm v-slot="slotProps"
+                 :complete-text="`파블로 서비스를 </br> 종료하시겠습니까?`"
+                 :cancelText="`아니오`"
+                 :okText="`네`">
+        <div class="btn-close" @click="globalUtils.confirm(slotProps,'checkRed')"><img src="@/assets/images/common/close@2x.png" alt=""></div>
+        </Confirm>
       </div>
     </div>
     <div class="content">
@@ -21,9 +26,11 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import Confirm from '@/components/popup/Confirm'
 
 export default {
   name: 'Home',
+  components: {Confirm },
   computed: {
     ...mapGetters({
       diagnose: 'getDiagnose'

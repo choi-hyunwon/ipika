@@ -9,20 +9,26 @@
     </div>
     <div class="symbol">
       <span class="img"><img src="@/assets/images/common/Symbol@2x.png" alt=""></span>
-      <span class="text">{{subject.subject}}</span>
+      <span class="text"></span>
     </div>
     <div class="box-close">
-      <!-- TODO: inline-style 추가함 확인 필요 -->
-      <button @click="close" style="padding-top: 0;" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></button>
+      <Confirm v-slot="slotProps"
+               :complete-text="`파블로 서비스를 </br> 종료하시겠습니까?`"
+               :cancelText="`아니오`"
+               :okText="`네`">
+        <button @click="globalUtils.confirm(slotProps,'checkRed')" style="padding-top: 0;" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></button>
+      </Confirm>
     </div>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import Confirm from '@/components/popup/Confirm'
 
 export default {
   name: 'CanvasHeader',
+  components: {Confirm },
   data(){
     return{
     }
@@ -41,11 +47,6 @@ export default {
       let ss = this.canvasTimer.time % 60
       ss = ss < 10 ? '0' + ss : ss
       return `${mm} : ${ss}`
-    },
-  },
-  methods: {
-    close() {
-      this.$EventBus.$emit('close')
     },
   }
 }

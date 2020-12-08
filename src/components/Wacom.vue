@@ -701,8 +701,8 @@
               <Confirm v-slot="slotProps"
                        :completeText="'다시 그리시겠어요?'"
                        :text="'조금 전 그림은 사라져요'"
-                       :cancelText="'아니요'"
-                       :okText="'다시그리기'">
+                       :cancelText="'제출하기'"
+                       :okText="'다시 그리기'">
               <button @click="undo"><img src="@/assets/images/common/btn_undo@2x.png" alt=""></button>
               <button @click="redo"><img src="@/assets/images/common/btn_redo@2x.png" alt=""></button>
                 <button @click="globalUtils.confirm(slotProps,'refresh')"><img src="@/assets/images/common/btn_refresh@2x.png" alt=""></button>
@@ -712,12 +712,17 @@
 
           <div v-if="page==='diagnose'||'letter'" class="btn-wrap">
             <Confirm v-slot="slotProps"
-                      :completeText="'다 그렸나요?'"
-                      :text="'제출하면 수정할 수 없어요!'"
+                      :completeText="'다 그렸나요? </br> 제출하면 수정할 수 없어요!'"
                       :cancelText = "'아니요'"
                       :okText = "'제출하기'">
-              <b-button v-if="page==='diagnose'" @click="globalUtils.confirm(slotProps,'diagnose')" class="btn btn-blue btn-lg">다 그렸어요!</b-button>
-              <b-button v-if="page==='letter'" @click="globalUtils.confirm(slotProps,'letter')" class="btn btn-blue btn-lg">다 그렸어요!</b-button>
+              <b-button v-if="page==='diagnose'" @click="globalUtils.confirm(slotProps,'diagnose')" class="btn btn-blue btn-lg">완료</b-button>
+            </Confirm>
+            <Confirm v-slot="slotProps"
+                     :completeText="'배경교재1이 저장되었어요 남은 그림도 더 그려볼까요?'"
+                     :text="'모든 배경교재를 그려야 학습과정이 완료돼요'"
+                     :cancelText = "'아니요'"
+                     :okText = "'네'">
+              <b-button v-if="page==='letter'" @click="globalUtils.confirm(slotProps,'letter')" class="btn btn-blue btn-lg">완료</b-button>
             </Confirm>
           </div>
         </div>
