@@ -64,8 +64,8 @@ export default {
     }
   },
   mounted () {
-    this.fetchResult();
-    this.fetchUserGallery();
+    this.fetchResult()
+    this.fetchUserGallery()
   },
 
   methods: {

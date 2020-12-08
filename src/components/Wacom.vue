@@ -709,20 +709,23 @@
             </div>
           </div>
 
-          <div v-if="page==='diagnose'||'letter'" class="btn-wrap">
-            <Confirm v-slot="slotProps"
+          <div class="btn-wrap">
+            <Confirm  v-if="page==='diagnose'"
+                      v-slot="slotProps"
                       :completeText="'다 그렸나요? </br> 제출하면 수정할 수 없어요!'"
                       :cancelText = "'아니요'"
                       :okText = "'제출하기'">
               <b-button v-if="page==='diagnose'" @click="globalUtils.confirm(slotProps,'diagnose')" class="btn btn-blue btn-lg">완료</b-button>
             </Confirm>
-            <Confirm v-slot="slotProps"
+            <Confirm v-if="page==='letter'"
+                     v-slot="slotProps"
                      :completeText="'배경교재1이 저장되었어요 남은 그림도 더 그려볼까요?'"
                      :text="'모든 배경교재를 그려야 학습과정이 완료돼요'"
                      :cancelText = "'아니요'"
                      :okText = "'네'">
               <b-button v-if="page==='letter'" @click="globalUtils.confirm(slotProps,'letter')" class="btn btn-blue btn-lg">완료</b-button>
             </Confirm>
+            <b-button v-else class="btn btn-blue btn-lg">완료</b-button>
           </div>
         </div>
       </div>
