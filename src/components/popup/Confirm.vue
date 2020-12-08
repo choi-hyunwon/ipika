@@ -123,12 +123,15 @@ export default {
     ok(){
       if(this.type==='goBack'){
         this.goBack()
-      }else if(this.type==='Complete'||this.type==='checkRed'||this.type==='diagnose'||this.type==='refresh'){
+      }else if(this.type==='Complete'||this.type==='diagnose'||this.type==='refresh' || this.type==='record'){
         this.goToNext()
       }else if(this.type==='watchComplete'){
         this.$route.push('/Recording')
       }else if(this.type==='letter'){
         this.modalCancel()
+      }else if(this.type==='checkRed'){
+        this.showConfirm = false
+        alert('파블로 서비스 종료 연동 필요')
       }
     },
     cancleA() {

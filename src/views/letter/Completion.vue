@@ -21,12 +21,19 @@
 </template>
 
 <script>
-import Confirm from '@/components/popup/Confirm'
 import LetterHeader from '@/components/letter/LetterHeader'
 
 export default {
-  name: 'PabloStudy6',
-  components: { Confirm, LetterHeader}
+  name: 'Completion',
+  components: {LetterHeader},
+  created() {
+    this.$EventBus.$on('back',this.goBack)
+  },
+  methods : {
+    goBack () {
+      this.$router.push('/Watching')
+    }
+  }
 }
 </script>
 

@@ -117,7 +117,9 @@ export default new Vuex.Store({
         stageId : state.letter.stageId,
         stageName : state.letter.stageName,
         stepSubejct : state.letter.stepSubejct,
-        stepImageUrl : state.letter.stepImageUrl
+        stepImageUrl : state.letter.stepImageUrl,
+        stepAudioMainText : state.letter.stepAudioMainText,
+        stepAudioSubText : state.letter.stepAudioSubText
       }
     }
   },

@@ -6,7 +6,7 @@
         <div class="symbol"><img src="@/assets/images/common/drawing@2x.png" alt=""></div>
       </template>
       <template >
-        <p class="text text-md">{{boldText}}</p>
+        <p class="text">{{boldText}}</p>
         <p class="text-sm">{{text}}</p>
       </template>
       <template #modal-footer="{ cancel }">
