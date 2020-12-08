@@ -89,4 +89,25 @@ export default {
 
 <style lang="scss" scoped>
 
+.btn_group{
+  position: absolute;
+  bottom: 10rem;
+  right: 10rem;
+  .btn{
+    width: 16rem;
+    height: 8rem;
+    border-radius: 0.8rem;
+    background-color: var(--red-500);
+    border: none;
+    font-size: 2.4rem;
+    font-weight: bold;
+    line-height: 4rem;
+    letter-spacing: -0.03rem;
+    text-align: center;
+    color: var(--gray-white);
+  }
+}
+
+
+
 </style>

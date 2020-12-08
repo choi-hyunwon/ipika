@@ -1,55 +1,23 @@
 <template>
   <div class="wrap bg-ivory">
-    <div class="header ivory">
-
-      <div class="symbol">
-        <Confirm v-slot="slotProps"
-                 :okText="'네'"
-                 :cancelText="'아니요'"
-                 :text = "'이전 화면으로 이동할까요? </br> 진행중인 학습 내용은 </br> 저장되지 않아요!'"
-        >
-          <button @click="globalUtils.confirm(slotProps,'goBack')"><img src="@/assets/images/common/arrow_left@2x.png" alt=""></button>
-        </Confirm>
-      </div>
-      <div class="flex-box">
-        <Alert v-slot="slotProps"
-                :boldText="`학습주제`"
-                :text="`학습주제`"
-                :buttonText ="'닫기'">
-        <button class="btn-right" @click="globalUtils.alert(slotProps,'subject')">
-          <span class="img"><img src="@/assets/images/common/ic-drawing@2x.png" alt=""></span>
-          <span class="tit">주제보기</span>
-          </button>
-        </Alert>
-        <div class="box-close">
-          <router-link to="/PabloMain" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>
-        </div>
-      </div>
-    </div>
-
+    <LetterHeader/>
     <div class="dim">
       <div class="inner"
-           ref="playerArea"
-      >
+           ref="playerArea">
         <Player v-if="isMounted" :options="playerOptions"/>
       </div>
     </div>
-    <!-- e 영상 재생 중_화면 탭 시 -->
-
   </div>
 </template>
 
 <script>
-import Confirm from '@/components/popup/Confirm'
-import Alert from '@/components/popup/Alert'
-
+import LetterHeader from '@/components/letter/LetterHeader'
 import Player from '@/components/letter/Player'
 import { mapGetters } from 'vuex'
-// import video from '@/assets/videos/file_example_MP4_640_3MG.mp4'
 
 export default {
   name: 'Watching',
-  components: { Alert, Confirm, Player },
+  components: {Player , LetterHeader},
   data(){
     return {
       isMounted: false

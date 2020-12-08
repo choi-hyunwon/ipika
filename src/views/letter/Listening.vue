@@ -1,38 +1,6 @@
 <template>
   <div class="wrap bg-ivory">
-    <div class="header ivory">
-      <Confirm v-slot="slotProps"
-               :okText="'네'"
-               :cancelText="'아니요'"
-               :text = "'이전 화면으로 이동할까요? </br> 진행중인 학습 내용은 </br> 저장되지 않아요!'">
-      <button class="symbol" @click="globalUtils.confirm(slotProps,'goBack')">
-        <img src="@/assets/images/common/arrow_left@2x.png" alt="">
-      </button>
-      </Confirm>
-
-      <div class="flex-box">
-        <Alert v-slot="slotProps">
-            <button @click="globalUtils.alert(slotProps,'video')" class="btn-right">
-              <span class="img"><img src="@/assets/images/common/ic-play@2x.png" alt=""></span>
-              <span class="tit">영상보기</span>
-            </button>
-        </Alert>
-
-        <Alert v-slot="slotProps"
-                :boldText="'주제보기'"
-                :text="'주제보기'"
-                :buttonText="'닫기'">
-          <button @click="globalUtils.alert(slotProps,'subject')" class="btn-right">
-            <span class="img"><img src="@/assets/images/common/ic-drawing@2x.png" alt=""></span>
-            <span class="tit">주제보기</span>
-          </button>
-        </Alert>
-
-        <div class="box-close">
-          <router-link to="/" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>
-        </div>
-      </div>
-    </div>
+    <LetterHeader/>
     <div class="contents">
       <div class="txt-area">
         <p class="txt-lg">다른 친구들은 어떻게<br/>
@@ -93,12 +61,11 @@
 </template>
 
 <script>
+import LetterHeader from '@/components/letter/LetterHeader'
 
-import Confirm from '@/components/popup/Confirm'
-import Alert from '@/components/popup/Alert'
 export default {
   name: 'peopleThinking',
-  components: { Alert, Confirm },
+  components: {LetterHeader },
   created() {
     this.$EventBus.$on('back',this.goBack)
   },

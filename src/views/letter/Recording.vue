@@ -1,51 +1,10 @@
 <template>
-
   <div class="wrap bg-ivory">
-    <div class="header ivory">
-      <!--      < style="position: absolute; top: 200px; left: 820px;">뒤로가기 팝업</b-button>-->
-      <Confirm v-slot="slotProps"
-               :okText="'네'"
-               :cancelText="'아니오'"
-               :text = "'이전 화면으로 이동할까요? </br> 진행중인 학습 내용은 </br> 저장되지 않아요!'"
-      >
-        <button class="symbol" @click="globalUtils.confirm(slotProps,'goBack')">
-          <img src="@/assets/images/common/arrow_left@2x.png" alt="">
-        </button>
-      </Confirm>
-
-      <div class="flex-box">
-        <Alert v-slot="slotProps">
-          <button @click="globalUtils.alert(slotProps,'video')" class="btn-right">
-            <span class="img"><img src="@/assets/images/common/ic-play@2x.png" alt=""></span>
-            <span class="tit">영상보기</span>
-          </button>
-        </Alert>
-
-        <Alert v-slot="slotProps"
-               :boldText="'주제보기'"
-               :text="'주제보기'"
-               :buttonText="'닫기'">
-          <button @click="globalUtils.alert(slotProps,'subject')" class="btn-right">
-            <span class="img"><img src="@/assets/images/common/ic-drawing@2x.png" alt=""></span>
-            <span class="tit">주제보기</span>
-          </button>
-        </Alert>
-
-        <div class="box-close">
-          <router-link to="/" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>
-        </div>
-      </div>
-    </div>
+    <LetterHeader/>
     <div class="contents">
       <div class="txt-area">
-        <p class="txt-lg">
-          정윤님은<br/>
-          이 주제에 대해 어떻게 생각해요?<br/>
-          생각을 들려주세요
-        </p>
-        <p class="txt-sm">
-          자유롭게 본인의 생각을 말해보세요
-        </p>
+        <p class="txt-lg" v-html="letter.stepAudioMainText"></p>
+        <p class="txt-sm">{{letter.stepAudioSubText}}</p>
       </div>
       <div class="record-area">
         <div v-if="!ing">
@@ -60,12 +19,16 @@
           :before-recording="startRecord"
           :after-recording="stopRecord"/>
         <Confirm v-slot="slotProps"
-                 :complete-text="`다시 녹음하시겠어요? 지금 녹음한 내용은 지워져요`"
+                 :complete-text="`다시 녹음하시겠어요? </br> 지금 녹음한 내용은 지워져요`"
                  :text="`지워진 녹음은 다시 들을 수 없어요`"
-                 :cancelText="`닫기`"
-                 :okText="`다시 녹음할게요`">
-          <button v-if="!record" @click="globalUtils.confirm(slotProps,'checkRed')" style="position: absolute; bottom: 0"><img src="@/assets/images/common/refresh_active@2x.png" alt=""></button>
-          <button v-if="record" style="position: absolute; bottom: 0"><img src="@/assets/images/common/refresh_default@2x.png" alt=""></button>
+                 :cancelText="`아니오`"
+                 :okText="`네`">
+          <button v-if="!record" @click="globalUtils.confirm(slotProps,'record')" style="position: absolute; bottom: 0">
+            <img src="@/assets/images/common/refresh_active@2x.png" alt="">
+          </button>
+          <button v-if="record" style="position: absolute; bottom: 0">
+            <img src="@/assets/images/common/refresh_default@2x.png" alt="">
+          </button>
         </Confirm>
       </div>
       <div class="btn-area">
@@ -77,11 +40,13 @@
 </template>
 
 <script>
+import LetterHeader from '@/components/letter/LetterHeader'
 import Confirm from '@/components/popup/Confirm'
-import Alert from '@/components/popup/Alert'
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'recording',
-  components: { Alert, Confirm },
+  components: {Confirm, LetterHeader},
   data(){
     return{
       media: null,
@@ -99,7 +64,7 @@ export default {
   },
   mounted () {
     this.todoRemove()
-    this.globalUtils.tts('정윤님은 이 주제에 대해 어떻게 생각해요? 생각을 들려주세요 자유롭게 자신의 생각을 말해보세요')
+    this.globalUtils.tts(this.letter.stepAudioMainText + this.letter.stepAudioSubText)
     navigator.mediaDevices.getUserMedia(this.constraints)
       .then(media => {
         this.media = media
@@ -119,6 +84,11 @@ export default {
         $('.ar-player').show()
       }
     }
+  },
+  computed: {
+    ...mapGetters({
+      letter: 'getLetterIntro'
+    })
   },
   methods : {
     goBack () {
