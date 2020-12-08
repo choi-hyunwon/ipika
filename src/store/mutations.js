@@ -70,6 +70,9 @@ export const mutations = {
   },
   setPlayerSize(state, size){
     state.playerOptions = {...state.playerOptions, ...size}
+  },
+  setBg(state, bg) {
+    state.bg = {...state.bg, ...bg}
   }
 
 }

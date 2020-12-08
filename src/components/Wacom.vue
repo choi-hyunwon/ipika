@@ -737,6 +737,7 @@
 
 <script>
 import Confirm from '@/components/popup/Confirm'
+import { mapMutations } from 'vuex'
 export default {
   name: "Wacom",
   components: { Confirm },
@@ -756,15 +757,24 @@ export default {
       default(){return true}
     }
   },
+  created(){
+    this.$EventBus.$on('setBg', (bg) => {
+      this.setLayerBgSelect(bg.img)
+      this.setBg({imgUrl: bg.img , active : true, subject:bg.subject})
+    });
+  },
   computed : {
     page() {
       return this.$router.currentRoute.query.page
     }
   },
   methods : {
-    setLayerBgSelect (e) {
+    ...mapMutations({
+      setBg: 'setBg',
+    }),
+    setLayerBgSelect (img) {
       // todo : 학습 배경 선택시 캔버스는 투명하게 만들고, 배경 레이어에 BG image 넣어야함
-      // document.querySelector('.layer_bg').style.backgroundColor = "#f00"
+      document.querySelector('.layer_bg').style.backgroundImage =  `url('${img}')`;
     },
     /**
      * 캔버스 툴 조작
