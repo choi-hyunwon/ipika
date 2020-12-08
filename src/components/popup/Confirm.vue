@@ -18,43 +18,10 @@
       <!--  footer  -->
       <template #modal-footer="{ cancel }">
         <b-button variant="gray" class="btn-half" @click="cancleA(cancel)">{{cancelText}}</b-button>
-        <b-button @click="ok" variant="black" class="btn-black btn-half">{{okText}}</b-button>
+        <b-button variant="black" class="btn-black btn-half" @click="ok()">{{okText}}</b-button>
       </template>
 
-     <!-- <template v-if="type==='goBack'" #modal-footer="{ cancel }">
-        <b-button variant="gray" class="btn-half" @click="cancel()">{{cancelText}}</b-button>
-        <b-button @click="goBack" variant="black" class="btn-black btn-half">{{okText}}</b-button>
-      </template>
 
-      <template v-else-if="type==='Complete'" #modal-footer="{ cancel }">
-        <b-button variant="gray" class="btn-half" @click="cancel()">{{cancelText}}</b-button>
-        <b-button @click="goToNext" variant="black" class="btn-black btn-half">{{okText}}</b-button>
-      </template>
-
-      <template v-else-if="type==='checkRed'" #modal-footer="{ cancel }">
-        <b-button variant="gray" class="btn-half" @click="cancel()">{{cancelText}}</b-button>
-        <b-button @click="goToNext" variant="black" class="btn-black btn-half">{{okText}}</b-button>
-      </template>
-
-      <template v-else-if="type==='refresh'" #modal-footer="{ cancel }">
-        <b-button variant="gray" class="btn-half" @click="cancel()">{{cancelText}}</b-button>
-        <b-button @click="clear" variant="black" class="btn-black btn-half">{{okText}}</b-button>
-      </template>
-
-      <template v-else-if="type==='watchComplete'" #modal-footer="{ cancel }">
-        <b-button variant="gray" class="btn-half"  @click="cancel()">다시 볼래요</b-button>
-        <router-link to="/Recording" class="btn btn-black btn-half">넘어갈게요</router-link>
-      </template>
-
-      <template v-else-if="type==='diagnose'"  #modal-footer="{ cancel }">
-        <b-button variant="gray" class="btn-half"  @click="modalCancel">{{cancelText}}</b-button>
-        <router-link to="/TestingResult" class="btn btn-black btn-half">{{okText}}</router-link>
-      </template>
-
-      <template v-else-if="type==='letter'"  #modal-footer="{ cancel }">
-        <button class="btn btn-black btn-half" @click="isComplete">{{cancelText}}</button>
-        <b-button variant="gray" class="btn-half" @click="modalCancel">{{okText}}</b-button>
-      </template>-->
     </b-modal>
 
     <b-modal v-if="type === 'timeOut'" no-close-on-backdrop id="timeoverPopup" centered title="진단테스트 : 타임오버" modal-class="normalPopup" v-model="showConfirm">
@@ -157,8 +124,19 @@ export default {
       return this.$router.push('/pablomain')
     },
     ok(){
-
-
+      if(this.type==='goBack'){
+        this.goBack()
+      }else if(this.type==='Complete'||this.type==='checkRed'){
+        this.goToNext()
+      }else if(this.type==='refresh'){
+        this.clear()
+      }else if(this.type==='watchComplete'){
+        this.$route.push('/Recording')
+      }else if(this.type==='diagnose'){
+        this.$router.push('/TestingResult')
+      }else if(this.type==='letter'){
+        this.modalCancel()
+      }
     },
     cancleA(cancle) {
       if(this.type === 'diagnose') this.modalCancel()
