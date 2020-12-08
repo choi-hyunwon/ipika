@@ -9,7 +9,7 @@
     </div>
     <div class="symbol">
       <span class="img"><img src="@/assets/images/common/Symbol@2x.png" alt=""></span>
-      <span class="text"></span>
+      <span class="text">{{subject.subject}}</span>
     </div>
     <div class="box-close">
       <Confirm v-slot="slotProps"
@@ -39,7 +39,7 @@ export default {
       subject : 'getSubject'
     }),
     timeInit() {
-      return this.canvasTimer.timeInitVal
+      return this.canvasTimer.timeInitVal()
     },
     time() {
       let mm = Math.floor(this.canvasTimer.time / 60)

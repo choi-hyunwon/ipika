@@ -19,7 +19,6 @@ import Recording from '@/views/letter/Recording'
 import Listening from '@/views/letter/Listening'
 import ListeningPlay from '@/views/letter/ListeningPlay'
 import PabloPopup1 from '@/views/letter/PabloPopup1'
-import PabloPopup2 from '@/views/letter/PabloPopup2'
 import Completion from '@/views/letter/Completion'
 
 import MyGallery from '@/views/myGallery/MyGallery'
@@ -92,11 +91,6 @@ const routes = [
     path: '/PabloPopup1',
     name: 'PabloPopup1',
     component: PabloPopup1
-  },
-  {
-    path: '/PabloPopup2',
-    name: 'PabloPopup2',
-    component: PabloPopup2
   },
   {
     path: '/Recording',

@@ -699,10 +699,9 @@
 
 
               <Confirm v-slot="slotProps"
-                       :completeText="'다시 그리시겠어요?'"
-                       :text="'조금 전 그림은 사라져요'"
-                       :cancelText="'제출하기'"
-                       :okText="'다시 그리기'">
+                       :completeText="'다시 그리시겠어요? </br> 조금 전 그림은 사라져요 '"
+                       :cancelText="'다시 그리기'"
+                       :okText="'제출하기'">
               <button @click="undo"><img src="@/assets/images/common/btn_undo@2x.png" alt=""></button>
               <button @click="redo"><img src="@/assets/images/common/btn_redo@2x.png" alt=""></button>
                 <button @click="globalUtils.confirm(slotProps,'refresh')"><img src="@/assets/images/common/btn_refresh@2x.png" alt=""></button>

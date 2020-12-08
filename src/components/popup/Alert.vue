@@ -5,8 +5,8 @@
       <template #modal-header>
         <div class="symbol"><img src="@/assets/images/common/drawing@2x.png" alt=""></div>
       </template>
-      <template  >
-        <p class="text text-md">{{boldText}}</p>
+      <template >
+        <p class="text">{{boldText}}</p>
         <p class="text-sm">{{text}}</p>
       </template>
       <template #modal-footer="{ cancel }">
@@ -56,7 +56,7 @@
       </template>
       <p class="text">{{text}}</p>
       <template #modal-footer="{ cancel }">
-        <button size="sm" class="btn btn-black btn-block" @click="timeStart">알겠어요!</button>
+        <button size="sm" class="btn btn-black btn-block" @click="timeStart">시작하기</button>
       </template>
     </b-modal>
   </div>
@@ -95,6 +95,10 @@ export default {
       default(){return ''}
     },
     autoOpen : {
+      Boolean,
+      default(){return false}
+    },
+    isLoading :{
       Boolean,
       default(){return false}
     }

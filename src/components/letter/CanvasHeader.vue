@@ -43,8 +43,14 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
-  name: 'CanvasHeader'
+  name: 'CanvasHeader',
+  computed: {
+    ...mapGetters({
+      subject : 'getSubject'
+    })
+  }
 }
 </script>
 

@@ -1,11 +1,6 @@
 <template>
   <div class="wrap bg-ivory">
-    <div class="header">
-      <router-link to="/PabloMain" class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt=""></router-link>
-      <div class="box-close">
-        <router-link to="/PabloMain" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>
-      </div>
-    </div>
+    <LetterHeader/>
     <div class="row">
       <div class="col col-6">
         <div class="symbol-wrap">
@@ -24,9 +19,11 @@
 </template>
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import LetterHeader from '@/components/letter/LetterHeader'
 
 export default {
   name: 'Intro',
+  components : {LetterHeader},
   data () {
     return {
       isLoading : false
