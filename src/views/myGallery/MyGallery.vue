@@ -1,6 +1,6 @@
 <template>
   <div class="wrap">
-    <div class="header ivory bg-ivory d-flex">
+    <div class="header ivory bg-ivory d-flex" v-if="userGalleryMypicture" v-model="setList">
       <a href="#" @click.prevent="goBack" v-b-modal.goBackPopup class="symbol"><img
         src="@/assets/images/common/arrow_left@2x.png" alt=""></a>
       <div class="gallery-title">
@@ -13,7 +13,7 @@
         </router-link>
       </div>
     </div>
-    <div class="contents">
+    <div class="contents" setList>
       <myGalleryInfo v-on:popup="settingPopup"></myGalleryInfo>
       <div class="tab-section">
         <b-tabs justified>
@@ -47,53 +47,22 @@
           </div>
           <div class="c-body">
             <div class="btns_group d-flex">
-              <b-button class="all_button">
-                <img src="@/assets/images/common/all.png" alt="모든이미지" class="img">
-                <span>ALL</span>
-              </b-button>
-              <b-button class="drawing_button">
-                <img src="@/assets/images/common/all.png" alt="모든이미지" class="img">
-                <span>Pablo Drawing</span>
-              </b-button>
-              <b-button class="classic_button">
-                <img src="@/assets/images/common/all.png" alt="모든이미지" class="img" style="width: 1.57rem; height: 2rem;">
-                <span>Pablo Classic</span>
-              </b-button>
-              <b-button class="canvas_button">
-                <img src="@/assets/images/common/all.png" alt="모든이미지" class="img">
-                <span>Canvas</span>
+              <b-button v-for="(filterItem, index) in filter"
+                        :key="index"
+                        aria-pressed="true"
+                        :data="filterItem"
+                        :class="{'selected' : activeIndex === index}"
+                        @click="onClick(index)"
+              >
+                <img v-if="filterItem.src" src="@/assets/images/common/all.png" alt="모든이미지" class="img">
+                <span>{{ filterItem.title }} ({{ nSize[index] }})</span>
               </b-button>
             </div>
             <ul class="scroll d-flex">
-              <li class="background-img">
-                <router-link to="">
-                  <img src="@/assets/images/temp/sample_img_01.jpg" alt="" class="img-m">
-                </router-link>
-              </li>
-              <li class="background-img">
-                <router-link to="">
-                  <img src="@/assets/images/temp/sample_img_01.jpg" alt="" class="img-m">
-                </router-link>
-              </li>
-              <li class="background-img">
-                <router-link to="">
-                  <img src="@/assets/images/temp/sample_img_01.jpg" alt="" class="img-m">
-                </router-link>
-              </li>
-              <li class="background-img">
-                <router-link to="">
-                  <img src="@/assets/images/temp/sample_img_01.jpg" alt="" class="img-m">
-                </router-link>
-              </li>
-              <li class="background-img">
-                <router-link to="">
-                  <img src="@/assets/images/temp/sample_img_01.jpg" alt="" class="img-m">
-                </router-link>
-              </li>
-              <li class="background-img">
-                <router-link to="">
-                  <img src="@/assets/images/temp/sample_img_01.jpg" alt="" class="img-m">
-                </router-link>
+              <li class="background-img" v-for="(item, index) in list" allSize>
+                <a href="#" @click.prevent="setBackground(item.pictureId, index)">
+                  <img :src="item.pictureUrl" alt="갤러리사진" class="img-m">
+                </a>
               </li>
             </ul>
           </div>
@@ -120,19 +89,58 @@ export default {
   },
   data () {
     return {
-      myTab: {
-        empty: false
-      },
+      empty: null,
       closeBtn: {
         ModalClose: false
-      }
+      },
+      activeIndex : 0,
+      nSize : [0,0,0],
+      filter : [
+        {
+          'title' : 'ALL',
+          'src' : '@/assets/images/common/all.png',
+          'click' : 'filterAll'
+        },
+        {
+          'title' : 'Pablo Letter',
+          'click': 'filterLetter'
+        },
+        {
+          'title': 'Free Drawing',
+          'click': 'filterTest'
+        }
+      ],
+      list: [],
+      selected: 1
     }
   },
   computed: {
     ...mapGetters({
       session: 'getSession',
-      UserGalleryMypicture: 'getUserGalleryMypicture'
-    })
+      userGalleryMypicture: 'getUserGalleryMypicture'
+    }),
+    getEmpty(){
+      let userGalleryMypicture = this.userGalleryMypicture
+      if (userGalleryMypicture.pictures.length === 0 && userGalleryMypicture.audios.length === 0) {
+        this.empty = true
+      } else {
+        this.empty = false
+      }
+    },
+    setList(){
+      return this.list = this.userGalleryMypicture.pictures
+    },
+    allSize(){
+      this.nSize[0] = this.list.length
+      const letter = this.list.filter(function (item) {
+        return item.drawingType === 4
+      })
+      this.nSize[1] = letter.length
+      const free = this.list.filter(function (item) {
+        return item.drawingType === 3
+      })
+      this.nSize[2] = free.length
+    }
   },
   mounted () {
     this.fetchUserGalleryMypicture()
@@ -145,7 +153,7 @@ export default {
       getUserGalleryDetele: 'getUserGalleryDetele'
     }),
     settingPopup () {
-      if (!this.myTab.empty) {
+      if (this.empty) {
         this.$bvModal.show('galleryBGChangeEmpty')
       } else {
         this.$bvModal.show('galleryBgChange')
@@ -160,7 +168,65 @@ export default {
     goBack () {
       this.$router.go(-1)
     },
-
+    onClick (index) {
+      if (this.activeIndex === index) {
+        this.activeIndex = null
+      } else {
+        this.activeIndex = index
+      }
+      this.setFilter(index)
+    },
+    setFilter (index) {
+      if (index === 0) {
+        this.list = this.userGalleryMypicture.pictures
+      } else if (index === 1) {
+        this.list = this.userGalleryMypicture.pictures.filter(function (item) {
+          return item.drawingType === 4
+        })
+      } else if (index === 2) {
+        this.list = this.userGalleryMypicture.pictures.filter(function (item) {
+          return item.drawingType === 3
+        })
+      }
+      //sort 처리
+      this.setSort(this.selected)
+    },
+    setSort (value) {
+      //select value
+      this.selected = value
+      //값 없을 경우
+      if (this.list.length === 0)
+        return false;
+      //select value에 따른 처리
+      if (value === 1){
+        this.list.sort(function(a, b) { // 오름차순
+          return a.createdDate > b.createdDate ? -1 : a.createdDate > b.createdDate ? 1 : 0;
+        });
+      } else if (value === 2){
+        this.list.sort(function(a, b) { // 오름차순
+          return a.createdDate < b.createdDate ? -1 : a.createdDate > b.createdDate ? 1 : 0;
+        });
+      }
+    },
+    setBackground (pictureId, index) {
+      var self=this;
+      this.selectId = pictureId
+      this.selectIndex = index
+      this.$bvModal.hide('galleryBgChange')
+      this.getUserGalleryBackground({pictureId : this.selectId})
+        .then(result => {
+          if (result.code === "U001"){
+            alert('삭제되었습니다.');
+            self.list.splice(self.selectIndex, 1)
+          } else if (result.code === "U002"){
+            alert(result.message);
+          } else if (result.code === "U003"){
+            alert(result.message);
+          } else if (result.code === "U004"){
+            alert(result.message);
+          }
+        })
+    }
   }
 }
 </script>
@@ -177,5 +243,13 @@ export default {
       color: var(--gray-black);
     }
   }
+}
+
+.modal.galleryBgChange .c-body .btns_group .btn:hover,
+.modal.galleryBgChange .c-body .btns_group .btn:active,
+.modal.galleryBgChange .c-body .btns_group .btn:focus,
+.modal.galleryBgChange .c-body .btns_group .btn.selected {
+  color: var(--gray-white);
+  background-color: var(--gray-900);
 }
 </style>

@@ -84,11 +84,11 @@ export default {
           'click' : 'filterAll'
         },
         {
-          'title' : 'Pablo Letter()',
+          'title' : 'Pablo Letter',
           'click': 'filterLetter'
         },
         {
-          'title': 'Free Drawing()',
+          'title': 'Free Drawing',
           'click': 'filterTest'
         }
       ],
