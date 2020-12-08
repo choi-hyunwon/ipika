@@ -2,6 +2,7 @@
   <div class="wrap bg-ivory">
     <LetterHeader/>
     <div class="contents">
+
       <div class="txt-area">
         <p class="txt-lg">다른 친구들은 어떻게<br/>
           생각하는지 들어볼까요?</p>

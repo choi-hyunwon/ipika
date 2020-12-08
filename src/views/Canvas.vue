@@ -1,7 +1,9 @@
 <template>
   <div class="wrap">
 
-    <div class="cover"></div>
+    <div class="cover">
+      
+    </div>
 
     <!--   canvas 헤더 -->
     <CanvasHeader></CanvasHeader>
