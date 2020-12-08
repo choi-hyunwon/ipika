@@ -9,9 +9,16 @@
         </div>
       </template>
 
+<!--      canvase time header-->
+<!--      <template v-if="type==='canvasComplete'" #modal-header>-->
+<!--        <div class="symbol">-->
+<!--          <img src="@/assets/images/common/timer@2x.png" alt="">-->
+<!--        </div>-->
+<!--      </template>-->
+
 <!--     본문  -->
       <template v-if= "type==='goBack'">
-        <p class="text">정말 뒤로 가시겠어요?</p>
+        <p class="text">이전 화면으로 이동할까요? </br> 진행중인 학습 내용은 </br> 저장되지 않아요!</p>
         <p class="text-sm">{{backText}}</p>
       </template>
 
@@ -20,7 +27,7 @@
         <p class="text-sm">{{text}}</p>
       </template>
 
-      <template v-else-if="type==='refresh'">
+      <template v-else-if="type==='checkRed'">
         <p class="text">{{completeText}}</p>
         <p class="text-sm">{{text}}</p>
       </template>
@@ -42,14 +49,14 @@
         <b-button @click="goToNext" variant="black" class="btn-black btn-half">{{okText}}</b-button>
       </template>
 
-      <template v-else-if="type==='refresh'" #modal-footer="{ cancel }">
-        <b-button variant="gray" class="btn-half" @click="modalCancel">{{cancelText}}</b-button>
-        <b-button @click="clear" variant="black" class="btn-black btn-half">{{okText}}</b-button>
+      <template v-else-if="type==='checkRed'" #modal-footer="{ cancel }">
+        <b-button variant="gray" class="btn-half" @click="cancel()">{{cancelText}}</b-button>
+        <b-button @click="goToNext" variant="black" class="btn-black btn-half">{{okText}}</b-button>
       </template>
 
       <template v-else-if="type==='watchComplete'" #modal-footer="{ cancel }">
         <b-button variant="gray" class="btn-half"  @click="cancel()">다시 볼래요</b-button>
-        <router-link to="/thoughtRecords" class="btn btn-black btn-half">넘어갈게요</router-link>
+        <router-link to="/Recording" class="btn btn-black btn-half">넘어갈게요</router-link>
       </template>
 
       <template v-else-if="type==='diagnose'"  #modal-footer="{ cancel }">
@@ -142,6 +149,7 @@ export default {
       this.$EventBus.$emit('back')
     },
     goToNext(){
+      this.showConfirm = false
       this.$EventBus.$emit('next')
     },
     clear(){

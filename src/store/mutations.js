@@ -11,9 +11,6 @@ export const mutations = {
   setSubject (state, subject) {
     state.subject = subject
   },
-  setResult (state, result) {
-    state.result = result
-  },
   setUesrGallery (state, userGallery) {
     state.userGallery = userGallery
   },
@@ -63,6 +60,12 @@ export const mutations = {
         state.canvasTimer.time--
       }
     }, 1000)
+  },
+  setLetter(state, letter){
+    state.letter = letter
+  },
+  setPlayerUrl(state, url){
+    state.playerOptions = {...state.playerOptions, ...url}
   }
-  /* // timer */
+
 }

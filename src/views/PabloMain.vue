@@ -1,6 +1,6 @@
 <template>
   <div class="wrap">
-    <div class="row">
+    <div v-if="isLoading" class="row">
       <div class="col col-6 left">
         <div class="symbol"><img src="@/assets/images/common/Symbol@2x.png" alt=""></div>
         <ul class="dot-list" v-if="slider">
@@ -12,41 +12,11 @@
           <li><router-link to=""></router-link></li>
         </ul>
         <ul class="title-list">
-          <li class="active"><!-- badge-new / badge-start -->
-            <router-link to="/Intro">
-              <span class="num">01</span>
-              <span class="title">Pablo Letter</span>
+          <li v-for="(menu,i) in mainMenuList" :class="{active : isActiveMenuList.includes(menu.menuId)}">
+            <router-link :to=setPath(menu.menuId)>
+              <span class="num">{{`0${i+1}`}}</span>
+              <span class="title">{{menu.menuName}}</span>
             </router-link>
-          </li>
-          <li>
-            <span>
-              <span class="num">02</span>
-              <span class="title">Pablo Classic</span>
-            </span>
-          </li>
-          <li class="active">
-            <router-link to="/canvas">
-              <span class="num">03</span>
-              <span class="title">Canvas</span>
-            </router-link>
-          </li>
-          <li class="active">
-            <router-link to="/MainGallery">
-              <span class="num">04</span>
-              <span class="title">My Gallery</span>
-            </router-link>
-          </li>
-          <li>
-            <span>
-              <span class="num">05</span>
-              <span class="title">Open Gallery</span>
-            </span>
-          </li>
-          <li>
-            <span>
-              <span class="num">06</span>
-              <span class="title">My Page</span>
-            </span>
           </li>
         </ul>
         <div class="message" v-if="message">
@@ -56,20 +26,65 @@
         </div>
       </div>
       <div class="col col-6 right">
-        <router-link to="/" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>
-        <div class="img"><img src="@/assets/images/temp/sample_img_01.jpg" alt=""></div>
+        <Confirm v-slot="slotProps"
+                 :complete-text="`파블로 서비스를 종료하시겠습니까?`"
+                 :cancelText="`아니오`"
+                 :okText="`네`">
+          <div @click="globalUtils.confirm(slotProps,'checkRed')" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></div>
+        </Confirm>
+        <div class="img"><img :src=mainMenuList[0].imgUrl alt=""></div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+import Confirm from '@/components/popup/Confirm'
+
 export default {
   name: 'PabloMain',
+  components: {Confirm },
   data () {
     return {
       message: false,
       slider: false,
+      isLoading : false,
+      mainMenuList : [],
+      isActiveMenuList : [111, 115, 116]
+    }
+  },
+  mounted () {
+    this.fetchMainMenu();
+  },
+  methods : {
+    ...mapActions({
+      getMainMenu : 'getMainMenu'
+    }),
+    fetchMainMenu(){
+      this.getMainMenu()
+        .then(result => {
+          this.isLoading = true;
+          this.mainMenuList = result.menuList;
+        })
+    },
+    setPath(menuId){
+      let link = ''
+       switch (menuId){
+        case 111 :
+           link = '/Intro'
+           break;
+         case 115 :
+           link = '/canvas'
+           break;
+         case 116 :
+           link = '/MyGallery'
+           break;
+         default :
+           link = '/'
+           break;
+       }
+      return link
     }
   }
 }

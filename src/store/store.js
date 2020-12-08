@@ -19,7 +19,7 @@ export default new Vuex.Store({
    */
   state: {
     isDummy : false,
-    diagnose : false,
+    diagnose : true,
 
     /**
      * userinfo는 단말기(안드로이드)기에서 받아온다.
@@ -44,13 +44,12 @@ export default new Vuex.Store({
      * API session options
      */
     session: {
-      'user_id': 'testplan56',
+      'user_id': 'test107',
       'user_auth_key': 'abcdefghijklmnopqrstuvwxyz0123456789',
       'Content_Language': 'ko',
       'device_type': '1001'
     },
     subject: {},
-    result: {},
     userGallery: {},
     uesrGalleryMypicture: {},
 
@@ -60,6 +59,21 @@ export default new Vuex.Store({
       timer: null,
       timeOver : false,
     },
+    playerOptions: {
+      autoplay: false,
+      controls: true,
+      sources: [
+        {
+          src: '',
+          type: ''
+        }
+      ],
+      width: 0,
+      height: 0,
+      liveui: false,
+      Thumnail : ''
+    },
+    letter : {}
   },
   /**
    * global로 사용하는 getters
@@ -78,9 +92,6 @@ export default new Vuex.Store({
     getSubject: state => {
       return state.subject
     },
-    getResult: state => {
-      return state.result
-    },
     getUserGallery: state => {
       return state.userGallery
     },
@@ -98,6 +109,17 @@ export default new Vuex.Store({
     getCanvasTimer: state => {
       return state.canvasTimer
     },
+    getPlayerOptions: state => {
+      return state.playerOptions
+    },
+    getLetterIntro: state => {
+      return {
+        stageId : state.letter.stageId,
+        stageName : state.letter.stageName,
+        stepSubejct : state.letter.stepSubejct,
+        stepImageUrl : state.letter.stepImageUrl
+      }
+    }
   },
   /**
    * global로 사용하는 Mutations

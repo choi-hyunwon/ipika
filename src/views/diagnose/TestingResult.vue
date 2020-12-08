@@ -10,7 +10,7 @@
       <div class="col col-6">
         <div class="symbol-wrap">
           <div class="symbol"><img src="@/assets/images/common/Vector@2x.png" alt=""></div>
-          <span class="text">Twinkle Stage</span></div>
+          <span class="text">{{result.stageName}}</span></div>
         <div class="title">정윤님은 무의식의 세계,<br/>
           트윙클 스테이지네요!<br/>
           학습을 시작하세요 😉</div>
@@ -21,15 +21,37 @@
         </div>
       </div>
       <div class="col col-6">
-        <div class="img"><img src="@/assets/images/temp/sample_img_01.jpg" alt=""></div>
+        <div class="img"><img :src=result.pictureUrl alt=""></div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapActions} from 'vuex'
 export default {
-  name: 'TestingResult'
+  name: 'TestingResult',
+  data () {
+    return {
+      isLoading : false,
+      result : {}
+    }
+  },
+  mounted () {
+    this.fetchLetter();
+  },
+  methods:{
+    ...mapActions({
+      getResult : 'getResult'
+    }),
+    fetchLetter(){
+      this.getResult()
+        .then(result => {
+          this.isLoading = true;
+          this.result = result
+        })
+    }
+  }
 }
 </script>
 
