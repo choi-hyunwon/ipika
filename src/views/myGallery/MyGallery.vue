@@ -1,24 +1,26 @@
 <template>
   <div class="wrap">
     <div class="header ivory bg-ivory d-flex">
-      <a href="#" @click.prevent="goBack" v-b-modal.goBackPopup class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt=""></a>
+      <a href="#" @click.prevent="goBack" v-b-modal.goBackPopup class="symbol"><img
+        src="@/assets/images/common/arrow_left@2x.png" alt=""></a>
       <div class="gallery-title">
         <router-link to="/">
           <span class="title-center">My Gallery</span>
         </router-link>
       </div>
       <div class="box-close">
-        <router-link to="/PabloMain" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>
+        <router-link to="/PabloMain" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt="">
+        </router-link>
       </div>
     </div>
     <div class="contents">
       <myGalleryInfo v-on:popup="settingPopup"></myGalleryInfo>
       <div class="tab-section">
         <b-tabs justified>
-          <b-tab title="내그림" class="tab">
+          <b-tab title="내그림" title-link-class="mytab">
             <myGalleryPicture></myGalleryPicture>
           </b-tab>
-          <b-tab title="내 녹음 듣기" class="tab">
+          <b-tab title="내 녹음 듣기" title-link-class="mytab">
             <myGalleryVoice></myGalleryVoice>
           </b-tab>
         </b-tabs>
@@ -72,11 +74,12 @@
                 <router-link to="">
                   <img src="@/assets/images/temp/sample_img_01.jpg" alt="" class="img-m">
                 </router-link>
-              </li>  <li class="background-img">
-              <router-link to="">
-                <img src="@/assets/images/temp/sample_img_01.jpg" alt="" class="img-m">
-              </router-link>
-            </li>
+              </li>
+              <li class="background-img">
+                <router-link to="">
+                  <img src="@/assets/images/temp/sample_img_01.jpg" alt="" class="img-m">
+                </router-link>
+              </li>
               <li class="background-img">
                 <router-link to="">
                   <img src="@/assets/images/temp/sample_img_01.jpg" alt="" class="img-m">
@@ -97,39 +100,7 @@
         </div>
       </template>
     </b-modal>
-    <b-modal id="delete" centered title="완전히 삭제" modal-class="delete">
-      <template #modal-header>
-        <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>
-      </template>
-      <p class="text">완전히 삭제하시겠어요?<br/>그림과 녹음 모두 삭제돼요<br/></p>
-      <p class="text-sm">삭제한 그림과 녹음은 복구할 수 없어요</p>
-      <template #modal-footer="{ cancel }">
-        <b-button variant="gray" class="btn-half">삭제하기</b-button>
-        <b-button class="btn btn-black  btn-half" @click="cancel()">닫기</b-button>
-      </template>
-    </b-modal>
-    <b-modal id="openGallery" centered title="오픈갤러리 공개" modal-class="openGallery">
-      <template #modal-header>
-        <div class="symbol"><img src="@/assets/images/common/check_blue@2x.png" alt=""></div>
-      </template>
-      <p class="text">오픈갤러리에 그림을<br/>공개하시겠어요?<br/></p>
-      <p class="text-sm">친구들에게 그림을 보여주세요!</p>
-      <template #modal-footer="{ cancel }">
-        <b-button variant="gray" class="btn-half"  @click="cancel()">닫기</b-button>
-        <b-button v-b-modal.normalPopup1-1  class="btn btn-black  btn-half" >공개하기</b-button>
-      </template>
-    </b-modal>
-    <b-modal id="openGalleryComplete" centered title="오픈갤러리 공개 완료" modal-class="openGalleryComplete">
-      <template #modal-header>
-        <div class="symbol"><img src="@/assets/images/common/check_green@2x.png" alt=""></div>
-      </template>
-      <p class="text">그림이 친구들에게<br/>공개되었습니다!<br/></p>
-      <p class="text-sm">오픈갤러리에서 확인해보세요!</p>
-      <template #modal-footer="{ cancel }">
-        <b-button variant="gray" class="btn-half"  @click="cancel()">닫기</b-button>
-        <router-link to="/PabloMain" class="btn btn-black  btn-half">오픈갤러리 가기</router-link>
-      </template>
-    </b-modal>
+
     <!--//modal-->
   </div>
 </template>
@@ -152,7 +123,7 @@ export default {
       myTab: {
         empty: false
       },
-      closeBtn:{
+      closeBtn: {
         ModalClose: false
       }
     }
@@ -164,11 +135,11 @@ export default {
     })
   },
   mounted () {
-    this.fetchUserGalleryMypicture();
+    this.fetchUserGalleryMypicture()
   },
   methods: {
     ...mapActions({
-      getUserGallery : 'getUserGallery',
+      getUserGallery: 'getUserGallery',
       getUserGalleryMypicture: 'getUserGalleryMypicture',
       getUserGalleryBackground: 'getUserGalleryBackground',
       getUserGalleryDetele: 'getUserGalleryDetele'
@@ -180,19 +151,31 @@ export default {
         this.$bvModal.show('galleryBgChange')
       }
     },
-    fetchUserGalleryMypicture(){
+    fetchUserGalleryMypicture () {
       this.getUserGalleryMypicture()
         .then(result => {
           console.log('getUserGalleryMypicture :', result)
         })
-    }
-  },
-  goBack(){
-    this.$router.go(-1)
-  },
+    },
+    goBack () {
+      this.$router.go(-1)
+    },
+
+  }
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+.tab-section {
+  border-top: 1px solid var(--gray-500);;
 
+  .nav-link.mytab {
+    border: none;
+
+    &.active {
+      border-bottom: 0.4rem solid var(--gray-black);
+      color: var(--gray-black);
+    }
+  }
+}
 </style>

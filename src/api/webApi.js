@@ -121,7 +121,7 @@ export default class WebApi {
    * pictureId:String-그림ID
    */
   getUserGalleryDetele (options) {
-    return this.request('api/users/gallery/delete', {
+    return this.request('api/users/gallery/delete/5', {
       method: 'DELETE',
       data: {
         pictureId: options.pictureId

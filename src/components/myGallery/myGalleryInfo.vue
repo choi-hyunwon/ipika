@@ -3,7 +3,7 @@
     <div class="bgc-section">
       <div class="bg">
         <!--        <div class="img-m" style="width:192rem; height: 40rem; background-color:#eee9e3;" :style="{backgroundImage: 'url(' + galleryInfo.backgroundImage + ')'}"></div>-->
-        <div class="img-m" style="width:192rem; height: 40rem; background-color:#eee9e3;" :style="{backgroundImage: 'url(https://kr.vuejs.org/images/stdlib.png)'}"></div>
+        <div class="img-m" style="width:192rem; height: 40rem; background-color:#eee9e3;" :style="{backgroundImage: 'url(' + galleryInfo.backgroundPictureUrl + ')'}"></div>
       </div>
       <div class="setting-img">
         <img src="@/assets/images/common/setting_default.png" alt="세팅" class=" img-m" @click="$emit('popup')">
@@ -16,7 +16,7 @@
         <img v-if="result.stageId === 2" src="@/assets/images/common/img_thum_stage_03@2x.png" alt="프로필사진" class="img-m">
         <img v-if="result.stageId === 3" src="@/assets/images/common/img_thum_stage_04@2x.png" alt="프로필사진" class="img-m">
         <img v-if="result.stageId === 4" src="@/assets/images/common/img_thum_stage_05@2x.png" alt="프로필사진" class="img-m">
-        <div class="text-center name">{{ name }}</div>
+        <div class="text-center name">{{ galleryInfo.nickname || name }}</div>
         <div class="text-center english-name">{{ result.stageName }}</div>
       </div>
 <!--      <ul class="infomation d-flex">-->
@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'myGalleryInfo',
@@ -51,11 +51,9 @@ export default {
     return {
       result: {
         stageName: '',
-        stageId: 0,
+        stageId: 0
       },
-      galleryInfo:{
-
-      }
+      galleryInfo: {}
     }
   },
   computed: {
@@ -73,21 +71,20 @@ export default {
       getResult: "getResult",
       getUserGallery: "getUserGallery"
     }),
-    fetchResult(){
+    fetchResult() {
       this.getResult()
         .then(result => {
           console.log('fetchResult :', result)
-          if(result !== undefined) this.result = result;
+          if(result !== undefined) this.result = result
         })
     },
-    fetchUserGallery(){
+    fetchUserGallery() {
       this.getUserGallery()
         .then(result => {
           console.log('fetchUserGallery :', result)
-          if(result !== undefined) this.galleryInfo = result;
+          if(result !== undefined) this.galleryInfo = result
         })
-    },
-
+    }
   }
 }
 </script>

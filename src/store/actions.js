@@ -30,12 +30,17 @@ export const actions = {
   getUserGallery ({ commit }, options) {
     if (store.getters.getIsDummy) {
       const data = {
-        "userName": "궁예",
-        "backgroundImage": "/images/users/background/king.png",
-        "totalCount": "21",
-        "totalSharedCount": "21",
-        "totalViewCount": "352",
-        "totalReactionCount": "34"
+        "code": "0000",
+        "message": "",
+        "nickname": null,
+        "stageId": 1,
+        "stageName": "트윙클",
+        "backgroundPictureId": 0,
+        "backgroundPictureUrl": null,
+        "totalCount": 0,
+        "totalSharedCount": 0,
+        "totalViewCount": 0,
+        "totalReactionCount": 0
       }
       commit('setUserGallery', data)
       return data
