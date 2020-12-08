@@ -1,11 +1,13 @@
 <template>
   <div class="wrap">
 
-    <div class="cover"></div>
-
+    <div class="cover">
+      <div class="guide guide_canvas"><img src="@/assets/images/common/guide@2x.png" alt="" class="img-m"></div>
+      <div class="guide test_canvas"><img src="@/assets/images/common/test_guide@2x.png" alt="" class="img-m"></div>
+    </div>
     <!--   canvas 헤더 -->
     <CanvasHeader></CanvasHeader>
-
+    <GuideHeader></GuideHeader>
     <!--   wacom 라이브러리 -->
     <Wacom ref="wacom" :isLoading="isLoading" :drawer="drawer"></Wacom>
 
@@ -27,6 +29,7 @@ import Wacom from '@/components/Wacom'
 import Confirm from '@/components/popup/Confirm'
 import CanvasHeader from '@/components/CanvasHeader'
 import Alert from '@/components/popup/Alert'
+import GuideHeader from '@/components/letter/GuideHeader'
 
 
 export default {
@@ -35,7 +38,8 @@ export default {
     Alert,
     Wacom,
     Confirm,
-    CanvasHeader
+    CanvasHeader,
+    GuideHeader
   },
   data () {
     return {
@@ -170,5 +174,13 @@ export default {
     width: 100%;
     height: 100%;
   }
+}
+.test_canvas{
+  //display: none;
+  display: block;
+}
+.guide_canvas{
+  //display:block;
+  display: none;
 }
 </style>

@@ -16,6 +16,7 @@ export default {
 </script>
 
 <style scoped>
+
 .guide_bg{
   position: absolute;
   top: 0;
