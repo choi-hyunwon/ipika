@@ -61,6 +61,7 @@ export const mutations = {
       }
     }, 1000)
   },
+  /* // timer */
   setLetter(state, letter){
     state.letter = letter
   },
