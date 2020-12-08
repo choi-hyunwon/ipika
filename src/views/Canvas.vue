@@ -1,15 +1,19 @@
 <template>
   <div class="wrap">
 
-    <div class="cover">
-      <div class="guide guide_canvas"><img src="@/assets/images/common/guide@2x.png" alt="" class="img-m"></div>
-      <div class="guide test_canvas"><img src="@/assets/images/common/test_guide@2x.png" alt="" class="img-m"></div>
-    </div>
+    <div class="cover"></div>
+
     <!--   canvas 헤더 -->
     <CanvasHeader></CanvasHeader>
-    <GuideHeader></GuideHeader>
+
     <!--   wacom 라이브러리 -->
     <Wacom ref="wacom" :isLoading="isLoading" :drawer="drawer"></Wacom>
+
+    <!-- <div class="guide_bg">
+      <img src="@/assets/images/common/test_guide@2x.png" alt="" class="img-m">
+      <img src="@/assets/images/common/guide@2x.png" alt="" class="img-m">
+    </div>-->
+
 
     <!--   진단테스트 canvas 첫 진입시 Alert-->
     <Alert ref="autoOpen"
@@ -29,7 +33,6 @@ import Wacom from '@/components/Wacom'
 import Confirm from '@/components/popup/Confirm'
 import CanvasHeader from '@/components/CanvasHeader'
 import Alert from '@/components/popup/Alert'
-import GuideHeader from '@/components/letter/GuideHeader'
 
 
 export default {
@@ -38,8 +41,7 @@ export default {
     Alert,
     Wacom,
     Confirm,
-    CanvasHeader,
-    GuideHeader
+    CanvasHeader
   },
   data () {
     return {
@@ -175,12 +177,10 @@ export default {
     height: 100%;
   }
 }
-.test_canvas{
-  //display: none;
-  display: block;
-}
-.guide_canvas{
-  //display:block;
-  display: none;
+.guide_bg{
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 9999;
 }
 </style>

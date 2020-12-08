@@ -738,6 +738,7 @@
 <script>
 import Confirm from '@/components/popup/Confirm'
 import { mapMutations } from 'vuex'
+
 export default {
   name: "Wacom",
   components: { Confirm },
