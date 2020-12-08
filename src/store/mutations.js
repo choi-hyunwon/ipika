@@ -31,10 +31,12 @@ export const mutations = {
     state.canvasTimer.time = state.canvasTimer.timeInitVal
     state.canvasTimer.timer = setInterval(() => {
       if (state.canvasTimer.time === 0) {
-        state.canvasTimer.timeOver = true
-        clearInterval(this.timer)
+        state.canvasTimer.timeOver=true
+        clearInterval(state.canvasTimer.timer)
       }
-      if (state.canvasTimer.time > 0) state.canvasTimer.time--
+      if (state.canvasTimer.time > 0) {
+        state.canvasTimer.time--
+      }
     }, 1000)
   },
 
@@ -59,6 +61,7 @@ export const mutations = {
       }
     }, 1000)
   },
+  /* // timer */
   setLetter(state, letter){
     state.letter = letter
   },

@@ -1,20 +1,13 @@
 <template>
   <div>
     <slot :toggleConfirm="toggleConfirm"></slot>
-    <b-modal :visible="autoModal" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup" v-model="showConfirm">
+    <b-modal no-close-on-backdrop ref="confirmModal" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup" v-model="showConfirm">
 <!--      header -->
       <template #modal-header>
         <div class="symbol">
           <img src="@/assets/images/common/check_red@2x.png" alt="">
         </div>
       </template>
-
-<!--      canvase time header-->
-<!--      <template v-if="type==='canvasComplete'" #modal-header>-->
-<!--        <div class="symbol">-->
-<!--          <img src="@/assets/images/common/timer@2x.png" alt="">-->
-<!--        </div>-->
-<!--      </template>-->
 
 <!--     본문  -->
       <template v-if= "type==='goBack'">
@@ -28,6 +21,11 @@
       </template>
 
       <template v-else-if="type==='checkRed'">
+        <p class="text">{{completeText}}</p>
+        <p class="text-sm">{{text}}</p>
+      </template>
+
+      <template v-else-if="type==='diagnose'">
         <p class="text">{{completeText}}</p>
         <p class="text-sm">{{text}}</p>
       </template>
@@ -54,11 +52,30 @@
         <router-link to="/Recording" class="btn btn-black btn-half">넘어갈게요</router-link>
       </template>
 
+      <template v-else-if="type==='diagnose'"  #modal-footer="{ cancel }">
+        <b-button variant="gray" class="btn-half"  @click="modalCancel">{{cancelText}}</b-button>
+        <router-link to="/TestingResult" class="btn btn-black btn-half">{{okText}}</router-link>
+      </template>
     </b-modal>
+
+    <b-modal v-if="type === 'timeOut'" no-close-on-backdrop id="timeoverPopup" centered title="진단테스트 : 타임오버" modal-class="normalPopup" v-model="showConfirm">
+      <template #modal-header>
+        <div class="symbol"><img src="@/assets/images/common/timer@2x.png" alt=""></div>
+      </template>
+      <p class="text">시간이 초과되었어요!<br/>
+        제출하시겠어요?</p>
+      <p class="text-sm">다시 그리면 먼저 그린 그림은 사라져요</p>
+      <template #modal-footer="{ cancel }">
+        <b-button @click="clear" variant="blue" class="btn-half">다시 그릴래요!</b-button>
+        <b-button @click="goToNext" variant="black" class="btn-half">제출할게요</b-button>
+      </template>
+    </b-modal>
+
   </div>
 </template>
 
 <script>
+import {mapMutations,mapGetters} from 'vuex'
 export default {
   name: 'Confirm',
   data(){
@@ -66,6 +83,20 @@ export default {
       showConfirm : false,
       autoModal : false,
       type : "",
+    }
+  },
+  created () {
+    if(this.autoOpen===true){
+      this.showConfirm = true
+      this.type='diagnose'
+    }
+  },
+  computed:{
+    ...mapGetters({
+      getCanvasTimer : 'getCanvasTimer',
+    }),
+    timeOver(){
+      return this.getCanvasTimer.timeOver
     }
   },
   props:{
@@ -85,20 +116,27 @@ export default {
       String,
       default(){return ''}
     },
-  completeText: {
-    String,
-    default () {return ''}
+    completeText: {
+      String,
+      default () {return ''}
+    },
+    autoOpen:{
+      Boolean,
+      default(){return false}
     }
   },
   methods:{
+    ...mapMutations({
+      setTimeInit : 'setTimeInit',
+      setTimerReset : 'setTimerReset',
+      setTimerStart : 'setTimerStart',
+      setTimerPause : 'setTimerPause',
+      setTimerResume : 'setTimerResume'
+    }),
     toggleConfirm(type,topic){
       this.showConfirm  = !this.showConfirm;
-      if(topic==='visible'){
-       this.autoModal = true
-      }else{
-        this.autoModal = false
-      }
       this.type = type;
+      this.setTimerPause()
     },
     goBack(){
       this.$EventBus.$emit('back')
@@ -106,9 +144,18 @@ export default {
     goToNext(){
       this.showConfirm = false
       this.$EventBus.$emit('next')
+    },
+    clear(){
+      WILL.clear()
+      this.$refs.confirmModal.hide()
+      this.setTimerReset();
+      this.setTimerStart();
+    },
+    modalCancel(){
+      this.$refs.confirmModal.hide()
+      this.setTimerResume();
     }
   }
-
 }
 </script>
 

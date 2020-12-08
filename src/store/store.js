@@ -54,8 +54,8 @@ export default new Vuex.Store({
     uesrGalleryMypicture: {},
 
     canvasTimer: {
-      timeInitVal: 60*1,
-      time: 60*1,
+      timeInitVal: null,
+      time: null,
       timer: null,
       timeOver : false,
     },
@@ -99,14 +99,12 @@ export default new Vuex.Store({
       return state.uesrGalleryMypicture
     },
 
-
     getIsDummy: state => {
       return state.isDummy
     },
     getDiagnose: state => {
       return state.diagnose
     },
-
 
     getCanvasTimer: state => {
       return state.canvasTimer

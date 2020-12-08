@@ -49,12 +49,23 @@
         </router-link>
       </template>
     </b-modal>
+
+    <b-modal ref="alertModal" v-if="type==='diagnose'" no-close-on-backdrop id="oderPopup" centered title="안내" modal-class="textPopup" ok-variant="black btn-block" v-model="showAlert">
+      <template #modal-header>
+        <div class="symbol"><img src="@/assets/images/common/Symbol@2x.png" alt=""></div>
+      </template>
+      <p class="text">{{text}}</p>
+      <template #modal-footer="{ cancel }">
+        <button size="sm" class="btn btn-black btn-block" @click="timeStart">알겠어요!</button>
+      </template>
+    </b-modal>
   </div>
 </template>
 
 <script>
 import Player from '@/components/letter/Player'
 import { mapGetters } from 'vuex'
+import {mapMutations} from 'vuex'
 export default {
   name: 'Alert',
   components : {Player},
@@ -63,6 +74,12 @@ export default {
       showAlert : false,
       type : "",
       modalShow : true
+    }
+  },
+  created () {
+    if(this.autoOpen === true){
+      this.showAlert = true
+      this.type='diagnose'
     }
   },
   props:{
@@ -77,6 +94,10 @@ export default {
     buttonText : {
       String,
       default(){return ''}
+    },
+    autoOpen : {
+      Boolean,
+      default(){return false}
     }
   },
   computed:{
@@ -85,10 +106,17 @@ export default {
     })
   },
   methods : {
+    ...mapMutations({
+      setTimerStart:'setTimerStart'
+    }),
     toggleAlert(type,topic){
       this.showAlert = !this.showAlert;
       this.type = type;
     },
+    timeStart(){
+      this.setTimerStart()
+      this.$refs['alertModal'].hide()
+    }
   }
 }
 </script>
