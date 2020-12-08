@@ -24,6 +24,8 @@ import Completion from '@/views/letter/Completion'
 import MyGallery from '@/views/myGallery/MyGallery'
 import MyGalleryDetail from '@/views/myGallery/MyGalleryDetail'
 
+import DrawingGuide from '@/views/DrawingGuide/DrawingGuide'
+
 import Agreement from '@/views/useLater/Agreement'
 import LoadingSpinnerWaiting from '@/views/useLater/LoadingSpinnerWaiting'
 
@@ -118,6 +120,12 @@ const routes = [
     path:'/MyGalleryDetail',
     name:'MyGalleryDetail',
     component: MyGalleryDetail
+  },
+
+  {
+    path:'/DrawingGuide',
+    name:'DrawingGuide',
+    component:DrawingGuide
   }
 ]
 
