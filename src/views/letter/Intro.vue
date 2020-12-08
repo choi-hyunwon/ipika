@@ -9,7 +9,7 @@
     <div class="row">
       <div class="col col-6">
         <div class="symbol-wrap">
-          <div class="symbol"><img src="@/assets/images/common/Vector@2x.png" alt=""></div>
+          <div class="symbol" :class="`stage_0${letter.stageId}`"></div>
           <span class="text">{{letter.stageName}} Stage {{letter.stageId}}</span></div>
         <div class="title">{{letter.stepSubejct}}</div>
         <div class="btn-group">
@@ -24,6 +24,7 @@
 </template>
 <script>
 import { mapActions, mapGetters } from 'vuex'
+
 export default {
   name: 'Intro',
   data () {
@@ -72,9 +73,23 @@ export default {
       height: 4rem;
       vertical-align: middle;
       margin-right: 0.8rem;
-      img {
-        width: 100%;
-        height: 100%;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 100%;
+      &.stage_01{
+        background-image: url("~@/assets/images/common/img_ic_stage_01@2x.png");
+      }
+      &.stage_02{
+        background-image: url("~@/assets/images/common/img_ic_stage_02@2x.png");
+      }
+      &.stage_03{
+        background-image: url("~@/assets/images/common/img_ic_stage_03@2x.png");
+      }
+      &.stage_04{
+        background-image: url("~@/assets/images/common/img_ic_stage_04@2x.png");
+      }
+      &.stage_05{
+       background-image: url("~@/assets/images/common/img_ic_stage_05@2x.png");
       }
     }
     .text {

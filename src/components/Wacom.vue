@@ -712,8 +712,7 @@
 
           <div v-if="page==='diagnose'||'letter'" class="btn-wrap">
             <Confirm v-slot="slotProps"
-                      :completeText="'다 그렸나요?'"
-                      :text="'제출하면 수정할 수 없어요!'"
+                      :completeText="'다 그렸나요? </br> 제출하면 수정할 수 없어요!'"
                       :cancelText = "'아니요'"
                       :okText = "'제출하기'">
               <b-button v-if="page==='diagnose'" @click="globalUtils.confirm(slotProps,'diagnose')" class="btn btn-blue btn-lg">완료</b-button>

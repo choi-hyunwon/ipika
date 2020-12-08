@@ -11,8 +11,8 @@
 
       <!--     본문  -->
       <template>
-        <p class="text">{{completeText}}</p>
-        <p class="text-sm">{{text}}</p>
+        <p class="text" v-html="completeText"></p>
+        <p class="text-sm" v-html="text"></p>
       </template>
 
       <!--  footer  -->
@@ -64,7 +64,7 @@
       <p class="text">시간이 초과되었어요!<br/>이대로 그림을 제출할까요?</p>
       <p class="text-sm"></p>
       <template #modal-footer="{ cancel }">
-        <b-button @click="clear" variant="blue" class="btn-half">아니오</b-button>
+        <b-button @click="clear" variant="gray" class="btn-half">아니오</b-button>
         <b-button @click="goToNext" variant="black" class="btn-half">제출하기</b-button>
       </template>
     </b-modal>
