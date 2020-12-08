@@ -39,7 +39,7 @@ export default {
       subject : 'getSubject'
     }),
     timeInit() {
-      return this.canvasTimer.timeInitVal
+      return this.canvasTimer.timeInitVal()
     },
     time() {
       let mm = Math.floor(this.canvasTimer.time / 60)

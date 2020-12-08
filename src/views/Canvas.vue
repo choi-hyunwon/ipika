@@ -135,7 +135,7 @@ export default {
     async fetchSubject () {
       this.getSubject()
         .then(result => {
-          if(result !== undefined) this.setTimeInit(this.subject.limitTime)
+          this.setTimeInit(this.subject.limitTime)
         })
     }
   }

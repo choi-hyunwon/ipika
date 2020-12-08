@@ -17,8 +17,8 @@
 
       <!--  footer  -->
       <template #modal-footer="{ cancel }">
-        <b-button variant="gray" class="btn-half" @click="cancleA(cancel)">{{cancelText}}</b-button>
-        <b-button variant="black" class="btn-black btn-half" @click="ok()">{{okText}}</b-button>
+        <b-button variant="gray" class="btn-half" @click="cancleA">{{cancelText}}</b-button>
+        <b-button variant="black" class="btn-black btn-half" @click="ok">{{okText}}</b-button>
       </template>
     </b-modal>
 
@@ -123,20 +123,19 @@ export default {
     ok(){
       if(this.type==='goBack'){
         this.goBack()
-      }else if(this.type==='Complete'||this.type==='checkRed'||this.type==='diagnose'){
+      }else if(this.type==='Complete'||this.type==='checkRed'||this.type==='diagnose'||this.type==='refresh'){
         this.goToNext()
-      }else if(this.type==='refresh'){
-        this.clear()
       }else if(this.type==='watchComplete'){
         this.$route.push('/Recording')
       }else if(this.type==='letter'){
         this.modalCancel()
       }
     },
-    cancleA(cancle) {
+    cancleA() {
       if(this.type === 'diagnose') this.modalCancel()
       else if(this.type === 'letter') this.isComplete()
-      else cancle()
+      else if(this.type==='refresh')  this.clear()
+      else this.showConfirm = false
     }
   }
 }
