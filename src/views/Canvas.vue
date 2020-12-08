@@ -5,6 +5,9 @@
 <!--    <div class="guide"><img src="@/assets/images/common/test_guide@2x.png" alt=""></div>-->
     <!-- E guide -->
 
+    <div class="cover">
+
+    </div>
 
     <CanvasHeader></CanvasHeader>
 
@@ -16,7 +19,6 @@
     <Wacom :isLoading="isLoading" :drawer="drawer"></Wacom>
 <!--   진단테스트 canvas 타이머 완료 시 popup-->
     <Confirm v-if="page==='diagnose'" ref="timerConfirm"></Confirm>
-
 
     <!-- s 팝업  -->
 <!--    <b-modal v-if="page === 'diagnose'||'letter'" @hide="setTimerResume" @show="popUpOpen" id="normalPopup3" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">-->
