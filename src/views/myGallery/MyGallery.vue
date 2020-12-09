@@ -1,24 +1,26 @@
 <template>
   <div class="wrap">
-    <div class="header ivory bg-ivory d-flex">
-      <a href="#" @click.prevent="goBack" v-b-modal.goBackPopup class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt=""></a>
+    <div class="header ivory bg-ivory d-flex" v-if="userGalleryMypicture" v-model="setList">
+      <a href="#" @click.prevent="goBack" v-b-modal.goBackPopup class="symbol"><img
+        src="@/assets/images/common/arrow_left@2x.png" alt=""></a>
       <div class="gallery-title">
         <router-link to="/">
           <span class="title-center">My Gallery</span>
         </router-link>
       </div>
       <div class="box-close">
-        <router-link to="/PabloMain" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>
+        <router-link to="/PabloMain" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt="">
+        </router-link>
       </div>
     </div>
-    <div class="contents">
+    <div class="contents" setList>
       <myGalleryInfo v-on:popup="settingPopup"></myGalleryInfo>
       <div class="tab-section">
         <b-tabs justified>
-          <b-tab title="내그림" class="tab">
+          <b-tab title="내그림" title-link-class="mytab">
             <myGalleryPicture></myGalleryPicture>
           </b-tab>
-          <b-tab title="내 녹음 듣기" class="tab">
+          <b-tab title="내 녹음 듣기" title-link-class="mytab">
             <myGalleryVoice></myGalleryVoice>
           </b-tab>
         </b-tabs>
@@ -45,91 +47,29 @@
           </div>
           <div class="c-body">
             <div class="btns_group d-flex">
-              <b-button class="all_button">
-                <img src="@/assets/images/common/all.png" alt="모든이미지" class="img">
-                <span>ALL</span>
-              </b-button>
-              <b-button class="drawing_button">
-                <img src="@/assets/images/common/all.png" alt="모든이미지" class="img">
-                <span>Pablo Drawing</span>
-              </b-button>
-              <b-button class="classic_button">
-                <img src="@/assets/images/common/all.png" alt="모든이미지" class="img" style="width: 1.57rem; height: 2rem;">
-                <span>Pablo Classic</span>
-              </b-button>
-              <b-button class="canvas_button">
-                <img src="@/assets/images/common/all.png" alt="모든이미지" class="img">
-                <span>Canvas</span>
+              <b-button v-for="(filterItem, index) in filter"
+                        :key="index"
+                        aria-pressed="true"
+                        :data="filterItem"
+                        :class="{'selected' : activeIndex === index}"
+                        @click="onClick(index)"
+              >
+                <img v-if="filterItem.src" src="@/assets/images/common/all.png" alt="모든이미지" class="img">
+                <span>{{ filterItem.title }} ({{ nSize[index] }})</span>
               </b-button>
             </div>
             <ul class="scroll d-flex">
-              <li class="background-img">
-                <router-link to="">
-                  <img src="@/assets/images/temp/sample_img_01.jpg" alt="" class="img-m">
-                </router-link>
-              </li>
-              <li class="background-img">
-                <router-link to="">
-                  <img src="@/assets/images/temp/sample_img_01.jpg" alt="" class="img-m">
-                </router-link>
-              </li>  <li class="background-img">
-              <router-link to="">
-                <img src="@/assets/images/temp/sample_img_01.jpg" alt="" class="img-m">
-              </router-link>
-            </li>
-              <li class="background-img">
-                <router-link to="">
-                  <img src="@/assets/images/temp/sample_img_01.jpg" alt="" class="img-m">
-                </router-link>
-              </li>
-              <li class="background-img">
-                <router-link to="">
-                  <img src="@/assets/images/temp/sample_img_01.jpg" alt="" class="img-m">
-                </router-link>
-              </li>
-              <li class="background-img">
-                <router-link to="">
-                  <img src="@/assets/images/temp/sample_img_01.jpg" alt="" class="img-m">
-                </router-link>
+              <li class="background-img" v-for="(item, index) in list" allSize>
+                <a href="#" @click.prevent="setBackground(item.pictureId, index)">
+                  <img :src="item.pictureUrl" alt="갤러리사진" class="img-m">
+                </a>
               </li>
             </ul>
           </div>
         </div>
       </template>
     </b-modal>
-    <b-modal id="delete" centered title="완전히 삭제" modal-class="delete">
-      <template #modal-header>
-        <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>
-      </template>
-      <p class="text">완전히 삭제하시겠어요?<br/>그림과 녹음 모두 삭제돼요<br/></p>
-      <p class="text-sm">삭제한 그림과 녹음은 복구할 수 없어요</p>
-      <template #modal-footer="{ cancel }">
-        <b-button variant="gray" class="btn-half">삭제하기</b-button>
-        <b-button class="btn btn-black  btn-half" @click="cancel()">닫기</b-button>
-      </template>
-    </b-modal>
-    <b-modal id="openGallery" centered title="오픈갤러리 공개" modal-class="openGallery">
-      <template #modal-header>
-        <div class="symbol"><img src="@/assets/images/common/check_blue@2x.png" alt=""></div>
-      </template>
-      <p class="text">오픈갤러리에 그림을<br/>공개하시겠어요?<br/></p>
-      <p class="text-sm">친구들에게 그림을 보여주세요!</p>
-      <template #modal-footer="{ cancel }">
-        <b-button variant="gray" class="btn-half"  @click="cancel()">닫기</b-button>
-        <b-button v-b-modal.normalPopup1-1  class="btn btn-black  btn-half" >공개하기</b-button>
-      </template>
-    </b-modal>
-    <b-modal id="openGalleryComplete" centered title="오픈갤러리 공개 완료" modal-class="openGalleryComplete">
-      <template #modal-header>
-        <div class="symbol"><img src="@/assets/images/common/check_green@2x.png" alt=""></div>
-      </template>
-      <p class="text">그림이 친구들에게<br/>공개되었습니다!<br/></p>
-      <p class="text-sm">오픈갤러리에서 확인해보세요!</p>
-      <template #modal-footer="{ cancel }">
-        <b-button variant="gray" class="btn-half"  @click="cancel()">닫기</b-button>
-        <router-link to="/PabloMain" class="btn btn-black  btn-half">오픈갤러리 가기</router-link>
-      </template>
-    </b-modal>
+
     <!--//modal-->
   </div>
 </template>
@@ -149,50 +89,167 @@ export default {
   },
   data () {
     return {
-      myTab: {
-        empty: false
-      },
-      closeBtn:{
+      empty: null,
+      closeBtn: {
         ModalClose: false
-      }
+      },
+      activeIndex : 0,
+      nSize : [0,0,0],
+      filter : [
+        {
+          'title' : 'ALL',
+          'src' : '@/assets/images/common/all.png',
+          'click' : 'filterAll'
+        },
+        {
+          'title' : 'Pablo Letter',
+          'click': 'filterLetter'
+        },
+        {
+          'title': 'Free Drawing',
+          'click': 'filterTest'
+        }
+      ],
+      list: [],
+      selected: 1
     }
   },
   computed: {
     ...mapGetters({
       session: 'getSession',
-      UserGalleryMypicture: 'getUserGalleryMypicture'
-    })
+      userGalleryMypicture: 'getUserGalleryMypicture'
+    }),
+    getEmpty(){
+      let userGalleryMypicture = this.userGalleryMypicture
+      if (userGalleryMypicture.pictures.length === 0 && userGalleryMypicture.audios.length === 0) {
+        this.empty = true
+      } else {
+        this.empty = false
+      }
+    },
+    setList(){
+      return this.list = this.userGalleryMypicture.pictures
+    },
+    allSize(){
+      this.nSize[0] = this.list.length
+      const letter = this.list.filter(function (item) {
+        return item.drawingType === 4
+      })
+      this.nSize[1] = letter.length
+      const free = this.list.filter(function (item) {
+        return item.drawingType === 3
+      })
+      this.nSize[2] = free.length
+    }
   },
   mounted () {
-    this.fetchUserGalleryMypicture();
+    this.fetchUserGalleryMypicture()
   },
   methods: {
     ...mapActions({
-      getUserGallery : 'getUserGallery',
+      getUserGallery: 'getUserGallery',
       getUserGalleryMypicture: 'getUserGalleryMypicture',
       getUserGalleryBackground: 'getUserGalleryBackground',
       getUserGalleryDetele: 'getUserGalleryDetele'
     }),
     settingPopup () {
-      if (!this.myTab.empty) {
+      if (this.empty) {
         this.$bvModal.show('galleryBGChangeEmpty')
       } else {
         this.$bvModal.show('galleryBgChange')
       }
     },
-    fetchUserGalleryMypicture(){
+    fetchUserGalleryMypicture () {
       this.getUserGalleryMypicture()
         .then(result => {
           console.log('getUserGalleryMypicture :', result)
         })
+    },
+    goBack () {
+      this.$router.go(-1)
+    },
+    onClick (index) {
+      if (this.activeIndex === index) {
+        this.activeIndex = null
+      } else {
+        this.activeIndex = index
+      }
+      this.setFilter(index)
+    },
+    setFilter (index) {
+      if (index === 0) {
+        this.list = this.userGalleryMypicture.pictures
+      } else if (index === 1) {
+        this.list = this.userGalleryMypicture.pictures.filter(function (item) {
+          return item.drawingType === 4
+        })
+      } else if (index === 2) {
+        this.list = this.userGalleryMypicture.pictures.filter(function (item) {
+          return item.drawingType === 3
+        })
+      }
+      //sort 처리
+      this.setSort(this.selected)
+    },
+    setSort (value) {
+      //select value
+      this.selected = value
+      //값 없을 경우
+      if (this.list.length === 0)
+        return false;
+      //select value에 따른 처리
+      if (value === 1){
+        this.list.sort(function(a, b) { // 오름차순
+          return a.createdDate > b.createdDate ? -1 : a.createdDate > b.createdDate ? 1 : 0;
+        });
+      } else if (value === 2){
+        this.list.sort(function(a, b) { // 오름차순
+          return a.createdDate < b.createdDate ? -1 : a.createdDate > b.createdDate ? 1 : 0;
+        });
+      }
+    },
+    setBackground (pictureId, index) {
+      var self=this;
+      this.selectId = pictureId
+      this.selectIndex = index
+      this.$bvModal.hide('galleryBgChange')
+      this.getUserGalleryBackground({pictureId : this.selectId})
+        .then(result => {
+          if (result.code === "U001"){
+            alert('삭제되었습니다.');
+            self.list.splice(self.selectIndex, 1)
+          } else if (result.code === "U002"){
+            alert(result.message);
+          } else if (result.code === "U003"){
+            alert(result.message);
+          } else if (result.code === "U004"){
+            alert(result.message);
+          }
+        })
     }
-  },
-  goBack(){
-    this.$router.go(-1)
-  },
+  }
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+.tab-section {
+  border-top: 1px solid var(--gray-500);;
 
+  .nav-link.mytab {
+    border: none;
+
+    &.active {
+      border-bottom: 0.4rem solid var(--gray-black);
+      color: var(--gray-black);
+    }
+  }
+}
+
+.modal.galleryBgChange .c-body .btns_group .btn:hover,
+.modal.galleryBgChange .c-body .btns_group .btn:active,
+.modal.galleryBgChange .c-body .btns_group .btn:focus,
+.modal.galleryBgChange .c-body .btns_group .btn.selected {
+  color: var(--gray-white);
+  background-color: var(--gray-900);
+}
 </style>

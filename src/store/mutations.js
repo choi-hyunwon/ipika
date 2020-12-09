@@ -11,11 +11,11 @@ export const mutations = {
   setSubject (state, subject) {
     state.subject = subject
   },
-  setUesrGallery (state, userGallery) {
+  setUserGallery (state, userGallery) {
     state.userGallery = userGallery
   },
-  setUesrGalleryMypicture (state, mypicture) {
-    state.uesrGalleryMypicture = mypicture
+  setUserGalleryMypicture (state, mypicture) {
+    state.UserGalleryMypicture = mypicture
   },
 
 
@@ -70,6 +70,9 @@ export const mutations = {
   },
   setPlayerSize(state, size){
     state.playerOptions = {...state.playerOptions, ...size}
+  },
+  setBg(state, bg) {
+    state.bg = {...state.bg, ...bg}
   }
 
 }

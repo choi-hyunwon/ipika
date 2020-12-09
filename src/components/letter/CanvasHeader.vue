@@ -9,8 +9,9 @@
         <img src="@/assets/images/common/arrow_left@2x.png" alt="">
       </button>
     </Confirm>
-    <div class="btn-wrap">
-      <button><img src="@/assets/images/common/img_invisible@2x.png" alt=""></button>
+    <div v-if="bg.active" class="btn-wrap">
+      <button v-if="bg.type === 'show'"><img src="@/assets/images/common/img_visible@2x.png" alt=""></button>
+      <button v-if="bg.type === 'hide'"><img src="@/assets/images/common/img_invisible@2x.png" alt=""></button>
     </div>
     <div class="flex-box">
       <!--영상보기-->
@@ -52,7 +53,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      subject : 'getSubject'
+      subject : 'getSubject',
+      bg : 'getBg'
     })
   }
 }

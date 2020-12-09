@@ -9,6 +9,12 @@
     <!--   wacom 라이브러리 -->
     <Wacom ref="wacom" :isLoading="isLoading" :drawer="drawer"></Wacom>
 
+    <!-- <div class="guide_bg">
+      <img src="@/assets/images/common/test_guide@2x.png" alt="" class="img-m">
+      <img src="@/assets/images/common/guide@2x.png" alt="" class="img-m">
+    </div>-->
+
+
     <!--   진단테스트 canvas 첫 진입시 Alert-->
     <Alert ref="autoOpen"
             v-if="page==='diagnose'"
@@ -170,5 +176,11 @@ export default {
     width: 100%;
     height: 100%;
   }
+}
+.guide_bg{
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 9999;
 }
 </style>
