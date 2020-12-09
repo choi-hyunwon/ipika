@@ -90,9 +90,14 @@ export default {
       default(){return ''}
     },
   },
+  created () {
+    this.$EventBus.$on('videoEnd', () => {
+      this.$EventBus.$off('videoEnd')
+    })
+  },
   watch : {
     'showAlert' : function (val) {
-      this.$EventBus.$emit('popupOpen', val)
+      if(this.type !== 'video') this.$EventBus.$emit('popupOpen', val)
     },
     'type' :function (){
       if(this.type === 'video') this.setPlayerOptions()
