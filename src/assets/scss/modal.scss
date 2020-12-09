@@ -1,0 +1,11 @@
+@charset "UTF-8";
+
+.modal {
+  height: 120rem;
+}
+
+.modal-backdrop {
+  height: 120rem;
+  width: 192rem;
+  left: calc(50% - 96rem);
+}
