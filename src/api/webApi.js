@@ -20,6 +20,7 @@ export default class WebApi {
       ...config
     }).then(result => result.data)
       .catch(error => {
+        // TODO 이미지 추룰 성공 후 해당 로직 제거 필요
         if(store.getters.getTest) {
           return {
             "code": "0000",
