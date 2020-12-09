@@ -30,15 +30,34 @@ import Confirm from '@/components/popup/Confirm'
 
 export default {
   name: 'Home',
+  data() {
+    return {
+      diagnose : null
+    }
+  },
   components: {Confirm },
   computed: {
-    ...mapGetters({
-      diagnose: 'getDiagnose'
-    })
+  },
+  mounted () {
+    this.fetchResult()
   },
   methods :{
+    ...mapActions({
+      getResult: 'getResult'
+    }),
     todo(){
       alert('종료 안내 팝업 노출 (퍼블리싱 필요)')
+    },
+    fetchResult(){
+      let  self = this;
+      this.getResult()
+        .then(result => {
+          if(result.code === "0000") {
+            self.diagnose = true
+          } else {
+            self.diagnose = false
+          }
+        })
     }
   }
 }
