@@ -2,14 +2,13 @@
   <div class="wrap bg-ivory">
     <LetterHeader/>
     <div class="contents">
-
       <div class="txt-area">
         <p class="txt-lg">다른 친구들은 어떻게<br/>생각하는지 들어볼까요?</p>
         <p class="txt-sm">친구들의 생각을 듣고, 내 생각과 비교해봐요!</p>
       </div>
-      <div class="img-slider">
+      <div class="img-slider" style="transform: translateX(0px);">
         <ul>
-          <li v-for="(audio, i) in audioList" class="item pause">
+        <li @click="showPlay(i)" v-for="(audio, i) in audioList" class="item" :class="{'pause' : !play, 'play' : play && i === focusIdx}">
             <router-link to="" class="img"><img :src=audio.characterImageUrl alt=""></router-link>
             <p class="title">{{audio.characterName}}</p>
             <p class="time">00:00</p>
@@ -20,22 +19,26 @@
         <button class="swipe"><img src="@/assets/images/common/swipe_left_default@2x.png" alt=""></button>
         <button class="swipe"><img src="@/assets/images/common/swipe_left_active@2x.png" alt=""></button>
         <button class="swipe"><img src="@/assets/images/common/swipe_right_active@2x.png" alt=""></button>
+        <button class="swipe"><img src="@/assets/images/common/swipe_right_default@2x.png" alt=""></button>
       </div>
-      <div class="btn-wrap"><router-link to="/canvas?page=letter" class="btn btn-dark">다 들었어요!</router-link></div>
+      <div class="btn-wrap"><router-link to="/canvas?page=letter" class="btn btn-dark disabled">다 들었어요!</router-link></div>
 <!--      <div class="btn-wrap"><button class="btn btn-dark ">다 들었어요!</button></div>-->
     </div>
+    <ListeningPlay v-if="play"/>
   </div>
 </template>
 
 <script>
 import LetterHeader from '@/components/letter/LetterHeader'
+import ListeningPlay from '@/components/letter/ListeningPlay'
 import { mapGetters } from 'vuex'
 
 export default {
   name: 'peopleThinking',
-  components: {LetterHeader},
+  components: {LetterHeader, ListeningPlay},
   data () {
     return {
+      play : false,
       focusIdx : 0
     }
   },
@@ -50,6 +53,10 @@ export default {
   methods : {
     goBack(){
       this.$router.push('/Recording')
+    },
+    showPlay(index){
+      this.play = true
+      this.focusIdx = index
     }
   }
 }
@@ -83,7 +90,6 @@ export default {
     width: 100%;
     ul {
       height: 47rem;
-      overflow-x: scroll;
       white-space: nowrap;
       padding-left: 10rem;
     }

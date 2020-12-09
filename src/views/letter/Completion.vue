@@ -5,9 +5,8 @@
       <div class="col col-6">
         <div class="symbol-wrap">
           <div class="symbol"><img src="@/assets/images/common/Vector@2x.png" alt=""></div>
-          <span class="text">Stage 4 Clear!</span></div>
-        <div class="title">트윙클 스테이지<br/>
-          4번째 학습을 완료했어요!</div>
+          <span class="text">Stage {{letter.stageId}} Clear!</span></div>
+        <div class="title" v-html="letter.completeText"></div>
         <div class="btn-group">
           <router-link to="/MainGallery" class="btn btn-dark mr">마이갤러리</router-link>
           <router-link to="/PabloMain" class="btn btn-gray">메인으로</router-link>
@@ -22,10 +21,16 @@
 
 <script>
 import LetterHeader from '@/components/letter/LetterHeader'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'Completion',
   components: {LetterHeader},
+  computed:{
+    ...mapGetters({
+      letter: 'getLetterIntro'
+    })
+  },
   created() {
     this.$EventBus.$on('back',this.goBack)
   },

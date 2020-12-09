@@ -19,7 +19,6 @@ export default new Vuex.Store({
    */
   state: {
     isDummy : false,
-    diagnose : true,
     /**
      * userinfo는 단말기(안드로이드)기에서 받아온다.
      *
@@ -78,7 +77,9 @@ export default new Vuex.Store({
       subject : '',
       active : false,
       type : 'hide'
-    }
+    },
+    submission : {},
+    test : true
   },
   /**
    * global로 사용하는 getters
@@ -124,7 +125,8 @@ export default new Vuex.Store({
         stepSubejct : state.letter.stepSubejct,
         stepImageUrl : state.letter.stepImageUrl,
         stepAudioMainText : state.letter.stepAudioMainText,
-        stepAudioSubText : state.letter.stepAudioSubText
+        stepAudioSubText : state.letter.stepAudioSubText,
+        completeText : state.letter.completeText
       }
     },
     getLetterAudioList : state => {
@@ -135,6 +137,12 @@ export default new Vuex.Store({
     },
     getBg :state => {
       return state.bg
+    },
+    getSubmission :state => {
+      return state.submission
+    },
+    getTest : state => {
+      return state.test
     }
   },
   /**

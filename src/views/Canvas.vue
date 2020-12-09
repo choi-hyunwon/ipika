@@ -76,7 +76,8 @@ export default {
     ...mapGetters({
       session: 'getSession',
       canvasTimer: 'getCanvasTimer',
-      subject : 'getSubject'
+      subject : 'getSubject',
+      submission : 'getSubmission'
     }),
     page() {
       return this.$router.currentRoute.query.page
@@ -106,7 +107,8 @@ export default {
     ...mapActions({
       getUserInfo: 'getUserInfo',
       getSubject: 'getSubject',
-      getLetter : 'getLetter'
+      getLetter : 'getLetter',
+      getSubmission : 'getSubmission'
     }),
     ttsPlay(tts){
       globalUtils.tts(tts)
@@ -150,6 +152,7 @@ export default {
         console.log(href)
 
       });*/
+      this.fetchSubmission()
     },
     toggleBg(){
       this.bgPopup = !this.bgPopup;
@@ -167,9 +170,15 @@ export default {
     },
     async fetchLetter(){
       this.getLetter()
-        .then(result => {
-
-        })
+    },
+    fetchSubmission(){
+      this.getSubmission()
+      .then(result => {
+        if(this.submission.code === '0000') {
+          // TODO 드로잉 제출 성공 팝업 노출 후 "내 스테이지 확인하러 가기" 클릭 시 TestingResult로 이동
+          this.$router.push('/TestingResult')
+        }else alert('드로잉 제출 실패')
+      })
     }
   }
 }

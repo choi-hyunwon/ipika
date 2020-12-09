@@ -14,50 +14,31 @@
     <div class="row">
       <div class="col col-6">
         <div class="symbol-wrap">
-          <div class="symbol" :class="`stage_0${result.stageId}`"></div>
-          <span class="text">{{result.stageName}} Stage</span></div>
-        <div class="title">정윤님은 무의식의 세계,<br/>
-          트윙클 스테이지네요!<br/>
-          학습을 시작하세요 😉</div>
-        <p class="desc">트윙클 스테이지는 눈과 손의 협응이 일어나고<br/>
-          무의식적으로 표현하는 단계입니다.</p>
+          <div class="symbol" :class="`stage_0${submission.stageId}`"></div>
+          <span class="text">{{submission.stageName}} Stage</span></div>
+        <div class="title" v-html="submission.mainTitle"></div>
+        <p class="desc" v-html="submission.subTitle"></p>
         <div class="btn-group">
           <router-link to="/PabloMain" class="btn btn-dark">무료체험 시작하기</router-link>
         </div>
       </div>
       <div class="col col-6">
-        <div class="img"><img :src=result.pictureUrl alt=""></div>
+        <div class="img"><img  src="@/assets/images/temp/sample_img_01.jpg" alt=""></div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapActions} from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import Confirm from '@/components/popup/Confirm'
 export default {
   name: 'TestingResult',
   components: {Confirm },
-  data () {
-    return {
-      isLoading : false,
-      result : {}
-    }
-  },
-  mounted () {
-    this.fetchLetter();
-  },
-  methods:{
-    ...mapActions({
-      getResult : 'getResult'
-    }),
-    fetchLetter(){
-      this.getResult()
-        .then(result => {
-          this.isLoading = true;
-          this.result = result
-        })
-    }
+  computed: {
+    ...mapGetters({
+      submission : 'getSubmission'
+    })
   }
 }
 </script>

@@ -21,10 +21,10 @@ export const actions = {
         commit('setSubject', data)
       })
   },
-  getResult ({ commit }, options) {
-    return webApi.getResult(options)
+  getDiagnoseResult ({ commit }, options) {
+    return webApi.getDiagnoseResult(options)
       .then(data => {
-        return data
+        return data.code
       })
   },
   getUserGallery ({ commit }, options) {
@@ -138,7 +138,6 @@ export const actions = {
         return data
       })
   },
-
   getLetter({ commit }, options) {
     return webApi.getLetter(options)
       .then(data => {
@@ -154,6 +153,12 @@ export const actions = {
         }
 
         commit('setPlayerUrl', {sources: [{ src: data.stepVideoUrl}],Thumnail :  data.stepVideoThumnailUrl})
+      })
+  },
+  getSubmission({ commit }, options) {
+    return webApi.getSubmission(options)
+      .then(data => {
+        commit('setSubmission', data)
       })
   },
 }

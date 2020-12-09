@@ -144,7 +144,7 @@ export default {
       this.setTimerResume();
     },
     isComplete () {
-      return this.$router.push('/pablomain')
+      return this.$router.push('/Completion')
     },
     ok () {
       if (this.type === 'goBack') {

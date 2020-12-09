@@ -20,11 +20,27 @@ export default class WebApi {
       ...config
     }).then(result => result.data)
       .catch(error => {
-        console.log('error from api')
+        // TODO 이미지 추룰 성공 후 해당 로직 제거 필요
+        if(store.getters.getTest) {
+          return {
+            "code": "0000",
+            "message": "",
+            "stageId": 1,
+            "stageName": "트윙클",
+            "trialRecommendation": "Y",
+            "mainTitle": "정윤님의 Ai Pablo 분석 결과는 <br>무의식의 세계 <br>트윙클 스테이지입니다.",
+            "subTitle": "트윙클 스테이지에서는 반짝이는 상상력과<br>눈과 손의 협응력이 향상되며 자신감을 얻습니다."
+          }
+        }else{
+          return {
+            "code": "0001"
+          }
+        }
+       /* console.log('error from api')
         console.log(error)
         alert(error.message)
         throw new Error(`WebApi ${url} Error!!`)
-        // throw new Error(error)
+        // throw new Error(error)*/
       })
   }
 
@@ -56,12 +72,12 @@ export default class WebApi {
   }
 
   /**
-   * 진단테스트 : 결과 조회
+   * 진단테스트 : 결과 조회 (홈 화면 분기 처리 시 사용)
    *
    * api/test/result
    *
    */
-  getResult (options) {
+  getDiagnoseResult (options) {
     return this.request('api/test/result', {
       method: 'GET',
       data: {}
@@ -139,6 +155,21 @@ export default class WebApi {
     return this.request('api/learning/info', {
       method: 'GET',
       data: {}
+    })
+  }
+
+  /**
+   * 진단테스트 : 드로잉제출
+   *
+   * api/test/submission
+   *
+   */
+  getSubmission (options) {
+    return this.request('api/test/submission', {
+      method: 'POST',
+      data: {
+        ...options
+      }
     })
   }
 }
