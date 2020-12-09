@@ -42,7 +42,7 @@ export default new Vuex.Store({
      * API session options
      */
     session: {
-      'user_id': 'domfamtest1111',
+      'user_id': 'domfamtest1110',
       'user_auth_key': 'abcdefghijklmnopqrstuvwxyz0123456789',
       'Content_Language': 'ko',
       'device_type': '1001'
@@ -125,7 +125,8 @@ export default new Vuex.Store({
         stepSubejct : state.letter.stepSubejct,
         stepImageUrl : state.letter.stepImageUrl,
         stepAudioMainText : state.letter.stepAudioMainText,
-        stepAudioSubText : state.letter.stepAudioSubText
+        stepAudioSubText : state.letter.stepAudioSubText,
+        completeText : state.letter.completeText
       }
     },
     getLetterAudioList : state => {

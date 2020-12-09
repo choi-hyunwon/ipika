@@ -17,7 +17,6 @@ import Intro from '@/views/letter/Intro'
 import Watching from '@/views/letter/Watching'
 import Recording from '@/views/letter/Recording'
 import Listening from '@/views/letter/Listening'
-import ListeningPlay from '@/views/letter/ListeningPlay'
 import PabloPopup1 from '@/views/letter/PabloPopup1'
 import Completion from '@/views/letter/Completion'
 
@@ -113,11 +112,6 @@ const routes = [
     path:'/MyGalleryDetail',
     name:'MyGalleryDetail',
     component: MyGalleryDetail
-  },
-  {
-    path:'/ListeningPlay',
-    name:'/ListeningPlay',
-    component:ListeningPlay
   }
 ]
 
