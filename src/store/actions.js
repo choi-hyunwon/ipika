@@ -151,4 +151,11 @@ export const actions = {
         commit('setSubmission', data)
       })
   },
+  getSubmissionLearning({ commit }, options) {
+    return webApi.getSubmissionLearning(options)
+      .then(data => {
+        commit('setSubmissionLearning', data)
+      })
+  },
+
 }

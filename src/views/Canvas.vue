@@ -77,7 +77,8 @@ export default {
       session: 'getSession',
       canvasTimer: 'getCanvasTimer',
       subject : 'getSubject',
-      submission : 'getSubmission'
+      submission : 'getSubmission',
+      submissionLearning : 'getSubmissionLearning'
     }),
     page() {
       return this.$router.currentRoute.query.page
@@ -108,12 +109,12 @@ export default {
       getUserInfo: 'getUserInfo',
       getSubject: 'getSubject',
       getLetter : 'getLetter',
-      getSubmission : 'getSubmission'
+      getSubmission : 'getSubmission',
+      getSubmissionLearning : 'getSubmissionLearning'
     }),
     ttsPlay(tts){
       globalUtils.tts(tts)
-    }
-    ,
+    },
     reload(){
       window.location.reload()
     },
@@ -147,12 +148,16 @@ export default {
       this.setTimerReset()
     },
     exportPNG(e){
-      /*WILL.getImageCanvas().toBlob(function(blob) {
+      const self = this;
+      WILL.getImageCanvas().toBlob(function(blob) {
         const href = URL.createObjectURL(blob);
         console.log(href)
-
-      });*/
-      this.fetchSubmission()
+        if (this.page === 'diagnose') {
+          self.fetchSubmission(href) //진단 테스트 API
+        } else if (this.page === 'letter') {
+          self.fetchSubmissionLearning(href) //진단 테스트 API
+        }
+      })
     },
     toggleBg(){
       this.bgPopup = !this.bgPopup;
@@ -171,15 +176,25 @@ export default {
     async fetchLetter(){
       this.getLetter()
     },
-    fetchSubmission(){
-      this.getSubmission()
+    fetchSubmission(href){
+      this.getSubmission({userPicture : href})
       .then(result => {
         if(this.submission.code === '0000') {
           // TODO 드로잉 제출 성공 팝업 노출 후 "내 스테이지 확인하러 가기" 클릭 시 TestingResult로 이동
           this.$router.push('/TestingResult')
-        }else alert('드로잉 제출 실패')
+        } else alert('드로잉 제출 실패')
+      })
+    },
+    fetchSubmissionLearning(href){
+      this.getSubmissionLearning({userPicture : href})
+      .then(result => {
+        if(!this.submissionLearning && this.submissionLearning.code === '0000') {
+          // TODO 드로잉 제출 성공 팝업 노출 후 "내 스테이지 확인하러 가기" 클릭 시 TestingResult로 이동
+          this.$router.push('/Completion')
+        } else alert('드로잉 제출 실패')
       })
     }
+
   }
 }
 
