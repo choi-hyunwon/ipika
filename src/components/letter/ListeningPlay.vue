@@ -90,7 +90,6 @@ export default {
       letter-spacing: -0.03rem;
       text-align: center;
       color: var(--gray-white);
-
       margin: 0 10rem;
     }
   }
