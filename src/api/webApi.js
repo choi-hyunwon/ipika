@@ -35,12 +35,11 @@ export default class WebApi {
             "code": "0001"
           }
         }
-
-        console.log('error from api')
+       /* console.log('error from api')
         console.log(error)
         alert(error.message)
         throw new Error(`WebApi ${url} Error!!`)
-        // throw new Error(error)
+        // throw new Error(error)*/
       })
   }
 
@@ -172,6 +171,21 @@ export default class WebApi {
       }
     })
   }
+  /**
+   * 학습 : 드로잉제출
+   *
+   * api/learning/submission
+   *
+   */
+  getSubmissionLearning (options) {
+    return this.request('api/learning/submission', {
+      method: 'POST',
+      data: {
+        ...options
+      }
+    })
+  }
+
 
   /**
    * 학습정보: 생각녹음

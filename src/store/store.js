@@ -42,7 +42,7 @@ export default new Vuex.Store({
      * API session options
      */
     session: {
-      'user_id': 'domfamtest1110',
+      'user_id': 'domfamtest11211',
       'user_auth_key': 'abcdefghijklmnopqrstuvwxyz0123456789',
       'Content_Language': 'ko',
       'device_type': '1001'
@@ -79,6 +79,7 @@ export default new Vuex.Store({
       type : 'hide'
     },
     submission : {},
+    submissionLearning : {},
     test : true
   },
   /**
@@ -94,6 +95,9 @@ export default new Vuex.Store({
     },
     getSession: state => {
       return state.session
+    },
+    getSubmissionLearning: state => {
+      return state.submissionLearning
     },
     getSubject: state => {
       return state.subject

@@ -17,7 +17,7 @@
       <img src="@/assets/images/common/Group 1388@2x.png" alt="" class="img">
       </div>
         <div class="btn-group">
-          <router-link v-if=" resultCode === '0000'" to="/PabloMain" class="btn btn-dark">시작하기</router-link>
+          <router-link v-if="resultCode.code === '0000'" to="/PabloMain" class="btn btn-dark">시작하기</router-link>
           <router-link v-else to="/canvas?page=diagnose" class="btn btn-dark">시작하기</router-link>
         </div>
       </div>

@@ -77,4 +77,8 @@ export const mutations = {
   setSubmission(state, submission) {
     state.submission = submission
   },
+  setSubmissionLearning(state, submission) {
+    state.submissionLearning = submission
+  },
+
 }
