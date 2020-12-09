@@ -2,18 +2,37 @@
   <div class="wrap bg-ivory">
     <LetterHeader/>
     <div class="contents">
+
       <div class="txt-area">
         <p class="txt-lg" v-html="letter.stepAudioMainText"></p>
         <p class="txt-sm">{{letter.stepAudioSubText}}</p>
       </div>
-      <div class="record-area">
-        <div v-if="!ing">
+
+      <div ref="recordingArea" class="record-area" :class="{recording : ing}">
+        <div v-if="!ing" class="_media">
           <div v-if="record" style="width: 100%; height: 5px; background-color: #2fca56;"></div>
           <div v-else style="width: 100%; height: 5px; background-color: #1585ff;"></div>
         </div>
-        <av-media class="_media" ref="media" type="frequ" :media="media" line-color="#f53c32"/>
+
+        <av-media
+          v-show="ing" class="_media" ref="media"
+          type="frequ"
+          line-color="#f53c32"
+          :media="media"
+          :canv-width="canvasOptions.canvWidth"
+          :canv-height="canvasOptions.canvHeight"
+          :line-width="canvasOptions.canvLineWidth"
+        />
       </div>
-      <div class="play-area">
+
+      <div class="play-area"
+           :class="{
+             mic : !ing && record,
+             stop : ing && record,
+             play : !ing && !record,
+             pause : ing && !record
+           }"
+      >
         <audio-recorder
           ref="recorder"
           format="mp3"
@@ -32,10 +51,12 @@
           </button>
         </Confirm>
       </div>
+
       <div class="btn-area">
         <button v-if="!record" @click="fetchRecording" class="btn btn-dark">다했어요!</button>
         <button v-if="record" class="btn btn-dark disabled">다했어요!</button>
       </div>
+
     </div>
   </div>
 </template>
@@ -57,35 +78,26 @@ export default {
       },
       ing : false,
       record : true,
-      file : {}
+      file : {},
+
+      canvasOptions: {
+        canvWidth : 1260, // TODO::: 동적 입력 확인 필요..
+        canvHeight: 270,
+        canvLineWidth: 15,
+      }
     }
   },
   created() {
     this.$EventBus.$on('back',this.goBack)
     this.$EventBus.$on('next', this.todoRemove);
+
   },
   mounted () {
-    this.todoRemove()
     this.globalUtils.tts(this.letter.stepAudioMainText + this.letter.stepAudioSubText)
     navigator.mediaDevices.getUserMedia(this.constraints)
       .then(media => {
         this.media = media
       })
-  },
-  watch :{
-    'ing':function (){ // TODO 퍼블리싱 완료 후 제거
-      if(this.ing) $('._media').show()
-      else $('._media').hide()
-    },
-    'record':function (){ // TODO 퍼블리싱 완료 후 제거
-      if(this.record) {
-        $('.ar-recorder').show()
-        $('.ar-player').hide()
-      }else{
-        $('.ar-recorder').hide()
-        $('.ar-player').show()
-      }
-    }
   },
   computed: {
     ...mapGetters({
@@ -118,22 +130,6 @@ export default {
         recorder.selected = recorder.recordList[top];
         this.file = recorder.recordList[top]
       }
-    },
-    setPlayerAbled() { // TODO 퍼블리싱 완료 후 제거
-      const $player = this.$refs.recorder.$el.querySelector('.ar-player');
-      $player.classList.add('abled');
-      const $stopBtn = this.$refs.recorder.$el.querySelector('.ar-recorder__stop');
-      $stopBtn.style.display = 'none';
-    },
-    setRecordAbled() { // TODO 퍼블리싱 완료 후 제거
-      const $stopBtn = this.$refs.recorder.$el.querySelector('.ar-recorder__stop');
-      $stopBtn.style.display = 'block';
-    },
-    todoRemove(){ // TODO 퍼블리싱 완료 후 제거
-      this.record = true
-      $('._media').hide()
-      $('.ar-player').hide()
-      $('.ar-recorder').show()
     },
     fetchRecording(){
       const data = new FormData()
@@ -179,15 +175,23 @@ export default {
     width: 100%;
     height: 27.1rem;
     background-color: var(--ivory-200);
-    top: 40.8rem;
+    top: 53.2rem;
+
+    &.recording {
+      top: 33.2rem;
+    }
+
   }
   .play-area {
-    padding-left: 10rem;
+    position: absolute;
+    bottom: 10.3rem;
+    left: 10.3rem;
+
     button {
       display: inline-block;
       width: 12rem;
       height: 12rem;
-      margin-left: 2.4rem;
+      margin-left: 14.1rem;
       img {
         width: 100%;
         height: 100%;
@@ -201,113 +205,95 @@ export default {
   }
 }
 
-::v-deep .ar-player__play {
-  fill: white !important;
-  background-color: #171003 !important;
 
-  &.ar-player__play--active {
-    background-color: #171003 !important;
+
+
+
+::v-deep .ar {
+  width: 11.4rem;
+  background-color: transparent;
+  box-shadow: unset;
+  .ar-records {
+    display: none;
+  }
+  .ar-player {
+    display: none;
+  }
+  .ar-recorder__duration {
+    display: none;
+  }
+
+  .ar-content {
+    padding: 0;
+  }
+
+  .ar-icon {
+    width: 11.4rem;
+    height: 11.4rem;
+    box-shadow: unset;
+    border: none;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 50%;
+
+    >svg {
+      display: none;
+    }
+
+    &.ar-icon__sm {
+      &.ar-recorder__stop {
+        display: none;
+        position: unset;
+        top: unset;
+        right: unset;
+      }
+    }
+
+    /* 일시 중지 버튼 */
+    &.ar-icon__lg {
+      &.ar-icon--rec {
+        display: none;
+      }
+    }
   }
 }
 
-::v-deep .ar-player__play {
-  fill: white !important;
-  background-color: #ff6b64 !important;
-  cursor: inherit;
-
-  &.ar-player__play--active {
-    background-color: #ff6b64 !important;
+.mic {
+  ::v-deep.ar {
+    .ar-icon {
+      background-color: #2fca56;
+      background-image: url("~@/assets/images/common/record@2x.png");
+      background-size: 120%;
+    }
   }
 }
 
-::v-deep .ar-icon {
-  border: none;
-  box-shadow: 0 2px 5px 1px rgba(158, 158, 158, 0.5);
-}
-
-::v-deep .ar-icon__lg {
-  width: 38px;
-  height: 38px;
-}
-
-::v-deep svg {
-  vertical-align: baseline;
-}
-
-::v-deep div.ar {
-  margin: auto;
-  width: 100%;
-  max-width: 510px;
-  box-shadow: 0 0.75rem 1.5rem rgba(18, 38, 63, 0.03);
-  background-color: #fff;
-  border: 1px solid #eff2f7;
-  border-radius: 0.375rem;
-}
-
-::v-deep .ar-player {
-  width: 100%;
-}
-
-/* disalbed 처리 */
-::v-deep .ar-player {
-  opacity: 0.5;
-  cursor: default;
-  &.abled {
-    opacity: 1;
-    cursor: pointer;
+.play {
+  ::v-deep.ar {
+    .ar-icon {
+      background-color: #1585ff;
+      background-image: url("~@/assets/images/common/play@2x.png");
+    }
   }
 }
 
-::v-deep .ar-player__time {
-  width: 3.2rem;
-  margin: 0 0.4rem;
+.stop {
+  ::v-deep.ar {
+    .ar-icon {
+      background-image: url("~@/assets/images/common/freeze@2x.png");
+      border: 5px solid red;
+    }
+  }
 }
 
-::v-deep .ar-records {
-  display: none;
+.pause {
+  ::v-deep.ar {
+    .ar-icon {
+      background-image: url("~@/assets/images/common/ic-pause@2x.png");
+      border: 5px solid #1585ff;
+    }
+  }
 }
 
-::v-deep .ar-records__record {
-  min-width: 250px;
-}
-
-::v-deep .ar-recorder__duration {
-  font-size: 1.3rem;
-  margin: 0.3rem 0 0 0;
-}
-
-::v-deep .ar-player-actions {
-  width: 50px;
-  justify-content: center;
-}
-
-::v-deep .ar-player > .ar-player-bar > .ar-player__progress {
-  max-width: 110px;
-}
-
-/* 중지 버튼 레코딩 버튼과 겹치기 */
-
-::v-deep .ar-recorder__stop {
-  fill: white !important;
-  background-color: #ff6b64 !important;
-  top: 0;
-  right: 0;
-  width: 38px;
-  height: 38px;
-  display: none;
-}
-
-::v-deep .ar-player > .ar-player-bar{
-  display: none;
-}
-::v-deep .ar-player > .ar-player-bar > .ar-player__progress {
-  max-width: 110px;
-}
-::v-deep .ar-recorder__duration {
-  font-size: 1.3rem;
-  margin: 0.3rem 0 0 0;
-  display: none;
-}
 </style>
-
-
