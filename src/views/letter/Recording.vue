@@ -113,12 +113,10 @@ export default {
     },
     startRecord() {
       this.ing = true
-      this.setRecordAbled()
     },
     stopRecord() {
       this.ing = false
       this.record = false
-      this.setPlayerAbled()
       setTimeout(() => {
         this.setRecentRecord();
       }, 800);
@@ -136,12 +134,15 @@ export default {
       data.append('stepId', this.letter.stepId)
       data.append('recordingAudio', this.file.blob)
 
-     this.getRecording(data)
-       .then(result =>{
-         console.log(result)
-         this.$router.push('/Listening')
-      })
-
+      this.getRecording(data)
+        .then(result =>{
+          console.log(result)
+          if(result.code === '0000') this.$router.push('/Listening')
+          else {
+            alert(`code : ${result.code} message : ${result.message}`)
+            this.$router.push('/Listening')
+          }
+        })
     }
   }
 }
@@ -244,7 +245,6 @@ export default {
 
     &.ar-icon__sm {
       &.ar-recorder__stop {
-        display: none;
         position: unset;
         top: unset;
         right: unset;
