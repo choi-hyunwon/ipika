@@ -17,8 +17,8 @@
       <img src="@/assets/images/common/Group 1388@2x.png" alt="" class="img">
       </div>
         <div class="btn-group">
-          <router-link v-if="diagnose" to="/PabloMain" class="btn btn-dark">시작하기</router-link>
-          <router-link  v-else to="/canvas?page=diagnose" class="btn btn-dark">시작하기</router-link>
+          <router-link v-if=" resultCode === '0000'" to="/PabloMain" class="btn btn-dark">시작하기</router-link>
+          <router-link v-else to="/canvas?page=diagnose" class="btn btn-dark">시작하기</router-link>
         </div>
       </div>
   </div>
@@ -30,34 +30,27 @@ import Confirm from '@/components/popup/Confirm'
 
 export default {
   name: 'Home',
-  data() {
+  components: {Confirm},
+  data (){
     return {
-      diagnose : null
+      resultCode : ''
     }
   },
-  components: {Confirm },
-  computed: {
-  },
   mounted () {
-    this.fetchResult()
+    this.fetchDiagnoseResult()
   },
   methods :{
     ...mapActions({
-      getResult: 'getResult'
+      getDiagnoseResult: 'getDiagnoseResult'
     }),
     todo(){
       alert('종료 안내 팝업 노출 (퍼블리싱 필요)')
     },
-    fetchResult(){
-      let  self = this;
-      this.getResult()
-        .then(result => {
-          if(result.code === "0000") {
-            self.diagnose = true
-          } else {
-            self.diagnose = false
-          }
-        })
+    fetchDiagnoseResult(){
+      this.getDiagnoseResult()
+      .then( result => {
+        this.resultCode = result
+      })
     }
   }
 }

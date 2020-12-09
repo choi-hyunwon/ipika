@@ -19,7 +19,6 @@ export default new Vuex.Store({
    */
   state: {
     isDummy : false,
-    diagnose : true,
     /**
      * userinfo는 단말기(안드로이드)기에서 받아온다.
      *
@@ -43,7 +42,7 @@ export default new Vuex.Store({
      * API session options
      */
     session: {
-      'user_id': 'domfamtest1110',
+      'user_id': 'domfamtest1111',
       'user_auth_key': 'abcdefghijklmnopqrstuvwxyz0123456789',
       'Content_Language': 'ko',
       'device_type': '1001'
@@ -78,7 +77,9 @@ export default new Vuex.Store({
       subject : '',
       active : false,
       type : 'hide'
-    }
+    },
+    submission : {},
+    test : true
   },
   /**
    * global로 사용하는 getters
@@ -135,6 +136,12 @@ export default new Vuex.Store({
     },
     getBg :state => {
       return state.bg
+    },
+    getSubmission :state => {
+      return state.submission
+    },
+    getTest : state => {
+      return state.test
     }
   },
   /**
