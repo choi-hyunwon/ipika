@@ -6,7 +6,7 @@
         <p class="txt-lg">다른 친구들은 어떻게<br/>생각하는지 들어볼까요?</p>
         <p class="txt-sm">친구들의 생각을 듣고, 내 생각과 비교해봐요!</p>
       </div>
-      <div class="img-slider">
+      <div class="img-slider" style="transform: translateX(0px);">
         <ul>
         <li @click="showPlay(i)" v-for="(audio, i) in audioList" class="item" :class="{'pause' : !play, 'play' : play && i === focusIdx}">
             <router-link to="" class="img"><img :src=audio.characterImageUrl alt=""></router-link>
