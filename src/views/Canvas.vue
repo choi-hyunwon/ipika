@@ -112,9 +112,6 @@ export default {
       getSubmissionLearning : 'getSubmissionLearning',
       getSubmission : 'getSubmission'
     }),
-    ttsPlay(tts){
-      globalUtils.tts(tts)
-    },
     reload(){
       window.location.reload()
     },
