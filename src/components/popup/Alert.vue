@@ -89,6 +89,9 @@ export default {
     },
   },
   watch : {
+    'showAlert' : function (val) {
+      this.$EventBus.$emit('popupOpen', val)
+    },
     'type' :function (){
       if(this.type === 'video') this.setPlayerOptions()
     }

@@ -4,7 +4,7 @@
     <div class="dim">
       <div class="inner"
            ref="playerArea">
-        <Player v-if="isMounted" :options="playerOptions"/>
+        <Player v-if="isMounted" :options="playerOptions" :isPopup="false"/>
       </div>
     </div>
   </div>
