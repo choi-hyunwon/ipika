@@ -43,7 +43,7 @@ export default new Vuex.Store({
      * API session options
      */
     session: {
-      'user_id': 'test107',
+      'user_id': 'domfamtest1110',
       'user_auth_key': 'abcdefghijklmnopqrstuvwxyz0123456789',
       'Content_Language': 'ko',
       'device_type': '1001'
