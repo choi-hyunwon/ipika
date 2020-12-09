@@ -1,29 +1,50 @@
 <template>
   <div class="video">
-    <video ref="videoPlayer" class="video-js"/>
-
-    <div class="play-wrap"
-         :class="{'isTap' : isTap}"
-         @click="tap"
+    <!-- 영상 플레이어 -->
+    <video ref="videoPlayer" class="video-js"
+           :style="{
+             'isStart' : 'display: none',
+             '!isStart' : 'display: block',
+           }"
     />
-    <div class="btn-area">
-      <!-- 5초 앞으로 -->
-      <button v-show="isTap" class="btn-rewind" @click="() => skip(-5)">
-        <img src="@/assets/images/common/5s_rewind@2x.png" alt="">
-      </button>
-      <!-- 재생 -->
-      <button v-show="isStart || (isTap && !isPlaying)" class="btn-play" @click="play">
-        <img src="@/assets/images/common/btn_play@2x.png" alt="">
-      </button>
-      <!-- 일시 정지 -->
-      <button v-show="isTap && isPlaying" class="btn-pause" @click="pause">
-        <img src="@/assets/images/common/pause@2x.png" alt="">
-      </button>
-      <!-- 5초 뒤로 -->
-      <button v-show="isTap" class="btn-forward" @click="() => skip(5)">
-        <img src="@/assets/images/common/5s_forward@2x.png" alt="">
-      </button>
+
+    <!-- 영상 시작 전 썸네일 이미지 -->
+    <div v-if="isStart && !isPopup"
+         class="video-thumbnail"
+         style="position: absolute; top: 0; background-size: cover; height: 100%; width: 100%;"
+         :style="{ 'background-image' : `url(${options.Thumnail})` }"
+    />
+
+    <div v-if="options.sources[0].src">
+      <!-- 비디오 영역 커버 - videojs 직접 컨트롤 안되도록 -->
+      <div class="play-wrap"
+           :class="{'isTap' : isTap}"
+           @click="tap"
+      />
+
+      <!-- 비디오 컨트롤 버튼 영역 -->
+      <div
+           class="btn-area"
+      >
+        <!-- 5초 앞으로 -->
+        <button v-show="isTap" class="btn-rewind" @click="() => skip(-5)">
+          <img src="@/assets/images/common/5s_rewind@2x.png" alt="">
+        </button>
+        <!-- 재생 -->
+        <button v-show="isStart || (isTap && !isPlaying)" class="btn-play" @click="play">
+          <img src="@/assets/images/common/btn_play@2x.png" alt="">
+        </button>
+        <!-- 일시 정지 -->
+        <button v-show="isTap && isPlaying" class="btn-pause" @click="pause">
+          <img src="@/assets/images/common/pause@2x.png" alt="">
+        </button>
+        <!-- 5초 뒤로 -->
+        <button v-show="isTap" class="btn-forward" @click="() => skip(5)">
+          <img src="@/assets/images/common/5s_forward@2x.png" alt="">
+        </button>
+      </div>
     </div>
+
   </div>
 </template>
 
@@ -40,6 +61,12 @@ export default {
       default() {
         return {}
       }
+    },
+    isPopup: {
+      Boolean,
+      default() {
+        return false
+      }
     }
   },
 
@@ -51,6 +78,14 @@ export default {
       isTap: false,
       tapTimer: null
     }
+  },
+
+  created () {
+    this.$EventBus.$on('popupOpen', (val) => {
+      if(this.player) {
+        val ? this.pause() : this.play()
+      }
+    })
   },
 
   mounted () {
@@ -76,7 +111,7 @@ export default {
 
       // TODO: 테스트용 임시 코드(영상시간단축)
       if(this.isStart) {
-        this.player.currentTime(this.player.duration() - 2)
+        this.player.currentTime(this.player.duration() - 5)
       }
 
       // 시작이 아닌 경우
@@ -103,15 +138,15 @@ export default {
     // 영상 종료
     videoEnd() {
       this.isPlaying = false
+
       this.$EventBus.$emit('videoEnd')
-
       // 테스트용 임시 코드(영상 무한반복)
-      /*{
-        this.isPlaying = true
-
-        this.player.currentTime(0)
-        this.player.play()
-      }*/
+      // {
+      //   this.isPlaying = true
+      //
+      //   this.player.currentTime(0)
+      //   this.player.play()
+      // }
 
     },
 

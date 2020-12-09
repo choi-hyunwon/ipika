@@ -172,4 +172,19 @@ export default class WebApi {
       }
     })
   }
+  /**
+   * 진단테스트 : 드로잉제출
+   *
+   * api/test/submission
+   *
+   */
+  getSubmissionlearning (options) {
+    return this.request('api/learning/submission', {
+      method: 'POST',
+      data: {
+        ...options
+      }
+    })
+  }
+
 }

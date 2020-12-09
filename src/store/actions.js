@@ -142,6 +142,16 @@ export const actions = {
     return webApi.getLetter(options)
       .then(data => {
         commit('setLetter', data)
+
+        /* TODO: API 조회 예외 처리 필요 */
+        // 영상 재생을 위한 임시 코드
+        console.log("data.stepVideoUrl from actions > getLetter")
+        console.log(data)
+        if(!data.stepVideoUrl) {
+          data.stepVideoUrl = 'https://file-examples-com.github.io/uploads/2017/04/file_example_MP4_640_3MG.mp4'
+          data.stepVideoThumnailUrl = 'https://dummyimage.com/640x360/000000/fff&text=Thumbnail'
+        }
+
         commit('setPlayerUrl', {sources: [{ src: data.stepVideoUrl}],Thumnail :  data.stepVideoThumnailUrl})
       })
   },
@@ -151,4 +161,11 @@ export const actions = {
         commit('setSubmission', data)
       })
   },
+  getSubmissionLearning({ commit }, options) {
+    return webApi.getSubmissionLearning(options)
+      .then(data => {
+        commit('setSubmissionLearning', data)
+      })
+  },
+
 }
