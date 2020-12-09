@@ -74,6 +74,11 @@ export default {
       this.player.play()
       this.isPlaying = true
 
+      // TODO: 테스트용 임시 코드(영상시간단축)
+      if(this.isStart) {
+        this.player.currentTime(this.player.duration() - 2)
+      }
+
       // 시작이 아닌 경우
       if(!this.isStart) {
         this.extendTap()
@@ -99,6 +104,15 @@ export default {
     videoEnd() {
       this.isPlaying = false
       this.$EventBus.$emit('videoEnd')
+
+      // 테스트용 임시 코드(영상 무한반복)
+      /*{
+        this.isPlaying = true
+
+        this.player.currentTime(0)
+        this.player.play()
+      }*/
+
     },
 
     // 화면 탭
@@ -116,9 +130,6 @@ export default {
 
     // 화면 탭 상태 시작
     startTap() {
-      // TODO: progress bar 보이도록 작업 필요
-      // TODO: progress bar 에서 duration time 우측으로 이동
-
       this.isTap = true
       this.tapTimer = setTimeout(() => {
         this.resetTap()
@@ -171,6 +182,7 @@ export default {
       background-color: var(--gray-black);
       opacity: 0.3;
     }
+    z-index: 1;
   }
   .btn-area {
     position: absolute;
@@ -179,6 +191,7 @@ export default {
     top: 0;
     text-align: center;
     margin-top: 48rem;
+    z-index: 5;
     button {
       display: inline-block;
     }
@@ -309,8 +322,31 @@ button.vjs-fullscreen-control.vjs-control.vjs-button {
 
 .video-js .vjs-current-time, .vjs-no-flex .vjs-current-time {
   display: block;
+  margin-left: 22px;
 }
 .vjs-duration.vjs-time-control.vjs-control {
   display: block;
 }
+.vjs-has-started .vjs-control-bar {
+  opacity: 1 !important;
+  background-color: rgba(255,255,255,0);
+  margin-bottom: 40px;
+  height: 4em;
+}
+.video-js .vjs-progress-control .vjs-progress-holder {
+  margin: 0 120px 0 10px;
+}
+.vjs-duration.vjs-time-control.vjs-control {
+  position: absolute;
+  right: 22px;
+}
+.vjs-time-control.vjs-control {
+  font-size: 24px;
+  line-height: 40px;
+  letter-spacing: 0.3px;
+  font-weight: bold;
+}
 </style>
+
+<!--.vjs-current-time.vjs-time-control.vjs-control-->
+<!--.vjs-duration.vjs-time-control.vjs-control-->
