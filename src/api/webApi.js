@@ -1,10 +1,6 @@
 import axios from 'axios'
 import store from '../store/store'
 
-axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8'
-// axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
-// axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*'
-
 export default class WebApi {
   // eslint-disable-next-line no-useless-constructor
   constructor () {
@@ -188,4 +184,17 @@ export default class WebApi {
     })
   }
 
+
+  /**
+   * 학습정보: 생각녹음
+   *
+   * api/learning/recording
+   *
+   */
+  getRecording (options) {
+    return this.request('api/learning/recording', {
+      method: 'POST',
+      data: options
+    })
+  }
 }

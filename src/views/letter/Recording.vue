@@ -113,12 +113,10 @@ export default {
     },
     startRecord() {
       this.ing = true
-      this.setRecordAbled()
     },
     stopRecord() {
       this.ing = false
       this.record = false
-      this.setPlayerAbled()
       setTimeout(() => {
         this.setRecentRecord();
       }, 800);
@@ -134,13 +132,17 @@ export default {
     fetchRecording(){
       const data = new FormData()
       data.append('stepId', this.letter.stepId)
-      data.append('recordingAudio', this.file.blob, 'record.mp3')
+      data.append('recordingAudio', this.file.blob)
 
-     this.getRecording(data)
-       .then(result =>{
-         console.log(result)
-      })
-
+      this.getRecording(data)
+        .then(result =>{
+          console.log(result)
+          if(result.code === '0000') this.$router.push('/Listening')
+          else {
+            alert(`code : ${result.code} message : ${result.message}`)
+            this.$router.push('/Listening')
+          }
+        })
     }
   }
 }
@@ -243,7 +245,6 @@ export default {
 
     &.ar-icon__sm {
       &.ar-recorder__stop {
-        display: none;
         position: unset;
         top: unset;
         right: unset;
@@ -265,6 +266,9 @@ export default {
       background-color: #2fca56;
       background-image: url("~@/assets/images/common/record@2x.png");
       background-size: 120%;
+      &.ar-recorder__stop {
+        display: none;
+      }
     }
   }
 }
@@ -274,6 +278,9 @@ export default {
     .ar-icon {
       background-color: #1585ff;
       background-image: url("~@/assets/images/common/play@2x.png");
+      &.ar-recorder__stop {
+        display: none;
+      }
     }
   }
 }
