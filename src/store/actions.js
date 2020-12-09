@@ -151,4 +151,11 @@ export const actions = {
         commit('setSubmission', data)
       })
   },
+  getRecording({ commit }, options) {
+    return webApi.getRecording(options)
+      .then(data => {
+        return data
+      })
+  },
+
 }

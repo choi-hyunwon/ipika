@@ -16,8 +16,10 @@
       <div class="play-area">
         <audio-recorder
           ref="recorder"
+          format="mp3"
           :before-recording="startRecord"
           :after-recording="stopRecord"/>
+        <audio-player ref="player"/>
         <Confirm v-slot="slotProps"
                  :complete-text="`다시 녹음하시겠어요? </br> 지금 녹음한 내용은 지워져요`"
                  :text="`지워진 녹음은 다시 들을 수 없어요`"
@@ -32,7 +34,7 @@
         </Confirm>
       </div>
       <div class="btn-area">
-        <router-link v-if="!record" to="/Listening" class="btn btn-dark">다했어요!</router-link>
+        <button v-if="!record" @click="fetchRecording" class="btn btn-dark">다했어요!</button>
         <button v-if="record" class="btn btn-dark disabled">다했어요!</button>
       </div>
     </div>
@@ -42,7 +44,7 @@
 <script>
 import LetterHeader from '@/components/letter/LetterHeader'
 import Confirm from '@/components/popup/Confirm'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'recording',
@@ -55,7 +57,8 @@ export default {
         video: false
       },
       ing : false,
-      record : true
+      record : true,
+      file : {}
     }
   },
   created() {
@@ -91,6 +94,9 @@ export default {
     })
   },
   methods : {
+    ...mapActions({
+      getRecording: 'getRecording'
+    }),
     goBack () {
       this.$router.push('/Watching')
     },
@@ -111,6 +117,7 @@ export default {
       if (recorder) {
         const top = recorder.recordList.length - 1;
         recorder.selected = recorder.recordList[top];
+        this.file = recorder.recordList[top]
       }
     },
     setPlayerAbled() { // TODO 퍼블리싱 완료 후 제거
@@ -128,6 +135,19 @@ export default {
       $('._media').hide()
       $('.ar-player').hide()
       $('.ar-recorder').show()
+    },
+    fetchRecording(){
+      const recordingAudio = new FormData()
+      recordingAudio.append('recordingAudio', this.file.blob, `record.mp3`)
+
+
+      this.getRecording({
+          stepId : this.letter.stepId,
+          recordingAudio : recordingAudio
+        }).then(result =>{
+        console.error(result)
+      })
+
     }
   }
 }

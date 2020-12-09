@@ -121,6 +121,7 @@ export default new Vuex.Store({
     getLetterIntro: state => {
       return {
         stageId : state.letter.stageId,
+        stepId : state.letter.stepId,
         stageName : state.letter.stageName,
         stepSubejct : state.letter.stepSubejct,
         stepImageUrl : state.letter.stepImageUrl,
