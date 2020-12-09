@@ -108,7 +108,7 @@ export default {
       this.type = type;
     },
     timeStart(){
-      this.setTimerStart()
+      this.$EventBus.$emit('bgPopup')
       this.$refs['alertModal'].hide()
     },
     setPlayerOptions(){

@@ -4,6 +4,7 @@
       <p>TTS 기능 테스트 :<br></p>
       <button id="btn-read" @click="globalUtils.tts('TTS 테스트')">TTS 기능 테스트</button>
     </div>
+
     <div class="navigation">
       <p>진단테스트 :<br></p>
       <router-link to="/home">초기화면</router-link>

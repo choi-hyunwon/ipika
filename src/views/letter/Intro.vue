@@ -44,7 +44,7 @@ export default {
     fetchLetter(){
       this.getLetter()
         .then(result => {
-          this.isLoading = true;
+          this.isLoading = true
           this.globalUtils.tts(this.letter.stepSubejct)
         })
     }

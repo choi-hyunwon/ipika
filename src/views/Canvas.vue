@@ -1,19 +1,18 @@
 <template>
   <div class="wrap">
 
-    <div class="cover"></div>
-
     <!--   canvas 헤더 -->
     <CanvasHeader></CanvasHeader>
 
     <!--   wacom 라이브러리 -->
     <Wacom ref="wacom" :isLoading="isLoading" :drawer="drawer"></Wacom>
 
-    <!-- <div class="guide_bg">
+    <div v-if="bgPopup===true&&page==='diagnose'" class="guide_bg" @click="toggleBg">
       <img src="@/assets/images/common/test_guide@2x.png" alt="" class="img-m">
+    </div>
+    <div v-if="bgPopup===true&&page==='letter'" class="guide_bg" @click="toggleBg">
       <img src="@/assets/images/common/guide@2x.png" alt="" class="img-m">
-    </div>-->
-
+    </div>
 
     <!--   진단테스트 canvas 첫 진입시 Alert-->
     <Alert ref="autoOpen"
@@ -25,7 +24,6 @@
     <Confirm v-if="page==='diagnose'" ref="timerConfirm"></Confirm>
   </div>
 </template>
-
 <script>
 
 import { mapActions, mapGetters, mapMutations } from 'vuex'
@@ -46,7 +44,8 @@ export default {
   data () {
     return {
       isLoading: false,
-      drawer : true
+      drawer : true,
+      bgPopup : false
     }
   },
 
@@ -57,13 +56,16 @@ export default {
     this.$EventBus.$on('back',this.goBack)
     this.$EventBus.$on('close', this.close);
     this.$EventBus.$on('next', this.exportPNG);
+    this.$EventBus.$on('bgPopup',this.toggleBg);
+    if(this.page==='letter'){
+      this.bgPopup = true
+    }
   },
   mounted () {
     if (localStorage.getItem('isReload') === 'true' || localStorage.getItem('isReload') === undefined) window.location.reload()
     else {
       this.isLoading = true
       //  todo refs 사용 로딩 완료 시 팝업 노출
-
     }
     ;(async () => {
       if(this.page ==='diagnose') await this.fetchSubject()
@@ -88,10 +90,10 @@ export default {
     },
     'isLoading':function(){
       if(this.isLoading&&this.page==='diagnose'){
-        this.$refs.autoOpen.showAlert=true
-        this.$refs.autoOpen.type='diagnose'
+          this.$refs.autoOpen.showAlert=true
+          this.$refs.autoOpen.type='diagnose'
       }
-    }
+    },
   },
   methods: {
     ...mapMutations({
@@ -106,7 +108,10 @@ export default {
       getSubject: 'getSubject',
       getLetter : 'getLetter'
     }),
-
+    ttsPlay(tts){
+      globalUtils.tts(tts)
+    }
+    ,
     reload(){
       window.location.reload()
     },
@@ -145,6 +150,14 @@ export default {
         console.log(href)
 
       });*/
+    },
+    toggleBg(){
+      this.bgPopup = !this.bgPopup;
+      if(this.bgPopup===false&&this.page==='diagnose'){
+        this.setTimerStart();
+      }else if(this.page==='letter'){
+        this.bgPopup=false
+      }
     },
     async fetchSubject () {
       this.getSubject()

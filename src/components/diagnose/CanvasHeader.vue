@@ -7,7 +7,7 @@
       </div>
       <div class="time">{{ time }}</div>
     </div>
-    <div class="symbol">
+    <div class="symbol" >
       <span class="img"><img src="@/assets/images/common/Symbol@2x.png" alt=""></span>
       <span class="text">{{subject.subject}}</span>
     </div>
