@@ -265,6 +265,9 @@ export default {
       background-color: #2fca56;
       background-image: url("~@/assets/images/common/record@2x.png");
       background-size: 120%;
+      &.ar-recorder__stop {
+        display: none;
+      }
     }
   }
 }
@@ -274,6 +277,9 @@ export default {
     .ar-icon {
       background-color: #1585ff;
       background-image: url("~@/assets/images/common/play@2x.png");
+      &.ar-recorder__stop {
+        display: none;
+      }
     }
   }
 }
