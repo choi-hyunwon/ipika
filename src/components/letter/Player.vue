@@ -81,6 +81,7 @@ export default {
   },
 
   created () {
+    console.log('PLAYER CREATED>>>>>>>>>>>>>>>>>>>>>')
     this.$EventBus.$on('popupOpen', (val) => {
       if(this.player) {
         val ? this.pause() : this.play()
@@ -98,8 +99,10 @@ export default {
   },
 
   beforeDestroy () {
+    console.log('<<<<<<<<<<<<<<<<<<<<<PLAYER BEFORE DESTROY')
     if (this.player) {
       this.player.dispose()
+      this.player = null
     }
   },
 

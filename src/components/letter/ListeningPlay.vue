@@ -2,10 +2,10 @@
   <div class="listening-modal">
    <div class="dim-dark">
     </div>
-
     <div class="player_area">
       <div class="player_img">
-        <img src="http://cdn.mcocoa.com/edu//study/20201207113508/study/캐릭터1.png" alt="">
+        <img src="http://cdn.mcocoa.com/edu//study/20201207113508/study/캐릭터1.png" alt="" style="width: 45rem; height: 45rem;">
+<!--이미지 더미 파일 수정 -->
         <div class="recode_button">
           <div class="recode_btn play"><img src="@/assets/images/common/record_play@2x.png" alt="재생" class="img-m"></div>
           <div class="recode_btn stop"><img src="@/assets/images/common/pause_dim@2x.png" alt="정지" class="img-m"></div>
@@ -16,12 +16,11 @@
         <p>김정윤</p>
       </div>
     </div>
-
     <div class="record-area">
     <p>음성 파일 자막 내용 노출 영역입니다. 음성 파일 자막 내용 노출 영역입니다. 음성 파일 자막 내용 노출 영역입니다. 음성 파일 자막 내용 노출 영역입니다. 음성 파일 자막 내용 노출 영역입니다.</p>
     </div>
     <div class="close_box">
-      <img src="@/assets/images/common/dim close@2x.png" alt="취소" class="img-m">
+      <a href="#"><img src="@/assets/images/common/dim close@2x.png" alt="취소" class="img-m"></a>
     </div>
   </div>
 </template>
@@ -58,6 +57,8 @@ export default {
     transform: translate(-50%, -50%);
     .player_img{
       position: relative;
+      border-radius: 50%;
+      overflow: hidden;
       .recode_btn {
         position: absolute;
         top: 50%;

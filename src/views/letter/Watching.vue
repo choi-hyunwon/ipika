@@ -26,7 +26,10 @@ export default {
   created () {
     this.$EventBus.$on('back',this.goBack)
     this.$EventBus.$on('next',this.goToNext)
-    this.$EventBus.$on('videoEnd', this.goToNext)
+    this.$EventBus.$on('videoEnd', () => {
+      this.$EventBus.$off('videoEnd')
+      this.goToNext()
+    })
   },
   mounted () {
     this.playerOptions.width = this.$refs.playerArea.clientWidth
