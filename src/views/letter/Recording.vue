@@ -17,7 +17,7 @@
         <av-media
           v-show="ing" class="_media" ref="media"
           type="frequ"
-          line-color="#f53c32"
+          :line-color="setColor"
           :media="media"
           :canv-width="canvasOptions.canvWidth"
           :canv-height="canvasOptions.canvHeight"
@@ -72,14 +72,9 @@ export default {
   data(){
     return{
       media: null,
-      constraints : {
-        audio: true,
-        video: false
-      },
       ing : false,
       record : true,
       file : {},
-
       canvasOptions: {
         canvWidth : 1260, // TODO::: 동적 입력 확인 필요..
         canvHeight: 270,
@@ -94,7 +89,7 @@ export default {
   },
   mounted () {
     this.globalUtils.tts(this.letter.stepAudioMainText + this.letter.stepAudioSubText)
-    navigator.mediaDevices.getUserMedia(this.constraints)
+    navigator.mediaDevices.getUserMedia({ audio: true, video: false })
       .then(media => {
         this.media = media
       })
@@ -102,7 +97,11 @@ export default {
   computed: {
     ...mapGetters({
       letter: 'getLetterIntro'
-    })
+    }),
+    setColor (){
+      if(this.ing && this.record) return '#f53c32'
+      else if(this.ing && !this.record) return  '#1585ff'
+    }
   },
   methods : {
     ...mapActions({
