@@ -4,6 +4,7 @@
     <b-modal v-if="type==='subject'" centered modal-class="normalPopup" v-model="showAlert">
       <template #modal-header>
         <div class="symbol"><img src="@/assets/images/common/drawing@2x.png" alt=""></div>
+        <div class="modal-title">학습 주제</div>
       </template>
       <template >
         <p class="text">{{boldText}}</p>
@@ -53,6 +54,7 @@
     <b-modal ref="alertModal" v-if="type==='diagnose'" no-close-on-backdrop id="oderPopup" centered title="안내" modal-class="textPopup" ok-variant="black btn-block" v-model="showAlert">
       <template #modal-header>
         <div class="symbol"><img src="@/assets/images/common/Symbol@2x.png" alt=""></div>
+        <div class="modal-title">환영해요 정윤님!</div>
       </template>
       <p class="text">{{text}}</p>
       <template #modal-footer="{ cancel }">

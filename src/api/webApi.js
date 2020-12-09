@@ -1,10 +1,7 @@
 import axios from 'axios'
 import store from '../store/store'
 
-axios.defaults.baseURL = 'http://localhost:8000';
-axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
-axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
-
+axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8'
 
 export default class WebApi {
   // eslint-disable-next-line no-useless-constructor
@@ -17,8 +14,7 @@ export default class WebApi {
       headers: {
         user_id: store.getters.getSession.user_id,
         user_auth_key: store.getters.getSession.user_auth_key,
-        device_type: store.getters.getSession.device_type,
-        'Access-Control-Allow-Origin': '*'
+        device_type: store.getters.getSession.device_type
       },
       ...config
     }).then(result => result.data)
@@ -39,11 +35,12 @@ export default class WebApi {
             "code": "0001"
           }
         }
-       /* console.log('error from api')
+
+        console.log('error from api')
         console.log(error)
         alert(error.message)
         throw new Error(`WebApi ${url} Error!!`)
-        // throw new Error(error)*/
+        // throw new Error(error)
       })
   }
 

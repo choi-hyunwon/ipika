@@ -19,7 +19,6 @@
           format="mp3"
           :before-recording="startRecord"
           :after-recording="stopRecord"/>
-        <audio-player ref="player"/>
         <Confirm v-slot="slotProps"
                  :complete-text="`다시 녹음하시겠어요? </br> 지금 녹음한 내용은 지워져요`"
                  :text="`지워진 녹음은 다시 들을 수 없어요`"
@@ -137,15 +136,13 @@ export default {
       $('.ar-recorder').show()
     },
     fetchRecording(){
-      const recordingAudio = new FormData()
-      recordingAudio.append('recordingAudio', this.file.blob, `record.mp3`)
+      const data = new FormData()
+      data.append('stepId', this.letter.stepId)
+      data.append('recordingAudio', this.file.blob, 'record.mp3')
 
-
-      this.getRecording({
-          stepId : this.letter.stepId,
-          recordingAudio : recordingAudio
-        }).then(result =>{
-        console.error(result)
+     this.getRecording(data)
+       .then(result =>{
+         console.log(result)
       })
 
     }
