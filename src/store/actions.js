@@ -166,6 +166,5 @@ export const actions = {
       .then(data => {
         commit('setSubmissionLearning', data)
       })
-  },
-
+  }
 }

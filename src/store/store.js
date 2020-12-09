@@ -96,7 +96,7 @@ export default new Vuex.Store({
     getSession: state => {
       return state.session
     },
-    getSessionLearning: state => {
+    getSubmissionLearning: state => {
       return state.submissionLearning
     },
     getSubject: state => {

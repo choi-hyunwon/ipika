@@ -109,8 +109,8 @@ export default {
       getUserInfo: 'getUserInfo',
       getSubject: 'getSubject',
       getLetter : 'getLetter',
-      getSubmission : 'getSubmission',
-      getSubmissionLearning : 'getSubmissionLearning'
+      getSubmissionLearning : 'getSubmissionLearning',
+      getSubmission : 'getSubmission'
     }),
     ttsPlay(tts){
       globalUtils.tts(tts)
@@ -152,11 +152,12 @@ export default {
       WILL.getImageCanvas().toBlob(function(blob) {
         const href = URL.createObjectURL(blob);
         console.log(href)
-        if (this.page === 'diagnose') {
-          self.fetchSubmission(href) //진단 테스트 API
-        } else if (this.page === 'letter') {
+        if (self.page === 'diagnose') {
           self.fetchSubmissionLearning(href) //진단 테스트 API
+        } else if (self.page === 'letter') {
+          self.fetchSubmission(href) //진단 테스트 API
         }
+
       })
     },
     toggleBg(){
@@ -177,28 +178,31 @@ export default {
       this.getLetter()
     },
     fetchSubmission(href){
+      const self = this;
       this.getSubmission({userPicture : href})
       .then(result => {
-        if(this.submission.code === '0000') {
+        if(self.submission.code === '0000') {
           // TODO 드로잉 제출 성공 팝업 노출 후 "내 스테이지 확인하러 가기" 클릭 시 TestingResult로 이동
-          this.$router.push('/TestingResult')
+          self.$router.push('/TestingResult')
         } else alert('드로잉 제출 실패')
       })
     },
     fetchSubmissionLearning(href){
-      this.getSubmissionLearning({userPicture : href})
+      const self = this;
+      this.getSubmissionLearning({
+        userPicture : href,
+        stepId : 1,
+        imageId : 1,
+      })
       .then(result => {
-        if(!this.submissionLearning && this.submissionLearning.code === '0000') {
+        if(!self.submissionLearning && self.submissionLearning.code === '0000') {
           // TODO 드로잉 제출 성공 팝업 노출 후 "내 스테이지 확인하러 가기" 클릭 시 TestingResult로 이동
-          this.$router.push('/Completion')
+          self.$router.push('/Completion')
         } else alert('드로잉 제출 실패')
       })
     }
-
   }
 }
-
-
 </script>
 
 <style lang="scss" scoped>
