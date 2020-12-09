@@ -112,9 +112,6 @@ export default {
       getSubmissionLearning : 'getSubmissionLearning',
       getSubmission : 'getSubmission'
     }),
-    ttsPlay(tts){
-      globalUtils.tts(tts)
-    },
     reload(){
       window.location.reload()
     },
@@ -152,12 +149,8 @@ export default {
       WILL.getImageCanvas().toBlob(function(blob) {
         const href = URL.createObjectURL(blob);
         console.log(href)
-        if (self.page === 'diagnose') {
-          self.fetchSubmissionLearning(href) //진단 테스트 API
-        } else if (self.page === 'letter') {
-          self.fetchSubmission(href) //진단 테스트 API
-        }
-
+        if (self.page === 'letter') self.fetchSubmissionLearning(href) //학습정보 드로잉 제출 API
+        else if (self.page === 'diagnose') self.fetchSubmission(href) //진단 테스트 드로잉 제출 API
       })
     },
     toggleBg(){
