@@ -63,6 +63,11 @@
 import {mapMutations,mapGetters} from 'vuex'
 export default {
   name: 'Confirm',
+  watch: {
+    'showConfirm' : function (val) {
+      this.$EventBus.$emit('popupOpen', val)
+    },
+  },
   data(){
     return{
       showConfirm : false,
