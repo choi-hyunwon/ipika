@@ -138,11 +138,12 @@ export default {
     fetchRecording(){
       const data = new FormData()
       data.append('stepId', this.letter.stepId)
-      data.append('recordingAudio', this.file.blob, 'record.mp3')
+      data.append('recordingAudio', this.file.blob)
 
      this.getRecording(data)
        .then(result =>{
          console.log(result)
+         this.$router.push('/Listening')
       })
 
     }

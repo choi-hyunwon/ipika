@@ -1,8 +1,6 @@
 import axios from 'axios'
 import store from '../store/store'
 
-axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8'
-
 export default class WebApi {
   // eslint-disable-next-line no-useless-constructor
   constructor () {
@@ -166,9 +164,7 @@ export default class WebApi {
   getSubmission (options) {
     return this.request('api/test/submission', {
       method: 'POST',
-      data: {
-        ...options
-      }
+      data: options
     })
   }
   /**
@@ -180,9 +176,7 @@ export default class WebApi {
   getSubmissionLearning (options) {
     return this.request('api/learning/submission', {
       method: 'POST',
-      data: {
-        ...options
-      }
+      data: options
     })
   }
 
@@ -196,9 +190,7 @@ export default class WebApi {
   getRecording (options) {
     return this.request('api/learning/recording', {
       method: 'POST',
-      data: {
-        ...options
-      }
+      data: options
     })
   }
 }
