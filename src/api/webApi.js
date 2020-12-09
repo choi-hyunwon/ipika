@@ -161,12 +161,10 @@ export default class WebApi {
    * api/test/submission
    *
    */
-  getSubmission (options) {
+  getSubmission (data) {
     return this.request('api/test/submission', {
       method: 'POST',
-      data: {
-        ...options
-      }
+      data: data
     })
   }
   /**
@@ -175,12 +173,10 @@ export default class WebApi {
    * api/learning/submission
    *
    */
-  getSubmissionLearning (options) {
+  getSubmissionLearning (data) {
     return this.request('api/learning/submission', {
       method: 'POST',
-      data: {
-        ...options
-      }
+      data: data
     })
   }
 

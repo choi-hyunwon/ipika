@@ -21,6 +21,12 @@ export const actions = {
         commit('setSubject', data)
       })
   },
+  getResult ({ commit }, options) {
+    return webApi.getDiagnoseResult(options)
+      .then(data => {
+        return data
+      })
+  },
   getDiagnoseResult ({ commit }, options) {
     return webApi.getDiagnoseResult(options)
       .then(data => {
