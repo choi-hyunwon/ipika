@@ -1,7 +1,7 @@
 import axios from 'axios'
 import store from '../store/store'
 
-axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8'
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*'
 
 export default class WebApi {
@@ -13,6 +13,7 @@ export default class WebApi {
     return axios({
       url: `http://ec2-15-165-50-157.ap-northeast-2.compute.amazonaws.com:8996/${url}`,
       headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
         user_id: store.getters.getSession.user_id,
         user_auth_key: store.getters.getSession.user_auth_key,
         device_type: store.getters.getSession.device_type

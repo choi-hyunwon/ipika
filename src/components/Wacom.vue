@@ -60,14 +60,15 @@
               <button class="color" style="background-color: #2f71f1"
                       @click="setColorSelect"
               ></button>
-              <button class="color" style="background-color: #1122b5"
-                      @click="setColorSelect"
-              ></button>
               <button class="color" style="background-color: #8551d3"
                       @click="setColorSelect"
               ></button>
               <button class="color selected" style="background-color: #444444"
                       @click="setColorSelect"
+              ></button>
+              <button class="color colorpicker"
+                      @click='setColorSelect($event); isPickerOpen();'
+                      v-bind:style="{ background: colors.hex }"
               ></button>
             </div>
             <div class="tool">
@@ -728,23 +729,40 @@
         </div>
       </div>
     </nav>
-
+    <chrome-picker
+      v-show="isOpen"
+      v-model="colors"
+    />
     <div id="notifications" style="bottom: 127px;"></div>
+
   </div>
 </template>
 
 <script>
-import Confirm from '@/components/popup/Confirm'
-import { mapMutations } from 'vuex'
+  import Confirm from '@/components/popup/Confirm'
+  import { mapMutations } from 'vuex'
+  import { Chrome } from 'vue-color'
 
-export default {
-  name: "Wacom",
-  components: { Confirm },
-  data(){
-    return{
-      showConfirm : false,
-      type : ""
-    }
+  export default {
+    name: 'Wacom',
+    components: {
+      Confirm,
+      'chrome-picker': Chrome
+    },
+    data () {
+      return {
+        showConfirm: false,
+        type: '',
+        colour: '#000000',
+        message: 'hello',
+        colors: {
+          'hex': '#000000',
+          'source': 'hex'
+        },
+        updateValue: '',
+        hex: '',
+        isOpen: false
+      }
   },
   props : {
     isLoading: {
@@ -802,9 +820,16 @@ export default {
     toggleDrawer () {
       this.$EventBus.$emit('toggleDrawer', !this.drawer)
     },
-    toggleConfirm(type,topic){
-      this.showConfirm = !this.showConfirm;
+    toggleConfirm (type, topic) {
+      this.showConfirm = !this.showConfirm
       this.type = type
+    },
+    isPickerOpen () {
+      this.isOpen = !this.isOpen
+    },
+    colorPicker() {
+      this.setColorSelect()
+      this.isPickerOpen()
     }
   }
 }
@@ -1143,4 +1168,15 @@ export default {
     }
   }
 }
+
+
+.vc-chrome {
+  position: absolute;
+  left: 169px;
+  top: 450px;
+  z-index: 200
+}
+
+
+
 </style>

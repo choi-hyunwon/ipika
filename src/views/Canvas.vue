@@ -151,11 +151,17 @@ export default {
       const self = this;
       WILL.getImageCanvas().toBlob(function(blob) {
         const href = URL.createObjectURL(blob);
-        console.log(href)
+
+        let file = new File([blob], "my_image.png",{type:"image/png", lastModified:new Date()})
+        console.log(file)
+        if (file.size <= 14500) {
+          alert('아직 그림이 그려지지 않았어요')
+          return false
+        }
         if (self.page === 'diagnose') {
-          self.fetchSubmissionLearning(href) //진단 테스트 API
+          self.fetchSubmission(file) //진단 테스트 API
         } else if (self.page === 'letter') {
-          self.fetchSubmission(href) //진단 테스트 API
+          self.fetchSubmissionLearning(file) //진단 테스트 API
         }
 
       })
