@@ -1,5 +1,6 @@
 <template>
   <div>
+
     <div class="empty" v-if="empty">
       <div class="gallery-section">
         <ul class="gallerys">
@@ -15,6 +16,7 @@
         </ul>
       </div>
     </div>
+
     <div class="list" v-else-if="userGalleryMypicture" v-model="setList">
       <div class="clearfix btns_group">
         <div class="float-left btn-left">
@@ -34,6 +36,7 @@
           <b-form-select v-model="selected" @change="setSort" :options="options" class="select_box"></b-form-select>
         </div>
       </div>
+
       <div class="gallery-section">
         <ul class="gallerys">
           <li class="gallery-g" v-for="(item, index) in list" v-model="allSize">
@@ -64,6 +67,7 @@
         <b-button class="btn btn-black  btn-half" @click="cancel()">닫기</b-button>
       </template>
     </b-modal>
+
   </div>
 </template>
 

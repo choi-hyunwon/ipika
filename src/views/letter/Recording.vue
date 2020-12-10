@@ -84,8 +84,12 @@ export default {
   },
   created() {
     this.$EventBus.$on('back',this.goBack)
-    this.$EventBus.$on('next', this.todoRemove);
-
+    this.$EventBus.$on('next', () => {
+      this.record = true
+      // $('._media').hide()
+      // $('.ar-player').hide()
+      // $('.ar-recorder').show()
+    })
   },
   mounted () {
     this.globalUtils.tts(this.letter.stepAudioMainText + this.letter.stepAudioSubText)
@@ -214,11 +218,14 @@ export default {
   width: 11.4rem;
   background-color: transparent;
   box-shadow: unset;
+
   .ar-records {
     display: none;
   }
   .ar-player {
-    display: none;
+    .ar-player-bar {
+      display: none;
+    }
   }
   .ar-recorder__duration {
     display: none;
@@ -229,6 +236,7 @@ export default {
   }
 
   .ar-icon {
+
     width: 11.4rem;
     height: 11.4rem;
     box-shadow: unset;
@@ -239,7 +247,7 @@ export default {
     background-size: 50%;
 
     >svg {
-      display: none;
+      //display: none;
     }
 
     &.ar-icon__sm {
@@ -253,20 +261,144 @@ export default {
     /* 일시 중지 버튼 */
     &.ar-icon__lg {
       &.ar-icon--rec {
+        //display: none;
+      }
+    }
+  }
+}
+
+/* 음성 녹음 아이콘 */
+.mic {
+  ::v-deep.ar {
+    .ar-recorder {
+      .ar-icon {
+        &.ar-icon__lg {
+          background-color: #2fca56;
+          background-image: url("~@/assets/images/common/record@2x.png");
+          background-size: 120%;
+          > svg {
+            display: none;
+          }
+        }
+        &.ar-icon__sm.ar-recorder__stop {
+          display: none;
+        }
+      }
+    }
+    .ar-player {
+      .ar-player-actions {
         display: none;
       }
     }
   }
 }
 
-.mic {
+/* 녹음 정지 아이콘 */
+.stop {
+  ::v-deep.ar {
+    .ar-recorder {
+      .ar-icon {
+        &.ar-icon__lg.ar-icon--rec {
+          display: none;
+        }
+        &.ar-icon__sm.ar-recorder__stop {
+          background-image: url("~@/assets/images/common/freeze@2x.png");
+          border: 5px solid red;
+          > svg {
+            display: none;
+          }
+        }
+      }
+    }
+    .ar-player {
+      .ar-player-actions {
+        display: none;
+      }
+    }
+  }
+}
+
+/* 녹음 재생 아이콘 */
+.play {
+  ::v-deep.ar {
+    .ar-recorder {
+      .ar-icon {
+        &.ar-icon__lg {
+          display: none;
+        }
+        &.ar-icon__sm.ar-recorder__stop {
+          display: none;
+        }
+      }
+    }
+    .ar-player {
+      width: unset;
+      .ar-player-actions {
+        width: 11.4rem;
+        svg {
+          display: none;
+        }
+        .ar-icon.ar-icon__lg.ar-player__play {
+          background-color: #1585ff;
+          background-image: url("~@/assets/images/common/play@2x.png");
+          background-repeat: no-repeat;
+          background-position: center;
+          &.ar-player__play--active {
+            background-color: transparent !important;
+            background-image: url("~@/assets/images/common/ic-pause@2x.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            border: 5px solid #1585ff;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* 재생 정지 아이콘 */
+/*.pause {
+  ::v-deep.ar {
+    !*.ar-icon {
+      background-image: url("~@/assets/images/common/ic-pause@2x.png");
+      border: 5px solid #1585ff;
+    }*!
+    .ar-recorder {
+      .ar-icon {
+        &.ar-icon__lg {
+          display: none;
+        }
+        &.ar-icon__sm.ar-recorder__stop {
+          display: none;
+        }
+      }
+    }
+    .ar-player {
+      width: unset;
+      .ar-player-actions {
+        width: 11.4rem;
+        svg {
+          display: none;
+        }
+        .ar-icon.ar-icon__lg.ar-player__play.ar-player__play--active {
+          background-color: #1585ff;
+          background-image: url("~@/assets/images/common/ic-pause@2x.png");
+          background-repeat: no-repeat;
+          background-position: center;
+        }
+      }
+    }
+  }
+}*/
+
+/*.mic {
   ::v-deep.ar {
     .ar-icon {
       background-color: #2fca56;
       background-image: url("~@/assets/images/common/record@2x.png");
       background-size: 120%;
       &.ar-recorder__stop {
-        display: none;
+        //display: none;
       }
     }
   }
@@ -277,9 +409,9 @@ export default {
     .ar-icon {
       background-color: #1585ff;
       background-image: url("~@/assets/images/common/play@2x.png");
-      &.ar-recorder__stop {
-        display: none;
-      }
+      //&.ar-recorder__stop {
+      //  display: none;
+      //}
     }
   }
 }
@@ -300,6 +432,6 @@ export default {
       border: 5px solid #1585ff;
     }
   }
-}
+}*/
 
 </style>
