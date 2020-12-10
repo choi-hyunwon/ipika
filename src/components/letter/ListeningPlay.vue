@@ -63,6 +63,10 @@ export default {
       if(!this.toggleButton){
         this.audio.play();
         this.toggleButton=true;
+        setTimeout(()=>{
+          this.toggleButton=false
+        },Number(this.audio.duration)*1000)
+        console.log(this.audio.duration)
       }else{
         this.toggleButton=false;
         this.audio.pause();
