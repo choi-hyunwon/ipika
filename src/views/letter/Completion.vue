@@ -36,7 +36,7 @@ export default {
   },
   methods : {
     goBack () {
-      this.$router.push('/Watching')
+      this.$router.push('/PabloMain')
     }
   }
 }

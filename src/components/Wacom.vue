@@ -707,7 +707,6 @@
               </Confirm>
             </div>
           </div>
-
           <div class="btn-wrap">
             <Confirm  v-if="page==='diagnose'"
                       v-slot="slotProps"
@@ -716,23 +715,14 @@
                       :okText = "'제출하기'">
               <b-button  @click="globalUtils.confirm(slotProps,'diagnose')" class="btn btn-blue btn-lg">완료</b-button>
             </Confirm>
-            <Confirm v-else-if="page==='letter'"
-                     v-slot="slotProps"
-                     :completeText="'배경교재1이 저장되었어요<br> 남은 그림도 더 그려볼까요?'"
-                     :text="'모든 배경교재를 그려야 학습과정이 완료돼요'"
-                     :cancelText = "'아니요'"
-                     :okText = "'네'">
-              <b-button  @click="globalUtils.confirm(slotProps,'letter')" class="btn btn-blue btn-lg">완료</b-button>
-            </Confirm>
+            <b-button v-else-if="page==='letter'" @click="setEvent" class="btn btn-blue btn-lg" :class="{'disabled' : !bg.imageId}">완료</b-button>
+            <!--TODO : 프리드로잉-->
             <b-button v-else class="btn btn-blue btn-lg">완료</b-button>
           </div>
         </div>
       </div>
     </nav>
-    <chrome-picker
-      v-show="isOpen"
-      v-model="colors"
-    />
+    <chrome-picker v-show="isOpen" v-model="colors"/>
     <div id="notifications" style="bottom: 127px;"></div>
 
   </div>
@@ -771,16 +761,17 @@
     }
   },
   created(){
-    this.$EventBus.$on('setBg', (bg) => {
+    this.$EventBus.$on('setBg', (bg, reset) => {
       this.setLayerBgSelect(bg.tabletImageUrl)
-      this.setBg({...bg, ...{active : true} })
+      if(reset) {
+        // TODO : 전송 완료 한 캔버스 리스트 삭제
+        this.setBg({reset : true})
+      }
+      else this.setBg({...bg, ...{active : true} })
     });
     this.$EventBus.$on('visibleBg', () => {
       if(!this.bg.isShow) this.setLayerBgSelect(this.bg.tabletImageUrl)
-      else{
-        this.setLayerBgSelect('')
-        document.querySelector('.layer_bg').style.backgroundColor = "#fff"
-      }
+      else this.setLayerBgSelect('https://colorate.azurewebsites.net/SwatchColor/FFFFFF')
     });
   },
   computed : {
@@ -796,9 +787,7 @@
       setBg: 'setBg',
     }),
     setLayerBgSelect (img) {
-      // todo : 학습 배경 선택시 캔버스는 투명하게 만들고, 배경 레이어에 BG image 넣어야함
       WILL.setBackground(img, 'url')
-      // document.querySelector('.layer_bg').style.backgroundImage =  `url('${img}')`;
     },
     /**
      * 캔버스 툴 조작
@@ -837,6 +826,10 @@
     colorPicker() {
       this.setColorSelect()
       this.isPickerOpen()
+    },
+    setEvent(){
+      // TODO : 마지막 남은 배경교재인지 확인
+      this.$EventBus.$emit('next')
     }
   }
 }

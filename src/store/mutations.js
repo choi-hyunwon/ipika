@@ -72,7 +72,8 @@ export const mutations = {
     state.playerOptions = {...state.playerOptions, ...size}
   },
   setBg(state, bg) {
-    state.bg = {...state.bg, ...bg}
+    if (bg.reset) state.bg = { active : false, isShow : false}
+    else state.bg = { ...state.bg, ...bg }
   },
   setSubmission(state, submission) {
     state.submission = submission
