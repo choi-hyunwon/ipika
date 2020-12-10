@@ -63,6 +63,9 @@ export default {
       if(!this.toggleButton){
         this.audio.play();
         this.toggleButton=true;
+        this.audio.onended = ()=>{
+          this.toggleButton = false
+        }
       }else{
         this.toggleButton=false;
         this.audio.pause();
