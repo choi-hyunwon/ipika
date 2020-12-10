@@ -14,7 +14,6 @@
         <b-button class="btn btn-block btn-black" @click="cancel()">{{ buttonText }}</b-button>
       </template>
     </b-modal>
-
     <b-modal v-if="type==='video'" centered hide-footer modal-class="videoReviewPopup" v-model="showAlert">
       <template  #default="{ hide }">
         <div class="full-screen dim"><!-- 전체 화면시 dim 제거 -->
@@ -32,25 +31,6 @@
         </div>
       </template>
     </b-modal>
-
-    <b-modal v-if="type==='agreement1'" centered :title=boldText modal-class="marketing" scrollable ok-only ok-title="닫기" ok-variant="black btn-block" v-model="showAlert">
-      <p>
-        {{text}}
-      </p>
-    </b-modal>
-
-    <b-modal v-if="type==='agreement2'"  id="startPopup" centered modal-class="textPopup" v-model="showAlert">
-      <template #modal-header>
-        <div class="symbol"><img src="@/assets/images/common/Symbol@2x.png" alt=""></div>
-      </template>
-      <p class="text" v-html="text"></p>
-      <template #modal-footer="{ cancel }">
-        <router-link to="/canvas?page=diagnose">
-          <button size="sm" variant="btn black btn-block" @click="cancel()">네 그려볼게요!!</button>
-        </router-link>
-      </template>
-    </b-modal>
-
     <b-modal ref="alertModal" v-if="type==='diagnose'" no-close-on-backdrop id="oderPopup" centered title="안내" modal-class="textPopup" ok-variant="black btn-block" v-model="showAlert">
       <template #modal-header>
         <div class="symbol"><img src="@/assets/images/common/Symbol@2x.png" alt=""></div>
@@ -61,6 +41,32 @@
         <button size="sm" class="btn btn-black btn-block" @click="timeStart">시작하기</button>
       </template>
     </b-modal>
+    <b-modal v-if="type==='success'" centered modal-class="normalPopup" v-model="showAlert">
+      <template #modal-header>
+        <div class="symbol"><img src="@/assets/images/common/check_green@2x.png" alt=""></div>
+      </template>
+      <template >
+        <p class="text" v-html="boldText"></p>
+        <p class="text-sm">{{text}}</p>
+      </template>
+      <template #modal-footer="{ cancel }">
+        <b-button class="btn btn-block btn-black" @click="$router.push('/TestingResult')">{{ buttonText }}</b-button>
+      </template>
+    </b-modal>
+    <!--<b-modal v-if="type==='agreement1'" centered :title=boldText modal-class="marketing" scrollable ok-only ok-title="닫기" ok-variant="black btn-block" v-model="showAlert">
+      <p>{{text}}</p>
+    </b-modal>
+    <b-modal v-if="type==='agreement2'"  id="startPopup" centered modal-class="textPopup" v-model="showAlert">
+      <template #modal-header>
+        <div class="symbol"><img src="@/assets/images/common/Symbol@2x.png" alt=""></div>
+      </template>
+      <p class="text" v-html="text"></p>
+      <template #modal-footer="{ cancel }">
+        <router-link to="/canvas?page=diagnose">
+          <button size="sm" variant="btn black btn-block" @click="cancel()">네 그려볼게요!!</button>
+        </router-link>
+      </template>
+    </b-modal>-->
   </div>
 </template>
 
