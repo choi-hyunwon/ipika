@@ -78,7 +78,8 @@ export default {
       canvasTimer: 'getCanvasTimer',
       subject : 'getSubject',
       submission : 'getSubmission',
-      submissionLearning : 'getSubmissionLearning'
+      submissionLearning : 'getSubmissionLearning',
+      letter: 'getLetterIntro'
     }),
     page() {
       return this.$router.currentRoute.query.page
@@ -112,9 +113,6 @@ export default {
       getSubmissionLearning : 'getSubmissionLearning',
       getSubmission : 'getSubmission'
     }),
-    ttsPlay(tts){
-      globalUtils.tts(tts)
-    },
     reload(){
       window.location.reload()
     },
@@ -150,12 +148,22 @@ export default {
     exportPNG(e){
       const self = this;
       WILL.getImageCanvas().toBlob(function(blob) {
-        const href = URL.createObjectURL(blob);
-        console.log(href)
+        let file = new File([blob], "my_image.png",{type:"image/png", lastModified:new Date()})
+
+        if (file.size <= 14500) {
+          alert('아직 그림이 그려지지 않았어요')
+          return false
+        }
         if (self.page === 'diagnose') {
-          self.fetchSubmissionLearning(href) //진단 테스트 API
+          const data = new FormData()
+          data.append('userPicture', blob, 'rain.png')
+          self.fetchSubmission(data) //진단 테스트 API
         } else if (self.page === 'letter') {
-          self.fetchSubmission(href) //진단 테스트 API
+          const data = new FormData()
+          data.append('stepId', this.letter.stepId)
+          data.append('stepPicture', blob, 'rain.png')
+          data.append('imageId', '1')
+          self.fetchSubmissionLearning(data) //진단 테스트 API
         }
 
       })
@@ -177,9 +185,9 @@ export default {
     async fetchLetter(){
       this.getLetter()
     },
-    fetchSubmission(href){
+    fetchSubmission(data){
       const self = this;
-      this.getSubmission({userPicture : href})
+      this.getSubmission(data)
       .then(result => {
         if(self.submission.code === '0000') {
           // TODO 드로잉 제출 성공 팝업 노출 후 "내 스테이지 확인하러 가기" 클릭 시 TestingResult로 이동

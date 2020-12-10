@@ -52,6 +52,8 @@
         </ul>
       </div>
     </div>
+
+
     <b-modal id="deleteAudio" centered title="완전히 삭제" modal-class="deleteAudio">
       <template #modal-header>
         <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>
