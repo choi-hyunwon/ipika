@@ -19,24 +19,6 @@
         <div class="text-center name">{{ galleryInfo.nickname || name }}</div>
         <div class="text-center english-name">{{ result.stageName }}</div>
       </div>
-<!--      <ul class="infomation d-flex">-->
-<!--        <li class="info">-->
-<!--          <div>내 그림</div>-->
-<!--          <div>{{ galleryInfo.totalCount }}</div>-->
-<!--        </li>-->
-<!--        <li class="info">-->
-<!--          <div>공개한 그림</div>-->
-<!--          <div>{{ galleryInfo.totalSharedCount }}</div>-->
-<!--        </li>-->
-<!--        <li class="info">-->
-<!--          <div>조회 수</div>-->
-<!--          <div>{{ galleryInfo.totalViewCount }}</div>-->
-<!--        </li>-->
-<!--        <li class="info">-->
-<!--          <div>좋아요 수</div>-->
-<!--          <div>{{ galleryInfo.totalReactionCount }}</div>-->
-<!--        </li>-->
-<!--      </ul>-->
     </div>
   </div>
 </template>

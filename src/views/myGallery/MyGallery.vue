@@ -1,6 +1,6 @@
 <template>
-  <div class="wrap">
-    <div class="header ivory bg-ivory d-flex" v-if="userGalleryMypicture" v-model="setList">
+  <div class="wrap"  v-if="isLoading">
+    <div class="header ivory bg-ivory d-flex">
       <a href="#" @click.prevent="goBack" v-b-modal.goBackPopup class="symbol"><img
         src="@/assets/images/common/arrow_left@2x.png" alt=""></a>
       <div class="gallery-title">
@@ -13,7 +13,7 @@
         </router-link>
       </div>
     </div>
-    <div class="contents" setList>
+    <div class="contents" >
       <myGalleryInfo v-on:popup="settingPopup"></myGalleryInfo>
       <div class="tab-section">
         <b-tabs justified>
@@ -34,7 +34,7 @@
       <p class="text">직접 그린 그림으로만<br/> 배경을 설정할 수 있어요<br/>파블로학습을 시작해보세요!</p>
       <template #modal-footer="{ cancel }">
         <b-button variant="gray" class="btn-half" @click="cancel()">닫기</b-button>
-        <router-link to="/canvas" class="btn btn-black btn-half">시작하기</router-link>
+        <router-link to="/pabloMain" class="btn btn-black btn-half">시작하기</router-link>
       </template>
     </b-modal>
     <b-modal id="galleryBgChange" centered title="배경 그림 선택" hide-header hide-footer modal-class="galleryBgChange">
@@ -59,7 +59,7 @@
               </b-button>
             </div>
             <ul class="scroll d-flex">
-              <li class="background-img" v-for="(item, index) in list" allSize>
+              <li class="background-img" v-for="(item, index) in list">
                 <a href="#" @click.prevent="setBackground(item.pictureId, index)">
                   <img :src="item.pictureUrl" alt="갤러리사진" class="img-m">
                 </a>
@@ -69,7 +69,6 @@
         </div>
       </template>
     </b-modal>
-
     <!--//modal-->
   </div>
 </template>
@@ -89,7 +88,7 @@ export default {
   },
   data () {
     return {
-      empty: null,
+      isLoading : false,
       closeBtn: {
         ModalClose: false
       },
@@ -119,28 +118,7 @@ export default {
       session: 'getSession',
       userGalleryMypicture: 'getUserGalleryMypicture'
     }),
-    getEmpty(){
-      let userGalleryMypicture = this.userGalleryMypicture
-      if (userGalleryMypicture.pictures.length === 0 && userGalleryMypicture.audios.length === 0) {
-        this.empty = true
-      } else {
-        this.empty = false
-      }
-    },
-    setList(){
-      return this.list = this.userGalleryMypicture.pictures
-    },
-    allSize(){
-      this.nSize[0] = this.list.length
-      const letter = this.list.filter(function (item) {
-        return item.drawingType === 4
-      })
-      this.nSize[1] = letter.length
-      const free = this.list.filter(function (item) {
-        return item.drawingType === 3
-      })
-      this.nSize[2] = free.length
-    }
+
   },
   mounted () {
     this.fetchUserGalleryMypicture()
@@ -152,8 +130,24 @@ export default {
       getUserGalleryBackground: 'getUserGalleryBackground',
       getUserGalleryDetele: 'getUserGalleryDetele'
     }),
+    isEmpty(){
+      return this.userGalleryMypicture.pictures.length === 0 ? true : false
+    },
+    allSize(){
+      this.nSize[0] = this.list.length
+
+      const letter = this.list.filter(function (item) {
+        return item.drawingType === 4
+      })
+      this.nSize[1] = letter.length
+
+      const free = this.list.filter(function (item) {
+        return item.drawingType === 3
+      })
+      this.nSize[2] = free.length
+    },
     settingPopup () {
-      if (this.empty) {
+      if (this.isEmpty()) {
         this.$bvModal.show('galleryBGChangeEmpty')
       } else {
         this.$bvModal.show('galleryBgChange')
@@ -163,6 +157,9 @@ export default {
       this.getUserGalleryMypicture()
         .then(result => {
           console.log('getUserGalleryMypicture :', result)
+          this.list = result.pictures
+          this.isLoading = true
+          this.allSize()
         })
     },
     goBack () {
@@ -211,6 +208,7 @@ export default {
     setBackground (pictureId, index) {
       var self=this;
       this.selectId = pictureId
+      console.log(pictureId)
       this.selectIndex = index
       this.$bvModal.hide('galleryBgChange')
       this.getUserGalleryBackground({pictureId : this.selectId})
