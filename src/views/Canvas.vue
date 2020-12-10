@@ -1,23 +1,19 @@
 <template>
   <div class="wrap">
-
     <!--   canvas 헤더 -->
-    <CanvasHeader></CanvasHeader>
-
+    <CanvasHeader v-if="isLoading"></CanvasHeader>
     <!--   wacom 라이브러리 -->
-    <Wacom ref="wacom" :isLoading="isLoading" :drawer="drawer"></Wacom>
-
+    <Wacom ref="wacom" :drawer="drawer"></Wacom>
     <div v-if="bgPopup===true&&page==='diagnose'" class="guide_bg" @click="toggleBg">
       <img src="@/assets/images/common/test_guide@2x.png" alt="" class="img-m">
     </div>
     <div v-if="bgPopup===true&&page==='letter'" class="guide_bg" @click="toggleBg">
       <img src="@/assets/images/common/guide@2x.png" alt="" class="img-m">
     </div>
-
+    <!--  프리드로잉 첫 진입시 Register -->
     <Register ref="register"
               v-if="page===''"
               v-slot="slotProps"/>
-
     <!--   진단테스트 canvas 첫 진입시 Alert-->
     <Alert ref="autoOpen"
             v-if="page==='diagnose'"
@@ -68,14 +64,10 @@ export default {
   },
   mounted () {
     // TODO: 프리드로잉 팝업 퍼블리싱 용
-    this.$refs.register.showRegister=true
-
+    if(this.page === '') this.$refs.register.showRegister=true
 
     if (localStorage.getItem('isReload') === 'true' || localStorage.getItem('isReload') === undefined) window.location.reload()
-    else {
-      this.isLoading = true
-      //  todo refs 사용 로딩 완료 시 팝업 노출
-    }
+    else this.isLoading = true
     ;(async () => {
       if(this.page ==='diagnose') await this.fetchSubject()
       else if(this.page === 'letter') await this.fetchLetter()
@@ -86,8 +78,6 @@ export default {
       session: 'getSession',
       canvasTimer: 'getCanvasTimer',
       subject : 'getSubject',
-      submission : 'getSubmission',
-      submissionLearning : 'getSubmissionLearning',
       letter: 'getLetterIntro'
     }),
     page() {
@@ -144,11 +134,6 @@ export default {
     popUpOpen(){
       this.setTimerPause()
     },
-    hideInfo(e){
-      if(e.trigger==="backdrop"||"esc"){
-        this.setTimerResume()
-      }
-    },
     clear(){
       WILL.clear()
       this.$bvModal.hide('clearAllPopup')
@@ -166,15 +151,14 @@ export default {
         if (self.page === 'diagnose') {
           const data = new FormData()
           data.append('userPicture', blob, 'rain.png')
-          self.fetchSubmission(data) //진단 테스트 API
+          self.fetchSubmission(data) //진단 테스트 드로잉 제출 API
         } else if (self.page === 'letter') {
           const data = new FormData()
           data.append('stepId', this.letter.stepId)
           data.append('stepPicture', blob, 'rain.png')
           data.append('imageId', '1')
-          self.fetchSubmissionLearning(data) //진단 테스트 API
+          self.fetchSubmissionLearning(data) //학습 정보 드로잉 제출 API
         }
-
       })
     },
     toggleBg(){
@@ -198,21 +182,17 @@ export default {
       const self = this;
       this.getSubmission(data)
       .then(result => {
-        if(self.submission.code === '0000') {
+        if(result.code === '0000') {
           // TODO 드로잉 제출 성공 팝업 노출 후 "내 스테이지 확인하러 가기" 클릭 시 TestingResult로 이동
           self.$router.push('/TestingResult')
         } else alert('드로잉 제출 실패')
       })
     },
-    fetchSubmissionLearning(href){
+    fetchSubmissionLearning(data){
       const self = this;
-      this.getSubmissionLearning({
-        userPicture : href,
-        stepId : 1,
-        imageId : 1,
-      })
+      this.getSubmissionLearning(data)
       .then(result => {
-        if(!self.submissionLearning && self.submissionLearning.code === '0000') {
+        if(result.code === '0000') {
           // TODO 드로잉 제출 성공 팝업 노출 후 "내 스테이지 확인하러 가기" 클릭 시 TestingResult로 이동
           self.$router.push('/Completion')
         } else alert('드로잉 제출 실패')

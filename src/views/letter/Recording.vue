@@ -38,6 +38,7 @@
           format="mp3"
           :before-recording="startRecord"
           :after-recording="stopRecord"/>
+
         <Confirm v-slot="slotProps"
                  :complete-text="`다시 녹음하시겠어요? </br> 지금 녹음한 내용은 지워져요`"
                  :text="`지워진 녹음은 다시 들을 수 없어요`"
@@ -79,16 +80,16 @@ export default {
         canvWidth : 1260, // TODO::: 동적 입력 확인 필요..
         canvHeight: 270,
         canvLineWidth: 15,
-      }
+      },
+
+
+      arPlayer : null,
     }
   },
   created() {
     this.$EventBus.$on('back',this.goBack)
     this.$EventBus.$on('next', () => {
       this.record = true
-      // $('._media').hide()
-      // $('.ar-player').hide()
-      // $('.ar-recorder').show()
     })
   },
   mounted () {
@@ -97,6 +98,12 @@ export default {
       .then(media => {
         this.media = media
       })
+  },
+  watch: {
+    'arPlayer.isPlaying' : function(val) {
+      console.log('Playing Changed....', val)
+      this.ing = val
+    }
   },
   computed: {
     ...mapGetters({
@@ -126,10 +133,18 @@ export default {
     },
     setRecentRecord() {
       const recorder = this.$refs.recorder;
+
+      // this.arPlayer = recorder.$children[2]
+      recorder.$children.forEach(val => {
+        val.$el.className === 'ar-player'
+        this.arPlayer = val
+      })
+
       if (recorder) {
         const top = recorder.recordList.length - 1;
         recorder.selected = recorder.recordList[top];
         this.file = recorder.recordList[top]
+        console.log(this.file)
       }
     },
     fetchRecording(){
@@ -357,12 +372,8 @@ export default {
 }
 
 /* 재생 정지 아이콘 */
-/*.pause {
+.pause {
   ::v-deep.ar {
-    !*.ar-icon {
-      background-image: url("~@/assets/images/common/ic-pause@2x.png");
-      border: 5px solid #1585ff;
-    }*!
     .ar-recorder {
       .ar-icon {
         &.ar-icon__lg {
@@ -381,57 +392,14 @@ export default {
           display: none;
         }
         .ar-icon.ar-icon__lg.ar-player__play.ar-player__play--active {
-          background-color: #1585ff;
+          background-color: transparent !important;
           background-image: url("~@/assets/images/common/ic-pause@2x.png");
           background-repeat: no-repeat;
           background-position: center;
+          border: 5px solid #1585ff;
         }
       }
     }
   }
-}*/
-
-/*.mic {
-  ::v-deep.ar {
-    .ar-icon {
-      background-color: #2fca56;
-      background-image: url("~@/assets/images/common/record@2x.png");
-      background-size: 120%;
-      &.ar-recorder__stop {
-        //display: none;
-      }
-    }
-  }
 }
-
-.play {
-  ::v-deep.ar {
-    .ar-icon {
-      background-color: #1585ff;
-      background-image: url("~@/assets/images/common/play@2x.png");
-      //&.ar-recorder__stop {
-      //  display: none;
-      //}
-    }
-  }
-}
-
-.stop {
-  ::v-deep.ar {
-    .ar-icon {
-      background-image: url("~@/assets/images/common/freeze@2x.png");
-      border: 5px solid red;
-    }
-  }
-}
-
-.pause {
-  ::v-deep.ar {
-    .ar-icon {
-      background-image: url("~@/assets/images/common/ic-pause@2x.png");
-      border: 5px solid #1585ff;
-    }
-  }
-}*/
-
 </style>

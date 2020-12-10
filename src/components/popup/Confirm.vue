@@ -11,14 +11,14 @@
 
       <!--     본문  -->
       <template>
-        <p class="text" v-html="completeText"></p>
+        <p class="text" v-html="type === 'Refresh' || type === 'Complete' ? timeOut.completeText : completeText"></p>
         <p class="text-sm" v-html="text"></p>
       </template>
 
       <!--  footer  -->
       <template #modal-footer="{ cancel }">
-        <b-button variant="gray" class="btn-half" @click="cancelA">{{cancelText}}</b-button>
-        <b-button variant="black" class="btn-black btn-half" @click="ok">{{okText}}</b-button>
+        <b-button variant="gray" class="btn-half" @click="cancelBtn">{{type === 'Refresh' || type === 'Complete' ? timeOut.cancelText : cancelText}}</b-button>
+        <b-button variant="black" class="btn-black btn-half" @click="okBtn">{{type === 'Refresh' || type === 'Complete' ? timeOut.okText :okText}}</b-button>
       </template>
     </b-modal>
 
@@ -29,8 +29,8 @@
       <p class="text">시간이 초과되었어요!<br/>이대로 그림을 제출할까요?</p>
       <p class="text-sm"></p>
       <template #modal-footer="{ cancel }">
-        <b-button @click="cancelA" variant="gray" class="btn-half">아니오</b-button>
-        <b-button @click="ok" variant="black" class="btn-half">제출하기</b-button>
+        <b-button @click="cancelBtn" variant="gray" class="btn-half">아니오</b-button>
+        <b-button @click="okBtn" variant="black" class="btn-half">제출하기</b-button>
       </template>
     </b-modal>
 
@@ -73,6 +73,11 @@ export default {
       showConfirm : false,
       autoModal : false,
       type : "",
+      timeOut : {
+        completeText : '',
+        cancelText : '다시그리기',
+        okText : '제출하기'
+      }
     }
   },
   created () {
@@ -146,10 +151,10 @@ export default {
     isComplete () {
       return this.$router.push('/Completion')
     },
-    ok () {
+    okBtn () {
       if (this.type === 'goBack') {
         this.goBack()
-      } else if (this.type === 'Complete' || this.type === 'diagnose' || this.type === 'refresh' || this.type === 'record') {
+      } else if (this.type === 'Complete' || this.type === 'diagnose' || this.type === 'refresh' || this.type === 'record' || this.type === 'Refresh') {
         this.goToNext()
       } else if (this.type === 'watchComplete') {
         this.$route.push('/Recording')
@@ -160,21 +165,17 @@ export default {
         alert('파블로 서비스 종료 연동 필요')
       } else if (this.type === 'timeOut') {
         this.type = 'Complete'
-        this.$props.completeText = "다 그리셨어요? </br> 제출하면 수정할수 없어요"
-        this.$props.cancelText = "다시그리기"
-        this.$props.okText = "제출하기"
+        this.timeOut.completeText = "다 그렸나요? </br> 제출하면 수정할수 없어요"
         this.showConfirm = true
       }
     },
-    cancelA () {
+    cancelBtn () {
       if (this.type === 'diagnose') this.modalCancel()
       else if (this.type === 'letter') this.isComplete()
-      else if (this.type === 'refresh') this.clear()
+      else if (this.type === 'refresh' || this.type === 'Refresh') this.clear()
       else if (this.type === 'timeOut') {
-        this.type = 'refresh'
-        this.$props.completeText = "다시 그리시겠어요? </br> 조금 전 그림은 사라져요"
-        this.$props.cancelText = "다시그리기"
-        this.$props.okText = "제출하기"
+        this.type = 'Refresh'
+        this.timeOut.completeText = "다시 그리시겠어요? </br> 조금 전 그림은 사라져요"
         this.showConfirm = true
       } else this.showConfirm = false
     },

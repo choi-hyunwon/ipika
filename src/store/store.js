@@ -42,7 +42,7 @@ export default new Vuex.Store({
      * API session options
      */
     session: {
-      'user_id': 'domfamtest12345',
+      'user_id': 'domfamtest1210_3',
       'user_auth_key': 'abcdefghijklmnopqrstuvwxyz0123456789',
       'Content_Language': 'ko',
       'device_type': '1001'
@@ -78,9 +78,7 @@ export default new Vuex.Store({
       active : false,
       type : 'hide'
     },
-    submission : {},
-    submissionLearning : {},
-    test : true
+    submission : {}
   },
   /**
    * global로 사용하는 getters
@@ -96,9 +94,6 @@ export default new Vuex.Store({
     getSession: state => {
       return state.session
     },
-    getSubmissionLearning: state => {
-      return state.submissionLearning
-    },
     getSubject: state => {
       return state.subject
     },
@@ -108,14 +103,12 @@ export default new Vuex.Store({
     getUserGalleryMypicture: state => {
       return state.UserGalleryMypicture
     },
-
     getIsDummy: state => {
       return state.isDummy
     },
     getDiagnose: state => {
       return state.diagnose
     },
-
     getCanvasTimer: state => {
       return state.canvasTimer
     },
@@ -145,9 +138,6 @@ export default new Vuex.Store({
     },
     getSubmission :state => {
       return state.submission
-    },
-    getTest : state => {
-      return state.test
     }
   },
   /**
