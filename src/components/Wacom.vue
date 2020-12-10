@@ -787,7 +787,8 @@
     }),
     setLayerBgSelect (img) {
       // todo : 학습 배경 선택시 캔버스는 투명하게 만들고, 배경 레이어에 BG image 넣어야함
-      document.querySelector('.layer_bg').style.backgroundImage =  `url('${img}')`;
+      WILL.setBackground(img, 'url')
+      // document.querySelector('.layer_bg').style.backgroundImage =  `url('${img}')`;
     },
     /**
      * 캔버스 툴 조작

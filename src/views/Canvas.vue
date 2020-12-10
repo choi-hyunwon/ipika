@@ -144,6 +144,8 @@ export default {
       WILL.getImageCanvas().toBlob(function(blob) {
         let file = new File([blob], "my_image.png",{type:"image/png", lastModified:new Date()})
 
+        self.saveFile(URL.createObjectURL(blob))
+
         if (file.size <= 14500) {
           alert('아직 그림이 그려지지 않았어요')
           return false
@@ -154,12 +156,27 @@ export default {
           self.fetchSubmission(data) //진단 테스트 드로잉 제출 API
         } else if (self.page === 'letter') {
           const data = new FormData()
-          data.append('stepId', this.letter.stepId)
+          data.append('stepId', self.letter.stageId )
           data.append('stepPicture', blob, 'rain.png')
-          data.append('imageId', '1')
+          data.append('imageId', self.letter.stepId )
           self.fetchSubmissionLearning(data) //학습 정보 드로잉 제출 API
         }
       })
+    },
+    saveFile(href){
+      var a = document.createElement("a");
+      a.href = href;
+      a.download = 'down.png';
+
+      a.appendChild(document.createTextNode('down.png'));
+      a.style.display = "none";
+
+      document.body.appendChild(a);
+      a.click();
+
+      setTimeout(function() {
+        URL.revokeObjectURL(href);
+      }, 911);
     },
     toggleBg(){
       this.bgPopup = !this.bgPopup;
