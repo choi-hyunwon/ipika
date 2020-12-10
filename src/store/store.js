@@ -119,7 +119,7 @@ export default new Vuex.Store({
           "characterName": "Garfield",
           "recordingAudioUrl": "http://cdn.mcocoa.com/edu//study/20201207112748/study/SAMPLE_1.MP3",
           "recordingAudioComment": "안녕하세요"
-        }]
+        } ]
     },
     bg : {
       imgUrl : '',
