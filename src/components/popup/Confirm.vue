@@ -44,8 +44,8 @@
           </div>
           <div class="c-body">
             <ul class="scroll">
-              <li v-for="(canvas, i) in canvasList">
-                <div @click="setBg(canvas.tabletImageUrl, canvas.imageSubject)">
+              <li @click="setBg(canvas)" v-for="(canvas, i) in canvasList">
+                <div>
                   <span class="img"><img :src=canvas.tabletImageUrl alt=""></span>
                   <span class="tit-sm">{{canvas.imageName}}</span>
                   <span class="tit">{{canvas.imageSubject}}</span>
@@ -179,9 +179,9 @@ export default {
         this.showConfirm = true
       } else this.showConfirm = false
     },
-    setBg(img, subject){
+    setBg(canvas){
       this.showConfirm = false
-      this.$EventBus.$emit('setBg', {img : img, subject : subject})
+      this.$EventBus.$emit('setBg', canvas)
     }
   }
 }

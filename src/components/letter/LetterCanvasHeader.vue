@@ -14,7 +14,7 @@
       <button v-else><img src="@/assets/images/common/img_invisible@2x.png" alt=""></button>
     </div>
 
-    <span>{{bg.subject}}</span>
+    <span>{{bg.imageSubject}}</span>
 
     <div class="flex-box">
       <!--영상보기-->
@@ -65,8 +65,8 @@ export default {
       setBg : 'setBg'
     }),
     visible(){
-      console.error('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$')
-      this.setBg({isShow : !this.setBg.isShow})
+      this.setBg({isShow : !this.bg.isShow})
+      this.$EventBus.$emit('visibleBg')
     }
   }
 }
