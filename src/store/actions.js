@@ -164,6 +164,7 @@ export const actions = {
   getSubmission({ commit }, options) {
     return webApi.getSubmission(options)
       .then(data => {
+        commit('setSubmission', data)
         return data
       })
   },
