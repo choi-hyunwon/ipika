@@ -42,7 +42,7 @@ export default new Vuex.Store({
      * API session options
      */
     session: {
-      'user_id': 'domfamtest1210_5',
+      'user_id': 'domfamtest1210_3',
       'user_auth_key': 'abcdefghijklmnopqrstuvwxyz0123456789',
       'Content_Language': 'ko',
       'device_type': '1001'
@@ -71,61 +71,10 @@ export default new Vuex.Store({
       liveui: false,
       Thumnail : ''
     },
-    letter : {
-      "audioCharacterList": [
-        {
-          "characterId": 1,
-          "characterImageUrl": "http://cdn.mcocoa.com/edu//study/20201207113508/study/캐릭터1.png",
-          "languageCode": "en",
-          "characterName": "Snoopy",
-          "recordingAudioUrl": "http://cdn.mcocoa.com/edu//study/20201207113224/study/SAMPLE_1.MP3",
-          "recordingAudioComment": "안녕하세요"
-        },
-        {
-          "characterId": 8,
-          "characterImageUrl": "http://cdn.mcocoa.com/edu//study/20201207112748/study/캐릭터2.png",
-          "languageCode": "en",
-          "characterName": "Garfield",
-          "recordingAudioUrl": "http://cdn.mcocoa.com/edu//study/20201207112748/study/SAMPLE_1.MP3",
-          "recordingAudioComment": "안녕하세요"
-        },
-        {
-          "characterId": 1,
-          "characterImageUrl": "http://cdn.mcocoa.com/edu//study/20201207113508/study/캐릭터1.png",
-          "languageCode": "en",
-          "characterName": "Snoopy",
-          "recordingAudioUrl": "http://cdn.mcocoa.com/edu//study/20201207113224/study/SAMPLE_1.MP3",
-          "recordingAudioComment": "안녕하세요"
-        },
-        {
-          "characterId": 8,
-          "characterImageUrl": "http://cdn.mcocoa.com/edu//study/20201207112748/study/캐릭터2.png",
-          "languageCode": "en",
-          "characterName": "Garfield",
-          "recordingAudioUrl": "http://cdn.mcocoa.com/edu//study/20201207112748/study/SAMPLE_1.MP3",
-          "recordingAudioComment": "안녕하세요"
-        },        {
-          "characterId": 1,
-          "characterImageUrl": "http://cdn.mcocoa.com/edu//study/20201207113508/study/캐릭터1.png",
-          "languageCode": "en",
-          "characterName": "Snoopy",
-          "recordingAudioUrl": "http://cdn.mcocoa.com/edu//study/20201207113224/study/SAMPLE_1.MP3",
-          "recordingAudioComment": "안녕하세요"
-        },
-        {
-          "characterId": 8,
-          "characterImageUrl": "http://cdn.mcocoa.com/edu//study/20201207112748/study/캐릭터2.png",
-          "languageCode": "en",
-          "characterName": "Garfield",
-          "recordingAudioUrl": "http://cdn.mcocoa.com/edu//study/20201207112748/study/SAMPLE_1.MP3",
-          "recordingAudioComment": "안녕하세요"
-        } ]
-    },
+    letter : {},
     bg : {
-      imgUrl : '',
-      subject : '',
       active : false,
-      type : 'hide'
+      isShow : false,
     },
     submission : {}
   },

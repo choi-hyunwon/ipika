@@ -15,8 +15,8 @@
 </template>
 
 <script>
-import Letter from '@/components/letter/CanvasHeader'
-import Diagnose from '@/components/diagnose/CanvasHeader'
+import Letter from '@/components/letter/LetterCanvasHeader'
+import Diagnose from '@/components/diagnose/DiagnoseCanvasHeader'
 
 export default {
   name: 'CanvasHeader',

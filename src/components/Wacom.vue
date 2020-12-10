@@ -740,7 +740,7 @@
 
 <script>
   import Confirm from '@/components/popup/Confirm'
-  import { mapMutations } from 'vuex'
+  import { mapGetters, mapMutations } from 'vuex'
   import { Chrome } from 'vue-color'
 
   export default {
@@ -772,11 +772,21 @@
   },
   created(){
     this.$EventBus.$on('setBg', (bg) => {
-      this.setLayerBgSelect(bg.img)
-      this.setBg({imgUrl: bg.img , active : true, subject:bg.subject})
+      this.setLayerBgSelect(bg.tabletImageUrl)
+      this.setBg({...bg, ...{active : true} })
+    });
+    this.$EventBus.$on('visibleBg', () => {
+      if(!this.bg.isShow) this.setLayerBgSelect(this.bg.tabletImageUrl)
+      else{
+        this.setLayerBgSelect('')
+        document.querySelector('.layer_bg').style.backgroundColor = "#fff"
+      }
     });
   },
   computed : {
+    ...mapGetters({
+      bg : 'getBg'
+    }),
     page() {
       return this.$router.currentRoute.query.page
     }

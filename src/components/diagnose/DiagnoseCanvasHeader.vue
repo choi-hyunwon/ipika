@@ -27,7 +27,7 @@ import { mapGetters } from 'vuex'
 import Confirm from '@/components/popup/Confirm'
 
 export default {
-  name: 'CanvasHeader',
+  name: 'DiagnoseCanvasHeader',
   components: {Confirm },
   data(){
     return{
