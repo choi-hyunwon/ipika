@@ -15,7 +15,7 @@
         </div>
 
         <av-media
-          v-show="ing" class="_media" ref="media"
+          v-show="ing && record" class="_media" ref="media"
           type="frequ"
           :line-color="setColor"
           :media="media"
@@ -23,6 +23,19 @@
           :canv-height="canvasOptions.canvHeight"
           :line-width="canvasOptions.canvLineWidth"
         />
+
+        <!--<av-line
+          v-if="ing && !record"-->
+        <av-line
+          ref="audioPlayer"
+          class="_audio"
+          v-show="!record && ing && isAudioSet"
+          :audio-src="audioSource"
+          :line-color="setColor"
+          :canv-width="canvasOptions.canvWidth"
+          :canv-height="canvasOptions.canvHeight"
+          :line-width="canvasOptions.canvLineWidth"
+        ></av-line>
       </div>
 
       <div class="play-area"
@@ -33,6 +46,10 @@
              pause : ing && !record
            }"
       >
+        <div class="play-btns"
+             @click="playOrPause"
+        />
+
         <audio-recorder
           ref="recorder"
           format="mp3"
@@ -82,11 +99,16 @@ export default {
         canvLineWidth: 15,
       },
 
-
       arPlayer : null,
+
+      audioEl : null,
+      audioSource : null,
+      isAudioSet : false,
     }
   },
   created() {
+    window.z = this
+
     this.$EventBus.$on('back',this.goBack)
     this.$EventBus.$on('next', () => {
       this.record = true
@@ -101,7 +123,6 @@ export default {
   },
   watch: {
     'arPlayer.isPlaying' : function(val) {
-      console.log('Playing Changed....', val)
       this.ing = val
     }
   },
@@ -111,7 +132,7 @@ export default {
     }),
     setColor (){
       if(this.ing && this.record) return '#f53c32'
-      else if(this.ing && !this.record) return  '#1585ff'
+      else if(this.ing && !this.record) return '#1585ff'
     }
   },
   methods : {
@@ -129,7 +150,7 @@ export default {
       this.record = false
       setTimeout(() => {
         this.setRecentRecord();
-      }, 800);
+      }, 500);
     },
     setRecentRecord() {
       const recorder = this.$refs.recorder;
@@ -144,7 +165,12 @@ export default {
         const top = recorder.recordList.length - 1;
         recorder.selected = recorder.recordList[top];
         this.file = recorder.recordList[top]
-        console.log(this.file)
+        this.audioSource = this.file.url
+        this.isAudioSet = true
+
+        this.audioEl = this.$refs.audioPlayer.$el.firstElementChild.firstElementChild
+        this.audioEl.setAttribute('src', this.audioSource)
+        this.audioEl.onended = () => {this.ing = false}
       }
     },
     fetchRecording(){
@@ -161,6 +187,12 @@ export default {
             this.$router.push('/Listening')
           }
         })
+    },
+    playOrPause(){
+      if(!this.record) {
+        !this.ing ? this.audioEl.play() : this.audioEl.pause()
+        this.ing = !this.ing
+      }
     }
   }
 }
@@ -225,10 +257,6 @@ export default {
   }
 }
 
-
-
-
-
 ::v-deep .ar {
   width: 11.4rem;
   background-color: transparent;
@@ -272,13 +300,6 @@ export default {
         right: unset;
       }
     }
-
-    /* 일시 중지 버튼 */
-    &.ar-icon__lg {
-      &.ar-icon--rec {
-        //display: none;
-      }
-    }
   }
 }
 
@@ -306,6 +327,9 @@ export default {
       }
     }
   }
+  .play-btns {
+    display: none;
+  }
 }
 
 /* 녹음 정지 아이콘 */
@@ -331,6 +355,9 @@ export default {
       }
     }
   }
+  .play-btns {
+    display: none;
+  }
 }
 
 /* 녹음 재생 아이콘 */
@@ -347,25 +374,8 @@ export default {
       }
     }
     .ar-player {
-      width: unset;
-      .ar-player-actions {
-        width: 11.4rem;
-        svg {
-          display: none;
-        }
-        .ar-icon.ar-icon__lg.ar-player__play {
-          background-color: #1585ff;
-          background-image: url("~@/assets/images/common/play@2x.png");
-          background-repeat: no-repeat;
-          background-position: center;
-          &.ar-player__play--active {
-            background-color: transparent !important;
-            background-image: url("~@/assets/images/common/ic-pause@2x.png");
-            background-repeat: no-repeat;
-            background-position: center;
-            border: 5px solid #1585ff;
-          }
-        }
+      .ar-icon.ar-icon__lg.ar-player__play {
+        display: none;
       }
     }
   }
@@ -385,21 +395,53 @@ export default {
       }
     }
     .ar-player {
-      width: unset;
-      .ar-player-actions {
-        width: 11.4rem;
-        svg {
-          display: none;
-        }
-        .ar-icon.ar-icon__lg.ar-player__play.ar-player__play--active {
-          background-color: transparent !important;
-          background-image: url("~@/assets/images/common/ic-pause@2x.png");
-          background-repeat: no-repeat;
-          background-position: center;
-          border: 5px solid #1585ff;
-        }
+      .ar-icon.ar-icon__lg.ar-player__play.ar-player__play--active {
+        display: none;
       }
     }
+  }
+}
+
+
+::v-deep ._audio {
+  & audio {
+    display: none;
+  }
+}
+
+.play-area {
+  width: 12rem;
+  height: 12rem;
+  border-radius: 6rem;
+
+  &.play {
+    cursor: pointer;
+    background-color: #1585ff;
+    background-image: url("~@/assets/images/common/play@2x.png");
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  &.pause {
+    cursor: pointer;
+    background-color: transparent !important;
+    background-image: url("~@/assets/images/common/ic-pause@2x.png");
+    background-repeat: no-repeat;
+    background-position: center;
+
+    & .play-btns {
+      border: 5px solid #1585ff;
+    }
+
+    ::v-deep.ar {
+      & #play>svg {
+        display: none;
+      }
+    }
+  }
+  & .play-btns {
+    width: 100%;
+    height: 100%;
+    border-radius: 6rem;
   }
 }
 </style>
