@@ -42,7 +42,7 @@ export default new Vuex.Store({
      * API session options
      */
     session: {
-      'user_id': 'domfamtest1210_5',
+      'user_id': 'domfamtest1210_3',
       'user_auth_key': 'abcdefghijklmnopqrstuvwxyz0123456789',
       'Content_Language': 'ko',
       'device_type': '1001'
@@ -125,7 +125,7 @@ export default new Vuex.Store({
       imgUrl : '',
       subject : '',
       active : false,
-      type : 'hide'
+      isShow : false
     },
     submission : {}
   },

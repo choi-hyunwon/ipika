@@ -9,10 +9,13 @@
         <img src="@/assets/images/common/arrow_left@2x.png" alt="">
       </button>
     </Confirm>
-    <div v-if="bg.active" class="btn-wrap">
-      <button v-if="bg.type === 'show'"><img src="@/assets/images/common/img_visible@2x.png" alt=""></button>
-      <button v-if="bg.type === 'hide'"><img src="@/assets/images/common/img_invisible@2x.png" alt=""></button>
+    <div v-if="bg.active" class="btn-wrap" @click="visible">
+      <button v-if="bg.isShow"><img src="@/assets/images/common/img_visible@2x.png" alt=""></button>
+      <button v-else><img src="@/assets/images/common/img_invisible@2x.png" alt=""></button>
     </div>
+
+    <span>{{bg.subject}}</span>
+
     <div class="flex-box">
       <!--영상보기-->
       <Alert v-slot="slotProps">
@@ -43,10 +46,10 @@
 <script>
 import Alert from '@/components/popup/Alert'
 import Confirm from '@/components/popup/Confirm'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 
 export default {
-  name: 'CanvasHeader',
+  name: 'LetterCanvasHeader',
   components :{
     Alert,
     Confirm
@@ -56,6 +59,15 @@ export default {
       subject : 'getSubject',
       bg : 'getBg'
     })
+  },
+  methods : {
+    ...mapMutations({
+      setBg : 'setBg'
+    }),
+    visible(){
+      console.error('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$')
+      this.setBg({isShow : !this.setBg.isShow})
+    }
   }
 }
 </script>
