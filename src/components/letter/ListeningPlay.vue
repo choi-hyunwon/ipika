@@ -4,11 +4,11 @@
     </div>
     <div class="player_area">
       <div class="player_img">
-        <img src="http://cdn.mcocoa.com/edu//study/20201207113508/study/캐릭터1.png" alt="" style="width: 45rem; height: 45rem;">
+        <img :src="audioList[this.focusIdx].characterImageUrl" alt="" style="width: 45rem; height: 45rem;">
 <!--이미지 더미 파일 수정 -->
-        <div class="recode_button">
-          <div class="recode_btn play"><img src="@/assets/images/common/record_play@2x.png" alt="재생" class="img-m"></div>
-          <div class="recode_btn stop"><img src="@/assets/images/common/pause_dim@2x.png" alt="정지" class="img-m"></div>
+        <div class="recode_button" @click="play">
+          <button v-if="!toggleButton" class="recode_btn play"><img src="@/assets/images/common/record_play@2x.png" alt="재생" class="img-m"></button>
+          <button v-else-if="toggleButton" class="recode_btn stop"><img src="@/assets/images/common/pause_dim@2x.png" alt="정지" class="img-m"></button>
           <!--      같은위치에 저장되어 있어요 play 재생 stop 저장-->
         </div>
       </div>
@@ -17,17 +17,58 @@
       </div>
     </div>
     <div class="record-area">
-    <p>음성 파일 자막 내용 노출 영역입니다. 음성 파일 자막 내용 노출 영역입니다. 음성 파일 자막 내용 노출 영역입니다. 음성 파일 자막 내용 노출 영역입니다. 음성 파일 자막 내용 노출 영역입니다.</p>
+      <p>음성 파일 자막 내용 노출 영역입니다. 음성 파일 자막 내용 노출 영역입니다. 음성 파일 자막 내용 노출 영역입니다. 음성 파일 자막 내용 노출 영역입니다. 음성 파일 자막 내용 노출 영역입니다.</p>
     </div>
     <div class="close_box">
-      <a href="#"><img src="@/assets/images/common/dim close@2x.png" alt="취소" class="img-m"></a>
+      <button @click="togglePlay"><img src="@/assets/images/common/dim close@2x.png" alt="취소" class="img-m"></button>
     </div>
   </div>
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
+
 export default {
-  name: 'ListeningPlay'
+  name: 'ListeningPlay',
+  data(){
+    return{
+      toggleButton : false,
+      audio : null
+    }
+  },
+  created () {
+    this.audio = new Audio(this.audioList[this.focusIdx].recordingAudioUrl)
+  },
+  computed:{
+    ...mapGetters({
+      audioList : 'getLetterAudioList',
+    })
+  },
+  props: {
+    playerInfo: {
+      Object,
+      default () {return {}}
+    },
+    focusIdx:{
+      Number,
+      default(){return 0}
+    }
+  },
+  methods:{
+    togglePlay(){
+      this.audio.pause()
+      this.$EventBus.$emit('toggle')
+    },
+    play(){
+      if(!this.toggleButton){
+        this.audio.play();
+        this.toggleButton=true;
+      }else{
+        this.toggleButton=false;
+        this.audio.pause();
+      }
+    }
+  }
 }
 </script>
 
