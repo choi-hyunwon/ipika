@@ -2,26 +2,28 @@
   <div class="wrap">
     <!--   canvas 헤더 -->
     <CanvasHeader v-if="isLoading"></CanvasHeader>
+
     <!--   wacom 라이브러리 -->
     <Wacom ref="wacom" :drawer="drawer"></Wacom>
+
     <div v-if="bgPopup===true&&page==='diagnose'" class="guide_bg" @click="toggleBg">
       <img src="@/assets/images/common/test_guide@2x.png" alt="" class="img-m">
     </div>
     <div v-if="bgPopup===true&&page==='letter'" class="guide_bg" @click="toggleBg">
       <img src="@/assets/images/common/guide@2x.png" alt="" class="img-m">
     </div>
-    <!--  프리드로잉 첫 진입시 Register -->
-    <Register ref="register"
-              v-if="page===''"
-              v-slot="slotProps"/>
-    <!--   진단테스트 canvas 첫 진입시 Alert-->
-    <Alert ref="autoOpen"
-            v-if="page==='diagnose'"
-            v-slot="slotProps"
-            :text=subject.subject></Alert>
+
+    <!--  프리드로잉 canvas 첫 진입시 popup -->
+    <Register ref="register" v-if="page===''" v-slot="slotProps"/>
+
+    <!--   진단테스트 canvas 첫 진입시 popup-->
+    <Alert ref="autoOpen" v-if="page==='diagnose'" v-slot="slotProps" :text=subject.subject></Alert>
 
     <!--   진단테스트 canvas 타이머 완료 시 popup-->
     <Confirm v-if="page==='diagnose'" ref="timerConfirm"></Confirm>
+
+    <!--   진단테스트 드로잉 제출 완료 시 popup-->
+    <Alert ref="autoOpenSuccess" v-slot="slotProps" :boldText="'성공적으로 </br> 제출되었어요 :)'" :text="'결과를 확인해보세요'" :buttonText ="'내 스테이지 확인하러 가기'"></Alert>
   </div>
 </template>
 <script>
@@ -200,9 +202,11 @@ export default {
       this.getSubmission(data)
       .then(result => {
         if(result.code === '0000') {
-          // TODO 드로잉 제출 성공 팝업 노출 후 "내 스테이지 확인하러 가기" 클릭 시 TestingResult로 이동
-          self.$router.push('/TestingResult')
-        } else alert('드로잉 제출 실패')
+          this.$refs.autoOpenSuccess.showAlert = true
+          this.$refs.autoOpenSuccess.type='success'
+        } else {
+          alert(`code : ${result.code} message : ${result.message}`)
+        }
       })
     },
     fetchSubmissionLearning(data){

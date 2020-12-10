@@ -42,7 +42,7 @@ export default new Vuex.Store({
      * API session options
      */
     session: {
-      'user_id': 'domfamtest1210_3',
+      'user_id': 'domfamtest1210_5',
       'user_auth_key': 'abcdefghijklmnopqrstuvwxyz0123456789',
       'Content_Language': 'ko',
       'device_type': '1001'
@@ -119,7 +119,7 @@ export default new Vuex.Store({
           "characterName": "Garfield",
           "recordingAudioUrl": "http://cdn.mcocoa.com/edu//study/20201207112748/study/SAMPLE_1.MP3",
           "recordingAudioComment": "안녕하세요"
-        }]
+        } ]
     },
     bg : {
       imgUrl : '',

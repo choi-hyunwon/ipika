@@ -6,43 +6,21 @@
         <p class="txt-lg">다른 친구들은 어떻게<br/>생각하는지 들어볼까요?</p>
         <p class="txt-sm">친구들의 생각을 듣고, 내 생각과 비교해봐요!</p>
       </div>
-      <div class="img-slider" :style="{'transform': `translateX(-${position}px)`}">
-        <swiper
-          :controllers="{control:controlledSwiper}"
-          :options="swiperOption"
-          @slideChangeTransitionEnd="test"
-        >
-          <swiper-slide v-for="(audio, i) in audioList" class="item" :class="{'pause' : !play, 'play' : play && i === focusIdx}">
+      <div class="img-slider" :style="{'transform': `translateX(-${position}px)`, 'transition-duration' : '300ms'}">
+        <ul>
+          <li>
+          <div v-for="(audio, i) in audioList" class="item" :class="{'pause' : !play, 'play' : play && i === focusIdx}">
             <button class="img" @click="showPlay(i)"><img :src=audio.characterImageUrl alt=""></button>
             <p class="time">00:00</p>
-          </swiper-slide>
-
-
-      </swiper>
-
-<!--        <ul>-->
-<!--          <li @click="showPlay(i)" v-for="(audio, i) in audioList" class="item" :class="{'pause' : !play, 'play' : play && i === focusIdx}">-->
-<!--            <router-link to="" class="img"><img :src=audio.characterImageUrl alt=""></router-link>-->
-<!--            <p class="time">00:00</p>-->
-<!--          </li>-->
-<!--        </ul>-->
+          </div>
+          </li>
+        </ul>
       </div>
-
-<!--      <swiper-slide @click="showPlay(i)" v-for="(audio, i) in audioList" class="item" :class="{'pause' : !play, 'play' : play && i === focusIdx}">-->
-<!--        <button class="img"><img :src=audio.characterImageUrl alt=""></button>-->
-<!--        <p class="time">00:00</p>-->
-<!--      </swiper-slide>-->
-
       <div v-if="maximumLength>=5" class="navigation">
-        <swiper @swiper="setControlledSwiper"
-                :options="swiperOptionC">
-          <div class="swiper-button-next"></div>
-          <div class="swiper-button-prev"></div>
-        </swiper>
-<!--        <button v-if="position<=0" class="swipe"><img src="@/assets/images/common/swipe_left_default@2x.png" alt=""></button>-->
-<!--        <button v-if="position>0||position>=this.maximumLength" class="swipe"><img src="@/assets/images/common/swipe_left_active@2x.png" alt="" @click="moveLeft"></button>-->
-<!--        <button v-if="position<=this.maximumLength" class="swipe"><img src="@/assets/images/common/swipe_right_active@2x.png" alt="" @click="moveRight"></button>-->
-<!--        <button v-if="position>this.maximumLength" class="swipe"><img src="@/assets/images/common/swipe_right_default@2x.png" alt=""></button>-->
+        <button v-if="position<=0" class="swipe"><img src="@/assets/images/common/swipe_left_default@2x.png" alt=""></button>
+        <button v-if="position>0||position>=this.maximumLength" class="swipe"><img src="@/assets/images/common/swipe_left_active@2x.png" alt="" @click="moveLeft"></button>
+        <button v-if="position<=this.maximumLength" class="swipe"><img src="@/assets/images/common/swipe_right_active@2x.png" alt="" @click="moveRight"></button>
+        <button v-if="position>this.maximumLength" class="swipe"><img src="@/assets/images/common/swipe_right_default@2x.png" alt=""></button>
       </div>
       <div class="btn-wrap"><router-link to="/canvas?page=letter" class="btn btn-dark" :class="{'disabled':submit===false}">다 들었어요!</router-link></div>
       <!--      <div class="btn-wrap"><button class="btn btn-dark ">다 들었어요!</button></div>-->
@@ -60,7 +38,6 @@ import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import "swiper/swiper-bundle.css";
 
 
-
 export default {
   name: 'peopleThinking',
   components: {LetterHeader, ListeningPlay,Swiper, SwiperSlide,Controller},
@@ -73,25 +50,26 @@ export default {
       playLength : 250,
       playPopup : false,
       submit : false,
-      swiperOption: {
-        paginatioin: '.swiper-pagination',
-        paginationClickable: true,
-        speed: 300,
-        slidesPerView: 4,
-        spaceBetween: 40,
-
-      },
-      swiperOptionC:{
-        navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev'
-        }
-      }
+      isEnd : false,
+      // swiperOption: {
+      //   slidesPerView: 5,
+      //   spaceBetween: 100,
+      //   pagination: {
+      //     el: ".swiper-pagination",
+      //     clickable: true
+      //   },
+      //   breakpoints: {
+      //     1024: {
+      //       slidesPerView: 5,
+      //       spaceBetween: 210
+      //     },
+      //   }
+      // }
     };
   },
   created() {
     this.$EventBus.$on('back',this.goBack)
-    if(this.audioList) this.maximumLength = this.playLength * this.audioList.length - 1025
+    if(this.audioList) this.maximumLength = this.playLength * this.audioList.length -1025
     else this.maximumLength = 0
     this.$EventBus.$on('toggle',()=>{
       this.play = false
@@ -131,7 +109,7 @@ export default {
       } else return
     },
     test(){
-      console.error('#################')
+      this.isEnd = true
     }
   }
 }
