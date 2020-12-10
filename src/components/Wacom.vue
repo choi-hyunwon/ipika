@@ -765,10 +765,6 @@
       }
   },
   props : {
-    isLoading: {
-      Boolean,
-      default(){return false}
-    },
     drawer: {
       Boolean,
       default(){return true}

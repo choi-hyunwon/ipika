@@ -93,9 +93,6 @@ export default new Vuex.Store({
     getSession: state => {
       return state.session
     },
-    getSubmissionLearning: state => {
-      return state.submissionLearning
-    },
     getSubject: state => {
       return state.subject
     },
@@ -105,14 +102,12 @@ export default new Vuex.Store({
     getUserGalleryMypicture: state => {
       return state.UserGalleryMypicture
     },
-
     getIsDummy: state => {
       return state.isDummy
     },
     getDiagnose: state => {
       return state.diagnose
     },
-
     getCanvasTimer: state => {
       return state.canvasTimer
     },
