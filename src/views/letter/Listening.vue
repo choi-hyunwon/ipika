@@ -16,6 +16,7 @@
           </li>
         </ul>
       </div>
+
       <div v-if="maximumLength>=5" class="navigation">
         <button v-if="position<=0" class="swipe"><img src="@/assets/images/common/swipe_left_default@2x.png" alt=""></button>
         <button v-if="position>0||position>=this.maximumLength" class="swipe"><img src="@/assets/images/common/swipe_left_active@2x.png" alt="" @click="moveLeft"></button>
