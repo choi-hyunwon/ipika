@@ -160,6 +160,8 @@ export default {
         this.$route.push('/Recording')
       } else if (this.type === 'letter') {
         this.modalCancel()
+
+        this.$EventBus.$emit('next');
       } else if (this.type === 'checkRed') {
         this.showConfirm = false
         alert('파블로 서비스 종료 연동 필요')
