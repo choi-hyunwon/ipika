@@ -73,12 +73,5 @@ export const mutations = {
   },
   setBg(state, bg) {
     state.bg = {...state.bg, ...bg}
-  },
-  setSubmission(state, submission) {
-    state.submission = submission
-  },
-  setSubmissionLearning(state, submission) {
-    state.submissionLearning = submission
-  },
-
+  }
 }

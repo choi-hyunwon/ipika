@@ -42,7 +42,7 @@ export default new Vuex.Store({
      * API session options
      */
     session: {
-      'user_id': 'domfamtest12345',
+      'user_id': 'domfamtest123456',
       'user_auth_key': 'abcdefghijklmnopqrstuvwxyz0123456789',
       'Content_Language': 'ko',
       'device_type': '1001'
@@ -77,10 +77,7 @@ export default new Vuex.Store({
       subject : '',
       active : false,
       type : 'hide'
-    },
-    submission : {},
-    submissionLearning : {},
-    test : true
+    }
   },
   /**
    * global로 사용하는 getters
@@ -142,12 +139,6 @@ export default new Vuex.Store({
     },
     getBg :state => {
       return state.bg
-    },
-    getSubmission :state => {
-      return state.submission
-    },
-    getTest : state => {
-      return state.test
     }
   },
   /**

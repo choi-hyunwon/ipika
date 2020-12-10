@@ -17,8 +17,8 @@
 
       <!--  footer  -->
       <template #modal-footer="{ cancel }">
-        <b-button variant="gray" class="btn-half" @click="cancelA">{{cancelText}}</b-button>
-        <b-button variant="black" class="btn-black btn-half" @click="ok">{{okText}}</b-button>
+        <b-button variant="gray" class="btn-half" @click="cancelBtn">{{cancelText}}</b-button>
+        <b-button variant="black" class="btn-black btn-half" @click="okBtn">{{okText}}</b-button>
       </template>
     </b-modal>
 
@@ -146,7 +146,7 @@ export default {
     isComplete () {
       return this.$router.push('/Completion')
     },
-    ok () {
+    okBtn () {
       if (this.type === 'goBack') {
         this.goBack()
       } else if (this.type === 'Complete' || this.type === 'diagnose' || this.type === 'refresh' || this.type === 'record') {
@@ -160,22 +160,27 @@ export default {
         alert('파블로 서비스 종료 연동 필요')
       } else if (this.type === 'timeOut') {
         this.type = 'Complete'
-        this.$props.completeText = "다 그리셨어요? </br> 제출하면 수정할수 없어요"
-        this.$props.cancelText = "다시그리기"
-        this.$props.okText = "제출하기"
         this.showConfirm = true
+        this.$props = {
+          completeText: '다 그리셨어요? </br> 제출하면 수정할수 없어요',
+          cancelText: '다시그리기',
+          okText: '제출하기'
+        }
+
       }
     },
-    cancelA () {
+    cancelBtn () {
       if (this.type === 'diagnose') this.modalCancel()
       else if (this.type === 'letter') this.isComplete()
       else if (this.type === 'refresh') this.clear()
       else if (this.type === 'timeOut') {
         this.type = 'refresh'
-        this.$props.completeText = "다시 그리시겠어요? </br> 조금 전 그림은 사라져요"
-        this.$props.cancelText = "다시그리기"
-        this.$props.okText = "제출하기"
         this.showConfirm = true
+        this.$props = {
+          completeText: '다시 그리시겠어요? </br> 조금 전 그림은 사라져요',
+          cancelText: '다시그리기',
+          okText: '제출하기'
+        }
       } else this.showConfirm = false
     },
     setBg(img, subject){

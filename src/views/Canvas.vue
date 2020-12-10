@@ -195,13 +195,9 @@ export default {
         } else alert('드로잉 제출 실패')
       })
     },
-    fetchSubmissionLearning(href){
+    fetchSubmissionLearning(data){
       const self = this;
-      this.getSubmissionLearning({
-        userPicture : href,
-        stepId : 1,
-        imageId : 1,
-      })
+      this.getSubmissionLearning(data)
       .then(result => {
         if(!self.submissionLearning && self.submissionLearning.code === '0000') {
           // TODO 드로잉 제출 성공 팝업 노출 후 "내 스테이지 확인하러 가기" 클릭 시 TestingResult로 이동

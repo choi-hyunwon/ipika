@@ -1,6 +1,6 @@
 <template>
-  <div class="wrap">
-    <div v-if="isLoading" class="row">
+  <div v-if="isLoading" class="wrap" :style="{'background-color' : mainMenuList[0].bgColor}" >
+    <div class="row">
       <div class="col col-6 left">
         <div class="symbol"><img src="@/assets/images/common/Symbol@2x.png" alt=""></div>
         <ul class="dot-list" v-if="slider">

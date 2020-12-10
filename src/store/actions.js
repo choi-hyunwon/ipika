@@ -164,13 +164,13 @@ export const actions = {
   getSubmission({ commit }, options) {
     return webApi.getSubmission(options)
       .then(data => {
-        commit('setSubmission', data)
+        return data
       })
   },
   getSubmissionLearning({ commit }, options) {
     return webApi.getSubmissionLearning(options)
       .then(data => {
-        commit('setSubmissionLearning', data)
+        return data
       })
   },
   getRecording({ commit }, options) {
