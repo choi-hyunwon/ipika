@@ -17,7 +17,6 @@
             <p class="time">00:00</p>
           </swiper-slide>
 
-
       </swiper>
 
 <!--        <ul>-->
