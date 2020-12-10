@@ -14,6 +14,10 @@
       <img src="@/assets/images/common/guide@2x.png" alt="" class="img-m">
     </div>
 
+    <Register ref="register"
+              v-if="page===''"
+              v-slot="slotProps"/>
+
     <!--   진단테스트 canvas 첫 진입시 Alert-->
     <Alert ref="autoOpen"
             v-if="page==='diagnose'"
@@ -31,7 +35,7 @@ import Wacom from '@/components/Wacom'
 import Confirm from '@/components/popup/Confirm'
 import CanvasHeader from '@/components/CanvasHeader'
 import Alert from '@/components/popup/Alert'
-
+import Register from '@/components/popup/Register'
 
 export default {
   name: 'Canvas',
@@ -39,6 +43,7 @@ export default {
     Alert,
     Wacom,
     Confirm,
+    Register,
     CanvasHeader
   },
   data () {
@@ -62,6 +67,10 @@ export default {
     }
   },
   mounted () {
+    // TODO: 프리드로잉 팝업 퍼블리싱 용
+    this.$refs.register.showRegister=true
+
+
     if (localStorage.getItem('isReload') === 'true' || localStorage.getItem('isReload') === undefined) window.location.reload()
     else {
       this.isLoading = true
@@ -82,7 +91,7 @@ export default {
       letter: 'getLetterIntro'
     }),
     page() {
-      return this.$router.currentRoute.query.page
+      return this.$router.currentRoute.query.page || ''
     }
   },
   watch:{
