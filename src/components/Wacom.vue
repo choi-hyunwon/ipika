@@ -718,7 +718,7 @@
             </Confirm>
             <Confirm v-else-if="page==='letter'"
                      v-slot="slotProps"
-                     :completeText="'배경교재1이 저장되었어요 남은 그림도 더 그려볼까요?'"
+                     :completeText="'배경교재1이 저장되었어요<br> 남은 그림도 더 그려볼까요?'"
                      :text="'모든 배경교재를 그려야 학습과정이 완료돼요'"
                      :cancelText = "'아니요'"
                      :okText = "'네'">
@@ -797,7 +797,8 @@
     }),
     setLayerBgSelect (img) {
       // todo : 학습 배경 선택시 캔버스는 투명하게 만들고, 배경 레이어에 BG image 넣어야함
-      document.querySelector('.layer_bg').style.backgroundImage =  `url('${img}')`;
+      WILL.setBackground(img, 'url')
+      // document.querySelector('.layer_bg').style.backgroundImage =  `url('${img}')`;
     },
     /**
      * 캔버스 툴 조작

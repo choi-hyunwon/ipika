@@ -107,7 +107,7 @@ export default class WebApi {
   getUserGalleryBackground (options) {
     return this.request('api/users/gallery/background', {
       method: 'POST',
-      data: {}
+      data: options
     })
   }
 

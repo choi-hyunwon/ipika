@@ -8,7 +8,7 @@
           <span class="text">Stage {{letter.stageId}} Clear!</span></div>
         <div class="title" v-html="letter.completeText"></div>
         <div class="btn-group">
-          <router-link to="/MainGallery" class="btn btn-dark mr">마이갤러리</router-link>
+          <router-link to="/MyGallery" class="btn btn-dark mr">마이갤러리</router-link>
           <router-link to="/PabloMain" class="btn btn-gray">메인으로</router-link>
         </div>
       </div>

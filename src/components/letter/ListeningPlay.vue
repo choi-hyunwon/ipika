@@ -13,11 +13,11 @@
         </div>
       </div>
       <div class="player_name">
-        <p>김정윤</p>
+        <p>{{ audioList[this.focusIdx].characterName }}</p>
       </div>
     </div>
     <div class="record-area">
-      <p>음성 파일 자막 내용 노출 영역입니다. 음성 파일 자막 내용 노출 영역입니다. 음성 파일 자막 내용 노출 영역입니다. 음성 파일 자막 내용 노출 영역입니다. 음성 파일 자막 내용 노출 영역입니다.</p>
+      <p style="text-align:center;">{{ audioList[this.focusIdx].recordingAudioComment }}</p>
     </div>
     <div class="close_box">
       <button @click="togglePlay"><img src="@/assets/images/common/dim close@2x.png" alt="취소" class="img-m"></button>
@@ -128,6 +128,7 @@ export default {
   .record-area{
     position: absolute;
     bottom: 10rem;
+    width: 100%;
     p{
       font-family:var(--gray-bold);
       font-size: 4rem;

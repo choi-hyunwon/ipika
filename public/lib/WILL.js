@@ -225,13 +225,17 @@ var WILL = {
 	 *
 	 * @param {(string | Module.Color)} paperORcolor papers is image name
 	 */
-	setBackground: function(paperORcolor) {
+	setBackground: function(paperORcolor, type) {
 		if (typeof paperORcolor == "string") {
-			var paper = paperORcolor;
-
-			Module.GLTools.prepareTexture(Module.GLTools.createTexture(GLctx.REPEAT, GLctx.LINEAR), WILL.PAPERS_PATH + "/" + paper + ".png", function(texture) {
+      let uri
+		  if(type === "url") {
+        uri = paperORcolor;
+      } else {
+        let paper = paperORcolor;
+        uri = WILL.PAPERS_PATH + "/" + paper + ".png"
+      }
+			Module.GLTools.prepareTexture(Module.GLTools.createTexture(false, false), uri, function(texture) {
 				if (this.backgroundLayer) this.backgroundLayer.delete();
-
 				this.backgroundLayer = this.canvas.createLayer({texture: texture});
 				this.refresh(WILL.VIEW_AREA);
 			}, this);

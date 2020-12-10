@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="empty" v-if="empty">
+  <div v-if="isLoading">
+    <div class="empty" v-if="isEmpty">
       <div class="voice-section">
         <ul class="voices">
           <li class="voice-default">
@@ -9,13 +9,13 @@
             </div>
             <div class="emoji-desc">아직 그린 그림이 없어요,<br>학습을 시작해보세요!</div>
             <div class="emoji-button">
-              <router-link to="/canvas" class="btn btn-blue5 btn-half">시작하기</router-link>
+              <router-link to="/pabloMain" class="btn btn-blue5 btn-half">시작하기</router-link>
             </div>
           </li>
         </ul>
       </div>
     </div>
-    <div class="list" v-else-if="userGalleryMypicture" v-model="setList">
+    <div class="list" v-else>
       <div class="clearfix btns_group">
         <div class="float-left btn-left">
           <b-button v-for="(filterItem, index) in filter"
@@ -76,6 +76,7 @@ export default {
 
   data () {
     return {
+      isLoading :false,
       empty: null,
       activeIndex: 0,
       nSize : [0,0,0],
@@ -108,7 +109,11 @@ export default {
       ]
     }
   },
-
+  mounted () {
+    this.isLoading = true
+    this.list = this.userGalleryMypicture.audios
+    this.allSize()
+  },
   computed: {
     ...mapGetters({
       userGalleryMypicture: 'getUserGalleryMypicture'
@@ -122,9 +127,12 @@ export default {
         return this.empty
       }
     },
-    setList () {
-      return this.list = this.userGalleryMypicture.audios
-    },
+
+  },
+  methods: {
+    ...mapActions({
+      getUserGalleryDetele: 'getUserGalleryDetele'
+    }),
     allSize(){
       this.nSize[0] = this.list.length
       const letter = this.list.filter(function (item) {
@@ -135,12 +143,7 @@ export default {
         return item.drawingType === 3
       })
       this.nSize[2] = free.length
-    }
-  },
-  methods: {
-    ...mapActions({
-      getUserGalleryDetele: 'getUserGalleryDetele'
-    }),
+    },
     onClick (index) {
       if (this.activeIndex === index) {
         this.activeIndex = null
