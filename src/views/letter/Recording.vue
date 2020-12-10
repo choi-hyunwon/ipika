@@ -107,7 +107,7 @@ export default {
     }
   },
   created() {
-    window.z = this
+    // window.z = this
 
     this.$EventBus.$on('back',this.goBack)
     this.$EventBus.$on('next', () => {
@@ -165,9 +165,9 @@ export default {
         const top = recorder.recordList.length - 1;
         recorder.selected = recorder.recordList[top];
         this.file = recorder.recordList[top]
+
         this.audioSource = this.file.url
         this.isAudioSet = true
-
         this.audioEl = this.$refs.audioPlayer.$el.firstElementChild.firstElementChild
         this.audioEl.setAttribute('src', this.audioSource)
         this.audioEl.onended = () => {this.ing = false}
