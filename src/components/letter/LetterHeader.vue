@@ -64,7 +64,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      letter: 'getLetterIntro'
+      letter: 'getLetter'
     }),
     path() {
       return this.$router.currentRoute.path

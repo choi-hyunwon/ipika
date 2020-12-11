@@ -730,7 +730,7 @@
 
 <script>
   import Confirm from '@/components/popup/Confirm'
-  import { mapGetters, mapMutations } from 'vuex'
+  import { mapActions, mapGetters, mapMutations } from 'vuex'
   import { Chrome } from 'vue-color'
 
   export default {
@@ -764,10 +764,11 @@
     this.$EventBus.$on('setBg', (bg, reset) => {
       this.setLayerBgSelect(bg.tabletImageUrl)
       if(reset) {
-        // TODO : 전송 완료 한 캔버스 리스트 삭제
-        this.setBg({reset : true})
-      }
-      else this.setBg({...bg, ...{active : true} })
+        this.getLetter()
+          .then( result => {
+            this.setBg({reset : true})
+          })
+      } else this.setBg({...bg, ...{active : true} })
     });
     this.$EventBus.$on('visibleBg', () => {
       if(!this.bg.isShow) this.setLayerBgSelect(this.bg.tabletImageUrl)
@@ -785,6 +786,10 @@
   methods : {
     ...mapMutations({
       setBg: 'setBg',
+      setLetter : 'setLetter'
+    }),
+    ...mapActions({
+      getLetter : 'getLetter'
     }),
     setLayerBgSelect (img) {
       WILL.setBackground(img, 'url')
@@ -828,7 +833,6 @@
       this.isPickerOpen()
     },
     setEvent(){
-      // TODO : 마지막 남은 배경교재인지 확인
       this.$EventBus.$emit('next')
     }
   }

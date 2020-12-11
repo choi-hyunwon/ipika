@@ -12,11 +12,11 @@
           <li><router-link to=""></router-link></li>
         </ul>
         <ul class="title-list">
-          <li v-for="(menu,i) in mainMenuList" :class="{active : isActiveMenuList.includes(menu.menuId)}">
-            <router-link :to=setPath(menu.menuId)>
+          <li @click="setPath(menu.menuId)" v-for="(menu,i) in mainMenuList" :class="{active : isActiveMenuList.includes(menu.menuId)}">
+            <a>
               <span class="num">{{`0${i+1}`}}</span>
               <span class="title">{{menu.menuName}}</span>
-            </router-link>
+            </a>
           </li>
         </ul>
         <div class="message" v-if="message">
@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import Confirm from '@/components/popup/Confirm'
 
 export default {
@@ -57,9 +57,16 @@ export default {
   mounted () {
     this.fetchMainMenu();
   },
+  computed:{
+    ...mapGetters({
+      letter: 'getLetter',
+      canvasList : 'getLetterCanvasList',
+    })
+  },
   methods : {
     ...mapActions({
-      getMainMenu : 'getMainMenu'
+      getMainMenu : 'getMainMenu',
+      getLetter : 'getLetter'
     }),
     fetchMainMenu(){
       this.getMainMenu()
@@ -84,7 +91,25 @@ export default {
            link = '/'
            break;
        }
-      return link
+      if(link === '/Intro') this.fetchLetter();
+      else this.$router.push(link)
+    },
+    fetchLetter(){
+      this.getLetter()
+        .then(result => {
+          if(this.canvasList.length === 0) { // 학습 완료 판단
+            alert("진입 불가 : 학습 완료 안내 팝업 노출")
+            this.$router.push('/canvas')
+          } else if (this.canvasList.length < this.letter.canvasList.length) { // 재진입 판단
+            this.$router.push('/canvas?page=letter')
+          } else {
+            if(this.letter.userAudioList.length === 0) this.$router.push('/Intro') // 최초 진입 판단
+            else {
+              alert('시나리오 확인 필요')
+              this.$router.push('/Listening')
+            }
+          }
+        })
     }
   }
 }

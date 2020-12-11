@@ -17,7 +17,14 @@ export const mutations = {
   setUserGalleryMypicture (state, mypicture) {
     state.UserGalleryMypicture = mypicture
   },
-
+  setUserAudio (state, userAudio) {
+    state.letter = {
+      ...state.letter,
+      userAudio: {
+        ...userAudio
+      }
+    }
+  },
 
   /* timer */
   setTimeInit (state, timeInitVal) {
@@ -63,6 +70,16 @@ export const mutations = {
   },
   /* // timer */
   setLetter(state, letter){
+    state.canvasList = []
+    letter.stepPictureList.forEach(function(pictureList){
+      if (pictureList.drawEnded === 'N') {
+        letter.canvasList.forEach(function(canvasList,j){
+          if (canvasList.imageId === pictureList.canvasImageId) {
+            state.canvasList.push(canvasList)
+          }
+        });
+      }
+    });
     state.letter = letter
   },
   setPlayerUrl(state, url){

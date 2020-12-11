@@ -33,19 +33,18 @@ export default new Vuex.Store({
      *
      */
     userinfo: {
-      'grade': '0',
-      'name': '홈런초등테스트1',
-      'key': '1604311',
-      'device_type': '1002',
-      'token': 'V01cbeyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlY290ZXN0MiIsInVzZXJJZCI6MTk1NDUzNiwibG9naW5BcyI6ZmFsc2UsImlhdCI6MTYwNzUwMDAxNiwiZXhwIjoxNjA4MTA0ODE2fQ.KAfTqaomGulem9Mg1bwVexqWZVcRyUGg - hGAxjYUg0yVrAqMtsoSIAXwPYIVv6zq5l_ILReR4xPmP6uT7BSWDQ'
+      name: '홈런초등테스트1',
+      key: '1604311',
+      grade: 0,
+      device_type: "1002"
     },
     /**
      * API session options
      */
     session: {
-      'user_id':'testdom12',
-      'user_auth_key':'abcdefghijklmnopqrstuvwxyz0123456789',
-      'Content_Language':'ko',
+      'user_id': 'domfamtest1211_11',
+      'user_auth_key': 'abcdefghijklmnopqrstuvwxyz0123456789',
+      'Content_Language': 'ko',
       'device_type': '1001'
     },
     subject: {},
@@ -77,7 +76,8 @@ export default new Vuex.Store({
       active : false,
       isShow : false,
     },
-    submission : {}
+    submission : {},
+    canvasList : []
   },
   /**
    * global로 사용하는 getters
@@ -114,30 +114,24 @@ export default new Vuex.Store({
     getPlayerOptions: state => {
       return state.playerOptions
     },
-    getLetterIntro: state => {
-      return {
-        stageId : state.letter.stageId,
-        stepId : state.letter.stepId,
-        stageName : state.letter.stageName,
-        stepSubejct : state.letter.stepSubejct,
-        stepImageUrl : state.letter.stepImageUrl,
-        stepAudioMainText : state.letter.stepAudioMainText,
-        stepAudioSubText : state.letter.stepAudioSubText,
-        completeText : state.letter.completeText
-      }
+    getLetter: state => {
+      return state.letter
     },
     getLetterAudioList : state => {
       return state.letter.audioCharacterList
     },
     getLetterCanvasList : state => {
-      return state.letter.canvasList
+      return state.canvasList
     },
     getBg :state => {
       return state.bg
     },
     getSubmission :state => {
       return state.submission
-    }
+    },
+    getUserAudio : state => {
+      return state.letter.userAudioList[0]
+    },
   },
   /**
    * global로 사용하는 Mutations
