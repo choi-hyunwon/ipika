@@ -39,7 +39,7 @@
             <div class="recode_icon">
               <img src="@/assets/images/common/record-mygallery@2x.png" alt="녹음 아이콘" class="img-m">
             </div>
-            <div class="recode-desc">01:00</div>
+            <div class="recode-desc">{{ item.audioPlaytime }}</div>
 
             <div class="gallery_img size-img">
               <a href="#" @click.prevent="onPlay"></a>
