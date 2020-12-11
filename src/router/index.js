@@ -1,16 +1,9 @@
 /* eslint-disable */
 
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-
 import List from '@/views/List'
-
 import Home from '@/views/Home'
-
 import PabloMain from '@/views/PabloMain'
-
 import Canvas from '@/views/Canvas'
-
 import TestingResult from '@/views/diagnose/TestingResult'
 
 import Intro from '@/views/letter/Intro'
@@ -26,8 +19,6 @@ import MyGalleryDetail from '@/views/myGallery/MyGalleryDetail'
 import Agreement from '@/views/useLater/Agreement'
 import LoadingSpinnerWaiting from '@/views/useLater/LoadingSpinnerWaiting'
 
-Vue.use(VueRouter)
-
 const requireAuth = () => (from, to, next) => {
   if(from.path === '/canvas' || from.path === '/pabloCanvas') {
     if(localStorage.getItem('isReload') !== 'true') localStorage.setItem('isReload', true)
@@ -36,7 +27,7 @@ const requireAuth = () => (from, to, next) => {
   }
 };
 
-const routes = [
+export const routes = [
   {
     path: '/',
     name: 'home',
@@ -115,9 +106,4 @@ const routes = [
   }
 ]
 
-const router = new VueRouter({
-  mode: 'history',
-  routes
-})
-
-export default router
+export default routes
