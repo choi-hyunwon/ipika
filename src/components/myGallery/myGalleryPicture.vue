@@ -54,7 +54,7 @@
       </div>
     </div>
 
-    <b-modal id="deletePicture" centered title="완전히 삭제" modal-class="deletePicture">
+    <b-modal id="deletePicture" centered title="완전히 삭제" modal-class="galleryBGChangeEmpty">
       <template #modal-header>
         <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>
       </template>

@@ -37,24 +37,32 @@
         <ul class="voices">
           <li class="voice-g" v-for="(item, index) in list" v-model="allSize">
             <div class="recode_icon">
-              <img src="@/assets/images/common/record@2x.png" alt="재생화면" class="img-m">
+              <img src="@/assets/images/common/record@2x.png" alt="녹음 아이콘" class="img-m">
             </div>
             <div class="recode-desc">01:00</div>
 
-            <div class="gallery_img size-img"><a href="#" @click.prevent="onPlay"></a></div>
-            <div class="play_icon">
+            <div class="gallery_img size-img">
+              <a href="#" @click.prevent="onPlay"></a>
+              <div class="play_bar"></div>
+            </div>
+            <div class="play_icon" v-if="play">
               <img src="@/assets/images/common/play_dim@2x.png" alt="재생화면" class="img-m">
             </div>
-            <div class="img_title">{{ item.stageName || '스테이지' }} {{ item.stageId || '단계' }}</div>
-            <div class="img_desc">{{ item.title || '제목을 불러 올수 없습니다' }}</div>
-            <a href="#" class="icon_delete"  @click.prevent="openDelete(item.userAudioId, index)"><img src="@/assets/images/common/btn_delete@2x.png" alt="" class="img-m"></a>
+            <div class="pause_icon" v-else>
+              <img src="@/assets/images/common/pause_dim@2x.png" alt="정지화면" class="img-m">
+            </div>
+            <div class="box_title">
+              <div class="img_title">{{ item.stageName || '스테이지' }} {{ item.stageId || '단계' }}</div>
+              <div class="img_desc">{{ item.title || '제목을 불러 올수 없습니다' }}</div>
+            </div>
+            <a href="#" class="icon_delete" @click.prevent="openDelete(item.userAudioId, index)"><img src="@/assets/images/common/btn_delete@2x.png" alt="" class="img-m"></a>
           </li>
         </ul>
       </div>
     </div>
 
 
-    <b-modal id="deleteAudio" centered title="완전히 삭제" modal-class="deleteAudio">
+    <b-modal id="deleteAudio" centered title="완전히 삭제" modal-class="galleryBGChangeEmpty">
       <template #modal-header>
         <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>
       </template>
@@ -69,19 +77,19 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+  import { mapActions, mapGetters } from 'vuex'
 
-export default {
-  name: 'myGalleryVoice',
+  export default {
+    name: 'myGalleryVoice',
 
-  data () {
-    return {
-      isLoading :false,
-      empty: null,
-      activeIndex: 0,
-      nSize : [0,0,0],
-      filter: [
-        {
+    data () {
+      return {
+        isLoading: false,
+        empty: null,
+        activeIndex: 0,
+        nSize: [0, 0, 0],
+        filter: [
+          {
           'title': 'ALL',
           'src': '@/assets/images/common/all.png',
           'click': 'filterAll'
@@ -280,59 +288,6 @@ export default {
       }
     }
 
-    /*.drawing_button {
-      min-width: 20.6rem;
-      background-color: var(--gray-200);
-      margin-right: 1.2rem;
-      color: var(--gray-500);
-      border: none;
-      font-weight: 600;
-      padding: 0;
-      .img{
-        width: 1.57rem;
-        height: 2rem;
-        margin-right: 1.13rem;
-      }
-      &:focus,&:active,&:hover{
-        background-color: var(--gray-900);
-      }
-    }
-
-    .classic_button {
-      min-width: 19.6rem;
-      color: var(--gray-500);
-      background-color: var(--gray-200);
-      margin-right: 1.2rem;
-      border: none;
-      font-weight: 600;
-      padding: 0;
-      .img{
-        width: 1.3rem;
-        height: 1.5rem;
-        margin-right: 1rem;
-      }
-      &:focus,&:active,&:hover{
-        background-color: var(--gray-900);
-      }
-    }
-
-    .canvas_button {
-      background-color: var(--gray-200);
-      color: var(--gray-500);
-      border: none;
-      font-weight: 600;
-      min-width: 14.1rem;
-      margin-right: 1.2rem;
-      padding: 0;
-      .img{
-        width: 1.67rem;
-        height: 1.67rem;
-        margin-right: 1.17rem;
-      }
-      &:focus,&:active,&:hover{
-        background-color: var(--gray-900);
-      }
-    }*/
   }
 }
 
@@ -342,7 +297,6 @@ export default {
   .voices {
     height: 64.4rem;
     width: 101%;
-
     .voice-default {
       margin: 0 auto;
 
@@ -372,86 +326,17 @@ export default {
           font-size: 2.4rem;
           font-weight: bold;
           line-height: 8rem;
-          letter-spacing: -0.3px;
+          letter-spacing: -0.03rem;
           text-align: center;
           color: var(--gray-white);
         }
       }
     }
-
     .voice-g {
-      .openPinfo {
-        margin-top: 1.6rem;
-        align-items: center;
-
-        .heart_icon {
-          width: 3.2rem;
-          height: 3.2rem;
-          margin-right: 1rem;
-        }
-
-        .heart_number {
-          font-family: 'Inter';
-          font-size: 2.4rem;
-          font-weight: 600;
-          line-height: 4.0px;
-          letter-spacing: -0.3px;
-          color: var(--gray-900);
-          margin-right: 2.4rem;
-        }
-
-        .eye_icon {
-          width: 3.2rem;
-          height: 3.2rem;
-          margin-right: 1rem;
-        }
-
-        .eye_number {
-          font-family: 'Inter';
-          font-size: 2.4rem;
-          font-weight: 600;
-          line-height: 4.0px;
-          letter-spacing: -0.3px;
-          color: var(--gray-900);
-
-        }
-
-      }
-
-      .icon_delete{
-        position: absolute;
-        top: 1.5rem;
-        right: 3.5rem;
-        height: 0;
-        z-index: 999;
-        width: 5rem;
-        height: 5rem;
-      }
-
       width: calc(100% / 3);
       float: left;
       margin-bottom: 8rem;
       position: relative;
-
-      .dark_bg {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 57.6rem;
-        height: 32.3rem;
-        opacity: 0.5;
-        border-radius: 1.2rem;
-        background-color: var(--gray-black);
-      }
-
-      .play_icon, .pause_icon {
-        position: absolute;
-        top: 12.2rem;
-        left: 24.8rem;
-        width: 8rem;
-        height: 8rem;
-        z-index: 55;
-      }
 
       .recode_icon {
         position: absolute;
@@ -478,63 +363,70 @@ export default {
       .size-img {
         width: 57.6rem;
         height: 32.3rem;
-        margin-bottom: 2.4rem;
         position: relative;
-        border: solid 1px var(--gray-500);
-        border-radius: 12px;
+        border: solid 0.1rem var(--gray-500);
+        border-radius: 1.2rem;
         z-index: 100;
-
+        overflow: hidden;
         > a {
           display: block;
           width: 100%;
           height: 100%;
         }
-
-        .img_icon {
-          width: 6.4rem;
-          height: 6.4rem;
+        .play_bar {
           position: absolute;
-          top: 2rem;
-          right: 2rem;
+          width: 0;
+          height: 2rem;
+          background-color: var(--blue-500);
+          bottom: 0;
+          left: 0;
+          z-index: 55
         }
-
-        img {
-          border-radius: 1.2rem;
-        }
       }
 
-      .img_title {
-        font-size: 2rem;
-        font-family: 'Inter-Regular';
-        margin-bottom: 0.2rem;
-        letter-spacing: -0.03rem;
-        font-weight: normal;
-        line-height: 3.6rem;
-        color: var(--gray-black);
-
-      }
-
-      .img_desc {
-        font-family: 'NotoSansCJKKR';
-        font-size: 2.4rem;
-        font-weight: bold;
-        font-stretch: normal;
-        font-style: normal;
-        letter-spacing: -0.03rem;
-        text-align: left;
-        line-height: 4rem;
-        color: var(--gray-black);
-      }
-
-      .play_bar {
+      .play_icon, .pause_icon {
         position: absolute;
-        border-radius: 0 0 0 1.2rem;
-        width: 32.8rem;
-        height: 2rem;
-        background-color: var(--blue-500);
-        bottom: 0;
-        left: 0;
-        z-index: 55
+        top: 8rem;
+        left: 24.8rem;
+        width: 8rem;
+        height: 8rem;
+        z-index: 55;
+      }
+      .box_title {
+        position: absolute;
+        bottom: 4rem;
+        left: 4rem;
+        .img_title {
+          font-size: 2rem;
+          font-family: 'Inter-Regular';
+          margin-bottom: 0.2rem;
+          letter-spacing: -0.03rem;
+          font-weight: normal;
+          line-height: 3.6rem;
+          color: var(--gray-black);
+
+        }
+        .img_desc {
+          font-family: 'NotoSansCJKKR';
+          font-size: 2.4rem;
+          font-weight: bold;
+          font-stretch: normal;
+          font-style: normal;
+          letter-spacing: -0.03rem;
+          text-align: left;
+          line-height: 4rem;
+          color: var(--gray-black);
+        }
+      }
+
+      .icon_delete {
+        position: absolute;
+        top: 1.5rem;
+        right: 3.5rem;
+        height: 0;
+        z-index: 999;
+        width: 5rem;
+        height: 5rem;
       }
     }
   }

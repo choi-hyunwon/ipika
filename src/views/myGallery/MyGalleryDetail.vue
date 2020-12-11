@@ -23,7 +23,7 @@
         </div>
       </div>
       <!-- 삭제 팝업  -->
-      <b-modal id="ImgDelete" centered title="파블로 알림" modal-class="normalPopup">
+      <b-modal id="ImgDelete" centered title="파블로 알림" modal-class="galleryBGChangeEmpty">
         <template #modal-header>
           <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>
         </template>
