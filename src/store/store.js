@@ -136,7 +136,10 @@ export default new Vuex.Store({
     },
     getSubmission :state => {
       return state.submission
-    }
+    },
+    getUserAudio : state => {
+      return state.letter.userAudioList[0]
+    },
   },
   /**
    * global로 사용하는 Mutations
