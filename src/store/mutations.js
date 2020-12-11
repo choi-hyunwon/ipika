@@ -17,7 +17,14 @@ export const mutations = {
   setUserGalleryMypicture (state, mypicture) {
     state.UserGalleryMypicture = mypicture
   },
-
+  setUserAudio (state, userAudio) {
+    state.letter = {
+      ...state.letter,
+      userAudio: {
+        ...userAudio
+      }
+    }
+  },
 
   /* timer */
   setTimeInit (state, timeInitVal) {
