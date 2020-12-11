@@ -2,7 +2,6 @@
   <div v-if="isLoading">
     <div class="wrap" v-show="userGalleryMypicture">
       <div class="header ivory bg-ivory d-flex">
-        <div v-b-modal.goBackPopup class="symbol" @click="goBack"><img src="@/assets/images/common/arrow_left@2x.png" alt=""></div>
         <div class="gallery-title">
           <span class="title-center">{{ title || '제목을 불러 올수 없습니다'}}</span>
         </div>
