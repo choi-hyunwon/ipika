@@ -6,6 +6,8 @@ import { BootstrapVue } from 'bootstrap-vue'
 import { GlobalUtils } from './utils/globalUtils'
 import AudioRecorder from 'vue-audio-recorder'
 import AudioVisual from 'vue-audio-visual'
+import VueProgress from 'vue-progress'
+
 
 Vue.config.productionTip = false
 
@@ -15,6 +17,8 @@ Vue.prototype.$EventBus = new Vue();
 Vue.use(BootstrapVue)
 Vue.use(AudioRecorder)
 Vue.use(AudioVisual)
+Vue.use(VueProgress)
+
 
 new Vue({
   router,

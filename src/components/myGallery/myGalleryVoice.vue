@@ -77,9 +77,11 @@ export default {
   data () {
     return {
       isLoading :false,
+      focusIdx : 0,
       empty: null,
       activeIndex: 0,
       nSize : [0,0,0],
+      isPlay : false,
       filter: [
         {
           'title': 'ALL',
@@ -97,10 +99,11 @@ export default {
       ],
       list: [],
       selected: 1,
+      audio : null,
       options: [
         {
           value: 1,
-          text: '최신 순'
+          text: '최신 순',
         },
         {
           value: 2,
@@ -108,6 +111,10 @@ export default {
         }
       ]
     }
+  },
+
+  created () {
+
   },
   mounted () {
     this.isLoading = true
@@ -128,6 +135,11 @@ export default {
       }
     },
 
+  },
+  watch:{
+    'focusIdx' : ()=>{
+      console.log(this.focusIdx)
+    }
   },
   methods: {
     ...mapActions({
@@ -185,8 +197,9 @@ export default {
         })
       }
     },
-    onPlay () {
+    onPlay (index) {
       //todo : @최현원 음성 플레이
+      this.focusIdx = index;
     },
     openDelete(pictureId, index){
       this.selectId = pictureId
@@ -209,7 +222,7 @@ export default {
             alert(result.message);
           }
         })
-    }
+    },
 
   }
 }
