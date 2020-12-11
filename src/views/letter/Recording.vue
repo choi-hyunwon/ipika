@@ -129,16 +129,23 @@ export default {
       this.isExpired = true
       this.record = false
 
+      /* 임시 코드 */
       // TODO: userAudio url 이 음성 파일 형태가 다른 경우 임시 작업(삭제 예정 코드)
-      if (this.userAudio.audioUrl.slice(-3, -1) !== 'mp') {
-        this.setUserAudio({
-          audioPlaytime:15,
-          audioUrl:"http://cdn.mcocoa.com/edu//steprecording/20201207122219/sample.mp3",
-          userAudioId:52
-        })
-      }
-      // TODO: set 한 다음에 아래 작업 필요
+      // if (this.userAudio.audioUrl.slice(-3, -1) !== 'mp') {
+      //   this.setUserAudio({
+      //     audioPlaytime:15,
+      //     audioUrl:"http://cdn.mcocoa.com/edu//steprecording/20201207122219/sample.mp3",
+      //     userAudioId:52
+      //   })
+      // }
+      /* // 임시 코드 */
+
       this.audioSource = this.userAudio.audioUrl
+
+      /* 임시 코드 */
+      // this.audioSource = "http://cdn.mcocoa.com/edu//steprecording/20201207122219/sample.mp3"
+      /* // 임시 코드 */
+
       this.setAudio()
     }
 
@@ -226,6 +233,7 @@ export default {
     },
     setAudio() {
       this.audioEl = this.$refs.audioPlayer.$el.firstElementChild.firstElementChild
+      this.audioEl.crossOrigin = "anonymous";
       this.audioEl.setAttribute('src', this.audioSource)
       this.audioEl.onended = () => {this.ing = false}
     },
