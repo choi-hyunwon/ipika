@@ -1,28 +1,25 @@
-import store from '../store/store'
+import Vue from 'vue'
 
-export default{
-  install(Vue){
-    /**
-     * 안드로이드 앱 종료
-     * @param data
-     */
-    Vue.prototype.$appExit = function(data){
-      window.android.exit();
-    }
-    /**
-     * 안드로이드 초기값 실행
-     * @param data
-     */
-    Vue.prototype.$getInitVariables = function(data){
-      store.state.userInfo = window.android.getInitVariables();
-    }
-
-
-    Vue.prototype.$onBackPressed = function(data){
-      //Native -> WebView로 Back버튼 선택 시 onBackPressed() 함수 호출
-      //todo : @최현원 함수 생성 필요
-    }
-
-
+export class Android {
+  /**
+   * 안드로이드 앱 종료
+   * @param data
+   */
+  appExit(){
+    window.android.exit();
+  }
+  /**
+   * 안드로이드 초기값 실행
+   * @param data
+   */
+  getInitVariables(){
+    return  window.android.getInitVariables();
+  }
+  /**
+   * Native -> WebView로 Back버튼 선택 시 onBackPressed() 함수 호출
+   * @param data
+   */
+  onBackPressed(){
+    Vue.prototype.Router.go(-1)
   }
 }

@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions, mapMutations } from 'vuex'
 import Confirm from '@/components/popup/Confirm'
 
 export default {
@@ -44,6 +44,9 @@ export default {
     ...mapActions({
       getDiagnoseResult: 'getDiagnoseResult'
     }),
+    ...mapMutations({
+      setUserInfo : 'setUserInfo'
+    }),
     fetchDiagnoseResult(){
       this.getDiagnoseResult()
       .then( result => {
@@ -51,7 +54,7 @@ export default {
       })
     },
     loadAndroid(){
-      store.state.userInfo = window.android.getInitVariables();
+      this.setUserInfo(this.Android.getInitVariables())
     }
   }
 }
