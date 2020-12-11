@@ -39,6 +39,9 @@ export default {
   created () {
     this.audio = new Audio(this.audioList[this.focusIdx].recordingAudioUrl)
   },
+  mounted () {
+    this.play()
+  },
   computed:{
     ...mapGetters({
       audioList : 'getLetterAudioList',

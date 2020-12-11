@@ -3,17 +3,21 @@
     <LetterHeader/>
     <div class="contents">
 
+      <!-- 화면 좌측 상단 텍스트 영역 -->
       <div class="txt-area">
         <p class="txt-lg" v-html="letter.stepAudioMainText"></p>
         <p class="txt-sm">{{letter.stepAudioSubText}}</p>
       </div>
 
+      <!-- 이퀄라이징 영역 (av-media, av-line) -->
       <div ref="recordingArea" class="record-area" :class="{recording : ing}">
+        <!-- 플레이 중 아닌 경우 가로선 -->
         <div v-if="!ing" class="_media">
           <div v-if="record" style="width: 100%; height: 5px; background-color: #2fca56;"></div>
           <div v-else style="width: 100%; height: 5px; background-color: #1585ff;"></div>
         </div>
 
+        <!-- av-media:녹음 -->
         <av-media
           v-show="ing && record" class="_media" ref="media"
           type="frequ"
@@ -24,8 +28,7 @@
           :line-width="canvasOptions.canvLineWidth"
         />
 
-        <!--<av-line
-          v-if="ing && !record"-->
+        <!-- av-line:재생 -->
         <av-line
           ref="audioPlayer"
           class="_audio"
@@ -35,9 +38,10 @@
           :canv-width="canvasOptions.canvWidth"
           :canv-height="canvasOptions.canvHeight"
           :line-width="canvasOptions.canvLineWidth"
-        ></av-line>
+        />
       </div>
 
+      <!-- 플레이어 버튼 영역 -->
       <div class="play-area"
            :class="{
              mic : !ing && record,
@@ -46,30 +50,34 @@
              pause : ing && !record
            }"
       >
+        <!-- 재생 또는 재생 정지 버튼 -->
         <div class="play-btns"
              @click="playOrPause"
         />
 
+        <!-- 녹음 시작 또는 녹음 중지 버튼 -->
         <audio-recorder
           ref="recorder"
           format="mp3"
           :before-recording="startRecord"
           :after-recording="stopRecord"/>
 
+        <!-- '다시 녹음하기' 버튼 -->
         <Confirm v-slot="slotProps"
                  :complete-text="`다시 녹음하시겠어요? </br> 지금 녹음한 내용은 지워져요`"
                  :text="`지워진 녹음은 다시 들을 수 없어요`"
                  :cancelText="`아니오`"
                  :okText="`네`">
-          <button v-if="!record" @click="globalUtils.confirm(slotProps,'record')" style="position: absolute; bottom: 0">
-            <img src="@/assets/images/common/refresh_active@2x.png" alt="">
-          </button>
-          <button v-if="record" style="position: absolute; bottom: 0">
+          <button v-if="record || isExpired" style="position: absolute; bottom: 0">
             <img src="@/assets/images/common/refresh_default@2x.png" alt="">
+          </button>
+          <button v-else @click="globalUtils.confirm(slotProps,'record')" style="position: absolute; bottom: 0">
+            <img src="@/assets/images/common/refresh_active@2x.png" alt="">
           </button>
         </Confirm>
       </div>
 
+      <!-- 우측 하단 '다했어요!' 버튼 -->
       <div class="btn-area">
         <button v-if="!record" @click="fetchRecording" class="btn btn-dark">다했어요!</button>
         <button v-if="record" class="btn btn-dark disabled">다했어요!</button>
@@ -82,7 +90,7 @@
 <script>
 import LetterHeader from '@/components/letter/LetterHeader'
 import Confirm from '@/components/popup/Confirm'
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions, mapMutations } from 'vuex'
 
 export default {
   name: 'recording',
@@ -104,6 +112,8 @@ export default {
       audioEl : null,
       audioSource : null,
       isAudioSet : false,
+
+      isExpired: false,
     }
   },
   created() {
@@ -115,6 +125,24 @@ export default {
     })
   },
   mounted () {
+    // TODO; letter 조회에서 userAudio 없는 경우 어떤 식으로 값을 주는지?
+    if(this.userAudio.audioUrl !== "") {
+      this.isExpired = true
+      this.record = false
+
+      // TODO: userAudio url 이 음성 파일 형태가 다른 경우 임시 작업(삭제 예정 코드)
+      if (this.userAudio.audioUrl.slice(-3, -1) !== 'mp') {
+        this.setUserAudio({
+          audioPlaytime:15,
+          audioUrl:"http://cdn.mcocoa.com/edu//steprecording/20201207122219/sample.mp3",
+          userAudioId:52
+        })
+      }
+      // TODO: set 한 다음에 아래 작업 필요
+      this.audioSource = this.userAudio.audioUrl
+      this.setAudio()
+    }
+
     this.globalUtils.tts(this.letter.stepAudioMainText + this.letter.stepAudioSubText)
     navigator.mediaDevices.getUserMedia({ audio: true, video: false })
       .then(media => {
@@ -124,11 +152,15 @@ export default {
   watch: {
     'arPlayer.isPlaying' : function(val) {
       this.ing = val
-    }
+    },
+    /*'userAudio.audioUrl' : function(val) {
+      this.
+    }*/
   },
   computed: {
     ...mapGetters({
-      letter: 'getLetterIntro'
+      letter: 'getLetter',
+      userAudio: 'getUserAudio',
     }),
     setColor (){
       if(this.ing && this.record) return '#f53c32'
@@ -138,6 +170,9 @@ export default {
   methods : {
     ...mapActions({
       getRecording: 'getRecording'
+    }),
+    ...mapMutations({
+      setUserAudio: 'setUserAudio'
     }),
     goBack () {
       this.$router.push('/Watching')
@@ -165,15 +200,17 @@ export default {
         const top = recorder.recordList.length - 1;
         recorder.selected = recorder.recordList[top];
         this.file = recorder.recordList[top]
-
         this.audioSource = this.file.url
         this.isAudioSet = true
-        this.audioEl = this.$refs.audioPlayer.$el.firstElementChild.firstElementChild
-        this.audioEl.setAttribute('src', this.audioSource)
-        this.audioEl.onended = () => {this.ing = false}
+
+        this.setAudio()
       }
     },
     fetchRecording(){
+      if(this.isExpired) {
+        return this.$router.push('/Listening')
+      }
+
       const data = new FormData()
       data.append('stepId', this.letter.stepId)
       data.append('recordingAudio', this.file.blob)
@@ -187,6 +224,11 @@ export default {
             this.$router.push('/Listening')
           }
         })
+    },
+    setAudio() {
+      this.audioEl = this.$refs.audioPlayer.$el.firstElementChild.firstElementChild
+      this.audioEl.setAttribute('src', this.audioSource)
+      this.audioEl.onended = () => {this.ing = false}
     },
     playOrPause(){
       if(!this.record) {

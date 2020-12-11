@@ -30,10 +30,7 @@
           <span class="tit">배경교재</span>
         </button>
       </Confirm>
-      <Confirm v-slot="slotProps"
-               :complete-text="`파블로 서비스를 </br> 종료하시겠습니까?`"
-               :cancelText="`아니오`"
-               :okText="`네`">
+      <Confirm v-slot="slotProps" :complete-text="`파블로 서비스를 </br> 종료하시겠습니까?`" :cancelText="`아니오`" :okText="`네`">
         <div class="box-close">
           <button @click="globalUtils.confirm(slotProps,'checkRed')" style="padding-top: 0;" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></button>
         </div>

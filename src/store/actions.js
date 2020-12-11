@@ -177,6 +177,7 @@ export const actions = {
   getRecording({ commit }, options) {
     return webApi.getRecording(options)
       .then(data => {
+        commit('setUserAudio', data)
         return data
       })
   },

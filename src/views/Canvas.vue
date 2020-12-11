@@ -17,13 +17,17 @@
     <Register ref="register" v-if="page===''" v-slot="slotProps"/>
 
     <!--   진단테스트 canvas 첫 진입시 popup-->
-    <Alert ref="autoOpen" v-if="page==='diagnose'" v-slot="slotProps" :text=subject.subject></Alert>
+    <Alert ref="autoOpen" v-if="page==='diagnose'" :text=subject.subject v-slot="slotProps"/>
 
     <!--   진단테스트 canvas 타이머 완료 시 popup-->
-    <Confirm v-if="page==='diagnose'" ref="timerConfirm"></Confirm>
+    <Confirm v-if="page==='diagnose'" ref="timerConfirm"/>
 
     <!--   진단테스트 드로잉 제출 완료 시 popup-->
-    <Alert ref="autoOpenSuccess" v-slot="slotProps" :boldText="'성공적으로 </br> 제출되었어요 :)'" :text="'결과를 확인해보세요'" :buttonText ="'내 스테이지 확인하러 가기'"></Alert>
+    <Alert ref="autoOpenSuccess" v-slot="slotProps" :boldText="'성공적으로 </br> 제출되었어요 :)'" :text="'결과를 확인해보세요'" :buttonText ="'내 스테이지 확인하러 가기'"/>
+
+    <!--   학습 드로잉 제출 완료 시 popup-->
+    <Confirm ref="autoOpenLSuccess" v-slot="slotProps" :completeText="`${bg.imageName} 저장되었어요<br> 남은 그림도 더 그려볼까요?`"
+             :text="'모든 배경교재를 그려야 학습과정이 완료돼요'" :cancelText = "'아니요'" :okText = "'네'"/>
   </div>
 </template>
 <script>
@@ -60,6 +64,7 @@ export default {
     this.$EventBus.$on('close', this.close);
     this.$EventBus.$on('next', this.exportPNG);
     this.$EventBus.$on('bgPopup',this.toggleBg);
+
     if(this.page==='letter'){
       this.bgPopup = true
     }
@@ -80,7 +85,9 @@ export default {
       session: 'getSession',
       canvasTimer: 'getCanvasTimer',
       subject : 'getSubject',
-      letter: 'getLetterIntro'
+      letter: 'getLetter',
+      bg : 'getBg',
+      canvasList : 'getLetterCanvasList'
     }),
     page() {
       return this.$router.currentRoute.query.page || ''
@@ -106,6 +113,7 @@ export default {
       setTimerReset: 'setTimerReset',
       setTimerPause: 'setTimerPause',
       setTimerResume: 'setTimerResume',
+      setBg: 'setBg'
     }),
     ...mapActions({
       getUserInfo: 'getUserInfo',
@@ -160,7 +168,7 @@ export default {
           const data = new FormData()
           data.append('stepId', self.letter.stageId )
           data.append('stepPicture', blob, 'rain.png')
-          data.append('imageId', self.letter.stepId )
+          data.append('imageId', self.bg.imageId)
           self.fetchSubmissionLearning(data) //학습 정보 드로잉 제출 API
         }
       })
@@ -203,10 +211,8 @@ export default {
       .then(result => {
         if(result.code === '0000') {
           this.$refs.autoOpenSuccess.showAlert = true
-          this.$refs.autoOpenSuccess.type='success'
-        } else {
-          alert(`code : ${result.code} message : ${result.message}`)
-        }
+          this.$refs.autoOpenSuccess.type = 'success'
+        } else alert(`code : ${result.code} message : ${result.message}`)
       })
     },
     fetchSubmissionLearning(data){
@@ -214,8 +220,16 @@ export default {
       this.getSubmissionLearning(data)
       .then(result => {
         if(result.code === '0000') {
-          // TODO 드로잉 제출 성공 팝업 노출 후 "내 스테이지 확인하러 가기" 클릭 시 TestingResult로 이동
-          self.$router.push('/Completion')
+          if(this.canvasList.length === 1) {
+            this.getLetter()
+              .then( result => {
+                this.setBg({reset : true})
+                this.$router.push('/Completion')
+              })
+          } else {
+            this.$refs.autoOpenLSuccess.showConfirm = true
+            this.$refs.autoOpenLSuccess.type = 'success'
+          }
         } else alert('드로잉 제출 실패')
       })
     }

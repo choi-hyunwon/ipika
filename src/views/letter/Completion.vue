@@ -28,7 +28,7 @@ export default {
   components: {LetterHeader},
   computed:{
     ...mapGetters({
-      letter: 'getLetterIntro'
+      letter: 'getLetter'
     })
   },
   created() {
@@ -36,7 +36,7 @@ export default {
   },
   methods : {
     goBack () {
-      this.$router.push('/Watching')
+      this.$router.push('/PabloMain')
     }
   }
 }

@@ -44,7 +44,7 @@
           </div>
           <div class="c-body">
             <ul class="scroll">
-              <li @click="setBg(canvas)" v-for="(canvas, i) in canvasList">
+              <li @click="setBg(canvas, false)" v-for="(canvas, i) in canvasList">
                 <div>
                   <span class="img"><img :src=canvas.tabletImageUrl alt=""></span>
                   <span class="tit-sm">{{canvas.imageName}}</span>
@@ -86,7 +86,8 @@ export default {
   computed:{
     ...mapGetters({
       getCanvasTimer : 'getCanvasTimer',
-      canvasList : 'getLetterCanvasList'
+      canvasList : 'getLetterCanvasList',
+      bg : 'getBg'
     }),
     timeOver(){
       return this.getCanvasTimer.timeOver
@@ -148,9 +149,6 @@ export default {
       this.showConfirm = false
       this.setTimerResume();
     },
-    isComplete () {
-      return this.$router.push('/Completion')
-    },
     okBtn () {
       if (this.type === 'goBack') {
         this.goBack()
@@ -158,13 +156,12 @@ export default {
         this.goToNext()
       } else if (this.type === 'watchComplete') {
         this.$route.push('/Recording')
-      } else if (this.type === 'letter') {
-        this.modalCancel()
-
-        this.$EventBus.$emit('next');
+      } else if (this.type === 'success') {
+        this.setBg({tabletImageUrl : 'https://colorate.azurewebsites.net/SwatchColor/FFFFFF'}, true)
       } else if (this.type === 'checkRed') {
         this.showConfirm = false
-        alert('파블로 서비스 종료 연동 필요')
+        // alert('파블로 서비스 종료 연동 필요')
+        window.android.exit();
       } else if (this.type === 'timeOut') {
         this.type = 'Complete'
         this.timeOut.completeText = "다 그렸나요? </br> 제출하면 수정할수 없어요"
@@ -173,7 +170,7 @@ export default {
     },
     cancelBtn () {
       if (this.type === 'diagnose') this.modalCancel()
-      else if (this.type === 'letter') this.isComplete()
+      else if (this.type === 'success') this.$router.push('/PabloMain')
       else if (this.type === 'refresh' || this.type === 'Refresh') this.clear()
       else if (this.type === 'timeOut') {
         this.type = 'Refresh'
@@ -181,9 +178,10 @@ export default {
         this.showConfirm = true
       } else this.showConfirm = false
     },
-    setBg(canvas){
+    setBg(canvas, reset){
       this.showConfirm = false
-      this.$EventBus.$emit('setBg', canvas)
+      WILL.clear()
+      this.$EventBus.$emit('setBg', canvas , reset)
     }
   }
 }

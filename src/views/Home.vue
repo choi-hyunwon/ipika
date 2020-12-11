@@ -38,19 +38,20 @@ export default {
   },
   mounted () {
     this.fetchDiagnoseResult()
+    this.loadAndroid()
   },
   methods :{
     ...mapActions({
       getDiagnoseResult: 'getDiagnoseResult'
     }),
-    todo(){
-      alert('종료 안내 팝업 노출 (퍼블리싱 필요)')
-    },
     fetchDiagnoseResult(){
       this.getDiagnoseResult()
       .then( result => {
         this.resultCode = result
       })
+    },
+    loadAndroid(){
+      store.state.userInfo = window.android.getInitVariables();
     }
   }
 }
