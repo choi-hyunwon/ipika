@@ -125,8 +125,7 @@ export default {
     })
   },
   mounted () {
-    // TODO; letter 조회에서 userAudio 없는 경우 어떤 식으로 값을 주는지?
-    if(this.userAudio.audioUrl !== "") {
+    if(this.userAudio) {
       this.isExpired = true
       this.record = false
 
