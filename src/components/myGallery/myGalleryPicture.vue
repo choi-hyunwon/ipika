@@ -432,6 +432,7 @@ export default {
         border-radius: 12px;
         border: solid 1px var(--gray-500);
         z-index: 100;
+        overflow: hidden;
         > a{
           display: block;
           width: 100%;
