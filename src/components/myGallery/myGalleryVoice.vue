@@ -37,7 +37,7 @@
         <ul class="voices">
           <li class="voice-g" v-for="(item, index) in list" v-model="allSize">
             <div class="recode_icon">
-              <img src="@/assets/images/common/record@2x.png" alt="녹음 아이콘" class="img-m">
+              <img src="@/assets/images/common/record-mygallery@2x.png" alt="녹음 아이콘" class="img-m">
             </div>
             <div class="recode-desc">01:00</div>
 
