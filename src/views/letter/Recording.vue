@@ -18,7 +18,7 @@
         </div>
 
         <!-- av-media:녹음 -->
-        <!--<av-media
+        <av-media
           v-show="ing && record" class="_media" ref="media"
           type="frequ"
           :line-color="setColor"
@@ -26,7 +26,7 @@
           :canv-width="canvasOptions.canvWidth"
           :canv-height="canvasOptions.canvHeight"
           :line-width="canvasOptions.canvLineWidth"
-        />-->
+        />
 
         <!-- av-line:재생 -->
         <av-line
@@ -150,10 +150,10 @@ export default {
     }
 
     this.globalUtils.tts(this.letter.stepAudioMainText + this.letter.stepAudioSubText)
-    /*navigator.mediaDevices.getUserMedia({ audio: true, video: false })
+    navigator.mediaDevices.getUserMedia({ audio: true, video: false })
       .then(media => {
         this.media = media
-      })*/
+      })
   },
   watch: {
     'arPlayer.isPlaying' : function(val) {
