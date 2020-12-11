@@ -37,17 +37,25 @@
         <ul class="voices">
           <li class="voice-g" v-for="(item, index) in list" v-model="allSize">
             <div class="recode_icon">
-              <img src="@/assets/images/common/record@2x.png" alt="재생화면" class="img-m">
+              <img src="@/assets/images/common/record-mygallery@2x.png" alt="녹음 아이콘" class="img-m">
             </div>
-            <div class="recode-desc">01:00</div>
+            <div class="recode-desc">{{ item.audioPlaytime }}</div>
 
-            <div class="gallery_img size-img"><a href="#" @click.prevent="onPlay"></a></div>
-            <div class="play_icon">
+            <div class="gallery_img size-img">
+              <a href="#" @click.prevent="onPlay"></a>
+              <div class="play_bar"></div>
+            </div>
+            <div class="play_icon" v-if="play">
               <img src="@/assets/images/common/play_dim@2x.png" alt="재생화면" class="img-m">
             </div>
-            <div class="img_title">{{ item.stageName || '스테이지' }} {{ item.stageId || '단계' }}</div>
-            <div class="img_desc">{{ item.title || '제목을 불러 올수 없습니다' }}</div>
-            <a href="#" class="icon_delete"  @click.prevent="openDelete(item.userAudioId, index)"><img src="@/assets/images/common/btn_delete@2x.png" alt="" class="img-m"></a>
+            <div class="pause_icon" v-else>
+              <img src="@/assets/images/common/pause_dim@2x.png" alt="정지화면" class="img-m">
+            </div>
+            <div class="box_title">
+              <div class="img_title">{{ item.stageName || '스테이지' }} {{ item.stageId || '단계' }}</div>
+              <div class="img_desc">{{ item.title || '제목을 불러 올수 없습니다' }}</div>
+            </div>
+            <a href="#" class="icon_delete" @click.prevent="openDelete(item.userAudioId, index)"><img src="@/assets/images/common/btn_delete@2x.png" alt="" class="img-m"></a>
           </li>
         </ul>
       </div>
@@ -222,7 +230,7 @@ export default {
             alert(result.message);
           }
         })
-    },
+    }
 
   }
 }

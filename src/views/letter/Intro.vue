@@ -24,30 +24,13 @@ import LetterHeader from '@/components/letter/LetterHeader'
 export default {
   name: 'Intro',
   components : {LetterHeader},
-  data () {
-    return {
-      isLoading : false
-    }
-  },
   mounted () {
-    this.fetchLetter();
+    this.globalUtils.tts(this.letter.stepSubejct)
   },
   computed:{
     ...mapGetters({
       letter: 'getLetter'
     })
-  },
-  methods:{
-    ...mapActions({
-      getLetter : 'getLetter'
-    }),
-    fetchLetter(){
-      this.getLetter()
-        .then(result => {
-          this.isLoading = true
-          this.globalUtils.tts(this.letter.stepSubejct)
-        })
-    }
   }
 }
 </script>

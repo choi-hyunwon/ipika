@@ -125,21 +125,27 @@ export default {
     })
   },
   mounted () {
-    // TODO; letter 조회에서 userAudio 없는 경우 어떤 식으로 값을 주는지?
-    if(this.userAudio.audioUrl !== "") {
+    if(this.userAudio) {
       this.isExpired = true
       this.record = false
 
+      /* 임시 코드 */
       // TODO: userAudio url 이 음성 파일 형태가 다른 경우 임시 작업(삭제 예정 코드)
-      if (this.userAudio.audioUrl.slice(-3, -1) !== 'mp') {
-        this.setUserAudio({
-          audioPlaytime:15,
-          audioUrl:"http://cdn.mcocoa.com/edu//steprecording/20201207122219/sample.mp3",
-          userAudioId:52
-        })
-      }
-      // TODO: set 한 다음에 아래 작업 필요
+      // if (this.userAudio.audioUrl.slice(-3, -1) !== 'mp') {
+      //   this.setUserAudio({
+      //     audioPlaytime:15,
+      //     audioUrl:"http://cdn.mcocoa.com/edu//steprecording/20201207122219/sample.mp3",
+      //     userAudioId:52
+      //   })
+      // }
+      /* // 임시 코드 */
+
       this.audioSource = this.userAudio.audioUrl
+
+      /* 임시 코드 */
+      // this.audioSource = "http://cdn.mcocoa.com/edu//steprecording/20201207122219/sample.mp3"
+      /* // 임시 코드 */
+
       this.setAudio()
     }
 
@@ -227,6 +233,7 @@ export default {
     },
     setAudio() {
       this.audioEl = this.$refs.audioPlayer.$el.firstElementChild.firstElementChild
+      this.audioEl.crossOrigin = "anonymous";
       this.audioEl.setAttribute('src', this.audioSource)
       this.audioEl.onended = () => {this.ing = false}
     },
@@ -353,7 +360,7 @@ export default {
         &.ar-icon__lg {
           background-color: #2fca56;
           background-image: url("~@/assets/images/common/record@2x.png");
-          background-size: 120%;
+          background-size: 4rem;
           > svg {
             display: none;
           }
