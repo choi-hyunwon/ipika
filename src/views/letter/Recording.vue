@@ -159,7 +159,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      letter: 'getLetter'
+      letter: 'getLetter',
       userAudio: 'getUserAudio',
     }),
     setColor (){
