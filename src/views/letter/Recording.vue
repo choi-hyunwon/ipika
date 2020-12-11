@@ -159,9 +159,6 @@ export default {
     'arPlayer.isPlaying' : function(val) {
       this.ing = val
     },
-    /*'userAudio.audioUrl' : function(val) {
-      this.
-    }*/
   },
   computed: {
     ...mapGetters({
@@ -175,7 +172,8 @@ export default {
   },
   methods : {
     ...mapActions({
-      getRecording: 'getRecording'
+      getRecording: 'getRecording',
+      getLetter: 'getLetter'
     }),
     ...mapMutations({
       setUserAudio: 'setUserAudio'
@@ -226,11 +224,22 @@ export default {
           console.log(result)
           if(result.code === '0000') this.$router.push('/Listening')
           else {
-            alert(`code : ${result.code} message : ${result.message}`)
-            this.$router.push('/Listening')
+            this.fetchLetter()
+
+            // alert(`code : ${result.code} message : ${result.message}`)
+            // this.$router.push('/Listening')
           }
         })
     },
+
+    fetchLetter(){
+      this.getLetter()
+        .then(result => {
+          alert(`code : ${result.code} message : ${result.message}`)
+          this.$router.push('/Listening')
+        })
+    },
+
     setAudio() {
       this.audioEl = this.$refs.audioPlayer.$el.firstElementChild.firstElementChild
       this.audioEl.crossOrigin = "anonymous";
