@@ -85,8 +85,9 @@ export default {
       session: 'getSession',
       canvasTimer: 'getCanvasTimer',
       subject : 'getSubject',
-      letter: 'getLetterIntro',
-      bg : 'getBg'
+      letter: 'getLetter',
+      bg : 'getBg',
+      canvasList : 'getLetterCanvasList'
     }),
     page() {
       return this.$router.currentRoute.query.page || ''
@@ -112,6 +113,7 @@ export default {
       setTimerReset: 'setTimerReset',
       setTimerPause: 'setTimerPause',
       setTimerResume: 'setTimerResume',
+      setBg: 'setBg'
     }),
     ...mapActions({
       getUserInfo: 'getUserInfo',
@@ -218,8 +220,16 @@ export default {
       this.getSubmissionLearning(data)
       .then(result => {
         if(result.code === '0000') {
-          this.$refs.autoOpenLSuccess.showConfirm = true
-          this.$refs.autoOpenLSuccess.type = 'success'
+          if(this.canvasList.length === 1) {
+            this.getLetter()
+              .then( result => {
+                this.setBg({reset : true})
+                this.$router.push('/Completion')
+              })
+          } else {
+            this.$refs.autoOpenLSuccess.showConfirm = true
+            this.$refs.autoOpenLSuccess.type = 'success'
+          }
         } else alert('드로잉 제출 실패')
       })
     }

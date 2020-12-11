@@ -128,7 +128,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      letter: 'getLetterIntro'
+      letter: 'getLetter'
     }),
     setColor (){
       if(this.ing && this.record) return '#f53c32'

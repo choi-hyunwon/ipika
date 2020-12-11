@@ -28,7 +28,7 @@ export default {
   components: {LetterHeader},
   computed:{
     ...mapGetters({
-      letter: 'getLetterIntro'
+      letter: 'getLetter'
     })
   },
   created() {

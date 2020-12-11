@@ -63,6 +63,16 @@ export const mutations = {
   },
   /* // timer */
   setLetter(state, letter){
+    state.canvasList = []
+    letter.stepPictureList.forEach(function(pictureList){
+      if (pictureList.drawEnded === 'N') {
+        letter.canvasList.forEach(function(canvasList,j){
+          if (canvasList.imageId === pictureList.canvasImageId) {
+            state.canvasList.push(canvasList)
+          }
+        });
+      }
+    });
     state.letter = letter
   },
   setPlayerUrl(state, url){
