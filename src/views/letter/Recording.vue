@@ -360,7 +360,7 @@ export default {
         &.ar-icon__lg {
           background-color: #2fca56;
           background-image: url("~@/assets/images/common/record@2x.png");
-          background-size: 120%;
+          background-size: 4rem;
           > svg {
             display: none;
           }
