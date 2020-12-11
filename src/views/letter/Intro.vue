@@ -34,7 +34,7 @@ export default {
   },
   computed:{
     ...mapGetters({
-      letter: 'getLetterIntro'
+      letter: 'getLetter'
     })
   },
   methods:{

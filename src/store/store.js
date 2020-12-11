@@ -42,7 +42,7 @@ export default new Vuex.Store({
      * API session options
      */
     session: {
-      'user_id': 'domfamtest1211_1',
+      'user_id': 'domfamtest1211_8',
       'user_auth_key': 'abcdefghijklmnopqrstuvwxyz0123456789',
       'Content_Language': 'ko',
       'device_type': '1001'
@@ -76,7 +76,8 @@ export default new Vuex.Store({
       active : false,
       isShow : false,
     },
-    submission : {}
+    submission : {},
+    canvasList : []
   },
   /**
    * global로 사용하는 getters
@@ -113,23 +114,14 @@ export default new Vuex.Store({
     getPlayerOptions: state => {
       return state.playerOptions
     },
-    getLetterIntro: state => {
-      return {
-        stageId : state.letter.stageId,
-        stepId : state.letter.stepId,
-        stageName : state.letter.stageName,
-        stepSubejct : state.letter.stepSubejct,
-        stepImageUrl : state.letter.stepImageUrl,
-        stepAudioMainText : state.letter.stepAudioMainText,
-        stepAudioSubText : state.letter.stepAudioSubText,
-        completeText : state.letter.completeText
-      }
+    getLetter: state => {
+      return state.letter
     },
     getLetterAudioList : state => {
       return state.letter.audioCharacterList
     },
     getLetterCanvasList : state => {
-      return state.letter.canvasList
+      return state.canvasList
     },
     getBg :state => {
       return state.bg
