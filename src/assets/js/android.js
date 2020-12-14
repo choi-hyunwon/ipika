@@ -20,6 +20,7 @@ export class Android {
    * @param data
    */
   onBackPressed(){
+    //todo : 메인 홈인 경우 exit
     Vue.prototype.Router.go(-1)
   }
 }

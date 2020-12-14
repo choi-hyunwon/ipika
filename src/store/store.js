@@ -42,10 +42,10 @@ export default new Vuex.Store({
      * API session options
      */
     session: {
-      'user_id': 'domfamtest1211_11',
+      'user_id': 'addd2d',
       'user_auth_key': 'abcdefghijklmnopqrstuvwxyz0123456789',
       'Content_Language': 'ko',
-      'device_type': '1001'
+      'device_type': '1002'
     },
     subject: {},
     userGallery: {},
