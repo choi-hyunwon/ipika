@@ -45,7 +45,7 @@ export default {
       getDiagnoseResult: 'getDiagnoseResult'
     }),
     ...mapMutations({
-      setUserInfo : 'setUserInfo'
+      setSession : 'setSession'
     }),
     fetchDiagnoseResult(){
       this.getDiagnoseResult()

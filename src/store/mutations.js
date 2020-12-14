@@ -3,10 +3,11 @@ export const mutations = {
     state.userinfo = userInfo
   },
   setSession (state, session) {
-    state.session = {
-      ...state.session,
-      ...session
-    }
+    state.session = session
+    // state.session = {
+    //   ...state.session,
+    //   ...session
+    // }
   },
   setSubject (state, subject) {
     state.subject = subject
