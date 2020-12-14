@@ -73,12 +73,18 @@ export default {
     // TODO: 프리드로잉 팝업 퍼블리싱 용
     if(this.page === '') this.$refs.register.showRegister=true
 
-    if (localStorage.getItem('isReload') === 'true' || localStorage.getItem('isReload') === undefined) window.location.reload()
-    else this.isLoading = true
+    // if (localStorage.getItem('isReload') === 'true' || localStorage.getItem('isReload') === undefined) window.location.reload()
+    // else this.isLoading = true
+    this.isLoading = true
     ;(async () => {
       if(this.page ==='diagnose') await this.fetchSubject()
       else if(this.page === 'letter') await this.fetchLetter()
     })()
+
+
+  },
+  updated () {
+    this.readyCanvas()
   },
   computed: {
     ...mapGetters({
@@ -232,6 +238,51 @@ export default {
           }
         } else alert('드로잉 제출 실패')
       })
+    },
+    setBackgrounImage(){
+      WILL.setBackground(this.canvasList[0].tabletImageUrl, 'url')
+      this.bg.imageId = this.canvasList[0].imageId
+      this.bg.imageName = this.canvasList[0].imageName
+    },
+
+    readyCanvas(){
+      layout.init()
+      initEngine()
+
+      $('body').addClass(WILL.type.name)
+
+      if (location.pathname.containsIgnoreCase('ToolConfigurator')) {
+        $('body').addClass('CONFIGURATOR')
+        document.getElementById('Eraser').src = 'Images/btn_toolconfig_eraser.png'
+        toolConfigurator.init()
+      }
+
+      if (location.pathname.containsIgnoreCase('RTC')) {
+        // var rtc = window.rtc || window.client;
+
+        // rtc.url = "ws://rtc-eu.cloudapp.net:80/api/web";
+        setTimeout(function () {
+          var COLLABORATORS_MAX = 128
+
+          var server = tools.getURLParam('server')
+          if (server) client.URL = client[server.toUpperCase()]
+
+          // barni - 115392
+          // bsenglish - 190638
+          // if (tools.getURLParam("Location")) client.url = client[tools.getURLParam("Location")];
+          client.init(parseInt(tools.getURLParam("UserID") || 115392, 10), tools.getURLParam("SessionID") || "0f8fad5b-d9cb-469f-a165-70867728950e");
+        }, 2000);
+
+        menu.clipboard.init();
+      }
+
+      if (tools.getURLParam("multicolors")) {
+        layout.multicolors();
+      }
+
+      $("nav").css("visibility", "visible");
+      setTimeout(() => this.setBackgrounImage(), 3000)
+      console.log('캔버스 시작')
     }
   }
 }
