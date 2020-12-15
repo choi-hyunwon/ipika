@@ -6,7 +6,7 @@
       <!-- 화면 좌측 상단 텍스트 영역 -->
       <div class="txt-area">
         <p class="txt-lg" v-html="letter.stepAudioMainText"></p>
-        <p class="txt-sm">{{letter.stepAudioSubText}}</p>
+        <p class="txt-sm">{{ letter.stepAudioSubText }}</p>
       </div>
 
       <!-- 이퀄라이징 영역 (av-media, av-line) -->
@@ -85,59 +85,71 @@
             <img src="@/assets/images/common/refresh_default@2x.png" alt="">
           </button>
           <button v-else @click="globalUtils.confirm(slotProps,'record')" style="position: absolute; bottom: 0">
-            <img src="@/assets/images/common/refresh_active@2x.png" alt=""></button>
+            <img src="@/assets/images/common/refresh_active@2x.png" alt="">
+          </button>
         </Confirm>
       </div>
 
       <!-- 우측 하단 '다했어요!' 버튼 -->
       <div class="btn-area">
+        <button class="btn btn-dark" @click="$router.push('/Listening')">건너뛰기</button>
         <button v-if="!record" @click="fetchRecording" class="btn btn-dark">다했어요!</button>
         <button v-if="record" class="btn btn-dark disabled">다했어요!</button>
       </div>
 
     </div>
+
+    <!-- 공통 알림 popup-->
+    <Alert ref="deviceFindFail" v-slot="slotProps" :boldText="'녹음을 할 수 있는 장치가 없어요'" :text="'장치 설치를 하고 다시 해볼까요?'" :buttonText ="'확인'"/>
+
   </div>
 </template>
 
 <script>
 import LetterHeader from '@/components/letter/LetterHeader'
 import Confirm from '@/components/popup/Confirm'
+import Alert from '@/components/popup/Alert'
 import { mapGetters, mapActions, mapMutations } from 'vuex'
 
 export default {
   name: 'recording',
-  components: {Confirm, LetterHeader},
-  data(){
-    return{
+  components: {
+    Confirm,
+    LetterHeader,
+    Alert
+  },
+  data () {
+    return {
       media: null,
-      ing : false,
-      record : true,
-      file : {},
+      ing: false,
+      record: true,
+      file: {},
       canvasOptions: {
-        canvWidth : 1260, // TODO::: 동적 입력 확인 필요..
+        canvWidth: 1260, // TODO::: 동적 입력 확인 필요..
         canvHeight: 270,
         canvLineWidth: 15,
       },
 
-      arPlayer : null,
+      arPlayer: null,
 
-      audioEl : null,
-      audioSource : null,
-      isAudioSet : false,
+      audioEl: null,
+      audioSource: null,
+      isAudioSet: false,
 
       isExpired: false,
+      error: false
     }
   },
-  created() {
+  created () {
     // window.z = this
 
-    this.$EventBus.$on('back',this.goBack)
+    this.$EventBus.$on('back', this.goBack)
     this.$EventBus.$on('next', () => {
       this.record = true
     })
   },
   mounted () {
-    if(this.userAudio) {
+    if (this.userAudio) {
       this.isExpired = true
       this.record = false
 
@@ -162,13 +174,25 @@ export default {
     }
 
     this.globalUtils.tts(this.letter.stepAudioMainText + this.letter.stepAudioSubText)
-    navigator.mediaDevices.getUserMedia({ audio: true, video: false })
-      .then(media => {
-        this.media = media
+
+    const self = this
+    navigator.getUserMedia({
+        audio: true,
+        video: false
+      },
+      function (stream) {
+        console.log(stream)
+        self.media = stream
+      },
+      function (err) {
+        console.log(err)
+        self.$refs.deviceFindFail.showAlert = true
+        self.$refs.deviceFindFail.type = "common"
+        self.error = true
       })
   },
   watch: {
-    'arPlayer.isPlaying' : function(val) {
+    'arPlayer.isPlaying': function (val) {
       this.ing = val
     },
   },
@@ -177,12 +201,13 @@ export default {
       letter: 'getLetter',
       userAudio: 'getUserAudio',
     }),
-    setColor (){
-      if(this.ing && this.record) return '#f53c32'
-      else if(this.ing && !this.record) return '#1585ff'
+    setColor () {
+      if (this.ing && this.record) {
+        return '#f53c32'
+      } else if (this.ing && !this.record) return '#1585ff'
     }
   },
-  methods : {
+  methods: {
     ...mapActions({
       getRecording: 'getRecording',
       getLetter: 'getLetter'
@@ -193,18 +218,18 @@ export default {
     goBack () {
       this.$router.push('/Watching')
     },
-    startRecord() {
+    startRecord () {
       this.ing = true
     },
-    stopRecord() {
+    stopRecord () {
       this.ing = false
       this.record = false
       setTimeout(() => {
-        this.setRecentRecord();
-      }, 500);
+        this.setRecentRecord()
+      }, 500)
     },
-    setRecentRecord() {
-      const recorder = this.$refs.recorder;
+    setRecentRecord () {
+      const recorder = this.$refs.recorder
 
       // this.arPlayer = recorder.$children[2]
       recorder.$children.forEach(val => {
@@ -213,8 +238,8 @@ export default {
       })
 
       if (recorder) {
-        const top = recorder.recordList.length - 1;
-        recorder.selected = recorder.recordList[top];
+        const top = recorder.recordList.length - 1
+        recorder.selected = recorder.recordList[top]
         this.file = recorder.recordList[top]
         this.audioSource = this.file.url
         this.isAudioSet = true
@@ -222,8 +247,8 @@ export default {
         this.setAudio()
       }
     },
-    fetchRecording(){
-      if(this.isExpired) {
+    fetchRecording () {
+      if (this.isExpired) {
         return this.$router.push('/Listening')
       }
 
@@ -234,32 +259,33 @@ export default {
       this.getRecording(data)
         .then(result => {
           console.log(result)
-          if(result.code === '0000') {
+          if (result.code === '0000') {
             this.fetchLetter()
-          }
-          else {
+          } else {
             alert(`code : ${result.code} message : ${result.message}`)
             this.$router.push('/Listening')
           }
         })
     },
 
-    async fetchLetter(){
+    async fetchLetter () {
       this.getLetter()
         .then(result => {
           this.$router.push('/Listening')
         })
     },
 
-    setAudio() {
+    setAudio () {
       // this.audioEl = this.$refs.audioPlayer.$el.firstElementChild.firstElementChild
       this.audioEl = this.$refs.audioPlayer
-      this.audioEl.crossOrigin = "anonymous";
+      this.audioEl.crossOrigin = 'anonymous'
       this.audioEl.setAttribute('src', this.audioSource)
-      this.audioEl.onended = () => {this.ing = false}
+      this.audioEl.onended = () => {
+        this.ing = false
+      }
     },
-    playOrPause(){
-      if(!this.record) {
+    playOrPause () {
+      if (!this.record) {
         !this.ing ? this.audioEl.play() : this.audioEl.pause()
         this.ing = !this.ing
       }
@@ -273,10 +299,12 @@ export default {
   position: relative;
   width: 100%;
   height: calc(100% - 12rem);
+
   .txt-area {
     padding-top: 8rem;
     padding-left: 10rem;
     margin-bottom: 55.2rem;
+
     .txt-lg {
       font-family: var(--bold);
       font-size: 4rem;
@@ -285,6 +313,7 @@ export default {
       letter-spacing: -0.03rem;
       margin-bottom: 1.2rem;
     }
+
     .txt-sm {
       font-size: 3.2rem;
       line-height: 4.8rem;
@@ -292,6 +321,7 @@ export default {
       color: var(--gray-black);
     }
   }
+
   .record-area {
     position: absolute;
     width: 100%;
@@ -310,15 +340,18 @@ export default {
       background-repeat: no-repeat;
       background-position: center;
       background-size: 100%;
+
       &.recording {
         background-image: url("~@/assets/images/common/equalizer-red@2x.png");
       }
+
       &.playing {
         background-image: url("~@/assets/images/common/equalizer-blue@2x.png");
       }
     }
 
   }
+
   .play-area {
     position: absolute;
     bottom: 10.3rem;
@@ -329,16 +362,22 @@ export default {
       width: 12rem;
       height: 12rem;
       margin-left: 14.1rem;
+
       img {
         width: 100%;
         height: 100%;
       }
     }
   }
+
   .btn-area {
     position: absolute;
     bottom: 10rem;
     right: 10rem;
+
+    .btn {
+      margin-left: 10px;
+    }
   }
 }
 
@@ -350,11 +389,13 @@ export default {
   .ar-records {
     display: none;
   }
+
   .ar-player {
     .ar-player-bar {
       display: none;
     }
   }
+
   .ar-recorder__duration {
     display: none;
   }
@@ -374,7 +415,7 @@ export default {
     background-position: center;
     background-size: 50%;
 
-    >svg {
+    > svg {
       //display: none;
     }
 
@@ -397,21 +438,25 @@ export default {
           background-color: #2fca56;
           background-image: url("~@/assets/images/common/record@2x.png");
           background-size: 4rem;
+
           > svg {
             display: none;
           }
         }
+
         &.ar-icon__sm.ar-recorder__stop {
           display: none;
         }
       }
     }
+
     .ar-player {
       .ar-player-actions {
         display: none;
       }
     }
   }
+
   .play-btns {
     display: none;
   }
@@ -425,21 +470,25 @@ export default {
         &.ar-icon__lg.ar-icon--rec {
           display: none;
         }
+
         &.ar-icon__sm.ar-recorder__stop {
           background-image: url("~@/assets/images/common/freeze@2x.png");
           border: 5px solid red;
+
           > svg {
             display: none;
           }
         }
       }
     }
+
     .ar-player {
       .ar-player-actions {
         display: none;
       }
     }
   }
+
   .play-btns {
     display: none;
   }
@@ -453,11 +502,13 @@ export default {
         &.ar-icon__lg {
           display: none;
         }
+
         &.ar-icon__sm.ar-recorder__stop {
           display: none;
         }
       }
     }
+
     .ar-player {
       .ar-icon.ar-icon__lg.ar-player__play {
         display: none;
@@ -474,11 +525,13 @@ export default {
         &.ar-icon__lg {
           display: none;
         }
+
         &.ar-icon__sm.ar-recorder__stop {
           display: none;
         }
       }
     }
+
     .ar-player {
       .ar-icon.ar-icon__lg.ar-player__play.ar-player__play--active {
         display: none;
@@ -506,6 +559,7 @@ export default {
     background-repeat: no-repeat;
     background-position: center;
   }
+
   &.pause {
     cursor: pointer;
     background-color: transparent !important;
@@ -518,11 +572,12 @@ export default {
     }
 
     ::v-deep.ar {
-      & #play>svg {
+      & #play > svg {
         display: none;
       }
     }
   }
+
   & .play-btns {
     width: 100%;
     height: 100%;
