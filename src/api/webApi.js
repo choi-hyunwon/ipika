@@ -172,6 +172,19 @@ export default class WebApi {
       data: data
     })
   }
+  /**
+   * 학습 : 드로잉제출
+   *
+   * api/learning/submission
+   *
+   */
+  getSubmissionFree (data) {
+    return this.request('api/drawing/register', {
+      method: 'POST',
+      data: data
+    })
+  }
+
 
 
   /**

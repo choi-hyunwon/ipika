@@ -174,6 +174,13 @@ export const actions = {
         return data
       })
   },
+  getSubmissionFree({ commit }, options) {
+    return webApi.getSubmissionFree(options)
+      .then(data => {
+        return data
+      })
+  },
+
   getRecording({ commit }, options) {
     return webApi.getRecording(options)
       .then(data => {

@@ -37,6 +37,7 @@ import Confirm from '@/components/popup/Confirm'
 import CanvasHeader from '@/components/CanvasHeader'
 import Alert from '@/components/popup/Alert'
 import Register from '@/components/popup/Register'
+import store from '@/store/store'
 
 export default {
   name: 'Canvas',
@@ -63,14 +64,17 @@ export default {
     this.$EventBus.$on('back',this.goBack)
     this.$EventBus.$on('close', this.close);
     this.$EventBus.$on('next', this.exportPNG);
+    this.$EventBus.$on('free', (title)=> {
+      this.freeTitle = title
+      this.exportPNG()
+    });
     this.$EventBus.$on('bgPopup',this.toggleBg);
+    this.$EventBus.$on('freeName',this.setFreeName);
     if(this.page==='letter'){
       this.bgPopup = true
     }
   },
   mounted () {
-    // TODO: 프리드로잉 팝업 퍼블리싱 용
-    if(this.page === '') this.$refs.register.showRegister=true
 
     if (localStorage.getItem('isReload') === 'true' || localStorage.getItem('isReload') === undefined) window.location.reload()
     else this.isLoading = true
@@ -116,10 +120,10 @@ export default {
       setBg: 'setBg'
     }),
     ...mapActions({
-      getUserInfo: 'getUserInfo',
       getSubject: 'getSubject',
       getLetter : 'getLetter',
       getSubmissionLearning : 'getSubmissionLearning',
+      getSubmissionFree : 'getSubmissionFree',
       getSubmission : 'getSubmission'
     }),
     reload(){
@@ -158,21 +162,29 @@ export default {
         let file = new File([blob], "my_image.png",{type:"image/png", lastModified:new Date()})
 
         self.saveFile(URL.createObjectURL(blob))
-
+        //미완성
         if (file.size <= 14500) {
           alert('아직 그림이 그려지지 않았어요')
           return false
         }
+        //진단학습
         if (self.page === 'diagnose') {
           const data = new FormData()
           data.append('userPicture', blob, 'rain.png')
           self.fetchSubmission(data) //진단 테스트 드로잉 제출 API
+          //학습교제
         } else if (self.page === 'letter') {
           const data = new FormData()
           data.append('stepId', self.letter.stepId )
           data.append('stepPicture', blob, 'rain.png')
           data.append('imageId', self.bg.imageId)
           self.fetchSubmissionLearning(data) //학습 정보 드로잉 제출 API
+          //프리 드로잉
+        } else {
+          const data = new FormData()
+          data.append('title', self.freeTitle || store.getters.getSession.name + ' 프리드로잉')
+          data.append('files', blob, 'rain.png')
+          self.fetchSubmissionFree(data) //프리 드로잉 제출 API
         }
       })
     },
@@ -201,6 +213,9 @@ export default {
         this.setBackgrounImage()
       }
 
+    },
+    setFreeName(){
+      this.$refs.register.showRegister=true
     },
     async fetchSubject () {
       this.getSubject()
@@ -236,6 +251,16 @@ export default {
               this.$refs.autoOpenLSuccess.showConfirm = true
               this.$refs.autoOpenLSuccess.type = 'success'
             }
+          } else alert('드로잉 제출 실패')
+        })
+    },
+    fetchSubmissionFree(data){
+      const self = this;
+      this.getSubmissionFree(data)
+        .then(result => {
+          if(result.code === '0000') {
+            alert('드로잉 제출 되었습니다.')
+            this.$router.push('/PabloMain')
           } else alert('드로잉 제출 실패')
         })
     },

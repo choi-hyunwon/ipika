@@ -716,8 +716,8 @@
               <b-button  @click="globalUtils.confirm(slotProps,'diagnose')" class="btn btn-blue btn-lg">완료</b-button>
             </Confirm>
             <b-button v-else-if="page==='letter'" @click="setEvent" class="btn btn-blue btn-lg" :class="{'disabled' : !bg.imageId}">완료</b-button>
-            <!--TODO : 프리드로잉-->
-            <b-button v-else class="btn btn-blue btn-lg">완료</b-button>
+            <!--프리드로잉-->
+            <b-button v-else @click="$EventBus.$emit('freeName')" class="btn btn-blue btn-lg">완료</b-button>
           </div>
         </div>
       </div>
@@ -772,7 +772,8 @@
     });
     this.$EventBus.$on('visibleBg', () => {
       if(!this.bg.isShow) this.setLayerBgSelect(this.bg.tabletImageUrl)
-      else this.setLayerBgSelect('https://colorate.azurewebsites.net/SwatchColor/FFFFFF')
+      else WILL.setBackground('paper_01')
+      //this.setLayerBgSelect('https://colorate.azurewebsites.net/SwatchColor/FFFFFF')
     });
   },
   computed : {

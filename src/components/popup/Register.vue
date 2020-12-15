@@ -34,12 +34,10 @@
         어떤 그림인지 파블로에게 알려주세요
       </p>
       <form>
-        <input type="text" class="form-control active" id="text" placeholder="여기에 입력해주세요">
+        <input type="text" class="form-control active" id="text" v-model="title" placeholder="여기에 입력해주세요">
       </form>
       <template #modal-footer="{ ok }">
-        <router-link to="/canvas">
-          <button class="btn submit_button" variant="btn black btn-block" @click="ok()">등록하기</button>
-        </router-link>
+        <button class="btn submit_button" variant="btn black btn-block" @click="registerFree">등록하기</button>
       </template>
     </b-modal>
 
@@ -55,6 +53,7 @@ export default {
       showRegister : false,
       autoModal : true,
       type : "",
+      title : ''
     }
   },
   props:{
@@ -74,11 +73,18 @@ export default {
   methods: {
     toggleRegister (type, topic) {
       this.showRegister = !this.showRegister;
-      this.type = type;
+      this.type = type
       this.setTimerPause()
     },
     ok () {
-
+    },
+    registerFree () {
+      if(this.title === '') {
+        alert('제목이 비어있습니다.')
+        return false;
+      }
+      this.showRegister = false
+      this.$EventBus.$emit('free', this.title)
     }
   }
 }
