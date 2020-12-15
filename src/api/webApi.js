@@ -117,12 +117,10 @@ export default class WebApi {
    * 마이갤러리 상단 부분의 정보 조회
    * pictureId:String-그림ID
    */
-  getUserGalleryDetele (options) {
-    return this.request('api/users/gallery/delete/5', {
+  getUserGalleryDetele (data) {
+    return this.request('api/users/gallery/delete', {
       method: 'DELETE',
-      data: {
-        pictureId: options.pictureId
-      }
+      data:data
     })
   }
 

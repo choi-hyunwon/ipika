@@ -160,8 +160,7 @@ export default {
         this.setBg({tabletImageUrl : 'https://colorate.azurewebsites.net/SwatchColor/FFFFFF'}, true)
       } else if (this.type === 'checkRed') {
         this.showConfirm = false
-        // alert('파블로 서비스 종료 연동 필요')
-        window.android.exit();
+        this.Android.appExit()
       } else if (this.type === 'timeOut') {
         this.type = 'Complete'
         this.timeOut.completeText = "다 그렸나요? </br> 제출하면 수정할수 없어요"

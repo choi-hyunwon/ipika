@@ -73,12 +73,22 @@ export default {
     // TODO: 프리드로잉 팝업 퍼블리싱 용
     if(this.page === '') this.$refs.register.showRegister=true
 
-    if (localStorage.getItem('isReload') === 'true' || localStorage.getItem('isReload') === undefined) window.location.reload()
-    else this.isLoading = true
+    // if (localStorage.getItem('isReload') === 'true' || localStorage.getItem('isReload') === undefined)
+    // else this.isLoading = true
+
+
+    console.log('mounted')
+    this.readyCanvas()
+
     ;(async () => {
       if(this.page ==='diagnose') await this.fetchSubject()
       else if(this.page === 'letter') await this.fetchLetter()
     })()
+
+
+  },
+  updated () {
+
   },
   computed: {
     ...mapGetters({
@@ -96,13 +106,13 @@ export default {
   watch:{
     'canvasTimer.timeOver':function(){
       if(this.canvasTimer.timeOver===true)
-      this.$refs.timerConfirm.showConfirm=true
+        this.$refs.timerConfirm.showConfirm=true
       this.$refs.timerConfirm.type='timeOut'
     },
     'isLoading':function(){
       if(this.isLoading&&this.page==='diagnose'){
-          this.$refs.autoOpen.showAlert=true
-          this.$refs.autoOpen.type='diagnose'
+        this.$refs.autoOpen.showAlert=true
+        this.$refs.autoOpen.type='diagnose'
       }
     },
   },
@@ -208,30 +218,75 @@ export default {
     fetchSubmission(data){
       const self = this;
       this.getSubmission(data)
-      .then(result => {
-        if(result.code === '0000') {
-          this.$refs.autoOpenSuccess.showAlert = true
-          this.$refs.autoOpenSuccess.type = 'success'
-        } else alert(`code : ${result.code} message : ${result.message}`)
-      })
+        .then(result => {
+          if(result.code === '0000') {
+            this.$refs.autoOpenSuccess.showAlert = true
+            this.$refs.autoOpenSuccess.type = 'success'
+          } else alert(`code : ${result.code} message : ${result.message}`)
+        })
     },
     fetchSubmissionLearning(data){
       const self = this;
       this.getSubmissionLearning(data)
-      .then(result => {
-        if(result.code === '0000') {
-          if(this.canvasList.length === 1) {
-            this.getLetter()
-              .then( result => {
-                this.setBg({reset : true})
-                this.$router.push('/Completion')
-              })
-          } else {
-            this.$refs.autoOpenLSuccess.showConfirm = true
-            this.$refs.autoOpenLSuccess.type = 'success'
-          }
-        } else alert('드로잉 제출 실패')
-      })
+        .then(result => {
+          if(result.code === '0000') {
+            if(this.canvasList.length === 1) {
+              this.getLetter()
+                .then( result => {
+                  this.setBg({reset : true})
+                  this.$router.push('/Completion')
+                })
+            } else {
+              this.$refs.autoOpenLSuccess.showConfirm = true
+              this.$refs.autoOpenLSuccess.type = 'success'
+            }
+          } else alert('드로잉 제출 실패')
+        })
+    },
+    setBackgrounImage(){
+      WILL.setBackground(this.canvasList[0].tabletImageUrl, 'url')
+      this.bg.imageId = this.canvasList[0].imageId
+      this.bg.imageName = this.canvasList[0].imageName
+    },
+
+    readyCanvas(){
+      layout.init()
+      initEngine()
+
+      $('body').addClass(WILL.type.name)
+      //
+      // if (location.pathname.containsIgnoreCase('ToolConfigurator')) {
+      //   $('body').addClass('CONFIGURATOR')
+      //   document.getElementById('Eraser').src = 'Images/btn_toolconfig_eraser.png'
+      //   toolConfigurator.init()
+      // }
+      //
+      // if (location.pathname.containsIgnoreCase('RTC')) {
+      //   // var rtc = window.rtc || window.client;
+      //
+      //   // rtc.url = "ws://rtc-eu.cloudapp.net:80/api/web";
+      //   setTimeout(function () {
+      //     var COLLABORATORS_MAX = 128
+      //
+      //     var server = tools.getURLParam('server')
+      //     if (server) client.URL = client[server.toUpperCase()]
+      //
+      //     // barni - 115392
+      //     // bsenglish - 190638
+      //     // if (tools.getURLParam("Location")) client.url = client[tools.getURLParam("Location")];
+      //     client.init(parseInt(tools.getURLParam("UserID") || 115392, 10), tools.getURLParam("SessionID") || "0f8fad5b-d9cb-469f-a165-70867728950e");
+      //   }, 2000);
+      //
+      //   menu.clipboard.init();
+      // }
+      //
+      // if (tools.getURLParam("multicolors")) {
+      //   layout.multicolors();
+      // }
+
+      $("nav").css("visibility", "visible");
+      setTimeout(() => this.setBackgrounImage(), 3000)
+      console.log('캔버스 시작')
     }
   }
 }
