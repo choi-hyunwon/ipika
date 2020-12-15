@@ -15,7 +15,10 @@
         <div class="symbol"><img src="@/assets/images/common/Symbol@2x.png" alt=""></div>
       <div class="img-size">
       <img src="@/assets/images/common/Group 1388@2x.png" alt="" class="img">
+        <p>모든 학습의 기본 파블로<br>
+          질문하고 대화하는 미술교육 서비스</p>
       </div>
+
         <div class="btn-group">
           <router-link v-if="resultCode=== '0000'" to="/PabloMain" class="btn btn-dark">시작하기</router-link>
           <router-link v-else to="/canvas?page=diagnose" class="btn btn-dark">시작하기</router-link>
@@ -57,7 +60,6 @@ export default {
 
       try {
         const Vari = this.Android.getInitVariables()
-        // const Vari = '{"grade":"5","name":"홈런******","user_id":"1954536","user_auth_key":"V0147eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlY290ZXN0MiIsInVzZXJJZCI6MTk1NDUzNiwibG9naW5BcyI6ZmFsc2UsImlhdCI6MTYwNzk0ODgwOCwiZXhwIjoxNjA4NTUzNjA4fQ.sTVDmHc-j68H5mbkGBKQFEbk3B-y7eKHNG4PgBbzzuiCTvsXqwt5mARkl63c2C8D1bXZ-LPVizvdHUTIntf0VQ","device_type":"1002"}'
         const obj = JSON.parse(Vari)
         console.log(obj)
         this.setSession(obj)
@@ -97,15 +99,20 @@ export default {
 .content {
 
   .btn-group {
-    position: absolute;
-    top: 66rem;
-    left: 88rem;
+    display: block;
+    text-align: center;
   }
   .img-size{
     width: 120.8rem;
-    height: 19.2rem;
-    margin: 0 auto;
-    margin-top: 29.4rem;
+    //height: 19.2rem;
+    margin: 29.4rem auto 5.4rem;
+    p {
+      text-align: center;
+      font-size: 24px;
+      font-weight: 500;
+      line-height: 1.67;
+      color: var(--gray-700);
+    }
   }
 
   .img {
