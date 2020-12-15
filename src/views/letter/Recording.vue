@@ -232,22 +232,21 @@ export default {
       data.append('recordingAudio', this.file.blob)
 
       this.getRecording(data)
-        .then(result =>{
+        .then(result => {
           console.log(result)
-          if(result.code === '0000') this.$router.push('/Listening')
-          else {
+          if(result.code === '0000') {
             this.fetchLetter()
-
-            // alert(`code : ${result.code} message : ${result.message}`)
-            // this.$router.push('/Listening')
+          }
+          else {
+            alert(`code : ${result.code} message : ${result.message}`)
+            this.$router.push('/Listening')
           }
         })
     },
 
-    fetchLetter(){
+    async fetchLetter(){
       this.getLetter()
         .then(result => {
-          alert(`code : ${result.code} message : ${result.message}`)
           this.$router.push('/Listening')
         })
     },
