@@ -2,7 +2,6 @@
   <div class="wrap">
     <!--   canvas 헤더 -->
     <CanvasHeader v-if="isLoading"></CanvasHeader>
-
     <!--   wacom 라이브러리 -->
     <Wacom ref="wacom" :drawer="drawer"></Wacom>
 
@@ -60,11 +59,11 @@ export default {
     this.$EventBus.$on('toggleDrawer', (drawer) => {
       this.drawer = drawer;
     });
+    this.$EventBus.$on('main',this.goMain)
     this.$EventBus.$on('back',this.goBack)
     this.$EventBus.$on('close', this.close);
     this.$EventBus.$on('next', this.exportPNG);
     this.$EventBus.$on('bgPopup',this.toggleBg);
-
     if(this.page==='letter'){
       this.bgPopup = true
     }
@@ -75,6 +74,7 @@ export default {
 
     if (localStorage.getItem('isReload') === 'true' || localStorage.getItem('isReload') === undefined) window.location.reload()
     else this.isLoading = true
+
     ;(async () => {
       if(this.page ==='diagnose') await this.fetchSubject()
       else if(this.page === 'letter') await this.fetchLetter()
@@ -96,13 +96,13 @@ export default {
   watch:{
     'canvasTimer.timeOver':function(){
       if(this.canvasTimer.timeOver===true)
-      this.$refs.timerConfirm.showConfirm=true
+        this.$refs.timerConfirm.showConfirm=true
       this.$refs.timerConfirm.type='timeOut'
     },
     'isLoading':function(){
       if(this.isLoading&&this.page==='diagnose'){
-          this.$refs.autoOpen.showAlert=true
-          this.$refs.autoOpen.type='diagnose'
+        this.$refs.autoOpen.showAlert=true
+        this.$refs.autoOpen.type='diagnose'
       }
     },
   },
@@ -137,6 +137,9 @@ export default {
     goBack(){
       this.$router.push('/Listening')
     },
+    goMain(){
+      this.$router.push('/PabloMain')
+    },
     close(){
       this.setTimerReset()
       this.$router.push('/')
@@ -166,7 +169,7 @@ export default {
           self.fetchSubmission(data) //진단 테스트 드로잉 제출 API
         } else if (self.page === 'letter') {
           const data = new FormData()
-          data.append('stepId', self.letter.stageId )
+          data.append('stepId', self.letter.stepId )
           data.append('stepPicture', blob, 'rain.png')
           data.append('imageId', self.bg.imageId)
           self.fetchSubmissionLearning(data) //학습 정보 드로잉 제출 API
@@ -194,7 +197,10 @@ export default {
         this.setTimerStart();
       }else if(this.page==='letter'){
         this.bgPopup=false
+
+        this.setBackgrounImage()
       }
+
     },
     async fetchSubject () {
       this.getSubject()
@@ -208,30 +214,39 @@ export default {
     fetchSubmission(data){
       const self = this;
       this.getSubmission(data)
-      .then(result => {
-        if(result.code === '0000') {
-          this.$refs.autoOpenSuccess.showAlert = true
-          this.$refs.autoOpenSuccess.type = 'success'
-        } else alert(`code : ${result.code} message : ${result.message}`)
-      })
+        .then(result => {
+          if(result.code === '0000') {
+            this.$refs.autoOpenSuccess.showAlert = true
+            this.$refs.autoOpenSuccess.type = 'success'
+          } else alert(`code : ${result.code} message : ${result.message}`)
+        })
     },
     fetchSubmissionLearning(data){
       const self = this;
       this.getSubmissionLearning(data)
-      .then(result => {
-        if(result.code === '0000') {
-          if(this.canvasList.length === 1) {
-            this.getLetter()
-              .then( result => {
-                this.setBg({reset : true})
-                this.$router.push('/Completion')
-              })
-          } else {
-            this.$refs.autoOpenLSuccess.showConfirm = true
-            this.$refs.autoOpenLSuccess.type = 'success'
-          }
-        } else alert('드로잉 제출 실패')
-      })
+        .then(result => {
+          if(result.code === '0000') {
+            if(this.canvasList.length === 1) {
+              this.getLetter()
+                .then( result => {
+                  this.setBg({reset : true})
+                  this.$router.push('/Completion')
+                })
+            } else {
+              this.$refs.autoOpenLSuccess.showConfirm = true
+              this.$refs.autoOpenLSuccess.type = 'success'
+            }
+          } else alert('드로잉 제출 실패')
+        })
+    },
+    setBackgrounImage(){
+      // WILL.setBackground(this.canvasList[0].tabletImageUrl, 'url')
+      // this.bg.imageId = this.canvasList[0].imageId
+      // this.bg.imageName = this.canvasList[0].imageName
+
+      WILL.clear()
+      this.$EventBus.$emit('setBg', this.canvasList[0] , false)
+
     }
   }
 }

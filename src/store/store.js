@@ -36,13 +36,13 @@ export default new Vuex.Store({
       name: '홈런초등테스트1',
       key: '1604311',
       grade: 0,
-      device_type: "1002"
+      device_type: "1001"
     },
     /**
      * API session options
      */
     session: {
-      'user_id': 'domfamtest1211_11',
+      'user_id': 'xptmxm1030',
       'user_auth_key': 'abcdefghijklmnopqrstuvwxyz0123456789',
       'Content_Language': 'ko',
       'device_type': '1001'

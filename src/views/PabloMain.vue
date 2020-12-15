@@ -99,7 +99,6 @@ export default {
         .then(result => {
           if(this.canvasList.length === 0) { // 학습 완료 판단
             alert("진입 불가 : 학습 완료 안내 팝업 노출")
-            this.$router.push('/canvas')
           } else if (this.canvasList.length < this.letter.canvasList.length) { // 재진입 판단
             this.$router.push('/canvas?page=letter')
           } else {

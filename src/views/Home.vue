@@ -37,7 +37,7 @@ export default {
     }
   },
   mounted () {
-    this.fetchDiagnoseResult()
+
     this.loadAndroid()
   },
   methods :{
@@ -45,7 +45,7 @@ export default {
       getDiagnoseResult: 'getDiagnoseResult'
     }),
     ...mapMutations({
-      setUserInfo : 'setUserInfo'
+      setSession : 'setSession'
     }),
     fetchDiagnoseResult(){
       this.getDiagnoseResult()
@@ -54,7 +54,17 @@ export default {
       })
     },
     loadAndroid(){
-      this.setUserInfo(this.Android.getInitVariables())
+
+      try {
+        const Vari = this.Android.getInitVariables()
+        // const Vari = '{"grade":"5","name":"홈런******","user_id":"1954536","user_auth_key":"V0147eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlY290ZXN0MiIsInVzZXJJZCI6MTk1NDUzNiwibG9naW5BcyI6ZmFsc2UsImlhdCI6MTYwNzk0ODgwOCwiZXhwIjoxNjA4NTUzNjA4fQ.sTVDmHc-j68H5mbkGBKQFEbk3B-y7eKHNG4PgBbzzuiCTvsXqwt5mARkl63c2C8D1bXZ-LPVizvdHUTIntf0VQ","device_type":"1002"}'
+        const obj = JSON.parse(Vari)
+        console.log(obj)
+        this.setSession(obj)
+      } catch(e){
+        console.log('this.Android.getInitVariables 에러')
+      }
+      this.fetchDiagnoseResult()
     }
   }
 }
