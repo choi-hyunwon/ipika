@@ -162,7 +162,10 @@ export default {
       } else if (this.type === 'watchComplete') {
         this.$route.push('/Recording')
       } else if (this.type === 'success') {
-        this.setBg({tabletImageUrl : 'https://colorate.azurewebsites.net/SwatchColor/FFFFFF'}, true)
+        // this.setBg({tabletImageUrl : 'https://colorate.azurewebsites.net/SwatchColor/FFFFFF'}, true)
+        // 흰색 배경 이미지 처리 : 크로스 오리진 에러
+        WILL.clear()
+        WILL.setBackground('paper_01')
       } else if (this.type === 'checkRed') {
         this.showConfirm = false
         this.Android.appExit()
