@@ -84,8 +84,7 @@
             <img src="@/assets/images/common/refresh_default@2x.png" alt="">
           </button>
           <button v-else @click="globalUtils.confirm(slotProps,'record')" style="position: absolute; bottom: 0">
-            <img src="@/assets/images/common/refresh_active@2x.png" alt="">
-          </button>
+            <img src="@/assets/images/common/refresh_active@2x.png" alt=""></button>
         </Confirm>
       </div>
 
