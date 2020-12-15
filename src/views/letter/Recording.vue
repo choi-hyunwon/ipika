@@ -254,7 +254,7 @@ export default {
 
       const data = new FormData()
       data.append('stepId', this.letter.stepId)
-      data.append('recordingAudio', this.file.blob)
+      data.append('recordingAudio', this.file.blob, 'myrecord.mp3')
 
       this.getRecording(data)
         .then(result => {
