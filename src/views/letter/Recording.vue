@@ -251,10 +251,13 @@ export default {
       if (this.isExpired) {
         return this.$router.push('/Listening')
       }
+      //파일 테스트 : 삭제 예정
+      self.saveFile(URL.createObjectURL(this.file.blob))
 
       const data = new FormData()
       data.append('stepId', this.letter.stepId)
       data.append('recordingAudio', this.file.blob, 'myrecord.mp3')
+
 
       this.getRecording(data)
         .then(result => {
@@ -267,7 +270,21 @@ export default {
           }
         })
     },
+    saveFile(href){
+      var a = document.createElement("a");
+      a.href = href;
+      a.download = 'myrecord.mp3';
 
+      a.appendChild(document.createTextNode('myrecord.mp3'));
+      a.style.display = "none";
+
+      document.body.appendChild(a);
+      a.click();
+
+      setTimeout(function() {
+        URL.revokeObjectURL(href);
+      }, 911);
+    },
     async fetchLetter () {
       this.getLetter()
         .then(result => {
