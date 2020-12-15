@@ -14,7 +14,10 @@
       <button v-else><img src="@/assets/images/common/img_invisible@2x.png" alt=""></button>
     </div>
 
-    <span>{{bg.imageSubject}}</span>
+    <div class="title" >
+      <span class="img"><img src="@/assets/images/common/Symbol@2x.png" alt=""></span>
+      <span class="text">{{bg.imageSubject}}</span>
+    </div>
 
     <div class="flex-box">
       <!--영상보기-->
@@ -72,6 +75,7 @@ export default {
 
 <style lang="scss" scoped>
 .header {
+  background-color: var(--ivory-200);
   .btn-wrap {
     position: absolute;
     display: inline-block;
@@ -88,6 +92,27 @@ export default {
       &:first-child {
         margin-right: 1.2rem;
       }
+    }
+  }
+  .title {
+    position: absolute;
+    top: 4rem;
+    left: 32.7rem;
+    .img {
+      width: 4rem;
+      height: 4rem;
+      display: inline-block;
+      margin-right: 2.4rem;
+      img {
+        width: 100%;
+      }
+    }
+    .text {
+      font-size: 2.4rem;
+      font-weight: 500;
+      line-height: 4rem;
+      text-align: left;
+      color: var(--gray-black);
     }
   }
 }

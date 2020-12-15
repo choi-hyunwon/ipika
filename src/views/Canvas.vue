@@ -193,7 +193,10 @@ export default {
         this.setTimerStart();
       }else if(this.page==='letter'){
         this.bgPopup=false
+
+        this.setBackgrounImage()
       }
+
     },
     async fetchSubject () {
       this.getSubject()
@@ -233,9 +236,13 @@ export default {
         })
     },
     setBackgrounImage(){
-      WILL.setBackground(this.canvasList[0].tabletImageUrl, 'url')
-      this.bg.imageId = this.canvasList[0].imageId
-      this.bg.imageName = this.canvasList[0].imageName
+      // WILL.setBackground(this.canvasList[0].tabletImageUrl, 'url')
+      // this.bg.imageId = this.canvasList[0].imageId
+      // this.bg.imageName = this.canvasList[0].imageName
+
+      WILL.clear()
+      this.$EventBus.$emit('setBg', this.canvasList[0] , false)
+
     }
   }
 }
