@@ -133,7 +133,7 @@ export default {
       this.setTimerPause()
     },
     goMain () {
-      this.$EventBus.$emit('main')
+      this.$router.push('/PabloMain')
     },
     goBack () {
       this.$EventBus.$emit('back')
