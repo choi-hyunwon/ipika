@@ -35,21 +35,18 @@
       </div>
       <div class="voice-section">
         <ul class="voices">
-          <li class="voice-g" v-for="(item, index) in list" v-model="allSize">
+          <li class="voice-g" v-for="(item, index) in list" v-model="allSize" @click="onToggle(index)">
             <div class="recode_icon">
               <img src="@/assets/images/common/record-mygallery@2x.png" alt="녹음 아이콘" class="img-m">
             </div>
             <div class="recode-desc">{{ item.audioPlaytime }}</div>
-
             <div class="gallery_img size-img">
               <a href="#" @click.prevent="onPlay"></a>
               <div class="play_bar"></div>
             </div>
-            <div class="play_icon" v-if="play">
-              <img src="@/assets/images/common/play_dim@2x.png" alt="재생화면" class="img-m">
-            </div>
-            <div class="pause_icon" v-else>
-              <img src="@/assets/images/common/pause_dim@2x.png" alt="정지화면" class="img-m">
+            <div class="play_icon">
+              <img src="@/assets/images/common/play_dim@2x.png" v-if="focusIdx!==index||!play" alt="재생화면" class="img-m">
+              <img src="@/assets/images/common/pause_dim@2x.png" v-else-if="focusIdx===index" alt="정지화면" class="img-m">
             </div>
             <div class="box_title">
               <div class="img_title">{{ item.stageName || '스테이지' }} {{ item.stageId || '단계' }}</div>
@@ -60,7 +57,6 @@
         </ul>
       </div>
     </div>
-
 
     <b-modal id="deleteAudio" centered title="완전히 삭제" modal-class="deleteAudio">
       <template #modal-header>
@@ -81,7 +77,6 @@ import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'myGalleryVoice',
-
   data () {
     return {
       isLoading :false,
@@ -90,6 +85,7 @@ export default {
       activeIndex: 0,
       nSize : [0,0,0],
       isPlay : false,
+      play : false,
       filter: [
         {
           'title': 'ALL',
@@ -120,7 +116,6 @@ export default {
       ]
     }
   },
-
   created () {
 
   },
@@ -128,6 +123,7 @@ export default {
     this.isLoading = true
     this.list = this.userGalleryMypicture.audios
     this.allSize()
+    this.audio = new Audio(this.list[0].audioUrl)
   },
   computed: {
     ...mapGetters({
@@ -142,12 +138,6 @@ export default {
         return this.empty
       }
     },
-
-  },
-  watch:{
-    'focusIdx' : ()=>{
-      console.log(this.focusIdx)
-    }
   },
   methods: {
     ...mapActions({
@@ -205,9 +195,24 @@ export default {
         })
       }
     },
-    onPlay (index) {
+    onPlay () {
       //todo : @최현원 음성 플레이
-      this.focusIdx = index;
+    },
+    onToggle(index){
+      if(index!==this.focusIdx){
+        this.focusIdx = index
+        this.audio = new Audio(this.list[index].audioUrl)
+      }
+      if(!this.play){
+        this.audio.play()
+        this.play = true
+        this.audio.onended = ()=>{
+          this.play=false
+        }
+      }else{
+        this.audio.pause()
+        this.play = false
+      }
     },
     openDelete(pictureId, index){
       this.selectId = pictureId
