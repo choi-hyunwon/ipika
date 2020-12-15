@@ -10,7 +10,7 @@
       </div>
 
       <!-- 이퀄라이징 영역 (av-media, av-line) -->
-      <div ref="recordingArea" class="record-area" :class="{recording : ing}">
+      <div ref="recordingArea" class="record-area" :class="{equalizing : ing}">
         <!-- 플레이 중 아닌 경우 가로선 -->
         <div v-if="!ing" class="_media">
           <div v-if="record" style="width: 100%; height: 5px; background-color: #2fca56;"></div>
@@ -18,7 +18,13 @@
         </div>
 
         <!-- 이퀄라이징 대체 이미지 -->
-        <div sr/>
+        <div v-else
+             class="equalizer"
+             :class="{
+              recording : record,
+              playing : !record
+             }"
+        />
 
         <!-- av-media:녹음 -->
         <!--<av-media
@@ -248,10 +254,6 @@ export default {
 
     setAudio() {
       // this.audioEl = this.$refs.audioPlayer.$el.firstElementChild.firstElementChild
-      // this.audioEl.crossOrigin = "anonymous";
-      // this.audioEl.setAttribute('src', this.audioSource)
-      // this.audioEl.onended = () => {this.ing = false}
-
       this.audioEl = this.$refs.audioPlayer
       this.audioEl.crossOrigin = "anonymous";
       this.audioEl.setAttribute('src', this.audioSource)
@@ -298,8 +300,23 @@ export default {
     background-color: var(--ivory-200);
     top: 53.2rem;
 
-    &.recording {
-      top: 33.2rem;
+    &.equalizing {
+      top: 40.2rem;
+    }
+
+    .equalizer {
+      width: 100%;
+      height: 27.1rem;
+
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 100%;
+      &.recording {
+        background-image: url("~@/assets/images/common/equalizer-red@2x.png");
+      }
+      &.playing {
+        background-image: url("~@/assets/images/common/equalizer-blue@2x.png");
+      }
     }
 
   }
