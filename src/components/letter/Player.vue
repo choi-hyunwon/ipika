@@ -114,7 +114,7 @@ export default {
 
       // TODO: 테스트용 임시 코드(영상시간단축)
       if(this.isStart) {
-        this.player.currentTime(this.player.duration() - 5)
+        // this.player.currentTime(this.player.duration() - 5)
       }
 
       // 시작이 아닌 경우
