@@ -6,7 +6,7 @@ import store from './store/store'
 import { BootstrapVue } from 'bootstrap-vue'
 import { GlobalUtils } from './utils/globalUtils'
 import AudioRecorder from 'vue-audio-recorder'
-import AudioVisual from 'vue-audio-visual'
+// import AudioVisual from 'vue-audio-visual'
 import {Android} from './assets/js/android'
 
 Vue.config.productionTip = false
@@ -18,7 +18,7 @@ Vue.prototype.Router = new Router({ mode : 'history', routes : routes })
 
 Vue.use(BootstrapVue)
 Vue.use(AudioRecorder)
-Vue.use(AudioVisual)
+// Vue.use(AudioVisual)
 Vue.use(Router);
 
 const router = new Router({

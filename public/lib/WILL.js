@@ -195,7 +195,7 @@ var WILL = {
 			document.addEventListener("touchend", pointerUp);
 		}
 		else {
-			if (window.PointerEvent) {
+			if (window.PointerEvent && !window.loaded) {
 				Object.defineProperty(PointerEvent.prototype, "offset", {get: function() {return getOffset(this)}});
 
 				this.canvas.surface.addEventListener("pointerdown", pointerDown);
