@@ -139,7 +139,7 @@
   },
   methods: {
     ...mapActions({
-      getUserGalleryDetele: 'getUserGalleryDetele'
+      getUserAudioDetele: 'getUserAudioDetele'
     }),
     allSize(){
       this.nSize[0] = this.list.length
@@ -204,18 +204,12 @@
     deleteAudio () {
       var self=this;
       this.$bvModal.hide('deleteAudio')
-      this.getUserGalleryDetele({pictureId : this.selectId})
+      this.getUserAudioDetele({paramMap : this.selectId})
         .then(result => {
           if (result.code === "U001"){
             alert('삭제되었습니다.');
             self.list.splice(self.selectIndex, 1)
-          } else if (result.code === "U002"){
-            alert(result.message);
-          } else if (result.code === "U003"){
-            alert(result.message);
-          } else if (result.code === "U004"){
-            alert(result.message);
-          }
+          } else alert(result.message)
         })
     }
 

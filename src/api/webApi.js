@@ -129,11 +129,24 @@ export default class WebApi {
    * pictureId:String-그림ID
    */
   getUserGalleryDetele (data) {
-    return this.request('api/users/gallery/delete', {
+    return this.request('api/users/gallery/picture', {
       method: 'DELETE',
       data:data
     })
   }
+  /**
+   * 마이갤러리 : 오디오 삭제
+   *
+   * 마이갤러리 상단 부분의 정보 조회
+   * pictureId:String-그림ID
+   */
+  getUserAudioDetele (data) {
+    return this.request('api/users/gallery/audio', {
+      method: 'DELETE',
+      data:data
+    })
+  }
+
 
   /**
    * 학습 : 학습 정보 조회
