@@ -59,6 +59,7 @@ export default {
     this.$EventBus.$on('toggleDrawer', (drawer) => {
       this.drawer = drawer;
     });
+    this.$EventBus.$on('main',this.goMain)
     this.$EventBus.$on('back',this.goBack)
     this.$EventBus.$on('close', this.close);
     this.$EventBus.$on('next', this.exportPNG);
@@ -136,6 +137,9 @@ export default {
     goBack(){
       this.$router.push('/Listening')
     },
+    goMain(){
+      this.$router.push('/PabloMain')
+    },
     close(){
       this.setTimerReset()
       this.$router.push('/')
@@ -165,7 +169,7 @@ export default {
           self.fetchSubmission(data) //진단 테스트 드로잉 제출 API
         } else if (self.page === 'letter') {
           const data = new FormData()
-          data.append('stepId', self.letter.stageId )
+          data.append('stepId', self.letter.stepId )
           data.append('stepPicture', blob, 'rain.png')
           data.append('imageId', self.bg.imageId)
           self.fetchSubmissionLearning(data) //학습 정보 드로잉 제출 API

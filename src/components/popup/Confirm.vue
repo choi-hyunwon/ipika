@@ -132,6 +132,9 @@ export default {
       this.type = type;
       this.setTimerPause()
     },
+    goMain () {
+      this.$EventBus.$emit('main')
+    },
     goBack () {
       this.$EventBus.$emit('back')
     },
@@ -152,6 +155,8 @@ export default {
     okBtn () {
       if (this.type === 'goBack') {
         this.goBack()
+      } else if (this.type === 'goMain') {
+        this.goMain()
       } else if (this.type === 'Complete' || this.type === 'diagnose' || this.type === 'refresh' || this.type === 'record' || this.type === 'Refresh') {
         this.goToNext()
       } else if (this.type === 'watchComplete') {
