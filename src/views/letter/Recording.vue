@@ -10,15 +10,24 @@
       </div>
 
       <!-- 이퀄라이징 영역 (av-media, av-line) -->
-      <div ref="recordingArea" class="record-area" :class="{recording : ing}">
+      <div ref="recordingArea" class="record-area" :class="{equalizing : ing}">
         <!-- 플레이 중 아닌 경우 가로선 -->
         <div v-if="!ing" class="_media">
           <div v-if="record" style="width: 100%; height: 5px; background-color: #2fca56;"></div>
           <div v-else style="width: 100%; height: 5px; background-color: #1585ff;"></div>
         </div>
 
+        <!-- 이퀄라이징 대체 이미지 -->
+        <div v-else
+             class="equalizer"
+             :class="{
+              recording : record,
+              playing : !record
+             }"
+        />
+
         <!-- av-media:녹음 -->
-        <av-media
+        <!--<av-media
           v-show="ing && record" class="_media" ref="media"
           type="frequ"
           :line-color="setColor"
@@ -26,10 +35,10 @@
           :canv-width="canvasOptions.canvWidth"
           :canv-height="canvasOptions.canvHeight"
           :line-width="canvasOptions.canvLineWidth"
-        />
+        />-->
 
         <!-- av-line:재생 -->
-        <av-line
+        <!--<av-line
           ref="audioPlayer"
           class="_audio"
           v-show="!record && ing && isAudioSet"
@@ -38,7 +47,7 @@
           :canv-width="canvasOptions.canvWidth"
           :canv-height="canvasOptions.canvHeight"
           :line-width="canvasOptions.canvLineWidth"
-        />
+        />-->
       </div>
 
       <!-- 플레이어 버튼 영역 -->
@@ -50,8 +59,11 @@
              pause : ing && !record
            }"
       >
+        <audio ref="audioPlayer" src=""/>
+
         <!-- 재생 또는 재생 정지 버튼 -->
-        <div class="play-btns"
+        <div v-if="audioEl"
+             class="play-btns"
              @click="playOrPause"
         />
 
@@ -73,8 +85,7 @@
             <img src="@/assets/images/common/refresh_default@2x.png" alt="">
           </button>
           <button v-else @click="globalUtils.confirm(slotProps,'record')" style="position: absolute; bottom: 0">
-            <img src="@/assets/images/common/refresh_active@2x.png" alt="">
-          </button>
+            <img src="@/assets/images/common/refresh_active@2x.png" alt=""></button>
         </Confirm>
       </div>
 
@@ -160,9 +171,6 @@ export default {
     'arPlayer.isPlaying' : function(val) {
       this.ing = val
     },
-    /*'userAudio.audioUrl' : function(val) {
-      this.
-    }*/
   },
   computed: {
     ...mapGetters({
@@ -176,7 +184,8 @@ export default {
   },
   methods : {
     ...mapActions({
-      getRecording: 'getRecording'
+      getRecording: 'getRecording',
+      getLetter: 'getLetter'
     }),
     ...mapMutations({
       setUserAudio: 'setUserAudio'
@@ -223,17 +232,28 @@ export default {
       data.append('recordingAudio', this.file.blob)
 
       this.getRecording(data)
-        .then(result =>{
+        .then(result => {
           console.log(result)
-          if(result.code === '0000') this.$router.push('/Listening')
+          if(result.code === '0000') {
+            this.fetchLetter()
+          }
           else {
             alert(`code : ${result.code} message : ${result.message}`)
             this.$router.push('/Listening')
           }
         })
     },
+
+    async fetchLetter(){
+      this.getLetter()
+        .then(result => {
+          this.$router.push('/Listening')
+        })
+    },
+
     setAudio() {
-      this.audioEl = this.$refs.audioPlayer.$el.firstElementChild.firstElementChild
+      // this.audioEl = this.$refs.audioPlayer.$el.firstElementChild.firstElementChild
+      this.audioEl = this.$refs.audioPlayer
       this.audioEl.crossOrigin = "anonymous";
       this.audioEl.setAttribute('src', this.audioSource)
       this.audioEl.onended = () => {this.ing = false}
@@ -279,8 +299,23 @@ export default {
     background-color: var(--ivory-200);
     top: 53.2rem;
 
-    &.recording {
-      top: 33.2rem;
+    &.equalizing {
+      top: 40.2rem;
+    }
+
+    .equalizer {
+      width: 100%;
+      height: 27.1rem;
+
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 100%;
+      &.recording {
+        background-image: url("~@/assets/images/common/equalizer-red@2x.png");
+      }
+      &.playing {
+        background-image: url("~@/assets/images/common/equalizer-blue@2x.png");
+      }
     }
 
   }
