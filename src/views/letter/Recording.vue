@@ -17,8 +17,11 @@
           <div v-else style="width: 100%; height: 5px; background-color: #1585ff;"></div>
         </div>
 
+        <!-- 이퀄라이징 대체 이미지 -->
+        <div sr/>
+
         <!-- av-media:녹음 -->
-        <av-media
+        <!--<av-media
           v-show="ing && record" class="_media" ref="media"
           type="frequ"
           :line-color="setColor"
@@ -26,10 +29,10 @@
           :canv-width="canvasOptions.canvWidth"
           :canv-height="canvasOptions.canvHeight"
           :line-width="canvasOptions.canvLineWidth"
-        />
+        />-->
 
         <!-- av-line:재생 -->
-        <av-line
+        <!--<av-line
           ref="audioPlayer"
           class="_audio"
           v-show="!record && ing && isAudioSet"
@@ -38,7 +41,7 @@
           :canv-width="canvasOptions.canvWidth"
           :canv-height="canvasOptions.canvHeight"
           :line-width="canvasOptions.canvLineWidth"
-        />
+        />-->
       </div>
 
       <!-- 플레이어 버튼 영역 -->
@@ -50,8 +53,11 @@
              pause : ing && !record
            }"
       >
+        <audio ref="audioPlayer" src=""/>
+
         <!-- 재생 또는 재생 정지 버튼 -->
-        <div class="play-btns"
+        <div v-if="audioEl"
+             class="play-btns"
              @click="playOrPause"
         />
 
@@ -241,7 +247,12 @@ export default {
     },
 
     setAudio() {
-      this.audioEl = this.$refs.audioPlayer.$el.firstElementChild.firstElementChild
+      // this.audioEl = this.$refs.audioPlayer.$el.firstElementChild.firstElementChild
+      // this.audioEl.crossOrigin = "anonymous";
+      // this.audioEl.setAttribute('src', this.audioSource)
+      // this.audioEl.onended = () => {this.ing = false}
+
+      this.audioEl = this.$refs.audioPlayer
       this.audioEl.crossOrigin = "anonymous";
       this.audioEl.setAttribute('src', this.audioSource)
       this.audioEl.onended = () => {this.ing = false}
