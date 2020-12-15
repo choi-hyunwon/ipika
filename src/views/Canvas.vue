@@ -183,20 +183,20 @@ export default {
         //진단학습
         if (self.page === 'diagnose') {
           const data = new FormData()
-          data.append('userPicture', blob, 'rain.png')
+          data.append('userPicture', blob, 'canvas.png')
           self.fetchSubmission(data) //진단 테스트 드로잉 제출 API
           //학습교제
         } else if (self.page === 'letter') {
           const data = new FormData()
           data.append('stepId', self.letter.stepId )
-          data.append('stepPicture', blob, 'rain.png')
+          data.append('stepPicture', blob, 'canvas.png')
           data.append('imageId', self.bg.imageId)
           self.fetchSubmissionLearning(data) //학습 정보 드로잉 제출 API
           //프리 드로잉
         } else {
           const data = new FormData()
           data.append('title', self.freeTitle || store.getters.getSession.name + ' 프리드로잉')
-          data.append('files', blob, 'rain.png')
+          data.append('files', blob, 'canvas.png')
           self.fetchSubmissionFree(data) //프리 드로잉 제출 API
         }
       })
