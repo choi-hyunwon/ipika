@@ -59,6 +59,7 @@
         <audio-recorder
           ref="recorder"
           format="mp3"
+          :time="1"
           :before-recording="startRecord"
           :after-recording="stopRecord"/>
 

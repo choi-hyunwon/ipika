@@ -101,13 +101,7 @@ export default {
             alert("진입 불가 : 학습 완료 안내 팝업 노출")
           } else if (this.canvasList.length < this.letter.canvasList.length) { // 재진입 판단
             this.$router.push('/canvas?page=letter')
-          } else {
-            if(this.letter.userAudioList.length === 0) this.$router.push('/Intro') // 최초 진입 판단
-            else {
-              alert('시나리오 확인 필요')
-              this.$router.push('/Listening')
-            }
-          }
+          } else this.$router.push('/Intro') // 최초 진입 판단
         })
     }
   }
