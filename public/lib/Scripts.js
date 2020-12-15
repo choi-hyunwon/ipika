@@ -500,7 +500,7 @@ function initEngine() {
 
   WILL.mode = top.location.pathname.containsIgnoreCase("RTC")?WILL.Mode["2D"]:WILL.Mode["GL"];
 
-  WILL.init(type, $(".Wrapper").width(), $(".Wrapper")[0].offsetHeight - ($("nav").height() || 0));
+  WILL.init(type, $(".Wrapper").width(), $(".Wrapper")[0].offsetHeight);
 
 
   if (layout.navType == "DEMO") {
