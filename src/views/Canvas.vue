@@ -27,6 +27,17 @@
     <!--   학습 드로잉 제출 완료 시 popup-->
     <Confirm ref="autoOpenLSuccess" v-slot="slotProps" :completeText="`${bg.imageName} 저장되었어요<br> 남은 그림도 더 그려볼까요?`"
              :text="'모든 배경교재를 그려야 학습과정이 완료돼요'" :cancelText = "'아니요'" :okText = "'네'"/>
+
+    <!-- 공통 알림 popup-->
+    <Alert ref="commonAlert" v-slot="slotProps" :boldText="'그림이 그려지지 않았어요'" :text="'그림을 시작해 볼까요?'" :buttonText ="'확인'"/>
+
+    <!-- 공통 알림 popup-->
+    <Alert ref="submissionComfirm" v-slot="slotProps" :boldText="'드로잉 제출 되었습니다'" :text="'다른 그림을 그릴까요?'" :buttonText ="'확인'"/>
+
+    <!-- 공통 알림 popup-->
+    <Alert ref="submissionFail" v-slot="slotProps" :boldText="'드로잉 제출 실패하였습니다'" :text="'앗! 이런'" :buttonText ="'확인'"/>
+
+
   </div>
 </template>
 <script>
@@ -164,7 +175,9 @@ export default {
         self.saveFile(URL.createObjectURL(blob))
         //미완성
         if (file.size <= 14500) {
-          alert('아직 그림이 그려지지 않았어요')
+          // alert('아직 그림이 그려지지 않았어요')
+          self.$refs.commonAlert.showAlert = true
+          self.$refs.commonAlert.type = 'common'
           return false
         }
         //진단학습
@@ -251,7 +264,11 @@ export default {
               this.$refs.autoOpenLSuccess.showConfirm = true
               this.$refs.autoOpenLSuccess.type = 'success'
             }
-          } else alert('드로잉 제출 실패')
+          } else {
+            // alert('드로잉 제출 실패')
+            this.$refs.submissionFail.showConfirm = true
+            this.$refs.submissionFail.type = 'common'
+          }
         })
     },
     fetchSubmissionFree(data){
@@ -259,9 +276,15 @@ export default {
       this.getSubmissionFree(data)
         .then(result => {
           if(result.code === '0000') {
-            alert('드로잉 제출 되었습니다.')
+            // alert('드로잉 제출 되었습니다.')
+            this.$refs.submissionComfirm.showConfirm = true
+            this.$refs.submissionComfirm.type = 'common'
             this.$router.push('/PabloMain')
-          } else alert('드로잉 제출 실패')
+          } else {
+            // alert('드로잉 제출 실패')
+            this.$refs.submissionFail.showConfirm = true
+            this.$refs.submissionFail.type = 'common'
+          }
         })
     },
     setBackgrounImage(){

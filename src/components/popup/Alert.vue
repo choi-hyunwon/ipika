@@ -53,6 +53,20 @@
         <b-button class="btn btn-block btn-black" @click="$router.push('/TestingResult')">{{ buttonText }}</b-button>
       </template>
     </b-modal>
+
+    <b-modal v-if="type==='common'" centered modal-class="normalPopup" v-model="showAlert">
+      <template #modal-header>
+        <div class="symbol"><img src="@/assets/images/common/Symbol@2x.png" alt=""></div>
+      </template>
+      <template >
+        <p class="text" v-html="boldText"></p>
+        <p class="text-sm">{{text}}</p>
+      </template>
+      <template #modal-footer="{ cancel }">
+        <b-button class="btn btn-block btn-black" @click="cancel">{{ buttonText }}</b-button>
+      </template>
+    </b-modal>
+
     <!--<b-modal v-if="type==='agreement1'" centered :title=boldText modal-class="marketing" scrollable ok-only ok-title="닫기" ok-variant="black btn-block" v-model="showAlert">
       <p>{{text}}</p>
     </b-modal>

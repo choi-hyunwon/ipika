@@ -41,11 +41,16 @@
       </template>
     </b-modal>
 
+    <!-- 공통 알림 popup-->
+    <Alert ref="emptyTitle" v-slot="slotProps" :boldText="'제목이 비어있어요'" :text="'멋진 제목을 써보세요'" :buttonText ="'확인'"/>
+
   </div>
 </template>
 
 <script>
 import {mapMutations,mapGetters} from 'vuex'
+import Alert from '@/components/popup/Alert'
+
 export default {
   name: 'Register',
   data(){
@@ -55,6 +60,9 @@ export default {
       type : "",
       title : ''
     }
+  },
+  components :{
+    Alert
   },
   props:{
     okText: {
@@ -80,7 +88,8 @@ export default {
     },
     registerFree () {
       if(this.title === '') {
-        alert('제목이 비어있습니다.')
+        this.$refs.emptyTitle.showAlert = true
+        this.$refs.emptyTitle.type = 'common'
         return false;
       }
       this.showRegister = false

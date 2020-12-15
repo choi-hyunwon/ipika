@@ -35,16 +35,26 @@
         <div class="img"><img :src=mainMenuList[0].imgUrl alt=""></div>
       </div>
     </div>
+
+    <!-- 공통 알림 popup-->
+    <Alert ref="commonAlert" v-slot="slotProps" :boldText="'학습이 완료 되었습니다'" :text="'프리드로잉을 해보면 어떨까요?'" :buttonText ="'확인'"/>
+
   </div>
+
+
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import Confirm from '@/components/popup/Confirm'
+import Alert from '@/components/popup/Alert'
 
 export default {
   name: 'PabloMain',
-  components: {Confirm },
+  components: {
+    Confirm,
+    Alert
+  },
   data () {
     return {
       message: false,
@@ -98,7 +108,8 @@ export default {
       this.getLetter()
         .then(result => {
           if(this.canvasList.length === 0) { // 학습 완료 판단
-            alert("학습이 완료 되었습니다.")
+            this.$refs.commonAlert.showAlert = true
+            this.$refs.commonAlert.type = 'common'
           } else if (this.canvasList.length < this.letter.canvasList.length) { // 재진입 판단
             this.$router.push('/canvas?page=letter')
           } else this.$router.push('/Intro') // 최초 진입 판단
