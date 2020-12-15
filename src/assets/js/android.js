@@ -21,7 +21,11 @@ export class Android {
    * @param data
    */
   onBackPressed(){
-    //todo : 메인 홈인 경우 exit
-    Vue.prototype.Router.go(-1)
+    //메인 홈인 경우 exit
+    if ( location.pathname.containsIgnoreCase("Main") || location.pathname == "/" ){
+      window.android.exit()
+    } else {
+      Vue.prototype.Router.go(-1)
+    }
   }
 }
