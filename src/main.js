@@ -11,7 +11,7 @@ import {Android} from './assets/js/android'
 
 Vue.config.productionTip = false
 
-Vue.prototype.globalUtils= new GlobalUtils()
+Vue.prototype.globalUtils = new GlobalUtils()
 Vue.prototype.$EventBus = new Vue();
 Vue.prototype.Android = new Android()
 Vue.prototype.Router = new Router({ mode : 'history', routes : routes })
