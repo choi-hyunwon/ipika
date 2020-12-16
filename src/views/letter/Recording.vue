@@ -79,7 +79,7 @@
         <Confirm v-slot="slotProps"
                  :complete-text="`다시 녹음하시겠어요? </br> 지금 녹음한 내용은 지워져요`"
                  :text="`지워진 녹음은 다시 들을 수 없어요`"
-                 :cancelText="`아니오`"
+                 :cancelText="`아니요`"
                  :okText="`네`">
           <button v-if="record || isExpired" style="position: absolute; bottom: 0">
             <img src="@/assets/images/common/refresh_default@2x.png" alt="">

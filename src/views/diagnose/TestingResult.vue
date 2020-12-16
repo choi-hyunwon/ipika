@@ -5,7 +5,7 @@
       <div class="box-close">
         <Confirm v-slot="slotProps"
                  :complete-text="`파블로 서비스를 </br> 종료하시겠습니까?`"
-                 :cancelText="`아니오`"
+                 :cancelText="`아니요`"
                  :okText="`네`">
           <div class="btn-close" @click="globalUtils.confirm(slotProps,'checkRed')"><img src="@/assets/images/common/close@2x.png" alt=""></div>
         </Confirm>
@@ -23,7 +23,11 @@
         </div>
       </div>
       <div class="col col-6">
-        <div class="img"><img  src="@/assets/images/temp/sample_img_01.jpg" alt=""></div>
+        <img v-if="submission.stageId === 1" src="@/assets/images/common/img_stage_end_01@2x.png" alt="프로필사진" class="img">
+        <img v-if="submission.stageId === 2" src="@/assets/images/common/img_stage_end_02@2x.png" alt="프로필사진" class="img">
+        <img v-if="submission.stageId === 3" src="@/assets/images/common/img_stage_end_03@2x.png" alt="프로필사진" class="img">
+        <img v-if="submission.stageId === 4" src="@/assets/images/common/img_stage_end_04@2x.png" alt="프로필사진" class="img">
+        <img v-if="submission.stageId === 5" src="@/assets/images/common/img_stage_end_05@2x.png" alt="프로필사진" class="img">
       </div>
     </div>
   </div>
