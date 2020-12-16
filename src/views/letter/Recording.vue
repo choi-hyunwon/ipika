@@ -251,8 +251,10 @@ export default {
       if (this.isExpired) {
         return this.$router.push('/Listening')
       }
+
+      try{
       //파일 테스트 : 삭제 예정
-      self.saveFile(URL.createObjectURL(this.file.blob))
+      //this.saveFile(URL.createObjectURL(this.file.blob))
 
       const data = new FormData()
       data.append('stepId', this.letter.stepId)
@@ -269,6 +271,9 @@ export default {
             this.$router.push('/Listening')
           }
         })
+      } catch(e){
+        alert(e)
+      }
     },
     saveFile(href){
       var a = document.createElement("a");
