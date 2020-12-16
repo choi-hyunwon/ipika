@@ -71,13 +71,17 @@ export default new Vuex.Store({
       liveui: false,
       Thumnail : ''
     },
-    letter : {},
+    letter : {
+
+    },
     bg : {
       active : false,
       isShow : false,
     },
     submission : {},
-    canvasList : []
+    canvasList : [
+
+    ]
   },
   /**
    * global로 사용하는 getters

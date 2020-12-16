@@ -25,10 +25,9 @@
     </div>
   </div>
 </template>
-
 <script>
-import {mapGetters} from 'vuex'
 
+import {mapGetters} from 'vuex'
 export default {
   name: 'ListeningPlay',
   data(){
@@ -40,7 +39,7 @@ export default {
       options : {
         color : '#007AFF',
         strokeWidth : 3,
-        duration : 3000,
+        duration : 0
       },
       style : {
         position : 'absolute',
@@ -52,11 +51,11 @@ export default {
   },
   created () {
     this.audio = new Audio(this.audioList[this.focusIdx].recordingAudioUrl)
+    console.log(this.audioList[this.focusIdx].audioPlaytime *1000)
+    this.options.duration = this.audioList[this.focusIdx].audioPlaytime *1000
   },
   mounted () {
-    setTimeout(()=>{
-      this.play()
-    },500)
+    this.play()
     this.$refs.line.animate(1.0)
   },
   watch:{
@@ -91,9 +90,11 @@ export default {
         this.audio.onended = ()=>{
           this.toggleButton = false
         }
+        !this.$refs.line.stop()
       }else{
         this.toggleButton=false;
         this.audio.pause();
+        this.$refs.line.stop()
       }
     }
   }
