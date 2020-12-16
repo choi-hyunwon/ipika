@@ -7,7 +7,7 @@
             <div class="emoji-icon">
               <img src="@/assets/images/common/emoji@2x.png" alt="이모티콘" class="img-m">
             </div>
-            <div class="emoji-desc">아직 그린 그림이 없어요,<br>학습을 시작해보세요!</div>
+            <div class="emoji-desc">아직 녹음한 음성이 없어요,<br>학습을 시작해보세요!</div>
             <div class="emoji-button">
               <router-link to="/pabloMain" class="btn btn-blue5 btn-half">시작하기</router-link>
             </div>
@@ -35,13 +35,13 @@
       </div>
       <div class="voice-section">
         <ul class="voices">
-          <li class="voice-g" v-for="(item, index) in list" v-model="allSize" @click="onToggle(index)">
+          <li class="voice-g" v-for="(item, index) in list" v-model="allSize">
             <div class="recode_icon">
               <img src="@/assets/images/common/record-mygallery@2x.png" alt="녹음 아이콘" class="img-m">
             </div>
             <div class="recode-desc">{{ item.audioPlaytime }}초</div>
             <div class="gallery_img size-img">
-              <a href="#" @click="onPlay"></a>
+              <a href="#"  @click="onToggle(index)"></a>
               <transition name="fade">
               <div class="play_bar" id="play_bar" :class="{'active' : wide}"></div>
               </transition>
@@ -71,11 +71,16 @@
         <b-button class="btn btn-black  btn-half" @click="cancel()">닫기</b-button>
       </template>
     </b-modal>
+
+    <!-- 공통 알림 popup-->
+    <Alert ref="deleteComfirm" v-slot="slotProps" :boldText="'삭제 되었습니다'" :text="'다른 그림을 그릴까요?'" :buttonText ="'확인'"/>
+
   </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import Alert from '@/components/popup/Alert'
 
 export default {
   name: 'myGalleryVoice',
@@ -119,6 +124,9 @@ export default {
       ]
     }
   },
+  components:{
+    Alert
+  },
   created () {
 
   },
@@ -144,6 +152,7 @@ export default {
   },
   methods: {
     ...mapActions({
+      getUserGalleryMypicture: 'getUserGalleryMypicture',
       getUserAudioDetele: 'getUserAudioDetele'
     }),
     allSize(){
@@ -198,8 +207,6 @@ export default {
         })
       }
     },
-    onPlay () {
-    },
     onToggle(index){
       if(index!==this.focusIdx){
         this.focusIdx = index
@@ -231,11 +238,12 @@ export default {
     deleteAudio () {
       var self=this;
       this.$bvModal.hide('deleteAudio')
-      this.getUserAudioDetele({paramMap : this.selectId})
+      this.getUserAudioDetele({audioId : this.selectId})
         .then(result => {
-          if (result.code === "U001"){
-            alert('삭제되었습니다.');
-            self.list.splice(self.selectIndex, 1)
+          if (result.code === "0000"){
+            self.$refs.deleteComfirm.showAlert = true
+            self.$refs.deleteComfirm.type = 'common'
+            self.getUserGalleryMypicture()
           } else alert(result.message)
         })
     }

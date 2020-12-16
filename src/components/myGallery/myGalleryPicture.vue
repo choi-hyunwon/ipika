@@ -66,11 +66,16 @@
       </template>
     </b-modal>
 
+
+    <!-- 공통 알림 popup-->
+    <Alert ref="deleteComfirm" v-slot="slotProps" :boldText="'삭제 되었습니다'" :text="'다른 그림을 그릴까요?'" :buttonText ="'확인'"/>
+
   </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import Alert from '@/components/popup/Alert'
 
 export default {
   name: 'myGalleryPicture',
@@ -104,6 +109,9 @@ export default {
       ]
     }
   },
+  components:{
+    Alert
+  },
   computed: {
     ...mapGetters({
       userGalleryMypicture: 'getUserGalleryMypicture'
@@ -119,7 +127,10 @@ export default {
   },
   methods: {
     ...mapActions({
+      getUserGallery: 'getUserGallery',
+      getUserGalleryMypicture: 'getUserGalleryMypicture',
       getUserGalleryDetele: 'getUserGalleryDetele'
+
     }),
     allSize(){
       this.nSize[0] = this.userGalleryMypicture.pictures.length
@@ -191,14 +202,12 @@ export default {
       this.$bvModal.hide('deletePicture')
       this.getUserGalleryDetele({pictureId : this.selectId})
         .then(result => {
-          if (result.code === "U001"){
-            alert('삭제되었습니다.');
-            self.list.splice(self.selectIndex, 1)
-          } else if (result.code === "U002"){
-            alert(result.message);
-          } else if (result.code === "U003"){
-            alert(result.message);
-          } else if (result.code === "U004"){
+          if (result.code === "0000"){
+            self.$refs.deleteComfirm.showAlert = true
+            self.$refs.deleteComfirm.type = 'common'
+            self.getUserGallery()
+            self.getUserGalleryMypicture()
+          } else {
             alert(result.message);
           }
         })
