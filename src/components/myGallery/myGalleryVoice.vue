@@ -39,10 +39,12 @@
             <div class="recode_icon">
               <img src="@/assets/images/common/record-mygallery@2x.png" alt="녹음 아이콘" class="img-m">
             </div>
-            <div class="recode-desc">{{ item.audioPlaytime }}</div>
+            <div class="recode-desc">{{ item.audioPlaytime }}초</div>
             <div class="gallery_img size-img">
-              <a href="#" @click.prevent="onPlay"></a>
-              <div class="play_bar"></div>
+              <a href="#" @click="onPlay"></a>
+              <transition name="fade">
+              <div class="play_bar" id="play_bar" :class="{'active' : wide}"></div>
+              </transition>
             </div>
             <div class="play_icon">
               <img src="@/assets/images/common/play_dim@2x.png" v-if="focusIdx!==index||!play" alt="재생화면" class="img-m">
@@ -86,6 +88,7 @@ export default {
       nSize : [0,0,0],
       isPlay : false,
       play : false,
+      wide : false,
       filter: [
         {
           'title': 'ALL',
@@ -196,22 +199,28 @@ export default {
       }
     },
     onPlay () {
-      //todo : @최현원 음성 플레이
     },
     onToggle(index){
       if(index!==this.focusIdx){
         this.focusIdx = index
         this.audio = new Audio(this.list[index].audioUrl)
       }
+      let elementById = document.getElementById("play_bar")
       if(!this.play){
         this.audio.play()
         this.play = true
+        this.wide = true
+        elementById.style.transitionDuration = this.list[index].audioPlaytime + "s";
         this.audio.onended = ()=>{
           this.play=false
+          this.wide = false
+          elementById.style.transitionDuration = "0s";
         }
       }else{
         this.audio.pause()
         this.play = false
+        this.wide = false
+        elementById.style.transitionDuration = "0s";
       }
     },
     openDelete(pictureId, index){
@@ -548,15 +557,21 @@ export default {
 
       .play_bar {
         position: absolute;
-        border-radius: 0 0 0 1.2rem;
-        width: 32.8rem;
+        border-radius: 0 0 1.2rem 1.2rem;
+        width: 0%;
         height: 2rem;
         background-color: var(--blue-500);
         bottom: 0;
         left: 0;
-        z-index: 55
+        z-index: 55;
+        transition-timing-function: linear;
+        &.active {
+          width:100%;
+        }
       }
     }
   }
 }
+
+
 </style>
