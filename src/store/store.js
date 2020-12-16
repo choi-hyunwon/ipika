@@ -101,6 +101,7 @@ export default new Vuex.Store({
     },
     getUserGalleryMypicture: state => {
       return state.UserGalleryMypicture
+
     },
     getIsDummy: state => {
       return state.isDummy

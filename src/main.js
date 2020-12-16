@@ -8,6 +8,8 @@ import { GlobalUtils } from './utils/globalUtils'
 import AudioRecorder from 'vue-audio-recorder'
 // import AudioVisual from 'vue-audio-visual'
 import {Android} from './assets/js/android'
+import VueProgress from 'vue-progress'
+
 
 Vue.config.productionTip = false
 
@@ -25,6 +27,8 @@ const router = new Router({
   mode : 'history',
   routes : routes
 });
+Vue.use(VueProgress)
+
 
 new Vue({
   router,

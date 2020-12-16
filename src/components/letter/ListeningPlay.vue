@@ -4,6 +4,7 @@
     </div>
     <div class="player_area">
       <div class="player_img">
+        <progress-bar type="circle" ref="line" :options="options" :style="style" ></progress-bar>
         <img :src="audioList[this.focusIdx].characterImageUrl" alt="" style="width: 45rem; height: 45rem;">
 <!--이미지 더미 파일 수정 -->
         <div class="recode_button" @click="play">
@@ -33,14 +34,35 @@ export default {
   data(){
     return{
       toggleButton : false,
-      audio : null
+      audio : null,
+      audioDuraion : null,
+      completeStep : 0,
+      options : {
+        color : '#007AFF',
+        strokeWidth : 3,
+        duration : 3000,
+      },
+      style : {
+        position : 'absolute',
+      },
+      svgStyle:{
+        display : 'block'
+      }
     }
   },
   created () {
     this.audio = new Audio(this.audioList[this.focusIdx].recordingAudioUrl)
   },
   mounted () {
-    this.play()
+    setTimeout(()=>{
+      this.play()
+    },500)
+    this.$refs.line.animate(1.0)
+  },
+  watch:{
+    'play':()=>{
+      this.audioDuration = this.audio.duration
+    }
   },
   computed:{
     ...mapGetters({

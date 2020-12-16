@@ -6,6 +6,7 @@
         <p class="txt-lg">다른 친구들은 어떻게<br/>생각하는지 들어볼까요?</p>
         <p class="txt-sm">친구들의 생각을 듣고, 내 생각과 비교해봐요!</p>
       </div>
+
       <div class="img-slider" :style="{'transform': `translateX(-${position}px)`, 'transition-duration' : '300ms'}">
         <ul>
           <li>
@@ -52,6 +53,7 @@ export default {
       playPopup : false,
       submit : false,
       isEnd : false,
+
       // swiperOption: {
       //   slidesPerView: 5,
       //   spaceBetween: 100,
@@ -76,6 +78,9 @@ export default {
       this.play = false
     })
     console.log(this.submit)
+  },
+  mounted:function(){
+
   },
   computed:{
     ...mapGetters({
