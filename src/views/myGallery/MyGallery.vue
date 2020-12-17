@@ -70,6 +70,11 @@
       </template>
     </b-modal>
     <!--//modal-->
+
+    <!-- 공통 알림 popup-->
+    <Alert ref="setMyBackground" v-slot="slotProps" :boldText="'배경 화면이 저장되었습니다.'" :text="'배경을 바꾸어 보았어요'" :buttonText ="'확인'"/>
+
+
   </div>
 </template>
 
@@ -78,10 +83,12 @@ import { mapActions, mapGetters } from 'vuex'
 import myGalleryPicture from '@/components/myGallery/myGalleryPicture'
 import myGalleryVoice from '@/components/myGallery/myGalleryVoice'
 import myGalleryInfo from '@/components/myGallery/myGalleryInfo'
+import Alert from '@/components/popup/Alert'
 
 export default {
   name: 'MyGallery',
   components: {
+    Alert,
     myGalleryPicture,
     myGalleryVoice,
     myGalleryInfo
@@ -207,20 +214,18 @@ export default {
     },
     setBackground (pictureId, index) {
       var self=this;
+      this.$bvModal.hide('galleryBgChange')
       this.selectId = pictureId
       console.log(pictureId)
       this.selectIndex = index
       this.$bvModal.hide('galleryBgChange')
       this.getUserGalleryBackground({pictureId : this.selectId})
         .then(result => {
-          if (result.code === "U001"){
-            alert('삭제되었습니다.');
-            self.list.splice(self.selectIndex, 1)
-          } else if (result.code === "U002"){
-            alert(result.message);
-          } else if (result.code === "U003"){
-            alert(result.message);
-          } else if (result.code === "U004"){
+          if (result.code === "0000"){
+            self.getUserGallery()
+            self.$refs.setMyBackground.showAlert = true
+            self.$refs.setMyBackground.type = 'common'
+          } else {
             alert(result.message);
           }
         })

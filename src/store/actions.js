@@ -34,29 +34,12 @@ export const actions = {
       })
   },
   getUserGallery ({ commit }, options) {
-    if (store.getters.getIsDummy) {
-      const data = {
-        "code": "0000",
-        "message": "",
-        "nickname": null,
-        "stageId": 1,
-        "stageName": "트윙클",
-        "backgroundPictureId": 0,
-        "backgroundPictureUrl": null,
-        "totalCount": 0,
-        "totalSharedCount": 0,
-        "totalViewCount": 0,
-        "totalReactionCount": 0
-      }
-      commit('setUserGallery', data)
-      return data
-    } else {
-      return webApi.getUserGallery(options)
-        .then(data => {
-          commit('setUserGallery', data)
-          return data
-        })
-    }
+
+    return webApi.getUserGallery(options)
+      .then(data => {
+        commit('setUserGallery', data)
+        return data
+      })
   },
   getUserGalleryMypicture ({ commit }, options) {
     return webApi.getUserGalleryMypicture(options)
@@ -83,44 +66,47 @@ export const actions = {
         return data
       })
   },
-  getLetter({ commit }, options) {
+  getLetter ({ commit }, options) {
     return webApi.getLetter(options)
       .then(data => {
         commit('setLetter', data)
 
         /* TODO: API 조회 예외 처리 필요 */
         // 영상 재생을 위한 임시 코드
-        console.log("data.stepVideoUrl from actions > getLetter")
+        console.log('data.stepVideoUrl from actions > getLetter')
         console.log(data)
-        if(!data.stepVideoUrl) {
+        if (!data.stepVideoUrl) {
           data.stepVideoUrl = 'https://file-examples-com.github.io/uploads/2017/04/file_example_MP4_640_3MG.mp4'
           data.stepVideoThumnailUrl = 'https://dummyimage.com/640x360/000000/fff&text=Thumbnail'
         }
 
-        commit('setPlayerUrl', {sources: [{ src: data.stepVideoUrl}],Thumnail :  data.stepVideoThumnailUrl})
+        commit('setPlayerUrl', {
+          sources: [{ src: data.stepVideoUrl }],
+          Thumnail: data.stepVideoThumnailUrl
+        })
       })
   },
-  getSubmission({ commit }, options) {
+  getSubmission ({ commit }, options) {
     return webApi.getSubmission(options)
       .then(data => {
         commit('setSubmission', data)
         return data
       })
   },
-  getSubmissionLearning({ commit }, options) {
+  getSubmissionLearning ({ commit }, options) {
     return webApi.getSubmissionLearning(options)
       .then(data => {
         return data
       })
   },
-  getSubmissionFree({ commit }, options) {
+  getSubmissionFree ({ commit }, options) {
     return webApi.getSubmissionFree(options)
       .then(data => {
         return data
       })
   },
 
-  getRecording({ commit }, options) {
+  getRecording ({ commit }, options) {
     return webApi.getRecording(options)
       .then(data => {
         commit('setUserAudio', data)

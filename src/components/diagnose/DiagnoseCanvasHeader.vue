@@ -14,7 +14,7 @@
     <div class="box-close">
       <Confirm v-slot="slotProps"
                :complete-text="`파블로 서비스를 </br> 종료하시겠습니까?`"
-               :cancelText="`아니오`"
+               :cancelText="`아니요`"
                :okText="`네`">
         <button @click="globalUtils.confirm(slotProps,'checkRed')" style="padding-top: 0;" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></button>
       </Confirm>
