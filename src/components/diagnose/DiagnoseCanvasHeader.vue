@@ -1,8 +1,8 @@
 <template>
   <div class="header canvas">
-    <div class="timer" :class="{'red' : canvasTimer.time < 60}"><!-- 1분 미만일 경우, red 클래스 추가 -->
+    <div class="timer" :class="{'red' : canvasTimer.time <= 10}"><!-- 1분(10초로 변경) 미만일 경우, red 클래스 추가 -->
       <div class="img">
-        <img v-if="canvasTimer.time >= 60" src="@/assets/images/common/timer-black@2x.png" alt="">
+        <img v-if="canvasTimer.time > 10" src="@/assets/images/common/timer-black@2x.png" alt="">
         <img v-else src="@/assets/images/common/timer@2x.png" alt="">
       </div>
       <div class="time">{{ time }}</div>

@@ -168,6 +168,7 @@ export default {
         WILL.setBackground('paper_01')
       } else if (this.type === 'checkRed') {
         this.showConfirm = false
+        this.setTimerReset()
         this.Android.appExit()
       } else if (this.type === 'timeOut') {
         this.type = 'Complete'
@@ -179,6 +180,7 @@ export default {
       if (this.type === 'diagnose') this.modalCancel()
       else if (this.type === 'success') this.$router.push('/PabloMain')
       else if (this.type === 'refresh' || this.type === 'Refresh') this.clear()
+      else if(this.type === 'checkRed') this.modalCancel()
       else if (this.type === 'timeOut') {
         this.type = 'Refresh'
         this.timeOut.completeText = "다시 그리시겠어요? </br> 조금 전 그림은 사라져요"
