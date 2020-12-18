@@ -26,7 +26,8 @@ export default new Vuex.Store({
      * return : {"grade":"0","name":"홈런초등테스트1","key":"1604311","device_type":"1002"}
      *
      * DEVICE_TYPE_N = "1001"    // N형 디바이스
-     * DEVICE_TYPE_AI = "1002"   // AI 신형 디바이스
+     * DEVICE_TYPE_
+     * AI = "1002"   // AI 신형 디바이스
      * DEVICE_TYPE_LH = "1003"   // 리틀홈런 디바이스
      * DEVICE_TYPE_WEB = "1004"   // 독립웹
      * DEVICE_TYPE_MB = "1005"   // 하이브리드 앱(android or ios)
