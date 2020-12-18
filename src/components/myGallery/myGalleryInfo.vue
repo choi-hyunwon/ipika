@@ -3,7 +3,7 @@
     <div class="bgc-section">
       <div class="bg">
         <!--        <div class="img-m" style="width:192rem; height: 40rem; background-color:#eee9e3;" :style="{backgroundImage: 'url(' + galleryInfo.backgroundImage + ')'}"></div>-->
-        <div class="img-m" style="width:192rem; height: 40rem; background-color:#eee9e3;" :style="{backgroundImage: 'url(https://kr.vuejs.org/images/stdlib.png)'}"></div>
+        <div class="img-m" style="width:192rem; height: 40rem; background-color:#eee9e3;" :style="{backgroundImage: 'url(' + getUserGallery.backgroundPictureUrl + ')'}"></div>
       </div>
       <div class="setting-img">
         <img src="@/assets/images/common/setting_default.png" alt="세팅" class=" img-m" @click="$emit('popup')">
@@ -16,27 +16,9 @@
         <img v-if="result.stageId === 2" src="@/assets/images/common/img_thum_stage_03@2x.png" alt="프로필사진" class="img-m">
         <img v-if="result.stageId === 3" src="@/assets/images/common/img_thum_stage_04@2x.png" alt="프로필사진" class="img-m">
         <img v-if="result.stageId === 4" src="@/assets/images/common/img_thum_stage_05@2x.png" alt="프로필사진" class="img-m">
-        <div class="text-center name">{{ name }}</div>
+        <div class="text-center name">{{ getUserGallery.nickname || name }}</div>
         <div class="text-center english-name">{{ result.stageName }}</div>
       </div>
-<!--      <ul class="infomation d-flex">-->
-<!--        <li class="info">-->
-<!--          <div>내 그림</div>-->
-<!--          <div>{{ galleryInfo.totalCount }}</div>-->
-<!--        </li>-->
-<!--        <li class="info">-->
-<!--          <div>공개한 그림</div>-->
-<!--          <div>{{ galleryInfo.totalSharedCount }}</div>-->
-<!--        </li>-->
-<!--        <li class="info">-->
-<!--          <div>조회 수</div>-->
-<!--          <div>{{ galleryInfo.totalViewCount }}</div>-->
-<!--        </li>-->
-<!--        <li class="info">-->
-<!--          <div>좋아요 수</div>-->
-<!--          <div>{{ galleryInfo.totalReactionCount }}</div>-->
-<!--        </li>-->
-<!--      </ul>-->
     </div>
   </div>
 </template>
@@ -51,21 +33,22 @@ export default {
     return {
       result: {
         stageName: '',
-        stageId: 0,
+        stageId: 0
       },
-      galleryInfo:{
-
-      }
+      galleryInfo: {}
     }
   },
   computed: {
+    ...mapGetters({
+      getUserGallery: 'getUserGallery'
+    }),
     name () {
-      return this.$store.state.userinfo.name
+      return this.$store.state.session.name || "이름 없음"
     }
   },
   mounted () {
-    this.fetchResult();
-    this.fetchUserGallery();
+    this.fetchResult()
+    this.fetchUserGallery()
   },
 
   methods: {
@@ -73,21 +56,21 @@ export default {
       getResult: "getResult",
       getUserGallery: "getUserGallery"
     }),
-    fetchResult(){
+    fetchResult() {
       this.getResult()
         .then(result => {
           console.log('fetchResult :', result)
-          if(result !== undefined) this.result = result;
+          if(result !== undefined) this.result = result
         })
     },
-    fetchUserGallery(){
+    fetchUserGallery() {
+      const self = this
       this.getUserGallery()
         .then(result => {
           console.log('fetchUserGallery :', result)
-          if(result !== undefined) this.galleryInfo = result;
+          if(result !== undefined) this.galleryInfo = self.getUserGallery
         })
-    },
-
+    }
   }
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="empty" v-if="empty">
+  <div v-if="isLoading">
+    <div class="empty" v-if="isEmpty">
       <div class="gallery-section">
         <ul class="gallerys">
           <li class="gallery-default">
@@ -9,13 +9,13 @@
             </div>
             <div class="emoji-desc">아직 그린 그림이 없어요,<br>학습을 시작해보세요!</div>
             <div class="emoji-button">
-              <router-link to="/canvas" class="btn btn-blue5 btn-half">시작하기</router-link>
+              <router-link to="/pabloMain" class="btn btn-blue5 btn-half">시작하기</router-link>
             </div>
           </li>
         </ul>
       </div>
     </div>
-    <div class="list" v-else-if="userGalleryMypicture" v-model="setList">
+    <div class="list" v-else>
       <div class="clearfix btns_group">
         <div class="float-left btn-left">
 
@@ -27,13 +27,14 @@
                     @click="onClick(index)"
           >
             <img v-if="filterItem.src" src="@/assets/images/common/all.png" alt="모든이미지" class="img">
-            <span>{{ filterItem.title }}</span>
+            <span>{{ filterItem.title }} ({{ nSize[index] }})</span>
           </b-button>
         </div>
         <div class="float-right btn-right">
           <b-form-select v-model="selected" @change="setSort" :options="options" class="select_box"></b-form-select>
         </div>
       </div>
+
       <div class="gallery-section">
         <ul class="gallerys">
           <li class="gallery-g" v-for="(item, index) in list">
@@ -45,43 +46,59 @@
                 </div>
               </div>
               <div class="img_title">{{ item.stageName || '스테이지'}} {{ item.stageId || '단계'}}</div>
-              <div class="img_desc">{{ item.title || '제목을 불러 올수 없습니다'}}</div>
-              <div class="icon_delete"><img src="@/assets/images/common/btn_delete@2x.png" alt="" class="img-m"></div>
+              <div class="img_desc">{{ item.title || '제목이 없어요'}}</div>
+              <a href="#" class="icon_delete"  @click.prevent="openDelete(item.pictureId, index)"><img src="@/assets/images/common/btn_delete@2x.png" alt="" class="img-m"></a>
             </router-link>
           </li>
         </ul>
       </div>
     </div>
+
+    <b-modal id="deletePicture" centered title="완전히 삭제" modal-class="galleryBGChangeEmpty">
+      <template #modal-header>
+        <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>
+      </template>
+      <p class="text">완전히 삭제하시겠어요?<br/>그림이 삭제돼요<br/></p>
+      <p class="text-sm">삭제한 그림은 복구할 수 없어요</p>
+      <template #modal-footer="{ cancel }">
+        <b-button variant="gray" class="btn-half" @click.prevent="deletePicture()">삭제하기</b-button>
+        <b-button class="btn btn-black  btn-half" @click="cancel()">닫기</b-button>
+      </template>
+    </b-modal>
+
+
+    <!-- 공통 알림 popup-->
+    <Alert ref="deleteComfirm" v-slot="slotProps" :boldText="'삭제 되었습니다'" :text="'다른 그림을 그릴까요?'" :buttonText ="'확인'"/>
+
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
+import Alert from '@/components/popup/Alert'
 
 export default {
   name: 'myGalleryPicture',
 
   data () {
     return {
+      isLoading :false,
       empty: null,
       activeIndex : 0,
+      nSize : [0,0,0],
       filter : [
         {
-          'title' : 'ALL(100)',
+          'title' : 'ALL',
           'src' : '@/assets/images/common/all.png',
           'click' : 'filterAll'
         },
         {
-          'title' : 'Pablo Letter(60)',
+          'title' : 'Pablo Letter',
           'click': 'filterLetter'
         },
         {
-          'title': 'Free Drawing(40)',
+          'title': 'Free Drawing',
           'click': 'filterTest'
-        },
-        {
-          'title': 'Canvas',
-          'click': 'filterFree'
         }
       ],
       list: [],
@@ -92,25 +109,43 @@ export default {
       ]
     }
   },
+  components:{
+    Alert
+  },
   computed: {
     ...mapGetters({
       userGalleryMypicture: 'getUserGalleryMypicture'
     }),
     isEmpty(){
-      if (this.userGalleryMypicture.pictures.length === 0){
-        this.empty = true
-        return this.empty
-      } else {
-        this.empty = false
-        return this.empty
-      }
-    },
-    setList(){
-      return this.list = this.userGalleryMypicture.pictures
-    },
-
+      return this.userGalleryMypicture.pictures.length === 0 ? true : false
+    }
+  },
+  mounted () {
+    this.isLoading = true
+    this.list = this.userGalleryMypicture.pictures
+    this.allSize()
   },
   methods: {
+    ...mapActions({
+      getUserGallery: 'getUserGallery',
+      getUserGalleryMypicture: 'getUserGalleryMypicture',
+      getUserGalleryDetele: 'getUserGalleryDetele'
+
+    }),
+    allSize(){
+      this.nSize[0] = this.userGalleryMypicture.pictures.length
+
+      const letter = this.userGalleryMypicture.pictures.filter(function (item) {
+        return item.drawingType === 4
+      })
+      this.nSize[1] = letter.length
+
+      const free = this.userGalleryMypicture.pictures.filter(function (item) {
+        return item.drawingType === 3
+      })
+      this.nSize[2] = free.length
+
+    },
     onClick (index) {
       if (this.activeIndex === index) {
         this.activeIndex = null
@@ -124,13 +159,9 @@ export default {
         this.list = this.userGalleryMypicture.pictures
       } else if (index === 1) {
         this.list = this.userGalleryMypicture.pictures.filter(function (item) {
-          return item.drawingType === 1
+          return item.drawingType === 4
         })
       } else if (index === 2) {
-        this.list = this.userGalleryMypicture.pictures.filter(function (item) {
-          return item.drawingType === 2
-        })
-      } else if (index === 3) {
         this.list = this.userGalleryMypicture.pictures.filter(function (item) {
           return item.drawingType === 3
         })
@@ -160,13 +191,32 @@ export default {
     },
     log(e){
       console.log(e.currentTarget)
+    },
+    openDelete(pictureId, index){
+      this.selectId = pictureId
+      this.selectIndex = index
+      this.$bvModal.show('deletePicture')
+    },
+    deletePicture () {
+      var self=this;
+      this.$bvModal.hide('deletePicture')
+      this.getUserGalleryDetele({pictureId : this.selectId})
+        .then(result => {
+          if (result.code === "0000"){
+            self.$refs.deleteComfirm.showAlert = true
+            self.$refs.deleteComfirm.type = 'common'
+            self.getUserGallery()
+            self.getUserGalleryMypicture()
+          } else {
+            alert(result.message);
+          }
+        })
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-
 .tab-section {
   .nav-item {
     border-top: 0.1rem solid var(--gray-300);
@@ -388,8 +438,10 @@ export default {
         height: 32.3rem;
         margin-bottom: 2.4rem;
         position: relative;
+        border-radius: 12px;
         border: solid 1px var(--gray-500);
         z-index: 100;
+        overflow: hidden;
         > a{
           display: block;
           width: 100%;

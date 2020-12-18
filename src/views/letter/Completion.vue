@@ -1,26 +1,14 @@
 <template>
   <div class="wrap bg-ivory">
-    <div class="header">
-      <Confirm v-slot="slotProps"
-              :boldText="'정말 뒤로 가시겠어요?'"
-              :okText="'네'"
-              :cancelText="'아니요'">
-        <button @click="globalUtils.confirm(slotProps,'goBack')" class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt="">
-        </button>
-      </Confirm>
-      <div class="box-close">
-        <router-link to="/" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>
-      </div>
-    </div>
+    <LetterHeader/>
     <div class="row">
       <div class="col col-6">
         <div class="symbol-wrap">
           <div class="symbol"><img src="@/assets/images/common/Vector@2x.png" alt=""></div>
-          <span class="text">Stage 4 Clear!</span></div>
-        <div class="title">트윙클 스테이지<br/>
-          4번째 학습을 완료했어요!</div>
+          <span class="text">Stage {{letter.stageId}} Clear!</span></div>
+        <div class="title" v-html="letter.completeText"></div>
         <div class="btn-group">
-          <router-link to="/MainGallery" class="btn btn-dark mr">마이갤러리</router-link>
+          <router-link to="/MyGallery" class="btn btn-dark mr">마이갤러리</router-link>
           <router-link to="/PabloMain" class="btn btn-gray">메인으로</router-link>
         </div>
       </div>
@@ -32,10 +20,25 @@
 </template>
 
 <script>
-import Confirm from '@/components/popup/Confirm'
+import LetterHeader from '@/components/letter/LetterHeader'
+import { mapGetters } from 'vuex'
+
 export default {
-  name: 'PabloStudy6',
-  components: { Confirm }
+  name: 'Completion',
+  components: {LetterHeader},
+  computed:{
+    ...mapGetters({
+      letter: 'getLetter'
+    })
+  },
+  created() {
+    this.$EventBus.$on('back',this.goBack)
+  },
+  methods : {
+    goBack () {
+      this.$router.push('/PabloMain')
+    }
+  }
 }
 </script>
 

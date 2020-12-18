@@ -161,11 +161,9 @@
   }
   .nav-link {
     color: var(--gray-500);
-
     &.active {
       color: var(--gray-black);
       font-family: 'Noto Sans CJK KR Bold';
-      border-bottom: 1px solid var(--gray-black);
     }
   }
   .nav-tabs {

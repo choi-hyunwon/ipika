@@ -1,28 +1,31 @@
-import store from '../store/store'
+import Vue from 'vue'
 
-export default{
-  install(Vue){
-    /**
-     * 안드로이드 앱 종료
-     * @param data
-     */
-    Vue.prototype.$appExit = function(data){
-      window.android.exit();
+export class Android {
+  /**
+   * 안드로이드 앱 종료
+   * @param data
+   */
+  appExit(){
+    window.android.exit();
+  }
+  /**
+   * 안드로이드 초기값 실행
+   * @param data
+   */
+  getInitVariables(){
+    // return '{"grade":"5","name":"홈런******","user_id":"1954536","user_auth_key":"V0147eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlY290ZXN0MiIsInVzZXJJZCI6MTk1NDUzNiwibG9naW5BcyI6ZmFsc2UsImlhdCI6MTYwNzk0ODgwOCwiZXhwIjoxNjA4NTUzNjA4fQ.sTVDmHc-j68H5mbkGBKQFEbk3B-y7eKHNG4PgBbzzuiCTvsXqwt5mARkl63c2C8D1bXZ-LPVizvdHUTIntf0VQ","device_type":"1002"}'
+    return  window.android.getInitVariables();
+  }
+  /**
+   * Native -> WebView로 Back버튼 선택 시 onBackPressed() 함수 호출
+   * @param data
+   */
+  onBackPressed(){
+    //메인 홈인 경우 exit
+    if ( location.pathname.containsIgnoreCase("Main") || location.pathname == "/" ){
+      window.android.exit()
+    } else {
+      Vue.prototype.Router.go(-1)
     }
-    /**
-     * 안드로이드 초기값 실행
-     * @param data
-     */
-    Vue.prototype.$getInitVariables = function(data){
-      store.state.userInfo = window.android.getInitVariables();
-    }
-
-
-    Vue.prototype.$onBackPressed = function(data){
-      //Native -> WebView로 Back버튼 선택 시 onBackPressed() 함수 호출
-      //todo : @최현원 함수 생성 필요
-    }
-
-
   }
 }

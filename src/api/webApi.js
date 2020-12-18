@@ -1,20 +1,25 @@
 import axios from 'axios'
 import store from '../store/store'
 
-axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8'
-axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*'
-
 export default class WebApi {
   // eslint-disable-next-line no-useless-constructor
   constructor () {
   }
 
   request (url, config) {
-    console.error(url)
-    console.error(config)
+    if (store.getters.getSession.user_id === ""){
+      // alert('user_id 가 유효하지 않습니다.')
+      const Vari = window.android.getInitVariables()
+      // const Vari = '{"grade":"5","name":"홈런******","user_id":"1954536","user_auth_key":"V01a1eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1YmlwMDEiLCJ1c2VySWQiOjIwNTkzNTYsImxvZ2luQXMiOmZhbHNlLCJpYXQiOjE2MDgwMzQ1NjQsImV4cCI6MTYwODYzOTM2NH0.qgXxkRvDh6vdVsthFaXV9egKquReHF6Y3VoB1hY_12cbC5aoiSYFW5A5NO8wvbBzriNUncApkmqqdSHHRFYCGw","device_type":"1002"}'
+      const obj = JSON.parse(Vari)
+      store.getters.getSession.user_id = obj.user_id
+      store.getters.getSession.user_auth_key = obj.user_auth_key
+      store.getters.getSession.device_type = obj.device_type
+      store.getters.getSession.name = obj.name
+    }
 
     return axios({
-      url: `http://ec2-15-165-50-157.ap-northeast-2.compute.amazonaws.com:8996/${url}`,
+      url: `https://ec2-15-165-50-157.ap-northeast-2.compute.amazonaws.com/${url}`,
       headers: {
         user_id: store.getters.getSession.user_id,
         user_auth_key: store.getters.getSession.user_auth_key,
@@ -41,11 +46,6 @@ export default class WebApi {
     // console.log(store.getters.getSession)
     return this.request('api/main/menu', {
       method: 'GET',
-      headers: {
-        user_id: store.getters.getSession.user_id,
-        user_auth_key: store.getters.getSession.user_auth_key,
-        device_type: store.getters.getSession.device_type
-      },
       data: {}
     })
   }
@@ -64,15 +64,12 @@ export default class WebApi {
   }
 
   /**
-   * 사용자 정보 조회
+   * 진단테스트 : 결과 조회 (홈 화면 분기 처리 시 사용)
    *
-   * 사용자 스테이지 티어 및 정보 조회
-   * stageId:int-스테이지ID
-   * stageName:String-스테이지명
-   * trialRecommendation:String-무료체험 추천여부
+   * api/test/result
    *
    */
-  getResult (options) {
+  getDiagnoseResult (options) {
     return this.request('api/test/result', {
       method: 'GET',
       data: {}
@@ -121,7 +118,7 @@ export default class WebApi {
   getUserGalleryBackground (options) {
     return this.request('api/users/gallery/background', {
       method: 'POST',
-      data: {}
+      data: options
     })
   }
 
@@ -131,12 +128,107 @@ export default class WebApi {
    * 마이갤러리 상단 부분의 정보 조회
    * pictureId:String-그림ID
    */
-  getUserGalleryDetele (options) {
-    return this.request('api/users/gallery/delete', {
+  getUserGalleryDetele (data) {
+    return this.request('api/users/gallery/picture', {
       method: 'DELETE',
-      data: {
-        pictureId: options.pictureId
-      }
+      data:data
+    })
+  }
+  /**
+   * 마이갤러리 : 오디오 삭제
+   *
+   * 마이갤러리 상단 부분의 정보 조회
+   * pictureId:String-그림ID
+   */
+  getUserAudioDetele (data) {
+    return this.request('api/users/gallery/audio', {
+      method: 'DELETE',
+      data:data
+    })
+  }
+
+
+  /**
+   * 학습 : 학습 정보 조회
+   *
+   * api/learning/info
+   *
+   */
+  getLetter (options) {
+    return this.request('api/learning/info', {
+      method: 'GET',
+      data: {}
+    })
+  }
+
+  /**
+   * 진단테스트 : 드로잉제출
+   *
+   * api/test/submission
+   *
+   */
+  getSubmission (data) {
+    return this.request('api/test/submission', {
+      method: 'POST',
+      data: data
+    })
+  }
+  /**
+   * 학습 : 드로잉제출
+   *
+   * api/learning/submission
+   *
+   */
+  getSubmissionLearning (data) {
+    return this.request('api/learning/submission', {
+      method: 'POST',
+      data: data
+    })
+  }
+  /**
+   * 학습 : 드로잉제출
+   *
+   * api/learning/submission
+   *
+   */
+  getSubmissionFree (data) {
+    return this.request('api/drawing/register', {
+      method: 'POST',
+      data: data
+    })
+  }
+
+
+
+  /**
+   * 학습정보: 생각녹음
+   *
+   * api/learning/recording
+   *
+   */
+  getRecording (options) {
+    return this.request('api/learning/recording', {
+      method: 'POST',
+      data: options
+    })
+  }
+
+  /**
+   * 전역 : TTS
+   *
+   * 네이버 크로버 TTS
+   *
+   */
+  getClovaTTS (options) {
+    return axios({
+      url: 'https://naveropenapi.apigw.ntruss.com/tts-premium/v1/tts',
+      method: 'POST',
+      headers: {
+        'Content-Type':'multipart/form-data;',
+        'X-NCP-APIGW-API-KEY-ID': '0d5rxee0gt',
+        'X-NCP-APIGW-API-KEY': 'uKcIGuao7nWRbkJIxnT5t8wAuW18SAGifKRrU2Gh'
+      },
+      data: options
     })
   }
 }

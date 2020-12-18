@@ -1,241 +1,125 @@
 <template>
   <div class="wrap">
+    <!--   canvas 헤더 -->
+    <CanvasHeader v-if="isLoading"></CanvasHeader>
+    <!--   wacom 라이브러리 -->
+    <Wacom ref="wacom" :drawer="drawer"></Wacom>
 
-    <!-- s guide -->
-<!--    <div class="guide"><img src="@/assets/images/common/test_guide@2x.png" alt=""></div>-->
-    <!-- E guide -->
+    <div v-if="bgPopup===true&&page==='diagnose'" class="guide_bg" @click="toggleBg">
+      <img src="@/assets/images/common/test_guide@2x.png" alt="" class="img-m">
+    </div>
+    <div v-if="bgPopup===true&&page==='letter'" class="guide_bg" @click="toggleBg">
+      <img src="@/assets/images/common/guide@2x.png" alt="" class="img-m">
+    </div>
 
-    <!-- 진단 테스트 -->
-    <!--<Confirm v-slot="slotProps">
-      <div :visible="showConfirm(slotProps,2)" ></div>
-    </Confirm>-->
+    <!--  프리드로잉 canvas 첫 진입시 popup -->
+    <Register ref="register" v-if="page===''" v-slot="slotProps"/>
 
-    <CanvasHeader></CanvasHeader>
-    <Wacom :isLoading="isLoading" :drawer="drawer"></Wacom>
+    <!--   진단테스트 canvas 첫 진입시 popup-->
+    <Alert ref="autoOpen" v-if="page==='diagnose'" :text=subject.subject v-slot="slotProps"/>
 
+    <!--   진단테스트 canvas 타이머 완료 시 popup-->
+    <Confirm v-if="page==='diagnose'" ref="timerConfirm"/>
 
+    <!--   진단테스트 드로잉 제출 완료 시 popup-->
+    <Alert ref="autoOpenSuccess" v-slot="slotProps" :boldText="'성공적으로 </br> 제출되었어요 :)'" :text="'결과를 확인해보세요'" :buttonText ="'내 스테이지 확인하러 가기'"/>
 
-    <!-- 진단 테스트 -->
-    <!-- s 팝업  -->
-    <!--<b-button v-if="page === 'diagnose'"  v-b-modal.normalPopup style="position: absolute; top: 200px; left: 50px;">진단테스트_3_시간 초과 시 1</b-button>-->
-    <b-modal v-if="page === 'diagnose'" :visible="timeOver" id="timeoverPopup" centered title="진단테스트 : 타임오버" modal-class="normalPopup">
-      <template #modal-header>
-        <div class="symbol"><img src="@/assets/images/common/timer@2x.png" alt=""></div>
-      </template>
-      <p class="text">시간이 초과되었어요!<br/>
-        제출하시겠어요?</p>
-      <p class="text-sm">다시 그리면 먼저 그린 그림은 사라져요</p>
-      <template #modal-footer="{ cancel }">
-        <b-button @click="clear" variant="blue" class="btn-half">다시 그릴래요!</b-button>
-        <b-button @click="exportPNG" variant="black" class="btn-half">제출할게요</b-button>
-      </template>
-    </b-modal>
+    <!--   학습 드로잉 제출 완료 시 popup-->
+    <Confirm ref="autoOpenLSuccess" v-slot="slotProps" :completeText="`${bg.imageName} 저장되었어요<br> 남은 그림도 더 그려볼까요?`"
+             :text="'모든 배경교재를 그려야 학습과정이 완료돼요'" :cancelText = "'아니요'" :okText = "'네'"/>
 
-    <!--<b-button v-if="page === 'diagnose'" v-b-modal.normalPopup2 style="position: absolute; top: 200px; left: 200px;">진단테스트_3_시간 초과 시 2</b-button>-->
-    <b-modal v-if="page === 'diagnose'||'letter'" @show="popUpOpen" @hide="hideInfo" id="clearAllPopup" centered title="진단테스트 : 전체 그림 지우기" modal-class="normalPopup">
-      <template #modal-header>
-        <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>
-      </template>
-      <p class="text">다시 그리시겠어요?<br/>
-        지금 그린 그림이 지워져요</p>
-      <p class="text-sm">제출하면 파블로가 그림을 분석할 거예요 :)</p>
-      <template #modal-footer="{ cancel }">
-        <b-button @click="exportPNG" variant="blue" class="btn-half">제출할게요</b-button>
-        <b-button @click="clear" variant="black" class="btn-half">다시 그릴게요!</b-button>
-      </template>
-    </b-modal>
+    <!-- 공통 알림 popup-->
+    <Alert ref="commonAlert" v-slot="slotProps" :boldText="'그림이 그려지지 않았어요'" :text="'그림을 시작해 볼까요?'" :buttonText ="'확인'"/>
 
-    <!--<b-button v-if="page === 'diagnose'" v-b-modal.normalPopup3 style="position: absolute; top: 200px; left: 350px;">진단테스트_3_제출팝업</b-button>-->
-    <b-modal v-if="page === 'diagnose'||'letter'" @hide="setTimerResume" @show="popUpOpen" id="normalPopup3" centered title="마케팅 관련 정보 수신 동의" modal-class="normalPopup">
-      <template #modal-header>
-        <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>
-      </template>
-      <p class="text">다 그렸나요?<br/>
-        제출하면 수정할 수 없어요!</p>
-      <p class="text-sm">더 그리고 싶은 것은 없는지 생각해봐요</p>
-      <template #modal-footer="{ cancel }">
-        <b-button variant="gray" class="btn-half" @click="exportPNG">제출할게요</b-button>
-        <b-button variant="black" class="btn-half" @click=cancel >더 그릴게요!</b-button>
-      </template>
-    </b-modal>
-    <!-- s 팝업  -->
+    <!-- 공통 알림 popup-->
+    <Alert ref="submissionComfirm" v-slot="slotProps" :boldText="'드로잉 제출 되었습니다'" :text="'다른 그림을 그릴까요?'" :buttonText ="'확인'"/>
 
-    <!--<b-button v-if="page === 'letter'" v-b-modal.studyBookPopup style="position: absolute; top: 200px; left: 500px;" @click="popUpOpen">배경교제</b-button>-->
-    <b-modal v-if="page === 'letter'" :visible="true" @show="popUpOpen" @hide="hideInfo" id="studyBookPopup" centered hide-footer modal-class="studyBookPopup">
-      <template #default="{ hide,cancel }">
-        <button class="btn-close" @click="hide()"><img src="@/assets/images/common/close_dim@2x.png" alt=""></button>
-        <div class="content">
-          <div class="c-header">
-            <p class="title">배경교재 선택하기</p>
-            <p class="desc">그리고 싶은 배경교재를 선택하고, 캔버스에서 그려보세요!</p>
-          </div>
-          <div class="c-body">
-            <ul class="scroll">
-              <li>
-                <div @click="cancel">
-                  <span class="img"><img src="@/assets/images/temp/sample_img_02.png" alt=""></span>
-                  <span class="tit-sm">배경교재1</span>
-                  <span class="tit">사람들이 오늘은 무슨 신발을 신었을까?</span>
-                </div>
-              </li>
-              <li>
-                <div @click="cancel">
-                  <span class="img"><img src="@/assets/images/temp/sample_img_02.png" alt=""></span>
-                  <span class="tit-sm">배경교재1</span>
-                  <span class="tit">사람들이 오늘은 무슨 신발을 신었을까?사람들이 오늘은 무슨 신발을 신었을까?</span>
-                </div>
-              </li>
-              <li>
-                <div @click="cancel">
-                  <span class="img"><img src="@/assets/images/temp/sample_img_02.png" alt=""></span>
-                  <span class="tit-sm">배경교재1</span>
-                  <span class="tit">사람들이 오늘은 무슨 신발을 신었을까?</span>
-                </div>
-              </li>
-              <li>
-                <div @click="cancel">
-                  <span class="img"><img src="@/assets/images/temp/sample_img_02.png" alt=""></span>
-                  <span class="tit-sm">배경교재1</span>
-                  <span class="tit">사람들이 오늘은 무슨 신발을 신었을까?</span>
-                </div>
-              </li>
-              <li>
-                <div @click="cancel">
-                  <span class="img"><img src="@/assets/images/temp/sample_img_02.png" alt=""></span>
-                  <span class="tit-sm">배경교재1</span>
-                  <span class="tit">사람들이 오늘은 무슨 신발을 신었을까?</span>
-                </div>
-              </li>
-              <li>
-                <div @click="cancel">
-                  <span class="img"><img src="@/assets/images/temp/sample_img_02.png" alt=""></span>
-                  <span class="tit-sm">배경교재1</span>
-                  <span class="tit">사람들이 오늘은 무슨 신발을 신었을까?</span>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </template>
-    </b-modal>
-    <!-- e 팝업  -->
+    <!-- 공통 알림 popup-->
+    <Alert ref="submissionFail" v-slot="slotProps" :boldText="'드로잉 제출 실패하였습니다'" :text="'앗! 이런'" :buttonText ="'확인'"/>
 
-    <b-modal v-if="page==='diagnose' && isLoading" :visible="true" @show="popUpOpen" @hide="setTimerResume" id="oderPopup" centered title="안내" modal-class="textPopup" scrollable ok-only ok-title="네 그려볼게요!" ok-variant="black btn-block">
-      <template #modal-header>
-        <div class="symbol"><img src="@/assets/images/common/Symbol@2x.png" alt=""></div>
-      </template>
-      <p class="text">{{subject.subject}}</p>
-      <template #modal-footer="{ cancel }">
-        <button size="sm" class="btn btn-black btn-block" @click="cancel()">네 그려볼게요!</button>
-      </template>
-    </b-modal>
-
-    <!--주제보기-->
-    <b-modal id="watchSubject" centered modal-class="normalPopup" @hide="hideInfo">
-      <template #modal-header>
-        <div class="symbol"><img src="@/assets/images/common/drawing@2x.png" alt=""></div>
-      </template>
-      <p class="text text-md">학습 주제 영역입니다.<br/>
-        학습 주제는 최대 세 문장까지<br/>
-        가능합니다.</p>
-      <p class="text-sm">생각 제시하는 생각 과제 제시하는 텍스트<br/>
-        영역으로 최대 두줄 이상을 생각합니다.</p>
-      <template #modal-footer="{ cancel }">
-        <b-button class="btn btn-block btn-black" @click="cancel()">닫기</b-button>
-      </template>
-    </b-modal>
-
-    <!--영상보기-->
-    <b-modal id="videoReviewPopup" centered hide-footer modal-class="videoReviewPopup" @hide="hideInfo">
-      <template #default="{ hide }">
-        <div class="bg"><img src="@/assets/images/temp/sample_img_02.png" alt=""></div>
-        <div class="full-screen dim"><!-- 전체 화면시 dim 제거 -->
-          <div class="inner">
-            <div class="video">
-              <p class="text">생각 제시하는 생각 과제 제시하는 텍스트 영역입니다.</p>
-              <button class="btn-close" @click="hide()"><img src="@/assets/images/common/close_dim@2x.png" alt=""></button>
-              <!-- s 전체 화면시 hide -->
-              <div class="play-wrap">
-                <button class="btn-rewind"><img src="@/assets/images/common/5s_rewind@2x.png" alt=""></button>
-                <button class="btn-pause"><img src="@/assets/images/common/pause@2x.png" alt=""></button>
-                <button class="btn-play"><img src="@/assets/images/common/btn_play@2x.png" alt=""></button>
-                <button class="btn-forward"><img src="@/assets/images/common/5s_forward@2x.png" alt=""></button>
-              </div>
-              <div class="progress-wrap">
-                <div class="inner">
-                  <span class="time">2:40</span>
-                  <div class="progress-inner">
-                    <span class="bar" style="width: 30%"></span>
-                  </div>
-                  <span class="playtime">2:40</span>
-                  <button class="btn-full-screen"><img src="@/assets/images/common/btn_full_screen@2x.png" alt="">
-                  </button>
-                </div>
-              </div>
-              <!-- e 전체 화면시 hide -->
-            </div>
-          </div>
-          <!-- e 영상 재생 중_화면 탭 시 -->
-
-        </div>
-      </template>
-    </b-modal>
 
   </div>
 </template>
-
 <script>
 
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import Wacom from '@/components/Wacom'
 import Confirm from '@/components/popup/Confirm'
 import CanvasHeader from '@/components/CanvasHeader'
-
+import Alert from '@/components/popup/Alert'
+import Register from '@/components/popup/Register'
+import store from '@/store/store'
 
 export default {
   name: 'Canvas',
   components :{
+    Alert,
     Wacom,
     Confirm,
+    Register,
     CanvasHeader
   },
   data () {
     return {
       isLoading: false,
       drawer : true,
-      subject : {},
+      bgPopup : false
     }
   },
+
   created(){
     this.$EventBus.$on('toggleDrawer', (drawer) => {
       this.drawer = drawer;
     });
+    this.$EventBus.$on('main',this.goMain)
     this.$EventBus.$on('back',this.goBack)
     this.$EventBus.$on('close', this.close);
+    this.$EventBus.$on('next', this.exportPNG);
+    this.$EventBus.$on('free', (title)=> {
+      this.freeTitle = title
+      this.exportPNG()
+    });
+    this.$EventBus.$on('bgPopup',this.toggleBg);
+    this.$EventBus.$on('freeName',this.setFreeName);
+    if(this.page==='letter'){
+      this.bgPopup = true
+    }
   },
   mounted () {
+
     if (localStorage.getItem('isReload') === 'true' || localStorage.getItem('isReload') === undefined) window.location.reload()
     else this.isLoading = true
 
     ;(async () => {
-      await this.fetchSubject()
-      this.setTimerStart()
+      if(this.page ==='diagnose') await this.fetchSubject()
+      else if(this.page === 'letter') await this.fetchLetter()
     })()
-
   },
   computed: {
     ...mapGetters({
       session: 'getSession',
-      canvasTimer: 'getCanvasTimer'
+      canvasTimer: 'getCanvasTimer',
+      subject : 'getSubject',
+      letter: 'getLetter',
+      bg : 'getBg',
+      canvasList : 'getLetterCanvasList'
     }),
-
     page() {
-      return this.$router.currentRoute.query.page
-    },
-
-    timeOver() {
-      return this.canvasTimer.timeOver
+      return this.$router.currentRoute.query.page || ''
     }
+  },
+  watch:{
+    'canvasTimer.timeOver':function(){
+      if(this.canvasTimer.timeOver===true)
+        this.$refs.timerConfirm.showConfirm=true
+      this.$refs.timerConfirm.type='timeOut'
+    },
+    'isLoading':function(){
+      if(this.isLoading&&this.page==='diagnose'){
+        this.$refs.autoOpen.showAlert=true
+        this.$refs.autoOpen.type='diagnose'
+      }
+    },
   },
   methods: {
     ...mapMutations({
@@ -243,11 +127,15 @@ export default {
       setTimerStart: 'setTimerStart',
       setTimerReset: 'setTimerReset',
       setTimerPause: 'setTimerPause',
-      setTimerResume: 'setTimerResume'
+      setTimerResume: 'setTimerResume',
+      setBg: 'setBg'
     }),
     ...mapActions({
-      getUserInfo: 'getUserInfo',
-      getSubject: 'getSubject'
+      getSubject: 'getSubject',
+      getLetter : 'getLetter',
+      getSubmissionLearning : 'getSubmissionLearning',
+      getSubmissionFree : 'getSubmissionFree',
+      getSubmission : 'getSubmission'
     }),
 
     reload(){
@@ -263,21 +151,17 @@ export default {
       }
     },
     goBack(){
-      this.$router.push('/peopleThinking')
+      this.$router.push('/Listening')
+    },
+    goMain(){
+      this.$router.push('/PabloMain')
     },
     close(){
       this.setTimerReset()
       this.$router.push('/')
     },
-
-
     popUpOpen(){
       this.setTimerPause()
-    },
-    hideInfo(e){
-      if(e.trigger==="backdrop"||"esc"){
-        this.setTimerResume()
-      }
     },
     clear(){
       WILL.clear()
@@ -285,43 +169,136 @@ export default {
       this.setTimerReset()
     },
     exportPNG(e){
-      /*WILL.getImageCanvas().toBlob(function(blob) {
-        const href = URL.createObjectURL(blob);
-        console.log(href)
-        /!**
-         * todo : API날리기
-         *!/
-      });*/
-      this.goNext()
-    },
-    showConfirm(slotProps,number){
-      if(number === 1){
-        slotProps.toggleConfirm('goBack','canvas');
-      }else if(number === 2){
-        if(this.time <= 0){
-          slotProps.toggleConfirm('canvasComplete','canvas');
+      const self = this;
+      WILL.getImageCanvas().toBlob(function(blob) {
+        let file = new File([blob], "my_image.png",{type:"image/png", lastModified:new Date()})
+
+        self.saveFile(URL.createObjectURL(blob))
+        //미완성
+        if (file.size <= 14500) {
+          // alert('아직 그림이 그려지지 않았어요')
+          self.$refs.commonAlert.showAlert = true
+          self.$refs.commonAlert.type = 'common'
+          return false
         }
-      }
+        //진단학습
+        if (self.page === 'diagnose') {
+          const data = new FormData()
+          data.append('userPicture', blob, 'canvas.png')
+          self.fetchSubmission(data) //진단 테스트 드로잉 제출 API
+          //학습교제
+        } else if (self.page === 'letter') {
+          const data = new FormData()
+          data.append('stepId', self.letter.stepId )
+          data.append('stepPicture', blob, 'canvas.png')
+          data.append('imageId', self.bg.imageId)
+          self.fetchSubmissionLearning(data) //학습 정보 드로잉 제출 API
+          //프리 드로잉
+        } else {
+          const data = new FormData()
+          data.append('title', self.freeTitle || store.getters.getSession.name + ' 프리드로잉')
+          data.append('files', blob, 'canvas.png')
+          self.fetchSubmissionFree(data) //프리 드로잉 제출 API
+        }
+      })
     },
+    saveFile(href){
+      var a = document.createElement("a");
+      a.href = href;
+      a.download = 'down.png';
 
+      a.appendChild(document.createTextNode('down.png'));
+      a.style.display = "none";
 
-    // TODO::
-    // 메인 메뉴 조회
+      document.body.appendChild(a);
+      a.click();
+
+      setTimeout(function() {
+        URL.revokeObjectURL(href);
+      }, 911);
+    },
+    toggleBg(){
+      this.bgPopup = !this.bgPopup;
+      if(this.bgPopup===false&&this.page==='diagnose'){
+        this.setTimerStart();
+      }else if(this.page==='letter'){
+        this.bgPopup=false
+
+        this.setBackgrounImage()
+      }
+
+    },
+    setFreeName(){
+      this.$refs.register.showRegister=true
+    },
     async fetchSubject () {
-      // this.getSubject()
-      //   .then(result => {
-      //     console.log('fetchSubject :', result)
-      //
-      //     if(result !== undefined) {
-      //       this.subject = result
-      //       this.setTimeInit(this.subject.limitMinute * 60)
-            this.setTimeInit(1.2 * 60)
-      //     }
-      //   })
+      this.getSubject()
+        .then(result => {
+          this.setTimeInit(this.subject.limitTime)
+        })
+    },
+    async fetchLetter(){
+      this.getLetter()
+    },
+    fetchSubmission(data){
+      const self = this;
+      this.getSubmission(data)
+        .then(result => {
+          if(result.code === '0000') {
+            this.$refs.autoOpenSuccess.showAlert = true
+            this.$refs.autoOpenSuccess.type = 'success'
+          } else alert(`code : ${result.code} message : ${result.message}`)
+        })
+    },
+    fetchSubmissionLearning(data){
+      const self = this;
+      this.getSubmissionLearning(data)
+        .then(result => {
+          if(result.code === '0000') {
+            if(this.canvasList.length === 1) {
+              this.getLetter()
+                .then( result => {
+                  this.setBg({reset : true})
+                  this.$router.push('/Completion')
+                })
+            } else {
+              this.$refs.autoOpenLSuccess.showConfirm = true
+              this.$refs.autoOpenLSuccess.type = 'success'
+            }
+          } else {
+            // alert('드로잉 제출 실패')
+            this.$refs.submissionFail.showConfirm = true
+            this.$refs.submissionFail.type = 'common'
+          }
+        })
+    },
+    fetchSubmissionFree(data){
+      const self = this;
+      this.getSubmissionFree(data)
+        .then(result => {
+          if(result.code === '0000') {
+            // alert('드로잉 제출 되었습니다.')
+            this.$refs.submissionComfirm.showConfirm = true
+            this.$refs.submissionComfirm.type = 'common'
+            this.$router.push('/PabloMain')
+          } else {
+            // alert('드로잉 제출 실패')
+            this.$refs.submissionFail.showConfirm = true
+            this.$refs.submissionFail.type = 'common'
+          }
+        })
+    },
+    setBackgrounImage(){
+      // WILL.setBackground(this.canvasList[0].tabletImageUrl, 'url')
+      // this.bg.imageId = this.canvasList[0].imageId
+      // this.bg.imageName = this.canvasList[0].imageName
+
+      WILL.clear()
+      this.$EventBus.$emit('setBg', this.canvasList[0] , false)
+
     }
   }
 }
-
 </script>
 
 <style lang="scss" scoped>
@@ -336,5 +313,11 @@ export default {
     width: 100%;
     height: 100%;
   }
+}
+.guide_bg{
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 9999;
 }
 </style>
