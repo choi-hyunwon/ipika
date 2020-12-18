@@ -126,7 +126,7 @@
       </template>
       <p class="text">{{subject.subject}}</p>
       <template #modal-footer="{ cancel }">
-        <button size="sm" class="btn btn-black btn-block" @click="cancel()">알겠어요!</button>
+        <button size="sm" class="btn btn-black btn-block" @click="cancel()">네 그려볼게요!</button>
       </template>
     </b-modal>
 
