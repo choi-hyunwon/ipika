@@ -34,7 +34,7 @@
         </div>
       </div>
       <div class="voice-section">
-        <ul class="voices">
+        <ul class="voices" v-if="list.length > 0">
           <li class="voice-g" v-for="(item, index) in list" v-model="allSize">
             <div class="recode_icon">
               <img src="@/assets/images/common/record-mygallery@2x.png" alt="녹음 아이콘" class="img-m">
@@ -54,7 +54,12 @@
               <div class="img_title">{{ item.stageName || '스테이지' }} {{ item.stageId || '단계' }}</div>
               <div class="img_desc">{{ item.title || '제목을 불러 올수 없습니다' }}</div>
             </div>
-            <a href="#" class="icon_delete" @click.prevent="openDelete(item.userAudioId, index)"><img src="@/assets/images/common/btn_delete@2x.png" alt="" class="img-m"></a>
+            <button class="icon_delete" @click="openDelete(item.userAudioId, index)"><img src="@/assets/images/common/btn_delete@2x.png" alt="" class="img-m"></button>
+          </li>
+        </ul>
+        <ul class="voices" v-else">
+          <li class="voice-default">
+            <div class="emptyList">등록된 정보가 없어요</div>
           </li>
         </ul>
       </div>
@@ -66,7 +71,7 @@
       </template>
       <p class="text">완전히 삭제하시겠어요?<br/>녹음이 삭제돼요</p>
       <template #modal-footer="{ cancel }">
-        <b-button variant="gray" class="btn-half" @click.prevent="deleteAudio()">삭제하기</b-button>
+        <b-button variant="gray" class="btn-half" @click="deleteAudio()">삭제하기</b-button>
         <b-button class="btn btn-black  btn-half" @click="cancel()">닫기</b-button>
       </template>
     </b-modal>
@@ -576,6 +581,15 @@ export default {
           width:100%;
         }
       }
+    }
+    .emptyList {
+      margin: 20rem auto 3.2rem;
+      font-family: 'NotoSansCJKKR';
+      font-size: 4rem;
+      font-weight: bold;
+      line-height: 5.6rem;
+      letter-spacing: -0.03rem;
+      text-align: center;
     }
   }
 }

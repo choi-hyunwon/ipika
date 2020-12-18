@@ -36,9 +36,9 @@
       </div>
 
       <div class="gallery-section">
-        <ul class="gallerys">
+        <ul class="gallerys" v-if="list.length > 0">
           <li class="gallery-g" v-for="(item, index) in list">
-            <router-link :to="getURL(item)" @click.prevent="log">
+            <router-link :to="getURL(item)" @click="log">
               <div class="gallery_img size-img">
                 <img :src="item.pictureUrl" alt="갤러리사진" class="img-m">
                 <div class="img_icon" v-b-modal.normalPopup1>
@@ -47,8 +47,14 @@
               </div>
               <div class="img_title">{{ item.stageName || '스테이지'}} {{ item.stageId || '단계'}}</div>
               <div class="img_desc">{{ item.title || '제목이 없어요'}}</div>
-              <a href="#" class="icon_delete"  @click.prevent="openDelete(item.pictureId, index)"><img src="@/assets/images/common/btn_delete@2x.png" alt="" class="img-m"></a>
+              <button class="icon_delete"  @click="openDelete(item.pictureId, index)"><img src="@/assets/images/common/btn_delete@2x.png" alt="" class="img-m"></button>
             </router-link>
+          </li>
+        </ul>
+
+        <ul class="gallerys" v-else>
+          <li class="gallery-default">
+            <div class="emptyList">등록된 정보가 없어요</div>
           </li>
         </ul>
       </div>
@@ -491,6 +497,15 @@ export default {
         left: 0;
         z-index:55
       }
+    }
+    .emptyList {
+      margin: 20rem auto 3.2rem;
+      font-family: 'NotoSansCJKKR';
+      font-size: 4rem;
+      font-weight: bold;
+      line-height: 5.6rem;
+      letter-spacing: -0.03rem;
+      text-align: center;
     }
   }
 }
