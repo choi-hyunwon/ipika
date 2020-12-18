@@ -137,6 +137,7 @@ export default {
       getSubmissionFree : 'getSubmissionFree',
       getSubmission : 'getSubmission'
     }),
+
     reload(){
       window.location.reload()
     },
