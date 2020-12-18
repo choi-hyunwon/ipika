@@ -27,6 +27,7 @@ export const mutations = {
     }
   },
 
+
   /* timer */
   setTimeInit (state, timeInitVal) {
     state.canvasTimer.timeInitVal = timeInitVal
