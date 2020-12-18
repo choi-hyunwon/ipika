@@ -27,11 +27,10 @@
         <template #modal-header>
           <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>
         </template>
-        <p class="text">완전히 삭제하시겠어요?<br/>그림과 녹음 모두 삭제되요<br/></p>
-        <p class="text-sm">삭제된 그림과 녹음은 복구할 수 없어요</p>
+        <p class="text">완전히 삭제하시겠어요?<br/>그림이 삭제돼요</p>
         <template #modal-footer="{ cancel }">
-          <b-button variant="gray" class="btn-half" @click="deletePicture">삭제하기</b-button>
-          <b-button class="btn btn-black  btn-half" @click="cancel()">닫기</b-button>
+          <b-button variant="gray" class="btn-half" @click="deletePicture">네</b-button>
+          <b-button class="btn btn-black  btn-half" @click="cancel()">아니요</b-button>
         </template>
       </b-modal>
       <!-- //삭제 팝업  -->
