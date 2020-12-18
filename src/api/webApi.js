@@ -224,7 +224,7 @@ export default class WebApi {
       url: 'https://naveropenapi.apigw.ntruss.com/tts-premium/v1/tts',
       method: 'POST',
       headers: {
-        'Content-Type':'multipart/form-data; boundary=<calculated when request is sent>',
+        'Content-Type':'multipart/form-data;',
         'X-NCP-APIGW-API-KEY-ID': '0d5rxee0gt',
         'X-NCP-APIGW-API-KEY': 'uKcIGuao7nWRbkJIxnT5t8wAuW18SAGifKRrU2Gh'
       },

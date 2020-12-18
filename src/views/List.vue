@@ -39,8 +39,23 @@
 </template>
 
 <script>
+import { mapActions, mapGetters, mapMutations } from 'vuex'
+import store from '@/store/store'
+
   export default {
-    name: 'List'
+    name: 'List',
+    computed:{
+      ...mapGetters({
+        session : 'getSession'
+      })
+    },
+    mounted () {
+      this.$store.state.session.user_id = "asd1010104949"
+      this.$store.state.session.user_auth_key = 'abcdefghijklmnopqrstuvwxyz0123456789'
+      this.$store.state.session.Content_Language = 'ko'
+      this.$store.state.session.device_type = "1001"
+      console.log(this.$store.state.session)
+    }
   }
 </script>
 

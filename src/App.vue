@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-<!--    <div class="userid">사용자 ID : {{ $store.state.session.user_id }}</div>-->
+    <div class="userid"></div>
 
     <router-view/>
   </div>
