@@ -37,8 +37,8 @@
         <input type="text" class="form-control active" id="text" v-model="title" placeholder="여기에 입력해주세요">
       </form>
       <template #modal-footer="{ ok }">
-        <button class="btn submit_button" variant="btn black btn-block" :class="{ 'btn-blue5' : title == '' }" @click="registerFree">등록하기</button>
-        <button class="btn submit_button" variant="btn black btn-block" :class="{ 'btn-blue5' : !title == '' }" @click="registerFree">닫기</button>
+        <button class="btn submit_button" variant="btn black btn-block" @click="cancel">닫기</button>
+        <button class="btn submit_button" variant="btn black btn-block" :class="{ 'btn-blue5' : !title == '' }" @click="registerFree">등록하기</button>
       </template>
     </b-modal>
 
@@ -95,6 +95,10 @@ export default {
       }
       this.showRegister = false
       this.$EventBus.$emit('free', this.title)
+    },
+    cancel () {
+      this.showRegister = !this.showRegister;
+
     }
   }
 }
