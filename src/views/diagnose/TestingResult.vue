@@ -14,8 +14,12 @@
         <div class="title">정윤님은 무의식의 세계,<br/>
           트윙클 스테이지네요!<br/>
           학습을 시작하세요 😉</div>
-        <p class="desc">트윙클 스테이지는 눈과 손의 협응이 일어나고<br/>
-          무의식적으로 표현하는 단계입니다.</p>
+        <p class="desc">트윙클 스테이지는 반짝이는 상상력이 돋보이는 단계입니다.<br>
+          원과 직선의 드로잉은 규칙과 순서에 얽매이지 않고, 눈과 손<br>
+          의 협응이 자유로우며 표현에 자신감이 드러납니다.<br>
+        <div class="btn-other">
+          <a href="#" @click="menu.popup = !menu.popup" class="btn btn-blue">다른 스테이지 더 알아보기</a>
+        </div>
         <div class="btn-group">
           <router-link to="/PabloMain" class="btn btn-dark">무료체험 3개월 시작하기</router-link>
         </div>
@@ -24,12 +28,24 @@
         <div class="img"><img src="@/assets/images/temp/sample_img_01.jpg" alt=""></div>
       </div>
     </div>
+    <div class="bg_dim"  v-if="menu.popup" @click="menu.popup = !menu.popup">
+    <div class="modal_img">
+      <img src="@/assets/images/common/stage_modal.png" alt="" class="img-m">
+    </div>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'TestingResult'
+  name: 'TestingResult',
+  data() {
+    return {
+      menu:{
+        popup:false
+      }
+    }
+  }
 }
 </script>
 
@@ -93,7 +109,24 @@ export default {
     color: var(--gray-700);
     padding-left: 10rem;
   }
-
+  .btn-other{
+    position: absolute;
+    left: 10rem;
+    top: 59rem;
+    color: #fff;
+    border-radius: 5rem;
+    overflow: hidden;
+    .btn{
+      border-right: 3rem;
+      width: 26.5rem;
+      height: 5rem;
+      font-size: 2rem;
+      line-height: 5rem;
+      &:hover{
+        color: #fff;
+      }
+    }
+  }
   .btn-group {
     position: absolute;
     left: 10rem;
@@ -111,6 +144,21 @@ export default {
       width: 100%;
       height: 100%;
     }
+  }
+  .bg_dim{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    background-color: rgba(20,20,20,.6);
+  }
+  .modal_img{
+    position: absolute;
+    top: 7rem;
+    width: 176rem;
+    height: 105.7rem;
+    left: 8.5rem;
   }
 }
 </style>
