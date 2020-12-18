@@ -57,7 +57,6 @@ export default {
       })
     },
     loadAndroid(){
-
       try {
         const Vari = this.Android.getInitVariables()
         const obj = JSON.parse(Vari)
