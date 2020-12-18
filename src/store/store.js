@@ -42,6 +42,7 @@ export default new Vuex.Store({
     /**
      * API session options
      */
+
     session: {
       // 'user_id': '',
       // 'user_auth_key': '',
@@ -59,6 +60,7 @@ export default new Vuex.Store({
     canvasTimer: {
       timeInitVal: null,
       time: null,
+
       timer: null,
       timeOver : false,
     },

@@ -84,7 +84,7 @@ export default {
     console.log('PLAYER CREATED>>>>>>>>>>>>>>>>>>>>>')
     this.$EventBus.$on('popupOpen', (val) => {
       if(this.player) {
-        val ? this.pause() : this.play()
+        val && this.pause()
       }
     })
   },
