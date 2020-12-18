@@ -60,11 +60,11 @@
       </div>
     </div>
 
-    <b-modal id="deleteAudio" centered title="완전히 삭제" modal-class="deleteAudio">
+    <b-modal id="deleteAudio" centered title="완전히 삭제" modal-class="normalPopup">
       <template #modal-header>
         <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>
       </template>
-      <p class="text">완전히 삭제하시겠어요?<br/>녹음이 삭제돼요<br/></p>
+      <p class="text">완전히 삭제하시겠어요?<br/>녹음이 삭제돼요</p>
       <template #modal-footer="{ cancel }">
         <b-button variant="gray" class="btn-half" @click.prevent="deleteAudio()">삭제하기</b-button>
         <b-button class="btn btn-black  btn-half" @click="cancel()">닫기</b-button>

@@ -60,8 +60,8 @@
       </template>
       <p class="text">완전히 삭제하시겠어요?<br>그림이 삭제돼요</p>
       <template #modal-footer="{ cancel }">
-        <b-button variant="gray" class="btn-half" @click.prevent="deletePicture()">삭제하기</b-button>
-        <b-button class="btn btn-black  btn-half" @click="cancel()">닫기</b-button>
+        <b-button variant="gray" class="btn-half" @click.prevent="deletePicture()">네</b-button>
+        <b-button class="btn btn-black  btn-half" @click="cancel()">아니요</b-button>
       </template>
     </b-modal>
 
