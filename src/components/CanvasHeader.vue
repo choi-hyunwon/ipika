@@ -5,7 +5,14 @@
   <Diagnose v-else-if="page === 'diagnose'"></Diagnose>
   <!--프리드로잉-->
   <div v-else class="header ivory">
-    <router-link to="/PabloMain" class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt=""></router-link>
+    <Confirm v-slot="slotProps"
+             :okText="'네'"
+             :cancelText="'아니요'"
+             :completeText = "'이전 화면으로 이동할까요? </br> 진행중인 학습 내용은 </br> 저장되지 않아요!'">
+      <button @click="globalUtils.confirm(slotProps,'goMain')" class="symbol">
+        <img src="@/assets/images/common/arrow_left@2x.png" alt="">
+      </button>
+    </Confirm>
     <div class="flex-box">
       <div class="box-close">
         <Confirm v-slot="slotProps"

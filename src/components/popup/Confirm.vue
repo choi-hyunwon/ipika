@@ -174,12 +174,15 @@ export default {
         this.type = 'Complete'
         this.timeOut.completeText = "다 그렸나요? </br> 제출하면 수정할수 없어요"
         this.showConfirm = true
+      }else if(this.type==='refresh-letter'){
+        this.clear()
       }
     },
     cancelBtn () {
       if (this.type === 'diagnose') this.modalCancel()
       else if (this.type === 'success') this.$router.push('/PabloMain')
       else if (this.type === 'refresh' || this.type === 'Refresh') this.clear()
+        else if(this.type==='refresh-letter') this.modalCancel()
       else if(this.type === 'checkRed') this.modalCancel()
       else if (this.type === 'timeOut') {
         this.type = 'Refresh'
