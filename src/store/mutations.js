@@ -3,22 +3,28 @@ export const mutations = {
     state.userinfo = userInfo
   },
   setSession (state, session) {
-    state.session = {
-      ...state.session,
-      ...session
-    }
+    state.session = session
+    // state.session = {
+    //   ...state.session,
+    //   ...session
+    // }
   },
   setSubject (state, subject) {
     state.subject = subject
   },
-  setResult (state, result) {
-    state.result = result
-  },
-  setUesrGallery (state, userGallery) {
+  setUserGallery (state, userGallery) {
     state.userGallery = userGallery
   },
-  setUesrGalleryMypicture (state, mypicture) {
-    state.uesrGalleryMypicture = mypicture
+  setUserGalleryMypicture (state, mypicture) {
+    state.UserGalleryMypicture = mypicture
+  },
+  setUserAudio (state, userAudio) {
+    state.letter = {
+      ...state.letter,
+      userAudio: {
+        ...userAudio
+      }
+    }
   },
 
 
@@ -34,8 +40,8 @@ export const mutations = {
     state.canvasTimer.time = state.canvasTimer.timeInitVal
     state.canvasTimer.timer = setInterval(() => {
       if (state.canvasTimer.time === 0) {
-        state.canvasTimer.timeOver = true
-        clearInterval(this.timer)
+        state.canvasTimer.timeOver=true
+        clearInterval(state.canvasTimer.timer)
       }
       if (state.canvasTimer.time > 0) {
         state.canvasTimer.time--
@@ -65,4 +71,30 @@ export const mutations = {
     }, 1000)
   },
   /* // timer */
+  setLetter(state, letter){
+    state.canvasList = []
+    letter.stepPictureList.forEach(function(pictureList){
+      if (pictureList.drawEnded === 'N') {
+        letter.canvasList.forEach(function(canvasList,j){
+          if (canvasList.imageId === pictureList.canvasImageId) {
+            state.canvasList.push(canvasList)
+          }
+        });
+      }
+    });
+    state.letter = letter
+  },
+  setPlayerUrl(state, url){
+    state.playerOptions = {...state.playerOptions, ...url}
+  },
+  setPlayerSize(state, size){
+    state.playerOptions = {...state.playerOptions, ...size}
+  },
+  setBg(state, bg) {
+    if (bg.reset) state.bg = { active : false, isShow : false}
+    else state.bg = { ...state.bg, ...bg }
+  },
+  setSubmission(state, submission) {
+    state.submission = submission
+  }
 }

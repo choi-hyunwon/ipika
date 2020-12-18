@@ -1,5 +1,5 @@
 <template>
-  <div class="wrap">
+  <div v-if="isLoading" class="wrap" :style="{'background-color' : mainMenuList[0].bgColor}" >
     <div class="row">
       <div class="col col-6 left">
         <div class="symbol"><img src="@/assets/images/common/Symbol@2x.png" alt=""></div>
@@ -10,57 +10,13 @@
           <li><router-link to=""></router-link></li>
           <li><router-link to=""></router-link></li>
           <li><router-link to=""></router-link></li>
-          <li><router-link to=""></router-link></li>
-          <li><router-link to=""></router-link></li>
         </ul>
         <ul class="title-list">
-          <li class="active"><!-- badge-new / badge-start -->
-            <router-link to="/Intro">
-              <span class="num">01</span>
-              <span class="title">Pablo Letter</span>
-            </router-link>
-          </li>
-          <li>
-            <span>
-              <span class="num">02</span>
-              <span class="title">Pablo Classic</span>
-            </span>
-          </li>
-          <li class="">
-            <router-link to="/Pablo Park">
-              <span class="num">03</span>
-              <span class="title">Pablo Park</span>
-            </router-link>
-          </li>
-          <li class="">
-            <router-link to="/">
-              <span class="num">04</span>
-              <span class="title">Pablo Sea</span>
-            </router-link>
-          </li>
-          <li class="active">
-            <router-link to="/canvas">
-              <span class="num">05</span>
-              <span class="title">Free Drawing</span>
-            </router-link>
-          </li>
-          <li class="active">
-            <router-link to="/MyGallery">
-              <span class="num">06</span>
-              <span class="title">My Gallery</span>
-            </router-link>
-          </li>
-          <li>
-            <span>
-              <span class="num">07</span>
-              <span class="title">Open Gallery</span>
-            </span>
-          </li>
-          <li>
-            <span>
-              <span class="num">08</span>
-              <span class="title">My Page</span>
-            </span>
+          <li @click="setPath(menu.menuId)" v-for="(menu,i) in mainMenuList" :class="{active : isActiveMenuList.includes(menu.menuId)}">
+            <a>
+              <span class="num">{{`0${i+1}`}}</span>
+              <span class="title">{{menu.menuName}}</span>
+            </a>
           </li>
         </ul>
         <div class="message" v-if="message">
@@ -70,20 +26,94 @@
         </div>
       </div>
       <div class="col col-6 right">
-        <router-link to="/" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>
-        <div class="img"><img src="@/assets/images/temp/sample_img_01.jpg" alt=""></div>
+        <Confirm v-slot="slotProps"
+                 :complete-text="`파블로 서비스를 </br> 종료하시겠습니까?`"
+                 :cancelText="`아니요`"
+                 :okText="`네`">
+          <div @click="globalUtils.confirm(slotProps,'checkRed')" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></div>
+        </Confirm>
+        <div class="img"><img :src=mainMenuList[0].imgUrl alt=""></div>
       </div>
     </div>
+
+    <!-- 공통 알림 popup-->
+    <Alert ref="commonAlert" v-slot="slotProps" :boldText="'학습이 완료 되었습니다'" :text="'프리드로잉을 해보면 어떨까요?'" :buttonText ="'확인'"/>
+
   </div>
+
+
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
+import Confirm from '@/components/popup/Confirm'
+import Alert from '@/components/popup/Alert'
+
 export default {
   name: 'PabloMain',
+  components: {
+    Confirm,
+    Alert
+  },
   data () {
     return {
       message: false,
       slider: false,
+      isLoading : false,
+      mainMenuList : [],
+      isActiveMenuList : [111, 115, 116]
+    }
+  },
+  mounted () {
+    this.fetchMainMenu();
+  },
+  computed:{
+    ...mapGetters({
+      letter: 'getLetter',
+      canvasList : 'getLetterCanvasList',
+    })
+  },
+  methods : {
+    ...mapActions({
+      getMainMenu : 'getMainMenu',
+      getLetter : 'getLetter'
+    }),
+    fetchMainMenu(){
+      this.getMainMenu()
+        .then(result => {
+          this.isLoading = true;
+          this.mainMenuList = result.menuList;
+        })
+    },
+    setPath(menuId){
+      let link = ''
+       switch (menuId){
+        case 111 :
+           link = '/Intro'
+           break;
+         case 115 :
+           link = '/canvas'
+           break;
+         case 116 :
+           link = '/MyGallery'
+           break;
+         default :
+           link = ''
+           break;
+       }
+      if(link === '/Intro') this.fetchLetter();
+      else this.$router.push(link)
+    },
+    fetchLetter(){
+      this.getLetter()
+        .then(result => {
+          if(this.canvasList.length === 0) { // 학습 완료 판단
+            this.$refs.commonAlert.showAlert = true
+            this.$refs.commonAlert.type = 'common'
+          } else if (this.canvasList.length < this.letter.canvasList.length) { // 재진입 판단
+            this.$router.push('/canvas?page=letter')
+          } else this.$router.push('/Intro') // 최초 진입 판단
+        })
     }
   }
 }
@@ -93,6 +123,11 @@ export default {
 .wrap {
   .left {
     position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 800px;
+    justify-content: center;
     .symbol {
       position: absolute;
       width: 4rem;
@@ -139,8 +174,7 @@ export default {
       }
     }
     .title-list {
-      padding-left: 19.5rem;
-      padding-top: 11.8rem;
+
       li {
         position: relative;
         line-height: 9.6px;

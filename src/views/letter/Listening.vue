@@ -1,113 +1,125 @@
 <template>
   <div class="wrap bg-ivory">
-    <div class="header ivory">
-      <Confirm v-slot="slotProps"
-               :okText="'네'"
-               :cancelText="'아니요'"
-               :text="'정말 뒤로 가시겠어요?'">
-      <button class="symbol" @click="globalUtils.confirm(slotProps,'goBack')">
-        <img src="@/assets/images/common/arrow_left@2x.png" alt="">
-      </button>
-      </Confirm>
-
-      <div class="flex-box">
-        <Alert v-slot="slotProps">
-            <button @click="globalUtils.alert(slotProps,'video')" class="btn-right">
-              <span class="img"><img src="@/assets/images/common/ic-play@2x.png" alt=""></span>
-              <span class="tit">영상보기</span>
-            </button>
-        </Alert>
-
-        <Alert v-slot="slotProps"
-                :boldText="'주제보기'"
-                :text="'주제보기'"
-                :buttonText="'닫기'">
-          <button @click="globalUtils.alert(slotProps,'subject')" class="btn-right">
-            <span class="img"><img src="@/assets/images/common/ic-drawing@2x.png" alt=""></span>
-            <span class="tit">주제보기</span>
-          </button>
-        </Alert>
-
-        <div class="box-close">
-          <router-link to="/" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>
-        </div>
-      </div>
-    </div>
+    <LetterHeader/>
     <div class="contents">
       <div class="txt-area">
-        <p class="txt-lg">다른 친구들은 어떻게<br/>
-          생각하는지 들어볼까요?</p>
-        <p class="txt-sm">
-          친구들의 생각을 듣고, 내 생각과 비교해봐요!
-        </p>
+        <p class="txt-lg">다른 친구들은 어떻게<br/>생각하는지 들어볼까요?</p>
+        <p class="txt-sm">친구들의 생각을 듣고, 내 생각과 비교해봐요!</p>
       </div>
-      <!-- todo! slider? scroll? -->
-      <div class="img-slider">
+
+      <div class="img-slider" :style="{'transform': `translateX(-${position}px)`, 'transition-duration' : '300ms'}">
         <ul>
-          <li class="item play">
-            <router-link to="" class="img">
-              <img src="@/assets/images/temp/sample_img_03.png" alt="">
-            </router-link>
-            <p class="title">김정윤</p>
-            <p class="time">00:59</p>
-          </li>
-          <li class="item pause">
-            <router-link to="" class="img">
-              <img src="@/assets/images/temp/sample_img_03.png" alt="">
-            </router-link>
-            <p class="title">김정윤</p>
-            <p class="time">00:59</p>
-          </li>
-          <li class="item pause">
-            <router-link to="" class="img">
-              <img src="@/assets/images/temp/sample_img_03.png" alt="">
-            </router-link>
-            <p class="title">김정윤</p>
-            <p class="time">00:59</p>
-          </li>
-          <li class="item pause">
-            <router-link to="" class="img">
-              <img src="@/assets/images/temp/sample_img_03.png" alt="">
-            </router-link>
-            <p class="title">김정윤</p>
-            <p class="time">00:59</p>
-          </li>
-          <li class="item pause">
-            <router-link to="" class="img">
-              <img src="@/assets/images/temp/sample_img_03.png" alt="">
-            </router-link>
-            <p class="title">김정윤</p>
-            <p class="time">00:59</p>
+          <li>
+          <div v-for="(audio, i) in audioList" class="item" :class="{'pause' : !play, 'play' : play && i === focusIdx}">
+            <button class="img" @click="showPlay(i)"><img :src=audio.characterImageUrl alt=""></button>
+            <p class="time">00:00</p>
+          </div>
           </li>
         </ul>
       </div>
-      <div class="navigation">
-        <button class="swipe"><img src="@/assets/images/common/swipe_left_default@2x.png" alt=""></button>
-        <button class="swipe"><img src="@/assets/images/common/swipe_left_active@2x.png" alt=""></button>
-        <button class="swipe"><img src="@/assets/images/common/swipe_right_active@2x.png" alt=""></button>
+
+      <div v-if="maximumLength>=5" class="navigation">
+        <button v-if="position<=0" class="swipe"><img src="@/assets/images/common/swipe_left_default@2x.png" alt=""></button>
+        <button v-if="position>0||position>=this.maximumLength" class="swipe"><img src="@/assets/images/common/swipe_left_active@2x.png" alt="" @click="moveLeft"></button>
+        <button v-if="position<=this.maximumLength" class="swipe"><img src="@/assets/images/common/swipe_right_active@2x.png" alt="" @click="moveRight"></button>
+        <button v-if="position>this.maximumLength" class="swipe"><img src="@/assets/images/common/swipe_right_default@2x.png" alt=""></button>
       </div>
-      <div class="btn-wrap"><router-link to="/canvas?page=letter" class="btn btn-dark">다 들었어요!</router-link></div>
-<!--      <div class="btn-wrap"><button class="btn btn-dark disabled">다 들었어요!</button></div>-->
+      <div class="btn-wrap"><router-link to="/canvas?page=letter" class="btn btn-dark" :class="{'disabled':submit===false}">다 들었어요!</router-link></div>
+      <!--      <div class="btn-wrap"><button class="btn btn-dark ">다 들었어요!</button></div>-->
     </div>
+    <ListeningPlay v-if="play" :focusIdx="focusIdx"/>
   </div>
 </template>
 
 <script>
+import LetterHeader from '@/components/letter/LetterHeader'
+import ListeningPlay from '@/components/letter/ListeningPlay'
+import { mapGetters } from 'vuex'
+import {Controller} from 'swiper'
+import { Swiper, SwiperSlide } from "vue-awesome-swiper";
+import "swiper/swiper-bundle.css";
 
-import Confirm from '@/components/popup/Confirm'
-import Alert from '@/components/popup/Alert'
+
 export default {
   name: 'peopleThinking',
-  components: { Alert, Confirm },
+  components: {LetterHeader, ListeningPlay,Swiper, SwiperSlide,Controller},
+  data () {
+    return {
+      play : false,
+      focusIdx : 0,
+      position : 0,
+      maximumLength : 0,
+      playLength : 250,
+      playPopup : false,
+      submit : false,
+      isEnd : false,
+
+      // swiperOption: {
+      //   slidesPerView: 5,
+      //   spaceBetween: 100,
+      //   pagination: {
+      //     el: ".swiper-pagination",
+      //     clickable: true
+      //   },
+      //   breakpoints: {
+      //     1024: {
+      //       slidesPerView: 5,
+      //       spaceBetween: 210
+      //     },
+      //   }
+      // }
+    };
+  },
   created() {
     this.$EventBus.$on('back',this.goBack)
+    if(this.audioList) this.maximumLength = this.playLength * this.audioList.length -1025
+    else this.maximumLength = 0
+    this.$EventBus.$on('toggle',()=>{
+      this.play = false
+    })
+    console.log(this.submit)
+  },
+  mounted:function(){
+
+  },
+  computed:{
+    ...mapGetters({
+      audioList: 'getLetterAudioList'
+    })
   },
   methods : {
-    goBack(){
+    goBack () {
       this.$router.push('/Recording')
+    },
+    showPlay (index) {
+      this.play = true
+      this.submit = true
+      this.focusIdx = index
+      console.log(index)
+    },
+    selectIndex(index){
+      this.focusIdx=index
+    },
+    moveRight () {
+      if (this.position <= this.maximumLength) {
+        this.position += 280;
+        console.log("현재 위치 : " + this.position)
+        console.log("전체 길이  : " + this.maximumLength)
+      } else return
+    },
+    moveLeft () {
+      if (this.position >= 0) {
+        this.position -= 280;
+        console.log("현재 위치 : " + this.position)
+        console.log("전체 길이  : " + this.maximumLength)
+      } else return
+    },
+    test(){
+      this.isEnd = true
     }
   }
 }
+
 </script>
 
 <style lang="scss" scoped>
@@ -138,7 +150,6 @@ export default {
     width: 100%;
     ul {
       height: 47rem;
-      overflow-x: scroll;
       white-space: nowrap;
       padding-left: 10rem;
     }

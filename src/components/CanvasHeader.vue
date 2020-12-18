@@ -1,11 +1,22 @@
 <template>
+  <!--학습하기-->
   <Letter v-if="page === 'letter'" ></Letter>
+  <!--진단하기-->
   <Diagnose v-else-if="page === 'diagnose'"></Diagnose>
+  <!--프리드로잉-->
+  <div v-else class="header ivory">
+    <router-link to="/PabloMain" class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt=""></router-link>
+    <div class="flex-box">
+      <div class="box-close">
+        <router-link to="/PabloMain" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-import Letter from '@/components/letter/CanvasHeader'
-import Diagnose from '@/components/diagnose/CanvasHeader'
+import Letter from '@/components/letter/LetterCanvasHeader'
+import Diagnose from '@/components/diagnose/DiagnoseCanvasHeader'
 
 export default {
   name: 'CanvasHeader',

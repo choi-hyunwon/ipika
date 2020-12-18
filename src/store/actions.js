@@ -10,143 +10,43 @@ export const actions = {
     return data
   },
   getMainMenu ({ commit }, options) {
-    console.log(`getMainMenu`)
     return webApi.getMainmenu(options)
       .then(data => {
-        commit('setCategoryItems', data)
         return data
       })
   },
   getSubject ({ commit }, options) {
-    if (store.getters.getIsDummy) {
-      const data = {
-        code: '0000',
-        message: '',
-        subject: '5 분안에 자유롭게 나무를 그려보세요.',
-        limitMinute: 5
-      }
-      commit('setSubject', data)
-      return data
-    } else {
-      return webApi.getSubject(options)
-        .then(data => {
-          commit('setSubject', data)
-          return data
-        })
-    }
+    return webApi.getSubject(options)
+      .then(data => {
+        commit('setSubject', data)
+      })
   },
   getResult ({ commit }, options) {
-    if (store.getters.getIsDummy) {
-      const data = {
-        "code": "0000",
-        "message": null,
-        "stageId": 3,
-        "stageName": "Growing-up",
-        "trialRecommendation": "Y"
-      }
-      commit('setResult', data)
-      return data
-    } else {
-      return webApi.getResult(options)
-        .then(data => {
-          commit('setResult', data)
-          return data
-        })
-    }
+    return webApi.getDiagnoseResult(options)
+      .then(data => {
+        return data
+      })
+  },
+  getDiagnoseResult ({ commit }, options) {
+    return webApi.getDiagnoseResult(options)
+      .then(data => {
+        return data.code
+      })
   },
   getUserGallery ({ commit }, options) {
-    if (store.getters.getIsDummy) {
-      const data = {
-        "userName": "궁예",
-        "backgroundImage": "/images/users/background/king.png",
-        "totalCount": "21",
-        "totalSharedCount": "21",
-        "totalViewCount": "352",
-        "totalReactionCount": "34"
-      }
-      commit('setUserGallery', data)
-      return data
-    } else {
-      return webApi.getUserGallery(options)
-        .then(data => {
-          commit('setUserGallery', data)
-          return data
-        })
-    }
+
+    return webApi.getUserGallery(options)
+      .then(data => {
+        commit('setUserGallery', data)
+        return data
+      })
   },
   getUserGalleryMypicture ({ commit }, options) {
-    if (store.getters.getIsDummy) {
-      const data =    {
-        "pictures":[
-          {
-            "drawingType": 1,
-            "stageId": 1,
-            "stageName": "Twinkle Stage",
-            "stepId": 1,
-            "stepName": "4",
-            "stepSubject": "사물을 그려보아요.",
-            "ideaKeyword": "사과를 그려봅시다.",
-            "pictureUrl": "https://vuejs.org/images/logo.png",
-            "shareStatus": "Y",
-            "viewCount": 23,
-            "reactionCount": 6,
-            "createdDate": "2020-11-06T18:25:43.511Z",
-            "pictureId": "987654321"
-          },
-          {
-            "drawingType": 3,
-            "stageId": 0,
-            "stageName": null,
-            "stepId": 1,
-            "stepName": null,
-            "stepSubject": null,
-            "ideaKeyword": null,
-            "pictureUrl": "https://nodejs.org/static/images/logo.svg",
-            "shareStatus": "Y",
-            "viewCount": 16,
-            "reactionCount": 4,
-            "createdDate": "2020-11-07T12:25:43.511Z",
-            "pictureId": "123465789"
-          }
-        ],
-        "code": "string",
-        "message": "string",
-        "audio":[
-          {
-            "audioUrl": "string",
-            "createdDate": "2020-11-07T12:25:43.511Z",
-            "drawingType": 2,
-            "pictureId": 0,
-            "stageId": 1,
-            "stageName": "Twinkle Stage",
-            "stepId": 1,
-            "title": "string",
-            "userAudioId": 1,
-            "userCode": 0
-          },
-          {
-            "audioUrl": "string",
-            "createdDate": "2020-11-01T12:25:43.511Z",
-            "drawingType": 1,
-            "pictureId": 0,
-            "stageId": 1,
-            "stageName": "Grow Stage",
-            "stepId": 1,
-            "title": "string",
-            "userAudioId": 1,
-            "userCode": 0
-          },
-        ]
-      }
-      commit('setUserGalleryMypicture', data)
-      return data
-    } else {
-      return webApi.getUserGalleryMypicture(options)
-        .then(data => {
-          commit('setUserGalleryMypicture', data)
-          return data
-        })
-    }
+    return webApi.getUserGalleryMypicture(options)
+      .then(data => {
+        commit('setUserGalleryMypicture', data)
+        return data
+      })
   },
   getUserGalleryBackground ({ commit }, options) {
     return webApi.getUserGalleryBackground(options)
@@ -159,5 +59,59 @@ export const actions = {
       .then(data => {
         return data
       })
-  }
+  },
+  getUserAudioDetele ({ commit }, options) {
+    return webApi.getUserAudioDetele(options)
+      .then(data => {
+        return data
+      })
+  },
+  getLetter ({ commit }, options) {
+    return webApi.getLetter(options)
+      .then(data => {
+        commit('setLetter', data)
+
+        /* TODO: API 조회 예외 처리 필요 */
+        // 영상 재생을 위한 임시 코드
+        console.log('data.stepVideoUrl from actions > getLetter')
+        console.log(data)
+        if (!data.stepVideoUrl) {
+          data.stepVideoUrl = 'https://file-examples-com.github.io/uploads/2017/04/file_example_MP4_640_3MG.mp4'
+          data.stepVideoThumnailUrl = 'https://dummyimage.com/640x360/000000/fff&text=Thumbnail'
+        }
+
+        commit('setPlayerUrl', {
+          sources: [{ src: data.stepVideoUrl }],
+          Thumnail: data.stepVideoThumnailUrl
+        })
+      })
+  },
+  getSubmission ({ commit }, options) {
+    return webApi.getSubmission(options)
+      .then(data => {
+        commit('setSubmission', data)
+        return data
+      })
+  },
+  getSubmissionLearning ({ commit }, options) {
+    return webApi.getSubmissionLearning(options)
+      .then(data => {
+        return data
+      })
+  },
+  getSubmissionFree ({ commit }, options) {
+    return webApi.getSubmissionFree(options)
+      .then(data => {
+        return data
+      })
+  },
+
+  getRecording ({ commit }, options) {
+    return webApi.getRecording(options)
+      .then(data => {
+        commit('setUserAudio', data)
+        return data
+      })
+  },
+
 }

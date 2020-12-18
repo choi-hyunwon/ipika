@@ -60,14 +60,15 @@
               <button class="color" style="background-color: #2f71f1"
                       @click="setColorSelect"
               ></button>
-              <button class="color" style="background-color: #1122b5"
-                      @click="setColorSelect"
-              ></button>
               <button class="color" style="background-color: #8551d3"
                       @click="setColorSelect"
               ></button>
               <button class="color selected" style="background-color: #444444"
                       @click="setColorSelect"
+              ></button>
+              <button class="color colorpicker"
+                      @click='setColorSelect($event); isPickerOpen();'
+                      v-bind:style="{ background: colors.hex }"
               ></button>
             </div>
             <div class="tool">
@@ -696,44 +697,103 @@
               </button>
             </div>
             <div class="btn-tool">
+              <Confirm v-slot="slotProps"
+                       :completeText="'다시 그리시겠어요? </br> 조금 전 그림은 사라져요 '"
+                       :cancelText="'다시 그리기'"
+                       :okText="'제출하기'">
               <button @click="undo"><img src="@/assets/images/common/btn_undo@2x.png" alt=""></button>
               <button @click="redo"><img src="@/assets/images/common/btn_redo@2x.png" alt=""></button>
-              <button v-b-modal.clearAllPopup><img src="@/assets/images/common/btn_refresh@2x.png" alt=""></button>
+                <button @click="globalUtils.confirm(slotProps,'refresh')"><img src="@/assets/images/common/btn_refresh@2x.png" alt=""></button>
+              </Confirm>
             </div>
           </div>
-          <div v-if="page==='diagnose'||'letter'" class="btn-wrap">
-            <b-button v-b-modal.normalPopup3 class="btn btn-blue btn-lg">다 그렸어요!</b-button>
+          <div class="btn-wrap">
+            <Confirm  v-if="page==='diagnose'"
+                      v-slot="slotProps"
+                      :completeText="'다 그렸나요? </br> 제출하면 수정할 수 없어요!'"
+                      :cancelText = "'아니요'"
+                      :okText = "'제출하기'">
+              <b-button  @click="globalUtils.confirm(slotProps,'diagnose')" class="btn btn-blue btn-lg">완료</b-button>
+            </Confirm>
+            <b-button v-else-if="page==='letter'" @click="setEvent" class="btn btn-blue btn-lg" :class="{'disabled' : !bg.imageId}">완료</b-button>
+            <!--프리드로잉-->
+            <b-button v-else @click="$EventBus.$emit('freeName')" class="btn btn-blue btn-lg">완료</b-button>
           </div>
         </div>
       </div>
     </nav>
-
+    <chrome-picker v-show="isOpen" v-model="colors"/>
     <div id="notifications" style="bottom: 127px;"></div>
+
   </div>
 </template>
 
 <script>
-export default {
-  name: "Wacom",
-  props : {
-    isLoading: {
-      Boolean,
-      default(){return false}
+  import Confirm from '@/components/popup/Confirm'
+  import { mapActions, mapGetters, mapMutations } from 'vuex'
+  import { Chrome } from 'vue-color'
+
+  export default {
+    name: 'Wacom',
+    components: {
+      Confirm,
+      'chrome-picker': Chrome
     },
+    data () {
+      return {
+        showConfirm: false,
+        type: '',
+        colour: '#000000',
+        message: 'hello',
+        colors: {
+          'hex': '#000000',
+          'source': 'hex'
+        },
+        updateValue: '',
+        hex: '',
+        isOpen: false
+      }
+  },
+  props : {
     drawer: {
       Boolean,
       default(){return true}
     }
   },
+  created(){
+    this.$EventBus.$on('setBg', (bg, reset) => {
+      this.setLayerBgSelect(bg.tabletImageUrl)
+      if(reset) {
+        this.getLetter()
+          .then( result => {
+            this.setBg({reset : true})
+          })
+      } else this.setBg({...bg, ...{active : true} })
+    });
+    this.$EventBus.$on('visibleBg', () => {
+      if(!this.bg.isShow) this.setLayerBgSelect(this.bg.tabletImageUrl)
+      else WILL.setBackground('paper_01')
+      //this.setLayerBgSelect('https://colorate.azurewebsites.net/SwatchColor/FFFFFF')
+    });
+  },
   computed : {
+    ...mapGetters({
+      bg : 'getBg'
+    }),
     page() {
       return this.$router.currentRoute.query.page
     }
   },
   methods : {
-    setLayerBgSelect (e) {
-      // todo : 학습 배경 선택시 캔버스는 투명하게 만들고, 배경 레이어에 BG image 넣어야함
-      // document.querySelector('.layer_bg').style.backgroundColor = "#f00"
+    ...mapMutations({
+      setBg: 'setBg',
+      setLetter : 'setLetter'
+    }),
+    ...mapActions({
+      getLetter : 'getLetter'
+    }),
+    setLayerBgSelect (img) {
+      WILL.setBackground(img, 'url')
     },
     /**
      * 캔버스 툴 조작
@@ -761,6 +821,20 @@ export default {
     },
     toggleDrawer () {
       this.$EventBus.$emit('toggleDrawer', !this.drawer)
+    },
+    toggleConfirm (type, topic) {
+      this.showConfirm = !this.showConfirm
+      this.type = type
+    },
+    isPickerOpen () {
+      this.isOpen = !this.isOpen
+    },
+    colorPicker() {
+      this.setColorSelect()
+      this.isPickerOpen()
+    },
+    setEvent(){
+      this.$EventBus.$emit('next')
     }
   }
 }
@@ -1099,4 +1173,15 @@ export default {
     }
   }
 }
+
+
+.vc-chrome {
+  position: absolute;
+  left: 169px;
+  top: 450px;
+  z-index: 200
+}
+
+
+
 </style>

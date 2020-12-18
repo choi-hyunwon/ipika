@@ -19,8 +19,6 @@ export default new Vuex.Store({
    */
   state: {
     isDummy : false,
-    diagnose : false,
-
     /**
      * userinfo는 단말기(안드로이드)기에서 받아온다.
      *
@@ -38,28 +36,56 @@ export default new Vuex.Store({
       name: '홈런초등테스트1',
       key: '1604311',
       grade: 0,
-      device_type: "1002"
+      device_type: "1001"
     },
     /**
      * API session options
      */
     session: {
-      'user_id': 'testplan56',
-      'user_auth_key': 'abcdefghijklmnopqrstuvwxyz0123456789',
-      'Content_Language': 'ko',
-      'device_type': '1001'
+      'user_id': '',
+      'user_auth_key': '',
+      'Content_Language': '',
+      'device_type': ''
+      // 'user_id': 'xptmxm1',
+      // 'user_auth_key': 'abcdefghijklmnopqrstuvwxyz0123456789',
+      // 'Content_Language': 'ko',
+      // 'device_type': '1001'
     },
     subject: {},
-    result: {},
     userGallery: {},
-    uesrGalleryMypicture: {},
+    UserGalleryMypicture: {},
 
     canvasTimer: {
-      timeInitVal: 60*1,
-      time: 60*1,
+      timeInitVal: null,
+      time: null,
       timer: null,
       timeOver : false,
     },
+    playerOptions: {
+      autoplay: false,
+      controls: true,
+      sources: [
+        {
+          src: '',
+          type: ''
+        }
+      ],
+      width: 0,
+      height: 0,
+      liveui: false,
+      Thumnail : ''
+    },
+    letter : {
+
+    },
+    bg : {
+      active : false,
+      isShow : false,
+    },
+    submission : {},
+    canvasList : [
+
+    ]
   },
   /**
    * global로 사용하는 getters
@@ -78,27 +104,42 @@ export default new Vuex.Store({
     getSubject: state => {
       return state.subject
     },
-    getResult: state => {
-      return state.result
-    },
     getUserGallery: state => {
       return state.userGallery
     },
-    getUesrGalleryMypicture: state => {
-      return state.uesrGalleryMypicture
+    getUserGalleryMypicture: state => {
+      return state.UserGalleryMypicture
+
     },
-
-
     getIsDummy: state => {
       return state.isDummy
     },
     getDiagnose: state => {
       return state.diagnose
     },
-
-
     getCanvasTimer: state => {
       return state.canvasTimer
+    },
+    getPlayerOptions: state => {
+      return state.playerOptions
+    },
+    getLetter: state => {
+      return state.letter
+    },
+    getLetterAudioList : state => {
+      return state.letter.audioCharacterList
+    },
+    getLetterCanvasList : state => {
+      return state.canvasList
+    },
+    getBg :state => {
+      return state.bg
+    },
+    getSubmission :state => {
+      return state.submission
+    },
+    getUserAudio : state => {
+      return state.letter.userAudioList[0]
     },
   },
   /**

@@ -1,16 +1,9 @@
 /* eslint-disable */
 
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-
 import List from '@/views/List'
-
 import Home from '@/views/Home'
-
 import PabloMain from '@/views/PabloMain'
-
 import Canvas from '@/views/Canvas'
-
 import TestingResult from '@/views/diagnose/TestingResult'
 
 import Intro from '@/views/letter/Intro'
@@ -18,7 +11,6 @@ import Watching from '@/views/letter/Watching'
 import Recording from '@/views/letter/Recording'
 import Listening from '@/views/letter/Listening'
 import PabloPopup1 from '@/views/letter/PabloPopup1'
-import PabloPopup2 from '@/views/letter/PabloPopup2'
 import Completion from '@/views/letter/Completion'
 
 import MyGallery from '@/views/myGallery/MyGallery'
@@ -26,8 +18,6 @@ import MyGalleryDetail from '@/views/myGallery/MyGalleryDetail'
 
 import Agreement from '@/views/useLater/Agreement'
 import LoadingSpinnerWaiting from '@/views/useLater/LoadingSpinnerWaiting'
-
-Vue.use(VueRouter)
 
 const requireAuth = () => (from, to, next) => {
   if(from.path === '/canvas' || from.path === '/pabloCanvas') {
@@ -37,7 +27,7 @@ const requireAuth = () => (from, to, next) => {
   }
 };
 
-const routes = [
+export const routes = [
   {
     path: '/',
     name: 'home',
@@ -90,11 +80,6 @@ const routes = [
     component: PabloPopup1
   },
   {
-    path: '/PabloPopup2',
-    name: 'PabloPopup2',
-    component: PabloPopup2
-  },
-  {
     path: '/Recording',
     name: 'Recording',
     component: Recording
@@ -121,9 +106,4 @@ const routes = [
   }
 ]
 
-const router = new VueRouter({
-  mode: 'history',
-  routes
-})
-
-export default router
+export default routes
