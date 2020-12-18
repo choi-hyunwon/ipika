@@ -45,7 +45,7 @@ export default new Vuex.Store({
       'user_id': '',
       'user_auth_key': '',
       'Content_Language': '',
-      'device_type': ''
+      'device_type': '',
       // 'user_id': 'xptmxm1',
       // 'user_auth_key': 'abcdefghijklmnopqrstuvwxyz0123456789',
       // 'Content_Language': 'ko',

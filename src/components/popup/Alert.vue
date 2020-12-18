@@ -38,7 +38,7 @@
       </template>
       <p class="text">{{text}}</p>
       <template #modal-footer="{ cancel }">
-        <button size="sm" class="btn btn-black btn-block" @click="timeStart">시작하기</button>
+        <button size="sm" class="btn btn-black btn-block" @click="timeStart">네 그려볼게요!</button>
       </template>
     </b-modal>
     <b-modal v-if="type==='success'" centered modal-class="normalPopup" v-model="showAlert">
