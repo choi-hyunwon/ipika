@@ -697,13 +697,23 @@
               </button>
             </div>
             <div class="btn-tool">
-              <Confirm v-slot="slotProps"
+              <Confirm v-if="page==='diagnose'"
+                        v-slot="slotProps"
                        :completeText="'다시 그리시겠어요? </br> 조금 전 그림은 사라져요 '"
                        :cancelText="'다시 그리기'"
                        :okText="'제출하기'">
               <button @click="undo"><img src="@/assets/images/common/btn_undo@2x.png" alt=""></button>
               <button @click="redo"><img src="@/assets/images/common/btn_redo@2x.png" alt=""></button>
                 <button @click="globalUtils.confirm(slotProps,'refresh')"><img src="@/assets/images/common/btn_refresh@2x.png" alt=""></button>
+              </Confirm>
+              <Confirm v-if="page==='letter'"
+                       v-slot="slotProps"
+                       :completeText="'다시 그리시겠어요? </br> 조금 전 그림은 사라져요 '"
+                       :cancelText="'아니요'"
+                       :okText="'네'">
+                <button @click="undo"><img src="@/assets/images/common/btn_undo@2x.png" alt=""></button>
+                <button @click="redo"><img src="@/assets/images/common/btn_redo@2x.png" alt=""></button>
+                <button @click="globalUtils.confirm(slotProps,'refresh-letter')"><img src="@/assets/images/common/btn_refresh@2x.png" alt=""></button>
               </Confirm>
             </div>
           </div>

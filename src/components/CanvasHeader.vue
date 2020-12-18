@@ -5,10 +5,22 @@
   <Diagnose v-else-if="page === 'diagnose'"></Diagnose>
   <!--프리드로잉-->
   <div v-else class="header ivory">
-    <router-link to="/PabloMain" class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt=""></router-link>
+    <Confirm v-slot="slotProps"
+             :okText="'네'"
+             :cancelText="'아니요'"
+             :completeText = "'이전 화면으로 이동할까요? </br> 진행중인 학습 내용은 </br> 저장되지 않아요!'">
+      <button @click="globalUtils.confirm(slotProps,'goMain')" class="symbol">
+        <img src="@/assets/images/common/arrow_left@2x.png" alt="">
+      </button>
+    </Confirm>
     <div class="flex-box">
       <div class="box-close">
-        <router-link to="/PabloMain" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>
+        <Confirm v-slot="slotProps"
+                 :complete-text="`파블로 서비스를 </br> 종료하시겠습니까?`"
+                 :cancelText="`아니요`"
+                 :okText="`네`">
+          <button @click="globalUtils.confirm(slotProps,'checkRed')" style="padding-top: 0;" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></button>
+        </Confirm>
       </div>
     </div>
   </div>
@@ -17,10 +29,11 @@
 <script>
 import Letter from '@/components/letter/LetterCanvasHeader'
 import Diagnose from '@/components/diagnose/DiagnoseCanvasHeader'
+import Confirm from '@/components/popup/Confirm'
 
 export default {
   name: 'CanvasHeader',
-  components : {Letter, Diagnose},
+  components : {Letter, Diagnose,Confirm},
   computed: {
     page () {
       return this.$router.currentRoute.query.page

@@ -12,7 +12,7 @@
           <li>
           <div v-for="(audio, i) in audioList" class="item" :class="{'pause' : !play, 'play' : play && i === focusIdx}">
             <button class="img" @click="showPlay(i)"><img :src=audio.characterImageUrl alt=""></button>
-            <p class="time">00:00</p>
+            <p class="time">{{audioList[i].audioPlaytime}}</p>
           </div>
           </li>
         </ul>
