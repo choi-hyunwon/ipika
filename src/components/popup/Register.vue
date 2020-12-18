@@ -37,7 +37,8 @@
         <input type="text" class="form-control active" id="text" v-model="title" placeholder="여기에 입력해주세요">
       </form>
       <template #modal-footer="{ ok }">
-        <button class="btn submit_button" variant="btn black btn-block" :class="{ 'btn-blue5' : !title == '' }" @click="registerFree">등록하기</button>
+        <button class="btn submit_button" variant="btn black btn-block" :class="{ 'btn-blue5' : title == '' }" @click="registerFree">등록하기</button>
+        <button class="btn submit_button" variant="btn black btn-block" :class="{ 'btn-blue5' : !title == '' }" @click="registerFree">닫기</button>
       </template>
     </b-modal>
 
@@ -100,5 +101,16 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.CanvasPopup{
+  .modal-footer{
+    .btn{
+      width:35rem;
+      margin-bottom: 1rem;
+      &:nth-child(1){
+        margin-right: 4rem;
 
+      }
+    }
+  }
+}
 </style>

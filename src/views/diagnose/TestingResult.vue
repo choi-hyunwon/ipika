@@ -18,6 +18,9 @@
           <span class="text">{{submission.stageName}} Stage</span></div>
         <div class="title" v-html="submission.mainTitle"></div>
         <p class="desc" v-html="submission.subTitle"></p>
+        <div class="btn-other">
+          <a href="#" @click="menu.popup = !menu.popup" class="btn btn-blue">다른 스테이지 더 알아보기</a>
+        </div>
         <div class="btn-group">
           <router-link to="/PabloMain" class="btn btn-dark">무료체험 시작하기</router-link>
         </div>
@@ -30,6 +33,11 @@
         <img v-if="submission.stageId === 5" src="@/assets/images/common/img_stage_end_05@2x.png" alt="프로필사진" class="img">
       </div>
     </div>
+    <div class="bg_dim"  v-if="menu.popup" @click="menu.popup = !menu.popup">
+      <div class="modal_img">
+        <img src="@/assets/images/common/stage_modal.png" alt="" class="img-m">
+      </div>
+    </div>
   </div>
 </template>
 
@@ -39,6 +47,13 @@ import Confirm from '@/components/popup/Confirm'
 export default {
   name: 'TestingResult',
   components: {Confirm },
+  data() {
+    return {
+      menu:{
+        popup:false
+      }
+    }
+  },
   computed: {
     ...mapGetters({
       submission : 'getSubmission'
@@ -121,7 +136,24 @@ export default {
     color: var(--gray-700);
     padding-left: 10rem;
   }
-
+  .btn-other{
+    position: absolute;
+    left: 10rem;
+    top: 59rem;
+    color: #fff;
+    border-radius: 5rem;
+    overflow: hidden;
+    .btn{
+      border-right: 3rem;
+      width: 26.5rem;
+      height: 5rem;
+      font-size: 2rem;
+      line-height: 5rem;
+      &:hover{
+        color: #fff;
+      }
+    }
+  }
   .btn-group {
     position: absolute;
     left: 10rem;
@@ -139,6 +171,21 @@ export default {
       width: 100%;
       height: 100%;
     }
+  }
+  .bg_dim{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    background-color: rgba(20,20,20,.6);
+  }
+  .modal_img{
+    position: absolute;
+    top: 7rem;
+    width: 176rem;
+    height: 105.7rem;
+    left: 8.5rem;
   }
 }
 </style>
