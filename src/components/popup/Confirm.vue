@@ -145,8 +145,8 @@ export default {
     clear () {
       WILL.clear()
       this.showConfirm = false
-      this.setTimerReset();
-      this.setTimerStart();
+      this.setTimerReset()
+      this.setTimerStart()
     },
     modalCancel () {
       this.showConfirm = false
@@ -157,6 +157,10 @@ export default {
         this.goBack()
       } else if (this.type === 'goMain') {
         this.goMain()
+      } else if (this.type === 'goMain') {
+        this.goMain()
+      } else if (this.type === 'refresh') {
+        this.clear()
       } else if (this.type === 'Complete' || this.type === 'diagnose' || this.type === 'refresh' || this.type === 'record' || this.type === 'Refresh') {
         this.goToNext()
       } else if (this.type === 'watchComplete') {
@@ -181,9 +185,10 @@ export default {
     cancelBtn () {
       if (this.type === 'diagnose') this.modalCancel()
       else if (this.type === 'success') this.$router.push('/PabloMain')
-      else if (this.type === 'refresh' || this.type === 'Refresh') this.clear()
-        else if(this.type==='refresh-letter') this.modalCancel()
-      else if(this.type === 'checkRed') this.modalCancel()
+      else if (this.type === 'refresh') this.modalCancel()
+      else if (this.type === 'Refresh') this.clear()
+      else if (this.type === 'refresh-letter') this.modalCancel()
+      else if (this.type === 'checkRed') this.modalCancel()
       else if (this.type === 'timeOut') {
         this.type = 'Refresh'
         this.timeOut.completeText = "다시 그리시겠어요? </br> 조금 전 그림은 사라져요"
