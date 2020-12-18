@@ -22,6 +22,7 @@
   </div>
 </template>
 
+
 <script>
 import { mapGetters } from 'vuex'
 import Confirm from '@/components/popup/Confirm'

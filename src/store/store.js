@@ -26,7 +26,8 @@ export default new Vuex.Store({
      * return : {"grade":"0","name":"홈런초등테스트1","key":"1604311","device_type":"1002"}
      *
      * DEVICE_TYPE_N = "1001"    // N형 디바이스
-     * DEVICE_TYPE_AI = "1002"   // AI 신형 디바이스
+     * DEVICE_TYPE_
+     * AI = "1002"   // AI 신형 디바이스
      * DEVICE_TYPE_LH = "1003"   // 리틀홈런 디바이스
      * DEVICE_TYPE_WEB = "1004"   // 독립웹
      * DEVICE_TYPE_MB = "1005"   // 하이브리드 앱(android or ios)
@@ -41,15 +42,16 @@ export default new Vuex.Store({
     /**
      * API session options
      */
+
     session: {
-      'user_id': '',
-      'user_auth_key': '',
-      'Content_Language': '',
-      'device_type': ''
-      // 'user_id': 'xptmxm1',
-      // 'user_auth_key': 'abcdefghijklmnopqrstuvwxyz0123456789',
-      // 'Content_Language': 'ko',
-      // 'device_type': '1001'
+      // 'user_id': '',
+      // 'user_auth_key': '',
+      // 'Content_Language': '',
+      // 'device_type': ''
+      'user_id': 'laoo3',
+      'user_auth_key': 'abcdefghijklmnopqrstuvwxyz0123456789',
+      'Content_Language': 'ko',
+      'device_type': '1001'
     },
     subject: {},
     userGallery: {},
@@ -58,6 +60,7 @@ export default new Vuex.Store({
     canvasTimer: {
       timeInitVal: null,
       time: null,
+
       timer: null,
       timeOver : false,
     },
