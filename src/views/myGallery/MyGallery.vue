@@ -9,8 +9,13 @@
         </router-link>
       </div>
       <div class="box-close">
-        <router-link to="/PabloMain" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt="">
-        </router-link>
+        <Confirm v-slot="slotProps"
+                 :complete-text="`파블로 서비스를 </br> 종료하시겠습니까?`"
+                 :cancelText="`아니요`"
+                 :okText="`네`">
+          <button @click="globalUtils.confirm(slotProps,'checkRed')" style="padding-top: 0;" class="btn-close"><img
+            src="@/assets/images/common/close@2x.png" alt=""></button>
+        </Confirm>
       </div>
     </div>
     <div class="contents" >
@@ -87,11 +92,13 @@ import myGalleryPicture from '@/components/myGallery/myGalleryPicture'
 import myGalleryVoice from '@/components/myGallery/myGalleryVoice'
 import myGalleryInfo from '@/components/myGallery/myGalleryInfo'
 import Alert from '@/components/popup/Alert'
+import Confirm from '@/components/popup/Confirm'
 
 export default {
   name: 'MyGallery',
   components: {
     Alert,
+    Confirm,
     myGalleryPicture,
     myGalleryVoice,
     myGalleryInfo

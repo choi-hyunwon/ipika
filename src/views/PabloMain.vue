@@ -1,21 +1,34 @@
 <template>
-  <div v-if="isLoading" class="wrap" :style="{'background-color' : mainMenuList[0].bgColor}" >
+  <div v-if="isLoading" class="wrap" :style="{'background-color' : mainMenuList[0].bgColor}">
     <div class="row">
       <div class="col col-6 left">
         <div class="symbol"><img src="@/assets/images/common/Symbol@2x.png" alt=""></div>
         <ul class="dot-list" v-if="slider">
-          <li class="on"><router-link to=""></router-link></li>
-          <li><router-link to=""></router-link></li>
-          <li><router-link to=""></router-link></li>
-          <li><router-link to=""></router-link></li>
-          <li><router-link to=""></router-link></li>
-          <li><router-link to=""></router-link></li>
+          <li class="on">
+            <router-link to=""></router-link>
+          </li>
+          <li>
+            <router-link to=""></router-link>
+          </li>
+          <li>
+            <router-link to=""></router-link>
+          </li>
+          <li>
+            <router-link to=""></router-link>
+          </li>
+          <li>
+            <router-link to=""></router-link>
+          </li>
+          <li>
+            <router-link to=""></router-link>
+          </li>
         </ul>
         <ul class="title-list">
-          <li @click="setPath(menu.menuId)" v-for="(menu,i) in mainMenuList" :class="{active : isActiveMenuList.includes(menu.menuId)}">
+          <li @click="setPath(menu.menuId)" v-for="(menu,i) in mainMenuList"
+              :class="{active : isActiveMenuList.includes(menu.menuId)}">
             <a>
-              <span class="num">{{`0${i+1}`}}</span>
-              <span class="title">{{menu.menuName}}</span>
+              <span class="num">{{ `0${i + 1}` }}</span>
+              <span class="title">{{ menu.menuName }}</span>
             </a>
           </li>
         </ul>
@@ -30,14 +43,16 @@
                  :complete-text="`파블로 서비스를 </br> 종료하시겠습니까?`"
                  :cancelText="`아니요`"
                  :okText="`네`">
-          <div @click="globalUtils.confirm(slotProps,'checkRed')" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></div>
+          <div @click="globalUtils.confirm(slotProps,'checkRed')" class="btn-close"><img
+            src="@/assets/images/common/close@2x.png" alt=""></div>
         </Confirm>
         <div class="img"><img :src=mainMenuList[0].imgUrl alt=""></div>
       </div>
     </div>
 
     <!-- 공통 알림 popup-->
-    <Alert ref="commonAlert" v-slot="slotProps" :boldText="'학습이 완료 되었습니다'" :text="'프리드로잉을 해보면 어떨까요?'" :buttonText ="'확인'"/>
+    <Alert ref="commonAlert" v-slot="slotProps" :boldText="'학습이 완료 되었습니다'" :text="'프리드로잉을 해보면 어떨까요?'"
+           :buttonText="'확인'"/>
 
   </div>
 
@@ -59,60 +74,68 @@ export default {
     return {
       message: false,
       slider: false,
-      isLoading : false,
-      mainMenuList : [],
-      isActiveMenuList : [111, 115, 116]
+      isLoading: false,
+      mainMenuList: [],
+      isActiveMenuList: [111, 113, 115, 116]
     }
   },
   mounted () {
-    this.fetchMainMenu();
+    this.fetchMainMenu()
   },
-  computed:{
+  computed: {
     ...mapGetters({
       letter: 'getLetter',
-      canvasList : 'getLetterCanvasList',
+      canvasList: 'getLetterCanvasList',
     })
   },
-  methods : {
+  methods: {
     ...mapActions({
-      getMainMenu : 'getMainMenu',
-      getLetter : 'getLetter'
+      getMainMenu: 'getMainMenu',
+      getLetter: 'getLetter'
     }),
-    fetchMainMenu(){
+    fetchMainMenu () {
       this.getMainMenu()
         .then(result => {
-          this.isLoading = true;
-          this.mainMenuList = result.menuList;
+          this.isLoading = true
+          this.mainMenuList = result.menuList
         })
     },
-    setPath(menuId){
+    setPath (menuId) {
       let link = ''
-       switch (menuId){
+      switch (menuId) {
         case 111 :
-           link = '/Intro'
-           break;
-         case 115 :
-           link = '/canvas'
-           break;
-         case 116 :
-           link = '/MyGallery'
-           break;
-         default :
-           link = ''
-           break;
-       }
-      if(link === '/Intro') this.fetchLetter();
-      else this.$router.push(link)
+          link = '/Intro'
+          break
+        case 113 :
+          link = '/Park'
+          break
+        case 115 :
+          link = '/canvas'
+          break
+        case 116 :
+          link = '/MyGallery'
+          break
+        default :
+          link = ''
+          break
+      }
+      if (link === '/Intro') {
+        this.fetchLetter()
+      } else {
+        this.$router.push(link)
+      }
     },
-    fetchLetter(){
+    fetchLetter () {
       this.getLetter()
         .then(result => {
-          if(this.canvasList.length === 0) { // 학습 완료 판단
+          if (this.canvasList.length === 0) { // 학습 완료 판단
             this.$refs.commonAlert.showAlert = true
             this.$refs.commonAlert.type = 'common'
           } else if (this.canvasList.length < this.letter.canvasList.length) { // 재진입 판단
             this.$router.push('/canvas?page=letter')
-          } else this.$router.push('/Intro') // 최초 진입 판단
+          } else {
+            this.$router.push('/Intro')
+          } // 최초 진입 판단
         })
     }
   }
@@ -128,6 +151,7 @@ export default {
     width: 100%;
     height: 800px;
     justify-content: center;
+
     .symbol {
       position: absolute;
       width: 4rem;
@@ -140,18 +164,22 @@ export default {
         height: 100%;
       }
     }
+
     .dot-list {
       position: absolute;
       left: 4rem;
       top: 50%;
       transform: translateY(-50%);
+
       li {
         position: relative;
         width: 0.8rem;
         height: 0.8rem;
         margin-bottom: 0.8rem;
+
         a {
           display: block;
+
           &::after {
             content: '';
             position: absolute;
@@ -159,11 +187,12 @@ export default {
             height: 0.8rem;
             font-size: 0;
             border-radius: 50%;
-            background-color: rgba(20, 20, 20,.2);
+            background-color: rgba(20, 20, 20, .2);
             left: 0;
             top: 0;
           }
         }
+
         &.on {
           a {
             &::after {
@@ -173,14 +202,17 @@ export default {
         }
       }
     }
+
     .title-list {
 
       li {
         position: relative;
         line-height: 9.6px;
         margin-bottom: 2.8rem;
-        > a, >span {
+
+        > a, > span {
           display: inline-block;
+
           .num {
             display: none;
             position: absolute;
@@ -192,6 +224,7 @@ export default {
             font-weight: bold;
             letter-spacing: -0.03rem;
           }
+
           .title {
             display: inline-block;
             font-family: var(--Taviraj);
@@ -202,19 +235,23 @@ export default {
             color: rgba(20, 20, 20, .1);
           }
         }
+
         &.active {
           a {
             .num {
               display: inline-block;
             }
+
             .title {
               color: var(--gray-black);
             }
           }
         }
+
         &.badge-start {
           a {
             position: relative;
+
             &::after {
               content: 'Start';
               position: absolute;
@@ -234,9 +271,11 @@ export default {
             }
           }
         }
+
         &.badge-new {
           a {
             position: relative;
+
             &::after {
               content: 'New';
               position: absolute;
@@ -258,6 +297,7 @@ export default {
         }
       }
     }
+
     .message {
       position: absolute;
       width: 84rem;
@@ -269,6 +309,7 @@ export default {
       padding-top: 2.8rem;
       padding-left: 3.2rem;
       padding-right: 3.8rem;
+
       .symbol {
         position: initial;
         display: inline-block;
@@ -276,11 +317,13 @@ export default {
         width: 3.2rem;
         height: 3.2rem;
         margin-right: 1.6rem;
+
         img {
           width: 100%;
           height: 100%;
         }
       }
+
       .text {
         display: inline-block;
         font-family: var(--medium);
@@ -292,6 +335,7 @@ export default {
         line-height: 4rem;
         vertical-align: middle;
       }
+
       .btn-close {
         position: relative;
         float: right;
@@ -299,12 +343,14 @@ export default {
         width: 3.6rem;
         height: 3.6rem;
         border-radius: 10rem;
-        background-color: rgba(20,20,20,.1);
+        background-color: rgba(20, 20, 20, .1);
         vertical-align: middle;
+
         img {
           width: 100%;
           height: 100%;
         }
+
         &::after {
           content: '';
           display: inline-block;
@@ -313,7 +359,7 @@ export default {
           position: absolute;
           top: 50%;
           left: 50%;
-          transform: translate(-50%,-50%);
+          transform: translate(-50%, -50%);
           background-image: url("~@/assets/images/common/close-sm@2x.png");
           background-size: cover;
         }
@@ -321,8 +367,10 @@ export default {
     ;
     }
   }
+
   .right {
     position: relative;
+
     .img {
       width: 100%;
       height: 100%;
@@ -332,12 +380,14 @@ export default {
         height: 100%;
       }
     }
+
     .btn-close {
       position: absolute;
       width: 4rem;
       height: 4rem;
       right: 4rem;
       top: 4rem;
+
       img {
         width: 100%;
         height: 100%;

@@ -19,6 +19,8 @@ import MyGalleryDetail from '@/views/myGallery/MyGalleryDetail'
 import Agreement from '@/views/useLater/Agreement'
 import LoadingSpinnerWaiting from '@/views/useLater/LoadingSpinnerWaiting'
 
+import Park from '@/views/Park'
+
 const requireAuth = () => (from, to, next) => {
   if(from.path === '/canvas' || from.path === '/pabloCanvas') {
     if(localStorage.getItem('isReload') !== 'true') localStorage.setItem('isReload', true)
@@ -103,6 +105,11 @@ export const routes = [
     path:'/MyGalleryDetail',
     name:'MyGalleryDetail',
     component: MyGalleryDetail
+  },
+  {
+    path:'/Park',
+    name:'Park',
+    component: Park
   }
 ]
 
