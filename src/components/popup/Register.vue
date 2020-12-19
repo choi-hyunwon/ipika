@@ -34,7 +34,7 @@
         어떤 그림인지 파블로에게 알려주세요
       </p>
       <form>
-        <input type="text" class="form-control active" id="text" v-model="title" placeholder="여기에 입력해주세요">
+        <input type="text" class="form-control active" id="text" v-model="title" @input="checkInputSize" placeholder="여기에 입력해주세요">
       </form>
       <template #modal-footer="{ ok }">
         <button class="btn submit_button" variant="btn black btn-block" @click="cancel">닫기</button>
@@ -85,7 +85,8 @@ export default {
       this.type = type
       this.setTimerPause()
     },
-    ok () {
+    checkInputSize() {
+      this.title = this.title.slice(0, 19)
     },
     registerFree () {
       if(this.title === '') {
