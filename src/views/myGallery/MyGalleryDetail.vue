@@ -6,7 +6,7 @@
           <span class="title-center">{{ title || '제목을 불러 올수 없습니다'}}</span>
         </div>
         <div class="box-close">
-          <a href="#" class="btn-close" @click.prevent="goBack"><img src="@/assets/images/common/close@2x.png" alt=""></a>
+          <a href="#" class="btn-close" @click="goBack"><img src="@/assets/images/common/close@2x.png" alt=""></a>
         </div>
       </div>
       <div class="contents no_scroll">

@@ -1,7 +1,7 @@
 <template>
   <div class="wrap"  v-if="isLoading">
     <div class="header ivory bg-ivory d-flex">
-      <a href="#" @click.prevent="goBack" v-b-modal.goBackPopup class="symbol"><img
+      <a href="#" @click="goBack" v-b-modal.goBackPopup class="symbol"><img
         src="@/assets/images/common/arrow_left@2x.png" alt=""></a>
       <div class="gallery-title">
         <router-link to="/">
@@ -58,13 +58,16 @@
                 <span>{{ filterItem.title }} ({{ nSize[index] }})</span>
               </b-button>
             </div>
-            <ul class="scroll d-flex">
+            <ul class="scroll d-flex" v-if="list.length > 0">
               <li class="background-img" v-for="(item, index) in list">
-                <a href="#" @click.prevent="setBackground(item.pictureId, index)">
+                <button @click="setBackground(item.pictureId, index)">
                   <img :src="item.pictureUrl" alt="갤러리사진" class="img-m">
-                </a>
+                </button>
               </li>
             </ul>
+            <div class="emptyList" v-else> 등록된 정보가 없어요
+            </div>
+
           </div>
         </div>
       </template>
@@ -247,12 +250,25 @@ export default {
     }
   }
 }
-
+.modal.galleryBgChange .modal-content {
+  height: 760px;
+  margin-top: 10px;
+}
 .modal.galleryBgChange .c-body .btns_group .btn:hover,
 .modal.galleryBgChange .c-body .btns_group .btn:active,
 .modal.galleryBgChange .c-body .btns_group .btn:focus,
 .modal.galleryBgChange .c-body .btns_group .btn.selected {
   color: var(--gray-white);
   background-color: var(--gray-900);
+}
+
+.emptyList {
+  margin: 35rem auto 3.2rem;
+  font-family: 'NotoSansCJKKR';
+  font-size: 4rem;
+  font-weight: bold;
+  line-height: 5.6rem;
+  letter-spacing: -0.03rem;
+  text-align: center;
 }
 </style>

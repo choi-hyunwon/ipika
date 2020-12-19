@@ -39,7 +39,7 @@
             <div class="recode_icon">
               <img src="@/assets/images/common/record-mygallery@2x.png" alt="녹음 아이콘" class="img-m">
             </div>
-            <div class="recode-desc">{{ item.audioPlaytime }}초</div>
+            <div class="recode-desc">{{ timeChange(item.audioPlaytime) }}</div>
             <div class="gallery_img size-img">
               <a href="#"  @click="onToggle(index)"></a>
               <transition name="fade">
@@ -57,7 +57,7 @@
             <button class="icon_delete" @click="openDelete(item.userAudioId, index)"><img src="@/assets/images/common/btn_delete@2x.png" alt="" class="img-m"></button>
           </li>
         </ul>
-        <ul class="voices" v-else">
+        <ul class="voices" v-else>
           <li class="voice-default">
             <div class="emptyList">등록된 정보가 없어요</div>
           </li>
@@ -69,7 +69,9 @@
       <template #modal-header>
         <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>
       </template>
-      <p class="text">완전히 삭제하시겠어요?<br/>녹음이 삭제돼요</p>
+      <p class="text" style="margin-bottom: 12px;">완전히 삭제하시겠어요?
+        <br>그림과 녹음 모두 삭제돼요</p>
+      <p class="text-sm">삭제한 그림과 녹음은 복구할 수 없어요</p>
       <template #modal-footer="{ cancel }">
         <b-button variant="gray" class="btn-half" @click="deleteAudio()">삭제하기</b-button>
         <b-button class="btn btn-black  btn-half" @click="cancel()">닫기</b-button>
@@ -130,9 +132,6 @@ export default {
   },
   components:{
     Alert
-  },
-  created () {
-
   },
   mounted () {
     this.isLoading = true
@@ -250,6 +249,27 @@ export default {
             self.getUserGalleryMypicture()
           } else alert(result.message)
         })
+    },
+    timeChange(time){
+      console.log(time)
+      let min = Math.floor(time/60);
+      let sec = 0;
+      if (min > 0) {
+        sec = time - min*60
+      } else {
+        sec = time
+      }
+      if (sec <10) {
+        sec = "0" + sec.toString()
+      } else {
+        sec = sec.toString()
+      }
+      if (min <10) {
+        min = "0" + min.toString()
+      } else {
+        min = min.toString()
+      }
+      return min + ':' + sec
     }
 
   }

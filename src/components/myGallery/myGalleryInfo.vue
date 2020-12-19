@@ -11,11 +11,11 @@
     </div>
     <div class="info-section d-flex">
       <div class="profile profile_r">
-        <img v-if="result.stageId === 0" src="@/assets/images/common/img_thum_stage_01@2x.png" alt="프로필사진" class="img-m">
-        <img v-if="result.stageId === 1" src="@/assets/images/common/img_thum_stage_02@2x.png" alt="프로필사진" class="img-m">
-        <img v-if="result.stageId === 2" src="@/assets/images/common/img_thum_stage_03@2x.png" alt="프로필사진" class="img-m">
-        <img v-if="result.stageId === 3" src="@/assets/images/common/img_thum_stage_04@2x.png" alt="프로필사진" class="img-m">
-        <img v-if="result.stageId === 4" src="@/assets/images/common/img_thum_stage_05@2x.png" alt="프로필사진" class="img-m">
+        <img v-if="result.stageId === 1" src="@/assets/images/common/img_thum_stage_01@2x.png" alt="프로필사진" class="img-m">
+        <img v-if="result.stageId === 2" src="@/assets/images/common/img_thum_stage_02@2x.png" alt="프로필사진" class="img-m">
+        <img v-if="result.stageId === 3" src="@/assets/images/common/img_thum_stage_03@2x.png" alt="프로필사진" class="img-m">
+        <img v-if="result.stageId === 4" src="@/assets/images/common/img_thum_stage_04@2x.png" alt="프로필사진" class="img-m">
+        <img v-if="result.stageId === 5" src="@/assets/images/common/img_thum_stage_05@2x.png" alt="프로필사진" class="img-m">
         <div class="text-center name">{{ getUserGallery.nickname || name }}</div>
         <div class="text-center english-name">{{ result.stageName }}</div>
       </div>

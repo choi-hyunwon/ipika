@@ -38,9 +38,11 @@
       <div class="gallery-section">
         <ul class="gallerys" v-if="list.length > 0">
           <li class="gallery-g" v-for="(item, index) in list">
-            <router-link :to="getURL(item)" @click="log">
+
               <div class="gallery_img size-img">
+                <router-link :to="getURL(item)" @click="log">
                 <img :src="item.pictureUrl" alt="갤러리사진" class="img-m">
+                </router-link>
                 <div class="img_icon" v-b-modal.normalPopup1>
 <!--                  <img src="@/assets/images/common/share.png" alt="다운로드" class="img-m" v-b-modal.normalPopup1>-->
                 </div>
@@ -48,7 +50,7 @@
               <div class="img_title">{{ item.stageName || '스테이지'}} {{ item.stageId || '단계'}}</div>
               <div class="img_desc">{{ item.title || '제목이 없어요'}}</div>
               <button class="icon_delete"  @click="openDelete(item.pictureId, index)"><img src="@/assets/images/common/btn_delete@2x.png" alt="" class="img-m"></button>
-            </router-link>
+
           </li>
         </ul>
 
@@ -64,10 +66,12 @@
       <template #modal-header>
         <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>
       </template>
-      <p class="text">완전히 삭제하시겠어요?<br>그림이 삭제돼요</p>
+      <p class="text" style="margin-bottom: 12px;">완전히 삭제하시겠어요?
+        <br>그림과 녹음 모두 삭제돼요</p>
+      <p class="text-sm">삭제한 그림과 녹음은 복구할 수 없어요</p>
       <template #modal-footer="{ cancel }">
-        <b-button variant="gray" class="btn-half" @click.prevent="deletePicture()">네</b-button>
-        <b-button class="btn btn-black  btn-half" @click="cancel()">아니요</b-button>
+        <b-button variant="gray" class="btn-half" @click="deletePicture()">삭제하기</b-button>
+        <b-button class="btn btn-black  btn-half" @click="cancel()">닫기</b-button>
       </template>
     </b-modal>
 
@@ -207,6 +211,7 @@ export default {
       this.$bvModal.hide('deletePicture')
       this.getUserGalleryDetele({pictureId : this.selectId})
         .then(result => {
+          //API에서 결과값을 안줌 
           if (result.code === "0000"){
             self.$refs.deleteComfirm.showAlert = true
             self.$refs.deleteComfirm.type = 'common'
@@ -404,7 +409,6 @@ export default {
         position: absolute;
         top: 1.5rem;
         right: 3.5rem;
-        height: 0;
         z-index: 999;
         width: 5rem;
         height: 5rem;
