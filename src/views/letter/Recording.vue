@@ -92,9 +92,9 @@
 
       <!-- 우측 하단 '다했어요!' 버튼 -->
       <div class="btn-area">
-        <button class="btn btn-dark" @click="$router.push('/Listening')">건너뛰기</button>
-        <button v-if="!record" @click="fetchRecording" class="btn btn-dark">다했어요!</button>
-        <button v-if="record" class="btn btn-dark disabled">다했어요!</button>
+<!--        <button class="btn btn-dark" @click="$router.push('/Listening')">건너뛰기</button>-->
+        <button v-if="!record" @click="fetchRecording" class="btn btn-dark" style="width: 16rem; height: 8rem; text-align:center;"><img src="@/assets/images/common/next_nor@2x.png" style="width: 5rem"></button>
+        <button v-if="record" class="btn btn-dark disabled" style="width: 16rem; height: 8rem; text-align:center;"><img src="@/assets/images/common/next_nor@2x.png" style="width: 5rem"></button>
       </div>
 
     </div>
@@ -419,6 +419,9 @@ export default {
   }
 
   .ar-recorder__duration {
+    display: none;
+  }
+  .ar-recorder__time-limit {
     display: none;
   }
 
