@@ -21,6 +21,8 @@ import LoadingSpinnerWaiting from '@/views/useLater/LoadingSpinnerWaiting'
 
 import Park from '@/views/Park'
 
+import TestInfo from '@/views/TestInfo'
+
 const requireAuth = () => (from, to, next) => {
   if(from.path === '/canvas' || from.path === '/pabloCanvas') {
     if(localStorage.getItem('isReload') !== 'true') localStorage.setItem('isReload', true)
@@ -110,6 +112,11 @@ export const routes = [
     path:'/Park',
     name:'Park',
     component: Park
+  },
+  {
+    path:'/TestInfo',
+    name:'TestInfo',
+    component: TestInfo
   }
 ]
 

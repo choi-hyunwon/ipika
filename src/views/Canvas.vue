@@ -220,9 +220,9 @@ export default {
         this.setTimerStart();
       }else if(this.page==='letter'){
         this.bgPopup=false
-
         this.setBackgrounImage()
       }
+      this.$EventBus.$emit('showToolBar');
 
     },
     setFreeName(){

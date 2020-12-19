@@ -28,7 +28,7 @@
         </div>
       </div>
     </div>
-    <nav class="nav" :class="{'show': drawer === true, 'hide': drawer=== false}" style="z-index: 100;"><!-- show/hide -->
+    <nav class="nav" :class="{'show': drawer === true, 'hide': drawer=== false}" v-if="isLoadingGuide" style="z-index: 100;"><!-- show/hide -->
       <div class="inner">
         <button class="btn-drawer" @click="toggleDrawer">
           <img v-if="drawer === true" src="@/assets/images/common/slide_down@2x.png" alt="">
@@ -67,8 +67,7 @@
                       @click="setColorSelect"
               ></button>
               <button class="color colorpicker"
-                      @click='setColorSelect($event); isPickerOpen();'
-                      v-bind:style="{ background: colors.hex }"
+                      @click='setColorSelect($event); isPickerOpen()'
               ></button>
             </div>
             <div class="tool">
@@ -761,7 +760,8 @@
         },
         updateValue: '',
         hex: '',
-        isOpen: false
+        isOpen: false,
+        isLoadingGuide : false //가이드 클릭 시 활성화
       }
   },
   props : {
@@ -784,6 +784,10 @@
       if(!this.bg.isShow) this.setLayerBgSelect(this.bg.tabletImageUrl)
       else WILL.setBackground('paper_01')
       //this.setLayerBgSelect('https://colorate.azurewebsites.net/SwatchColor/FFFFFF')
+    });
+
+    this.$EventBus.$on('showToolBar', () => {
+      this.isLoadingGuide = true;
     });
   },
   computed : {
@@ -982,6 +986,10 @@
                   height: 4.4rem;
                   border: .8rem solid rgba(20, 20, 20, .2);
                 }
+              }
+              &.colorpicker {
+                background: url("~@/assets/images/common/ico_colorpicker.png") no-repeat 0 0;
+                background-size: cover
               }
             }
           }

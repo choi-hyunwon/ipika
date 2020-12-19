@@ -151,8 +151,6 @@
 
 .contents {
   height: calc(100% - 12rem);
-  overflow-y: scroll;
-  overflow-x: inherit;
 
   &.no_scroll {
     overflow: visible;
