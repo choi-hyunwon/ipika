@@ -12,7 +12,8 @@
           <li>
           <div v-for="(audio, i) in audioList" class="item" :class="{'pause' : !play, 'play' : play && i === focusIdx}">
             <button class="img" @click="showPlay(i)"><img :src=audio.characterImageUrl alt=""></button>
-            <p class="time">{{audioList[i].audioPlaytime}}</p>
+            <p class="name">{{audioList[i].characterName}}</p>
+            <p class="time">{{ timeChange(audioList[i].audioPlaytime)}}</p>
           </div>
           </li>
         </ul>
@@ -116,6 +117,27 @@ export default {
     },
     test(){
       this.isEnd = true
+    },
+    timeChange(time){
+      console.log(time)
+      let min = Math.floor(time/60);
+      let sec = 0;
+      if (min > 0) {
+        sec = time - min*60
+      } else {
+        sec = time
+      }
+      if (sec <10) {
+        sec = "0" + sec.toString()
+      } else {
+        sec = sec.toString()
+      }
+      if (min <10) {
+        min = "0" + min.toString()
+      } else {
+        min = min.toString()
+      }
+      return min + ':' + sec
     }
   }
 }
@@ -181,6 +203,18 @@ export default {
         letter-spacing: -0.03rem;
         text-align: center;
         margin-top: 2.4rem;
+      }
+      .name{
+        height: 40px;
+        font-size: 24px;
+        font-weight: bold;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 40px;
+        letter-spacing: -0.3px;
+        text-align: center;
+        margin-top: 24px;
+        color: var(--gray-black);
       }
       .time {
         font-family: var(--Inter);
