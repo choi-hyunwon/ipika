@@ -32,9 +32,6 @@
     <Alert ref="commonAlert" v-slot="slotProps" :boldText="'그림이 그려지지 않았어요'" :text="'그림을 시작해 볼까요?'" :buttonText ="'확인'"/>
 
     <!-- 공통 알림 popup-->
-    <Alert ref="submissionComfirm" v-slot="slotProps" :boldText="'드로잉 제출 되었습니다'" :text="'다른 그림을 그릴까요?'" :buttonText ="'확인'"/>
-
-    <!-- 공통 알림 popup-->
     <Alert ref="submissionFail" v-slot="slotProps" :boldText="'드로잉 제출 실패하였습니다'" :text="'앗! 이런'" :buttonText ="'확인'"/>
 
 
@@ -277,13 +274,10 @@ export default {
       this.getSubmissionFree(data)
         .then(result => {
           if(result.code === '0000') {
-            // alert('드로잉 제출 되었습니다.')
-            this.$refs.submissionComfirm.showConfirm = true
-            this.$refs.submissionComfirm.type = 'common'
-            this.$router.push('/PabloMain')
+            this.$router.push('/Recording?page=free')
           } else {
             // alert('드로잉 제출 실패')
-            this.$refs.submissionFail.showConfirm = true
+            this.$refs.submissionFail.showAlert = true
             this.$refs.submissionFail.type = 'common'
           }
         })

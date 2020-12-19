@@ -67,6 +67,7 @@
       </template>
     </b-modal>
 
+
     <!--<b-modal v-if="type==='agreement1'" centered :title=boldText modal-class="marketing" scrollable ok-only ok-title="닫기" ok-variant="black btn-block" v-model="showAlert">
       <p>{{text}}</p>
     </b-modal>
