@@ -170,7 +170,7 @@ export default {
       WILL.getImageCanvas().toBlob(function(blob) {
         let file = new File([blob], "my_image.png",{type:"image/png", lastModified:new Date()})
 
-        self.saveFile(URL.createObjectURL(blob))
+        // self.saveFile(URL.createObjectURL(blob))
         //미완성
         if (file.size <= 14500) {
           // alert('아직 그림이 그려지지 않았어요')
