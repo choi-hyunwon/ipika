@@ -17,7 +17,7 @@
     <div class="flex-box">
 
       <!--영상보기-->
-      <Alert v-if="path ==='/Recording' || path ==='/Listening'"
+      <Alert v-if="(path ==='/Recording' && page !== 'free') || path ==='/Listening' "
              v-slot="slotProps">
         <button @click="globalUtils.alert(slotProps,'video')" class="btn-right">
           <span class="img"><img src="@/assets/images/common/ic-play@2x.png" alt=""></span>
@@ -26,7 +26,7 @@
       </Alert>
 
       <!--주제보기-->
-      <Alert  v-if="path !=='/Intro' && path !=='/Completion'"
+      <Alert  v-if="path !=='/Intro' && path !=='/Completion' && (path ==='/Recording' && page !== 'free')"
               v-slot="slotProps" :boldText=letter.stepSubejct :buttonText ="'닫기'">
         <button class="btn-right" @click="globalUtils.alert(slotProps,'subject')">
           <span class="img"><img src="@/assets/images/common/ic-drawing@2x.png" alt=""></span>
@@ -68,6 +68,9 @@ export default {
     }),
     path() {
       return this.$router.currentRoute.path
+    },
+    page() {
+      return this.$router.currentRoute.query.page
     }
   }
 
