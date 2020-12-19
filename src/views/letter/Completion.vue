@@ -13,7 +13,7 @@
         </div>
       </div>
       <div class="col col-6">
-        <div class="img"><img src="@/assets/images/temp/sample_img_01.jpg" alt=""></div>
+        <div class="img"><img :src="letter.stepCompleteImageUrl" alt=""></div>
       </div>
     </div>
   </div>
