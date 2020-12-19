@@ -36,9 +36,9 @@
 
       <div class="box-close">
         <!--Intro / Completion 페이지 종료 아이콘 클릭 시 팝업 노출 없이 메인 이동-->
-        <router-link v-if="path ==='/Intro' || path ==='/Completion'" to="/PabloMain" class="btn-close">
-          <img src="@/assets/images/common/close@2x.png" alt="">
-        </router-link>
+<!--        <router-link v-if="path ==='/Intro' || path ==='/Completion'" to="/PabloMain" class="btn-close">-->
+<!--          <img src="@/assets/images/common/close@2x.png" alt="">-->
+<!--        </router-link>-->
 
         <!-- 그 외 페이지 종료 안내 팝업 노출 -->
         <Confirm v-slot="slotProps" :complete-text="`파블로 서비스를 </br> 종료하시겠습니까?`" :cancelText="`아니요`" :okText="`네`">
