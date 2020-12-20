@@ -199,6 +199,7 @@ export default {
       this.showConfirm = false
       WILL.clear()
       this.$EventBus.$emit('setBg', canvas , reset)
+      this.globalUtils.tts(canvas.imageSubject)
     }
   }
 }

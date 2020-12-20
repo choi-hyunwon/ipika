@@ -109,7 +109,7 @@
           <button v-if="!record" @click="fetchRecording" class="btn btn-dark"
                   style="width: 16rem; height: 8rem; text-align:center;"><img
             src="@/assets/images/common/next_nor@2x.png" style="width: 5rem"></button>
-          <button v-if="record" class="btn btn-dark disabled" style="width: 16rem; height: 8rem; text-align:center;">
+          <button v-if="record" ref="btnnext" class="btn btn-dark disabled" style="width: 16rem; height: 8rem; text-align:center;">
             <img src="@/assets/images/common/next_nor@2x.png" style="width: 5rem"></button>
         </div>
 
@@ -119,8 +119,21 @@
     </div>
 
     <!-- 공통 알림 popup-->
-    <Alert ref="deviceFindFail" v-slot="slotProps" :boldText="'녹음을 할 수 있는 장치가 없어요'" :text="'장치 설치를 하고 다시 해볼까요?'"
-           :buttonText="'확인'"/>
+    <b-modal centered modal-class="normalPopup" id="failMedia">
+      <template #modal-header>
+        <div class="symbol"><img src="@/assets/images/common/Symbol@2x.png" alt=""></div>
+      </template>
+      <template >
+        <p class="text">녹음을 할 수 있는 장치가 없어요</p>
+        <p class="text-sm">장치 설치를 하고 다시 해볼까요?</p>
+      </template>
+      <template #modal-footer="{ cancel }">
+        <router-link to="/Listening" style="display:block; width: 100%;">
+          <span class="btn btn-block btn-black" >확인</span>
+        </router-link>
+      </template>
+    </b-modal>
+
     <!-- 공통 알림 popup-->
     <Alert ref="submissionFail" v-slot="slotProps" :boldText="'드로잉 제출 실패하였습니다'" :text="'앗! 이런'" :buttonText="'확인'"/>
 
@@ -220,9 +233,7 @@ export default {
         self.media = stream
       },
       function (err) {
-        console.log(err)
-        self.$refs.deviceFindFail.showAlert = true
-        self.$refs.deviceFindFail.type = 'common'
+        self.$bvModal.show('failMedia')
         self.error = true
       })
   },

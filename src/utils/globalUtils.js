@@ -14,6 +14,8 @@ export class GlobalUtils {
       alert("이 브라우저는 음성 합성을 지원하지 않습니다.")
       return
     }
+
+
     window.speechSynthesis.cancel()
     const speechMsg = new SpeechSynthesisUtterance()
     speechMsg.rate = 1

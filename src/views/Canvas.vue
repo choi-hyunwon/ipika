@@ -242,7 +242,6 @@ export default {
       this.getSubject()
         .then(result => {
           this.setTimeInit(this.subject.limitTime)
-          this.globalUtils.tts(this.subject.subject)
         })
     },
     async fetchLetter(){
@@ -300,7 +299,7 @@ export default {
 
       WILL.clear()
       this.$EventBus.$emit('setBg', this.canvasList[0] , false)
-
+      this.globalUtils.tts(this.canvasList[0].imageSubject)
     }
   }
 }

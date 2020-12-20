@@ -28,7 +28,7 @@
       <!--주제보기-->
       <Alert  v-if="path !=='/Intro' && path !=='/Completion' && (path ==='/Recording' && page !== 'free')"
               v-slot="slotProps" :boldText=letter.stepSubejct :buttonText ="'닫기'">
-        <button class="btn-right" @click="globalUtils.alert(slotProps,'subject'), subjectTTS()">
+        <button class="btn-right" @click="globalUtils.alert(slotProps,'subject')">
           <span class="img"><img src="@/assets/images/common/ic-drawing@2x.png" alt=""></span>
           <span class="tit">주제보기</span>
         </button>
@@ -78,6 +78,10 @@ export default {
   },
   methods:{
     subjectTTS(){
+      if (this.letter.stepSubejct === undefined){
+        console.log('subjectTTS fail')
+        return false
+      }
       this.globalUtils.tts(this.letter.stepSubejct)
     }
   }
