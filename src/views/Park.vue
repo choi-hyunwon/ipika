@@ -1,5 +1,6 @@
 <template>
-  <div class="park">
+  <transition name="fade">
+  <div class="park" v-if="isLoading">
     <div class="header ivory bg-ivory d-flex">
       <a href="#" @click="goBack" v-b-modal.goBackPopup class="symbol">
         <img src="@/assets/images/common/arrow_left@2x.png" alt="">
@@ -19,6 +20,7 @@
     </div>
     <iframe src="https://pablo.cmiscm.com/rain" frameborder="0"></iframe>
   </div>
+  </transition>
 </template>
 
 <script>
@@ -27,7 +29,15 @@ import Confirm from '@/components/popup/Confirm'
 export default {
   components: { Confirm },
   name: 'Park',
-  methods:{
+  data () {
+    return {
+      isLoading: false
+    }
+  },
+  mounted () {
+    this.isLoading = true
+  },
+  methods: {
     goBack () {
       this.$router.go(-1)
     }

@@ -1,4 +1,5 @@
 <template>
+  <transition name="fade">
   <div class="wrap"  v-if="isLoading">
     <div class="header ivory bg-ivory d-flex">
       <a href="#" @click="goBack" v-b-modal.goBackPopup class="symbol"><img
@@ -84,6 +85,7 @@
 
 
   </div>
+  </transition>
 </template>
 
 <script>
@@ -139,6 +141,8 @@ export default {
   },
   mounted () {
     this.fetchUserGalleryMypicture()
+
+    this.getUserGallery()
   },
   methods: {
     ...mapActions({

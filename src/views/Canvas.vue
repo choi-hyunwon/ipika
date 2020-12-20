@@ -1,5 +1,5 @@
 <template>
-  <div class="wrap">
+  <div class="wrap" >
     <!--   canvas 헤더 -->
     <CanvasHeader v-if="isLoading"></CanvasHeader>
     <!--   wacom 라이브러리 -->

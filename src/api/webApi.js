@@ -9,7 +9,7 @@ export default class WebApi {
   request (url, config) {
     if (store.getters.getSession.user_id === ""){
       // alert('user_id 가 유효하지 않습니다.')
-      // const Vari = window.android.getInitVariables()
+      const Vari = window.android.getInitVariables()
       // const Vari = '{"grade":"5","name":"홈런******","user_id":"1954536","user_auth_key":"V01a1eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1YmlwMDEiLCJ1c2VySWQiOjIwNTkzNTYsImxvZ2luQXMiOmZhbHNlLCJpYXQiOjE2MDgwMzQ1NjQsImV4cCI6MTYwODYzOTM2NH0.qgXxkRvDh6vdVsthFaXV9egKquReHF6Y3VoB1hY_12cbC5aoiSYFW5A5NO8wvbBzriNUncApkmqqdSHHRFYCGw","device_type":"1002"}'
       const obj = JSON.parse(Vari)
       store.getters.getSession.user_id = obj.user_id

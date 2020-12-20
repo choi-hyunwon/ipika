@@ -1,62 +1,60 @@
 <template>
-  <div v-if="isLoading" class="wrap" :style="{'background-color' : mainMenuList[0].bgColor}">
-    <div class="row">
-      <div class="col col-6 left">
-        <div class="symbol"><img src="@/assets/images/common/Symbol@2x.png" alt=""></div>
-        <ul class="dot-list" v-if="slider">
-          <li class="on">
-            <router-link to=""></router-link>
-          </li>
-          <li>
-            <router-link to=""></router-link>
-          </li>
-          <li>
-            <router-link to=""></router-link>
-          </li>
-          <li>
-            <router-link to=""></router-link>
-          </li>
-          <li>
-            <router-link to=""></router-link>
-          </li>
-          <li>
-            <router-link to=""></router-link>
-          </li>
-        </ul>
-        <ul class="title-list">
-          <li @click="setPath(menu.menuId)" v-for="(menu,i) in mainMenuList"
-              :class="{active : isActiveMenuList.includes(menu.menuId)}">
-            <a>
-              <span class="num">{{ `0${i + 1}` }}</span>
-              <span class="title">{{ menu.menuName }}</span>
-            </a>
-          </li>
-        </ul>
-        <div class="message" v-if="message">
-          <span class="symbol"><img src="@/assets/images/common/Symbol-white@2x.png" alt=""></span>
-          <span class="text">새로운 학습이 도착했어요! 지금 바로 시작해보세요 😃</span>
-          <router-link to="/" class="btn-close"></router-link>
+    <div v-if="isLoading" class="wrap" :style="{'background-color' : mainMenuList[0].bgColor}">
+      <div class="row">
+        <div class="col col-6 left">
+          <div class="symbol"><img src="@/assets/images/common/Symbol@2x.png" alt=""></div>
+          <ul class="dot-list" v-if="slider">
+            <li class="on">
+              <router-link to=""></router-link>
+            </li>
+            <li>
+              <router-link to=""></router-link>
+            </li>
+            <li>
+              <router-link to=""></router-link>
+            </li>
+            <li>
+              <router-link to=""></router-link>
+            </li>
+            <li>
+              <router-link to=""></router-link>
+            </li>
+            <li>
+              <router-link to=""></router-link>
+            </li>
+          </ul>
+          <ul class="title-list">
+            <li @click="setPath(menu.menuId)" v-for="(menu,i) in mainMenuList"
+                :class="{active : isActiveMenuList.includes(menu.menuId)}">
+              <a>
+                <span class="num">{{ `0${i + 1}` }}</span>
+                <span class="title">{{ menu.menuName }}</span>
+              </a>
+            </li>
+          </ul>
+          <div class="message" v-if="message">
+            <span class="symbol"><img src="@/assets/images/common/Symbol-white@2x.png" alt=""></span>
+            <span class="text">새로운 학습이 도착했어요! 지금 바로 시작해보세요 😃</span>
+            <router-link to="/" class="btn-close"></router-link>
+          </div>
+        </div>
+        <div class="col col-6 right">
+          <Confirm v-slot="slotProps"
+                   :complete-text="`파블로 서비스를 </br> 종료하시겠습니까?`"
+                   :cancelText="`아니요`"
+                   :okText="`네`">
+            <div @click="globalUtils.confirm(slotProps,'checkRed')" class="btn-close"><img
+              src="@/assets/images/common/close@2x.png" alt=""></div>
+          </Confirm>
+          <div class="img"><img :src=mainMenuList[0].imgUrl alt=""></div>
         </div>
       </div>
-      <div class="col col-6 right">
-        <Confirm v-slot="slotProps"
-                 :complete-text="`파블로 서비스를 </br> 종료하시겠습니까?`"
-                 :cancelText="`아니요`"
-                 :okText="`네`">
-          <div @click="globalUtils.confirm(slotProps,'checkRed')" class="btn-close"><img
-            src="@/assets/images/common/close@2x.png" alt=""></div>
-        </Confirm>
-        <div class="img"><img :src=mainMenuList[0].imgUrl alt=""></div>
-      </div>
+
+      <!-- 공통 알림 popup-->
+      <Alert ref="commonAlert" v-slot="slotProps" :boldText="'학습이 완료 되었습니다'" :text="'프리드로잉을 해보면 어떨까요?'"
+             :buttonText="'확인'"/>
+
     </div>
-
-    <!-- 공통 알림 popup-->
-    <Alert ref="commonAlert" v-slot="slotProps" :boldText="'학습이 완료 되었습니다'" :text="'프리드로잉을 해보면 어떨까요?'"
-           :buttonText="'확인'"/>
-
-  </div>
-
-
 </template>
 
 <script>
@@ -75,6 +73,7 @@ export default {
       message: false,
       slider: false,
       isLoading: false,
+      isShow: false,
       mainMenuList: [],
       isActiveMenuList: [111, 113, 115, 116]
     }

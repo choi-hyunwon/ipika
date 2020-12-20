@@ -679,7 +679,7 @@
         </div>
       </div>
     </nav>
-    <chrome-picker v-show="isOpen" v-model="colors" :class="{'colorPickerLetter' : colorPickerLetter === true }"/>
+    <chrome-picker v-show="isOpen" v-model="colors" :class="{'colorPickerLetter' : isColorPickerLetter === true }"/>
     <div id="notifications" style="bottom: 127px;"></div>
 
   </div>
@@ -709,7 +709,8 @@ export default {
         updateValue: '',
         hex: '',
         isOpen: false,
-        isLoadingGuide : false
+        isLoadingGuide : false,
+        isColorPickerLetter : false
       }
   },
   props : {
@@ -790,9 +791,9 @@ export default {
     },
     isPickerOpen (target) {
       this.isOpen = !this.isOpen
-      this.colorPickerLetter = false
+      this.isColorPickerLetter = false
       if (target === 'letter') {
-        this.colorPickerLetter = true
+        this.isColorPickerLetter = true
       }
 
     },
