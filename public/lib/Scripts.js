@@ -456,9 +456,9 @@ var layout = {
       if (!img.classList.contains("Selected")) img.src = img.src.replace("_selected.png", ".png");
     }
 
-    $("nav img")
-      .on("mouseover", function() {over(this);})
-      .on("mouseout", function() {out(this);});
+    // $("nav img")
+    //   .on("mouseover", function() {over(this);})
+    //   .on("mouseout", function() {out(this);});
 
     $("nav .ButtonFile")
       .on("mouseover", function() {over($(this).find("img")[0]);})
