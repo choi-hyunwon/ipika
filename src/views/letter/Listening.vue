@@ -81,7 +81,7 @@ export default {
     console.log(this.submit)
   },
   mounted:function(){
-
+    this.globalUtils.tts("다른 친구들은 어떻게 생각하는지 들어볼까요?  친구들의 생각을 듣고, 내 생각과 비교해봐요!")
   },
   computed:{
     ...mapGetters({

@@ -83,7 +83,6 @@ export default {
     }
   },
   mounted () {
-
     if (localStorage.getItem('isReload') === 'true' || localStorage.getItem('isReload') === undefined) window.location.reload()
     else this.isLoading = true
 
@@ -243,6 +242,7 @@ export default {
       this.getSubject()
         .then(result => {
           this.setTimeInit(this.subject.limitTime)
+          this.globalUtils.tts(this.subject.subject)
         })
     },
     async fetchLetter(){

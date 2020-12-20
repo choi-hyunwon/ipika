@@ -1,6 +1,8 @@
 <template>
   <div>
  <slot :toggleAlert="toggleAlert"></slot>
+
+
     <b-modal v-if="type==='subject'" centered modal-class="normalPopup" v-model="showAlert">
       <template #modal-header>
         <div class="symbol"><img src="@/assets/images/common/drawing@2x.png" alt=""></div>
@@ -14,6 +16,8 @@
         <b-button class="btn btn-block btn-black" @click="cancel()">{{ buttonText }}</b-button>
       </template>
     </b-modal>
+
+
     <b-modal v-if="type==='video'" centered hide-footer modal-class="videoReviewPopup" v-model="showAlert">
       <template  #default="{ hide }">
         <div class="full-screen dim"><!-- 전체 화면시 dim 제거 -->
@@ -31,6 +35,8 @@
         </div>
       </template>
     </b-modal>
+
+
     <b-modal ref="alertModal" v-if="type==='diagnose'" no-close-on-backdrop id="oderPopup" centered title="안내" modal-class="textPopup" ok-variant="black btn-block" v-model="showAlert">
       <template #modal-header>
         <div class="symbol"><img src="@/assets/images/common/Symbol@2x.png" alt=""></div>
@@ -41,6 +47,8 @@
         <button size="sm" class="btn btn-black btn-block" @click="timeStart">네 그려볼게요!</button>
       </template>
     </b-modal>
+
+
     <b-modal v-if="type==='success'" centered modal-class="normalPopup" v-model="showAlert">
       <template #modal-header>
         <div class="symbol"><img src="@/assets/images/common/check_green@2x.png" alt=""></div>
@@ -141,6 +149,7 @@ export default {
     timeStart(){
       this.$EventBus.$emit('bgPopup')
       this.$refs['alertModal'].hide()
+      this.globalUtils.tts("파블로 캔버스 툴에 대해 간단하게 설명해드릴게요")
     },
     setPlayerOptions(){
       this.setPlayerSize({width: 1065, height: 666})

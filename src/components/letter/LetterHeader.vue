@@ -28,7 +28,7 @@
       <!--주제보기-->
       <Alert  v-if="path !=='/Intro' && path !=='/Completion' && (path ==='/Recording' && page !== 'free')"
               v-slot="slotProps" :boldText=letter.stepSubejct :buttonText ="'닫기'">
-        <button class="btn-right" @click="globalUtils.alert(slotProps,'subject')">
+        <button class="btn-right" @click="globalUtils.alert(slotProps,'subject'), subjectTTS()">
           <span class="img"><img src="@/assets/images/common/ic-drawing@2x.png" alt=""></span>
           <span class="tit">주제보기</span>
         </button>
@@ -62,6 +62,9 @@ export default {
     Alert,
     Confirm
   },
+  created () {
+    this.$EventBus.$on('subjectTTS', this.subjectTTS)
+  },
   computed: {
     ...mapGetters({
       letter: 'getLetter'
@@ -71,6 +74,11 @@ export default {
     },
     page() {
       return this.$router.currentRoute.query.page
+    }
+  },
+  methods:{
+    subjectTTS(){
+      this.globalUtils.tts(this.letter.stepSubejct)
     }
   }
 

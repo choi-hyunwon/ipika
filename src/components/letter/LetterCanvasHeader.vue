@@ -60,6 +60,9 @@ export default {
       bg : 'getBg'
     })
   },
+  mounted () {
+    this.globalUtils.tts(this.bg.imageSubject)
+  },
   methods : {
     ...mapMutations({
       setBg : 'setBg'

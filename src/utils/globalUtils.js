@@ -17,9 +17,9 @@ export class GlobalUtils {
     window.speechSynthesis.cancel()
     const speechMsg = new SpeechSynthesisUtterance()
     speechMsg.rate = 1
-    speechMsg.pitch =  1
+    speechMsg.pitch = 1
     speechMsg.lang = 'ko-KR'
-    speechMsg.text = text
+    speechMsg.text = sText
     window.speechSynthesis.speak(speechMsg)
     // let options = {
     //   speaker: 'nara',
