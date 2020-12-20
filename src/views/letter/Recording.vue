@@ -3,8 +3,16 @@
     <LetterHeader/>
     <div class="contents">
 
+
       <!-- 화면 좌측 상단 텍스트 영역 -->
-      <div class="txt-area">
+      <div class="txt-area" v-if="page === 'free'">
+        <p class="txt-lg">이 그림은 무엇을 표현했는지<br>
+          생각을 들려주세요</p>
+        <p class="txt-sm">자유롭게 자신의 생각을 말해보세요</p>
+      </div>
+
+      <!-- 화면 좌측 상단 텍스트 영역 -->
+      <div class="txt-area" v-else>
         <p class="txt-lg" v-html="letter.stepAudioMainText"></p>
         <p class="txt-sm">{{ letter.stepAudioSubText }}</p>
       </div>
@@ -109,7 +117,7 @@
 import LetterHeader from '@/components/letter/LetterHeader'
 import Confirm from '@/components/popup/Confirm'
 import Alert from '@/components/popup/Alert'
-import { mapGetters, mapActions, mapMutations } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 export default {
   name: 'recording',
@@ -205,6 +213,9 @@ export default {
       if (this.ing && this.record) {
         return '#f53c32'
       } else if (this.ing && !this.record) return '#1585ff'
+    },
+    page() {
+      return this.$router.currentRoute.query.page
     }
   },
   methods: {
@@ -216,7 +227,8 @@ export default {
       setUserAudio: 'setUserAudio'
     }),
     goBack () {
-      this.$router.push('/Watching')
+      // this.$router.push('/Watching')
+      this.$router.go(-1)
     },
     startRecord () {
       this.ing = true
@@ -583,6 +595,7 @@ export default {
     background-image: url("~@/assets/images/common/play@2x.png");
     background-repeat: no-repeat;
     background-position: center;
+    background-size: 3.24rem;
   }
 
   &.pause {
@@ -591,6 +604,7 @@ export default {
     background-image: url("~@/assets/images/common/ic-pause@2x.png");
     background-repeat: no-repeat;
     background-position: center;
+    background-size: 3.2rem;
 
     & .play-btns {
       border: 5px solid #1585ff;
