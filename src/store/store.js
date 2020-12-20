@@ -44,14 +44,14 @@ export default new Vuex.Store({
      */
 
     session: {
-      // 'user_id': '',
-      // 'user_auth_key': '',
-      // 'Content_Language': '',
-      // 'device_type': ''
-      'user_id': 'l23',
-      'user_auth_key': 'abcdefghijklmnopqrstuvwxyz0123456789',
-      'Content_Language': 'ko',
-      'device_type': '1001'
+      'user_id': '',
+      'user_auth_key': '',
+      'Content_Language': '',
+      'device_type': ''
+      // 'user_id': 'l23',
+      // 'user_auth_key': 'abcdefghijklmnopqrstuvwxyz0123456789',
+      // 'Content_Language': 'ko',
+      // 'device_type': '1001'
     },
     subject: {},
     userGallery: {},
