@@ -28,7 +28,7 @@
         </div>
       </div>
     </div>
-    <nav class="nav" :class="{'show': drawer === true, 'hide': drawer=== false}" v-if="isLoadingGuide" style="z-index: 100;"><!-- show/hide -->
+    <nav class="nav" :class="{'show': drawer === true, 'hide': drawer=== false, 'visible': isLoadingGuide=== true}" style="z-index: 100; opacity:0"><!-- show/hide -->
       <div class="inner">
         <button class="btn-drawer" @click="toggleDrawer">
           <img v-if="drawer === true" src="@/assets/images/common/slide_down@2x.png" alt="">
@@ -738,11 +738,11 @@
 </template>
 
 <script>
-  import Confirm from '@/components/popup/Confirm'
-  import { mapActions, mapGetters, mapMutations } from 'vuex'
-  import { Chrome } from 'vue-color'
+import Confirm from '@/components/popup/Confirm'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
+import { Chrome } from 'vue-color'
 
-  export default {
+export default {
     name: 'Wacom',
     components: {
       Confirm,
@@ -761,7 +761,7 @@
         updateValue: '',
         hex: '',
         isOpen: false,
-        isLoadingGuide : false //가이드 클릭 시 활성화
+        isLoadingGuide : false
       }
   },
   props : {
@@ -872,7 +872,9 @@
   > div {
     padding: 0 !important;
   }
-
+  &.visible {
+    opacity: 1 !important;
+  }
   &.show {
     position: absolute;
     width: 182.4rem;
@@ -882,6 +884,7 @@
     background-color: var(--ivory-200);
     left: 4.8rem;
     bottom: 4.8rem;
+    transform: translateY(0px);
 
     .inner {
       position: relative;
@@ -1167,6 +1170,8 @@
   }
 
   &.hide {
+    //transform: translateY(670px);
+    //transition: transform 1s;
     .btn-drawer {
       position: absolute;
       width: 12rem;

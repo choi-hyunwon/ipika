@@ -5,10 +5,10 @@
     <!--   wacom 라이브러리 -->
     <Wacom ref="wacom" :drawer="drawer"></Wacom>
 
-    <div v-if="bgPopup===true&&page==='diagnose'" class="guide_bg" @click="toggleBg">
+    <div v-if="bgPopup===true&&page==='diagnose'" class="guide_bg" @click="toggleGuide">
       <img src="@/assets/images/common/test_guide@2x.png" alt="" class="img-m">
     </div>
-    <div v-if="bgPopup===true&&page==='letter'" class="guide_bg" @click="toggleBg">
+    <div v-if="bgPopup===true&&page==='letter'" class="guide_bg" @click="toggleGuide">
       <img src="@/assets/images/common/guide@2x.png" alt="" class="img-m">
     </div>
 
@@ -91,6 +91,8 @@ export default {
       if(this.page ==='diagnose') await this.fetchSubject()
       else if(this.page === 'letter') await this.fetchLetter()
     })()
+
+    if(this.page === '') this.$EventBus.$emit('showToolBar');
   },
   computed: {
     ...mapGetters({
@@ -222,9 +224,18 @@ export default {
         this.bgPopup=false
         this.setBackgrounImage()
       }
-      this.$EventBus.$emit('showToolBar');
-
     },
+    toggleGuide(){
+      this.bgPopup = !this.bgPopup;
+      if(this.bgPopup===false&&this.page==='diagnose'){
+        this.setTimerStart();
+      }else if(this.page==='letter'){
+        this.bgPopup=false
+        this.setBackgrounImage()
+      }
+      this.$EventBus.$emit('showToolBar');
+    },
+
     setFreeName(){
       this.$refs.register.showRegister=true
     },
@@ -274,11 +285,11 @@ export default {
       this.getSubmissionFree(data)
         .then(result => {
           if(result.code === '0000') {
-            this.$router.push('/Recording?page=free')
+            self.$router.push('/Recording?page=free&freeTitle='+this.freeTitle)
           } else {
             // alert('드로잉 제출 실패')
-            this.$refs.submissionFail.showAlert = true
-            this.$refs.submissionFail.type = 'common'
+            self.$refs.submissionFail.showAlert = true
+            self.$refs.submissionFail.type = 'common'
           }
         })
     },

@@ -100,15 +100,42 @@
 
       <!-- 우측 하단 '다했어요!' 버튼 -->
       <div class="btn-area">
-<!--        <button class="btn btn-dark" @click="$router.push('/Listening')">건너뛰기</button>-->
-        <button v-if="!record" @click="fetchRecording" class="btn btn-dark" style="width: 16rem; height: 8rem; text-align:center;"><img src="@/assets/images/common/next_nor@2x.png" style="width: 5rem"></button>
-        <button v-if="record" class="btn btn-dark disabled" style="width: 16rem; height: 8rem; text-align:center;"><img src="@/assets/images/common/next_nor@2x.png" style="width: 5rem"></button>
+        <!--        <button class="btn btn-dark" @click="$router.push('/Listening')">건너뛰기</button>-->
+        <div v-if="page==='free'">
+          <button @click="fetchRecordingFree" class="btn btn-dark"
+                  style="width: 16rem; height: 8rem; text-align:center;">완료</button>
+        </div>
+        <div v-else>
+          <button v-if="!record" @click="fetchRecording" class="btn btn-dark"
+                  style="width: 16rem; height: 8rem; text-align:center;"><img
+            src="@/assets/images/common/next_nor@2x.png" style="width: 5rem"></button>
+          <button v-if="record" class="btn btn-dark disabled" style="width: 16rem; height: 8rem; text-align:center;">
+            <img src="@/assets/images/common/next_nor@2x.png" style="width: 5rem"></button>
+        </div>
+
+
       </div>
 
     </div>
 
     <!-- 공통 알림 popup-->
-    <Alert ref="deviceFindFail" v-slot="slotProps" :boldText="'녹음을 할 수 있는 장치가 없어요'" :text="'장치 설치를 하고 다시 해볼까요?'" :buttonText ="'확인'"/>
+    <Alert ref="deviceFindFail" v-slot="slotProps" :boldText="'녹음을 할 수 있는 장치가 없어요'" :text="'장치 설치를 하고 다시 해볼까요?'"
+           :buttonText="'확인'"/>
+    <!-- 공통 알림 popup-->
+    <Alert ref="submissionFail" v-slot="slotProps" :boldText="'드로잉 제출 실패하였습니다'" :text="'앗! 이런'" :buttonText="'확인'"/>
+
+    <b-modal id="submissionFree" centered title="배경 설정 : 없을 경우" modal-class="galleryBGChangeEmpty">
+      <template #modal-header>
+        <div class="symbol"><img src="@/assets/images/common/emoji@2x.png" alt=""></div>
+      </template>
+      <p class="text">그림이 마이갤러리에<br>
+        추가되었어요!</p>
+      <p class="text-sm">마이갤러리에서 확인해보세요!</p>
+      <template #modal-footer="{ cancel }">
+        <router-link to="/PabloMain" class="btn btn-gray btn-half">메인으로</router-link>
+        <router-link to="/MyGallery" class="btn btn-black btn-half">마이갤러리 가기</router-link>
+      </template>
+    </b-modal>
 
   </div>
 </template>
@@ -195,7 +222,7 @@ export default {
       function (err) {
         console.log(err)
         self.$refs.deviceFindFail.showAlert = true
-        self.$refs.deviceFindFail.type = "common"
+        self.$refs.deviceFindFail.type = 'common'
         self.error = true
       })
   },
@@ -214,13 +241,18 @@ export default {
         return '#f53c32'
       } else if (this.ing && !this.record) return '#1585ff'
     },
-    page() {
-      return this.$router.currentRoute.query.page
-    }
+    page () {
+      return this.$router.currentRoute.query.page || ''
+    },
+    freeTitle () {
+      return this.$router.currentRoute.query.freeTitle || ''
+    },
+
   },
   methods: {
     ...mapActions({
       getRecording: 'getRecording',
+      getSubmissionFree: 'getSubmissionFree',
       getLetter: 'getLetter'
     }),
     ...mapMutations({
@@ -264,43 +296,68 @@ export default {
         return this.$router.push('/Listening')
       }
 
-      try{
-      //파일 테스트 : 삭제 예정
-      //this.saveFile(URL.createObjectURL(this.file.blob))
+      try {
+        //파일 테스트 : 삭제 예정
+        //this.saveFile(URL.createObjectURL(this.file.blob))
 
-      const data = new FormData()
-      data.append('stepId', this.letter.stepId)
-      data.append('recordingAudio', this.file.blob, 'myrecord.mp3')
+        const data = new FormData()
+        data.append('stepId', this.letter.stepId)
+        data.append('recordingAudio', this.file.blob, 'myrecord.mp3')
 
-
-      this.getRecording(data)
-        .then(result => {
-          console.log(result)
-          if (result.code === '0000') {
-            this.fetchLetter()
-          } else {
-            alert(`code : ${result.code} message : ${result.message}`)
-            this.$router.push('/Listening')
-          }
-        })
-      } catch(e){
+        this.getRecording(data)
+          .then(result => {
+            console.log(result)
+            if (result.code === '0000') {
+              this.fetchLetter()
+            } else {
+              alert(`code : ${result.code} message : ${result.message}`)
+              this.$router.push('/Listening')
+            }
+          })
+      } catch (e) {
         alert(e)
       }
     },
-    saveFile(href){
-      var a = document.createElement("a");
-      a.href = href;
-      a.download = 'myrecord.mp3';
+    fetchRecordingFree () {
 
-      a.appendChild(document.createTextNode('myrecord.mp3'));
-      a.style.display = "none";
+      //파일 테스트 : 삭제 예정
+      //this.saveFile(URL.createObjectURL(this.file.blob))
+      const self = this
+      if (!this.file.blob) {
+        this.$bvModal.show('submissionFree')
+      } else {
+        this.saveFile(URL.createObjectURL(this.file.blob))
 
-      document.body.appendChild(a);
-      a.click();
+        const data = new FormData()
+        data.append('title', this.freeTitle)
+        data.append('files', this.file.blob, 'myfree.mp3')
 
-      setTimeout(function() {
-        URL.revokeObjectURL(href);
-      }, 911);
+        this.getSubmissionFree(data)
+          .then(result => {
+            if (result.code === '0000') {
+              this.$bvModal.show('submissionFree')
+            } else {
+              // alert('드로잉 제출 실패')
+              self.$refs.submissionFail.showAlert = true
+              self.$refs.submissionFail.type = 'common'
+            }
+          })
+      }
+    },
+    saveFile (href) {
+      var a = document.createElement('a')
+      a.href = href
+      a.download = 'myrecord.mp3'
+
+      a.appendChild(document.createTextNode('myrecord.mp3'))
+      a.style.display = 'none'
+
+      document.body.appendChild(a)
+      a.click()
+
+      setTimeout(function () {
+        URL.revokeObjectURL(href)
+      }, 911)
     },
     async fetchLetter () {
       this.getLetter()
@@ -433,6 +490,7 @@ export default {
   .ar-recorder__duration {
     display: none;
   }
+
   .ar-recorder__time-limit {
     display: none;
   }

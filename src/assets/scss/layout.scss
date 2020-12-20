@@ -151,7 +151,8 @@
 
 .contents {
   height: calc(100% - 12rem);
-
+  overflow-y : auto;
+  overflow-x : hidden;
   &.no_scroll {
     overflow: visible;
     position: relative;

@@ -47,7 +47,7 @@
 <!--                  <img src="@/assets/images/common/share.png" alt="다운로드" class="img-m" v-b-modal.normalPopup1>-->
                 </div>
               </div>
-              <div class="img_title">{{ item.stageName || '스테이지'}} {{ item.stageId || '단계'}}</div>
+              <div class="img_title">{{ item.stageName || '프리드로잉'}} {{ item.stageId || ''}}</div>
               <div class="img_desc">{{ item.title || '제목이 없어요'}}</div>
               <button class="icon_delete"  @click="openDelete(item.pictureId, index)"><img src="@/assets/images/common/btn_delete@2x.png" alt="" class="img-m"></button>
 
@@ -211,7 +211,7 @@ export default {
       this.$bvModal.hide('deletePicture')
       this.getUserGalleryDetele({pictureId : this.selectId})
         .then(result => {
-          //API에서 결과값을 안줌 
+          //API에서 결과값을 안줌
           if (result.code === "0000"){
             self.$refs.deleteComfirm.showAlert = true
             self.$refs.deleteComfirm.type = 'common'
