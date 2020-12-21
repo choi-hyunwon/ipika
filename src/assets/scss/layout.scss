@@ -40,6 +40,8 @@
     flex-grow: 1;
     align-items: center;
     justify-content: flex-end;
+    position: relative;
+    z-index: 100;
     .box-close {
       position: initial;
       cursor:pointer;

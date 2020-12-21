@@ -227,7 +227,7 @@ export default class WebApi {
         'X-NCP-APIGW-API-KEY-ID': '0d5rxee0gt',
         'X-NCP-APIGW-API-KEY': 'uKcIGuao7nWRbkJIxnT5t8wAuW18SAGifKRrU2Gh'
       },
-      data: "speaker=nara&text=만나서 반갑습니다&volume=0&speed=0&pitch=0&format=mp3"
+      data: options
     })
   }
 }

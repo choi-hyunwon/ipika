@@ -202,7 +202,7 @@ export default {
       //select value에 따른 처리
       if (value === 1) {
         this.list.sort(function (a, b) { // 오름차순
-          return a.createdDate > b.createdDate ? -1 : a.createdDate > b.createdDate ? 1 : 0
+          return a.createdDate > b.createdDate ? -1 : a.createdDate < b.createdDate ? 1 : 0
         })
       } else if (value === 2) {
         this.list.sort(function (a, b) { // 오름차순
