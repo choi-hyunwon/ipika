@@ -89,6 +89,8 @@ export const actions = {
           sources: [{ src: data.stepVideoUrl }],
           Thumnail: data.stepVideoThumnailUrl
         })
+
+        return data
       })
   },
   getSubmission ({ commit }, options) {

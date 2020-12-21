@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 export default {
   name: 'Confirm',
@@ -121,6 +121,9 @@ export default {
     }
   },
   methods: {
+    ...mapActions({
+      getLetter : 'getLetter'
+    }),
     ...mapMutations({
       setTimeInit: 'setTimeInit',
       setTimerReset: 'setTimerReset',
@@ -167,17 +170,26 @@ export default {
       } else if (this.type === 'watchComplete') {
         this.$route.push('/Recording')
       } else if (this.type === 'success') {
-        // this.setBg({tabletImageUrl : 'https://colorate.azurewebsites.net/SwatchColor/FFFFFF'}, true)
-        // 흰색 배경 이미지 처리 : 크로스 오리진 에러
-        WILL.clear()
-        WILL.setBackground('paper_01')
+
+        if(this.canvasList.length > 1) {
+          WILL.clear()
+
+          this.canvasList = this.canvasList.splice(0,1)
+
+
+          this.$EventBus.$emit('setBg', this.canvasList[0])
+          this.globalUtils.tts(this.canvasList[0].imageSubject)
+          this.showConfirm = false
+        } else if(this.canvasList.length === 1) {
+          this.$refs.autoOpenLSuccess.showConfirm = true
+          this.$refs.autoOpenLSuccess.type = 'success'
+        }
+
       } else if (this.type === 'checkRed') {
         this.showConfirm = false
         this.setTimerReset()
         this.Android.appExit()
-
         this.Android.setLog('action=AppEnded&edApp=Pablo')
-
       } else if (this.type === 'timeOut') {
         this.type = 'Complete'
         this.timeOut.completeText = "다 그렸나요? </br> 제출하면 수정할수 없어요"
