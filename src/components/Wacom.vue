@@ -72,6 +72,9 @@
               <button class="color selected" style="background-color: #FFFFFF"
                       @click="setColorSelect"
               ></button>
+              <button class="color" style="background-color: #000000"
+                      @click="setColorSelect"
+              ></button>
               <button v-if="page==='diagnose' || page===undefined" class="color colorpicker"
                       @click='setColorSelect($event); isPickerOpen()'
                       v-bind:style="{ background: colors.hex }"

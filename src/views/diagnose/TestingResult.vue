@@ -135,6 +135,8 @@ export default {
 
   .desc {
     font-size: 2.4rem;
+    padding-right: 27rem;
+    padding-left: 4rem;
     font-family: "Noto Sans CJK KR Medium";
     font-family: var(--medium);
     font-weight: 500;

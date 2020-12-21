@@ -75,7 +75,7 @@ export default {
     >.inner {
       position: relative;
       width: 100%;
-      height: calc(120rem - 16rem);
+      height: 100%;
       /*.video {
         position: relative;
         width: 100%;
