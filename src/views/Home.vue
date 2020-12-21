@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions, mapMutations } from 'vuex'
+import { mapActions, mapMutations } from 'vuex'
 import Confirm from '@/components/popup/Confirm'
 
 export default {
@@ -101,9 +101,9 @@ export default {
   .content {
     width: 100%;
     height: 108rem;
-
+    padding-top: 29.4rem;
     .text-area {
-      margin-top: 29.4rem;
+
       text-align: center;
 
       p:nth-child(1) {

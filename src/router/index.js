@@ -23,6 +23,8 @@ import Park from '@/views/Park'
 
 import TestInfo from '@/views/TestInfo'
 
+import Testscroll from '@/views/Testscroll'
+
 const requireAuth = () => (from, to, next) => {
   if(from.path === '/canvas' || from.path === '/pabloCanvas') {
     if(localStorage.getItem('isReload') !== 'true') localStorage.setItem('isReload', true)
@@ -117,6 +119,11 @@ export const routes = [
     path:'/TestInfo',
     name:'TestInfo',
     component: TestInfo
+  },
+  {
+    path:'/Testscroll',
+    name:'Testscroll',
+    component: Testscroll
   }
 ]
 

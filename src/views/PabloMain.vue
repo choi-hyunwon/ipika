@@ -114,6 +114,10 @@ export default {
         case 116 :
           link = '/MyGallery'
           break
+        case 118 :
+          link = '/Testscroll'
+          break
+
         default :
           link = ''
           break
