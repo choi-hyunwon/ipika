@@ -23,8 +23,8 @@
       <!--영상보기-->
       <Alert v-slot="slotProps">
         <button @click="globalUtils.alert(slotProps,'video')" class="btn-right">
-          <span class="img"><img src="@/assets/images/common/ic-play@2x.png" alt=""></span>
-          <span class="tit">영상보기</span>
+          <span class="img"><img src="@/assets/images/common/youtube.png" alt=""></span>
+          <span class="tit">영상선택</span>
         </button>
       </Alert>
       <Confirm v-slot="slotProps">
@@ -82,8 +82,12 @@ export default {
   .btn-wrap {
     position: absolute;
     display: inline-block;
-    top: 1rem;
     left: 12rem;
+    padding-right: 4rem;
+    border-right: 0.1rem solid var(--ivory-500);
+    height: 100%;
+    padding-top: 1rem;
+
     button {
       display: inline-block;
       width: 12.7rem;
@@ -98,7 +102,7 @@ export default {
     }
   }
   .title {
-    position: absolute;
+    position: relative;
     top: 2rem;
     left: 32.7rem;
     .img {
@@ -106,6 +110,7 @@ export default {
       height: 4rem;
       display: inline-block;
       margin-right: 2.4rem;
+      position: absolute;
       img {
         width: 100%;
       }
@@ -116,6 +121,9 @@ export default {
       line-height: 4rem;
       text-align: left;
       color: var(--gray-black);
+      width: 100%;
+      position: absolute;
+      left: 6.4rem;
     }
   }
 }

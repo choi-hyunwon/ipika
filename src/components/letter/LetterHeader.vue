@@ -20,8 +20,8 @@
       <Alert v-if="(path ==='/Recording' && page !== 'free') || path ==='/Listening' "
              v-slot="slotProps">
         <button @click="globalUtils.alert(slotProps,'video')" class="btn-right">
-          <span class="img"><img src="@/assets/images/common/ic-play@2x.png" alt=""></span>
-          <span class="tit">영상선택</span>
+          <span class="img"><img src="@/assets/images/common/youtube.png" alt=""></span>
+          <span class="tit">영상보기</span>
         </button>
       </Alert>
 

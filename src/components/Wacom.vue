@@ -69,7 +69,7 @@
               <button class="color" style="background-color: #8551d3"
                       @click="setColorSelect"
               ></button>
-              <button class="color selected" style="background-color: #444444"
+              <button class="color selected" style="background-color: #FFFFFF"
                       @click="setColorSelect"
               ></button>
               <button v-if="page==='diagnose' || page===undefined" class="color colorpicker"
