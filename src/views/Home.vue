@@ -9,7 +9,7 @@
                    :cancelText="`아니요`"
                    :okText="`네`">
             <div class="btn-close" @click="globalUtils.confirm(slotProps,'checkRed')"><img
-              src="@/assets/images/common/close@2x.png" alt=""></div>
+              src="@/assets/images/common/close@2x.png" alt="" ></div>
           </Confirm>
         </div>
       </div>
@@ -78,9 +78,13 @@ export default {
 .wrap {
   .header {
     border: none;
-
+    height: 8rem;
     .box-close {
       border: none;
+      .btn-close{
+       padding-top: 2rem;
+        cursor: pointer;
+      }
     }
   }
 
@@ -88,7 +92,7 @@ export default {
     position: absolute;
     width: 4rem;
     height: 4rem;
-    top: 4rem;
+    top: 2rem;
     left: 4rem;
 
     img {
@@ -100,7 +104,7 @@ export default {
 
   .content {
     width: 100%;
-    height: 108rem;
+    height: calc(100% - 8rem);
     padding-top: 29.4rem;
     .text-area {
 

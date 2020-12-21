@@ -82,7 +82,7 @@ export default {
   .btn-wrap {
     position: absolute;
     display: inline-block;
-    top: 3rem;
+    top: 1rem;
     left: 12rem;
     button {
       display: inline-block;
@@ -99,7 +99,7 @@ export default {
   }
   .title {
     position: absolute;
-    top: 4rem;
+    top: 2rem;
     left: 32.7rem;
     .img {
       width: 4rem;

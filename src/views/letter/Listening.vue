@@ -148,7 +148,7 @@ export default {
 .contents {
   position: relative;
   width: 100%;
-  height: calc(100% - 12rem);
+  height: calc(100% - 8rem);
   .txt-area {
     padding-top: 8rem;
     padding-left: 10rem;

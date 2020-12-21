@@ -306,6 +306,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 .guide {
   position: absolute;
   width: 192rem;
@@ -324,4 +325,5 @@ export default {
   left: 0;
   z-index: 9999;
 }
+
 </style>

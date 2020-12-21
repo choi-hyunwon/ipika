@@ -152,14 +152,13 @@ export default {
     display: flex;
     align-items: center;
     width: 100%;
-    height: 800px;
     justify-content: center;
 
     .symbol {
       position: absolute;
       width: 4rem;
       height: 4rem;
-      top: 4rem;
+      top: 2rem;
       left: 4rem;
 
       img {
@@ -389,7 +388,7 @@ export default {
       width: 4rem;
       height: 4rem;
       right: 4rem;
-      top: 4rem;
+      top: 2rem;
 
       img {
         width: 100%;

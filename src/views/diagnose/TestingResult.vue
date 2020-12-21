@@ -33,9 +33,10 @@
         <img v-if="submission.stageId === 5" src="@/assets/images/common/img_stage_end_05@2x.png" alt="프로필사진" class="img">
       </div>
     </div>
-    <div class="bg_dim"  v-if="menu.popup" @click="menu.popup = !menu.popup">
+    <div class="bg_dim"  v-if="menu.popup">
       <div class="modal_img">
         <img src="@/assets/images/common/stage_modal.png" alt="" class="img-m">
+        <img src="@/assets/images/common/close_dim@2x.png" alt="" class="img-m close_btn" @click="menu.popup = !menu.popup">
       </div>
     </div>
   </div>
@@ -64,6 +65,12 @@ export default {
 
 <style lang="scss" scoped>
 .wrap {
+  .box-close{
+    .btn-close{
+      padding-top: 2rem;
+      cursor: pointer;
+    }
+  }
   > .row {
     height: calc(120rem - 12rem);
   }
@@ -182,10 +189,18 @@ export default {
   }
   .modal_img{
     position: absolute;
-    top: 7rem;
+    top: 3rem;
     width: 176rem;
     height: 105.7rem;
     left: 8.5rem;
+    .close_btn{
+      position: absolute;
+      top: 2rem;
+      right: 2rem;
+      width: 6rem;
+      height: 6rem;
+      cursor: pointer;
+    }
   }
 }
 </style>

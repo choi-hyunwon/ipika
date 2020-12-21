@@ -3,7 +3,7 @@
 .wrap {
   position: relative;
   width: 192rem;
-  height: 120rem;
+  height: 112.4rem;
   margin: 0 auto;
   overflow: hidden;
 }
@@ -11,7 +11,7 @@
 .header {
   position: relative;
   width: 100%;
-  height: 12rem;
+  height: 8rem;
   border-bottom: 1px solid var(--gray-800);
   .gallery-title {
     display: flex;
@@ -27,7 +27,7 @@
     width: 4rem;
     height: 4rem;
     left: 4rem;
-    top: 4rem;
+    top: 2rem;
     img {
       width: 100%;
       height: 100%;
@@ -40,12 +40,13 @@
     justify-content: flex-end;
     .box-close {
       position: initial;
+      cursor:pointer;
     }
   }
   .btn-right {
     width: 16.3rem;
-    height: 12rem;
-    line-height: 12rem;
+    height: 8rem;
+    line-height: 8rem;
     text-align: center;
     border-left: 1px solid var(--ivory-500);
     .img {
@@ -72,16 +73,16 @@
   .box-close {
     position: absolute;
     width: 11.8rem;
-    height: 11.8rem;
+    height: 8rem;
     top: 0;
     right: 0;
     border-left: 1px solid var(--gray-800);
     .btn-close {
       display: block;
       width: 11.8rem;
-      height: 11.8rem;
+      height: 8rem;
       text-align: center;
-      padding-top: 3.8rem;
+      padding-top: 2rem;
       img {
         width: 4rem;
         height: 4rem;
@@ -93,7 +94,7 @@
       width: 21.4rem;
       height: 100%;
       border-right: 1px solid var(--gray-black);
-      padding: 4rem 0 0 4rem;
+      padding: 2rem 0 0 2rem;
       .img {
         display: inline-block;
         width: 4rem;
@@ -121,7 +122,7 @@
     .symbol {
       position: absolute;
       left: 25.4rem;
-      top: 4rem;
+      top: 2rem;
       width: calc(100% - 40rem);
       height: auto;
       .img {
@@ -150,13 +151,13 @@
 }
 
 .contents {
-  height: calc(100% - 12rem);
+  height: calc(100% - 8rem);
   overflow-y : auto;
   overflow-x : hidden;
   &.no_scroll {
     overflow: visible;
     position: relative;
-    height: calc(100% - 12rem);
+    height: calc(100% - 8rem);
   }
   .nav-link {
     color: var(--gray-500);
