@@ -77,6 +77,7 @@ export default {
 <style lang="scss" scoped>
 .wrap {
   .header {
+    background-color: #fff;
     border: none;
     height: 8rem;
     .box-close {

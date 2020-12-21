@@ -18,7 +18,7 @@
       <div class="title"><img src="@/assets/images/common/img_testinfo_title@2x.png" style="width: 67rem"></div>
       <div class="desc"><img src="@/assets/images/common/img_testinfo_desc@2x.png" style="width: 86.8rem"></div>
       <div class="btn-group">
-        <router-link to="/canvas?page=diagnose" class="btn btn-block btn-dark">시작하기</router-link>
+        <router-link to="/canvas?page=diagnose" class="btn btn-block btn-dark">AI 입회 테스트 시작하기</router-link>
       </div>
     </div>
   </div>

@@ -24,7 +24,7 @@
       <Alert v-slot="slotProps">
         <button @click="globalUtils.alert(slotProps,'video')" class="btn-right">
           <span class="img"><img src="@/assets/images/common/youtube.png" alt=""></span>
-          <span class="tit">영상선택</span>
+          <span class="tit">영상보기</span>
         </button>
       </Alert>
       <Confirm v-slot="slotProps">
@@ -83,7 +83,7 @@ export default {
     position: absolute;
     display: inline-block;
     left: 12rem;
-    padding-right: 4rem;
+    padding-right: 2.8rem;
     border-right: 0.1rem solid var(--ivory-500);
     height: 100%;
     padding-top: 1rem;
@@ -95,6 +95,7 @@ export default {
       img {
         width: 100%;
         height: 100%;
+
       }
       &:first-child {
         margin-right: 1.2rem;
@@ -104,7 +105,7 @@ export default {
   .title {
     position: relative;
     top: 2rem;
-    left: 32.7rem;
+    left: 32.1rem;
     .img {
       width: 4rem;
       height: 4rem;
@@ -124,6 +125,13 @@ export default {
       width: 100%;
       position: absolute;
       left: 6.4rem;
+    }
+  }
+  .flex-box{
+    .btn-right{
+      .img{
+        margin-right: 0.6rem;
+      }
     }
   }
 }
