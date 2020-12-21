@@ -12,13 +12,13 @@ export class Android {
   /**
    * 안드로이드 로그 사용
    */
-  setLog (broadcastAction, action, data) {
-    // var broadcastAction = "com.homelearn.xcaliper.web"
+  setLog (data) {
+    var broadcastAction = "com.homelearn.xcaliper.web"
     // var action = "AppEnded"
     // var edApp = "Pablo"
 
     try{
-      window.android.callBroadcast(action, data)
+      window.android.callBroadcast(broadcastAction, data)
     } catch(error){
       console.log('안드로이드 로그 에러')
     }
