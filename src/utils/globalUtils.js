@@ -24,19 +24,19 @@ export class GlobalUtils {
     // speechMsg.text = sText
     // window.speechSynthesis.speak(speechMsg)
 
-
-
-
-    let options = 'speaker=nara&text=' + sText + '&format=mp3'
-
-    return webApi.getClovaTTS(options)
-      .then(data => {
-        alert(data)
-
-        document.getElementById('video').src = data
-        document.getElementById('video').click()
-        // this.audio = new Audio(data)
-        // this.audio.play()
-      })
+    //
+    //
+    //
+    // let options = 'speaker=nara&text=' + sText + '&format=mp3'
+    //
+    // return webApi.getClovaTTS(options)
+    //   .then(data => {
+    //     alert(data)
+    //
+    //     document.getElementById('video').src = data
+    //     document.getElementById('video').click()
+    //     // this.audio = new Audio(data)
+    //     // this.audio.play()
+    //   })
   }
 }

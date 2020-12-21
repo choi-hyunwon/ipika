@@ -43,8 +43,9 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 import Confirm from '@/components/popup/Confirm'
+
 export default {
   name: 'TestingResult',
   components: {Confirm },
@@ -135,8 +136,8 @@ export default {
 
   .desc {
     font-size: 2.4rem;
-    padding-right: 27rem;
-    padding-left: 4rem;
+    padding-right: 10rem;
+    padding-left: 10rem;
     font-family: "Noto Sans CJK KR Medium";
     font-family: var(--medium);
     font-weight: 500;

@@ -36,12 +36,13 @@
     }
   }
   .flex-box {
-    display: flex;
-    flex-grow: 1;
-    align-items: center;
-    justify-content: flex-end;
-    position: relative;
     z-index: 100;
+    position: absolute;
+    top: 0;
+    right: 0;
+    > div {
+      float: left;
+    }
     .box-close {
       position: initial;
       cursor:pointer;

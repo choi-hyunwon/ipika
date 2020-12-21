@@ -178,7 +178,7 @@ export default {
 
 
           this.$EventBus.$emit('setBg', this.canvasList[0])
-          this.globalUtils.tts(this.canvasList[0].imageSubject)
+          this.Android.tts(this.canvasList[0].imageSubject)
           this.showConfirm = false
         } else if(this.canvasList.length === 1) {
           this.$refs.autoOpenLSuccess.showConfirm = true
@@ -215,7 +215,7 @@ export default {
       this.showConfirm = false
       WILL.clear()
       this.$EventBus.$emit('setBg', canvas , reset)
-      this.globalUtils.tts(canvas.imageSubject)
+      this.Android.tts(canvas.imageSubject)
     }
   }
 }

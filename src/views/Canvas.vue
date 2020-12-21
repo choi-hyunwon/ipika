@@ -299,7 +299,7 @@ export default {
 
       WILL.clear()
       this.$EventBus.$emit('setBg', this.canvasList[0] , false)
-      this.globalUtils.tts(this.canvasList[0].imageSubject)
+      this.Android.tts(this.canvasList[0].imageSubject)
     }
   }
 }

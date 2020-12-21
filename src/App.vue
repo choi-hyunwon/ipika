@@ -1,7 +1,6 @@
 <template>
   <div id="app">
     <router-view/>
-    <video id="video" src="" onclick="this.play();"></video>
   </div>
 </template>
 

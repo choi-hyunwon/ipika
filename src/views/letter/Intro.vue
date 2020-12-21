@@ -18,14 +18,14 @@
   </div>
 </template>
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 import LetterHeader from '@/components/letter/LetterHeader'
 
 export default {
   name: 'Intro',
   components : {LetterHeader},
   mounted () {
-    this.globalUtils.tts(this.letter.stepSubejct)
+    this.Android.tts(this.letter.stepSubejct)
   },
   computed:{
     ...mapGetters({

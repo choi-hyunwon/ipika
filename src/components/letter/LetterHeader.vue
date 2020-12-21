@@ -82,7 +82,7 @@ export default {
         console.log('subjectTTS fail')
         return false
       }
-      this.globalUtils.tts(this.letter.stepSubejct)
+      this.Android.tts(this.letter.stepSubejct)
     }
   }
 

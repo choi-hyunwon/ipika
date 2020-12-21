@@ -221,7 +221,7 @@ export default {
       this.setAudio()
     }
 
-    this.globalUtils.tts(this.letter.stepAudioMainText + this.letter.stepAudioSubText)
+    this.Android.tts(this.letter.stepAudioMainText + this.letter.stepAudioSubText)
 
     const self = this
     navigator.getUserMedia({

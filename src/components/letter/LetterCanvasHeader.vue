@@ -61,7 +61,7 @@ export default {
     })
   },
   mounted () {
-    // this.globalUtils.tts(this.bg.imageSubject)
+    // this.Android.tts(this.bg.imageSubject)
   },
   methods : {
     ...mapMutations({

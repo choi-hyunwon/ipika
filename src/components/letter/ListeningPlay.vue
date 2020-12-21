@@ -27,7 +27,8 @@
 </template>
 <script>
 
-import {mapGetters} from 'vuex'
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'ListeningPlay',
   data(){
@@ -109,6 +110,7 @@ export default {
   left: 0;
   width: 192rem;
   height: 120rem;
+  z-index: 1000;
 
   .dim-dark {
     width: 192rem;
@@ -171,6 +173,7 @@ export default {
     height: 7.2rem;
     top: 2.4rem;
     right: 2.4rem;
+
   }
 }
 </style>
