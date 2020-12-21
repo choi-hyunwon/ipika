@@ -223,11 +223,11 @@ export default class WebApi {
     return this.request('tts-premium/v1/tts', {
       method: 'POST',
       headers: {
-        'Content-Type':'multipart/form-data;',
+        'Content-Type':'application/x-www-form-urlencoded',
         'X-NCP-APIGW-API-KEY-ID': '0d5rxee0gt',
         'X-NCP-APIGW-API-KEY': 'uKcIGuao7nWRbkJIxnT5t8wAuW18SAGifKRrU2Gh'
       },
-      data: options
+      data: "speaker=nara&text=만나서 반갑습니다&volume=0&speed=0&pitch=0&format=mp3"
     })
   }
 }

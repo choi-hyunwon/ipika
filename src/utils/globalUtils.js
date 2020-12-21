@@ -27,19 +27,19 @@ export class GlobalUtils {
 
 
 
-    // let options = {
-    //   speaker: 'njinho',
-    //   volume: '0',
-    //   speed: '0',
-    //   pitch: '0',
-    //   text: sText,
-    //   format: 'mp3'
-    // }
-    //
-    // return webApi.getClovaTTS(options)
-    //   .then(data => {
-    //     this.audio = new Audio(data)
-    //     this.audio.play()
-    //   })
+    let options = {
+      speaker: 'nara',
+      volume: '0',
+      speed: '0',
+      pitch: '0',
+      text: sText,
+      format: 'mp3'
+    }
+
+    return webApi.getClovaTTS(options)
+      .then(data => {
+        this.audio = new Audio(data)
+        this.audio.play()
+      })
   }
 }
