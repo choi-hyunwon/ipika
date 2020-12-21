@@ -1,6 +1,6 @@
 <template>
   <div class="wrap bg-ivory">
-    <LetterHeader/>
+    <LetterHeader></LetterHeader>
     <div class="dim">
       <div class="inner"
            ref="playerArea">
@@ -56,7 +56,7 @@ export default {
 .wrap {
   .bg {
     width: 100%;
-    height: calc(120rem - 12rem);
+    height: 100%;
     img {
       width: 100%;
       height: 100%;
@@ -67,7 +67,7 @@ export default {
   }
   .dim {
     width: 100%;
-    height: calc(120rem - 16rem);
+    height: calc(112.4rem - 8rem);
     position: absolute;
     top: 8rem;
     left: 0;
