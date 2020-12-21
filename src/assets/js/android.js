@@ -8,6 +8,15 @@ export class Android {
   appExit(){
     window.android.exit();
   }
+
+  /**
+   * 안드로이드 로그 사용
+   */
+  setLog (action, data) {
+    window.android.callBroadcast(action, data)
+  }
+
+
   /**
    * 안드로이드 초기값 실행
    * @param data
