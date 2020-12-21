@@ -118,5 +118,11 @@ export const actions = {
         return data
       })
   },
-
+  getClovaTTS ({ commit }, options) {
+    return webApi.getClovaTTS(options)
+      .then(data => {
+        console.log('getClovaTTS')
+        return data
+      })
+  }
 }
