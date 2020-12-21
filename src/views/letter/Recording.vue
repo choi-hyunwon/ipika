@@ -444,11 +444,11 @@ export default {
       background-size: 100%;
 
       &.recording {
-        background-image: url("~@/assets/images/common/equalizer-red@2x.png");
+        background-image: url("~@/assets/images/common/ani_wave_red.gif");
       }
 
       &.playing {
-        background-image: url("~@/assets/images/common/equalizer-blue@2x.png");
+        background-image: url("~@/assets/images/common/ani_wave_blue.gif");
       }
     }
 

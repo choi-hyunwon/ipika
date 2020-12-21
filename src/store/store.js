@@ -48,10 +48,10 @@ export default new Vuex.Store({
       // 'user_auth_key': '',
       // 'Content_Language': '',
       // 'device_type': ''
-      'user_id': 'l23',
+      'user_id': '123',
       'user_auth_key': 'abcdefghijklmnopqrstuvwxyz0123456789',
       'Content_Language': 'ko',
-      'device_type': '1001'
+      'device_type': '123123123'
     },
     subject: {},
     userGallery: {},

@@ -30,7 +30,7 @@
       <Confirm v-slot="slotProps">
         <button @click="globalUtils.confirm(slotProps,'background')" class="btn-right" >
           <span class="img"><img src="@/assets/images/common/ic-img@2x.png" alt="" ></span>
-          <span class="tit">배경교재</span>
+          <span class="tit">배경선택</span>
         </button>
       </Confirm>
       <Confirm v-slot="slotProps" :complete-text="`파블로 서비스를 </br> 종료하시겠습니까?`" :cancelText="`아니요`" :okText="`네`">
