@@ -16,8 +16,8 @@
       <div class="content">
         <div class="symbol"><img src="@/assets/images/common/Symbol@2x.png" alt=""></div>
         <div class="text-area">
-          <p>Ai Art Tutor, PABLO</p>
-          <p>모든 학습의 기본 파블로<br>생각을 말하는 미술교육 서비스</p>
+          <p><img src="@/assets/images/temp/home-title@2x.png" width="1280"/></p>
+          <p>모든 학습의 기본 파블로<br>질문하고 대화하는 미술 교육 서비스</p>
         </div>
 
         <div class="btn-group">
@@ -109,6 +109,7 @@ export default {
     .text-area {
 
       text-align: center;
+      margin-bottom: 5.4rem;
 
       p:nth-child(1) {
         font-family: 'Inter';
@@ -131,9 +132,8 @@ export default {
     }
 
     .btn-group {
-      position: absolute;
-      top: 66rem;
-      left: 88rem;
+      text-align: center;
+      display: block;
     }
 
     .img {

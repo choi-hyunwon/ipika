@@ -1176,11 +1176,10 @@ export default {
 .vc-chrome {
   position: absolute;
   left: 169px;
-  top: 450px;
+  bottom: 150px;
   z-index: 200;
   &.colorPickerLetter {
     left: 10px;
-    top: 410px;
   }
 }
 

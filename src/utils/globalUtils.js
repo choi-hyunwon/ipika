@@ -24,7 +24,7 @@ export class GlobalUtils {
     // speechMsg.text = sText
     // window.speechSynthesis.speak(speechMsg)
     let options = {
-      speaker: 'nara',
+      speaker: 'njinho',
       volume: '0',
       speed: '0',
       pitch: '0',
