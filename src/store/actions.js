@@ -1,5 +1,4 @@
 import WebApi from '../api/webApi'
-import store from '../store/store'
 
 const webApi = new WebApi()
 
@@ -69,6 +68,12 @@ export const actions = {
   getLetter ({ commit }, options) {
     return webApi.getLetter(options)
       .then(data => {
+
+        data.canvasList = data.canvasList.sort(function (a, b) { // 오름차순
+          return a.createdDate > b.createdDate ? -1 : a.createdDate > b.createdDate ? 1 : 0
+        })
+
+
         commit('setLetter', data)
 
         /* TODO: API 조회 예외 처리 필요 */

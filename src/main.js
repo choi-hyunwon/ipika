@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import Router from 'vue-router';
+import Router from 'vue-router'
 import App from './App.vue'
 import { routes } from './router/index'
 import store from './store/store'
@@ -7,9 +7,8 @@ import { BootstrapVue } from 'bootstrap-vue'
 import { GlobalUtils } from './utils/globalUtils'
 import AudioRecorder from 'vue-audio-recorder'
 // import AudioVisual from 'vue-audio-visual'
-import {Android} from './assets/js/android'
+import { Android } from './assets/js/android'
 import VueProgress from 'vue-progress'
-
 
 Vue.config.productionTip = false
 
