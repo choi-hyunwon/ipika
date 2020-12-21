@@ -43,6 +43,8 @@ export default {
 .testinfo {
   position: relative;
   padding-top: 15.4rem;
+  height: calc(100% - 8rem);
+
 
   .symbol {
     text-align: center;

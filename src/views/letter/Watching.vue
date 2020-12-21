@@ -67,15 +67,15 @@ export default {
   }
   .dim {
     width: 100%;
-    height: calc(120rem - 12rem);
+    height: calc(120rem - 16rem);
     position: absolute;
-    top: 12rem;
+    top: 8rem;
     left: 0;
     background-color: rgba(20,20,20,.6);
     >.inner {
       position: relative;
       width: 100%;
-      height: calc(120rem - 12rem);
+      height: calc(120rem - 16rem);
       /*.video {
         position: relative;
         width: 100%;

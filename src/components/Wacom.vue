@@ -816,11 +816,12 @@ export default {
 <style scoped src="@/assets/css/Selection.css"></style>
 <style scoped src="@/assets/css/Footer.css"></style>
 <style lang="scss" scoped>
+
+
 .Wrapper {
   width: 100% !important;
   height: 108rem !important;
   position: absolute;
-  top: 80px;
 }
 .nav {
   > div {
@@ -1182,7 +1183,5 @@ export default {
     top: 410px;
   }
 }
-
-
 
 </style>
