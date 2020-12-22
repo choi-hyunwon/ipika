@@ -92,6 +92,12 @@ export default {
     })()
 
     if(this.page === '') this.$EventBus.$emit('showToolBar');
+    console.log('page',typeof this.page)
+
+    setTimeout(function () {
+      WILL.setBackground('paper_01')
+      console.log('WILL.setBackground')
+    },3000)
   },
   computed: {
     ...mapGetters({
@@ -222,10 +228,13 @@ export default {
       }else if(this.page==='letter'){
         this.bgPopup=false
         this.setBackgrounImage()
+      } else if(this.page===''){
+        WILL.setBackground('paper_01')
       }
     },
     toggleGuide(){
       this.bgPopup = !this.bgPopup;
+
       if(this.bgPopup===false&&this.page==='diagnose'){
         this.setTimerStart();
       }else if(this.page==='letter'){
