@@ -87,6 +87,7 @@ export default {
         val && this.pause()
       }
     })
+
   },
 
   mounted () {

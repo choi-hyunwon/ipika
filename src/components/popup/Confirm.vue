@@ -136,7 +136,7 @@ export default {
       this.$router.push('/PabloMain')
     },
     goBack () {
-      this.$EventBus.$emit('back')
+      this.$router.back();
     },
     goToNext () {
       this.showConfirm = false

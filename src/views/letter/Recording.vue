@@ -3,7 +3,7 @@
     <LetterHeader/>
     <div class="contents">
 
-
+      <progress-bar type="circle" ref="line" :options="options" :style="style"></progress-bar>
       <!-- 화면 좌측 상단 텍스트 영역 -->
       <div class="txt-area" v-if="page === 'free'">
         <p class="txt-lg">이 그림은 무엇을 표현했는지<br>
@@ -67,13 +67,16 @@
              pause : ing && !record
            }"
       >
+
+
         <audio ref="audioPlayer" src=""/>
 
         <!-- 재생 또는 재생 정지 버튼 -->
         <div v-if="audioEl"
              class="play-btns"
              @click="playOrPause"
-        />
+         />
+
 
         <!-- 녹음 시작 또는 녹음 중지 버튼 -->
         <audio-recorder
@@ -185,7 +188,21 @@ export default {
       isAudioSet: false,
 
       isExpired: false,
-      error: false
+      error: false,
+      completeStep : 0,
+      options : {
+        color : '#007AFF',
+        strokeWidth : 3,
+        duration : 2000
+      },
+      style : {
+        position : 'absolute',
+        backgroundColor : 'white'
+      },
+      svgStyle:{
+        display : 'block'
+      },
+      lineBar: null
     }
   },
   created () {
@@ -197,6 +214,8 @@ export default {
     })
   },
   mounted () {
+    this.lineBar = this.$refs.line
+    this.lineBar.animate(1.0)
     if (this.userAudio) {
       this.isExpired = true
       this.record = false
