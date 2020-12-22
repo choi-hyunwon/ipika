@@ -95,7 +95,8 @@
 
 <script>
 import Player from '@/components/letter/Player'
-import { mapGetters , mapMutations} from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
+
 export default {
   name: 'Alert',
   components : {Player},
@@ -149,7 +150,7 @@ export default {
     timeStart(){
       this.$EventBus.$emit('bgPopup')
       this.$refs['alertModal'].hide()
-      this.globalUtils.tts("파블로 캔버스 툴에 대해 간단하게 설명해드릴게요")
+      this.Android.tts("파블로 캔버스 툴에 대해 간단하게 설명해드릴게요")
     },
     setPlayerOptions(){
       this.setPlayerSize({width: 1065, height: 666})

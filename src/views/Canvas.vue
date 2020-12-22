@@ -299,13 +299,14 @@ export default {
 
       WILL.clear()
       this.$EventBus.$emit('setBg', this.canvasList[0] , false)
-      this.globalUtils.tts(this.canvasList[0].imageSubject)
+      this.Android.tts(this.canvasList[0].imageSubject)
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+
 .guide {
   position: absolute;
   width: 192rem;
@@ -324,4 +325,5 @@ export default {
   left: 0;
   z-index: 9999;
 }
+
 </style>

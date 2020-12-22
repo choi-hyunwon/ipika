@@ -23,14 +23,14 @@
       <!--영상보기-->
       <Alert v-slot="slotProps">
         <button @click="globalUtils.alert(slotProps,'video')" class="btn-right">
-          <span class="img"><img src="@/assets/images/common/ic-play@2x.png" alt=""></span>
+          <span class="img"><img src="@/assets/images/common/youtube.png" alt=""></span>
           <span class="tit">영상보기</span>
         </button>
       </Alert>
       <Confirm v-slot="slotProps">
         <button @click="globalUtils.confirm(slotProps,'background')" class="btn-right" >
           <span class="img"><img src="@/assets/images/common/ic-img@2x.png" alt="" ></span>
-          <span class="tit">배경교재</span>
+          <span class="tit">배경선택</span>
         </button>
       </Confirm>
       <Confirm v-slot="slotProps" :complete-text="`파블로 서비스를 </br> 종료하시겠습니까?`" :cancelText="`아니요`" :okText="`네`">
@@ -61,7 +61,7 @@ export default {
     })
   },
   mounted () {
-    // this.globalUtils.tts(this.bg.imageSubject)
+    // this.Android.tts(this.bg.imageSubject)
   },
   methods : {
     ...mapMutations({
@@ -82,8 +82,12 @@ export default {
   .btn-wrap {
     position: absolute;
     display: inline-block;
-    top: 3rem;
     left: 12rem;
+    padding-right: 2.8rem;
+    border-right: 0.1rem solid var(--ivory-500);
+    height: 100%;
+    padding-top: 1rem;
+
     button {
       display: inline-block;
       width: 12.7rem;
@@ -91,6 +95,7 @@ export default {
       img {
         width: 100%;
         height: 100%;
+
       }
       &:first-child {
         margin-right: 1.2rem;
@@ -98,14 +103,15 @@ export default {
     }
   }
   .title {
-    position: absolute;
-    top: 4rem;
-    left: 32.7rem;
+    position: relative;
+    top: 2rem;
+    left: 32.1rem;
     .img {
       width: 4rem;
       height: 4rem;
       display: inline-block;
       margin-right: 2.4rem;
+      position: absolute;
       img {
         width: 100%;
       }
@@ -116,6 +122,16 @@ export default {
       line-height: 4rem;
       text-align: left;
       color: var(--gray-black);
+      width: 100%;
+      position: absolute;
+      left: 6.4rem;
+    }
+  }
+  .flex-box{
+    .btn-right{
+      .img{
+        margin-right: 0.6rem;
+      }
     }
   }
 }

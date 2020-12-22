@@ -240,7 +240,7 @@ export default {
       this.setAudio()
     }
 
-    this.globalUtils.tts(this.letter.stepAudioMainText + this.letter.stepAudioSubText)
+    this.Android.tts(this.letter.stepAudioMainText + this.letter.stepAudioSubText)
 
     const self = this
     navigator.getUserMedia({
@@ -419,7 +419,7 @@ export default {
 .contents {
   position: relative;
   width: 100%;
-  height: calc(100% - 12rem);
+  height: calc(100% - 8rem);
 
   .txt-area {
     padding-top: 8rem;
@@ -463,11 +463,11 @@ export default {
       background-size: 100%;
 
       &.recording {
-        background-image: url("~@/assets/images/common/equalizer-red@2x.png");
+        background-image: url("~@/assets/images/common/ani_wave_red.gif");
       }
 
       &.playing {
-        background-image: url("~@/assets/images/common/equalizer-blue@2x.png");
+        background-image: url("~@/assets/images/common/ani_wave_blue.gif");
       }
     }
 

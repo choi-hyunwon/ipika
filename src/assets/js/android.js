@@ -8,6 +8,32 @@ export class Android {
   appExit(){
     window.android.exit();
   }
+
+  /**
+   * 안드로이드 로그 사용
+   */
+  setLog (data) {
+    var broadcastAction = "com.homelearn.xcaliper.web"
+    // var action = "AppEnded"
+    // var edApp = "Pablo"
+
+    try{
+      window.android.callBroadcast(broadcastAction, data)
+    } catch(error){
+      console.log('안드로이드 로그 에러')
+    }
+  }
+
+  tts(text){
+    try{
+      alert(text)
+      window.android.sendTTS(text)
+    } catch (e){
+      console.log(e)
+    }
+  }
+
+
   /**
    * 안드로이드 초기값 실행
    * @param data

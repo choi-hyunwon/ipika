@@ -1,7 +1,7 @@
 <template>
   <div class="wrap">
     <div class="header ivory bg-ivory d-flex">
-      <a href="#" @click="goBack" v-b-modal.goBackPopup class="symbol"><img src="@/assets/images/common/Symbol@2x.png"
+      <a href="#" v-b-modal.goBackPopup class="symbol"><img src="@/assets/images/common/Symbol@2x.png"
                                                                             alt=""></a>
       <div class="box-close">
         <Confirm v-slot="slotProps"
@@ -43,6 +43,8 @@ export default {
 .testinfo {
   position: relative;
   padding-top: 15.4rem;
+  height: calc(100% - 8rem);
+
 
   .symbol {
     text-align: center;

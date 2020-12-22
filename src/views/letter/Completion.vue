@@ -45,7 +45,7 @@ export default {
 <style lang="scss" scoped>
 .wrap {
   > .row {
-    height: calc(120rem - 12rem);
+    height: calc(120rem - 8rem);
   }
   .col {
     height: 100%;

@@ -45,6 +45,9 @@ export default {
 
 <style lang="scss" scoped>
 .header {
+  .btn-close{
+    height: 8rem;
+  }
   .btn-wrap {
     position: absolute;
     display: inline-block;

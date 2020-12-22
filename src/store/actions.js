@@ -89,6 +89,8 @@ export const actions = {
           sources: [{ src: data.stepVideoUrl }],
           Thumnail: data.stepVideoThumnailUrl
         })
+
+        return data
       })
   },
   getSubmission ({ commit }, options) {
@@ -118,5 +120,11 @@ export const actions = {
         return data
       })
   },
-
+  getClovaTTS ({ commit }, options) {
+    return webApi.getClovaTTS(options)
+      .then(data => {
+        console.log('getClovaTTS')
+        return data
+      })
+  }
 }

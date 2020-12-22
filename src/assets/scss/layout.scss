@@ -3,16 +3,18 @@
 .wrap {
   position: relative;
   width: 192rem;
-  height: 120rem;
+  height: 112.4rem;
   margin: 0 auto;
   overflow: hidden;
 }
 
 .header {
+  background-color: var(--ivory-200);
   position: relative;
   width: 100%;
-  height: 12rem;
-  border-bottom: 1px solid var(--gray-800);
+  height: 8rem;
+  border-bottom:0.1rem solid  var(--ivory-500);
+
   .gallery-title {
     display: flex;
     margin: 0 auto;
@@ -27,32 +29,37 @@
     width: 4rem;
     height: 4rem;
     left: 4rem;
-    top: 4rem;
+    top: 2rem;
     img {
       width: 100%;
       height: 100%;
     }
   }
   .flex-box {
-    display: flex;
-    flex-grow: 1;
-    align-items: center;
-    justify-content: flex-end;
+    z-index: 100;
+    position: absolute;
+    top: 0;
+    right: 0;
+    > div {
+      float: left;
+    }
     .box-close {
       position: initial;
+      cursor:pointer;
     }
   }
   .btn-right {
     width: 16.3rem;
-    height: 12rem;
-    line-height: 12rem;
+    height: 8rem;
+    line-height: 8rem;
     text-align: center;
-    border-left: 1px solid var(--ivory-500);
+    border-left: 0.1rem solid var(--ivory-500);
     .img {
       display: inline-block;
       width: 2rem;
       height: 2rem;
       vertical-align: middle;
+      margin-right: 0.6rem;
       img {
         display: block;
         width: 100%;
@@ -72,16 +79,16 @@
   .box-close {
     position: absolute;
     width: 11.8rem;
-    height: 11.8rem;
+    height: 8rem;
     top: 0;
     right: 0;
-    border-left: 1px solid var(--gray-800);
+    border-left: 0.1rem solid var(--ivory-500);
     .btn-close {
       display: block;
       width: 11.8rem;
-      height: 11.8rem;
+      height: 8rem;
       text-align: center;
-      padding-top: 3.8rem;
+      padding-top: 2rem;
       img {
         width: 4rem;
         height: 4rem;
@@ -90,10 +97,11 @@
   }
   &.canvas {
     .timer {
-      width: 21.4rem;
+      width: 28.7rem;
       height: 100%;
-      border-right: 1px solid var(--gray-black);
-      padding: 4rem 0 0 4rem;
+      border-right: 0.1rem solid  var(--ivory-500);
+      padding: 2rem 0 0 7.6rem;
+
       .img {
         display: inline-block;
         width: 4rem;
@@ -120,8 +128,8 @@
     }
     .symbol {
       position: absolute;
-      left: 25.4rem;
-      top: 4rem;
+      left: 32.2rem;
+      top: 2rem;
       width: calc(100% - 40rem);
       height: auto;
       .img {
@@ -142,21 +150,21 @@
     }
   }
   &.ivory {
-    border-bottom: 1px solid var(--ivory-500);
+    border-bottom: 0.1rem solid var(--ivory-500);
     .box-close {
-      border-left: 1px solid var(--ivory-500);
+      border-left: 0.1rem solid var(--ivory-500);
     }
   }
 }
 
 .contents {
-  height: calc(100% - 12rem);
+  height: calc(100% - 8rem);
   overflow-y : auto;
   overflow-x : hidden;
   &.no_scroll {
     overflow: visible;
     position: relative;
-    height: calc(100% - 12rem);
+    height: calc(100% - 8rem);
   }
   .nav-link {
     color: var(--gray-500);

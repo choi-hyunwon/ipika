@@ -161,7 +161,7 @@ export default {
           .btn-pause, .btn-play {
             width: 12rem;
             height: 12rem;
-            margin-right: 6.4rem;
+            margin: 0  3.2rem;
           }
           img {
             width: 100%;

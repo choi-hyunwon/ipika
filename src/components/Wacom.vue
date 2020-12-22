@@ -69,7 +69,10 @@
               <button class="color" style="background-color: #8551d3"
                       @click="setColorSelect"
               ></button>
-              <button class="color selected" style="background-color: #444444"
+              <button class="color selected" style="background-color: #FFFFFF"
+                      @click="setColorSelect"
+              ></button>
+              <button class="color" style="background-color: #000000"
                       @click="setColorSelect"
               ></button>
               <button v-if="page==='diagnose' || page===undefined" class="color colorpicker"
@@ -816,11 +819,12 @@ export default {
 <style scoped src="@/assets/css/Selection.css"></style>
 <style scoped src="@/assets/css/Footer.css"></style>
 <style lang="scss" scoped>
+
+
 .Wrapper {
   width: 100% !important;
   height: 108rem !important;
   position: absolute;
-  top: 80px;
 }
 .nav {
   > div {
@@ -1175,14 +1179,11 @@ export default {
 .vc-chrome {
   position: absolute;
   left: 169px;
-  top: 450px;
+  bottom: 150px;
   z-index: 200;
   &.colorPickerLetter {
     left: 10px;
-    top: 410px;
   }
 }
-
-
 
 </style>

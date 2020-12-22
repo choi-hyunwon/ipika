@@ -184,16 +184,16 @@ export default {
       //값 없을 경우
       if (this.list.length === 0)
         return false;
-      //select value에 따른 처리
-      if (value === 1){
+      if (value == 1){
         this.list.sort(function(a, b) { // 오름차순
-          return a.createdDate > b.createdDate ? -1 : a.createdDate > b.createdDate ? 1 : 0;
-        });
-      } else if (value === 2){
+          return a.createdDate > b.createdDate ? -1 : a.createdDate < b.createdDate ? 1 : 0
+        })
+      } else if (value == 2){
         this.list.sort(function(a, b) { // 오름차순
-          return a.createdDate < b.createdDate ? -1 : a.createdDate > b.createdDate ? 1 : 0;
-        });
+          return a.createdDate < b.createdDate ? -1 : a.createdDate > b.createdDate ? 1 : 0
+        })
       }
+
     },
     getURL(item){
       return 'MyGalleryDetail?' +'pictureId=' + item.pictureId
