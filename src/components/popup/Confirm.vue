@@ -76,7 +76,7 @@ export default {
       type : "",
       timeOut : {
         completeText : '',
-        cancelText : '다시그리기',
+        cancelText : '다시 그리기',
         okText : '제출하기'
       }
     }
