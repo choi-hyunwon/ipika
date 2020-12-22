@@ -39,7 +39,7 @@
           </Confirm>
 
 
-          <swiper class="swiper" :options="swiperOption" >
+          <swiper class="swiper" refs="swiper" :options="swiperOption" >
             <swiper-slide v-for="(menu,i) in mainMenuList">
               <div class="img"><img :src=menu.imgUrl alt=""></div>
             </swiper-slide>
@@ -70,6 +70,7 @@ export default {
     SwiperSlide
   },
   data () {
+    const self = this
     return {
       message: false,
       slider: false,
@@ -78,12 +79,23 @@ export default {
       mainMenuList: [],
       isActiveMenuList: [111, 113, 115, 116],
       swiperOption: {
-        direction: 'vertical',
+        notNextTick: true,
+        loop: true,
+        initialSlide: 0,
+        autoplay: {
+          delay: 1500,
+          disableOnInteraction: true
+        },
+        speed: 800,
+        grabCursor: true,
         height : 750,
         pagination: {
           el: '.swiper-pagination'
         },
         on: {
+          init: (swiper)=>{
+            console.log(swiper)
+          },
           slideChange: (swiper) => {
             console.log('slideChange',swiper.realIndex)
             let nIdx = swiper.realIndex

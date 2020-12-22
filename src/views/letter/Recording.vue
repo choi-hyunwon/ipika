@@ -106,7 +106,7 @@
         <!--        <button class="btn btn-dark" @click="$router.push('/Listening')">건너뛰기</button>-->
         <div v-if="page==='free'">
           <button @click="fetchRecordingFree" class="btn btn-dark"
-                  style="width: 16rem; height: 8rem; text-align:center;">완료</button>
+                  style="width: 16rem; height: 8rem; text-align:center;"><img src="@/assets/images/common/next_nor@2x.png" style="width: 5rem"></button>
         </div>
         <div v-else>
           <button v-if="!record" @click="fetchRecording" class="btn btn-dark"

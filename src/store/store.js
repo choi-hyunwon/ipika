@@ -44,14 +44,16 @@ export default new Vuex.Store({
      */
 
     session: {
-      'user_id': '',
-      'user_auth_key': '',
-      'Content_Language': '',
-      'device_type': ''
-      // 'user_id': 'test11',
-      // 'user_auth_key': 'abcdefghijklmnopqrstuvwxyz0123456789',
-      // 'Content_Language': 'ko',
-      // 'device_type': '1001'
+      // 'name': '',
+      // 'user_id': '',
+      // 'user_auth_key': '',
+      // 'Content_Language': '',
+      // 'device_type': ''
+      'name': '홈런초등테스트',
+      'user_id': 'test111111711',
+      'user_auth_key': 'abcdefghijklmnopqrstuvwxyz0123456789',
+      'Content_Language': 'ko',
+      'device_type': '1001'
     },
     subject: {},
     userGallery: {},

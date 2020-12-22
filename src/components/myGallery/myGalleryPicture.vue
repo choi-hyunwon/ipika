@@ -47,7 +47,8 @@
                 <!--                  <img src="@/assets/images/common/share.png" alt="다운로드" class="img-m" v-b-modal.normalPopup1>-->
               </div>
             </div>
-            <div class="img_title">{{ item.stageName || '프리드로잉' }} {{ item.stageId || '' }}</div>
+<!--            <div class="img_title">{{ item.stageName || '프리드로잉' }} {{ item.stageId || '' }}</div>-->
+            <div class="img_title">{{ item.createdDate.slice(0, 10).replaceAll('-','.') }}</div>
             <div class="img_desc">{{ item.title || '제목이 없어요' }}</div>
             <button class="icon_delete" @click="openDelete(item.pictureId, index)"><img
               src="@/assets/images/common/btn_delete@2x.png" alt="" class="img-m"></button>
@@ -67,12 +68,10 @@
       <template #modal-header>
         <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>
       </template>
-      <p class="text" style="margin-bottom: 12px;">완전히 삭제하시겠어요?
-        <br>그림과 녹음 모두 삭제돼요</p>
-      <p class="text-sm">삭제한 그림과 녹음은 복구할 수 없어요</p>
+      <p class="text" style="margin-bottom: 12px;">완전히 삭제하시겠어요? <br data-v-88baf8f6="">삭제한 그림은<br data-v-88baf8f6="">복구할 수 없어요!</p>
       <template #modal-footer="{ cancel }">
-        <b-button variant="gray" class="btn-half" @click="deletePicture()">삭제하기</b-button>
-        <b-button class="btn btn-black  btn-half" @click="cancel()">닫기</b-button>
+        <b-button variant="gray" class="btn-half" @click="cancel()">아니요</b-button>
+        <b-button class="btn btn-black  btn-half" @click="deletePicture()">네</b-button>
       </template>
     </b-modal>
 
@@ -228,12 +227,16 @@ export default {
               .then(data => {
                 console.log('getUserGalleryMypictureVue', data.pictures)
                 self.list = data.pictures
+                self.allSize();
               })
 
           } else {
             alert(result.message)
           }
         })
+    },
+    dateSlice (date) {
+      return date.slice(0, 10)
     }
   }
 }

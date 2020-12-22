@@ -51,7 +51,8 @@
               <img src="@/assets/images/common/pause_dim@2x.png" v-else-if="focusIdx===index" alt="정지화면" class="img-m">
             </div>
             <div class="box_title">
-              <div class="img_title">{{ item.stageName || '스테이지' }} {{ item.stageId || '단계' }}</div>
+<!--              <div class="img_title">{{ item.stageName || '스테이지' }} {{ item.stageId || '단계' }}</div>-->
+              <div class="img_title">{{ item.createdDate.slice(0, 10).replaceAll('-','.') }}</div>
               <div class="img_desc">{{ item.title || '제목을 불러 올수 없습니다' }}</div>
             </div>
             <button class="icon_delete" @click="openDelete(item.userAudioId, index)"><img src="@/assets/images/common/btn_delete@2x.png" alt="" class="img-m"></button>
@@ -70,11 +71,10 @@
         <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>
       </template>
       <p class="text" style="margin-bottom: 12px;">완전히 삭제하시겠어요?
-        <br>그림과 녹음 모두 삭제돼요</p>
-      <p class="text-sm">삭제한 그림과 녹음은 복구할 수 없어요</p>
+        <br>삭제한 녹음 파일은<br>복구할 수 없어요!</p>
       <template #modal-footer="{ cancel }">
-        <b-button variant="gray" class="btn-half" @click="deleteAudio()">삭제하기</b-button>
-        <b-button class="btn btn-black  btn-half" @click="cancel()">닫기</b-button>
+        <b-button variant="gray" class="btn-half" @click="cancel()">아니요</b-button>
+        <b-button class="btn btn-black  btn-half" @click="deleteAudio()">네</b-button>
       </template>
     </b-modal>
 
@@ -251,6 +251,7 @@ export default {
               .then(data => {
                 console.log('getUserGalleryMypictureVue', data.audios)
                 self.list = data.audios
+                self.allSize();
               })
           } else alert(result.message)
         })
