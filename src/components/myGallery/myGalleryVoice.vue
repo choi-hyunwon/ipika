@@ -73,8 +73,8 @@
       <p class="text" style="margin-bottom: 12px;">완전히 삭제하시겠어요?
         <br>삭제한 녹음 파일은<br>복구할 수 없어요!</p>
       <template #modal-footer="{ cancel }">
-        <b-button variant="gray" class="btn-half" @click="deleteAudio()">삭제하기</b-button>
-        <b-button class="btn btn-black  btn-half" @click="cancel()">닫기</b-button>
+        <b-button variant="gray" class="btn-half" @click="cancel()">아니요</b-button>
+        <b-button class="btn btn-black  btn-half" @click="deleteAudio()">네</b-button>
       </template>
     </b-modal>
 
