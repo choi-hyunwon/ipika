@@ -43,7 +43,7 @@
             <div class="gallery_img size-img">
               <a href="#"  @click="onToggle(index)"></a>
               <transition name="fade">
-              <div class="play_bar" id="play_bar" :class="{'active' : wide}"></div>
+              <div class="play_bar" :id="playBar(index)" ></div>
               </transition>
             </div>
             <div class="play_icon">
@@ -99,7 +99,6 @@ export default {
       nSize : [0,0,0],
       isPlay : false,
       play : false,
-      wide : false,
       filter: [
         {
           'title': 'ALL',
@@ -152,6 +151,7 @@ export default {
         return this.empty
       }
     },
+
   },
   methods: {
     ...mapActions({
@@ -215,21 +215,22 @@ export default {
         this.focusIdx = index
         this.audio = new Audio(this.list[index].audioUrl)
       }
-      let elementById = document.getElementById("play_bar")
+      let elementById = document.getElementById("play_bar" + index)
+      console.log(elementById)
       if(!this.play){
         this.audio.play()
         this.play = true
-        this.wide = true
+        elementById.classList.add('active')
         elementById.style.transitionDuration = this.list[index].audioPlaytime + "s";
         this.audio.onended = ()=>{
           this.play=false
-          this.wide = false
+          elementById.classList.remove('active')
           elementById.style.transitionDuration = "0s";
         }
       }else{
         this.audio.pause()
         this.play = false
-        this.wide = false
+        elementById.classList.remove('active')
         elementById.style.transitionDuration = "0s";
       }
     },
@@ -247,6 +248,10 @@ export default {
             self.$refs.deleteComfirm.showAlert = true
             self.$refs.deleteComfirm.type = 'common'
             self.getUserGalleryMypicture()
+              .then(data => {
+                console.log('getUserGalleryMypictureVue', data.audios)
+                self.list = data.audios
+              })
           } else alert(result.message)
         })
     },
@@ -270,8 +275,10 @@ export default {
         min = min.toString()
       }
       return min + ':' + sec
+    },
+    playBar (index) {
+      return 'play_bar'+index;
     }
-
   }
 }
 
@@ -328,6 +335,7 @@ export default {
       padding: 1.6rem 2rem;
       height: 6.8rem;
       line-height: 2rem;
+      font-size: 2rem;
 
       img {
         width: 2rem;
@@ -605,7 +613,7 @@ export default {
     .emptyList {
       margin: 20rem auto 3.2rem;
       font-family: 'NotoSansCJKKR';
-      font-size: 4rem;
+      font-size: 3rem;
       font-weight: bold;
       line-height: 5.6rem;
       letter-spacing: -0.03rem;

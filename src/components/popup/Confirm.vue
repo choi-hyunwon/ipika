@@ -173,7 +173,6 @@ export default {
 
         if(this.canvasList.length > 1) {
           WILL.clear()
-
           this.canvasList = this.canvasList.splice(0,1)
 
 

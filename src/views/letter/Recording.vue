@@ -3,7 +3,7 @@
     <LetterHeader/>
     <div class="contents">
 
-      <progress-bar type="circle" ref="line" :options="options" :style="style"></progress-bar>
+<!--      <progress-bar type="circle" ref="line" :options="options" :style="style"></progress-bar>-->
       <!-- 화면 좌측 상단 텍스트 영역 -->
       <div class="txt-area" v-if="page === 'free'">
         <p class="txt-lg">이 그림은 무엇을 표현했는지<br>
@@ -356,7 +356,7 @@ export default {
       if (!this.file.blob) {
         this.$bvModal.show('submissionFree')
       } else {
-        this.saveFile(URL.createObjectURL(this.file.blob))
+        // this.saveFile(URL.createObjectURL(this.file.blob))
 
         const data = new FormData()
         data.append('title', this.freeTitle)
