@@ -34,7 +34,7 @@ export default {
     return {
       toggleButton: false,
       audio: null,
-      audioDuration: null,
+      audioDuraion: null,
       completeStep: 0,
       options: {
         color: '#007AFF',
@@ -49,15 +49,13 @@ export default {
       },
       lineBar: null,
       isPause : false,
-      realTime : 0,
     }
   },
   created () {
     this.audio = new Audio(this.audioList[this.focusIdx].recordingAudioUrl)
-    this.options.duration = this.audioList[this.focusIdx].audioPlaytime*1000
+    this.options.duration = this.audioList[this.focusIdx].audioPlaytime *1000
   },
   mounted () {
-    console.error(this.audio)
     this.lineBar = this.$refs.listenProgress
     this.play()
     // this.lineBar.animate(1.0)
@@ -71,7 +69,10 @@ export default {
   computed: {
     ...mapGetters({
       audioList: 'getLetterAudioList',
-    })
+    }),
+    audioTime(){
+      return this.audio.duration
+    }
   },
   props: {
     playerInfo: {
@@ -93,45 +94,20 @@ export default {
       this.$EventBus.$emit('toggle')
     },
     play () {
-      this.realTime = Math.floor(this.audio.duration*1000) - this.options.duration
-      console.log(this.audio.duration)
-      // console.log('audioDuration : '+Math.floor(this.audio.duration*1000))
       if (!this.toggleButton) {
-        if(this.isPause){
-          console.log('resume')
-          this.lineBar.animate(1+this.lineBar.value())
-          console.log(this.lineBar.value())
-          this.audio.play()
-          this.toggleButton = true
-          return
-        }
-        console.log(this.audioDuration)
         this.audio.play()
-        setTimeout(()=>{
-          this.lineBar.animate(1)
-        }, this.realTime)
-        this.lineBar.animate(1)
-        this.toggleButton = true
+        this.lineBar.animate(this.isPause? 1 + this.lineBar.value() : 1)
         this.audio.onended = () => {
-
-          // console.log(this.lineBar.value())
           this.toggleButton = false
           this.isPause=false
           this.lineBar.set(0)
         }
       }else {
-        // console.log(this.audio.duration)
-        // console.log(this.lineBar.value())
-        this.toggleButton = false
-        console.log('lineBar Stop')
-
         this.lineBar.stop()
         this.audio.pause()
         this.isPause=true
       }
-    },
-    test() {
-      return this.lineBar.value()
+      this.toggleButton = !this.toggleButton
     }
   }
 }

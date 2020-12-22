@@ -192,12 +192,15 @@ export default {
       completeStep : 0,
       options : {
         color : 'red',
-        strokeWidth : 3,
-        duration : 20000,
+        strokeWidth : 6,
+        duration : 60000,
       },
       style : {
         position : 'absolute',
-        backgroundColor : 'white'
+        backgroundColor : 'transparent',
+        bottom : '10.9rem',
+        left:'10.3rem',
+        width:'11.4rem'
       },
       svgStyle:{
         display : 'block'
@@ -413,32 +416,24 @@ export default {
       }
     },
     playOrPause () {
+      this.setProgressColor()
       if (!this.record) {
-
-        // !this.ing ? this.audioEl.play() : this.audioEl.pause()
         if(!this.ing){
-          if(this.isPause){
-            console.log('resume')
-            this.lineBar.animate(2)
-            this.audioEl.play()
-            this.ing = true
-          }
+
           this.audioEl.play()
-          this.lineBar.animate(1.0,{duration : this.audioEl.duration*1000})
+          this.lineBar.animate(this.isPause? 1+this.lineBar.value() : 1.0,{duration : this.audioEl.duration*1000})
           this.ing = true
           this.audioEl.onended=()=>{
             this.ing = false
             this.isPause=false
             this.lineBar.set(0)
           }
-
         }else{
           this.ing= false
           this.lineBar.stop()
           this.audioEl.pause()
           this.isPause= true;
         }
-        // this.ing = !this.ing
       }
     },
     setProgressColor(){
@@ -447,18 +442,14 @@ export default {
         svgPath = svgPath[0].getElementsByTagName('path')
         svgPath = svgPath[1]
         svgPath.setAttribute('stroke','#007AFF')
-        console.log(svgPath)
       }else{
-        console.log(this.record)
         svgPath =document.body.getElementsByTagName('svg')
         svgPath = svgPath[0].getElementsByTagName('path')
         svgPath = svgPath[1]
         svgPath.setAttribute('stroke','red')
-        console.log(svgPath)
       }
-    },
-    setProgressDuration(){
-
+    },setAnimate(){
+      return this.lineBar.animate(2.0)
     }
   }
 }
@@ -469,25 +460,10 @@ export default {
   position: relative;
   width: 100%;
   height: calc(100% - 8rem);
-
-  svg {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    stroke: #fff;
-    width: 100px;
-    height: 100px;
-    background-color: #5967D8;
-    border-radius: 100%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-  }
-
   .txt-area {
     padding-top: 8rem;
     padding-left: 10rem;
     margin-bottom: 55.2rem;
-
     .txt-lg {
       font-family: var(--bold);
       font-size: 4rem;
@@ -496,7 +472,6 @@ export default {
       letter-spacing: -0.03rem;
       margin-bottom: 1.2rem;
     }
-
     .txt-sm {
       font-size: 3.2rem;
       line-height: 4.8rem;
@@ -504,97 +479,75 @@ export default {
       color: var(--gray-black);
     }
   }
-
   .record-area {
     position: absolute;
     width: 100%;
     height: 27.1rem;
     background-color: var(--ivory-200);
     top: 53.2rem;
-
     &.equalizing {
       top: 40.2rem;
     }
-
     .equalizer {
       width: 100%;
       height: 27.1rem;
-
       background-repeat: no-repeat;
       background-position: center;
       background-size: 100%;
-
       &.recording {
         background-image: url("~@/assets/images/common/ani_wave_red.gif");
       }
-
       &.playing {
         background-image: url("~@/assets/images/common/ani_wave_blue.gif");
       }
     }
-
   }
-
   .play-area {
     position: absolute;
-    bottom: 10.3rem;
+    bottom: 10.9rem;
     left: 10.3rem;
-
     button {
       display: inline-block;
       width: 12rem;
       height: 12rem;
       margin-left: 14.1rem;
-
       img {
         width: 100%;
         height: 100%;
-
       }
-
     }
   }
-
   .btn-area {
     position: absolute;
     bottom: 10rem;
     right: 10rem;
-
     .btn {
       margin-left: 10px;
     }
   }
 }
-
 ::v-deep .ar {
   width: 11.4rem;
   background-color: transparent;
   box-shadow: unset;
-
   .ar-records {
     display: none;
   }
-
   .ar-player {
     .ar-player-bar {
       display: none;
     }
   }
-
   .ar-recorder__duration {
     display: none;
   }
-
   .ar-recorder__time-limit {
     display: none;
   }
-
   .ar-content {
     padding: 0;
   }
-
   .ar-icon {
-
     width: 11.4rem;
     height: 11.4rem;
     box-shadow: unset;
@@ -603,11 +556,9 @@ export default {
     background-repeat: no-repeat;
     background-position: center;
     background-size: 50%;
-
     > svg {
       //display: none;
     }
-
     &.ar-icon__sm {
       &.ar-recorder__stop {
         position: unset;
@@ -617,7 +568,6 @@ export default {
     }
   }
 }
-
 /* 음성 녹음 아이콘 */
 .mic {
   ::v-deep.ar {
@@ -627,30 +577,25 @@ export default {
           background-color: #2fca56;
           background-image: url("~@/assets/images/common/record@2x.png");
           background-size: 4rem;
-
           > svg {
             display: none;
           }
         }
-
         &.ar-icon__sm.ar-recorder__stop {
           display: none;
         }
       }
     }
-
     .ar-player {
       .ar-player-actions {
         display: none;
       }
     }
   }
-
   .play-btns {
     display: none;
   }
 }
-
 /* 녹음 정지 아이콘 */
 .stop {
   ::v-deep.ar {
@@ -659,30 +604,24 @@ export default {
         &.ar-icon__lg.ar-icon--rec {
           display: none;
         }
-
         &.ar-icon__sm.ar-recorder__stop {
           background-image: url("~@/assets/images/common/freeze@2x.png");
-          border: 5px solid red;
-
           > svg {
             display: none;
           }
         }
       }
     }
-
     .ar-player {
       .ar-player-actions {
         display: none;
       }
     }
   }
-
   .play-btns {
     display: none;
   }
 }
-
 /* 녹음 재생 아이콘 */
 .play {
   ::v-deep.ar {
@@ -691,13 +630,11 @@ export default {
         &.ar-icon__lg {
           display: none;
         }
-
         &.ar-icon__sm.ar-recorder__stop {
           display: none;
         }
       }
     }
-
     .ar-player {
       .ar-icon.ar-icon__lg.ar-player__play {
         display: none;
@@ -705,7 +642,6 @@ export default {
     }
   }
 }
-
 /* 재생 정지 아이콘 */
 .pause {
   ::v-deep.ar {
@@ -714,13 +650,11 @@ export default {
         &.ar-icon__lg {
           display: none;
         }
-
         &.ar-icon__sm.ar-recorder__stop {
           display: none;
         }
       }
     }
-
     .ar-player {
       .ar-icon.ar-icon__lg.ar-player__play.ar-player__play--active {
         display: none;
@@ -728,19 +662,15 @@ export default {
     }
   }
 }
-
-
 ::v-deep ._audio {
   & audio {
     display: none;
   }
 }
-
 .play-area {
-  width: 12rem;
-  height: 12rem;
+  width: 11.4rem;
+  height: 11.4rem;
   border-radius: 6rem;
-
   &.play {
     cursor: pointer;
     background-color: #1585ff;
@@ -748,9 +678,7 @@ export default {
     background-repeat: no-repeat;
     background-position: center;
     background-size: 3.24rem;
-
   }
-
   &.pause {
     cursor: pointer;
     background-color: transparent !important;
@@ -758,21 +686,15 @@ export default {
     background-repeat: no-repeat;
     background-position: center;
     background-size: 3.2rem;
-
-
-
-
     & .play-btns {
-      border: 5px solid #1585ff;
+      //border: 5px solid #1585ff;
     }
-
     ::v-deep.ar {
       & #play > svg {
         display: none;
       }
     }
   }
-
   & .play-btns {
     width: 100%;
     height: 100%;
