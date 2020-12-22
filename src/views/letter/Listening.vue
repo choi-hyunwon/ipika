@@ -25,7 +25,7 @@
         <button v-if="position<=this.maximumLength" class="swipe"><img src="@/assets/images/common/swipe_right_active@2x.png" alt="" @click="moveRight"></button>
         <button v-if="position>this.maximumLength" class="swipe"><img src="@/assets/images/common/swipe_right_default@2x.png" alt=""></button>
       </div>
-      <div class="btn-wrap"><router-link to="/canvas?page=letter" class="btn btn-dark" :class="{'disabled':submit===false}">다 들었어요!</router-link></div>
+      <div class="btn-wrap"><router-link to="/canvas?page=letter" class="btn btn-dark" :class="{'disabled':submit===false}"><img src="@/assets/images/common/next_nor@2x.png" style="width: 5rem"></router-link></div>
       <!--      <div class="btn-wrap"><button class="btn btn-dark ">다 들었어요!</button></div>-->
     </div>
     <ListeningPlay v-if="play" :focusIdx="focusIdx"/>

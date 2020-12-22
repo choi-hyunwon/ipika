@@ -16,7 +16,7 @@
       <div class="content">
         <div class="symbol"><img src="@/assets/images/common/Symbol@2x.png" alt=""></div>
         <div class="text-area">
-          <p><img src="@/assets/images/temp/home-title@2x.png" width="1280"/></p>
+          <p><img src="@/assets/images/temp/home-title@2x.png" style="width: 128rem"/></p>
           <p>모든 학습의 기본 파블로<br>질문하고 대화하는 미술 교육 서비스</p>
         </div>
 

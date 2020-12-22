@@ -69,13 +69,14 @@
               <button class="color" style="background-color: #8551d3"
                       @click="setColorSelect"
               ></button>
-              <button class="color selected" style="background-color: #FFFFFF"
+              <button v-if="page==='letter'" class="color" style="background-color: #FFFFFF"
                       @click="setColorSelect"
               ></button>
-              <button class="color" style="background-color: #000000"
+
+              <button class="color selected" style="background-color: #000000"
                       @click="setColorSelect"
               ></button>
-              <button v-if="page==='diagnose' || page===undefined" class="color colorpicker"
+              <button v-if="page==='diagnose' || page===undefined" class="color colorpicker selected"
                       @click='setColorSelect($event); isPickerOpen()'
                       v-bind:style="{ background: colors.hex }"
               ><img src="@/assets/images/common/ico_colorpicker.png" width="100%"></button>
@@ -841,7 +842,7 @@ export default {
     border: solid 1px var(--ivory-500);
     background-color: var(--ivory-200);
     left: 4.8rem;
-    bottom: 4.8rem;
+    bottom: 0;
     transform: translateY(0px);
     transition: transform 0.5s;
     .inner {
@@ -1152,7 +1153,7 @@ export default {
 
   &.hide {
     transition: transform 0.5s;
-    transform: translateY(176px);
+    transform: translateY(147px);
     .btn-drawer {
       position: absolute;
       width: 12rem;

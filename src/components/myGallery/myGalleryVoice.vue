@@ -43,7 +43,7 @@
             <div class="gallery_img size-img">
               <a href="#"  @click="onToggle(index)"></a>
               <transition name="fade">
-              <div class="play_bar" id="play_bar" :class="{'active' : wide}"></div>
+              <div class="play_bar" :id="playBar(index)" ></div>
               </transition>
             </div>
             <div class="play_icon">
@@ -51,7 +51,8 @@
               <img src="@/assets/images/common/pause_dim@2x.png" v-else-if="focusIdx===index" alt="정지화면" class="img-m">
             </div>
             <div class="box_title">
-              <div class="img_title">{{ item.stageName || '스테이지' }} {{ item.stageId || '단계' }}</div>
+<!--              <div class="img_title">{{ item.stageName || '스테이지' }} {{ item.stageId || '단계' }}</div>-->
+              <div class="img_title">{{ item.createdDate.slice(0, 10).replaceAll('-','.') }}</div>
               <div class="img_desc">{{ item.title || '제목을 불러 올수 없습니다' }}</div>
             </div>
             <button class="icon_delete" @click="openDelete(item.userAudioId, index)"><img src="@/assets/images/common/btn_delete@2x.png" alt="" class="img-m"></button>
@@ -70,11 +71,10 @@
         <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>
       </template>
       <p class="text" style="margin-bottom: 12px;">완전히 삭제하시겠어요?
-        <br>그림과 녹음 모두 삭제돼요</p>
-      <p class="text-sm">삭제한 그림과 녹음은 복구할 수 없어요</p>
+        <br>삭제한 녹음 파일은<br>복구할 수 없어요!</p>
       <template #modal-footer="{ cancel }">
-        <b-button variant="gray" class="btn-half" @click="deleteAudio()">삭제하기</b-button>
-        <b-button class="btn btn-black  btn-half" @click="cancel()">닫기</b-button>
+        <b-button variant="gray" class="btn-half" @click="cancel()">아니요</b-button>
+        <b-button class="btn btn-black  btn-half" @click="deleteAudio()">네</b-button>
       </template>
     </b-modal>
 
@@ -99,7 +99,6 @@ export default {
       nSize : [0,0,0],
       isPlay : false,
       play : false,
-      wide : false,
       filter: [
         {
           'title': 'ALL',
@@ -152,6 +151,7 @@ export default {
         return this.empty
       }
     },
+
   },
   methods: {
     ...mapActions({
@@ -215,21 +215,22 @@ export default {
         this.focusIdx = index
         this.audio = new Audio(this.list[index].audioUrl)
       }
-      let elementById = document.getElementById("play_bar")
+      let elementById = document.getElementById("play_bar" + index)
+      console.log(elementById)
       if(!this.play){
         this.audio.play()
         this.play = true
-        this.wide = true
+        elementById.classList.add('active')
         elementById.style.transitionDuration = this.list[index].audioPlaytime + "s";
         this.audio.onended = ()=>{
           this.play=false
-          this.wide = false
+          elementById.classList.remove('active')
           elementById.style.transitionDuration = "0s";
         }
       }else{
         this.audio.pause()
         this.play = false
-        this.wide = false
+        elementById.classList.remove('active')
         elementById.style.transitionDuration = "0s";
       }
     },
@@ -247,6 +248,11 @@ export default {
             self.$refs.deleteComfirm.showAlert = true
             self.$refs.deleteComfirm.type = 'common'
             self.getUserGalleryMypicture()
+              .then(data => {
+                console.log('getUserGalleryMypictureVue', data.audios)
+                self.list = data.audios
+                self.allSize();
+              })
           } else alert(result.message)
         })
     },
@@ -270,8 +276,10 @@ export default {
         min = min.toString()
       }
       return min + ':' + sec
+    },
+    playBar (index) {
+      return 'play_bar'+index;
     }
-
   }
 }
 
@@ -328,6 +336,7 @@ export default {
       padding: 1.6rem 2rem;
       height: 6.8rem;
       line-height: 2rem;
+      font-size: 2rem;
 
       img {
         width: 2rem;
@@ -605,7 +614,7 @@ export default {
     .emptyList {
       margin: 20rem auto 3.2rem;
       font-family: 'NotoSansCJKKR';
-      font-size: 4rem;
+      font-size: 3rem;
       font-weight: bold;
       line-height: 5.6rem;
       letter-spacing: -0.03rem;
