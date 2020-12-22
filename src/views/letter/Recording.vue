@@ -217,7 +217,7 @@ export default {
     // TODO:임시 주석처리
     // this.lineBar.animate(1.0)
 
-    if (this.userAudio) {
+    if (this.page !== 'free' && this.userAudio) {
       this.record = false
 
       this.audioSource = this.userAudio.audioUrl
@@ -275,7 +275,11 @@ export default {
       this.$router.go(-1)
     },
     goNext () {
-      this.$router.push('/Listening')
+      if(this.page === 'free') {
+        this.$bvModal.show('submissionFree')
+      } else {
+        this.$router.push('/Listening')
+      }
     },
     startRecord () {
       this.ing = true
@@ -335,32 +339,27 @@ export default {
         alert(e)
       }
     },
-    fetchRecordingFree () {
 
-      //파일 테스트 : 삭제 예정
-      //this.saveFile(URL.createObjectURL(this.file.blob))
-      const self = this
-      if (!this.file.blob) {
+    async fetchRecordingFree () {
+
+      const data = new FormData()
+      data.append('title', this.freeTitle)
+      data.append('files', this.file.blob, 'myfree.mp3')
+
+      const result = await this.getSubmissionFree(data)
+
+      if (result.code === '0000') {
         this.$bvModal.show('submissionFree')
+        this.record = false
+        this.audioSource = result.audioUrl
+        this.setAudio()
       } else {
-        // this.saveFile(URL.createObjectURL(this.file.blob))
-
-        const data = new FormData()
-        data.append('title', this.freeTitle)
-        data.append('files', this.file.blob, 'myfree.mp3')
-
-        this.getSubmissionFree(data)
-          .then(result => {
-            if (result.code === '0000') {
-              this.$bvModal.show('submissionFree')
-            } else {
-              // alert('드로잉 제출 실패')
-              self.$refs.submissionFail.showAlert = true
-              self.$refs.submissionFail.type = 'common'
-            }
-          })
+        this.$refs.submissionFail.showAlert = true
+        this.$refs.submissionFail.type = 'common'
       }
+
     },
+
     saveFile (href) {
       var a = document.createElement('a')
       a.href = href
