@@ -3,7 +3,7 @@
     <LetterHeader/>
     <div class="contents">
 
-<!--      <progress-bar type="circle" ref="line" :options="options" :style="style"></progress-bar>-->
+      <progress-bar class="progress-bar-wrap" type="circle" ref="line" :options="options" :style="style"></progress-bar>
       <!-- 화면 좌측 상단 텍스트 영역 -->
       <div class="txt-area" v-if="page === 'free'">
         <p class="txt-lg">이 그림은 무엇을 표현했는지<br>
@@ -191,13 +191,17 @@ export default {
       error: false,
       completeStep : 0,
       options : {
-        color : '#007AFF',
-        strokeWidth : 3,
+        color : '#f53c32',
+        strokeWidth : 6,
+        //ie 6이상이면 에러난다고 써있었음
         duration : 2000
       },
       style : {
         position : 'absolute',
-        backgroundColor : 'white'
+        backgroundColor : 'transparent',
+        bottom: '10.9rem',
+        left: '10.3rem',
+        width: '11.4rem'
       },
       svgStyle:{
         display : 'block'
@@ -428,6 +432,7 @@ export default {
 
     .txt-lg {
       font-family: var(--bold);
+
       font-size: 4rem;
       font-weight: bold;
       line-height: 5.6rem;
@@ -475,7 +480,7 @@ export default {
 
   .play-area {
     position: absolute;
-    bottom: 10.3rem;
+    bottom: 10.9rem;
     left: 10.3rem;
 
     button {
@@ -598,7 +603,6 @@ export default {
 
         &.ar-icon__sm.ar-recorder__stop {
           background-image: url("~@/assets/images/common/freeze@2x.png");
-          border: 5px solid red;
 
           > svg {
             display: none;
@@ -673,8 +677,8 @@ export default {
 }
 
 .play-area {
-  width: 12rem;
-  height: 12rem;
+  width: 11.4rem;
+  height: 11.4rem;
   border-radius: 6rem;
 
   &.play {
