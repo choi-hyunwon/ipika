@@ -44,11 +44,13 @@ export default new Vuex.Store({
      */
 
     session: {
+      // 'name': '',
       // 'user_id': '',
       // 'user_auth_key': '',
       // 'Content_Language': '',
       // 'device_type': ''
-      'user_id': 'laoo5',
+      'name': '홈런초등테스트',
+      'user_id': 'test111111711',
       'user_auth_key': 'abcdefghijklmnopqrstuvwxyz0123456789',
       'Content_Language': 'ko',
       'device_type': '1001'
@@ -142,7 +144,8 @@ export default new Vuex.Store({
       return state.submission
     },
     getUserAudio : state => {
-      return state.letter.userAudioList[0]
+      const lastIndex = state.letter.userAudioList.length - 1
+      return state.letter.userAudioList[lastIndex]
     },
   },
   /**

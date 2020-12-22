@@ -80,7 +80,6 @@
         <!-- 녹음 시작 또는 녹음 중지 버튼 -->
         <audio-recorder
           ref="recorder"
-
           format="mp3"
           :time="1"
           :before-recording="startRecord"
@@ -92,7 +91,7 @@
                  :text="`지워진 녹음은 다시 들을 수 없어요`"
                  :cancelText="`아니요`"
                  :okText="`네`">
-          <button v-if="record || isExpired" style="position: absolute; bottom: 0">
+          <button v-if="record" style="position: absolute; bottom: 0">
             <img src="@/assets/images/common/refresh_default@2x.png" alt="">
           </button>
           <button v-else @click="globalUtils.confirm(slotProps,'record')" style="position: absolute; bottom: 0">
@@ -105,11 +104,11 @@
       <div class="btn-area">
         <!--        <button class="btn btn-dark" @click="$router.push('/Listening')">건너뛰기</button>-->
         <div v-if="page==='free'">
-          <button @click="fetchRecordingFree" class="btn btn-dark"
-                  style="width: 16rem; height: 8rem; text-align:center;">완료</button>
+          <button @click="goNext" class="btn btn-dark"
+                  style="width: 16rem; height: 8rem; text-align:center;"><img src="@/assets/images/common/next_nor@2x.png" style="width: 5rem"></button>
         </div>
         <div v-else>
-          <button v-if="!record" @click="fetchRecording" class="btn btn-dark"
+          <button v-if="!record" @click="goNext" class="btn btn-dark"
                   style="width: 16rem; height: 8rem; text-align:center;"><img
             src="@/assets/images/common/next_nor@2x.png" style="width: 5rem"></button>
           <button v-if="record" ref="btnnext" class="btn btn-dark disabled" style="width: 16rem; height: 8rem; text-align:center;">
@@ -187,7 +186,6 @@ export default {
       audioSource: null,
       isAudioSet: false,
 
-      isExpired: false,
       error: false,
       completeStep : 0,
       options : {
@@ -221,26 +219,12 @@ export default {
   },
   mounted () {
     this.lineBar = this.$refs.line
-    if (this.userAudio) {
-      this.isExpired = true
+
+    // this.lineBar.animate(1.0)
+    if (this.page !== 'free' && this.userAudio) {
       this.record = false
 
-      /* 임시 코드 */
-      // TODO: userAudio url 이 음성 파일 형태가 다른 경우 임시 작업(삭제 예정 코드)
-      // if (this.userAudio.audioUrl.slice(-3, -1) !== 'mp') {
-      //   this.setUserAudio({
-      //     audioPlaytime:15,
-      //     audioUrl:"http://cdn.mcocoa.com/edu//steprecording/20201207122219/sample.mp3",
-      //     userAudioId:52
-      //   })
-      // }
-      /* // 임시 코드 */
-
       this.audioSource = this.userAudio.audioUrl
-
-      /* 임시 코드 */
-      // this.audioSource = "http://cdn.mcocoa.com/edu//steprecording/20201207122219/sample.mp3"
-      /* // 임시 코드 */
 
       this.setAudio()
     }
@@ -291,12 +275,16 @@ export default {
       getSubmissionFree: 'getSubmissionFree',
       getLetter: 'getLetter'
     }),
-    ...mapMutations({
-      setUserAudio: 'setUserAudio'
-    }),
     goBack () {
       // this.$router.push('/Watching')
       this.$router.go(-1)
+    },
+    goNext () {
+      if(this.page === 'free') {
+        this.$bvModal.show('submissionFree')
+      } else {
+        this.$router.push('/Listening')
+      }
     },
     startRecord () {
       this.ing = true
@@ -312,30 +300,36 @@ export default {
       }, 500)
       this.setProgressColor()
     },
-    setRecentRecord () {
+
+    async setRecentRecord () {
       const recorder = this.$refs.recorder
 
       // this.arPlayer = recorder.$children[2]
       recorder.$children.forEach(val => {
-        val.$el.className === 'ar-player'
-        this.arPlayer = val
+        if(val.$el.className === 'ar-player') {
+          console.log('recorder.$children.val', val)
+          this.arPlayer = val
+        }
       })
 
       if (recorder) {
         const top = recorder.recordList.length - 1
         recorder.selected = recorder.recordList[top]
         this.file = recorder.recordList[top]
-        this.audioSource = this.file.url
         this.isAudioSet = true
 
-        this.setAudio()
+        if(this.page === 'free') {
+          await this.fetchRecordingFree()
+        } else {
+          await this.fetchRecording()
+          this.audioSource = this.userAudio.audioUrl
+          this.setAudio()
+        }
       }
     },
-    fetchRecording () {
-      if (this.isExpired) {
-        return this.$router.push('/Listening')
-      }
 
+
+    async fetchRecording () {
       try {
         //파일 테스트 : 삭제 예정
         //this.saveFile(URL.createObjectURL(this.file.blob))
@@ -344,46 +338,34 @@ export default {
         data.append('stepId', this.letter.stepId)
         data.append('recordingAudio', this.file.blob, 'myrecord.mp3')
 
-        this.getRecording(data)
-          .then(result => {
-            console.log(result)
-            if (result.code === '0000') {
-              this.fetchLetter()
-            } else {
-              alert(`code : ${result.code} message : ${result.message}`)
-              this.$router.push('/Listening')
-            }
-          })
+        await this.getRecording(data)
+        await this.getLetter()
+
       } catch (e) {
         alert(e)
       }
     },
-    fetchRecordingFree () {
 
-      //파일 테스트 : 삭제 예정
-      //this.saveFile(URL.createObjectURL(this.file.blob))
-      const self = this
-      if (!this.file.blob) {
+    async fetchRecordingFree () {
+
+      const data = new FormData()
+      data.append('title', this.freeTitle)
+      data.append('files', this.file.blob, 'myfree.mp3')
+
+      const result = await this.getSubmissionFree(data)
+
+      if (result.code === '0000') {
         this.$bvModal.show('submissionFree')
+        this.record = false
+        this.audioSource = result.audioUrl
+        this.setAudio()
       } else {
-        this.saveFile(URL.createObjectURL(this.file.blob))
-
-        const data = new FormData()
-        data.append('title', this.freeTitle)
-        data.append('files', this.file.blob, 'myfree.mp3')
-
-        this.getSubmissionFree(data)
-          .then(result => {
-            if (result.code === '0000') {
-              this.$bvModal.show('submissionFree')
-            } else {
-              // alert('드로잉 제출 실패')
-              self.$refs.submissionFail.showAlert = true
-              self.$refs.submissionFail.type = 'common'
-            }
-          })
+        this.$refs.submissionFail.showAlert = true
+        this.$refs.submissionFail.type = 'common'
       }
+
     },
+
     saveFile (href) {
       var a = document.createElement('a')
       a.href = href
@@ -398,12 +380,6 @@ export default {
       setTimeout(function () {
         URL.revokeObjectURL(href)
       }, 911)
-    },
-    async fetchLetter () {
-      this.getLetter()
-        .then(result => {
-          this.$router.push('/Listening')
-        })
     },
 
     setAudio () {

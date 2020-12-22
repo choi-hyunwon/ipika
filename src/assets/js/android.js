@@ -26,7 +26,6 @@ export class Android {
 
   tts(text){
     try{
-      alert(text)
       window.android.sendTTS(text)
     } catch (e){
       console.log(e)

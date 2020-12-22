@@ -24,7 +24,9 @@ export default {
 <style>
 #app {
   width: 1280px;
+  height: 750px;
   position: relative;
   margin: 0 auto;
+  overflow: hidden;
 }
 </style>
