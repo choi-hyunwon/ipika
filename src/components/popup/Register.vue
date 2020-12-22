@@ -85,7 +85,7 @@ export default {
       this.setTimerPause()
     },
     checkInputSize() {
-      this.title = this.title.slice(0, 19)
+      this.title = this.title.slice(0, 20)
     },
     registerFree () {
       if(this.title === '') {
