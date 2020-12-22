@@ -130,7 +130,7 @@
         <p class="text-sm">장치 설치를 하고 다시 해볼까요?</p>
       </template>
       <template #modal-footer="{ cancel }">
-        <router-link to="/Listening" style="display:block; width: 100%;">
+        <router-link :to=" link() " style="display:block; width: 100%;">
           <span class="btn btn-block btn-black" >확인</span>
         </router-link>
       </template>
@@ -159,7 +159,7 @@
 import LetterHeader from '@/components/letter/LetterHeader'
 import Confirm from '@/components/popup/Confirm'
 import Alert from '@/components/popup/Alert'
-import { mapActions, mapGetters, mapMutations } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'recording',
@@ -268,6 +268,13 @@ export default {
       getSubmissionFree: 'getSubmissionFree',
       getLetter: 'getLetter'
     }),
+    link(){
+      if (this.page===''){
+        return  '/Listening'
+      } else if (this.page==='free'){
+        return  '/PabloMain'
+      }
+    },
     goBack () {
       // this.$router.push('/Watching')
       this.$router.go(-1)
