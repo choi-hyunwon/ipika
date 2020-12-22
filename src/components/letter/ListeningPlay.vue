@@ -3,7 +3,7 @@
     <div class="dim-dark"></div>
     <div class="player_area">
       <div class="player_img">
-        <progress-bar type="circle" ref="line" :options="options" :style="style"></progress-bar>
+        <progress-bar type="circle" ref="listenProgress" :options="options" :style="style"></progress-bar>
         <img :src="audioList[this.focusIdx].characterImageUrl" alt="" style="width: 45rem; height: 45rem;">
         <!--이미지 더미 파일 수정 -->
         <div class="recode_button" @click="play">
@@ -34,7 +34,7 @@ export default {
     return {
       toggleButton: false,
       audio: null,
-      audioDuraion: null,
+      audioDuration: null,
       completeStep: 0,
       options: {
         color: '#007AFF',
@@ -49,6 +49,7 @@ export default {
       },
       lineBar: null,
       isPause : false,
+      realTime : 0,
     }
   },
   created () {
@@ -56,7 +57,8 @@ export default {
     this.options.duration = this.audioList[this.focusIdx].audioPlaytime*1000
   },
   mounted () {
-    this.lineBar = this.$refs.line
+    console.error(this.audio)
+    this.lineBar = this.$refs.listenProgress
     this.play()
     // this.lineBar.animate(1.0)
     // this.$refs.line.animate(1.0)
@@ -91,32 +93,38 @@ export default {
       this.$EventBus.$emit('toggle')
     },
     play () {
+      this.realTime = Math.floor(this.audio.duration*1000) - this.options.duration
+      console.log(this.audio.duration)
+      // console.log('audioDuration : '+Math.floor(this.audio.duration*1000))
       if (!this.toggleButton) {
-        console.log(this.lineBar.svg())
         if(this.isPause){
           console.log('resume')
           this.lineBar.animate(1+this.lineBar.value())
+          console.log(this.lineBar.value())
           this.audio.play()
           this.toggleButton = true
           return
         }
-        console.log('lineBar Animate')
+        console.log(this.audioDuration)
         this.audio.play()
         setTimeout(()=>{
           this.lineBar.animate(1)
-        }, 561)
+        }, this.realTime)
+        this.lineBar.animate(1)
         this.toggleButton = true
         this.audio.onended = () => {
-          console.log(this.lineBar.value())
+
+          // console.log(this.lineBar.value())
           this.toggleButton = false
           this.isPause=false
           this.lineBar.set(0)
         }
       }else {
-        console.log(this.audio.duration)
-        console.log(this.lineBar.value())
+        // console.log(this.audio.duration)
+        // console.log(this.lineBar.value())
         this.toggleButton = false
         console.log('lineBar Stop')
+
         this.lineBar.stop()
         this.audio.pause()
         this.isPause=true

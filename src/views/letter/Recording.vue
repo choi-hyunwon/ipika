@@ -67,20 +67,20 @@
              pause : ing && !record
            }"
       >
-
-
         <audio ref="audioPlayer" src=""/>
 
         <!-- 재생 또는 재생 정지 버튼 -->
         <div v-if="audioEl"
              class="play-btns"
              @click="playOrPause"
-         />
+        />
+
 
 
         <!-- 녹음 시작 또는 녹음 중지 버튼 -->
         <audio-recorder
           ref="recorder"
+
           format="mp3"
           :time="1"
           :before-recording="startRecord"
@@ -191,9 +191,9 @@ export default {
       error: false,
       completeStep : 0,
       options : {
-        color : '#007AFF',
+        color : 'red',
         strokeWidth : 3,
-        duration : 2000
+        duration : 20000,
       },
       style : {
         position : 'absolute',
@@ -202,7 +202,9 @@ export default {
       svgStyle:{
         display : 'block'
       },
-      lineBar: null
+      lineBar: null,
+      isPause : false,
+      realTime : 0,
     }
   },
   created () {
@@ -211,11 +213,11 @@ export default {
     this.$EventBus.$on('back', this.goBack)
     this.$EventBus.$on('next', () => {
       this.record = true
+      this.lineBar.set(0)
     })
   },
   mounted () {
     this.lineBar = this.$refs.line
-    this.lineBar.animate(1.0)
     if (this.userAudio) {
       this.isExpired = true
       this.record = false
@@ -261,6 +263,7 @@ export default {
       this.ing = val
     },
   },
+
   computed: {
     ...mapGetters({
       letter: 'getLetter',
@@ -294,13 +297,17 @@ export default {
     },
     startRecord () {
       this.ing = true
+      this.lineBar.animate(1.0)
+      this.setProgressColor()
     },
     stopRecord () {
       this.ing = false
       this.record = false
+      this.lineBar.set(0)
       setTimeout(() => {
         this.setRecentRecord()
       }, 500)
+      this.setProgressColor()
     },
     setRecentRecord () {
       const recorder = this.$refs.recorder
@@ -407,9 +414,51 @@ export default {
     },
     playOrPause () {
       if (!this.record) {
-        !this.ing ? this.audioEl.play() : this.audioEl.pause()
-        this.ing = !this.ing
+
+        // !this.ing ? this.audioEl.play() : this.audioEl.pause()
+        if(!this.ing){
+          if(this.isPause){
+            console.log('resume')
+            this.lineBar.animate(2)
+            this.audioEl.play()
+            this.ing = true
+          }
+          this.audioEl.play()
+          this.lineBar.animate(1.0,{duration : this.audioEl.duration*1000})
+          this.ing = true
+          this.audioEl.onended=()=>{
+            this.ing = false
+            this.isPause=false
+            this.lineBar.set(0)
+          }
+
+        }else{
+          this.ing= false
+          this.lineBar.stop()
+          this.audioEl.pause()
+          this.isPause= true;
+        }
+        // this.ing = !this.ing
       }
+    },
+    setProgressColor(){
+      if(!this.record){
+        var svgPath =document.body.getElementsByTagName('svg')
+        svgPath = svgPath[0].getElementsByTagName('path')
+        svgPath = svgPath[1]
+        svgPath.setAttribute('stroke','#007AFF')
+        console.log(svgPath)
+      }else{
+        console.log(this.record)
+        svgPath =document.body.getElementsByTagName('svg')
+        svgPath = svgPath[0].getElementsByTagName('path')
+        svgPath = svgPath[1]
+        svgPath.setAttribute('stroke','red')
+        console.log(svgPath)
+      }
+    },
+    setProgressDuration(){
+
     }
   }
 }
@@ -420,6 +469,19 @@ export default {
   position: relative;
   width: 100%;
   height: calc(100% - 8rem);
+
+  svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    stroke: #fff;
+    width: 100px;
+    height: 100px;
+    background-color: #5967D8;
+    border-radius: 100%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
 
   .txt-area {
     padding-top: 8rem;
@@ -487,7 +549,9 @@ export default {
       img {
         width: 100%;
         height: 100%;
+
       }
+
     }
   }
 
@@ -684,6 +748,7 @@ export default {
     background-repeat: no-repeat;
     background-position: center;
     background-size: 3.24rem;
+
   }
 
   &.pause {
@@ -693,6 +758,9 @@ export default {
     background-repeat: no-repeat;
     background-position: center;
     background-size: 3.2rem;
+
+
+
 
     & .play-btns {
       border: 5px solid #1585ff;
