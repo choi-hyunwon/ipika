@@ -214,8 +214,7 @@ export default {
   mounted () {
     this.lineBar = this.$refs.line
 
-    // TODO:임시 주석처리
-    // this.lineBar.animate(1.0)
+    this.lineBar.animate(1.0)
 
     if (this.page !== 'free' && this.userAudio) {
       this.record = false
