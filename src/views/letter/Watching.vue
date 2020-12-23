@@ -46,6 +46,7 @@ export default {
       this.$router.push('/Intro')
     },
     goToNext(){
+      this.Android.setLog('action=MediaEnded&id=123456&url=http://home-learn.com/1791043103643185.mp4&title=동글동글 고구마 경단&type=VideoObject&duration=99&currentTime=0&edApp=파블로')
       this.$router.push('/Recording')
     },
   }

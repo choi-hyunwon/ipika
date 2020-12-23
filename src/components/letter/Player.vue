@@ -115,7 +115,7 @@ export default {
 
       // 로그값 넣기
       this.Android.setLog('action=MediaStarted&id=123456&url=http://home-learn.com/1791043103643185.mp4&title=동글동글 고구마 경단&type=VideoObject&duration=99&currentTime=0&edApp=파블로')
-
+      this.Android.setLog('action=MediaResumed&id=123456&url=http://home-learn.com/1791043103643185.mp4&title=동글동글 고구마 경단&type=VideoObject&duration=99&currentTime=0&edApp=파블로')
       // TODO: 테스트용 임시 코드(영상시간단축)
       if(this.isStart) {
         // this.player.currentTime(this.player.duration() - 5)

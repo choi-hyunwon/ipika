@@ -273,9 +273,8 @@ export default {
           if (result.code === '0000') {
             this.$refs.autoOpenSuccess.showAlert = true
             this.$refs.autoOpenSuccess.type = 'success'
-
             //로그삽입
-            this.Android.setLog('action=NavigatedTo&depth1=Twinkle Stage 4&execute=Y&edApp=파블로')
+            this.Android.setLog('action=AssignableSubmitted&isComplete=Y&edApp=파블로')
           } else {
             alert(`code : ${result.code} message : ${result.message}`)
           }

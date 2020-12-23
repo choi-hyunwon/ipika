@@ -22,7 +22,7 @@
           <a href="#" @click="menu.popup = !menu.popup" class="btn btn-blue">다른 스테이지 더 알아보기</a>
         </div>
         <div class="btn-group">
-          <router-link to="/PabloMain" class="btn btn-dark">무료체험 시작하기</router-link>
+          <router-link to="/PabloMain" class="btn btn-dark"><span @click="setLog">무료체험 시작하기</span></router-link>
         </div>
       </div>
       <div class="col col-6">
@@ -49,6 +49,11 @@ import Confirm from '@/components/popup/Confirm'
 export default {
   name: 'TestingResult',
   components: {Confirm },
+  methods: {
+    setLog() {
+      this.Android.setLog('action=NavigatedTo&depth1=Twinkle Stage 4&execute=Y&edApp=파블로')
+    }
+  },
   data() {
     return {
       menu:{
