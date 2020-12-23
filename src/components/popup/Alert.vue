@@ -152,6 +152,9 @@ export default {
       this.$EventBus.$emit('bgPopup')
       this.$refs['alertModal'].hide()
       this.Android.tts("파블로 캔버스 툴에 대해 간단하게 설명해드릴게요")
+
+      //로그삽입
+      this.Android.setLog('action=NavigatedTo&depth1=Twinkle Stage 4&execute=Y&edApp=파블로')
     },
     setPlayerOptions(){
       this.setPlayerSize({width: 1065, height: 666})

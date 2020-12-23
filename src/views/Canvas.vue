@@ -34,8 +34,6 @@
 
     <!-- 공통 알림 popup-->
     <Alert ref="submissionFail" v-slot="slotProps" :boldText="'드로잉 제출 실패하였습니다'" :text="'앗! 이런'" :buttonText="'확인'"/>
-
-
   </div>
 </template>
 <script>
@@ -275,6 +273,9 @@ export default {
           if (result.code === '0000') {
             this.$refs.autoOpenSuccess.showAlert = true
             this.$refs.autoOpenSuccess.type = 'success'
+
+            //로그삽입
+            this.Android.setLog('action=NavigatedTo&depth1=Twinkle Stage 4&execute=Y&edApp=파블로')
           } else {
             alert(`code : ${result.code} message : ${result.message}`)
           }

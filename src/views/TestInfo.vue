@@ -18,7 +18,7 @@
       <div class="title"><img src="@/assets/images/common/img_testinfo_title@2x.png" style="width: 67rem"></div>
       <div class="desc"><img src="@/assets/images/common/img_testinfo_desc@2x.png" style="width: 86.8rem"></div>
       <div class="btn-group">
-        <router-link to="/canvas?page=diagnose" class="btn btn-block btn-dark" @click="setLog">AI 입회 테스트 시작하기</router-link>
+        <router-link to="/canvas?page=diagnose" class="btn btn-block btn-dark"><span  @click="setLog">AI 입회 테스트 시작하기</span></router-link>
       </div>
     </div>
   </div>
@@ -33,7 +33,7 @@ export default {
     Confirm
   },
   methods: {
-    setLog(){
+    setLog() {
       this.Android.setLog('action=NavigatedTo&depth1=진단테스트&execute=Y&edApp=파블로')
     }
   }

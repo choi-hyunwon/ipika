@@ -64,9 +64,15 @@ export class Android {
     if (curVolume === 0){
       //  mute log
       Vue.$store.state.volume = curVolume;
+
+      //로그삽입
+      this.Android.setLog('action=MediaMuted&id=123456&url=http://home-learn.com/1791043103643185.mp4&title=동글동글 고구마 경단&type=VideoObject&duration=99&currentTime=0&edApp=파블로')
     } else {
       //소리가 있을때
       Vue.$store.state.volume = curVolume;
+
+      //로그삽입
+      this.Android.setLog('action=MediaUnmuted&id=123456&url=http://home-learn.com/1791043103643185.mp4&title=동글동글 고구마 경단&type=VideoObject&duration=99&currentTime=0&edApp=파블로')
     }
   }
 }
