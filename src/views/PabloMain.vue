@@ -445,6 +445,7 @@ export default {
       height: 4rem;
       right: 4rem;
       top: 2rem;
+      z-index: 100;
 
       img {
         width: 100%;

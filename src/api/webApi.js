@@ -30,6 +30,7 @@ export default class WebApi {
       .catch(error => {
         console.log('error from api')
         console.log(error)
+        alert('error from API')
         alert(error.message)
         throw new Error(`WebApi ${url} Error!!`)
         // throw new Error(error)
