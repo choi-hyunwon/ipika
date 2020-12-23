@@ -52,7 +52,7 @@
             </div>
             <div class="box_title">
 <!--              <div class="img_title">{{ item.stageName || '스테이지' }} {{ item.stageId || '단계' }}</div>-->
-              <div class="img_title">{{ item.createdDate.slice(0, 10).replaceAll('-','.') }}</div>
+              <div class="img_title">{{ item.createdDate.slice(0, 10) }}</div>
               <div class="img_desc">{{ item.title || '제목을 불러 올수 없습니다' }}</div>
             </div>
             <button class="icon_delete" @click="openDelete(item.userAudioId, index)"><img src="@/assets/images/common/btn_delete@2x.png" alt="" class="img-m"></button>

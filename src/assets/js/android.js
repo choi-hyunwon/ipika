@@ -28,6 +28,7 @@ export class Android {
     try{
       window.android.sendTTS(text)
     } catch (e){
+      console.log('TTS error')
       console.log(e)
     }
   }
