@@ -54,4 +54,19 @@ export class Android {
       Vue.prototype.Router.go(-1)
     }
   }
+
+
+  /**
+   * onChangedVolume
+   * @param curVolume
+   */
+  onChangedVolume(curVolume){
+    if (curVolume === 0){
+      //  mute log
+      Vue.$store.state.volume = curVolume;
+    } else {
+      //소리가 있을때
+      Vue.$store.state.volume = curVolume;
+    }
+  }
 }
