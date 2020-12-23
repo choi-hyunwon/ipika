@@ -12,6 +12,7 @@
     "bootstrap-vue": "^2.18.1",
     "core-js": "^3.6.5",
     "easy-circular-progress": "^1.0.4",
+    "swiper": "^6.4.5",
     "video.js": "^7.10.2",
     "vue": "^2.6.11",
     "vue-audio-recorder": "^3.0.1",
