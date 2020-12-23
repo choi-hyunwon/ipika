@@ -144,7 +144,8 @@ export default new Vuex.Store({
       return state.submission
     },
     getUserAudio : state => {
-      return state.letter.userAudioList[0]
+      const lastIndex = state.letter.userAudioList.length - 1
+      return state.letter.userAudioList[lastIndex]
     },
   },
   /**

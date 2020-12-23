@@ -228,6 +228,7 @@ export default {
                 console.log('getUserGalleryMypictureVue', data.pictures)
                 self.list = data.pictures
                 self.allSize();
+                self.setFilter(self.activeIndex)
               })
 
           } else {

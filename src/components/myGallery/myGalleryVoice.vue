@@ -252,6 +252,7 @@ export default {
                 console.log('getUserGalleryMypictureVue', data.audios)
                 self.list = data.audios
                 self.allSize();
+                self.setFilter(self.activeIndex)
               })
           } else alert(result.message)
         })

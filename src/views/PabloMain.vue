@@ -1,73 +1,72 @@
 <template>
-    <div v-if="isLoading" class="wrap" :style="{'background-color' : mainMenuList[0].bgColor}">
-      <div class="row">
-        <div class="col col-6 left">
-          <div class="symbol"><img src="@/assets/images/common/Symbol@2x.png" alt=""></div>
-          <div class="swiper-pagination swiper-pagination-bullets">
-            <span  class="pagination0 swiper-pagination-bullet swiper-pagination-bullet-active"></span>
-            <span  class="pagination1 swiper-pagination-bullet "></span>
-            <span  class="pagination2 swiper-pagination-bullet "></span>
-            <span  class="pagination3 swiper-pagination-bullet "></span>
-            <span  class="pagination4 swiper-pagination-bullet "></span>
-            <span  class="pagination5 swiper-pagination-bullet "></span>
-            <span  class="pagination6 swiper-pagination-bullet "></span>
-            <span  class="pagination7 swiper-pagination-bullet "></span>
-          </div>
+  <div v-if="isLoading" class="wrap" :style="{'background-color' : mainMenuList[0].bgColor}">
+    <div class="row">
+      <div class="col col-6 left">
+        <div class="symbol"><img src="@/assets/images/common/Symbol@2x.png" alt=""></div>
 
-          <ul class="title-list">
-            <li @click="setPath(menu.menuId)" v-for="(menu,i) in mainMenuList"
-                :class="{active : isActiveMenuList.includes(menu.menuId)}">
-              <a>
-                <span class="num">{{ `0${i + 1}` }}</span>
-                <span class="title">{{ menu.menuName }}</span>
-              </a>
-            </li>
-          </ul>
-          <div class="message" v-if="message">
-            <span class="symbol"><img src="@/assets/images/common/Symbol-white@2x.png" alt=""></span>
-            <span class="text">새로운 학습이 도착했어요! 지금 바로 시작해보세요 😃</span>
-            <router-link to="/" class="btn-close"></router-link>
-          </div>
-        </div>
-        <div class="col col-6 right">
-          <Confirm v-slot="slotProps"
-                   :complete-text="`파블로 서비스를 </br> 종료하시겠습니까?`"
-                   :cancelText="`아니요`"
-                   :okText="`네`">
-            <div @click="globalUtils.confirm(slotProps,'checkRed')" class="btn-close"><img
-              src="@/assets/images/common/close@2x.png" alt=""></div>
-          </Confirm>
-
-
-          <swiper class="swiper" refs="swiper" :options="swiperOption" >
-            <swiper-slide v-for="(menu,i) in mainMenuList">
-              <div class="img"><img :src=menu.imgUrl alt=""></div>
-            </swiper-slide>
-          </swiper>
-
-
-
+        <ul class="title-list">
+          <li @click="setPath(menu.menuId)" v-for="(menu,i) in mainMenuList"
+              :class="{active : isActiveMenuList.includes(menu.menuId)}">
+            <a>
+              <span class="num">{{ `0${i + 1}` }}</span>
+              <span class="title">{{ menu.menuName }}</span>
+            </a>
+          </li>
+        </ul>
+        <div class="message" v-if="message">
+          <span class="symbol"><img src="@/assets/images/common/Symbol-white@2x.png" alt=""></span>
+          <span class="text">새로운 학습이 도착했어요! 지금 바로 시작해보세요 😃</span>
+          <router-link to="/" class="btn-close"></router-link>
         </div>
       </div>
-      <!-- 공통 알림 popup-->
-      <Alert ref="commonAlert" v-slot="slotProps" :boldText="'학습이 완료 되었습니다'" :text="'프리드로잉을 해보면 어떨까요?'"
-             :buttonText="'확인'"/>
+      <div class="col col-6 right">
+        <Confirm v-slot="slotProps"
+                 :complete-text="`파블로 서비스를 </br> 종료하시겠습니까?`"
+                 :cancelText="`아니요`"
+                 :okText="`네`">
+          <div @click="globalUtils.confirm(slotProps,'checkRed')" class="btn-close"><img
+            src="@/assets/images/common/close@2x.png" alt=""></div>
+        </Confirm>
+
+
+        <slick
+          ref="slick"
+          :options="slickOptions"
+          @afterChange="handleAfterChange"
+          @beforeChange="handleBeforeChange"
+          @breakpoint="handleBreakpoint"
+          @destroy="handleDestroy"
+          @edge="handleEdge"
+          @init="handleInit"
+          @reInit="handleReInit"
+          @setPosition="handleSetPosition"
+          @swipe="handleSwipe"
+          @lazyLoaded="handleLazyLoaded"
+          @lazyLoadError="handleLazeLoadError">
+          <div class="img" v-for="(menu,i) in mainMenuList"><img :src=menu.imgUrl alt=""></div>
+        </slick>
+
+
+      </div>
     </div>
+    <!-- 공통 알림 popup-->
+    <Alert ref="commonAlert" v-slot="slotProps" :boldText="'학습이 완료 되었습니다'" :text="'프리드로잉을 해보면 어떨까요?'"
+           :buttonText="'확인'"/>
+  </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import Confirm from '@/components/popup/Confirm'
 import Alert from '@/components/popup/Alert'
-import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
+import Slick from 'vue-slick'
 
 export default {
   name: 'PabloMain',
   components: {
     Confirm,
     Alert,
-    Swiper,
-    SwiperSlide
+    Slick
   },
   data () {
     const self = this
@@ -78,31 +77,13 @@ export default {
       isShow: false,
       mainMenuList: [],
       isActiveMenuList: [111, 113, 115, 116],
-      swiperOption: {
-        notNextTick: true,
-        loop: true,
-        initialSlide: 0,
-        autoplay: {
-          delay: 1500,
-          disableOnInteraction: true
-        },
-        speed: 800,
-        grabCursor: true,
-        height : 750,
-        pagination: {
-          el: '.swiper-pagination'
-        },
-        on: {
-          init: (swiper)=>{
-            console.log(swiper)
-          },
-          slideChange: (swiper) => {
-            console.log('slideChange',swiper.realIndex)
-            let nIdx = swiper.realIndex
-            document.getElementsByClassName('pagination' + swiper.realIndex)[0].classList.add('swiper-pagination-bullet-active')
-            document.getElementsByClassName('pagination' + swiper.previousIndex)[0].classList.remove('swiper-pagination-bullet-active')
-          }
-        }
+      slickOptions: {
+        infinite: true,
+        slidesToShow: 1,
+        autoplay: true,
+        autoplaySpeed: 2000,
+        arrows:false,
+        dots:true
       }
     }
   },
@@ -165,7 +146,57 @@ export default {
             this.$router.push('/Intro')
           } // 최초 진입 판단
         })
-    }
+    },
+
+    next () {
+      this.$refs.slick.next()
+    },
+
+    prev () {
+      this.$refs.slick.prev()
+    },
+
+    reInit () {
+      // Helpful if you have to deal with v-for to update dynamic lists
+      this.$nextTick(() => {
+        this.$refs.slick.reSlick()
+      })
+    },
+
+    // Events listeners
+    handleAfterChange (event, slick, currentSlide) {
+      console.log('handleAfterChange', event, slick, currentSlide)
+    },
+    handleBeforeChange (event, slick, currentSlide, nextSlide) {
+      console.log('handleBeforeChange', event, slick, currentSlide, nextSlide)
+    },
+    handleBreakpoint (event, slick, breakpoint) {
+      console.log('handleBreakpoint', event, slick, breakpoint)
+    },
+    handleDestroy (event, slick) {
+      console.log('handleDestroy', event, slick)
+    },
+    handleEdge (event, slick, direction) {
+      console.log('handleEdge', event, slick, direction)
+    },
+    handleInit (event, slick) {
+      console.log('handleInit', event, slick)
+    },
+    handleReInit (event, slick) {
+      console.log('handleReInit', event, slick)
+    },
+    handleSetPosition (event, slick) {
+      console.log('handleSetPosition', event, slick)
+    },
+    handleSwipe (event, slick, direction) {
+      console.log('handleSwipe', event, slick, direction)
+    },
+    handleLazyLoaded (event, slick, image, imageSource) {
+      console.log('handleLazyLoaded', event, slick, image, imageSource)
+    },
+    handleLazeLoadError (event, slick, image, imageSource) {
+      console.log('handleLazeLoadError', event, slick, image, imageSource)
+    },
   }
 }
 </script>
@@ -423,141 +454,125 @@ export default {
   }
 }
 
+</style>
+<style lang="scss">
 
-.swiper-slide {
-  height: 697px;
+/* Slider */
+
+.slick-slider {
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -ms-touch-action: pan-y;
+  touch-action: pan-y;
+  -webkit-tap-highlight-color: transparent;
 }
 
-
-.swiper-container {
-  margin-left: auto;
-  margin-right: auto;
+.slick-list {
   position: relative;
   overflow: hidden;
-  list-style: none;
+  display: block;
+  margin: 0;
   padding: 0;
-  /* Fix of Webkit flickering */
-  z-index: 1;
-  height: 750px;
-}
-.swiper-container-vertical > .swiper-wrapper {
-  flex-direction: column;
-}
-.swiper-wrapper {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  display: flex;
-  transition-property: transform;
-  box-sizing: content-box;
-}
-.swiper-container-android .swiper-slide,
-.swiper-wrapper {
-  transform: translate3d(0px, 0, 0);
-}
-.swiper-container-multirow > .swiper-wrapper {
-  flex-wrap: wrap;
-}
-.swiper-container-multirow-column > .swiper-wrapper {
-  flex-wrap: wrap;
-  flex-direction: column;
-}
-.swiper-container-free-mode > .swiper-wrapper {
-  transition-timing-function: ease-out;
-  margin: 0 auto;
-}
-.swiper-slide {
-  flex-shrink: 0;
-  width: 100%;
-  height: 100%;
-  position: relative;
-  transition-property: transform;
-}
-.swiper-slide-invisible-blank {
-  visibility: hidden;
-}
-/* Auto Height */
-.swiper-container-autoheight {
-  &,
-  .swiper-slide {
-    height: auto;
+
+  &:focus {
+    outline: none;
   }
 
-  .swiper-wrapper {
-    align-items: flex-start;
-    transition-property: transform, height;
+  &.dragging {
+    cursor: pointer;
+    cursor: hand;
   }
 }
 
-/* 3D Effects */
-.swiper-container-3d {
-  perspective: 1200px;
-  .swiper-wrapper,
-  .swiper-slide,
-  .swiper-slide-shadow-left,
-  .swiper-slide-shadow-right,
-  .swiper-slide-shadow-top,
-  .swiper-slide-shadow-bottom,
-  .swiper-cube-shadow {
-    transform-style: preserve-3d;
+.slick-slider .slick-track,
+.slick-slider .slick-list {
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+
+.slick-track {
+  position: relative;
+  left: 0;
+  top: 0;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
+  &:before,
+  &:after {
+    content: "";
+    display: table;
   }
-  .swiper-slide-shadow-left,
-  .swiper-slide-shadow-right,
-  .swiper-slide-shadow-top,
-  .swiper-slide-shadow-bottom {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
+
+  &:after {
+    clear: both;
+  }
+
+  .slick-loading & {
+    visibility: hidden;
+  }
+}
+
+.slick-slide {
+  float: left;
+  height: 100%;
+  min-height: 1px;
+
+  [dir="rtl"] & {
+    float: right;
+  }
+
+  img {
+    display: block;
+  }
+
+  &.slick-loading img {
+    display: none;
+  }
+
+  display: none;
+
+  &.dragging img {
     pointer-events: none;
-    z-index: 10;
   }
-  .swiper-slide-shadow-left {
-    background-image: linear-gradient(to left, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+
+  .slick-initialized & {
+    display: block;
   }
-  .swiper-slide-shadow-right {
-    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+
+  .slick-loading & {
+    visibility: hidden;
   }
-  .swiper-slide-shadow-top {
-    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
-  }
-  .swiper-slide-shadow-bottom {
-    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+
+  .slick-vertical & {
+    display: block;
+    height: auto;
+    border: 1px solid transparent;
   }
 }
 
-/* CSS Mode */
-.swiper-container-css-mode {
-  > .swiper-wrapper {
-    overflow: auto;
-    scrollbar-width: none; /* For Firefox */
-    -ms-overflow-style: none; /* For Internet Explorer and Edge */
-    &::-webkit-scrollbar {
-      display: none;
-    }
-  }
-  > .swiper-wrapper > .swiper-slide {
-    scroll-snap-align: start start;
-  }
+.slick-arrow.slick-hidden {
+  display: none;
 }
-.swiper-container-horizontal.swiper-container-css-mode {
-  > .swiper-wrapper {
-    scroll-snap-type: x mandatory;
-  }
-}
-.swiper-container-vertical.swiper-container-css-mode {
-  > .swiper-wrapper {
-    scroll-snap-type: y mandatory;
-  }
-}
-.swiper-pagination {
+
+
+.slick-dots {
   position: absolute;
-  left: 4rem;
+  left: -92rem;
   top: 50%;
   transform: translateY(-50%);
-  & span {
+
+  & li {
     display: block;
     position: relative;
     width: 0.8rem;
@@ -565,8 +580,16 @@ export default {
     margin-bottom: 0.8rem;
     background: #000;
     opacity: .2;
-    &.swiper-pagination-bullet-active {
-      background-color: var(--gray-black);
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    button {
+      font-size: 0;
+      line-height: 0;
+      text-indent: -9999px;
+    }
+    &.slick-active {
+      background-color: #000;
       opacity: 1;
     }
   }
