@@ -20,7 +20,7 @@
       <div class="desc_detail"><img src="@/assets/images/common/img_testinfo_freedate@2x.png" style="width: 69rem"></div>
       <div class="btn-group clearfix" v-if="shortStory">
         <input type="text" class="form-control active" v-model="onlyNumber" maxlength="2" placeholder="나이를 입력해주세요">
-        <a href="#" class="btn btn-block btn-dark btn-start" @click="checkAge">AI 입회 테스트 시작하기</a>
+        <a href="#" class="btn btn-block btn-dark btn-start" @click="checkAge">시작하기</a>
       </div>
       <div class="btn-group" v-else>
         <router-link to="/canvas?page=diagnose" class="btn btn-block btn-dark">AI 입회 테스트 시작하기
@@ -32,7 +32,7 @@
 
 <script>
 import Confirm from '@/components/popup/Confirm'
-import {mapGetters} from "vuex";
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'TestInfo',
@@ -59,9 +59,11 @@ export default {
       const age = Number(this.onlyNumber)
       console.log(this.onlyNumber);
 
+
       if (age < 3 || age > 13) {
         alert('잘못된 나이를 입력하셨습니다.')
       } else {
+        localStorage.setItem('age', age)
         this.$router.push('/canvas?page=diagnose')
       }
     },
