@@ -28,6 +28,7 @@ export class Android {
     try{
       window.android.sendTTS(text)
     } catch (e){
+      console.log('TTS error')
       console.log(e)
     }
   }
@@ -51,6 +52,21 @@ export class Android {
       window.android.exit()
     } else {
       Vue.prototype.Router.go(-1)
+    }
+  }
+
+
+  /**
+   * onChangedVolume
+   * @param curVolume
+   */
+  onChangedVolume(curVolume){
+    if (curVolume === 0){
+      //  mute log
+      Vue.$store.state.volume = curVolume;
+    } else {
+      //소리가 있을때
+      Vue.$store.state.volume = curVolume;
     }
   }
 }
