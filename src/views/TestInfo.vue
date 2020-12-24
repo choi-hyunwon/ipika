@@ -2,7 +2,7 @@
   <div class="wrap">
     <div class="header ivory bg-ivory d-flex">
       <a href="#" v-b-modal.goBackPopup class="symbol"><img src="@/assets/images/common/Symbol@2x.png"
-                                                                            alt=""></a>
+                                                            alt=""></a>
       <div class="box-close">
         <Confirm v-slot="slotProps"
                  :complete-text="`파블로 서비스를 </br> 종료하시겠습니까?`"
@@ -17,8 +17,14 @@
       <div class="symbol"><img src="@/assets/images/common/Symbol@2x.png" style="width: 8rem;"></div>
       <div class="title"><img src="@/assets/images/common/img_testinfo_title@2x.png" style="width: 67rem"></div>
       <div class="desc"><img src="@/assets/images/common/img_testinfo_desc@2x.png" style="width: 86.8rem"></div>
-      <div class="btn-group">
-        <router-link to="/canvas?page=diagnose" class="btn btn-block btn-dark" @click="setLog">AI 입회 테스트 시작하기</router-link>
+      <div class="btn-group" v-if="shortStory">
+        <input type="text" class="form-control active" id="text" v-model="age" placeholder="여기에 입력해주세요">
+        <router-link to="/canvas?page=diagnose" class="btn btn-block btn-dark" @click="setLog">AI 입회 테스트 시작하기
+        </router-link>
+      </div>
+      <div class="btn-group" v-else>
+        <router-link to="/canvas?page=diagnose" class="btn btn-block btn-dark" @click="setLog">AI 입회 테스트 시작하기
+        </router-link>
       </div>
     </div>
   </div>
@@ -32,8 +38,14 @@ export default {
   components: {
     Confirm
   },
+  data() {
+    return {
+      age: null,
+      shortStory: true
+    }
+  },
   methods: {
-    setLog(){
+    setLog() {
       this.Android.setLog('action=NavigatedTo&depth1=진단테스트&execute=Y&edApp=파블로')
     }
   }
@@ -65,7 +77,8 @@ export default {
     text-align: center;
     margin-bottom: 10.7rem;
   }
-  .btn-group{
+
+  .btn-group {
     width: 48rem;
     display: block;
     margin: 0 auto
