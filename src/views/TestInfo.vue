@@ -17,9 +17,10 @@
       <div class="symbol"><img src="@/assets/images/common/Symbol@2x.png" style="width: 8rem;"></div>
       <div class="title"><img src="@/assets/images/common/img_testinfo_title@2x.png" style="width: 67rem"></div>
       <div class="desc"><img src="@/assets/images/common/img_testinfo_desc@2x.png" style="width: 86.8rem"></div>
-      <div class="btn-group" v-if="shortStory">
-        <input type="text" class="form-control active" id="text" v-model="age" placeholder="여기에 입력해주세요">
-        <router-link to="/canvas?page=diagnose" class="btn btn-block btn-dark" @click="setLog">AI 입회 테스트 시작하기
+      <div class="desc_detail"><img src="@/assets/images/common/img_testinfo_freedate@2x.png" style="width: 69rem"></div>
+      <div class="btn-group clearfix" v-if="shortStory">
+        <input type="text" class="form-control active" id="text" v-model="age" placeholder="나이를 입력해주세요">
+        <router-link to="/canvas?page=diagnose" class="btn btn-block btn-dark btn-start" @click="setLog">AI 입회 테스트 시작하기
         </router-link>
       </div>
       <div class="btn-group" v-else>
@@ -75,13 +76,39 @@ export default {
 
   .desc {
     text-align: center;
-    margin-bottom: 10.7rem;
+    margin-bottom: 5rem;
+  }
+  .desc_detail{
+    text-align: center;
+    margin-bottom: 3.2rem;
   }
 
   .btn-group {
-    width: 48rem;
+    width: 60rem;
     display: block;
-    margin: 0 auto
+    margin: 0 auto;
+    flex-wrap: wrap;
+  }
+  .btn-group .form-control{
+    width: 30.6rem;
+    height: 8rem;
+    float: left;
+    margin-right: 1rem;
+    border-radius: 0.8rem;
+    padding: 2rem 1.28rem;
+    font-size: 2.4rem;
+    background-color: #f2f2f2;
+    border: 1px solid #ddd;
+  }
+  .form-control:focus{
+    box-shadow: none;
+  }
+  .btn-group input::placeholder {
+    color: #a5a5a5;
+  }
+  .btn-group .btn-start{
+    width: 28.2rem ;
+    float: left;
   }
 }
 

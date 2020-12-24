@@ -5,9 +5,18 @@
 }
 
 .modal-header {
-  justify-content: normal;
+  display: block;
+  &:after{
+    content:"";
+    display:block;
+    clear:both;
+  }
+  .symbol{
+    float: left;
+  }
 
   .modal-title {
+    float: left;
     font-size: 3.2rem;
     margin-left: 3rem;
     letter-spacing: -0.3px;
