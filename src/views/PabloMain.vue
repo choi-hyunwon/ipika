@@ -29,7 +29,7 @@
             <router-link to="/" class="btn-close"></router-link>
           </div>
         </div>
-        <div class="col col-6 right">
+        <div class="col col-6 right">0
           <Confirm v-slot="slotProps"
                    :complete-text="`파블로 서비스를 </br> 종료하시겠습니까?`"
                    :cancelText="`아니요`"
@@ -44,8 +44,6 @@
               <div class="img"><img :src=menu.imgUrl alt=""></div>
             </swiper-slide>
           </swiper>
-
-
 
         </div>
       </div>

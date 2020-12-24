@@ -50,7 +50,7 @@ export default new Vuex.Store({
       // 'Content_Language': '',
       // 'device_type': ''
       'name': '홈런초등테스트',
-      'user_id': 'test111111711',
+      'user_id': 'test1111117d111',
       'user_auth_key': 'abcdefghijklmnopqrstuvwxyz0123456789',
       'Content_Language': 'ko',
       'device_type': '1001'

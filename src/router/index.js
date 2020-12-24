@@ -24,6 +24,7 @@ import Park from '@/views/Park'
 import TestInfo from '@/views/TestInfo'
 
 import Testscroll from '@/views/Testscroll'
+import AudioConstant from '@/components/AudioConstant'
 
 const requireAuth = () => (from, to, next) => {
   if(from.path === '/canvas' || from.path === '/pabloCanvas') {
@@ -124,6 +125,11 @@ export const routes = [
     path:'/Testscroll',
     name:'Testscroll',
     component: Testscroll
+  },
+  {
+    path : '/audioTest',
+    name : 'audioTest',
+    component : AudioConstant
   }
 ]
 

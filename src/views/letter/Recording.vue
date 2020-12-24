@@ -75,8 +75,6 @@
              @click="playOrPause"
         />
 
-
-
         <!-- 녹음 시작 또는 녹음 중지 버튼 -->
         <audio-recorder
           ref="recorder"
@@ -282,7 +280,7 @@ export default {
     goNext () {
       if(this.page === 'free') {
         this.$bvModal.show('submissionFree')
-      } else {
+      }else{
         this.$router.push('/Listening')
       }
     },
@@ -292,9 +290,8 @@ export default {
       this.setProgressColor()
     },
     stopRecord () {
-      this.ing = false
-      this.record = false
-      this.lineBar.set(0)
+      this.ing=false
+      this.record=false
       setTimeout(() => {
         this.setRecentRecord()
       }, 500)
@@ -303,7 +300,6 @@ export default {
 
     async setRecentRecord () {
       const recorder = this.$refs.recorder
-
       // this.arPlayer = recorder.$children[2]
       recorder.$children.forEach(val => {
         if(val.$el.className === 'ar-player') {
@@ -324,11 +320,13 @@ export default {
           await this.fetchRecording()
           this.audioSource = this.userAudio.audioUrl
           this.setAudio()
+          // this.ing = false
+          // this.record = false
+          this.lineBar.set(0)
+
         }
       }
     },
-
-
     async fetchRecording () {
       try {
         //파일 테스트 : 삭제 예정
@@ -355,7 +353,7 @@ export default {
       const result = await this.getSubmissionFree(data)
 
       if (result.code === '0000') {
-        this.$bvModal.show('submissionFree')
+        // this.$bvModal.show('submissionFree')
         this.record = false
         this.audioSource = result.audioUrl
         this.setAudio()
