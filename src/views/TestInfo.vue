@@ -19,12 +19,11 @@
       <div class="desc"><img src="@/assets/images/common/img_testinfo_desc@2x.png" style="width: 86.8rem"></div>
       <div class="desc_detail"><img src="@/assets/images/common/img_testinfo_freedate@2x.png" style="width: 69rem"></div>
       <div class="btn-group clearfix" v-if="shortStory">
-        <input type="text" class="form-control active" id="text" v-model="age" placeholder="나이를 입력해주세요">
-        <router-link to="/canvas?page=diagnose" class="btn btn-block btn-dark btn-start" @click="setLog">AI 입회 테스트 시작하기
-        </router-link>
+        <input type="text" class="form-control active" v-model="onlyNumber" maxlength="2" placeholder="나이를 입력해주세요">
+        <a href="#" class="btn btn-block btn-dark btn-start" @click="checkAge">AI 입회 테스트 시작하기</a>
       </div>
       <div class="btn-group" v-else>
-        <router-link to="/canvas?page=diagnose" class="btn btn-block btn-dark" @click="setLog">AI 입회 테스트 시작하기
+        <router-link to="/canvas?page=diagnose" class="btn btn-block btn-dark">AI 입회 테스트 시작하기
         </router-link>
       </div>
     </div>
@@ -33,6 +32,7 @@
 
 <script>
 import Confirm from '@/components/popup/Confirm'
+import {mapGetters} from "vuex";
 
 export default {
   name: 'TestInfo',
@@ -41,16 +41,42 @@ export default {
   },
   data() {
     return {
-      age: null,
+      onlyNumber: null,
       shortStory: true
     }
+  },
+  computed: {
+    ...mapGetters({
+      session: 'getSession'
+    }),
+
   },
   methods: {
     setLog() {
       this.Android.setLog('action=NavigatedTo&depth1=진단테스트&execute=Y&edApp=파블로')
+    },
+    checkAge(){
+      const age = Number(this.onlyNumber)
+      console.log(this.onlyNumber);
+
+      if (age < 3 || age > 13) {
+        alert('잘못된 나이를 입력하셨습니다.')
+      } else {
+        this.$router.push('/canvas?page=diagnose')
+      }
+    },
+    checkE(e){
+      console.log(e);
+    },
+
+  },
+  watch: {
+    onlyNumber () {
+      return this.onlyNumber = this.onlyNumber.replace(/[^0-9]/g, '')
     }
   }
 }
+
 </script>
 
 <style lang="scss" scoped>
