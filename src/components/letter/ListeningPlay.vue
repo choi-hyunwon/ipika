@@ -53,6 +53,7 @@ export default {
   },
   created () {
     this.audio = new Audio(this.audioList[this.focusIdx].recordingAudioUrl)
+    console.log(this.audio)
     this.options.duration = this.audioList[this.focusIdx].audioPlaytime *1000
   },
   mounted () {
@@ -96,15 +97,18 @@ export default {
     play () {
       if (!this.toggleButton) {
         this.audio.play()
-        this.lineBar.animate(this.isPause? 1 + this.lineBar.value() : 1)
+        // this.lineBar.animate(this.isPause? 1 + this.lineBar.value() : 1)
+        this.lineBar.animate(1)
         this.audio.onended = () => {
           this.toggleButton = false
           this.isPause=false
           this.lineBar.set(0)
         }
       }else {
-        this.lineBar.stop()
-        this.audio.pause()
+        // this.lineBar.stop()
+        // this.audio.pause()
+        this.lineBar.set(0)
+        this.audio.load()
         this.isPause=true
       }
       this.toggleButton = !this.toggleButton

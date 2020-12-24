@@ -17,6 +17,9 @@
     </div>
     <div class="list" v-else>
       <div class="clearfix btns_group">
+        <audio class="player" ref="player">
+          <source :src=url ref="source">
+        </audio>
         <div class="float-left btn-left">
           <b-button v-for="(filterItem, index) in filter"
                     :key="index"
@@ -33,6 +36,7 @@
           <b-form-select v-model="selected" @change="setSort" :options="options"></b-form-select>
         </div>
       </div>
+
       <div class="voice-section">
         <ul class="voices" v-if="list.length > 0">
           <li class="voice-g" v-for="(item, index) in list" v-model="allSize">
@@ -52,7 +56,7 @@
             </div>
             <div class="box_title">
 <!--              <div class="img_title">{{ item.stageName || '스테이지' }} {{ item.stageId || '단계' }}</div>-->
-              <div class="img_title">{{ item.createdDate.slice(0, 10).replaceAll('-','.') }}</div>
+              <div class="img_title">{{ item.createdDate.slice(0, 10) }}</div>
               <div class="img_desc">{{ item.title || '제목을 불러 올수 없습니다' }}</div>
             </div>
             <button class="icon_delete" @click="openDelete(item.userAudioId, index)"><img src="@/assets/images/common/btn_delete@2x.png" alt="" class="img-m"></button>
@@ -87,6 +91,7 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import Alert from '@/components/popup/Alert'
+import AudioConstant from '@/components/AudioConstant'
 
 export default {
   name: 'myGalleryVoice',
@@ -95,6 +100,7 @@ export default {
       isLoading :false,
       focusIdx : 0,
       empty: null,
+      url : '',
       activeIndex: 0,
       nSize : [0,0,0],
       isPlay : false,
@@ -130,6 +136,7 @@ export default {
     }
   },
   components:{
+    AudioConstant,
     Alert
   },
   mounted () {
@@ -151,7 +158,6 @@ export default {
         return this.empty
       }
     },
-
   },
   methods: {
     ...mapActions({
@@ -211,28 +217,47 @@ export default {
       }
     },
     onToggle(index){
-      if(index!==this.focusIdx){
-        this.focusIdx = index
-        this.audio = new Audio(this.list[index].audioUrl)
-      }
       let elementById = document.getElementById("play_bar" + index)
-      console.log(elementById)
+      let gettingProgress = document.getElementById("play_bar" + this.focusIdx)
+      if(index!==this.focusIdx){
+        gettingProgress.classList.remove('active')
+        gettingProgress.style.transitionDuration = "0s";
+        this.focusIdx = index
+        this.play=false
+      }
+      this.url = this.list[index].audioUrl
+      this.$refs.player.load()
       if(!this.play){
-        this.audio.play()
-        this.play = true
         elementById.classList.add('active')
         elementById.style.transitionDuration = this.list[index].audioPlaytime + "s";
-        this.audio.onended = ()=>{
+        this.$refs.player.play()
+        this.play = true
+        this.$refs.player.onended = ()=>{
           this.play=false
           elementById.classList.remove('active')
           elementById.style.transitionDuration = "0s";
         }
       }else{
-        this.audio.pause()
+        this.$refs.player.pause()
         this.play = false
         elementById.classList.remove('active')
         elementById.style.transitionDuration = "0s";
       }
+    },
+    // progressActive(progress,playtime){
+    //   if(progress.class){
+    //     progress.classList.remove('active')
+    //     progress.classList.transitionDuration = "0s";
+    //   }else{
+    //     console.log(progress.class)
+    //     progress.classList.add('active')
+    //     progress.style.transitionDuration = playtime + "s";
+    //   }
+    // },
+    durationActive(){
+      let elementById = document.getElementById("play_bar" + this.activeIndex)
+      elementById.classList.remove('active')
+      elementById.style.transitionDuration = "0s";
     },
     openDelete(pictureId, index){
       this.selectId = pictureId
@@ -249,15 +274,16 @@ export default {
             self.$refs.deleteComfirm.type = 'common'
             self.getUserGalleryMypicture()
               .then(data => {
-                console.log('getUserGalleryMypictureVue', data.audios)
+                // console.log('getUserGalleryMypictureVue', data.audios)
                 self.list = data.audios
                 self.allSize();
+                self.setFilter(self.activeIndex)
               })
           } else alert(result.message)
         })
     },
     timeChange(time){
-      console.log(time)
+      // console.log(time)
       let min = Math.floor(time/60);
       let sec = 0;
       if (min > 0) {

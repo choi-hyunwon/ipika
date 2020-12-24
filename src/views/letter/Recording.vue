@@ -76,8 +76,6 @@
              @click="playOrPause"
         />
 
-
-
         <!-- 녹음 시작 또는 녹음 중지 버튼 -->
         <audio-recorder
           ref="recorder"
@@ -131,7 +129,7 @@
         <p class="text-sm">장치 설치를 하고 다시 해볼까요?</p>
       </template>
       <template #modal-footer="{ cancel }">
-        <router-link to="/Listening" style="display:block; width: 100%;">
+        <router-link :to=" link() " style="display:block; width: 100%;">
           <span class="btn btn-block btn-black" >확인</span>
         </router-link>
       </template>
@@ -160,7 +158,7 @@
 import LetterHeader from '@/components/letter/LetterHeader'
 import Confirm from '@/components/popup/Confirm'
 import Alert from '@/components/popup/Alert'
-import { mapActions, mapGetters, mapMutations } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'recording',
@@ -274,6 +272,13 @@ export default {
       getSubmissionFree: 'getSubmissionFree',
       getLetter: 'getLetter'
     }),
+    link(){
+      if (this.page===''){
+        return  '/Listening'
+      } else if (this.page==='free'){
+        return  '/PabloMain'
+      }
+    },
     goBack () {
       // this.$router.push('/Watching')
       this.$router.go(-1)
@@ -281,7 +286,7 @@ export default {
     goNext () {
       if(this.page === 'free') {
         this.$bvModal.show('submissionFree')
-      } else {
+      }else{
         this.$router.push('/Listening')
       }
     },
@@ -291,9 +296,8 @@ export default {
       this.setProgressColor()
     },
     stopRecord () {
-      this.ing = false
-      this.record = false
-      this.lineBar.set(0)
+      this.ing=false
+      this.record=false
       setTimeout(() => {
         this.setRecentRecord()
       }, 500)
@@ -302,7 +306,6 @@ export default {
 
     async setRecentRecord () {
       const recorder = this.$refs.recorder
-
       // this.arPlayer = recorder.$children[2]
       recorder.$children.forEach(val => {
         if(val.$el.className === 'ar-player') {
@@ -323,11 +326,13 @@ export default {
           await this.fetchRecording()
           this.audioSource = this.userAudio.audioUrl
           this.setAudio()
+          // this.ing = false
+          // this.record = false
+          this.lineBar.set(0)
+
         }
       }
     },
-
-
     async fetchRecording () {
       try {
         //파일 테스트 : 삭제 예정
@@ -354,7 +359,7 @@ export default {
       const result = await this.getSubmissionFree(data)
 
       if (result.code === '0000') {
-        this.$bvModal.show('submissionFree')
+        // this.$bvModal.show('submissionFree')
         this.record = false
         this.audioSource = result.audioUrl
         this.setAudio()
