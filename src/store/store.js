@@ -18,7 +18,29 @@ export default new Vuex.Store({
    * this.$store.state.CONSTANTS;
    */
   state: {
-    isDummy : false,
+    config : {
+      isDummy : false,
+
+      /**
+       * 인터넷 익스플로러 체크
+       */
+      isApp : false,
+
+      /**
+       * 인터넷 익스플로러 체크
+       */
+      isIE : null,
+      isChrome : null,
+      isChromeIOS : null,
+      isIOS : null,
+
+      /**
+       * 짧은 시나리오 처리
+       * 진단 테스트만 할 수있도록 철리
+       */
+      isDemo : false,
+    },
+
     /**
      * userinfo는 단말기(안드로이드)기에서 받아온다.
      *
@@ -100,6 +122,9 @@ export default new Vuex.Store({
    * this.$store.getters.CONSTANTS
    */
   getters: {
+    getConfig: state => {
+      return state.config
+    },
     getUserInfo: state => {
       return state.userinfo
     },

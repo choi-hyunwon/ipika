@@ -9,6 +9,8 @@ import AudioRecorder from 'vue-audio-recorder'
 // import AudioVisual from 'vue-audio-visual'
 import { Android } from './assets/js/android'
 import VueProgress from 'vue-progress'
+import browserDetect from "vue-browser-detect-plugin";
+
 
 Vue.config.productionTip = false
 
@@ -17,10 +19,11 @@ Vue.prototype.$EventBus = new Vue();
 Vue.prototype.Android = new Android()
 Vue.prototype.Router = new Router({ mode : 'history', routes : routes })
 
+Vue.use(browserDetect)
 Vue.use(BootstrapVue)
 Vue.use(AudioRecorder)
 // Vue.use(AudioVisual)
-Vue.use(Router);
+Vue.use(Router)
 
 const router = new Router({
   mode : 'history',
