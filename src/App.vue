@@ -20,9 +20,9 @@ export default {
   data() {
     return {
       dummy: false, //더미 데이터 사용
-      demo: true, //데모용 빌드
+      demo: false, //데모용 빌드
       app: false, //웹 유무
-      dev: true, //API서버
+      dev: false, //API서버
     }
   },
   created() {
