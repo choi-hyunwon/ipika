@@ -7,9 +7,26 @@
 <script>
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import { mapGetters } from 'vuex'
 
 export default {
-  name: 'App'
+  name: 'App',
+  computed:{
+    ...mapGetters({
+      Config: 'getConfig'
+    })
+  },
+  created () {
+    const demo = true
+    const app = false
+    const dev = true
+
+    this.Config.isDemo = demo
+    this.Config.isIE = this.$browserDetect.isIE
+    this.Config.isChrome = this.$browserDetect.isChrome
+    this.Config.isChromeIOS = this.$browserDetect.isChromeIOS
+    this.Config.isIOS = this.$browserDetect.isIOS
+  }
 }
 </script>
 

@@ -1,5 +1,5 @@
 <template>
-  <transition name="fade">
+  <div>
     <div class="wrap" v-if="isLoading">
       <div class="header d-flex">
         <div v-b-modal.goBackPopup class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt=""></div>
@@ -9,7 +9,7 @@
                    :cancelText="`아니요`"
                    :okText="`네`">
             <div class="btn-close" @click="globalUtils.confirm(slotProps,'checkRed')"><img
-              src="@/assets/images/common/close@2x.png" alt="" ></div>
+              src="@/assets/images/common/close@2x.png" alt=""></div>
           </Confirm>
         </div>
       </div>
@@ -22,29 +22,53 @@
 
         <div class="btn-group">
           <router-link v-if="resultCode=== '0000'" to="/PabloMain" class="btn btn-dark">시작하기</router-link>
-          <router-link v-else to="/TestInfo" class="btn btn-dark">시작하기</router-link>
+          <router-link v-else to="/TestInfo" class="btn btn-dark" :class="{'disabled': Config.isIE}">시작하기</router-link>
         </div>
       </div>
     </div>
-  </transition>
+    <b-modal id="ieAlert" centered title="ieAlert" modal-class="normalPopup">
+      <template #modal-header>
+        <div class="symbol"><img src="@/assets/images/common/check_red@2x.png"></div>
+      </template>
+      <p class="text" style="margin-bottom: 12px;">해당 브라우저를 지원하지 않습니다</p>
+      <p class="text-sm">파블로는 최신 기술인 WebGL을 사용해서 만들어졌습니다<br>
+        해당 브라우저는 WebGL을 지원하지 않습니다<br>
+        <span class="f_blue">구글 크롬</span>, <span class="f_blue">사파리</span>, <span class="f_blue">파이어폭스</span> 또는 <span class="f_blue">엣지</span> 브라우저를 사용해 주세요
+      </p>
+      <template #modal-footer="{ cancel }">
+        <b-button class="btn btn-black btn-block" @click="cancel()">닫기</b-button>
+      </template>
+    </b-modal>
+  </div>
 </template>
 
 <script>
-import { mapActions, mapMutations } from 'vuex'
+import {mapActions, mapGetters, mapMutations} from 'vuex'
 import Confirm from '@/components/popup/Confirm'
 
 export default {
   name: 'Home',
-  components: { Confirm },
-  data () {
+  components: {
+    Confirm
+  },
+  data() {
     return {
       resultCode: '',
       isLoading: false
     }
   },
+  computed: {
+    ...mapGetters({
+      Config: 'getConfig'
+    })
+  },
   mounted () {
     this.isLoading = true
     this.loadAndroid()
+
+    if (this.Config.isIE) {
+      this.$bvModal.show('ieAlert')
+    }
   },
   methods: {
     ...mapActions({
@@ -53,13 +77,13 @@ export default {
     ...mapMutations({
       setSession: 'setSession'
     }),
-    fetchDiagnoseResult () {
+    fetchDiagnoseResult() {
       this.getDiagnoseResult()
         .then(result => {
           this.resultCode = result
         })
     },
-    loadAndroid () {
+    loadAndroid() {
       try {
         const Vari = this.Android.getInitVariables()
         const obj = JSON.parse(Vari)
@@ -80,10 +104,12 @@ export default {
     background-color: #fff;
     border: none;
     height: 8rem;
+
     .box-close {
       border: none;
-      .btn-close{
-       padding-top: 2rem;
+
+      .btn-close {
+        padding-top: 2rem;
         cursor: pointer;
       }
     }
@@ -107,6 +133,7 @@ export default {
     width: 100%;
     height: calc(100% - 8rem);
     padding-top: 29.4rem;
+
     .text-area {
 
       text-align: center;
@@ -147,6 +174,19 @@ export default {
       }
     }
   }
+}
+
+.modal-dialog {
+  max-width: auto !important;
+}
+.btn-black {
+  background-color: #141414;
+}
+.text-sm {
+  color: #a5a5a5 !important;
+}
+.f_blue {
+  color: #007bff !important;
 }
 
 </style>
