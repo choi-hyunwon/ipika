@@ -91,7 +91,7 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import Alert from '@/components/popup/Alert'
-import AudioConstant from '@/components/AudioConstant'
+// import AudioConstant from '@/components/`AudioConstant`'
 
 export default {
   name: 'myGalleryVoice',
@@ -136,7 +136,7 @@ export default {
     }
   },
   components:{
-    AudioConstant,
+    // AudioConstant,
     Alert
   },
   mounted () {

@@ -9,7 +9,7 @@ import AudioRecorder from 'vue-audio-recorder'
 // import AudioVisual from 'vue-audio-visual'
 import { Android } from './assets/js/android'
 import VueProgress from 'vue-progress'
-import browserDetect from "vue-browser-detect-plugin";
+import browserDetect from "vue-browser-detect-plugin"
 
 
 Vue.config.productionTip = false

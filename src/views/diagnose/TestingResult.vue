@@ -21,7 +21,7 @@
         <div class="btn-other">
           <a href="#" @click="menu.popup = !menu.popup" class="btn btn-blue">다른 스테이지 더 알아보기</a>
         </div>
-        <div class="btn-group" v-if="!demo">
+        <div class="btn-group" v-if="!isDemo">
           <router-link to="/PabloMain" class="btn btn-dark">무료체험 시작하기</router-link>
         </div>
       </div>
@@ -59,8 +59,12 @@ export default {
   },
   computed: {
     ...mapGetters({
-      submission : 'getSubmission'
-    })
+      submission : 'getSubmission',
+      config : 'getConfig'
+    }),
+    isDemo(){
+      return this.config.isDemo
+    }
   }
 }
 </script>

@@ -66,16 +66,12 @@ export default new Vuex.Store({
      */
 
     session: {
-      // 'name': '',
-      // 'user_id': '',
-      // 'user_auth_key': '',
-      // 'Content_Language': '',
-      // 'device_type': ''
-      'name': '승아',
-      'user_id': Math.random(99999999) * 10000000000000000,
-      'user_auth_key': 'abcdefghijklmnopqrstuvwxyz0123456789',
-      'Content_Language': 'ko',
-      'device_type': '1002'
+      name: '',
+      user_id: '',
+      user_auth_key: '',
+      Content_Language: '',
+      device_type: '',
+      api_url: ''
     },
     subject: {},
     userGallery: {},

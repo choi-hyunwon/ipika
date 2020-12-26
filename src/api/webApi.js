@@ -19,7 +19,7 @@ export default class WebApi {
     }
 
     return axios({
-      url: `https://ec2-15-165-50-157.ap-northeast-2.compute.amazonaws.com/${url}`,
+      url: store.getters.getSession.api_url + url,
       headers: {
         user_id: store.getters.getSession.user_id,
         user_auth_key: store.getters.getSession.user_auth_key,
