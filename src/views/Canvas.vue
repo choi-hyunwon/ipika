@@ -197,8 +197,10 @@ export default {
         }
         //진단학습
         if (self.page === 'diagnose') {
+          const age = localStorage.getItem('age')
           const data = new FormData()
           data.append('userPicture', blob, 'canvas.png')
+          data.append('age',age)
           self.fetchSubmission(data) //진단 테스트 드로잉 제출 API
           //학습교제
         } else if (self.page === 'letter') {

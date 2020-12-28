@@ -29,7 +29,7 @@ export class Android {
       window.android.sendTTS(text)
     } catch (e){
       console.log('TTS error')
-      console.log(e)
+      console.log(text)
     }
   }
 

@@ -23,7 +23,7 @@
       <myGalleryInfo v-on:popup="settingPopup"></myGalleryInfo>
       <div class="tab-section">
         <b-tabs justified>
-          <b-tab title="내그림" title-link-class="mytab">
+          <b-tab title="내 그림" title-link-class="mytab">
             <myGalleryPicture></myGalleryPicture>
           </b-tab>
           <b-tab title="내 녹음 듣기" title-link-class="mytab">
@@ -184,7 +184,7 @@ export default {
         })
     },
     goBack () {
-      this.$router.go(-1)
+      this.$router.push('/PabloMain')
     },
     onClick (index) {
       if (this.activeIndex === index) {

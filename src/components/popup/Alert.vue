@@ -40,7 +40,8 @@
     <b-modal ref="alertModal" v-if="type==='diagnose'" no-close-on-backdrop id="oderPopup" centered title="안내" modal-class="textPopup" ok-variant="black btn-block" v-model="showAlert">
       <template #modal-header>
         <div class="symbol"><img src="@/assets/images/common/Symbol@2x.png" alt=""></div>
-        <div class="modal-title">환영해요 {{ getSession.name }}님</div>
+<!--        <div class="modal-title">환영해요 {{ getSession.name }}님</div>-->
+        <div class="modal-title">환영해요</div>
       </template>
       <p class="text">{{text}}</p>
       <template #modal-footer="{ cancel }">
@@ -147,11 +148,15 @@ export default {
     toggleAlert(type,topic){
       this.showAlert = !this.showAlert;
       this.type = type;
+
+      if (type === 'subject') {
+        this.Android.tts(this.$store.getters.getLetter.stepSubejct)
+      }
     },
     timeStart(){
       this.$EventBus.$emit('bgPopup')
       this.$refs['alertModal'].hide()
-      this.Android.tts("파블로 캔버스 툴에 대해 간단하게 설명해드릴게요")
+      this.Android.tts("파블로 캔버스 툴에 대해 간단하게 설명해드릴게요 화면을 터치하면 가이드가 사라져요")
     },
     setPlayerOptions(){
       this.setPlayerSize({width: 1065, height: 666})
