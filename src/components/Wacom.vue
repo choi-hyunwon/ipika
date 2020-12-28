@@ -28,20 +28,26 @@
         </div>
       </div>
     </div>
-    <nav class="nav" :class="{'show': drawer === true, 'hide': drawer=== false}" style="z-index: 100;"><!-- show/hide -->
+    <nav class="nav show" :class="{'hide': drawer=== false, 'visible': isLoadingGuide=== true}" style="z-index: 100; opacity:0"><!-- show/hide -->
       <div class="inner">
         <button class="btn-drawer" @click="toggleDrawer">
           <img v-if="drawer === true" src="@/assets/images/common/slide_down@2x.png" alt="">
           <img v-else src="@/assets/images/common/slide_up@2x.png" alt="">
         </button>
         <div class="tool-wrap">
-          <div class="background-color">
+          <div class="background-color" v-if="page==='diagnose' || page===undefined">
             <button class="color" id="paper_01" style="background-color: #ffffff"
                     @click="setBgColorSelect"
             ></button>
             <button class="color" id="paper_02" style="background-color: #2f2f2f"
                     @click="setBgColorSelect"
             ></button>
+          </div>
+          <div class="background-color" v-if="page==='letter'">
+            <button class="colorPickerLetter"
+                    @click='setColorSelect($event); isPickerOpen("letter")'
+                    v-bind:style="{ background: colors.hex }"
+            ><img src="@/assets/images/common/ico_colorpicker.png" width="100%"></button>
           </div>
           <div class="tool-box">
             <div class="pallet">
@@ -63,13 +69,17 @@
               <button class="color" style="background-color: #8551d3"
                       @click="setColorSelect"
               ></button>
-              <button class="color selected" style="background-color: #444444"
+              <button v-if="page==='letter'" class="color" style="background-color: #FFFFFF"
                       @click="setColorSelect"
               ></button>
-              <button class="color colorpicker"
-                      @click='setColorSelect($event); isPickerOpen();'
-                      v-bind:style="{ background: colors.hex }"
+
+              <button class="color selected" style="background-color: #000000"
+                      @click="setColorSelect"
               ></button>
+              <button v-if="page==='diagnose' || page===undefined" class="color colorpicker selected"
+                      @click='setColorSelect($event); isPickerOpen()'
+                      v-bind:style="{ background: colors.hex }"
+              ><img src="@/assets/images/common/ico_colorpicker.png" width="100%"></button>
             </div>
             <div class="tool">
               <button id="Pencil" @click="setTool" class="tool-item pencil selected">
@@ -275,6 +285,69 @@
                     </linearGradient>
                   </defs>
                 </svg>
+              </button>
+              <button id="Crayon" @click.stop="setTool"  class="tool-item brush_style2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="80" height="130" fill="none" viewBox="0 0 80 130">
+                  <path fill="url(#paint0_linear60)" d="M18 67H62V172H18z"/>
+                  <path fill="url(#paint1_linear60)" d="M18 75H62V79H18z"/>
+                  <path fill="url(#paint2_linear60)" d="M18 82H62V86H18z"/>
+                  <path fill="url(#paint3_linear60)" d="M32.243 19.737L18.224 65.504C18.076 65.99 18 66.493 18 67h44c0-.507-.075-1.011-.224-1.496L47.757 19.737C46.713 16.327 43.565 14 40 14c-3.565 0-6.713 2.328-7.757 5.737z"/>
+                  <mask id="oq0nz8ncfa" width="44" height="53" x="18" y="14" maskUnits="userSpaceOnUse">
+                    <path fill="url(#paint4_linear60)" d="M32.244 19.737L18.216 65.56c-.143.467-.216.953-.216 1.441h44c0-.488-.073-.974-.216-1.441L47.756 19.737C46.713 16.328 43.566 14 40 14c-3.565 0-6.713 2.328-7.756 5.737z"/>
+                  </mask>
+                  <g mask="url(#oq0nz8ncfa)">
+                    <path fill="#181818" d="M16 14h51v53H16V14z"/>
+                    <path class="topColor"  fill="url(#paint5_linear60)" d="M16 14h51v53H16V14z"/>
+                  </g>
+                  <defs>
+                    <linearGradient id="paint0_linear60" x1="18" x2="62" y1="121.886" y2="121.886" gradientUnits="userSpaceOnUse">
+                      <stop stop-color="#DBDBDB"/>
+                      <stop offset=".064" stop-color="#EBEBEB"/>
+                      <stop offset=".178" stop-color="#DADADA"/>
+                      <stop offset=".488" stop-color="#F6F6F6"/>
+                      <stop offset=".757" stop-color="#EFEFEF"/>
+                      <stop offset="1" stop-color="#DDD"/>
+                    </linearGradient>
+                    <linearGradient id="paint1_linear60" x1="18" x2="62" y1="78.303" y2="78.303" gradientUnits="userSpaceOnUse">
+                      <stop stop-color="#2E2E2E"/>
+                      <stop offset=".047" stop-color="#393939"/>
+                      <stop offset=".146" stop-color="#212121"/>
+                      <stop offset=".573" stop-color="#5A5A5A"/>
+                      <stop offset=".906" stop-color="#2C2C2C"/>
+                      <stop offset="1" stop-color="#363636"/>
+                    </linearGradient>
+                    <linearGradient id="paint2_linear60" x1="18" x2="62" y1="85.303" y2="85.303" gradientUnits="userSpaceOnUse">
+                      <stop stop-color="#2E2E2E"/>
+                      <stop offset=".047" stop-color="#393939"/>
+                      <stop offset=".146" stop-color="#212121"/>
+                      <stop offset=".573" stop-color="#5A5A5A"/>
+                      <stop offset=".906" stop-color="#2C2C2C"/>
+                      <stop offset="1" stop-color="#363636"/>
+                    </linearGradient>
+                    <linearGradient id="paint3_linear60" x1="18" x2="62" y1="45.654" y2="45.654" gradientUnits="userSpaceOnUse">
+                      <stop stop-color="#DBDBDB"/>
+                      <stop offset=".064" stop-color="#EBEBEB"/>
+                      <stop offset=".178" stop-color="#DADADA"/>
+                      <stop offset=".488" stop-color="#F6F6F6"/>
+                      <stop offset=".757" stop-color="#EFEFEF"/>
+                      <stop offset="1" stop-color="#DDD"/>
+                    </linearGradient>
+                    <linearGradient id="paint4_linear60" x1="18" x2="62" y1="46.435" y2="46.435" gradientUnits="userSpaceOnUse">
+                      <stop stop-color="#DBDBDB"/>
+                      <stop offset=".064" stop-color="#EBEBEB"/>
+                      <stop offset=".178" stop-color="#DADADA"/>
+                      <stop offset=".488" stop-color="#F6F6F6"/>
+                      <stop offset=".757" stop-color="#EFEFEF"/>
+                      <stop offset="1" stop-color="#DDD"/>
+                    </linearGradient>
+                    <linearGradient id="paint5_linear60" x1="16" x2="67" y1="43.444" y2="43.444" gradientUnits="userSpaceOnUse">
+                      <stop stop-color="#1D1D1D"/>
+                      <stop offset=".497" stop-color="#585858"/>
+                      <stop offset="1" stop-color="#313131"/>
+                    </linearGradient>
+                  </defs>
+                </svg>
+
               </button>
               <button id="WaterBrush" @click.stop="setTool"  class="tool-item brush_style2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="80" height="173" fill="none" viewBox="0 0 80 173">
@@ -511,129 +584,7 @@
                   </defs>
                 </svg>
               </button>
-              <button id="Crayon" @click.stop="setTool"  class="tool-item brush_style2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="80" height="172" fill="none" viewBox="0 0 80 172">
-                  <g filter="url(#filter0_d60)">
-                    <path class="topColor" fill="url(#paint0_linear60)" d="M63 19.5c-.451-3.04-46.774-3.103-47 .5 0 6 5.554 37.66 6.005 44.527 0 .45.113.9.226 1.35.339.789 1.129.789 1.693 1.014l32.163 3.152C57.554 60.811 63.45 22.54 63 19.5z"/>
-                  </g>
-                  <path fill="url(#paint1_linear60)"
-                        d="M52.902 143.444c.1-.3.3-.7.3-1 .5-7.6 4.9-51.7 4.8-72.1 0-1.4 0-2.5-.1-3.1 0-.7-.1-1.2-.2-1.5-.7-2.4-2.9-3.2-6.9-3.5-.9-.1-1.8-.2-2.7-.2h-4.5c-.1-.1-4.2 0-8.4 0h.2-4.5c-.9 0-1.8.1-2.7.2-4 .3-6.2 1.1-6.9 3.5-.1.2-.1.8-.2 1.5 0 .7-.1 1.7-.1 3.1-.1 20.4 4.4 64.6 4.8 72.1 0 .4.1.8.3 1l2.6 4.8c.4.7.4 1.7 0 2.5l-2.2 4.1c-.4.8-.4 1.8 0 2.6l2 3.5c.4.7.4 1.8 0 2.6l-2.6 5c-.8 1.3-.3 3.4.9 3.4h25.5c1.2 0 1.7-2.1.9-3.4l-2.6-5c-.4-.8-.4-2 0-2.6l2-3.5c.4-.8.4-1.8 0-2.6l-2.2-4.1c-.4-.8-.4-1.8 0-2.5l2.5-4.8z"/>
-                  <g opacity=".06">
-                    <mask id="df5olicq4a" width="38" height="110" x="21" y="62" maskUnits="userSpaceOnUse">
-                      <path fill="url(#paint2_linear60)"
-                            d="M52.902 143.444c.1-.3.3-.7.3-1 .5-7.6 4.9-51.7 4.8-72.1 0-1.4 0-2.5-.1-3.1 0-.7-.1-1.2-.2-1.5-.7-2.4-2.9-3.2-6.9-3.5-.9-.1-1.8-.2-2.7-.2h-4.5c-.1-.1-4.2 0-8.4 0h.2-4.5c-.9 0-1.8.1-2.7.2-4 .3-6.2 1.1-6.9 3.5-.1.2-.1.8-.2 1.5 0 .7-.1 1.7-.1 3.1-.1 20.4 4.4 64.6 4.8 72.1 0 .4.1.8.3 1l2.6 4.8c.4.7.4 1.7 0 2.5l-2.2 4.1c-.4.8-.4 1.8 0 2.6l2 3.5c.4.7.4 1.8 0 2.6l-2.6 5c-.8 1.3-.3 3.4.9 3.4h25.5c1.2 0 1.7-2.1.9-3.4l-2.6-5c-.4-.8-.4-2 0-2.6l2-3.5c.4-.8.4-1.8 0-2.6l-2.2-4.1c-.4-.8-.4-1.8 0-2.5l2.5-4.8z"/>
-                    </mask>
-                    <g mask="url(#df5olicq4a)">
-                      <path fill="url(#paint3_linear60)"
-                            d="M35.545 47.118c-2.637 0-5.035-.122-8.152.244-3.237.365-6.594.61-7.433 4.024-.96 4.39 3.836 85.247 4.316 93.052 0 .366.12.61.24.976l2.397 4.512c.36.61.36 1.586 0 2.317l-2.038 3.781c-.36.732-.36 1.707 0 2.439l1.799 3.293c.36.732.36 1.707 0 2.439l-2.398 4.634c-.6 1.22-.12 3.171.959 3.171h28.653c1.079 0 1.558-1.951.839-3.171l-2.398-4.634c-.36-.732-.36-1.829 0-2.439l1.798-3.293c.36-.732.36-1.707 0-2.439l-2.038-3.781c-.36-.731-.36-1.707 0-2.317l2.398-4.512c.12-.244.24-.61.24-.976.48-7.927 5.515-89.637 4.196-93.906-.96-3.292-4.915-3.414-12.948-3.292-.12-.122-6.593-.122-10.43-.122z"/>
-                      <path fill="url(#paint4_linear60)"
-                            d="M53.767 68.826c.24-.366.24-13.293.84-18.537.12-.976.24-2.196-.36-3.05-.48-.73-1.319-.975-2.158-1.097-4.076-.732-7.673-1.707-11.629-.732-2.038.488-4.196.488-6.234.123-2.158-.366-5.395.243-7.433 1.707 7.553.366 25.296.122 25.895 1.463.36.732.48 13.903.48 18.66 0 .61-.36 1.097-.84 1.097-8.391-.122-16.304-.366-24.696 0 0 0 2.278 1.098 11.27 2.317 5.155.732 7.792 4.147 7.433 11.464-.24 3.78-1.32 46.465-3.237 59.88-.24 1.83-1.32 3.171-2.638 3.415-.959.122-2.158.244-2.997.244-.48 0-.84 0-1.199-.244-1.319-.732-1.558-3.293-1.558-5.244-.24-10.488-4.676-58.783-6.354-65.246 0-.122-.12-.244-.12-.366-.48-.732-2.158-3.659-3.357-5.244-.24-.244-.36-.61-.36-1.098.12-3.049.6-15.122.72-20.732 0-1.22-.72-1.83-1.559-1.342-.48.244-.72.732-.72 1.342.12 5.122 0 19.513-.12 21.342v.488c.72 3.536 7.314 33.172 7.794 72.563 0 1.342-.84 1.952-1.679 2.074-1.319.122-.452.447-1.65.081-1.44-.488-.72 2.683-.72 2.683 1.079.854-.028.772 1.171.65 6.834-.365 13.547-.609 20.38-.975.6 0 1.08-.122 1.56-.488.359-.488 8.631-97.077 8.272-97.93-.36-.976-2.158-2.074-2.158-.976.599 7.317-7.553 96.955-7.433 97.808 0 .122-.48.122-1.08.122-.599 0-.719-1.341-.719-2.317.48-11.952 4.316-69.27 7.194-73.905z"/>
-                      <path fill="url(#paint5_linear60)"
-                            d="M53.767 68.826c.24-.366.24-13.293.84-18.537.12-.976.24-2.196-.36-3.05-.48-.73-1.319-.975-2.158-1.097-4.076-.732-7.673-1.707-11.629-.732-2.038.488-4.196.488-6.234.123-2.158-.366-5.395.243-7.433 1.707 7.553.366 25.296.122 25.895 1.463.36.732.48 13.903.48 18.66 0 .61-.36 1.097-.84 1.097-8.391-.122-16.304-.366-24.696 0 0 0 2.278 1.098 11.27 2.317 5.155.732 7.792 4.147 7.433 11.464-.24 3.78-1.32 46.465-3.237 59.88-.24 1.83-1.32 3.171-2.638 3.415-.959.122-2.158.244-2.997.244-.48 0-.84 0-1.199-.244-1.319-.732-1.558-3.293-1.558-5.244-.24-10.488-4.676-58.783-6.354-65.246 0-.122-.12-.244-.12-.366-.48-.732-2.158-3.659-3.357-5.244-.24-.244-.36-.61-.36-1.098.12-3.049.6-15.122.72-20.732 0-1.22-1.559-1.342-1.559-1.342s-.72.732-.72 1.342c.12 5.122 0 19.513-.12 21.342v.488c.72 3.536 7.314 33.172 7.794 72.563 0 1.342-.84 1.952-1.679 2.074-1.34 0-.685-.095-1.808 0-1.686.477-.72 2.683-.72 2.683 1.08.853.13.853 1.33.731 6.833-.365 13.546-.609 20.38-.975.6 0 1.079-.122 1.558-.488.36-.488 8.632-97.077 8.273-97.93-.36-.976-2.158-2.074-2.158-.976.599 7.317-7.553 96.955-7.433 97.808 0 .122-.48.122-1.08.122-.599 0-.719-1.341-.719-2.317.48-11.952 4.316-69.27 7.194-73.905z"
-                            opacity=".8"/>
-                      <path fill="url(#paint6_linear60)" d="M53.648 156.878c-.12-.61-2.278-5.123-3.117-5.488-2.038-.976-20.26-.61-21.58 0-1.079.487-2.877 1.951-3.236 3.78-.36 1.83 20.74-2.561 27.933 1.708z"/>
-                      <path fill="url(#paint7_linear60)" d="M27.512 169.195c1.44.244 22.54-.366 26.375-.244-.12-.732-2.277-5.366-3.117-5.732-2.038-.975-20.74-.61-22.059 0-1.079.488-2.877 2.073-3.237 4.025-.36 1.707 1.08 1.829 2.038 1.951z"/>
-                      <path fill="url(#paint8_linear60)" d="M52.569 146.999c-.6-.853-1.559-.731-2.398-.61-7.912.976-15.945 1.586-23.857 1.952.96 2.195 2.877 2.561 4.675 2.561 4.796.122 16.785-.488 18.103-.244.36 0 .72.122 1.08 0 1.198-.488 1.918-2.195 2.397-3.659z" opacity=".5"/>
-                      <path fill="url(#paint9_linear60)" d="M52.929 157.853c-.6-.853-1.559-.731-2.398-.731-8.152.975-16.304 1.585-24.457 1.951.96 2.195 2.997 2.683 4.796 2.683 4.915.122 17.143-.488 18.462-.244.36.122.72.122 1.08 0 1.198-.244 1.917-2.073 2.517-3.659z" opacity=".5"/>
-                      <path fill="url(#paint10_linear60)" d="M25.715 47.483c-.24 6.464-.72 20.733-.6 20.977.12.122 3.956 4.512 4.796 9.268.36 2.317 5.634 62.32 6.353 64.759.72 2.317 2.758 1.951 4.077 1.585.839-.244 1.678-.732 2.158-1.707.48-1.098 2.397-25.611 2.997-44.636.36-11.342.719-21.098-1.439-23.415-4.196-4.39-11.39-4.269-16.904-5.61 8.032-.732 16.664-.976 24.697-.61.6 0 1.079-.488 1.079-1.22.48-4.268 0-16.83-.12-18.05-6.834-.365-26.255-1.463-27.094-1.34z"/>
-                      <path fill="url(#paint11_linear60)" d="M25.715 47.483c-.24 6.464-.72 20.733-.6 20.977.12.122 3.956 4.512 4.796 9.268.36 2.317 5.634 62.32 6.353 64.759.72 2.317 2.758 1.951 4.077 1.585.839-.244 1.678-.732 2.158-1.707.48-1.098 2.397-25.611 2.997-44.636.36-11.342.719-21.098-1.439-23.415-4.196-4.39-11.39-4.269-16.904-5.61 8.032-.732 16.664-.976 24.697-.61.6 0 1.079-.488 1.079-1.22.48-4.268 0-16.83-.12-18.05-6.834-.365-26.255-1.463-27.094-1.34z"/>
-                    </g>
-                  </g>
-                  <defs>
-                    <linearGradient id="paint0_linear60" x1="46.831" x2="36.368" y1="63.586" y2="11.543" gradientUnits="userSpaceOnUse">
-                      <stop stop-color="#904A02"/>
-                      <stop offset=".145" stop-color="#8B4702"/>
-                      <stop offset=".26" stop-color="#7D4002"/>
-                      <stop offset=".38" stop-color="#653401"/>
-                      <stop offset=".573" stop-color="#442301"/>
-                      <stop offset=".708" stop-color="#1A0D00"/>
-                      <stop offset="1"/>
-                    </linearGradient>
-                    <linearGradient id="paint1_linear60" x1="18" x2="61.003" y1="137.02" y2="137.02" gradientUnits="userSpaceOnUse">
-                      <stop stop-color="#DBDBDB"/>
-                      <stop offset=".064" stop-color="#EBEBEB"/>
-                      <stop offset=".178" stop-color="#DADADA"/>
-                      <stop offset=".488" stop-color="#F6F6F6"/>
-                      <stop offset=".757" stop-color="#EFEFEF"/>
-                      <stop offset="1" stop-color="#DDD"/>
-                    </linearGradient>
-                    <linearGradient id="paint2_linear60" x1="18" x2="61.003" y1="137.02" y2="137.02" gradientUnits="userSpaceOnUse">
-                      <stop stop-color="#DBDBDB"/>
-                      <stop offset=".064" stop-color="#EBEBEB"/>
-                      <stop offset=".178" stop-color="#DADADA"/>
-                      <stop offset=".488" stop-color="#F6F6F6"/>
-                      <stop offset=".757" stop-color="#EFEFEF"/>
-                      <stop offset="1" stop-color="#DDD"/>
-                    </linearGradient>
-                    <linearGradient id="paint3_linear60" x1="39.495" x2="39.495" y1="52.186" y2="163.127" gradientUnits="userSpaceOnUse">
-                      <stop stop-color="#fff"/>
-                      <stop offset=".516" stop-color="#5C5960"/>
-                      <stop offset=".737" stop-color="#49464D"/>
-                      <stop offset=".802" stop-color="#4D4A51"/>
-                      <stop offset=".869" stop-color="#59575B"/>
-                      <stop offset=".938" stop-color="#6C6B6D"/>
-                      <stop offset="1" stop-color="#858584"/>
-                    </linearGradient>
-                    <linearGradient id="paint4_linear60" x1="19.721" x2="54.009" y1="96.317" y2="96.317" gradientUnits="userSpaceOnUse">
-                      <stop stop-color="#666"/>
-                      <stop offset=".658" stop-color="#AEAEAE"/>
-                      <stop offset="1" stop-color="#D3D3D3"/>
-                    </linearGradient>
-                    <linearGradient id="paint5_linear60" x1="19.721" x2="54.009" y1="96.317" y2="96.317" gradientUnits="userSpaceOnUse">
-                      <stop stop-color="#EBEBEB"/>
-                      <stop offset=".658" stop-color="#3E3B43"/>
-                      <stop offset="1" stop-color="#3B3840"/>
-                    </linearGradient>
-                    <linearGradient id="paint6_linear60" x1="26.816" x2="51.558" y1="153.877" y2="153.877" gradientUnits="userSpaceOnUse">
-                      <stop stop-color="#fff"/>
-                      <stop offset=".516" stop-color="#5C5960"/>
-                      <stop offset="1" stop-color="#858584"/>
-                    </linearGradient>
-                    <linearGradient id="paint7_linear60" x1="26.533" x2="51.868" y1="165.98" y2="165.98" gradientUnits="userSpaceOnUse">
-                      <stop stop-color="#fff"/>
-                      <stop offset=".516" stop-color="#5C5960"/>
-                      <stop offset="1" stop-color="#858584"/>
-                    </linearGradient>
-                    <linearGradient id="paint8_linear60" x1="27.346" x2="50.663" y1="148.655" y2="148.655" gradientUnits="userSpaceOnUse">
-                      <stop stop-color="#fff"/>
-                      <stop offset=".516" stop-color="#5C5960"/>
-                      <stop offset=".695" stop-color="#2E2A33"/>
-                      <stop offset=".764" stop-color="#312E36"/>
-                      <stop offset=".827" stop-color="#3C3840"/>
-                      <stop offset=".886" stop-color="#4D4B50"/>
-                      <stop offset=".944" stop-color="#666467"/>
-                      <stop offset="1" stop-color="#858584"/>
-                    </linearGradient>
-                    <linearGradient id="paint9_linear60" x1="27.096" x2="50.918" y1="159.488" y2="159.488" gradientUnits="userSpaceOnUse">
-                      <stop stop-color="#fff"/>
-                      <stop offset=".516" stop-color="#5C5960"/>
-                      <stop offset=".695" stop-color="#2E2A33"/>
-                      <stop offset=".764" stop-color="#312E36"/>
-                      <stop offset=".827" stop-color="#3C3840"/>
-                      <stop offset=".886" stop-color="#4D4B50"/>
-                      <stop offset=".944" stop-color="#666467"/>
-                      <stop offset="1" stop-color="#858584"/>
-                    </linearGradient>
-                    <linearGradient id="paint10_linear60" x1="39.123" x2="39.123" y1="48.31" y2="138.861" gradientUnits="userSpaceOnUse">
-                      <stop stop-color="#fff"/>
-                      <stop offset="1" stop-color="#CCC"/>
-                    </linearGradient>
-                    <linearGradient id="paint11_linear60" x1="39.123" x2="39.123" y1="48.31" y2="138.861" gradientUnits="userSpaceOnUse">
-                      <stop stop-color="#fff"/>
-                      <stop offset="1" stop-color="#BBB"/>
-                    </linearGradient>
-                    <filter id="filter0_d60" width="55.025" height="60.787" x="12" y="17.256" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
-                      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-                      <feColorMatrix in="SourceAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
-                      <feOffset dy="4"/>
-                      <feGaussianBlur stdDeviation="2"/>
-                      <feColorMatrix values="0 0 0 0 0.295833 0 0 0 0 0.013559 0 0 0 0 0.013559 0 0 0 0.16 0"/>
-                      <feBlend in2="BackgroundImageFix" result="effect1_dropShadow"/>
-                      <feBlend in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
-                    </filter>
-                  </defs>
-                </svg>
-              </button>
+
               <button id="Eraser" @click.stop="setTool"  class="tool-item eraser">
                 <svg xmlns="http://www.w3.org/2000/svg" width="80" height="172" fill="none" viewBox="0 0 80 172">
                   <g filter="url(#filter0_i70)">
@@ -697,13 +648,23 @@
               </button>
             </div>
             <div class="btn-tool">
-              <Confirm v-slot="slotProps"
+              <Confirm v-if="page==='diagnose' || page===undefined"
+                        v-slot="slotProps"
                        :completeText="'다시 그리시겠어요? </br> 조금 전 그림은 사라져요 '"
-                       :cancelText="'다시 그리기'"
-                       :okText="'제출하기'">
+                       :cancelText="'아니요'"
+                       :okText="'네'">
               <button @click="undo"><img src="@/assets/images/common/btn_undo@2x.png" alt=""></button>
               <button @click="redo"><img src="@/assets/images/common/btn_redo@2x.png" alt=""></button>
-                <button @click="globalUtils.confirm(slotProps,'refresh')"><img src="@/assets/images/common/btn_refresh@2x.png" alt=""></button>
+              <button @click="globalUtils.confirm(slotProps,'refresh')"><img src="@/assets/images/common/btn_refresh@2x.png" alt=""></button>
+              </Confirm>
+              <Confirm v-if="page==='letter'"
+                       v-slot="slotProps"
+                       :completeText="'다시 그리시겠어요? </br> 조금 전 그림은 사라져요 '"
+                       :cancelText="'아니요'"
+                       :okText="'네'">
+                <button @click="undo"><img src="@/assets/images/common/btn_undo@2x.png" alt=""></button>
+                <button @click="redo"><img src="@/assets/images/common/btn_redo@2x.png" alt=""></button>
+                <button @click="globalUtils.confirm(slotProps,'refresh-letter')"><img src="@/assets/images/common/btn_refresh@2x.png" alt=""></button>
               </Confirm>
             </div>
           </div>
@@ -722,18 +683,18 @@
         </div>
       </div>
     </nav>
-    <chrome-picker v-show="isOpen" v-model="colors"/>
+    <chrome-picker v-show="isOpen" v-model="colors" :class="{'colorPickerLetter' : isColorPickerLetter === true }"/>
     <div id="notifications" style="bottom: 127px;"></div>
 
   </div>
 </template>
 
 <script>
-  import Confirm from '@/components/popup/Confirm'
-  import { mapActions, mapGetters, mapMutations } from 'vuex'
-  import { Chrome } from 'vue-color'
+import Confirm from '@/components/popup/Confirm'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
+import { Chrome } from 'vue-color'
 
-  export default {
+export default {
     name: 'Wacom',
     components: {
       Confirm,
@@ -751,7 +712,9 @@
         },
         updateValue: '',
         hex: '',
-        isOpen: false
+        isOpen: false,
+        isLoadingGuide : false,
+        isColorPickerLetter : false
       }
   },
   props : {
@@ -774,6 +737,10 @@
       if(!this.bg.isShow) this.setLayerBgSelect(this.bg.tabletImageUrl)
       else WILL.setBackground('paper_01')
       //this.setLayerBgSelect('https://colorate.azurewebsites.net/SwatchColor/FFFFFF')
+    });
+
+    this.$EventBus.$on('showToolBar', () => {
+      this.isLoadingGuide = true;
     });
   },
   computed : {
@@ -826,8 +793,13 @@
       this.showConfirm = !this.showConfirm
       this.type = type
     },
-    isPickerOpen () {
+    isPickerOpen (target) {
       this.isOpen = !this.isOpen
+      this.isColorPickerLetter = false
+      if (target === 'letter') {
+        this.isColorPickerLetter = true
+      }
+
     },
     colorPicker() {
       this.setColorSelect()
@@ -848,17 +820,20 @@
 <style scoped src="@/assets/css/Selection.css"></style>
 <style scoped src="@/assets/css/Footer.css"></style>
 <style lang="scss" scoped>
+
+
 .Wrapper {
   width: 100% !important;
   height: 108rem !important;
   position: absolute;
-  top: 80px;
 }
 .nav {
   > div {
     padding: 0 !important;
   }
-
+  &.visible {
+    opacity: 1 !important;
+  }
   &.show {
     position: absolute;
     width: 182.4rem;
@@ -867,8 +842,9 @@
     border: solid 1px var(--ivory-500);
     background-color: var(--ivory-200);
     left: 4.8rem;
-    bottom: 4.8rem;
-
+    bottom: 0;
+    transform: translateY(0px);
+    transition: transform 0.5s;
     .inner {
       position: relative;
       width: 100%;
@@ -926,6 +902,23 @@
             height: 14rem;
             background-color: var(--ivory-500);
           }
+          .colorPickerLetter {
+            position: relative;
+            width: 9rem;
+            height: 9rem;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            border-radius: 50%;
+            top: -10px;
+            left: 15px;
+            img {
+              position: absolute;
+              top: -1px;
+              left: -1px;
+              width: 9.2rem;
+              height: 9.2rem;
+            }
+          }
         }
 
         .tool-box {
@@ -971,6 +964,16 @@
                   width: 4.4rem;
                   height: 4.4rem;
                   border: .8rem solid rgba(20, 20, 20, .2);
+                }
+              }
+              &.colorpicker {
+                position: relative;
+                & img {
+                  position: absolute;
+                  top: -2px;
+                  left: -1px;
+                  width: 32px;
+                  height: 32px;
                 }
               }
             }
@@ -1149,6 +1152,8 @@
   }
 
   &.hide {
+    transition: transform 0.5s;
+    transform: translateY(147px);
     .btn-drawer {
       position: absolute;
       width: 12rem;
@@ -1168,9 +1173,6 @@
       }
     }
 
-    .tool-wrap {
-      display: none;
-    }
   }
 }
 
@@ -1178,10 +1180,11 @@
 .vc-chrome {
   position: absolute;
   left: 169px;
-  top: 450px;
-  z-index: 200
+  bottom: 150px;
+  z-index: 200;
+  &.colorPickerLetter {
+    left: 10px;
+  }
 }
-
-
 
 </style>

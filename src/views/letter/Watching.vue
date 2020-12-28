@@ -1,6 +1,6 @@
 <template>
   <div class="wrap bg-ivory">
-    <LetterHeader/>
+    <LetterHeader></LetterHeader>
     <div class="dim">
       <div class="inner"
            ref="playerArea">
@@ -56,7 +56,7 @@ export default {
 .wrap {
   .bg {
     width: 100%;
-    height: calc(120rem - 12rem);
+    height: 100%;
     img {
       width: 100%;
       height: 100%;
@@ -67,15 +67,15 @@ export default {
   }
   .dim {
     width: 100%;
-    height: calc(120rem - 12rem);
+    height: calc(112.4rem - 8rem);
     position: absolute;
-    top: 12rem;
+    top: 8rem;
     left: 0;
     background-color: rgba(20,20,20,.6);
     >.inner {
       position: relative;
       width: 100%;
-      height: calc(120rem - 12rem);
+      height: 100%;
       /*.video {
         position: relative;
         width: 100%;

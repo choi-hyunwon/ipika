@@ -1,5 +1,5 @@
-if (!("scrollX" in window)) Object.defineProperty(window, "scrollX", {get: function() {return (window.pageXOffset !== undefined)?window.pageXOffset:(document.documentElement || document.body.parentNode || document.body).scrollLeft;}});
-if (!("scrollY" in window)) Object.defineProperty(window, "scrollY", {get: function() {return (window.pageYOffset !== undefined)?window.pageYOffset:(document.documentElement || document.body.parentNode || document.body).scrollTop;}});
+// if (!("scrollX" in window)) Object.defineProperty(window, "scrollX", {get: function() {return (window.pageXOffset !== undefined)?window.pageXOffset:(document.documentElement || document.body.parentNode || document.body).scrollLeft;}});
+// if (!("scrollY" in window)) Object.defineProperty(window, "scrollY", {get: function() {return (window.pageYOffset !== undefined)?window.pageYOffset:(document.documentElement || document.body.parentNode || document.body).scrollTop;}});
 
 var tools = {
   android: /(android)/i.test(navigator.userAgent),
@@ -232,7 +232,7 @@ var tools = {
 
 tools.disbaleZoom();
 tools.disableIOSEffects();
-tools.disableOverscroll();
+// tools.disableOverscroll();
 
 // document.ontouchmove = function(e) {
 // 	e.preventDefault(); // warning in Chrome
@@ -456,9 +456,9 @@ var layout = {
       if (!img.classList.contains("Selected")) img.src = img.src.replace("_selected.png", ".png");
     }
 
-    $("nav img")
-      .on("mouseover", function() {over(this);})
-      .on("mouseout", function() {out(this);});
+    // $("nav img")
+    //   .on("mouseover", function() {over(this);})
+    //   .on("mouseout", function() {out(this);});
 
     $("nav .ButtonFile")
       .on("mouseover", function() {over($(this).find("img")[0]);})

@@ -18,7 +18,29 @@ export default new Vuex.Store({
    * this.$store.state.CONSTANTS;
    */
   state: {
-    isDummy : false,
+    config : {
+      isDummy : false,
+
+      /**
+       * 인터넷 익스플로러 체크
+       */
+      isApp : false,
+
+      /**
+       * 인터넷 익스플로러 체크
+       */
+      isIE : null,
+      isChrome : null,
+      isChromeIOS : null,
+      isIOS : null,
+
+      /**
+       * 짧은 시나리오 처리
+       * 진단 테스트만 할 수있도록 철리
+       */
+      isDemo : false,
+    },
+
     /**
      * userinfo는 단말기(안드로이드)기에서 받아온다.
      *
@@ -26,7 +48,8 @@ export default new Vuex.Store({
      * return : {"grade":"0","name":"홈런초등테스트1","key":"1604311","device_type":"1002"}
      *
      * DEVICE_TYPE_N = "1001"    // N형 디바이스
-     * DEVICE_TYPE_AI = "1002"   // AI 신형 디바이스
+     * DEVICE_TYPE_
+     * AI = "1002"   // AI 신형 디바이스
      * DEVICE_TYPE_LH = "1003"   // 리틀홈런 디바이스
      * DEVICE_TYPE_WEB = "1004"   // 독립웹
      * DEVICE_TYPE_MB = "1005"   // 하이브리드 앱(android or ios)
@@ -41,15 +64,14 @@ export default new Vuex.Store({
     /**
      * API session options
      */
+
     session: {
-      // 'user_id': '',
-      // 'user_auth_key': '',
-      // 'Content_Language': '',
-      // 'device_type': ''
-      'user_id': 'laoo6',
-      'user_auth_key': 'abcdefghijklmnopqrstuvwxyz0123456789',
-      'Content_Language': 'ko',
-      'device_type': '1001'
+      name: '',
+      user_id: '',
+      user_auth_key: '',
+      Content_Language: '',
+      device_type: '',
+      api_url: ''
     },
     subject: {},
     userGallery: {},
@@ -58,6 +80,7 @@ export default new Vuex.Store({
     canvasTimer: {
       timeInitVal: null,
       time: null,
+
       timer: null,
       timeOver : false,
     },
@@ -95,6 +118,9 @@ export default new Vuex.Store({
    * this.$store.getters.CONSTANTS
    */
   getters: {
+    getConfig: state => {
+      return state.config
+    },
     getUserInfo: state => {
       return state.userinfo
     },
@@ -139,7 +165,8 @@ export default new Vuex.Store({
       return state.submission
     },
     getUserAudio : state => {
-      return state.letter.userAudioList[0]
+      const lastIndex = state.letter.userAudioList.length - 1
+      return state.letter.userAudioList[lastIndex]
     },
   },
   /**

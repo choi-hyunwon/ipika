@@ -9,7 +9,7 @@ export default class WebApi {
   request (url, config) {
     if (store.getters.getSession.user_id === ""){
       // alert('user_id 가 유효하지 않습니다.')
-      // const Vari = window.android.getInitVariables()
+      const Vari = window.android.getInitVariables()
       // const Vari = '{"grade":"5","name":"홈런******","user_id":"1954536","user_auth_key":"V01a1eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1YmlwMDEiLCJ1c2VySWQiOjIwNTkzNTYsImxvZ2luQXMiOmZhbHNlLCJpYXQiOjE2MDgwMzQ1NjQsImV4cCI6MTYwODYzOTM2NH0.qgXxkRvDh6vdVsthFaXV9egKquReHF6Y3VoB1hY_12cbC5aoiSYFW5A5NO8wvbBzriNUncApkmqqdSHHRFYCGw","device_type":"1002"}'
       const obj = JSON.parse(Vari)
       store.getters.getSession.user_id = obj.user_id
@@ -19,7 +19,7 @@ export default class WebApi {
     }
 
     return axios({
-      url: `https://ec2-15-165-50-157.ap-northeast-2.compute.amazonaws.com/${url}`,
+      url: store.getters.getSession.api_url + url,
       headers: {
         user_id: store.getters.getSession.user_id,
         user_auth_key: store.getters.getSession.user_auth_key,
@@ -30,7 +30,8 @@ export default class WebApi {
       .catch(error => {
         console.log('error from api')
         console.log(error)
-        alert(error.message)
+        // alert('error from API')
+        // alert(error.message)
         throw new Error(`WebApi ${url} Error!!`)
         // throw new Error(error)
       })
@@ -220,11 +221,10 @@ export default class WebApi {
    *
    */
   getClovaTTS (options) {
-    return axios({
-      url: 'https://naveropenapi.apigw.ntruss.com/tts-premium/v1/tts',
+    return this.request('tts-premium/v1/tts', {
       method: 'POST',
       headers: {
-        'Content-Type':'multipart/form-data;',
+        'Content-Type':'application/x-www-form-urlencoded',
         'X-NCP-APIGW-API-KEY-ID': '0d5rxee0gt',
         'X-NCP-APIGW-API-KEY': 'uKcIGuao7nWRbkJIxnT5t8wAuW18SAGifKRrU2Gh'
       },

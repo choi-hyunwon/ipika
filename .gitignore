@@ -22,3 +22,7 @@ pnpm-debug.log*
 *.sln
 *.sw?
 /yarn.lock
+/dist-web-demo-dev.zip
+/dist-web-demo-live.zip
+/dist-web-full-dev.zip
+/dist-web-full-live.zip

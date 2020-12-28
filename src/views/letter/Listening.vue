@@ -12,7 +12,8 @@
           <li>
           <div v-for="(audio, i) in audioList" class="item" :class="{'pause' : !play, 'play' : play && i === focusIdx}">
             <button class="img" @click="showPlay(i)"><img :src=audio.characterImageUrl alt=""></button>
-            <p class="time">00:00</p>
+            <p class="name">{{audioList[i].characterName}}</p>
+            <p class="time">{{ timeChange(audioList[i].audioPlaytime)}}</p>
           </div>
           </li>
         </ul>
@@ -24,7 +25,7 @@
         <button v-if="position<=this.maximumLength" class="swipe"><img src="@/assets/images/common/swipe_right_active@2x.png" alt="" @click="moveRight"></button>
         <button v-if="position>this.maximumLength" class="swipe"><img src="@/assets/images/common/swipe_right_default@2x.png" alt=""></button>
       </div>
-      <div class="btn-wrap"><router-link to="/canvas?page=letter" class="btn btn-dark" :class="{'disabled':submit===false}">다 들었어요!</router-link></div>
+      <div class="btn-wrap"><router-link to="/canvas?page=letter" class="btn btn-dark" :class="{'disabled':submit===false}"><img src="@/assets/images/common/next_nor@2x.png" style="width: 5rem"></router-link></div>
       <!--      <div class="btn-wrap"><button class="btn btn-dark ">다 들었어요!</button></div>-->
     </div>
     <ListeningPlay v-if="play" :focusIdx="focusIdx"/>
@@ -35,10 +36,9 @@
 import LetterHeader from '@/components/letter/LetterHeader'
 import ListeningPlay from '@/components/letter/ListeningPlay'
 import { mapGetters } from 'vuex'
-import {Controller} from 'swiper'
-import { Swiper, SwiperSlide } from "vue-awesome-swiper";
-import "swiper/swiper-bundle.css";
-
+import { Controller } from 'swiper'
+import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
+import 'swiper/swiper-bundle.css'
 
 export default {
   name: 'peopleThinking',
@@ -80,7 +80,7 @@ export default {
     console.log(this.submit)
   },
   mounted:function(){
-
+    this.Android.tts("다른 친구들은 어떻게 생각하는지 들어볼까요?  친구들의 생각을 듣고, 내 생각과 비교해봐요!")
   },
   computed:{
     ...mapGetters({
@@ -116,6 +116,27 @@ export default {
     },
     test(){
       this.isEnd = true
+    },
+    timeChange(time){
+      console.log(time)
+      let min = Math.floor(time/60);
+      let sec = 0;
+      if (min > 0) {
+        sec = time - min*60
+      } else {
+        sec = time
+      }
+      if (sec <10) {
+        sec = "0" + sec.toString()
+      } else {
+        sec = sec.toString()
+      }
+      if (min <10) {
+        min = "0" + min.toString()
+      } else {
+        min = min.toString()
+      }
+      return min + ':' + sec
     }
   }
 }
@@ -126,7 +147,7 @@ export default {
 .contents {
   position: relative;
   width: 100%;
-  height: calc(100% - 12rem);
+  height: calc(100% - 8rem);
   .txt-area {
     padding-top: 8rem;
     padding-left: 10rem;
@@ -181,6 +202,18 @@ export default {
         letter-spacing: -0.03rem;
         text-align: center;
         margin-top: 2.4rem;
+      }
+      .name{
+        height: 40px;
+        font-size: 24px;
+        font-weight: bold;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 40px;
+        letter-spacing: -0.3px;
+        text-align: center;
+        margin-top: 24px;
+        color: var(--gray-black);
       }
       .time {
         font-family: var(--Inter);

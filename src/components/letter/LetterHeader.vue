@@ -17,16 +17,16 @@
     <div class="flex-box">
 
       <!--영상보기-->
-      <Alert v-if="path ==='/Recording' || path ==='/Listening'"
+      <Alert v-if="(path ==='/Recording' && page !== 'free') || path ==='/Listening' "
              v-slot="slotProps">
         <button @click="globalUtils.alert(slotProps,'video')" class="btn-right">
-          <span class="img"><img src="@/assets/images/common/ic-play@2x.png" alt=""></span>
+          <span class="img"><img src="@/assets/images/common/youtube.png" alt=""></span>
           <span class="tit">영상보기</span>
         </button>
       </Alert>
 
       <!--주제보기-->
-      <Alert  v-if="path !=='/Intro' && path !=='/Completion'"
+      <Alert  v-if="path !=='/Intro' && path !=='/Completion' && (path ==='/Recording' && page !== 'free') || path ==='/Watching' "
               v-slot="slotProps" :boldText=letter.stepSubejct :buttonText ="'닫기'">
         <button class="btn-right" @click="globalUtils.alert(slotProps,'subject')">
           <span class="img"><img src="@/assets/images/common/ic-drawing@2x.png" alt=""></span>
@@ -36,9 +36,9 @@
 
       <div class="box-close">
         <!--Intro / Completion 페이지 종료 아이콘 클릭 시 팝업 노출 없이 메인 이동-->
-        <router-link v-if="path ==='/Intro' || path ==='/Completion'" to="/PabloMain" class="btn-close">
-          <img src="@/assets/images/common/close@2x.png" alt="">
-        </router-link>
+<!--        <router-link v-if="path ==='/Intro' || path ==='/Completion'" to="/PabloMain" class="btn-close">-->
+<!--          <img src="@/assets/images/common/close@2x.png" alt="">-->
+<!--        </router-link>-->
 
         <!-- 그 외 페이지 종료 안내 팝업 노출 -->
         <Confirm v-slot="slotProps" :complete-text="`파블로 서비스를 </br> 종료하시겠습니까?`" :cancelText="`아니요`" :okText="`네`">
@@ -62,12 +62,27 @@ export default {
     Alert,
     Confirm
   },
+  created () {
+    this.$EventBus.$on('subjectTTS', this.subjectTTS)
+  },
   computed: {
     ...mapGetters({
       letter: 'getLetter'
     }),
     path() {
       return this.$router.currentRoute.path
+    },
+    page() {
+      return this.$router.currentRoute.query.page
+    }
+  },
+  methods:{
+    subjectTTS(){
+      if (this.letter.stepSubejct === undefined){
+        console.log('subjectTTS fail')
+        return false
+      }
+      this.Android.tts(this.letter.stepSubejct)
     }
   }
 

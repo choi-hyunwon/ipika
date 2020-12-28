@@ -60,7 +60,8 @@
 </template>
 
 <script>
-import {mapMutations,mapGetters} from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
+
 export default {
   name: 'Confirm',
   watch: {
@@ -75,7 +76,7 @@ export default {
       type : "",
       timeOut : {
         completeText : '',
-        cancelText : '다시그리기',
+        cancelText : '다시 그리기',
         okText : '제출하기'
       }
     }
@@ -120,6 +121,9 @@ export default {
     }
   },
   methods: {
+    ...mapActions({
+      getLetter : 'getLetter'
+    }),
     ...mapMutations({
       setTimeInit: 'setTimeInit',
       setTimerReset: 'setTimerReset',
@@ -136,7 +140,7 @@ export default {
       this.$router.push('/PabloMain')
     },
     goBack () {
-      this.$EventBus.$emit('back')
+      this.$router.back();
     },
     goToNext () {
       this.showConfirm = false
@@ -145,8 +149,8 @@ export default {
     clear () {
       WILL.clear()
       this.showConfirm = false
-      this.setTimerReset();
-      this.setTimerStart();
+      this.setTimerReset()
+      this.setTimerStart()
     },
     modalCancel () {
       this.showConfirm = false
@@ -157,30 +161,59 @@ export default {
         this.goBack()
       } else if (this.type === 'goMain') {
         this.goMain()
+      } else if (this.type === 'goMain') {
+        this.goMain()
+      } else if (this.type === 'refresh') {
+        this.clear()
       } else if (this.type === 'Complete' || this.type === 'diagnose' || this.type === 'refresh' || this.type === 'record' || this.type === 'Refresh') {
         this.goToNext()
       } else if (this.type === 'watchComplete') {
         this.$route.push('/Recording')
       } else if (this.type === 'success') {
-        // this.setBg({tabletImageUrl : 'https://colorate.azurewebsites.net/SwatchColor/FFFFFF'}, true)
-        // 흰색 배경 이미지 처리 : 크로스 오리진 에러
-        WILL.clear()
-        WILL.setBackground('paper_01')
+        const self = this;
+        if(this.canvasList.length > 1) {
+
+
+          WILL.clear()
+
+          // this.canvasList = this.canvasList.splice(0,1)
+          // this.canvasList.forEach(element => console.log(element))
+
+          this.canvasList = this.canvasList.forEach(function(item, index, object) {
+            if (item.imageId === self.bg.imageId) {
+              object.splice(index, 1);
+            }
+          })
+          console.log(this.canvasList)
+
+          this.$EventBus.$emit('setBg', this.canvasList[0])
+          this.Android.tts(this.canvasList[0].imageSubject)
+          this.showConfirm = false
+        } else if(this.canvasList.length === 1) {
+          this.$refs.autoOpenLSuccess.showConfirm = true
+          this.$refs.autoOpenLSuccess.type = 'success'
+        }
+
       } else if (this.type === 'checkRed') {
         this.showConfirm = false
         this.setTimerReset()
         this.Android.appExit()
+        this.Android.setLog('action=AppEnded&edApp=Pablo')
       } else if (this.type === 'timeOut') {
         this.type = 'Complete'
         this.timeOut.completeText = "다 그렸나요? </br> 제출하면 수정할수 없어요"
         this.showConfirm = true
+      }else if(this.type==='refresh-letter'){
+        this.clear()
       }
     },
     cancelBtn () {
       if (this.type === 'diagnose') this.modalCancel()
       else if (this.type === 'success') this.$router.push('/PabloMain')
-      else if (this.type === 'refresh' || this.type === 'Refresh') this.clear()
-      else if(this.type === 'checkRed') this.modalCancel()
+      else if (this.type === 'refresh') this.modalCancel()
+      else if (this.type === 'Refresh') this.clear()
+      else if (this.type === 'refresh-letter') this.modalCancel()
+      else if (this.type === 'checkRed') this.modalCancel()
       else if (this.type === 'timeOut') {
         this.type = 'Refresh'
         this.timeOut.completeText = "다시 그리시겠어요? </br> 조금 전 그림은 사라져요"
@@ -191,6 +224,7 @@ export default {
       this.showConfirm = false
       WILL.clear()
       this.$EventBus.$emit('setBg', canvas , reset)
+      this.Android.tts(canvas.imageSubject)
     }
   }
 }

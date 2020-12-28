@@ -34,9 +34,10 @@
         어떤 그림인지 파블로에게 알려주세요
       </p>
       <form>
-        <input type="text" class="form-control active" id="text" v-model="title" placeholder="여기에 입력해주세요">
+        <input type="text" class="form-control active" id="text" v-model="title" @input="checkInputSize" @keydown.enter="registerFree" placeholder="여기에 입력해주세요">
       </form>
       <template #modal-footer="{ ok }">
+        <button class="btn submit_button" variant="btn black btn-block" :class="{ 'btn-black' : title == '' }" @click="cancel">닫기</button>
         <button class="btn submit_button" variant="btn black btn-block" :class="{ 'btn-blue5' : !title == '' }" @click="registerFree">등록하기</button>
       </template>
     </b-modal>
@@ -48,7 +49,6 @@
 </template>
 
 <script>
-import {mapMutations,mapGetters} from 'vuex'
 import Alert from '@/components/popup/Alert'
 
 export default {
@@ -84,7 +84,8 @@ export default {
       this.type = type
       this.setTimerPause()
     },
-    ok () {
+    checkInputSize() {
+      this.title = this.title.slice(0, 20)
     },
     registerFree () {
       if(this.title === '') {
@@ -94,11 +95,26 @@ export default {
       }
       this.showRegister = false
       this.$EventBus.$emit('free', this.title)
+    },
+    cancel () {
+      this.showRegister = !this.showRegister;
+
     }
   }
 }
 </script>
 
 <style scoped lang="scss">
+.CanvasPopup{
+  .modal-footer{
+    .btn{
+      width:35rem;
+      margin-bottom: 1rem;
+      &:nth-child(1){
+        margin-right: 4rem;
 
+      }
+    }
+  }
+}
 </style>

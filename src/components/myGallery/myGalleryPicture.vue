@@ -36,19 +36,29 @@
       </div>
 
       <div class="gallery-section">
-        <ul class="gallerys">
+        <ul class="gallerys" v-if="list.length > 0">
           <li class="gallery-g" v-for="(item, index) in list">
-            <router-link :to="getURL(item)" @click.prevent="log">
-              <div class="gallery_img size-img">
+
+            <div class="gallery_img size-img">
+              <router-link :to="getURL(item)" @click="log">
                 <img :src="item.pictureUrl" alt="갤러리사진" class="img-m">
-                <div class="img_icon" v-b-modal.normalPopup1>
-<!--                  <img src="@/assets/images/common/share.png" alt="다운로드" class="img-m" v-b-modal.normalPopup1>-->
-                </div>
+              </router-link>
+              <div class="img_icon" v-b-modal.normalPopup1>
+                <!--                  <img src="@/assets/images/common/share.png" alt="다운로드" class="img-m" v-b-modal.normalPopup1>-->
               </div>
-              <div class="img_title">{{ item.stageName || '스테이지'}} {{ item.stageId || '단계'}}</div>
-              <div class="img_desc">{{ item.title || '제목이 없어요'}}</div>
-              <a href="#" class="icon_delete"  @click.prevent="openDelete(item.pictureId, index)"><img src="@/assets/images/common/btn_delete@2x.png" alt="" class="img-m"></a>
-            </router-link>
+            </div>
+<!--            <div class="img_title">{{ item.stageName || '프리드로잉' }} {{ item.stageId || '' }}</div>-->
+            <div class="img_title">{{ item.createdDate.slice(0, 10) }}</div>
+            <div class="img_desc">{{ item.title || '제목이 없어요' }}</div>
+            <button class="icon_delete" @click="openDelete(item.pictureId, index)"><img
+              src="@/assets/images/common/btn_delete@2x.png" alt="" class="img-m"></button>
+
+          </li>
+        </ul>
+
+        <ul class="gallerys" v-else>
+          <li class="gallery-default">
+            <div class="emptyList">등록된 정보가 없어요</div>
           </li>
         </ul>
       </div>
@@ -58,17 +68,16 @@
       <template #modal-header>
         <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>
       </template>
-      <p class="text">완전히 삭제하시겠어요?<br/>그림이 삭제돼요<br/></p>
-      <p class="text-sm">삭제한 그림은 복구할 수 없어요</p>
+      <p class="text" style="margin-bottom: 12px;">완전히 삭제하시겠어요? <br data-v-88baf8f6="">삭제한 그림은<br data-v-88baf8f6="">복구할 수 없어요!</p>
       <template #modal-footer="{ cancel }">
-        <b-button variant="gray" class="btn-half" @click.prevent="deletePicture()">삭제하기</b-button>
-        <b-button class="btn btn-black  btn-half" @click="cancel()">닫기</b-button>
+        <b-button variant="gray" class="btn-half" @click="cancel()">아니요</b-button>
+        <b-button class="btn btn-black  btn-half" @click="deletePicture()">네</b-button>
       </template>
     </b-modal>
 
 
     <!-- 공통 알림 popup-->
-    <Alert ref="deleteComfirm" v-slot="slotProps" :boldText="'삭제 되었습니다'" :text="'다른 그림을 그릴까요?'" :buttonText ="'확인'"/>
+    <Alert ref="deleteComfirm" v-slot="slotProps" :boldText="'삭제 되었습니다'" :text="'다른 그림을 그릴까요?'" :buttonText="'확인'"/>
 
   </div>
 </template>
@@ -82,18 +91,18 @@ export default {
 
   data () {
     return {
-      isLoading :false,
+      isLoading: false,
       empty: null,
-      activeIndex : 0,
-      nSize : [0,0,0],
-      filter : [
+      activeIndex: 0,
+      nSize: [0, 0, 0],
+      filter: [
         {
-          'title' : 'ALL',
-          'src' : '@/assets/images/common/all.png',
-          'click' : 'filterAll'
+          'title': 'ALL',
+          'src': '@/assets/images/common/all.png',
+          'click': 'filterAll'
         },
         {
-          'title' : 'Pablo Letter',
+          'title': 'Pablo Letter',
           'click': 'filterLetter'
         },
         {
@@ -104,19 +113,25 @@ export default {
       list: [],
       selected: 1,
       options: [
-        { value: 1, text: '최신 순' },
-        { value: 2, text: '오래된 순' }
+        {
+          value: 1,
+          text: '최신 순'
+        },
+        {
+          value: 2,
+          text: '오래된 순'
+        }
       ]
     }
   },
-  components:{
+  components: {
     Alert
   },
   computed: {
     ...mapGetters({
       userGalleryMypicture: 'getUserGalleryMypicture'
     }),
-    isEmpty(){
+    isEmpty () {
       return this.userGalleryMypicture.pictures.length === 0 ? true : false
     }
   },
@@ -130,9 +145,8 @@ export default {
       getUserGallery: 'getUserGallery',
       getUserGalleryMypicture: 'getUserGalleryMypicture',
       getUserGalleryDetele: 'getUserGalleryDetele'
-
     }),
-    allSize(){
+    allSize () {
       this.nSize[0] = this.userGalleryMypicture.pictures.length
 
       const letter = this.userGalleryMypicture.pictures.filter(function (item) {
@@ -173,44 +187,57 @@ export default {
       //select value
       this.selected = value
       //값 없을 경우
-      if (this.list.length === 0)
-        return false;
-      //select value에 따른 처리
-      if (value === 1){
-        this.list.sort(function(a, b) { // 오름차순
-          return a.createdDate > b.createdDate ? -1 : a.createdDate > b.createdDate ? 1 : 0;
-        });
-      } else if (value === 2){
-        this.list.sort(function(a, b) { // 오름차순
-          return a.createdDate < b.createdDate ? -1 : a.createdDate > b.createdDate ? 1 : 0;
-        });
+      if (this.list.length === 0) {
+        return false
       }
+      if (value == 1) {
+        this.list.sort(function (a, b) { // 오름차순
+          return a.createdDate > b.createdDate ? -1 : a.createdDate < b.createdDate ? 1 : 0
+        })
+      } else if (value == 2) {
+        this.list.sort(function (a, b) { // 오름차순
+          return a.createdDate < b.createdDate ? -1 : a.createdDate > b.createdDate ? 1 : 0
+        })
+      }
+
     },
-    getURL(item){
-      return 'MyGalleryDetail?' +'pictureId=' + item.pictureId
+    getURL (item) {
+      return 'MyGalleryDetail?' + 'pictureId=' + item.pictureId
     },
-    log(e){
+    log (e) {
       console.log(e.currentTarget)
     },
-    openDelete(pictureId, index){
+    openDelete (pictureId, index) {
       this.selectId = pictureId
       this.selectIndex = index
       this.$bvModal.show('deletePicture')
     },
     deletePicture () {
-      var self=this;
+      var self = this
       this.$bvModal.hide('deletePicture')
-      this.getUserGalleryDetele({pictureId : this.selectId})
+      this.getUserGalleryDetele({ pictureId: this.selectId })
         .then(result => {
-          if (result.code === "0000"){
+          if (result.code === '0000') {
             self.$refs.deleteComfirm.showAlert = true
             self.$refs.deleteComfirm.type = 'common'
             self.getUserGallery()
+              .then(data => {
+              })
             self.getUserGalleryMypicture()
+              .then(data => {
+                // console.log('getUserGalleryMypictureVue', data.pictures)
+                self.list = data.pictures
+                self.allSize();
+                self.setFilter(self.activeIndex)
+              })
+
           } else {
-            alert(result.message);
+            alert(result.message)
           }
         })
+    },
+    dateSlice (date) {
+      return date.slice(0, 10)
     }
   }
 }
@@ -222,16 +249,18 @@ export default {
     border-top: 0.1rem solid var(--gray-300);
     border-bottom: 0.1rem solid var(--gray-300);
     line-height: 12rem;
-    .active{
+
+    .active {
       border-bottom: 0.4rem solid var(--gray-black);
-      color:var(--gray-black);
+      color: var(--gray-black);
     }
-    a{
+
+    a {
       border: none;
 
-      &:focus,&:active{
+      &:focus, &:active {
         border-bottom: 0.4rem solid var(--gray-black);
-        color:var(--gray-black);
+        color: var(--gray-black);
       }
     }
   }
@@ -246,11 +275,14 @@ export default {
     margin-top: 6.4rem;
     border-radius: 0.6rem;
     margin-bottom: 5.6rem;
-    .active{
+
+    .active {
       background-color: var(--gray-900) !important;
     }
+
     .btn-right {
       margin-right: 6.4rem;
+
       .custom-select {
         border-radius: 0.8rem;
         border: solid 0.2rem var(--gray-400);
@@ -268,15 +300,18 @@ export default {
         color: var(--gray-700);
         padding: 0;
         padding-left: 2rem;
-        option{
+
+        option {
           padding: 0;
         }
       }
 
     }
+
     .btn-left {
       margin-left: 6.4rem;
       color: var(--gray-500);
+
       button {
         background-color: var(--gray-200);
         margin-right: 1.2rem;
@@ -287,16 +322,20 @@ export default {
         padding: 1.6rem 2rem;
         height: 6.8rem;
         line-height: 2rem;
-        img{
+        font-size: 2rem;
+
+        img {
           width: 2rem;
           height: 2rem;
           margin-right: 1rem;
           display: inline-block;
         }
-        &:focus,&:active,&:hover,&.selected{
+
+        &:focus, &:active, &:hover, &.selected {
           background-color: var(--gray-900);
         }
       }
+
       /*.drawing_button {
         min-width: 20.6rem;
         background-color: var(--gray-200);
@@ -353,19 +392,24 @@ export default {
     }
   }
 }
-.gallery-section{
-  margin:0 6.4rem;
-  .gallerys{
+
+.gallery-section {
+  margin: 0 6.4rem;
+
+  .gallerys {
     height: 64.4rem;
     width: 101%;
-    .gallery-default{
+
+    .gallery-default {
       margin: 0 auto;
-      .emoji-icon{
+
+      .emoji-icon {
         margin: 11.4rem auto 3.2rem;
         width: 14.4rem;
         height: 14.4rem;
       }
-      .emoji-desc{
+
+      .emoji-desc {
         margin: 0 auto 3.2rem;
         font-family: 'NotoSansCJKKR';
         font-size: 4rem;
@@ -374,9 +418,11 @@ export default {
         letter-spacing: -0.03rem;
         text-align: center;
       }
-      .emoji-button{
+
+      .emoji-button {
         text-align: center;
-        .btn{
+
+        .btn {
           background-color: var(--blue-500);
           border: none;
           font-family: 'NotoSansCJKKR';
@@ -389,23 +435,23 @@ export default {
         }
       }
     }
-    .gallery-g{
+
+    .gallery-g {
       width: calc(100% / 3);
       float: left;
       margin-bottom: 8rem;
       position: relative;
 
-      .icon_delete{
+      .icon_delete {
         position: absolute;
         top: 1.5rem;
         right: 3.5rem;
-        height: 0;
         z-index: 999;
         width: 5rem;
         height: 5rem;
       }
 
-      .play_icon , .pause_icon{
+      .play_icon, .pause_icon {
         position: absolute;
         top: 12.2rem;
         left: 24.8rem;
@@ -413,15 +459,17 @@ export default {
         height: 8rem;
         z-index: 55;
       }
-      .recode_icon{
+
+      .recode_icon {
         position: absolute;
         top: 3rem;
         left: 2.8rem;
         width: 3.2rem;
         height: 3.2rem;
-        z-index:55
+        z-index: 55
       }
-      .recode-desc{
+
+      .recode-desc {
         position: absolute;
         top: 2.8rem;
         left: 6.4rem;
@@ -429,11 +477,12 @@ export default {
         font-size: 2rem;
         font-weight: 600;
         color: var(--gray-800);
-        z-index:55;
+        z-index: 55;
         letter-spacing: -0.03rem;
 
       }
-      .size-img{
+
+      .size-img {
         width: 57.6rem;
         height: 32.3rem;
         margin-bottom: 2.4rem;
@@ -442,24 +491,27 @@ export default {
         border: solid 1px var(--gray-500);
         z-index: 100;
         overflow: hidden;
-        > a{
+
+        > a {
           display: block;
           width: 100%;
           height: 100%;
         }
-        .img_icon{
+
+        .img_icon {
           width: 6.4rem;
           height: 6.4rem;
           position: absolute;
           top: 2rem;
           right: 2rem;
         }
-        img{
+
+        img {
           border-radius: 1.2rem;
         }
       }
 
-      .img_title{
+      .img_title {
         font-size: 2rem;
         font-family: 'Inter-Regular';
         margin-bottom: 0.2rem;
@@ -482,16 +534,26 @@ export default {
         color: var(--gray-black);
       }
 
-      .play_bar{
+      .play_bar {
         position: absolute;
         border-radius: 0 0 0 1.2rem;
         width: 32.8rem;
         height: 2rem;
-        background-color:var(--blue-500);
+        background-color: var(--blue-500);
         bottom: 0;
         left: 0;
-        z-index:55
+        z-index: 55
       }
+    }
+
+    .emptyList {
+      margin: 20rem auto 3.2rem;
+      font-family: 'NotoSansCJKKR';
+      font-size: 3rem;
+      font-weight: bold;
+      line-height: 5.6rem;
+      letter-spacing: -0.03rem;
+      text-align: center;
     }
   }
 }

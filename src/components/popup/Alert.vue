@@ -1,6 +1,8 @@
 <template>
   <div>
  <slot :toggleAlert="toggleAlert"></slot>
+
+
     <b-modal v-if="type==='subject'" centered modal-class="normalPopup" v-model="showAlert">
       <template #modal-header>
         <div class="symbol"><img src="@/assets/images/common/drawing@2x.png" alt=""></div>
@@ -14,6 +16,8 @@
         <b-button class="btn btn-block btn-black" @click="cancel()">{{ buttonText }}</b-button>
       </template>
     </b-modal>
+
+
     <b-modal v-if="type==='video'" centered hide-footer modal-class="videoReviewPopup" v-model="showAlert">
       <template  #default="{ hide }">
         <div class="full-screen dim"><!-- 전체 화면시 dim 제거 -->
@@ -31,16 +35,21 @@
         </div>
       </template>
     </b-modal>
+
+
     <b-modal ref="alertModal" v-if="type==='diagnose'" no-close-on-backdrop id="oderPopup" centered title="안내" modal-class="textPopup" ok-variant="black btn-block" v-model="showAlert">
       <template #modal-header>
         <div class="symbol"><img src="@/assets/images/common/Symbol@2x.png" alt=""></div>
-        <div class="modal-title">환영해요 정윤님!</div>
+<!--        <div class="modal-title">환영해요 {{ getSession.name }}님</div>-->
+        <div class="modal-title">환영해요</div>
       </template>
       <p class="text">{{text}}</p>
       <template #modal-footer="{ cancel }">
         <button size="sm" class="btn btn-black btn-block" @click="timeStart">네 그려볼게요!</button>
       </template>
     </b-modal>
+
+
     <b-modal v-if="type==='success'" centered modal-class="normalPopup" v-model="showAlert">
       <template #modal-header>
         <div class="symbol"><img src="@/assets/images/common/check_green@2x.png" alt=""></div>
@@ -67,6 +76,7 @@
       </template>
     </b-modal>
 
+
     <!--<b-modal v-if="type==='agreement1'" centered :title=boldText modal-class="marketing" scrollable ok-only ok-title="닫기" ok-variant="black btn-block" v-model="showAlert">
       <p>{{text}}</p>
     </b-modal>
@@ -86,7 +96,8 @@
 
 <script>
 import Player from '@/components/letter/Player'
-import { mapGetters , mapMutations} from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
+
 export default {
   name: 'Alert',
   components : {Player},
@@ -125,7 +136,8 @@ export default {
   },
   computed:{
     ...mapGetters({
-      playerOptions: 'getPlayerOptions'
+      playerOptions: 'getPlayerOptions',
+      getSession: 'getSession'
     })
   },
   methods : {
@@ -140,6 +152,7 @@ export default {
     timeStart(){
       this.$EventBus.$emit('bgPopup')
       this.$refs['alertModal'].hide()
+      this.Android.tts("파블로 캔버스 툴에 대해 간단하게 설명해드릴게요")
     },
     setPlayerOptions(){
       this.setPlayerSize({width: 1065, height: 666})
