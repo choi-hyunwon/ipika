@@ -51,7 +51,7 @@
     </div>
     <!-- 공통 알림 popup-->
     <Alert ref="commonAlert" v-slot="slotProps" :boldText="'학습이 완료 되었습니다'" :text="'프리드로잉을 해보면 어떨까요?'"
-           :buttonText="'확인'"/>
+           :buttonText="'닫기'"/>
   </div>
 </template>
 

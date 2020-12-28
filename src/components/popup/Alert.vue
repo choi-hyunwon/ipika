@@ -148,11 +148,15 @@ export default {
     toggleAlert(type,topic){
       this.showAlert = !this.showAlert;
       this.type = type;
+
+      if (type === 'subject') {
+        this.Android.tts(this.$store.getters.getLetter.stepSubejct)
+      }
     },
     timeStart(){
       this.$EventBus.$emit('bgPopup')
       this.$refs['alertModal'].hide()
-      this.Android.tts("파블로 캔버스 툴에 대해 간단하게 설명해드릴게요")
+      this.Android.tts("파블로 캔버스 툴에 대해 간단하게 설명해드릴게요 화면을 터치하면 가이드가 사라져요")
     },
     setPlayerOptions(){
       this.setPlayerSize({width: 1065, height: 666})
