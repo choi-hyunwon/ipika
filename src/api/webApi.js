@@ -1,5 +1,7 @@
 import axios from 'axios'
 import store from '../store/store'
+import Vue from 'vue'
+
 
 export default class WebApi {
   // eslint-disable-next-line no-useless-constructor
@@ -32,6 +34,10 @@ export default class WebApi {
         console.log(error)
         // alert('error from API')
         // alert(error.message)
+        if (error.message === "Network Error") {
+          Vue.$router.push('/Error')
+        }
+
         throw new Error(`WebApi ${url} Error!!`)
         // throw new Error(error)
       })
