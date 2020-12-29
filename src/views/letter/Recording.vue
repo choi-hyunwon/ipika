@@ -170,6 +170,7 @@ export default {
   data () {
     return {
       media: null,
+      audioLoading : false,
       ing: false,
       record: true,
       file: {},
@@ -303,8 +304,10 @@ export default {
     stopRecord () {
       this.ing=false
       this.record=false
+      this.audioLoading = true
       setTimeout(() => {
         this.setRecentRecord()
+        this.audioLoading = false
       }, 500)
       this.setProgressColor()
     },
@@ -334,7 +337,6 @@ export default {
           // this.ing = false
           // this.record = false
           this.lineBar.set(0)
-
         }
       }
     },
@@ -401,6 +403,9 @@ export default {
       }
     },
     playOrPause () {
+      if(this.audioLoading){
+        return
+      }
       this.setProgressColor()
       if (!this.record) {
         if(!this.ing){
@@ -572,6 +577,7 @@ export default {
       }
     }
     .ar-player {
+
       .ar-player-actions {
         display: none;
       }
