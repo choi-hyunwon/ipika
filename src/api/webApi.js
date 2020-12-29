@@ -22,9 +22,9 @@ export default class WebApi {
 
     return axios({
       // url: store.getters.getSession.api_url + url,
-      url : `https://pablo.house/${url}`,
+      url : store.getters.getSession.api_url + url,
       headers: {
-        user_id: 'eunggiTest1',
+        user_id: store.getters.getSession.user_id,
         user_auth_key: store.getters.getSession.user_auth_key,
         device_type: store.getters.getSession.device_type
       },

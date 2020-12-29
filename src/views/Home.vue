@@ -21,7 +21,7 @@
         </div>
 
         <div class="btn-group">
-          <router-link v-if="resultCode=== '0000'" to="/PabloMain" class="btn btn-dark">시작하기-</router-link>
+          <router-link v-if="resultCode=== '0000'" to="/PabloMain" class="btn btn-dark">시작하기</router-link>
           <router-link v-else to="/TestInfo" class="btn btn-dark" :class="{'disabled': Config.isIE}">시작하기</router-link>
         </div>
       </div>
