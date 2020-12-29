@@ -212,6 +212,10 @@ export default {
 
     this.$EventBus.$on('back', this.goBack)
     this.$EventBus.$on('next', () => {
+      if(this.ing){
+        this.audioEl.setAttribute('src', this.audioSource)
+        this.ing = false
+      }
       this.record = true
       this.lineBar.set(0)
     })

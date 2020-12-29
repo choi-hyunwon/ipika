@@ -19,7 +19,8 @@ export default class WebApi {
     }
 
     return axios({
-      url: store.getters.getSession.api_url + url,
+      // url: store.getters.getSession.api_url + url,
+      url : `https://pablo.house/${url}`,
       headers: {
         user_id: store.getters.getSession.user_id,
         user_auth_key: store.getters.getSession.user_auth_key,
