@@ -227,6 +227,7 @@ export default {
     if (this.page !== 'free' && this.userAudio) {
       this.record = false
       this.audioSource = this.userAudio.audioUrl
+
       this.setAudio()
     }
 
