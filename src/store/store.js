@@ -39,6 +39,7 @@ export default new Vuex.Store({
        * 진단 테스트만 할 수있도록 철리
        */
       isDemo : false,
+
     },
 
     /**

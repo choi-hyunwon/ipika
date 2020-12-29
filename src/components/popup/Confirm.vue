@@ -38,6 +38,7 @@
       <template #default="{ hide,cancel }">
         <button class="btn-close" @click="cancel()"><img src="@/assets/images/common/close_dim@2x.png" alt=""></button>
         <div class="content">
+
           <div class="c-header">
             <p class="title">배경교재 선택하기</p>
             <p class="desc">그리고 싶은 배경교재를 선택하고, 캔버스에서 그려보세요!</p>
@@ -49,6 +50,7 @@
                   <span class="img"><img :src=canvas.tabletImageUrl alt=""></span>
                   <span class="tit-sm">{{canvas.imageName}}</span>
                   <span class="tit">{{canvas.imageSubject}}</span>
+
                 </div>
               </li>
             </ul>
