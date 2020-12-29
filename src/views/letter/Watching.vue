@@ -67,7 +67,7 @@ export default {
   }
   .dim {
     width: 100%;
-    height: calc(112.4rem - 8rem);
+    height: calc(112.9rem - 8rem);
     position: absolute;
     top: 8rem;
     left: 0;

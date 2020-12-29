@@ -21,7 +21,7 @@ export default {
     return {
       dummy: false, //더미 데이터 사용
       demo: false, //데모용 빌드
-      app: true, //웹 유무
+      app: false, //웹 유무
       dev: true //API서버
     }
   },
@@ -62,7 +62,7 @@ export default {
            * 정식 스토리 경우에는 고정값 처리
            */
           this.Session.name = '승아'
-          this.Session.user_id = '2233445566112'
+          this.Session.user_id = '123213124312412424567'
           this.Session.user_auth_key = 'abcdefghijklmnopqrstuvwxyz0123456789'
           this.Session.Content_Language = 'ko'
           this.Session.device_type = '1002'
@@ -76,7 +76,8 @@ export default {
        * 상용 서버 URL 셋팅
        */
       if (this.dev) {
-        this.Session.api_url = 'https://ec2-15-165-50-157.ap-northeast-2.compute.amazonaws.com/'
+        // this.Session.api_url = 'https://ec2-15-165-50-157.ap-northeast-2.compute.amazonaws.com/'
+        this.Session.api_url = 'https://dev.pablo.house/'
       } else {
         this.Session.api_url = 'https://pablo.house/'
       }
@@ -97,7 +98,7 @@ export default {
 <style>
 #app {
   width: 192.2rem;
-  height: 112.6rem;
+  height: 112.9rem;
   position: relative;
   margin: 0 auto;
   overflow: hidden;

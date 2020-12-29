@@ -335,7 +335,7 @@ export default {
 .guide {
   position: absolute;
   width: 192.5rem;
-  height: 112.6rem;
+  height: 112.9rem;
   top: 0;
   left: 0;
   z-index: 1111;

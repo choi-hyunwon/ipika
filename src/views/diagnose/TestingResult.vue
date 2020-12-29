@@ -78,10 +78,10 @@ export default {
     }
   }
   > .row {
-    height: calc(112.6rem - 8rem);
+    height: calc(112.9rem - 8rem);
   }
   .col {
-    height: calc(112.6rem - 8rem);
+    height: calc(112.9rem - 8rem);
   }
   .symbol-wrap {
     position: absolute;

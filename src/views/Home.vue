@@ -63,9 +63,9 @@ export default {
     })
   },
   mounted () {
-    this.isLoading = true
-    this.loadAndroid()
 
+    this.loadAndroid()
+    this.isLoading = true
     if (this.Config.isIE) {
       this.$bvModal.show('ieAlert')
     }
@@ -78,9 +78,13 @@ export default {
       setSession: 'setSession'
     }),
     fetchDiagnoseResult() {
+      // alert('fetchDiagnoseResult')
       this.getDiagnoseResult()
         .then(result => {
+          // alert('result')
+
           this.resultCode = result
+          // this.isLoading = true
         })
     },
     loadAndroid() {
@@ -135,7 +139,6 @@ export default {
     padding-top: 29.4rem;
 
     .text-area {
-
       text-align: center;
       margin-bottom: 5.4rem;
 
