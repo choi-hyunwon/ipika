@@ -225,7 +225,8 @@ export default {
         color: var(--gray-600);
       }
       &.pause {
-        a {
+        .img {
+          position: relative;
           &::after {
             content: '';
             position: absolute;
@@ -241,7 +242,9 @@ export default {
         }
       }
       &.play {
-        a {
+        .img {
+          position: relative;
+          box-shadow: 0 16px 24px 0 rgba(0, 0, 0, 0.08), 0 40px 60px 0 rgba(0, 0, 0, 0.2);
           &::after {
             content: '';
             position: absolute;
@@ -258,9 +261,7 @@ export default {
             left: 50%;
             transform: translate(-50%, -50%);
           }
-        }
-        .img {
-          box-shadow: 0 16px 24px 0 rgba(0, 0, 0, 0.08), 0 40px 60px 0 rgba(0, 0, 0, 0.2);
+
         }
         .time {
           color: var(--blue-400);

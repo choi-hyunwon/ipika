@@ -62,7 +62,7 @@ export default {
            * 정식 스토리 경우에는 고정값 처리
            */
           this.Session.name = '승아'
-          this.Session.user_id = '123213124312412424567'
+          this.Session.user_id = '12312412512512615242'
           this.Session.user_auth_key = 'abcdefghijklmnopqrstuvwxyz0123456789'
           this.Session.Content_Language = 'ko'
           this.Session.device_type = '1002'
