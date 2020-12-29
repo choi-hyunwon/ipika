@@ -78,7 +78,7 @@ export default {
     }
   }
   > .row {
-    height: calc(120rem - 12rem);
+    height: calc(112.6rem - 12rem);
   }
   .col {
     height: 100%;

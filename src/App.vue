@@ -21,8 +21,8 @@ export default {
     return {
       dummy: false, //더미 데이터 사용
       demo: false, //데모용 빌드
-      app: false, //웹 유무
-      dev: true, //API서버
+      app: true, //웹 유무
+      dev: true //API서버
     }
   },
   created() {
@@ -62,7 +62,7 @@ export default {
            * 정식 스토리 경우에는 고정값 처리
            */
           this.Session.name = '승아'
-          this.Session.user_id = '1234123123'
+          this.Session.user_id = 2135123523512351325
           this.Session.user_auth_key = 'abcdefghijklmnopqrstuvwxyz0123456789'
           this.Session.Content_Language = 'ko'
           this.Session.device_type = '1002'
@@ -96,8 +96,8 @@ export default {
 
 <style>
 #app {
-  width: 1280px;
-  height: 750px;
+  width: 192.2rem;
+  height: 112.9rem;
   position: relative;
   margin: 0 auto;
   overflow: hidden;
