@@ -203,12 +203,19 @@ export default {
 
 <style lang="scss" scoped>
 .wrap {
+  .row {
+    height: 112.9rem;
+    .col {
+      height: 112.9rem;
+    }
+  }
   .left {
     position: relative;
     display: flex;
     align-items: center;
     width: 100%;
     justify-content: center;
+    padding-top: 5.8rem;
 
     .symbol {
       position: absolute;
@@ -431,7 +438,7 @@ export default {
 
     .img {
       width: 100%;
-      height: 100%;
+      height: 113.5rem;
 
       img {
         width: 100%;
