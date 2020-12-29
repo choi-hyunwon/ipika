@@ -6,10 +6,10 @@
     <Wacom ref="wacom" :drawer="drawer"></Wacom>
 
     <div v-if="bgPopup===true&&page==='diagnose'" class="guide_bg" @click="toggleGuide">
-      <img src="@/assets/images/common/test_guide@2x.png" alt="" class="img-m">
+      <img src="@/assets/images/common/test_guide.png" alt="" class="img-m">
     </div>
     <div v-if="bgPopup===true&&page==='letter'" class="guide_bg" @click="toggleGuide">
-      <img src="@/assets/images/common/guide@2x.png" alt="" class="img-m">
+      <img src="@/assets/images/common/guide.png" alt="" class="img-m">
     </div>
 
     <!--  프리드로잉 canvas 첫 진입시 popup -->

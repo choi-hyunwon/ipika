@@ -77,7 +77,7 @@ export default new Vuex.Store({
     subject: {},
     userGallery: {},
     UserGalleryMypicture: {},
-
+    volume : 0.5,
     canvasTimer: {
       timeInitVal: null,
       time: null,
