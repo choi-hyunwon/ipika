@@ -62,7 +62,7 @@ export default {
            * 정식 스토리 경우에는 고정값 처리
            */
           this.Session.name = '승아'
-          this.Session.user_id = 2135123523512351325
+          this.Session.user_id = '2233445566112'
           this.Session.user_auth_key = 'abcdefghijklmnopqrstuvwxyz0123456789'
           this.Session.Content_Language = 'ko'
           this.Session.device_type = '1002'
@@ -97,7 +97,7 @@ export default {
 <style>
 #app {
   width: 192.2rem;
-  height: 112.9rem;
+  height: 112.6rem;
   position: relative;
   margin: 0 auto;
   overflow: hidden;

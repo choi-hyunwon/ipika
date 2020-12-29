@@ -204,9 +204,9 @@ export default {
 <style lang="scss" scoped>
 .wrap {
   .row {
-    height: 112.9rem;
+    height: 112.6rem;
     .col {
-      height: 112.9rem;
+      height: 112.6rem;
     }
   }
   .left {
