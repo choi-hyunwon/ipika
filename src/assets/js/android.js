@@ -60,19 +60,17 @@ export class Android {
    * onChangedVolume
    * @param curVolume
    */
-  onChangedVolume(curVolume){
-    if (curVolume === 0){
+  onChangedVolume(event) {
+    if (event === 'up') {
       //  mute log
-      Vue.$store.state.volume = curVolume;
-
-      //로그삽입
-      this.Android.setLog('action=MediaMuted&id=123456&url=http://home-learn.com/1791043103643185.mp4&title=동글동글 고구마 경단&type=VideoObject&duration=99&currentTime=0&edApp=파블로')
-    } else {
+      if (Vue.$store.state.volume < 1) {
+        Vue.$store.state.volume = Vue.$store.state.volume + 0.1
+      }
+    } else if (event === 'down') {
       //소리가 있을때
-      Vue.$store.state.volume = curVolume;
-
-      //로그삽입
-      this.Android.setLog('action=MediaUnmuted&id=123456&url=http://home-learn.com/1791043103643185.mp4&title=동글동글 고구마 경단&type=VideoObject&duration=99&currentTime=0&edApp=파블로')
+      if (Vue.$store.state.volume > 0) {
+        Vue.$store.state.volume = Vue.$store.state.volume - 0.1
+      }
     }
   }
 }

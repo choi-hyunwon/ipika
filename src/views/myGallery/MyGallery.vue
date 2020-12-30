@@ -3,7 +3,7 @@
   <div class="wrap"  v-if="isLoading">
     <div class="header ivory bg-ivory d-flex">
       <a href="#" @click="goBack" v-b-modal.goBackPopup class="symbol"><img
-        src="@/assets/images/common/arrow_left@2x.png" alt=""></a>
+        src="@/assets/images/common/arrow_left@2x.png" alt="뒤로가기"></a>
       <div class="gallery-title">
         <router-link to="/">
           <span class="title-center">My Gallery</span>
@@ -15,7 +15,7 @@
                  :cancelText="`아니요`"
                  :okText="`네`">
           <button @click="globalUtils.confirm(slotProps,'checkRed')" style="padding-top: 0;" class="btn-close"><img
-            src="@/assets/images/common/close@2x.png" alt=""></button>
+            src="@/assets/images/common/close@2x.png" alt="종료하기"></button>
         </Confirm>
       </div>
     </div>
@@ -35,7 +35,7 @@
     <!--modal-->
     <b-modal id="galleryBGChangeEmpty" centered title="배경 설정 : 없을 경우" modal-class="galleryBGChangeEmpty">
       <template #modal-header>
-        <div class="symbol"><img src="@/assets/images/common/emoji@2x.png" alt=""></div>
+        <div class="symbol"><img src="@/assets/images/common/emoji@2x.png" alt="팝업아이콘"></div>
       </template>
       <p class="text">직접 그린 그림으로만<br/> 배경을 설정할 수 있어요<br/>파블로학습을 시작해보세요!</p>
       <template #modal-footer="{ cancel }">

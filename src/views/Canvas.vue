@@ -6,10 +6,10 @@
     <Wacom ref="wacom" :drawer="drawer"></Wacom>
 
     <div v-if="bgPopup===true&&page==='diagnose'" class="guide_bg" @click="toggleGuide">
-      <img src="@/assets/images/common/test_guide.png" alt="" class="img-m">
+      <img src="@/assets/images/common/test_guide.png" alt="캔버스가이드-처음시작" class="img-m">
     </div>
     <div v-if="bgPopup===true&&page==='letter'" class="guide_bg" @click="toggleGuide">
-      <img src="@/assets/images/common/guide.png" alt="" class="img-m">
+      <img src="@/assets/images/common/guide.png" alt="캔버스가이드" class="img-m">
     </div>
 
     <!--  프리드로잉 canvas 첫 진입시 popup -->
@@ -34,6 +34,8 @@
 
     <!-- 공통 알림 popup-->
     <Alert ref="submissionFail" v-slot="slotProps" :boldText="'드로잉 제출 실패하였습니다'" :text="'앗! 이런'" :buttonText="'확인'"/>
+
+
   </div>
 </template>
 <script>
@@ -275,8 +277,6 @@ export default {
           if (result.code === '0000') {
             this.$refs.autoOpenSuccess.showAlert = true
             this.$refs.autoOpenSuccess.type = 'success'
-            //로그삽입
-            this.Android.setLog('action=AssignableSubmitted&isComplete=Y&edApp=파블로')
           } else {
             alert(`code : ${result.code} message : ${result.message}`)
           }
@@ -334,8 +334,8 @@ export default {
 
 .guide {
   position: absolute;
-  width: 192rem;
-  height: 120rem;
+  width: 192.5rem;
+  height: 112.9rem;
   top: 0;
   left: 0;
   z-index: 1111;

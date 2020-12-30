@@ -2,22 +2,22 @@
   <div class="wrap">
     <div class="header ivory bg-ivory d-flex">
       <a href="#" v-b-modal.goBackPopup class="symbol"><img src="@/assets/images/common/Symbol@2x.png"
-                                                            alt=""></a>
+                                                            alt="파블로아이콘"></a>
       <div class="box-close">
         <Confirm v-slot="slotProps"
                  :complete-text="`파블로 서비스를 </br> 종료하시겠습니까?`"
                  :cancelText="`아니요`"
                  :okText="`네`">
           <button @click="globalUtils.confirm(slotProps,'checkRed')" style="padding-top: 0;" class="btn-close"><img
-            src="@/assets/images/common/close@2x.png" alt=""></button>
+            src="@/assets/images/common/close@2x.png" alt="파블로종료하기"></button>
         </Confirm>
       </div>
     </div>
     <div class="contents bg-ivory testinfo">
-      <div class="symbol"><img src="@/assets/images/common/Symbol@2x.png" style="width: 8rem;"></div>
-      <div class="title"><img src="@/assets/images/common/img_testinfo_title@2x.png" style="width: 67rem"></div>
-      <div class="desc"><img src="@/assets/images/common/img_testinfo_desc@2x.png" style="width: 86.8rem"></div>
-      <div class="desc_detail"><img src="@/assets/images/common/img_testinfo_freedate@2x.png" style="width: 69rem"></div>
+      <div class="symbol"><img src="@/assets/images/common/Symbol@2x.png" style="width: 8rem;" alt="파블로아이콘"></div>
+      <div class="title"><img src="@/assets/images/common/img_testinfo_title@2x.png" alt="파블로타이틀"  style="width: 67rem"></div>
+      <div class="desc"><img src="@/assets/images/common/img_testinfo_desc@2x.png" alt="파블로테스트소개" style="width: 86.8rem"></div>
+      <div class="desc_detail"><img src="@/assets/images/common/img_testinfo_freedate@2x.png" alt="파블로테스트설명" style="width: 69rem"></div>
       <div class="btn-group clearfix" v-if="shortStory">
         <input type="text" class="form-control active" v-model="onlyNumber" maxlength="2" placeholder="나이를 입력해주세요">
         <a href="#" class="btn btn-block btn-dark btn-start" @click="checkAge">시작하기</a>

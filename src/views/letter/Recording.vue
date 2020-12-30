@@ -104,14 +104,14 @@
         <!--        <button class="btn btn-dark" @click="$router.push('/Listening')">건너뛰기</button>-->
         <div v-if="page==='free'">
           <button @click="goNext" class="btn btn-dark"
-                  style="width: 16rem; height: 8rem; text-align:center;"><img src="@/assets/images/common/next_nor@2x.png" style="width: 5rem"></button>
+                  style="width: 16rem; height: 8rem; text-align:center;"><img src="@/assets/images/common/next_nor@2x.png" style="width: 5rem" alt="앞으로가기"></button>
         </div>
         <div v-else>
           <button v-if="!record" @click="goNext" class="btn btn-dark"
                   style="width: 16rem; height: 8rem; text-align:center;"><img
-            src="@/assets/images/common/next_nor@2x.png" style="width: 5rem"></button>
+            src="@/assets/images/common/next_nor@2x.png" style="width: 5rem" alt="앞으로가기"></button>
           <button v-if="record" ref="btnnext" class="btn btn-dark disabled" style="width: 16rem; height: 8rem; text-align:center;">
-            <img src="@/assets/images/common/next_nor@2x.png" style="width: 5rem"></button>
+            <img src="@/assets/images/common/next_nor@2x.png" style="width: 5rem" alt="앞으로가기"></button>
         </div>
 
 
@@ -140,7 +140,7 @@
 
     <b-modal id="submissionFree" centered title="배경 설정 : 없을 경우" modal-class="galleryBGChangeEmpty">
       <template #modal-header>
-        <div class="symbol"><img src="@/assets/images/common/emoji@2x.png" alt=""></div>
+        <div class="symbol"><img src="@/assets/images/common/emoji@2x.png" alt="팝업아이콘"></div>
       </template>
       <p class="text">그림이 마이갤러리에<br>
         추가되었어요!</p>
@@ -170,6 +170,7 @@ export default {
   data () {
     return {
       media: null,
+      audioLoading : false,
       ing: false,
       record: true,
       file: {},
@@ -212,6 +213,10 @@ export default {
 
     this.$EventBus.$on('back', this.goBack)
     this.$EventBus.$on('next', () => {
+      if(this.ing){
+        this.audioEl.setAttribute('src', this.audioSource)
+        this.ing = false
+      }
       this.record = true
       this.lineBar.set(0)
     })
@@ -223,6 +228,7 @@ export default {
     if (this.page !== 'free' && this.userAudio) {
       this.record = false
       this.audioSource = this.userAudio.audioUrl
+
       this.setAudio()
     }
 
@@ -298,8 +304,10 @@ export default {
     stopRecord () {
       this.ing=false
       this.record=false
+      this.audioLoading = true
       setTimeout(() => {
         this.setRecentRecord()
+        this.audioLoading = false
       }, 500)
       this.setProgressColor()
     },
@@ -329,7 +337,6 @@ export default {
           // this.ing = false
           // this.record = false
           this.lineBar.set(0)
-
         }
       }
     },
@@ -396,6 +403,9 @@ export default {
       }
     },
     playOrPause () {
+      if(this.audioLoading){
+        return
+      }
       this.setProgressColor()
       if (!this.record) {
         if(!this.ing){
@@ -567,6 +577,7 @@ export default {
       }
     }
     .ar-player {
+
       .ar-player-actions {
         display: none;
       }

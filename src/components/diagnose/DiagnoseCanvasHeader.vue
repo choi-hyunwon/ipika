@@ -2,13 +2,13 @@
   <div class="header canvas">
     <div class="timer" :class="{'red' : canvasTimer.time <= 10}"><!-- 1분(10초로 변경) 미만일 경우, red 클래스 추가 -->
       <div class="img">
-        <img v-if="canvasTimer.time > 10" src="@/assets/images/common/timer-black@2x.png" alt="">
-        <img v-else src="@/assets/images/common/timer@2x.png" alt="">
+        <img v-if="canvasTimer.time > 10" src="@/assets/images/common/timer-black@2x.png" alt="시작타이머">
+        <img v-else src="@/assets/images/common/timer@2x.png" alt="종료10초전타이머">
       </div>
       <div class="time">{{ time }}</div>
     </div>
     <div class="symbol" >
-      <span class="img"><img src="@/assets/images/common/Symbol@2x.png" alt=""></span>
+      <span class="img"><img src="@/assets/images/common/Symbol@2x.png" alt="파블로아이콘"></span>
       <span class="text">{{subject.subject}}</span>
     </div>
     <div class="box-close">
@@ -16,7 +16,7 @@
                :complete-text="`파블로 서비스를 </br> 종료하시겠습니까?`"
                :cancelText="`아니요`"
                :okText="`네`">
-        <button @click="globalUtils.confirm(slotProps,'checkRed')" style="padding-top: 0;" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></button>
+        <button @click="globalUtils.confirm(slotProps,'checkRed')" style="padding-top: 0;" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt="종료하기"></button>
       </Confirm>
     </div>
   </div>

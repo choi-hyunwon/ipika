@@ -39,6 +39,7 @@ export default new Vuex.Store({
        * 진단 테스트만 할 수있도록 철리
        */
       isDemo : false,
+
     },
 
     /**
@@ -76,7 +77,7 @@ export default new Vuex.Store({
     subject: {},
     userGallery: {},
     UserGalleryMypicture: {},
-
+    volume : 0.5,
     canvasTimer: {
       timeInitVal: null,
       time: null,

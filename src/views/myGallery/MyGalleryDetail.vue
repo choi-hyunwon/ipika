@@ -2,11 +2,18 @@
   <div v-if="isLoading">
     <div class="wrap" v-show="userGalleryMypicture">
       <div class="header ivory bg-ivory d-flex">
+        <button  @click="goBack" class="symbol">
+          <img src="@/assets/images/common/arrow_left@2x.png" alt="뒤로가기">
+        </button>
         <div class="gallery-title">
           <span class="title-center">{{ title || '제목을 불러 올수 없습니다'}}</span>
         </div>
         <div class="box-close">
-          <a href="#" class="btn-close" @click="goBack"><img src="@/assets/images/common/close@2x.png" alt=""></a>
+          <Confirm v-slot="slotProps" :complete-text="`파블로 서비스를 </br> 종료하시겠습니까?`" :cancelText="`아니요`" :okText="`네`">
+            <div class="btn-close" @click="globalUtils.confirm(slotProps,'checkRed')">
+              <img src="@/assets/images/common/close@2x.png" alt="종료하기">
+            </div>
+          </Confirm>
         </div>
       </div>
       <div class="contents no_scroll">
@@ -25,7 +32,7 @@
       <!-- 삭제 팝업  -->
       <b-modal id="ImgDelete" centered title="파블로 알림" modal-class="galleryBGChangeEmpty">
         <template #modal-header>
-          <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>
+          <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt="팝업경고아이콘"></div>
         </template>
         <p class="text">완전히 삭제하시겠어요?<br>
           삭제한 그림은<br>
@@ -36,14 +43,19 @@
         </template>
       </b-modal>
       <!-- //삭제 팝업  -->
+
     </div>
   </div>
 </template>
 <script>
   import { mapActions, mapGetters } from 'vuex'
+  import Confirm from "@/components/popup/Confirm";
 
   export default {
     name: 'MyGalleryDetail',
+    components :{
+      Confirm
+    },
     data () {
       return {
         isLoading: false,

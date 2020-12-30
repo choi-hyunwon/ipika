@@ -28,19 +28,19 @@
       >
         <!-- 5초 앞으로 -->
         <button v-show="isTap" class="btn-rewind" @click="() => skip(-5)">
-          <img src="@/assets/images/common/5s_rewind@2x.png" alt="">
+          <img src="@/assets/images/common/5s_rewind@2x.png" alt="5초앞으로가기">
         </button>
         <!-- 재생 -->
         <button v-show="isStart || (isTap && !isPlaying)" class="btn-play" @click="play">
-          <img src="@/assets/images/common/btn_play@2x.png" alt="">
+          <img src="@/assets/images/common/btn_play@2x.png" alt="재생하기">
         </button>
         <!-- 일시 정지 -->
         <button v-show="isTap && isPlaying" class="btn-pause" @click="pause">
-          <img src="@/assets/images/common/pause@2x.png" alt="">
+          <img src="@/assets/images/common/pause@2x.png" alt="정지하기">
         </button>
         <!-- 5초 뒤로 -->
         <button v-show="isTap" class="btn-forward" @click="() => skip(5)">
-          <img src="@/assets/images/common/5s_forward@2x.png" alt="">
+          <img src="@/assets/images/common/5s_forward@2x.png" alt="5초뒤로가기">
         </button>
       </div>
     </div>

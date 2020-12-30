@@ -59,7 +59,7 @@
               <div class="img_title">{{ item.createdDate.slice(0, 10) }}</div>
               <div class="img_desc">{{ item.title || '제목을 불러 올수 없습니다' }}</div>
             </div>
-            <button class="icon_delete" @click="openDelete(item.userAudioId, index)"><img src="@/assets/images/common/btn_delete@2x.png" alt="" class="img-m"></button>
+            <button class="icon_delete" @click="openDelete(item.userAudioId, index)"><img src="@/assets/images/common/btn_delete@2x.png" alt="삭제아이콘" class="img-m"></button>
           </li>
         </ul>
         <ul class="voices" v-else>
@@ -72,7 +72,7 @@
 
     <b-modal id="deleteAudio" centered title="완전히 삭제" modal-class="normalPopup">
       <template #modal-header>
-        <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>
+        <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt="팝업경고아이콘"></div>
       </template>
       <p class="text" style="margin-bottom: 12px;">완전히 삭제하시겠어요?
         <br>삭제한 녹음 파일은<br>복구할 수 없어요!</p>
@@ -91,12 +91,12 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import Alert from '@/components/popup/Alert'
-// import AudioConstant from '@/components/`AudioConstant`'
 
 export default {
   name: 'myGalleryVoice',
   data () {
     return {
+      elementById : null,
       isLoading :false,
       focusIdx : 0,
       empty: null,
@@ -136,7 +136,6 @@ export default {
     }
   },
   components:{
-    // AudioConstant,
     Alert
   },
   mounted () {
@@ -178,8 +177,16 @@ export default {
     onClick (index) {
       if (this.activeIndex === index) {
         this.activeIndex = null
-      } else {
+      }else{
         this.activeIndex = index
+        if(this.play){
+          this.play=false
+          this.$refs.player.pause()
+          if(this.elementById.classList.contains('active')){
+            this.elementById.classList.remove('active')
+            this.elementById.style.transitionDuration = "0s";
+          }
+        }
       }
       this.setFilter(index)
     },
@@ -197,6 +204,7 @@ export default {
       }
       //sort 처리
       this.setSort(this.selected)
+
     },
     setSort (value) {
       //select value
@@ -217,45 +225,40 @@ export default {
       }
     },
     onToggle(index){
-      let elementById = document.getElementById("play_bar" + index)
+      this.elementById = document.getElementById("play_bar" + index)
       let gettingProgress = document.getElementById("play_bar" + this.focusIdx)
       if(index!==this.focusIdx){
+        if(gettingProgress === null){
+          this.focusIdx = index
+          gettingProgress = document.getElementById("play_bar" + this.focusIdx)
+        }
         gettingProgress.classList.remove('active')
         gettingProgress.style.transitionDuration = "0s";
         this.focusIdx = index
+        gettingProgress = document.getElementById("play_bar" + this.focusIdx)
         this.play=false
       }
       this.url = this.list[index].audioUrl
       this.$refs.player.load()
       if(!this.play){
-        elementById.classList.add('active')
-        elementById.style.transitionDuration = this.list[index].audioPlaytime + "s";
+        this.elementById.classList.add('active')
+        this.elementById.style.transitionDuration = this.list[index].audioPlaytime + "s";
         this.$refs.player.play()
         this.play = true
         this.$refs.player.onended = ()=>{
           this.play=false
-          elementById.classList.remove('active')
-          elementById.style.transitionDuration = "0s";
+          this.elementById.classList.remove('active')
+          this.elementById.style.transitionDuration = "0s";
         }
       }else{
         this.$refs.player.pause()
         this.play = false
-        elementById.classList.remove('active')
-        elementById.style.transitionDuration = "0s";
+        this.elementById.classList.remove('active')
+        this.elementById.style.transitionDuration = "0s";
       }
     },
-    // progressActive(progress,playtime){
-    //   if(progress.class){
-    //     progress.classList.remove('active')
-    //     progress.classList.transitionDuration = "0s";
-    //   }else{
-    //     console.log(progress.class)
-    //     progress.classList.add('active')
-    //     progress.style.transitionDuration = playtime + "s";
-    //   }
-    // },
     durationActive(){
-      let elementById = document.getElementById("play_bar" + this.activeIndex)
+      let elementById = document.getElementById("play_bar" + this.focusIdx)
       elementById.classList.remove('active')
       elementById.style.transitionDuration = "0s";
     },

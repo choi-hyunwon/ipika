@@ -2,21 +2,21 @@
   <div>
     <div class="wrap" v-if="isLoading">
       <div class="header d-flex">
-        <div v-b-modal.goBackPopup class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt=""></div>
+        <div v-b-modal.goBackPopup class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt="뒤로가기"></div>
         <div class="box-close">
           <Confirm v-slot="slotProps"
                    :complete-text="`파블로 서비스를 </br> 종료하시겠습니까?`"
                    :cancelText="`아니요`"
                    :okText="`네`">
             <div class="btn-close" @click="globalUtils.confirm(slotProps,'checkRed')"><img
-              src="@/assets/images/common/close@2x.png" alt=""></div>
+              src="@/assets/images/common/close@2x.png" alt="종료하기"></div>
           </Confirm>
         </div>
       </div>
       <div class="content">
-        <div class="symbol"><img src="@/assets/images/common/Symbol@2x.png" alt=""></div>
+        <div class="symbol"><img src="@/assets/images/common/Symbol@2x.png" alt="파블로아이콘"></div>
         <div class="text-area">
-          <p><img src="@/assets/images/temp/home-title@2x.png" style="width: 128rem"/></p>
+          <img src="@/assets/images/temp/home-title@2x.png" style="width: 128rem" alt="파블로타이틀">
           <p>모든 학습의 기본 파블로<br>질문하고 대화하는 미술 교육 서비스</p>
         </div>
 
@@ -28,7 +28,7 @@
     </div>
     <b-modal id="ieAlert" centered title="ieAlert" modal-class="normalPopup">
       <template #modal-header>
-        <div class="symbol"><img src="@/assets/images/common/check_red@2x.png"></div>
+        <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt="팝업경고아이콘"></div>
       </template>
       <p class="text" style="margin-bottom: 12px;">해당 브라우저를 지원하지 않습니다</p>
       <p class="text-sm">파블로는 최신 기술인 WebGL을 사용해서 만들어졌습니다<br>
@@ -63,9 +63,9 @@ export default {
     })
   },
   mounted () {
-    this.isLoading = true
-    this.loadAndroid()
 
+    this.loadAndroid()
+    this.isLoading = true
     if (this.Config.isIE) {
       this.$bvModal.show('ieAlert')
     }
@@ -78,9 +78,13 @@ export default {
       setSession: 'setSession'
     }),
     fetchDiagnoseResult() {
+      // alert('fetchDiagnoseResult')
       this.getDiagnoseResult()
         .then(result => {
+          // alert('result')
+
           this.resultCode = result
+          // this.isLoading = true
         })
     },
     loadAndroid() {
@@ -135,7 +139,6 @@ export default {
     padding-top: 29.4rem;
 
     .text-area {
-
       text-align: center;
       margin-bottom: 5.4rem;
 

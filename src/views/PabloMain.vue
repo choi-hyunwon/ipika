@@ -2,7 +2,7 @@
   <div v-if="isLoading" class="wrap" :style="{'background-color' : mainMenuList[0].bgColor}">
     <div class="row">
       <div class="col col-6 left">
-        <div class="symbol"><img src="@/assets/images/common/Symbol@2x.png" alt=""></div>
+        <div class="symbol"><img src="@/assets/images/common/Symbol@2x.png" alt="파블로심블"></div>
 
         <ul class="title-list">
           <li @click="setPath(menu.menuId)" v-for="(menu,i) in mainMenuList"
@@ -14,7 +14,7 @@
           </li>
         </ul>
         <div class="message" v-if="message">
-          <span class="symbol"><img src="@/assets/images/common/Symbol-white@2x.png" alt=""></span>
+          <span class="symbol"><img src="@/assets/images/common/Symbol-white@2x.png" alt="파블로심블"></span>
           <span class="text">새로운 학습이 도착했어요! 지금 바로 시작해보세요 😃</span>
           <router-link to="/" class="btn-close"></router-link>
         </div>
@@ -25,7 +25,7 @@
                  :cancelText="`아니요`"
                  :okText="`네`">
           <div @click="globalUtils.confirm(slotProps,'checkRed')" class="btn-close"><img
-            src="@/assets/images/common/close@2x.png" alt=""></div>
+            src="@/assets/images/common/close@2x.png" alt="종료하기"></div>
         </Confirm>
 
 
@@ -203,12 +203,19 @@ export default {
 
 <style lang="scss" scoped>
 .wrap {
+  .row {
+    height: 112.9rem;
+    .col {
+      height: 112.9rem;
+    }
+  }
   .left {
     position: relative;
     display: flex;
     align-items: center;
     width: 100%;
     justify-content: center;
+    padding-top: 5.8rem;
 
     .symbol {
       position: absolute;
@@ -431,7 +438,7 @@ export default {
 
     .img {
       width: 100%;
-      height: 100%;
+      height: 113.5rem;
 
       img {
         width: 100%;

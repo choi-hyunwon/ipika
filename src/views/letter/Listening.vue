@@ -25,7 +25,8 @@
         <button v-if="position<=this.maximumLength" class="swipe"><img src="@/assets/images/common/swipe_right_active@2x.png" alt="" @click="moveRight"></button>
         <button v-if="position>this.maximumLength" class="swipe"><img src="@/assets/images/common/swipe_right_default@2x.png" alt=""></button>
       </div>
-      <div class="btn-wrap"><router-link to="/canvas?page=letter" class="btn btn-dark" :class="{'disabled':submit===false}"><img src="@/assets/images/common/next_nor@2x.png" style="width: 5rem"></router-link></div>
+
+      <div class="btn-wrap"><router-link to="/canvas?page=letter" class="btn btn-dark" :class="{'disabled':submit===false}"><img src="@/assets/images/common/next_nor@2x.png" style="width: 5rem" alt="앞으로가기"></router-link></div>
       <!--      <div class="btn-wrap"><button class="btn btn-dark ">다 들었어요!</button></div>-->
     </div>
     <ListeningPlay v-if="play" :focusIdx="focusIdx"/>
@@ -225,7 +226,8 @@ export default {
         color: var(--gray-600);
       }
       &.pause {
-        a {
+        .img {
+          position: relative;
           &::after {
             content: '';
             position: absolute;
@@ -241,7 +243,9 @@ export default {
         }
       }
       &.play {
-        a {
+        .img {
+          position: relative;
+          box-shadow: 0 16px 24px 0 rgba(0, 0, 0, 0.08), 0 40px 60px 0 rgba(0, 0, 0, 0.2);
           &::after {
             content: '';
             position: absolute;
@@ -258,9 +262,7 @@ export default {
             left: 50%;
             transform: translate(-50%, -50%);
           }
-        }
-        .img {
-          box-shadow: 0 16px 24px 0 rgba(0, 0, 0, 0.08), 0 40px 60px 0 rgba(0, 0, 0, 0.2);
+
         }
         .time {
           color: var(--blue-400);

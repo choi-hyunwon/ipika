@@ -5,7 +5,7 @@
       <!--  header -->
       <template #modal-header>
         <div class="symbol">
-          <img src="@/assets/images/common/check_red@2x.png" alt="">
+          <img src="@/assets/images/common/check_red@2x.png" alt="팝업경고아이콘">
         </div>
       </template>
 
@@ -24,7 +24,7 @@
 
     <b-modal v-if="type === 'timeOut'" no-close-on-backdrop id="timeoverPopup" centered title="진단테스트 : 타임오버" modal-class="normalPopup" v-model="showConfirm">
       <template #modal-header>
-        <div class="symbol"><img src="@/assets/images/common/timer@2x.png" alt=""></div>
+        <div class="symbol"><img src="@/assets/images/common/timer@2x.png" alt="팝업창아이콘"></div>
       </template>
       <p class="text">시간이 초과되었어요!<br/>이대로 그림을 제출할까요?</p>
       <p class="text-sm"></p>
@@ -36,8 +36,9 @@
 
     <b-modal v-if="type === 'background'"  id="studyBookPopup" centered hide-footer modal-class="studyBookPopup" v-model="showConfirm">
       <template #default="{ hide,cancel }">
-        <button class="btn-close" @click="cancel()"><img src="@/assets/images/common/close_dim@2x.png" alt=""></button>
+        <button class="btn-close" @click="cancel()"><img src="@/assets/images/common/close_dim@2x.png" alt="종료하기"></button>
         <div class="content">
+
           <div class="c-header">
             <p class="title">배경교재 선택하기</p>
             <p class="desc">그리고 싶은 배경교재를 선택하고, 캔버스에서 그려보세요!</p>
@@ -49,6 +50,7 @@
                   <span class="img"><img :src=canvas.tabletImageUrl alt=""></span>
                   <span class="tit-sm">{{canvas.imageName}}</span>
                   <span class="tit">{{canvas.imageSubject}}</span>
+
                 </div>
               </li>
             </ul>

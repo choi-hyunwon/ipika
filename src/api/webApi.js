@@ -1,5 +1,7 @@
 import axios from 'axios'
 import store from '../store/store'
+import Vue from 'vue'
+
 
 export default class WebApi {
   // eslint-disable-next-line no-useless-constructor
@@ -10,7 +12,7 @@ export default class WebApi {
     if (store.getters.getSession.user_id === ""){
       // alert('user_id 가 유효하지 않습니다.')
       const Vari = window.android.getInitVariables()
-      // const Vari = '{"grade":"5","name":"홈런******","user_id":"1954536","user_auth_key":"V01a1eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1YmlwMDEiLCJ1c2VySWQiOjIwNTkzNTYsImxvZ2luQXMiOmZhbHNlLCJpYXQiOjE2MDgwMzQ1NjQsImV4cCI6MTYwODYzOTM2NH0.qgXxkRvDh6vdVsthFaXV9egKquReHF6Y3VoB1hY_12cbC5aoiSYFW5A5NO8wvbBzriNUncApkmqqdSHHRFYCGw","device_type":"1002"}'
+      // const Vari = '{"grade":"5","name":"홈런******","user_id":"156156156","user_auth_key":"V01a1eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1YmlwMDEiLCJ1c2VySWQiOjIwNTkzNTYsImxvZ2luQXMiOmZhbHNlLCJpYXQiOjE2MDgwMzQ1NjQsImV4cCI6MTYwODYzOTM2NH0.qgXxkRvDh6vdVsthFaXV9egKquReHF6Y3VoB1hY_12cbC5aoiSYFW5A5NO8wvbBzriNUncApkmqqdSHHRFYCGw","device_type":"1002"}'
       const obj = JSON.parse(Vari)
       store.getters.getSession.user_id = obj.user_id
       store.getters.getSession.user_auth_key = obj.user_auth_key
@@ -19,7 +21,8 @@ export default class WebApi {
     }
 
     return axios({
-      url: store.getters.getSession.api_url + url,
+      // url: store.getters.getSession.api_url + url,
+      url : store.getters.getSession.api_url + url,
       headers: {
         user_id: store.getters.getSession.user_id,
         user_auth_key: store.getters.getSession.user_auth_key,
@@ -32,6 +35,10 @@ export default class WebApi {
         console.log(error)
         // alert('error from API')
         // alert(error.message)
+        if (error.message === "Network Error") {
+          Vue.$router.push('/Error')
+        }
+
         throw new Error(`WebApi ${url} Error!!`)
         // throw new Error(error)
       })

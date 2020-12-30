@@ -51,7 +51,7 @@
             <div class="img_title">{{ item.createdDate.slice(0, 10) }}</div>
             <div class="img_desc">{{ item.title || '제목이 없어요' }}</div>
             <button class="icon_delete" @click="openDelete(item.pictureId, index)"><img
-              src="@/assets/images/common/btn_delete@2x.png" alt="" class="img-m"></button>
+              src="@/assets/images/common/btn_delete@2x.png" alt="삭제아이콘" class="img-m"></button>
 
           </li>
         </ul>
@@ -66,7 +66,7 @@
 
     <b-modal id="deletePicture" centered title="완전히 삭제" modal-class="galleryBGChangeEmpty">
       <template #modal-header>
-        <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>
+        <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt="팝업경고아이콘"></div>
       </template>
       <p class="text" style="margin-bottom: 12px;">완전히 삭제하시겠어요? <br data-v-88baf8f6="">삭제한 그림은<br data-v-88baf8f6="">복구할 수 없어요!</p>
       <template #modal-footer="{ cancel }">
