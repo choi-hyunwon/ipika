@@ -13,7 +13,7 @@
         </div>
       </div>
       <div class="col col-6">
-        <div class="img"><img :src="letter.stepCompleteImageUrl" alt=""></div>
+        <div class="img"><img :src="letter.stepCompleteImageUrl" alt="학습완료이미지"></div>
       </div>
     </div>
   </div>

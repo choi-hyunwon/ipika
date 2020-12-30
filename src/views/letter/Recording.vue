@@ -104,14 +104,14 @@
         <!--        <button class="btn btn-dark" @click="$router.push('/Listening')">건너뛰기</button>-->
         <div v-if="page==='free'">
           <button @click="goNext" class="btn btn-dark"
-                  style="width: 16rem; height: 8rem; text-align:center;"><img src="@/assets/images/common/next_nor@2x.png" style="width: 5rem"></button>
+                  style="width: 16rem; height: 8rem; text-align:center;"><img src="@/assets/images/common/next_nor@2x.png" style="width: 5rem" alt="앞으로가기"></button>
         </div>
         <div v-else>
           <button v-if="!record" @click="goNext" class="btn btn-dark"
                   style="width: 16rem; height: 8rem; text-align:center;"><img
-            src="@/assets/images/common/next_nor@2x.png" style="width: 5rem"></button>
+            src="@/assets/images/common/next_nor@2x.png" style="width: 5rem" alt="앞으로가기"></button>
           <button v-if="record" ref="btnnext" class="btn btn-dark disabled" style="width: 16rem; height: 8rem; text-align:center;">
-            <img src="@/assets/images/common/next_nor@2x.png" style="width: 5rem"></button>
+            <img src="@/assets/images/common/next_nor@2x.png" style="width: 5rem" alt="앞으로가기"></button>
         </div>
 
 

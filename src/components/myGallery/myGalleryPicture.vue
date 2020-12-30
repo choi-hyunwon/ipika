@@ -51,7 +51,7 @@
             <div class="img_title">{{ item.createdDate.slice(0, 10) }}</div>
             <div class="img_desc">{{ item.title || '제목이 없어요' }}</div>
             <button class="icon_delete" @click="openDelete(item.pictureId, index)"><img
-              src="@/assets/images/common/btn_delete@2x.png" alt="" class="img-m"></button>
+              src="@/assets/images/common/btn_delete@2x.png" alt="삭제아이콘" class="img-m"></button>
 
           </li>
         </ul>

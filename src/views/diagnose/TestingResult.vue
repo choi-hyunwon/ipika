@@ -1,13 +1,13 @@
 <template>
   <div class="wrap bg-ivory">
     <div class="header">
-      <div class="symbol"><img src="@/assets/images/common/Symbol@2x.png" alt=""></div>
+      <div class="symbol"><img src="@/assets/images/common/Symbol@2x.png" alt="팝업창아이콘"></div>
       <div class="box-close">
         <Confirm v-slot="slotProps"
                  :complete-text="`파블로 서비스를 </br> 종료하시겠습니까?`"
                  :cancelText="`아니요`"
                  :okText="`네`">
-          <div class="btn-close" @click="globalUtils.confirm(slotProps,'checkRed')"><img src="@/assets/images/common/close@2x.png" alt=""></div>
+          <div class="btn-close" @click="globalUtils.confirm(slotProps,'checkRed')"><img src="@/assets/images/common/close@2x.png" alt="종료하기"></div>
         </Confirm>
       </div>
     </div>
@@ -35,8 +35,8 @@
     </div>
     <div class="bg_dim"  v-if="menu.popup">
       <div class="modal_img">
-        <img src="@/assets/images/common/stage_modal.png" alt="" class="img-m">
-        <img src="@/assets/images/common/close_dim@2x.png" alt="" class="img-m close_btn" @click="menu.popup = !menu.popup">
+        <img src="@/assets/images/common/stage_modal.png" alt="스테이지알아보기" class="img-m">
+        <img src="@/assets/images/common/close_dim@2x.png" alt="스테이지알아보기종료" class="img-m close_btn" @click="menu.popup = !menu.popup">
       </div>
     </div>
   </div>

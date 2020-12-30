@@ -6,16 +6,16 @@
              :cancelText="'아니요'"
              :completeText = "'이전 화면으로 이동할까요? </br> 진행중인 학습 내용은 </br> 저장되지 않아요!'">
       <button @click="globalUtils.confirm(slotProps,'goBack')" class="symbol">
-        <img src="@/assets/images/common/arrow_left@2x.png" alt="">
+        <img src="@/assets/images/common/arrow_left@2x.png" alt="뒤로가기">
       </button>
     </Confirm>
     <div v-if="bg.active" class="btn-wrap" @click="visible">
-      <button v-if="bg.isShow"><img src="@/assets/images/common/img_visible@2x.png" alt=""></button>
-      <button v-else><img src="@/assets/images/common/img_invisible@2x.png" alt=""></button>
+      <button v-if="bg.isShow"><img src="@/assets/images/common/img_visible@2x.png" alt="보이기"></button>
+      <button v-else><img src="@/assets/images/common/img_invisible@2x.png" alt="가리기"></button>
     </div>
 
     <div class="title" >
-      <span class="img"><img src="@/assets/images/common/Symbol@2x.png" alt=""></span>
+      <span class="img"><img src="@/assets/images/common/Symbol@2x.png" alt="파블로아이콘"></span>
       <span class="text">{{bg.imageSubject}}</span>
     </div>
 
@@ -23,19 +23,19 @@
       <!--영상보기-->
       <Alert v-slot="slotProps">
         <button @click="globalUtils.alert(slotProps,'video')" class="btn-right">
-          <span class="img"><img src="@/assets/images/common/youtube.png" alt=""></span>
+          <span class="img"><img src="@/assets/images/common/youtube.png" alt="영상보기"></span>
           <span class="tit">영상보기</span>
         </button>
       </Alert>
       <Confirm v-slot="slotProps">
         <button @click="globalUtils.confirm(slotProps,'background')" class="btn-right" >
-          <span class="img"><img src="@/assets/images/common/ic-img@2x.png" alt="" ></span>
+          <span class="img"><img src="@/assets/images/common/ic-img@2x.png" alt="배경선택" ></span>
           <span class="tit">배경선택</span>
         </button>
       </Confirm>
       <Confirm v-slot="slotProps" :complete-text="`파블로 서비스를 </br> 종료하시겠습니까?`" :cancelText="`아니요`" :okText="`네`">
         <div class="box-close">
-          <button @click="globalUtils.confirm(slotProps,'checkRed')" style="padding-top: 0;" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></button>
+          <button @click="globalUtils.confirm(slotProps,'checkRed')" style="padding-top: 0;" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt="종료하기"></button>
         </div>
       </Confirm>
     </div>

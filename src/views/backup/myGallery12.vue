@@ -8,7 +8,7 @@
         </router-link>
       </div>
       <div class="box-close">
-        <router-link to="/PabloMain" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>
+        <router-link to="/PabloMain" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt="메인으로가기"></router-link>
       </div>
     </div>
     <div class="contents no_scroll">

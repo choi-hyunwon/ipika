@@ -2,21 +2,21 @@
   <div>
     <div class="wrap" v-if="isLoading">
       <div class="header d-flex">
-        <div v-b-modal.goBackPopup class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt=""></div>
+        <div v-b-modal.goBackPopup class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt="뒤로가기"></div>
         <div class="box-close">
           <Confirm v-slot="slotProps"
                    :complete-text="`파블로 서비스를 </br> 종료하시겠습니까?`"
                    :cancelText="`아니요`"
                    :okText="`네`">
             <div class="btn-close" @click="globalUtils.confirm(slotProps,'checkRed')"><img
-              src="@/assets/images/common/close@2x.png" alt=""></div>
+              src="@/assets/images/common/close@2x.png" alt="종료하기"></div>
           </Confirm>
         </div>
       </div>
       <div class="content">
-        <div class="symbol"><img src="@/assets/images/common/Symbol@2x.png" alt=""></div>
+        <div class="symbol"><img src="@/assets/images/common/Symbol@2x.png" alt="파블로아이콘"></div>
         <div class="text-area">
-          <p><img src="@/assets/images/temp/home-title@2x.png" style="width: 128rem"/></p>
+          <img src="@/assets/images/temp/home-title@2x.png" style="width: 128rem" alt="파블로타이틀">
           <p>모든 학습의 기본 파블로<br>질문하고 대화하는 미술 교육 서비스</p>
         </div>
 
