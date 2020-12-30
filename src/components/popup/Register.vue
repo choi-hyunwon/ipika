@@ -5,7 +5,7 @@
       <!--  header -->
       <template #modal-header>
         <div class="symbol">
-          <img src="@/assets/images/common/check_red@2x.png" alt="팝업창아이콘">
+          <img src="@/assets/images/common/check_red@2x.png" alt="팝업경고아이콘">
         </div>
       </template>
 

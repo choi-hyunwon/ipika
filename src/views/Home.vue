@@ -28,7 +28,7 @@
     </div>
     <b-modal id="ieAlert" centered title="ieAlert" modal-class="normalPopup">
       <template #modal-header>
-        <div class="symbol"><img src="@/assets/images/common/check_red@2x.png"></div>
+        <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt="팝업경고아이콘"></div>
       </template>
       <p class="text" style="margin-bottom: 12px;">해당 브라우저를 지원하지 않습니다</p>
       <p class="text-sm">파블로는 최신 기술인 WebGL을 사용해서 만들어졌습니다<br>

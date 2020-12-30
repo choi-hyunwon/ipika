@@ -140,7 +140,7 @@
 
     <b-modal id="submissionFree" centered title="배경 설정 : 없을 경우" modal-class="galleryBGChangeEmpty">
       <template #modal-header>
-        <div class="symbol"><img src="@/assets/images/common/emoji@2x.png" alt=""></div>
+        <div class="symbol"><img src="@/assets/images/common/emoji@2x.png" alt="팝업아이콘"></div>
       </template>
       <p class="text">그림이 마이갤러리에<br>
         추가되었어요!</p>
