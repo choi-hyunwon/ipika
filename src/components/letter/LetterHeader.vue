@@ -26,7 +26,7 @@
       </Alert>
 
       <!--주제보기-->
-      <Alert  v-if="path !=='/Intro' && path !=='/Completion' && (path ==='/Recording' && page !== 'free') || path ==='/Watching' "
+      <Alert  v-if="path !=='/Intro' && path !=='/Completion' && (path ==='/Recording' && page !== 'free') || path ==='/Watching'|| path ==='/Listening' "
               v-slot="slotProps" :boldText=letter.stepSubejct :buttonText ="'닫기'">
         <button class="btn-right" @click="globalUtils.alert(slotProps,'subject')">
           <span class="img"><img src="@/assets/images/common/ic-drawing@2x.png" alt=""></span>

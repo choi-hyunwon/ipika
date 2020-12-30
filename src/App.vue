@@ -8,6 +8,7 @@
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import {mapGetters} from 'vuex'
+import store from '@/store/store'
 
 export default {
   name: 'App',
@@ -21,7 +22,7 @@ export default {
     return {
       dummy: false, //더미 데이터 사용
       demo: false, //데모용 빌드
-      app: false, //웹 유무
+      app: true, //웹 유무
       dev: true //API서버
     }
   },
@@ -55,17 +56,17 @@ export default {
           this.Session.user_id = Math.random(99999999) * 10000000000000000
           this.Session.user_auth_key = 'abcdefghijklmnopqrstuvwxyz0123456789'
           this.Session.Content_Language = 'ko'
-          this.Session.device_type = '1002'
+          this.Session.device_type = '1001'
           localStorage.setItem('user_id', this.Session.user_id)
         } else {
           /**
            * 정식 스토리 경우에는 고정값 처리
            */
           this.Session.name = '승아'
-          this.Session.user_id = '12312412512512615242'
+          this.Session.user_id = '2059356'
           this.Session.user_auth_key = 'abcdefghijklmnopqrstuvwxyz0123456789'
           this.Session.Content_Language = 'ko'
-          this.Session.device_type = '1002'
+          this.Session.device_type = '1001'
           localStorage.setItem('userId', this.Session.user_id)
         }
 
@@ -77,9 +78,10 @@ export default {
        */
       if (this.dev) {
         // this.Session.api_url = 'https://ec2-15-165-50-157.ap-northeast-2.compute.amazonaws.com/'
-        this.Session.api_url = 'https://dev.pablo.house/'
+        store.getters.getApiUrl.url = 'https://dev.pablo.house/'
+
       } else {
-        this.Session.api_url = 'https://pablo.house/'
+        store.getters.getApiUrl.url = 'https://pablo.house/'
       }
     }
 

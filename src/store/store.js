@@ -65,14 +65,15 @@ export default new Vuex.Store({
     /**
      * API session options
      */
-
+    api: {
+      url : ''
+    },
     session: {
       name: '',
       user_id: '',
       user_auth_key: '',
       Content_Language: '',
-      device_type: '',
-      api_url: ''
+      device_type: ''
     },
     subject: {},
     userGallery: {},
@@ -119,6 +120,9 @@ export default new Vuex.Store({
    * this.$store.getters.CONSTANTS
    */
   getters: {
+    getApiUrl: state => {
+      return state.api
+    },
     getConfig: state => {
       return state.config
     },
