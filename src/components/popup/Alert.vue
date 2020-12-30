@@ -23,7 +23,7 @@
         <div class="full-screen dim"><!-- 전체 화면시 dim 제거 -->
           <div class="inner">
             <div class="video">
-              <button class="btn-close" @click="hide()"><img src="@/assets/images/common/close_dim@2x.png" alt=""></button>
+              <button class="btn-close" @click="hide()"><img src="@/assets/images/common/close_dim@2x.png" alt="종료하기"></button>
               <div class="dim" >
                 <div class="inner"
                      ref="playerArea">
@@ -39,7 +39,7 @@
 
     <b-modal ref="alertModal" v-if="type==='diagnose'" no-close-on-backdrop id="oderPopup" centered title="안내" modal-class="textPopup" ok-variant="black btn-block" v-model="showAlert">
       <template #modal-header>
-        <div class="symbol"><img src="@/assets/images/common/Symbol@2x.png" alt=""></div>
+        <div class="symbol"><img src="@/assets/images/common/Symbol@2x.png" alt="파블로아이콘"></div>
 <!--        <div class="modal-title">환영해요 {{ getSession.name }}님</div>-->
         <div class="modal-title">환영해요</div>
       </template>
@@ -52,7 +52,7 @@
 
     <b-modal v-if="type==='success'" centered modal-class="normalPopup" v-model="showAlert">
       <template #modal-header>
-        <div class="symbol"><img src="@/assets/images/common/check_green@2x.png" alt=""></div>
+        <div class="symbol"><img src="@/assets/images/common/check_green@2x.png" alt="팝업창아이콘"></div>
       </template>
       <template >
         <p class="text" v-html="boldText"></p>
@@ -65,7 +65,7 @@
 
     <b-modal v-if="type==='common'" centered modal-class="normalPopup" v-model="showAlert">
       <template #modal-header>
-        <div class="symbol"><img src="@/assets/images/common/Symbol@2x.png" alt=""></div>
+        <div class="symbol"><img src="@/assets/images/common/Symbol@2x.png" alt="파블로아이콘"></div>
       </template>
       <template >
         <p class="text" v-html="boldText"></p>

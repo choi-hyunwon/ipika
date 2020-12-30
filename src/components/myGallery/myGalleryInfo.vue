@@ -6,7 +6,7 @@
         <div class="img-m" style="width:192rem; height: 40rem; background-color:#eee9e3; background-position: center center;" :style="{backgroundImage: 'url(' + getUserGallery.backgroundPictureUrl + ')'}"></div>
       </div>
       <div class="setting-img">
-        <img src="@/assets/images/common/setting_default.png" alt="세팅" class=" img-m" @click="$emit('popup')">
+        <img src="@/assets/images/common/setting_default.png" alt="배경화면세팅" class=" img-m" @click="$emit('popup')">
       </div>
     </div>
     <div class="info-section d-flex">

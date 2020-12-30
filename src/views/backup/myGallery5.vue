@@ -1,14 +1,14 @@
 <template>
   <div class="wrap">
     <div class="header ivory bg-ivory d-flex">
-      <div v-b-modal.goBackPopup class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt=""></div>
+      <div v-b-modal.goBackPopup class="symbol"><img src="@/assets/images/common/arrow_left@2x.png" alt="뒤로가기"></div>
       <div class="gallery-title">
         <router-link to="/">
           <span class="title-center">My Gallery</span>
         </router-link>
       </div>
       <div class="box-close">
-        <router-link to="/PabloMain" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt=""></router-link>
+        <router-link to="/PabloMain" class="btn-close"><img src="@/assets/images/common/close@2x.png" alt="종료하기"></router-link>
       </div>
     </div>
     <div class="contents">

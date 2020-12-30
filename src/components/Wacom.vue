@@ -18,13 +18,13 @@
             <path stroke-miterlimit="1"></path>
           </svg>
         <div class="DragHandle">
-          <img src="https://developer-demos.wacom.com/Images/btn_move.png" alt="">
+          <img src="https://developer-demos.wacom.com/Images/btn_move.png" alt="사람 이미지">
         </div>
         <div class="RotateHandle Top">
-          <img src="https://developer-demos.wacom.com/Images/btn_rotate_top.png" alt="">
+          <img src="https://developer-demos.wacom.com/Images/btn_rotate_top.png" alt="사람 이미지">
         </div>
         <div class="RotateHandle Bottom">
-          <img src="https://developer-demos.wacom.com/Images/btn_rotate_bottom.png" alt="">
+          <img src="https://developer-demos.wacom.com/Images/btn_rotate_bottom.png" alt="사람 이미지">
         </div>
       </div>
     </div>
@@ -653,18 +653,18 @@
                        :completeText="'다시 그리시겠어요? </br> 조금 전 그림은 사라져요 '"
                        :cancelText="'아니요'"
                        :okText="'네'">
-              <button @click="undo"><img src="@/assets/images/common/btn_undo@2x.png" alt=""></button>
-              <button @click="redo"><img src="@/assets/images/common/btn_redo@2x.png" alt=""></button>
-              <button @click="globalUtils.confirm(slotProps,'refresh')"><img src="@/assets/images/common/btn_refresh@2x.png" alt=""></button>
+              <button @click="undo"><img src="@/assets/images/common/btn_undo@2x.png" alt="되돌리기"></button>
+              <button @click="redo"><img src="@/assets/images/common/btn_redo@2x.png" alt="되돌리기취소"></button>
+              <button @click="globalUtils.confirm(slotProps,'refresh')"><img src="@/assets/images/common/btn_refresh@2x.png" alt="새로고침"></button>
               </Confirm>
               <Confirm v-if="page==='letter'"
                        v-slot="slotProps"
                        :completeText="'다시 그리시겠어요? </br> 조금 전 그림은 사라져요 '"
                        :cancelText="'아니요'"
                        :okText="'네'">
-                <button @click="undo"><img src="@/assets/images/common/btn_undo@2x.png" alt=""></button>
-                <button @click="redo"><img src="@/assets/images/common/btn_redo@2x.png" alt=""></button>
-                <button @click="globalUtils.confirm(slotProps,'refresh-letter')"><img src="@/assets/images/common/btn_refresh@2x.png" alt=""></button>
+                <button @click="undo"><img src="@/assets/images/common/btn_undo@2x.png" alt="되돌리기"></button>
+                <button @click="redo"><img src="@/assets/images/common/btn_redo@2x.png" alt="되돌리기취소"></button>
+                <button @click="globalUtils.confirm(slotProps,'refresh-letter')"><img src="@/assets/images/common/btn_refresh@2x.png" alt="새로고침"></button>
               </Confirm>
             </div>
           </div>

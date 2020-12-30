@@ -5,7 +5,7 @@
       <!--  header -->
       <template #modal-header>
         <div class="symbol">
-          <img src="@/assets/images/common/check_red@2x.png" alt="">
+          <img src="@/assets/images/common/check_red@2x.png" alt="팝업경고아이콘">
         </div>
       </template>
 
@@ -25,7 +25,7 @@
     <!-- 태윤님 작업 영역 -->
     <b-modal id="startPopup" centered no-close-on-backdrop modal-class="CanvasPopup" v-model="showRegister">
       <template #modal-header="{}">
-        <div class="symbol"><img src="@/assets/images/common/Symbol@2x.png" alt=""></div>
+        <div class="symbol"><img src="@/assets/images/common/Symbol@2x.png" alt="팝업창아이콘"></div>
       </template>
       <p class="text">
         이 그림의 제목은 무엇인가요?

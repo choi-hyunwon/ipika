@@ -3,7 +3,7 @@
   <div class="park" v-if="isLoading">
     <div class="header ivory bg-ivory d-flex">
       <a href="#" @click="goBack" v-b-modal.goBackPopup class="symbol">
-        <img src="@/assets/images/common/arrow_left@2x.png" alt="">
+        <img src="@/assets/images/common/arrow_left@2x.png" alt="뒤로가기">
       </a>
       <div class="gallery-title">
           <span class="title-center">Pablo Park</span>
@@ -14,7 +14,7 @@
                  :cancelText="`아니요`"
                  :okText="`네`">
           <button @click="globalUtils.confirm(slotProps,'checkRed')" style="padding-top: 0;" class="btn-close"><img
-            src="@/assets/images/common/close@2x.png" alt=""></button>
+            src="@/assets/images/common/close@2x.png" alt="종료하기"></button>
         </Confirm>
       </div>
     </div>
