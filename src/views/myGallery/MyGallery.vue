@@ -65,7 +65,7 @@
               </b-button>
             </div>
             <ul class="scroll d-flex" v-if="list.length > 0">
-              <li class="background-img" v-for="(item, index) in list">
+              <li class="background-img" v-for="(item, index) in userGalleryMypicture.pictures">
                 <button @click="setBackground(item.pictureId, index)">
                   <img :src="item.pictureUrl" alt="갤러리사진" class="img-m">
                 </button>
