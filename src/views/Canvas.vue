@@ -149,6 +149,7 @@ export default {
       getLetter: 'getLetter',
       getSubmissionLearning: 'getSubmissionLearning',
       getSubmissionFree: 'getSubmissionFree',
+      getSubmissionFreePicture: 'getSubmissionFreePicture',
       getSubmission: 'getSubmission'
     }),
 
@@ -215,7 +216,7 @@ export default {
         } else {
           const data = new FormData()
           data.append('title', self.freeTitle || store.getters.getSession.name + ' 프리드로잉')
-          data.append('files', blob, 'canvas.png')
+          data.append('file', blob, 'canvas.png')
           self.fetchSubmissionFree(data) //프리 드로잉 제출 API
         }
       })
@@ -306,10 +307,10 @@ export default {
     },
     fetchSubmissionFree (data) {
       const self = this
-      this.getSubmissionFree(data)
+      this.getSubmissionFreePicture(data)
         .then(result => {
           if (result.code === '0000') {
-            self.$router.push('/Recording?page=free&freeTitle=' + this.freeTitle)
+            self.$router.push('/Recording?page=free&freeTitle=' + result.pictureId)
           } else {
             // alert('드로잉 제출 실패')
             self.$refs.submissionFail.showAlert = true

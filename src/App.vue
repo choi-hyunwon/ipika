@@ -22,7 +22,7 @@ export default {
     return {
       dummy: false, //더미 데이터 사용
       demo: false, //데모용 빌드
-      app: true, //웹 유무
+      app: false, //웹 유무
       dev: true //API서버
     }
   },

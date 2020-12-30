@@ -195,7 +195,7 @@ export default class WebApi {
     })
   }
   /**
-   * 학습 : 드로잉제출
+   * 학습 : 드로잉 제출
    *
    * api/learning/submission
    *
@@ -206,6 +206,37 @@ export default class WebApi {
       data: data
     })
   }
+
+
+  /**
+   * 학습 : 드로잉 제출
+   *
+   * api/learning/submission
+   *
+   */
+  getSubmissionFreePicture (data) {
+    return this.request('api/drawing/picture', {
+      method: 'POST',
+      data: data
+    })
+  }
+
+
+  /**
+   * 학습 : 드로잉 제출
+   *
+   * api/learning/submission
+   *
+   */
+  getSubmissionFreeAudio (data) {
+    return this.request('api/drawing/audio', {
+      method: 'POST',
+      data: data
+    })
+  }
+
+
+
 
 
 

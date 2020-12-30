@@ -276,6 +276,7 @@ export default {
     ...mapActions({
       getRecording: 'getRecording',
       getSubmissionFree: 'getSubmissionFree',
+      getSubmissionFreeAudio: 'getSubmissionFreeAudio',
       getLetter: 'getLetter'
     }),
     link(){
@@ -360,10 +361,10 @@ export default {
     async fetchRecordingFree () {
 
       const data = new FormData()
-      data.append('title', this.freeTitle)
-      data.append('files', this.file.blob, 'myfree.mp3')
+      data.append('pictureId', this.freeTitle)
+      data.append('file', this.file.blob, 'myfree.mp3')
 
-      const result = await this.getSubmissionFree(data)
+      const result = await this.getSubmissionFreeAudio(data)
 
       if (result.code === '0000') {
         // this.$bvModal.show('submissionFree')
