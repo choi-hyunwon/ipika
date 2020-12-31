@@ -45,7 +45,7 @@
             </div>
             <div class="recode-desc">{{ timeChange(item.audioPlaytime) }}</div>
             <div class="gallery_img size-img">
-              <a href="#"  @click="onToggle(index)"></a>
+              <a href="#"  @click="onToggle(index,item)"></a>
               <transition name="fade">
               <div class="play_bar" :id="playBar(index)" ></div>
               </transition>
@@ -57,8 +57,11 @@
             <div class="box_title">
 <!--              <div class="img_title">{{ item.stageName || '스테이지' }} {{ item.stageId || '단계' }}</div>-->
               <div class="img_title">{{ item.createdDate.slice(0, 10) }}</div>
-              <div class="img_desc">{{ item.title || '제목을 불러 올수 없습니다' }}</div>
+              <div class="img_desc">{{ item.title || '제목을 불러 올수 없습니다.'}}</div>
+<!--          <div class="img_desc">{{ item.drawingType === 4 ? item.title : item.drawingType === 3 ? userGalleryMypicture.pictures[index].title : '제목을 불러 올수 없습니다'  }}</div>&ndash;&gt;-->
             </div>
+
+            <button class="icon_delete" @click="openDelete(item.userAudioId, index)"><img src="@/assets/images/common/btn_delete@2x.png" alt="" class="img-m"></button>
             <button class="icon_delete" @click="openDelete(item.userAudioId, index)"><img src="@/assets/images/common/btn_delete@2x.png" alt="삭제아이콘" class="img-m"></button>
           </li>
         </ul>
@@ -72,7 +75,7 @@
 
     <b-modal id="deleteAudio" centered title="완전히 삭제" modal-class="normalPopup">
       <template #modal-header>
-        <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt="팝업경고아이콘"></div>
+        <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt=""></div>
       </template>
       <p class="text" style="margin-bottom: 12px;">완전히 삭제하시겠어요?
         <br>삭제한 녹음 파일은<br>복구할 수 없어요!</p>
@@ -132,7 +135,7 @@ export default {
           value: 2,
           text: '오래된 순'
         }
-      ]
+      ],
     }
   },
   components:{
