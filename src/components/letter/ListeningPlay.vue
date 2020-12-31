@@ -55,8 +55,12 @@ export default {
   created () {
     this.audio = new Audio(this.audioList[this.focusIdx].recordingAudioUrl)
     console.log(this.audio)
+
     this.options.duration = this.audioList[this.focusIdx].audioPlaytime *1000
+
+    this.$eventBus.$on('setVolumeLetter', this.setVolume)
   },
+
   mounted () {
     this.lineBar = this.$refs.listenProgress
     this.play()
@@ -71,6 +75,7 @@ export default {
   computed: {
     ...mapGetters({
       audioList: 'getLetterAudioList',
+      volume: 'getVolume',
     }),
     audioTime(){
       return this.audio.duration
@@ -95,9 +100,13 @@ export default {
       this.audio.pause()
       this.$EventBus.$emit('toggle')
     },
+    setVolume(){
+      this.audio.volume = this.volume
+    },
     play () {
       if (!this.toggleButton) {
         this.audio.play()
+        this.Android.stopTTS();
         // this.lineBar.animate(this.isPause? 1 + this.lineBar.value() : 1)
         this.lineBar.animate(1)
         this.audio.onended = () => {

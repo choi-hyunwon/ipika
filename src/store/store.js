@@ -132,6 +132,10 @@ export default new Vuex.Store({
     getSession: state => {
       return state.session
     },
+    getVolume: state => {
+      return state.volume
+    },
+
     getSubject: state => {
       return state.subject
     },

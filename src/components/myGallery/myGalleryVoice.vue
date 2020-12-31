@@ -141,15 +141,20 @@ export default {
   components:{
     Alert
   },
+  created () {
+    this.$eventBus.$on('setVolumeMy', this.setVolume)
+  },
   mounted () {
     this.isLoading = true
     this.list = this.userGalleryMypicture.audios
     this.allSize()
     this.audio = new Audio(this.list[0].audioUrl)
+
   },
   computed: {
     ...mapGetters({
-      userGalleryMypicture: 'getUserGalleryMypicture'
+      userGalleryMypicture: 'getUserGalleryMypicture',
+      volume: 'getVolume',
     }),
     isEmpty () {
       if (this.userGalleryMypicture.audios.length === 0) {
@@ -166,6 +171,9 @@ export default {
       getUserGalleryMypicture: 'getUserGalleryMypicture',
       getUserAudioDetele: 'getUserAudioDetele'
     }),
+    setVolume(){
+      this.audio.volume = this.volume
+    },
     allSize(){
       this.nSize[0] = this.list.length
       const letter = this.list.filter(function (item) {
@@ -247,6 +255,7 @@ export default {
         this.elementById.classList.add('active')
         this.elementById.style.transitionDuration = this.list[index].audioPlaytime + "s";
         this.$refs.player.play()
+        this.Android.stopTTS()
         this.play = true
         this.$refs.player.onended = ()=>{
           this.play=false

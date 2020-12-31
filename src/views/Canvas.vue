@@ -88,8 +88,6 @@ export default {
       window.location.reload()
     } else {
       this.isLoading = true
-
-
     }
     (async () => {
       if (this.page === 'diagnose') {
@@ -130,6 +128,7 @@ export default {
     },
     'isLoading': function () {
       if (this.isLoading && this.page === 'diagnose') {
+
         this.$refs.autoOpen.showAlert = true
         this.$refs.autoOpen.type = 'diagnose'
       }
@@ -248,15 +247,13 @@ export default {
       }
     },
     toggleGuide () {
-      this.bgPopup = !this.bgPopup
-
+      this.$EventBus.$emit('showToolBar')
+      this.bgPopup = false
       if (this.bgPopup === false && this.page === 'diagnose') {
         this.setTimerStart()
       } else if (this.page === 'letter') {
-        this.bgPopup = false
         this.setBackgrounImage()
       }
-      this.$EventBus.$emit('showToolBar')
     },
 
     setFreeName () {
@@ -266,6 +263,7 @@ export default {
       this.getSubject()
         .then(result => {
           this.setTimeInit(this.subject.limitTime)
+          this.Android.tts(this.subject.subject)
         })
     },
     async fetchLetter () {
