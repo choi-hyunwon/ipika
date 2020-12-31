@@ -47,8 +47,9 @@
                 <!--                  <img src="@/assets/images/common/share.png" alt="다운로드" class="img-m" v-b-modal.normalPopup1>-->
               </div>
             </div>
-<!--            <div class="img_title">{{ item.stageName || '프리드로잉' }} {{ item.stageId || '' }}</div>-->
-            <div class="img_title">{{ item.createdDate.slice(0, 10) }}</div>
+            <div class="img_title" v-if="item.drawingType === 4">{{ item.stageName }} {{ item.stageId }}</div>
+            <div class="img_title" v-else-if="item.drawingType === 3">{{ item.createdDate.slice(0, 10) }}</div>
+
             <div class="img_desc">{{ item.title || '제목이 없어요' }}</div>
             <button class="icon_delete" @click="openDelete(item.pictureId, index)"><img
               src="@/assets/images/common/btn_delete@2x.png" alt="삭제아이콘" class="img-m"></button>
