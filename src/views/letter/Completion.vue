@@ -5,7 +5,7 @@
       <div class="col col-6">
         <div class="symbol-wrap">
           <div class="symbol"><img src="@/assets/images/common/Vector@2x.png" alt=""></div>
-          <span class="text">Part {{letter.stageId}} Clear!</span></div>
+          <span class="text">Part {{letter.studySeq}} Clear!</span></div>
         <div class="title" v-html="letter.completeText"></div>
         <div class="btn-group">
           <router-link to="/MyGallery" class="btn btn-dark mr">마이갤러리</router-link>
