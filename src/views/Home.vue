@@ -21,7 +21,7 @@
         </div>
 
         <div class="btn-group">
-          <router-link v-if="resultCode=== '0000'" to="/PabloMain" class="btn btn-dark">시작하기</router-link>
+          <router-link v-if="resultCode=== '0000'" to="/PabloMain" class="btn btn-dark"  :class="{'disabled': Config.isIE}">시작하기</router-link>
           <router-link v-else to="/TestInfo" class="btn btn-dark" :class="{'disabled': Config.isIE}">시작하기</router-link>
         </div>
       </div>
@@ -31,9 +31,8 @@
         <div class="symbol"><img src="@/assets/images/common/check_red@2x.png" alt="팝업경고아이콘"></div>
       </template>
       <p class="text" style="margin-bottom: 12px;">해당 브라우저를 지원하지 않습니다</p>
-      <p class="text-sm">파블로는 최신 기술인 WebGL을 사용해서 만들어졌습니다<br>
-        해당 브라우저는 WebGL을 지원하지 않습니다<br>
-        <span class="f_blue">구글 크롬</span>, <span class="f_blue">사파리</span>, <span class="f_blue">파이어폭스</span> 또는 <span class="f_blue">엣지</span> 브라우저를 사용해 주세요
+      <p class="text-sm">파블로는 최신 웹기술을 사용해서 만들어졌습니다.<br>
+        최신 웹기술을 지원 하는 <span class="f_blue">구글 크롬</span>, <span class="f_blue">사파리</span>, <span class="f_blue">파이어폭스</span> 또는 <span class="f_blue">엣지</span> 브라우저를 사용해 주세요.
       </p>
       <template #modal-footer="{ cancel }">
         <b-button class="btn btn-black btn-block" @click="cancel()">닫기</b-button>
@@ -43,7 +42,7 @@
 </template>
 
 <script>
-import {mapActions, mapGetters, mapMutations} from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 import Confirm from '@/components/popup/Confirm'
 
 export default {
@@ -192,4 +191,9 @@ export default {
   color: #007bff !important;
 }
 
+</style>
+<style>
+#ieAlert .modal-dialog{
+  max-width: 500px
+}
 </style>

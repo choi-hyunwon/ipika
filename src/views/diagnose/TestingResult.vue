@@ -21,7 +21,15 @@
         <div class="btn-other">
           <a href="#" @click="menu.popup = !menu.popup" class="btn btn-blue">다른 스테이지 더 알아보기</a>
         </div>
-        <div class="btn-group" v-if="!isDemo">
+        <div class="btn_group btn_group_ch" v-if="isDemo">
+          <p>
+            <span class="ch"><img src="@/assets/images/common/img_ch@2x.png" alt="카카오 채널"></span>
+            파블로 2월 공식 런칭 무료체험 사전예약 신청<br>
+            카카오 채널 <span class="bold">“pablo”</span>
+          </p>
+          <a href="http://pf.kakao.com/_yxoCrK" target="_blank"  class="btn btn-dark">무료체험 신청하기</a>
+        </div>
+        <div class="btn_group" v-else>
           <router-link to="/PabloMain" class="btn btn-dark">무료체험 시작하기</router-link>
         </div>
       </div>
@@ -196,10 +204,33 @@ export default {
       }
     }
   }
-  .btn-group {
+  .btn_group {
     position: absolute;
     left: 10rem;
     bottom: 10rem;
+    &.btn_group_ch {
+      p {
+        font-size: 2.4rem;
+        font-weight: 500;
+        line-height: 1.67;
+        color: var(--gray-900);
+        padding-left: 9.8rem;
+        margin-bottom: 3rem;
+        .ch {
+          position: absolute;
+          top: 0;
+          left: 0;
+          img {
+            width: 8rem;
+          }
+        }
+        .bold {
+          font-weight: bold;
+        }
+      }
+
+
+    }
   }
   .btn {
     width: 72rem;
