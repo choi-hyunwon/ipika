@@ -29,7 +29,7 @@
       </div>
     </div>
 <!--    todo : @최현원 나중에 opacity 0으로 변경 필요-->
-    <nav class="nav show" :class="{'hide': drawer=== false, 'visible': isLoadingGuide=== true}" style="z-index: 500; opacity:0.05"><!-- show/hide -->
+    <nav class="nav show" :class="{'hide': drawer=== false, 'visible': isLoadingGuide=== true}" style="z-index: 500; opacity:0.3"><!-- show/hide -->
       <div class="inner">
         <button class="btn-drawer" @click="toggleDrawer" >
           <img v-if="drawer === true" src="@/assets/images/common/slide_down@2x.png" alt="">

@@ -83,21 +83,20 @@ export class Android {
     alert('onChangedVolume')
     alert(event)
     if (event === 'up') {
-      alert(Vue.$store.state.volume)
       //  mute log
       if (Vue.$store.state.volume < 1) {
         Vue.$store.state.volume = Vue.$store.state.volume + 0.1
-        alert(Vue.$store.state.volume)
       }
-    } else if (event === 'down') {
       alert(Vue.$store.state.volume)
+    } else if (event === 'down') {
       //소리가 있을때
       if (Vue.$store.state.volume > 0) {
         Vue.$store.state.volume = Vue.$store.state.volume - 0.1
-        alert(Vue.$store.state.volume)
       }
+      alert(Vue.$store.state.volume)
     }
     Vue.$eventBus.$emit('setVolumeMy')
     Vue.$eventBus.$emit('setVolumeLetter')
+    Vue.$eventBus.$emit('setVolumeVideo')
   }
 }

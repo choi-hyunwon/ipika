@@ -51,6 +51,7 @@
 <script>
 import videojs from 'video.js'
 import 'video.js/dist/video-js.css'
+import { mapGetters } from 'vuex'
 
 export default {
   name: "Player",
@@ -87,9 +88,13 @@ export default {
         val && this.pause()
       }
     })
-
+    this.$eventBus.$on('setVolumeVideo',this.setVolume)
   },
-
+  computed:{
+    ...mapGetters({
+       volume : 'getVolume'
+    })
+  },
   mounted () {
     this.player = videojs(this.$refs.videoPlayer, this.options, function onPlayerReady() {
       console.log('onPlayerReady', this);
@@ -111,11 +116,16 @@ export default {
     // 영상 재생
     play() {
       this.player.play()
+      this.player.volume(this.volume)
       this.isPlaying = true
 
-      // 로그값 넣기
-      this.Android.setLog('action=MediaStarted&id=123456&url=http://home-learn.com/1791043103643185.mp4&title=동글동글 고구마 경단&type=VideoObject&duration=99&currentTime=0&edApp=파블로')
-      this.Android.setLog('action=MediaResumed&id=123456&url=http://home-learn.com/1791043103643185.mp4&title=동글동글 고구마 경단&type=VideoObject&duration=99&currentTime=0&edApp=파블로')
+      if(this.player.currentTime() === 0){
+        // 로그값 넣기
+        this.Android.setLog('action=MediaStarted&id='+'N/A'+'&url='+this.options.sources[0].src+'&title='+'N/A'+'&type=VideoObject&duration='+'N/A'+'&currentTime='+0+'&edApp=파블로')
+      } else {
+        this.Android.setLog('action=MediaResumed&id='+'N/A'+'&url='+this.options.sources[0].src+'&title='+'N/A'+'&type=VideoObject&duration='+'N/A'+'&currentTime='+this.player.currentTime()+'&edApp=파블로')
+      }
+
       // TODO: 테스트용 임시 코드(영상시간단축)
       if(this.isStart) {
         // this.player.currentTime(this.player.duration() - 5)
@@ -128,30 +138,31 @@ export default {
 
       this.isStart = false
     },
-
+    setVolume(){
+      this.player.volume(this.volume)
+      this.Android.setLog('action=MediaChangedVolume&id='+'N/A'+'&url='+this.options.sources[0].src+'&title='+'N/A'+'&type=VideoObject&duration='+'N/A'+'&currentTime='+this.player.currentTime()+'&edApp=파블로')
+    },
     // 영상 정지
     pause() {
       this.player.pause()
       this.isPlaying = false
       this.extendTap()
-
       //로그값넣기기
-      this.Android.setLog('action=MediaPaused&id=123456&url=http://home-learn.com/1791043103643185.mp4&title=동글동글 고구마 경단&type=VideoObject&duration=99&currentTime=0&edApp=파블로')
+      this.Android.setLog('action=MediaPaused&id='+'N/A'+'&url='+this.options.sources[0].src+'&title='+'N/A'+'&type=VideoObject&duration='+'N/A'+'&currentTime='+this.player.currentTime()+'&edApp=파블로')
     },
 
     // 5초 앞으로 / 5초 뒤로
     skip(time) {
       this.player.currentTime(this.player.currentTime() + time)
       this.extendTap()
-
+      this.Android.setLog('action=MediaJumpedTo&id='+'N/A'+'&url='+this.options.sources[0].src+'&title='+'N/A'+'&type=VideoObject&duration='+'N/A'+'&currentTime='+this.player.currentTime()+'&seekTime=5&edApp=파블로')
       //로그값 넣기
-      this.Android.setLog('action=MediaJumpedTo&id=123456&url=http://home-learn.com/1791043103643185.mp4&title=동글동글 고구마 경단&type=VideoObject&duration=99&currentTime=23&seekTime=47&edApp=파블로')
     },
 
     // 영상 종료
     videoEnd() {
       this.isPlaying = false
-
+      this.Android.setLog('action=MediaJumpedTo&id='+'N/A'+'&url='+this.options.sources[0].src+'&title='+'N/A'+'&type=VideoObject&duration='+'N/A'+'&currentTime='+this.player.currentTime()+'&seekTime=5&edApp=파블로')
       this.$EventBus.$emit('videoEnd')
       // 테스트용 임시 코드(영상 무한반복)
       // {
