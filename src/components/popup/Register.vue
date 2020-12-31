@@ -34,7 +34,7 @@
         어떤 그림인지 파블로에게 알려주세요
       </p>
       <form>
-        <input type="text" class="form-control active" id="text" v-model="title" @input="checkInputSize" @keydown.enter="registerFree" placeholder="여기에 입력해주세요">
+        <input type="text" class="form-control active" id="text" v-model="title" @input="checkInputSize" @keypress.enter.prevent="registerFree" placeholder="여기에 입력해주세요">
       </form>
       <template #modal-footer="{ ok }">
         <button class="btn submit_button" variant="btn black btn-block" :class="{ 'btn-black' : title == '' }" @click="cancel">닫기</button>
@@ -91,14 +91,13 @@ export default {
       if(this.title === '') {
         this.$refs.emptyTitle.showAlert = true
         this.$refs.emptyTitle.type = 'common'
-        return false;
+      } else {
+        this.showRegister = false
+        this.$EventBus.$emit('free', this.title)
       }
-      this.showRegister = false
-      this.$EventBus.$emit('free', this.title)
     },
     cancel () {
       this.showRegister = !this.showRegister;
-
     }
   }
 }
