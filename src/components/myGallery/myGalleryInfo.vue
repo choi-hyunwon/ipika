@@ -80,8 +80,7 @@ export default {
 .bgc-section {
   position: relative;
   .bg {
-    //width: 192rem;
-    width: 100%;
+    width: 192rem;
     height: 40rem;
   }
   .setting-img{

@@ -7,7 +7,7 @@
 <script>
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-import {mapGetters} from 'vuex'
+import { mapGetters } from 'vuex'
 import store from '@/store/store'
 
 export default {
@@ -99,10 +99,8 @@ export default {
 
 <style>
 #app {
-  //width: 192.2rem;
-  //height: 112.9rem;
-  width: 100%;
-  height: 100%;
+  width: 192.2rem;
+  height: 112.9rem;
   position: relative;
   margin: 0 auto;
   overflow: hidden;
