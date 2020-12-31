@@ -62,6 +62,7 @@ export class Android {
    */
   onChangedVolume(event) {
     alert('onChangedVolume')
+    alert(event)
     if (event === 'up') {
       alert(Vue.$store.state.volume)
       //  mute log
