@@ -9,6 +9,9 @@ export default class WebApi {
   }
 
   request (url, config) {
+
+    // alert(store.getters.getApiUrl.url + url)
+
     if (store.getters.getSession.user_id === ""){
       // alert('user_id 가 유효하지 않습니다.')
       const Vari = window.android.getInitVariables()
@@ -22,7 +25,7 @@ export default class WebApi {
 
     return axios({
       // url: store.getters.getSession.api_url + url,
-      url : store.getters.getSession.api_url + url,
+      url : store.getters.getApiUrl.url + url,
       headers: {
         user_id: store.getters.getSession.user_id,
         user_auth_key: store.getters.getSession.user_auth_key,
@@ -33,8 +36,6 @@ export default class WebApi {
       .catch(error => {
         console.log('error from api')
         console.log(error)
-        // alert('error from API')
-        // alert(error.message)
         if (error.message === "Network Error") {
           Vue.$router.push('/Error')
         }
@@ -194,7 +195,7 @@ export default class WebApi {
     })
   }
   /**
-   * 학습 : 드로잉제출
+   * 학습 : 드로잉 제출
    *
    * api/learning/submission
    *
@@ -205,6 +206,37 @@ export default class WebApi {
       data: data
     })
   }
+
+
+  /**
+   * 학습 : 드로잉 제출
+   *
+   * api/learning/submission
+   *
+   */
+  getSubmissionFreePicture (data) {
+    return this.request('api/drawing/picture', {
+      method: 'POST',
+      data: data
+    })
+  }
+
+
+  /**
+   * 학습 : 드로잉 제출
+   *
+   * api/learning/submission
+   *
+   */
+  getSubmissionFreeAudio (data) {
+    return this.request('api/drawing/audio', {
+      method: 'POST',
+      data: data
+    })
+  }
+
+
+
 
 
 

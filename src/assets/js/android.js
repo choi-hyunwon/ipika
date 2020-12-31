@@ -61,15 +61,20 @@ export class Android {
    * @param curVolume
    */
   onChangedVolume(event) {
+    alert('onChangedVolume')
     if (event === 'up') {
+      alert(Vue.$store.state.volume)
       //  mute log
       if (Vue.$store.state.volume < 1) {
         Vue.$store.state.volume = Vue.$store.state.volume + 0.1
+        alert(Vue.$store.state.volume)
       }
     } else if (event === 'down') {
+      alert(Vue.$store.state.volume)
       //소리가 있을때
       if (Vue.$store.state.volume > 0) {
         Vue.$store.state.volume = Vue.$store.state.volume - 0.1
+        alert(Vue.$store.state.volume)
       }
     }
   }

@@ -113,6 +113,22 @@ export const actions = {
       })
   },
 
+  getSubmissionFreePicture ({ commit }, options) {
+    return webApi.getSubmissionFreePicture(options)
+      .then(data => {
+        return data
+      })
+  },
+
+  getSubmissionFreeAudio ({ commit }, options) {
+    return webApi.getSubmissionFreeAudio(options)
+      .then(data => {
+        return data
+      })
+  },
+
+
+
   getRecording ({ commit }, options) {
     return webApi.getRecording(options)
       .then(data => {
