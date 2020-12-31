@@ -44,23 +44,19 @@
             </li>
             <li class="grade_bg curious"></li>
             <li class="grade_desc">
-              <p><span>무의식의 세계</span> - 트윙클 스테이지는 반짝이는 상상력이 돋보이는 단계입니다.
-                원과 직선의 드로잉은 규칙과 순서에 얽매이지 않고, 눈과 손의 협응이 자유로우며 표현에 자신감이 드러납니다.</p>
+              <p><span>지식 표현의 세계</span> - 큐리어스 스테이지는 호기심이 왕성한 단계입니다. 자기 의식이 활발하여 객관적 사실의 서술 보다 주관적인 묘사를 시작합니다. 실제 대상과 무관한 색채를 특별하게 표현하기도 합니다.</p>
             </li>
             <li class="grade_bg growing"></li>
             <li class="grade_desc">
-              <p><span>무의식의 세계</span> - 트윙클 스테이지는 반짝이는 상상력이 돋보이는 단계입니다.
-                원과 직선의 드로잉은 규칙과 순서에 얽매이지 않고, 눈과 손의 협응이 자유로우며 표현에 자신감이 드러납니다.</p>
+              <p><span>주관의 세계</span> - 그로잉 업 스테이지는 다양한 경험에 의한 뚜렷한 주관이 돋보이는 단계입니다. 자신과 대상과의 관계를 발견하여 과장과 생략을 사용합니다. 인물과 공간을 표현 시 기저선이 나타나는 특징을 보입니다.</p>
             </li>
             <li class="grade_bg artist"></li>
             <li class="grade_desc">
-              <p><span>무의식의 세계</span> - 트윙클 스테이지는 반짝이는 상상력이 돋보이는 단계입니다.
-                원과 직선의 드로잉은 규칙과 순서에 얽매이지 않고, 눈과 손의 협응이 자유로우며 표현에 자신감이 드러납니다.</p>
+              <p><span>작가주의의 세계</span> - 아티스트 스테이지는 공식화한 자신만의 표현에서 벗어나 세부 표현으로 발전하는 단계입니다. 기저선은 물론 중첩, 부감 등 응용 표현이 가능해집니다. 세밀한 묘사를 수반한 표현을 통해 폭발적인 창의력을 보입니다.</p>
             </li>
             <li class="grade_bg creator"></li>
             <li class="grade_desc">
-              <p><span>무의식의 세계</span> - 트윙클 스테이지는 반짝이는 상상력이 돋보이는 단계입니다.
-                원과 직선의 드로잉은 규칙과 순서에 얽매이지 않고, 눈과 손의 협응이 자유로우며 표현에 자신감이 드러납니다.</p>
+              <p><span>창의융합의 세계</span> - 크리에이터 스테이지는 내면 정서를 창의적으로 표현하는 단계입니다. 다양한 배경지식을 통해 콜라보레이션이 가능해지며 융합적 사고가 발달하고, 자신만의 디자인 감각이 드러납니다. 입체와 원근을 포함한 3차원적 공간을 자유롭게 표현합니다.</p>
             </li>
           </ul>
         </div>
@@ -267,9 +263,10 @@ export default {
               font-size: 2.4rem;
               line-height: 4rem;
               letter-spacing: -0.03rem;
-              color: var(--gray-black);
+              color: var(--gray-800);
               font-family: 'Noto Sans CJK KR Regular';
               span{
+                color: var(--gray-black);
                 font-family: 'Noto Sans CJK KR Bold';
                 font-size: 2.4rem;
                 line-height: 4rem;
