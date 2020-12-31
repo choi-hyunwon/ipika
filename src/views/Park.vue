@@ -47,8 +47,10 @@ export default {
 
 <style lang="scss" scoped>
 .park {
-  width: 1280px;
-  height: 800px;
+  //width: 1280px;
+  //height: 800px;
+   width: 100%;
+  height: 100%;
 
   iframe {
     width: 100%;

@@ -99,8 +99,10 @@ export default {
 
 <style>
 #app {
-  width: 192.2rem;
-  height: 112.9rem;
+  //width: 192.2rem;
+  //height: 112.9rem;
+  width: 100%;
+  height: 100%;
   position: relative;
   margin: 0 auto;
   overflow: hidden;

@@ -121,13 +121,17 @@ export default {
   position: absolute;
   top: 0;
   left: 0;
-  width: 192rem;
-  height: 120rem;
+  //width: 192rem;
+  //height: 120rem;
+  width: 100%;
+  height: 100%;
   z-index: 1000;
 
   .dim-dark {
-    width: 192rem;
-    height: 120rem;
+    width: 100%;
+    height: 100%;
+    //width: 192rem;
+    //height: 120rem;
     opacity: 0.7;
     background-color: var(--gray-black);
     position: absolute;
