@@ -230,7 +230,7 @@ export default {
                 self.allSize();
                 self.setFilter(self.activeIndex)
               })
-
+            this.$EventBus.$emit('setPicture')
           } else {
             alert(result.message)
           }

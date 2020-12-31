@@ -132,16 +132,20 @@ export default {
       selected: 1
     }
   },
+  created () {
+    this.$EventBus.$on('setPicture',this.setList)
+  },
   computed: {
     ...mapGetters({
       session: 'getSession',
       userGalleryMypicture: 'getUserGalleryMypicture'
     }),
-
+    setList(){
+      this.list = this.userGalleryMypicture.pictures
+    }
   },
   mounted () {
     this.fetchUserGalleryMypicture()
-
     this.getUserGallery()
   },
   methods: {
@@ -172,6 +176,8 @@ export default {
         this.$bvModal.show('galleryBGChangeEmpty')
       } else {
         this.$bvModal.show('galleryBgChange')
+        this.setFilter()
+        this.allSize()
       }
     },
     fetchUserGalleryMypicture () {
