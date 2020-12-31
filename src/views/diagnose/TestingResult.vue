@@ -34,10 +34,41 @@
       </div>
     </div>
     <div class="bg_dim"  v-if="menu.popup">
-      <div class="modal_img">
-        <img src="@/assets/images/common/stage_modal.png" alt="스테이지알아보기" class="img-m">
-        <img src="@/assets/images/common/close_dim@2x.png" alt="스테이지알아보기종료" class="img-m close_btn" @click="menu.popup = !menu.popup">
+      <div class="modal_body">
+        <div class="modal_content">
+          <ul class="grade_list clearfix">
+            <li class="grade_bg twinkle"></li>
+            <li class="grade_desc">
+              <p><span>무의식의 세계</span> - 트윙클 스테이지는 반짝이는 상상력이 돋보이는 단계입니다.
+                원과 직선의 드로잉은 규칙과 순서에 얽매이지 않고, 눈과 손의 협응이 자유로우며 표현에 자신감이 드러납니다.</p>
+            </li>
+            <li class="grade_bg curious"></li>
+            <li class="grade_desc">
+              <p><span>무의식의 세계</span> - 트윙클 스테이지는 반짝이는 상상력이 돋보이는 단계입니다.
+                원과 직선의 드로잉은 규칙과 순서에 얽매이지 않고, 눈과 손의 협응이 자유로우며 표현에 자신감이 드러납니다.</p>
+            </li>
+            <li class="grade_bg growing"></li>
+            <li class="grade_desc">
+              <p><span>무의식의 세계</span> - 트윙클 스테이지는 반짝이는 상상력이 돋보이는 단계입니다.
+                원과 직선의 드로잉은 규칙과 순서에 얽매이지 않고, 눈과 손의 협응이 자유로우며 표현에 자신감이 드러납니다.</p>
+            </li>
+            <li class="grade_bg artist"></li>
+            <li class="grade_desc">
+              <p><span>무의식의 세계</span> - 트윙클 스테이지는 반짝이는 상상력이 돋보이는 단계입니다.
+                원과 직선의 드로잉은 규칙과 순서에 얽매이지 않고, 눈과 손의 협응이 자유로우며 표현에 자신감이 드러납니다.</p>
+            </li>
+            <li class="grade_bg creator"></li>
+            <li class="grade_desc">
+              <p><span>무의식의 세계</span> - 트윙클 스테이지는 반짝이는 상상력이 돋보이는 단계입니다.
+                원과 직선의 드로잉은 규칙과 순서에 얽매이지 않고, 눈과 손의 협응이 자유로우며 표현에 자신감이 드러납니다.</p>
+            </li>
+          </ul>
+        </div>
+        <div class="close_btn">
+          <img src="@/assets/images/common/close_dim@2x.png" alt="스테이지알아보기종료" class="img-m" @click="menu.popup = !menu.popup">
+        </div>
       </div>
+
     </div>
   </div>
 </template>
@@ -194,22 +225,72 @@ export default {
     height: 100%;
     left: 0;
     background-color: rgba(20,20,20,.6);
-  }
-  .modal_img{
-    position: absolute;
-    top: 3rem;
-    width: 176rem;
-    height: 105.7rem;
-    left: 8.5rem;
-    .close_btn{
-      position: absolute;
-      top: 2rem;
-      right: 2rem;
-      width: 6rem;
-      height: 6rem;
-      cursor: pointer;
+    .modal_body{
+      top: 8rem;
+      left: 8rem;
+      position: relative;
+      width: 176rem;
+      height: 98rem;
+      border-radius: 1.6rem;
+      background-color: var(--ivory-300);
+      .modal_content{
+        width: 100%;
+        height: 100%;
+        padding: 9.8rem 16.6rem 9.1rem 11.2rem;
+        .grade_list{
+          .grade_bg{
+            width: 55rem;
+            height: 10rem;
+            margin-right: 16.2rem;
+            float: left;
+            background-size: cover;
+            margin-bottom: 4.1rem;
+            &.twinkle{
+              background-image: url("~@/assets/images/common/img_text_info_twinkle@2x.png");
+            }
+            &.curious{
+              background-image: url("~@/assets/images/common/img_text_info_curious@2x.png");
+            }
+            &.growing{
+              background-image: url("~@/assets/images/common/img_text_info_growing@2x.png");
+            }
+            &.artist {
+              background-image: url("~@/assets/images/common/img_text_info_artist@2x.png");
+            }
+            &.creator{
+              background-image: url("~@/assets/images/common/img_text_info_creator@2x.png");
+            }
+          }
+          .grade_desc{
+            margin-bottom: 4.1rem;
+            p{
+              font-size: 2.4rem;
+              line-height: 4rem;
+              letter-spacing: -0.03rem;
+              color: var(--gray-black);
+              font-family: 'Noto Sans CJK KR Regular';
+              span{
+                font-family: 'Noto Sans CJK KR Bold';
+                font-size: 2.4rem;
+                line-height: 4rem;
+                letter-spacing: -0.03rem;
+              }
+            }
+          }
+        }
+      }
+        .close_btn{
+          position: absolute;
+          top: 2rem;
+          right: 2rem;
+          width: 6rem;
+          height: 6rem;
+          cursor: pointer;
+      }
     }
+
   }
+
 }
 </style>
 
