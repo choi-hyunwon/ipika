@@ -22,8 +22,8 @@
     <div class="contents" >
       <myGalleryInfo v-on:popup="settingPopup"></myGalleryInfo>
       <div class="tab-section">
-        <b-tabs justified>
-          <b-tab title="내 그림" title-link-class="mytab">
+        <b-tabs justified >
+          <b-tab title="내 그림" title-link-class="mytab" @click="onClickPicture">
             <myGalleryPicture></myGalleryPicture>
           </b-tab>
           <b-tab title="내 녹음 듣기" title-link-class="mytab">
@@ -65,7 +65,7 @@
               </b-button>
             </div>
             <ul class="scroll d-flex" v-if="list.length > 0">
-              <li class="background-img" v-for="(item, index) in userGalleryMypicture.pictures">
+              <li class="background-img" v-for="(item, index) in list">
                 <button @click="setBackground(item.pictureId, index)">
                   <img :src="item.pictureUrl" alt="갤러리사진" class="img-m">
                 </button>
@@ -133,7 +133,7 @@ export default {
     }
   },
   created () {
-    this.$EventBus.$on('setPicture',this.setList)
+    this.$EventBus.$on('setPicture', this.setList)
   },
   computed: {
     ...mapGetters({
@@ -153,6 +153,9 @@ export default {
       getUserGalleryBackground: 'getUserGalleryBackground',
       getUserGalleryDetele: 'getUserGalleryDetele'
     }),
+    onClickPicture() {
+      this.$eventBus.$emit('stopAudioMy')
+    },
     setList(){
       this.list = this.userGalleryMypicture.pictures
       this.allSize()
@@ -203,6 +206,7 @@ export default {
       this.setFilter(index)
     },
     setFilter (index) {
+
       if (index === 0) {
         this.list = this.userGalleryMypicture.pictures
       } else if (index === 1) {
@@ -214,6 +218,8 @@ export default {
           return item.drawingType === 3
         })
       }
+      console.log(index)
+      console.log(this.list)
       //sort 처리
       this.setSort(this.selected)
     },

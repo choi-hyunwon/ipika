@@ -143,6 +143,7 @@ export default {
   },
   created () {
     this.$eventBus.$on('setVolumeMy', this.setVolume)
+    this.$eventBus.$on('stopAudioMy', this.fnStop)
   },
   mounted () {
     this.isLoading = true
@@ -263,11 +264,14 @@ export default {
           this.elementById.style.transitionDuration = "0s";
         }
       }else{
-        this.$refs.player.pause()
-        this.play = false
-        this.elementById.classList.remove('active')
-        this.elementById.style.transitionDuration = "0s";
+        this.fnStop();
       }
+    },
+    fnStop(){
+      this.$refs.player.pause()
+      this.play = false
+      this.elementById.classList.remove('active')
+      this.elementById.style.transitionDuration = "0s";
     },
     durationActive(){
       let elementById = document.getElementById("play_bar" + this.focusIdx)

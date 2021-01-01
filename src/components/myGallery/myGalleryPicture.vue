@@ -128,6 +128,10 @@ export default {
   components: {
     Alert
   },
+  created() {
+    this.$eventBus.$on('setFilterBg', this.setFilter())
+
+  },
   computed: {
     ...mapGetters({
       userGalleryMypicture: 'getUserGalleryMypicture'
