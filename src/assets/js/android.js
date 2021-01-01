@@ -1,4 +1,4 @@
-import Vue from 'vue'
+
 
 export class Android {
   /**
@@ -66,13 +66,15 @@ export class Android {
    * @param data
    */
   onBackPressed(){
+    window.android.sendLog('onBackPressed')
     //메인 홈인 경우 exit
     if ( location.pathname.containsIgnoreCase("Main") || location.pathname == "/" ){
       window.android.exit()
     } else {
-      Vue.prototype.Router.go(-1)
+      vm.prototype.Router.go(-1)
     }
   }
+
 
 
   /**
@@ -80,23 +82,25 @@ export class Android {
    * @param curVolume
    */
   onChangedVolume(event) {
-    alert('onChangedVolume')
-    alert(event)
+    try {
+      window.android.sendLog('onChangedVolume')
+      window.android.sendLog(event)
+    }catch (e) {
+      console.log('window.android.sendLog error');
+    }
     if (event === 'up') {
       //  mute log
-      if (Vue.$store.state.volume < 1) {
-        Vue.$store.state.volume = Vue.$store.state.volume + 0.1
+      if (vm.$store.state.volume < 1) {
+        vm.$store.state.volume = vm.$store.state.volume + 0.1
       }
-      alert(Vue.$store.state.volume)
     } else if (event === 'down') {
       //소리가 있을때
-      if (Vue.$store.state.volume > 0) {
-        Vue.$store.state.volume = Vue.$store.state.volume - 0.1
+      if (vm.$store.state.volume > 0) {
+        vm.$store.state.volume = vm.$store.state.volume - 0.1
       }
-      alert(Vue.$store.state.volume)
     }
-    Vue.$eventBus.$emit('setVolumeMy')
-    Vue.$eventBus.$emit('setVolumeLetter')
-    Vue.$eventBus.$emit('setVolumeVideo')
+    vm.$eventBus.$emit('setVolumeMy')
+    vm.$eventBus.$emit('setVolumeLetter')
+    vm.$eventBus.$emit('setVolumeVideo')
   }
 }

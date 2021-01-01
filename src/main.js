@@ -16,6 +16,7 @@ Vue.config.productionTip = false
 Vue.prototype.globalUtils = new GlobalUtils()
 Vue.prototype.$EventBus = new Vue();
 Vue.prototype.Android = new Android()
+window.aOS = Vue.prototype.Android
 Vue.prototype.Router = new Router({ mode : 'history', routes : routes })
 
 Vue.use(browserDetect)
@@ -31,7 +32,7 @@ const router = new Router({
 Vue.use(VueProgress)
 
 
-var vm = new Vue({
+window.vm = new Vue({
   router,
   store,
   render: h => h(App)
