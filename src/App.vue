@@ -22,7 +22,7 @@ export default {
     return {
       dummy: false, //더미 데이터 사용
       demo: false, //데모용 빌드
-      app: true, //웹 유무
+      app: false, //웹 유무
       dev: true //API서버
     }
   },
@@ -63,7 +63,7 @@ export default {
            * 정식 스토리 경우에는 고정값 처리
            */
           this.Session.name = '승아'
-          this.Session.user_id = '2059356'
+          this.Session.user_id = 'hl99999'
           this.Session.user_auth_key = 'abcdefghijklmnopqrstuvwxyz0123456789'
           this.Session.Content_Language = 'ko'
           this.Session.device_type = '1001'

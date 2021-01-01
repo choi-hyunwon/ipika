@@ -1,14 +1,14 @@
 <template>
   <div class="wrap">
     <!--   canvas 헤더 -->
-    <CanvasHeader v-if="isLoading"></CanvasHeader>
+    <CanvasHeader v-if="isLoading" ></CanvasHeader>
     <!--   wacom 라이브러리 -->
     <Wacom ref="wacom" :drawer="drawer"></Wacom>
 
-    <div v-if="bgPopup===true&&page==='diagnose'" class="guide_bg" @click="toggleGuide">
+    <div v-if="isLoading===true && bgPopup===true && page==='diagnose'" class="guide_bg" @click="toggleGuide">
       <img src="@/assets/images/common/test_guide.png" alt="캔버스가이드-처음시작" class="img-m">
     </div>
-    <div v-if="bgPopup===true&&page==='letter'" class="guide_bg" @click="toggleGuide">
+    <div v-if="isLoading===true && bgPopup===true && page==='letter'" class="guide_bg" @click="toggleGuide">
       <img src="@/assets/images/common/guide.png" alt="캔버스가이드" class="img-m">
     </div>
 
@@ -87,7 +87,7 @@ export default {
     if (localStorage.getItem('isReload') === 'true' || localStorage.getItem('isReload') === undefined) {
       window.location.reload()
     } else {
-      this.isLoading = true
+
     }
     (async () => {
       if (this.page === 'diagnose') {
@@ -252,7 +252,9 @@ export default {
       if (this.bgPopup === false && this.page === 'diagnose') {
         this.setTimerStart()
       } else if (this.page === 'letter') {
-        this.setBackgrounImage()
+        setTimeout(()=>{
+          this.setBackgrounImage()
+        },1000)
       }
     },
 
@@ -268,6 +270,11 @@ export default {
     },
     async fetchLetter () {
       this.getLetter()
+        .then(result => {
+          console.log('info get');
+          this.isLoading = true
+          console.log('isLoading');
+        })
     },
     fetchSubmission (data) {
       const self = this

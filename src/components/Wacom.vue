@@ -677,7 +677,7 @@
                       :okText = "'제출하기'">
               <b-button  @click="globalUtils.confirm(slotProps,'diagnose')" class="btn btn-blue btn-lg">완료</b-button>
             </Confirm>
-            <b-button v-else-if="page==='letter'" @click="setEvent" class="btn btn-blue btn-lg" :class="{'disabled' : !bg.imageId}">완료</b-button>
+            <b-button v-else-if="page==='letter'" @click="setEvent" class="btn btn-blue btn-lg">완료</b-button>
             <!--프리드로잉-->
             <b-button v-else @click="$EventBus.$emit('freeName')" class="btn btn-blue btn-lg">완료</b-button>
           </div>
