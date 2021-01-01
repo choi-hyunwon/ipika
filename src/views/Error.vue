@@ -6,8 +6,8 @@
         확인 후 다시 시도해 주세요.
       </p>
       <div class="btn-wrap">
-        <button class="btn btn-gray">다시 시도</button>
-        <button class="btn btn-black">종료</button>
+        <button class="btn btn-gray" @click="back">다시 시도</button>
+        <button class="btn btn-black" @click="exit">종료</button>
       </div>
     </div>
   </div>
@@ -15,7 +15,16 @@
 
 <script>
 export default {
-  name: 'Error'
+  name: 'Error',
+  methods:{
+    back(){
+      // window.history.back()
+      window.location.assign("/")
+    },
+    exit(){
+      window.android.exit()
+    }
+  }
 }
 </script>
 

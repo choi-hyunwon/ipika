@@ -9,8 +9,7 @@ import AudioRecorder from 'vue-audio-recorder'
 // import AudioVisual from 'vue-audio-visual'
 import { Android } from './assets/js/android'
 import VueProgress from 'vue-progress'
-import browserDetect from "vue-browser-detect-plugin"
-
+import browserDetect from 'vue-browser-detect-plugin'
 
 Vue.config.productionTip = false
 
@@ -32,7 +31,7 @@ const router = new Router({
 Vue.use(VueProgress)
 
 
-new Vue({
+var vm = new Vue({
   router,
   store,
   render: h => h(App)
