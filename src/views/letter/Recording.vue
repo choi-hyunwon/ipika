@@ -212,7 +212,7 @@ export default {
     // window.z = this
 
     this.$EventBus.$on('back', this.goBack)
-    this.$EventBus.$on('next', () => {
+    this.$EventBus.$on('nextRecording', () => {
       if(this.ing){
         this.audioEl.setAttribute('src', this.audioSource)
         this.ing = false

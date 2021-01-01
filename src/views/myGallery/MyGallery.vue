@@ -140,9 +140,7 @@ export default {
       session: 'getSession',
       userGalleryMypicture: 'getUserGalleryMypicture'
     }),
-    setList(){
-      this.list = this.userGalleryMypicture.pictures
-    }
+
   },
   mounted () {
     this.fetchUserGalleryMypicture()
@@ -155,6 +153,10 @@ export default {
       getUserGalleryBackground: 'getUserGalleryBackground',
       getUserGalleryDetele: 'getUserGalleryDetele'
     }),
+    setList(){
+      this.list = this.userGalleryMypicture.pictures
+      this.allSize()
+    },
     isEmpty(){
       return this.userGalleryMypicture.pictures.length === 0 ? true : false
     },

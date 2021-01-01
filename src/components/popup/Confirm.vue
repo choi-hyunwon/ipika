@@ -146,7 +146,7 @@ export default {
     },
     goToNext () {
       this.showConfirm = false
-      this.$EventBus.$emit('next')
+      this.$EventBus.$emit('nextRecording')
     },
     clear () {
       WILL.clear()
