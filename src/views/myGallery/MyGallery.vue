@@ -181,7 +181,8 @@ export default {
         this.$bvModal.show('galleryBGChangeEmpty')
       } else {
         this.$bvModal.show('galleryBgChange')
-        this.setFilter()
+        this.activeIndex = 0;
+        this.setFilter(this.activeIndex)
         this.allSize()
       }
     },

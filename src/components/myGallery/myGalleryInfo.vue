@@ -49,12 +49,12 @@ export default {
   mounted () {
     this.fetchResult()
     this.fetchUserGallery()
+    console.log('myGalleryInfo mounted')
   },
-
   methods: {
     ...mapActions({
       getResult: "getResult",
-      getUserGallery: "getUserGallery"
+      UserGallery: "getUserGallery"
     }),
     fetchResult() {
       this.getResult()
@@ -65,7 +65,7 @@ export default {
     },
     fetchUserGallery() {
       const self = this
-      this.getUserGallery()
+      this.UserGallery()
         .then(result => {
           console.log('fetchUserGallery :', result)
           if(result !== undefined) this.galleryInfo = self.getUserGallery

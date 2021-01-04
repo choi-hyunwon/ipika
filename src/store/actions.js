@@ -33,7 +33,6 @@ export const actions = {
       })
   },
   getUserGallery ({ commit }, options) {
-
     return webApi.getUserGallery(options)
       .then(data => {
         commit('setUserGallery', data)
