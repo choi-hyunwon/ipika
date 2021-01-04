@@ -95,7 +95,10 @@ export default {
       } else if (this.page === 'letter') await this.fetchLetter()
     })()
 
-    if (this.page === '') this.$EventBus.$emit('showToolBar')
+    if (this.page === '') {
+      this.$EventBus.$emit('showToolBar')
+      this.isLoading = true
+    }
     console.log('page', typeof this.page)
 
 
@@ -266,6 +269,7 @@ export default {
         .then(result => {
           this.setTimeInit(this.subject.limitTime)
           this.Android.tts(this.subject.subject)
+          this.isLoading = true
         })
     },
     async fetchLetter () {
