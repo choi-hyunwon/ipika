@@ -27,6 +27,12 @@ import Testscroll from '@/views/Testscroll'
 import Error from '@/views/Error'
 // import AudioConstant from '@/components/AudioConstant'
 
+import Opengallery from '@/views/backup/opengallery/Opengallery'
+import opengalleryDetail from '@/views/backup/opengallery/opengalleryDetail'
+import opengalleryDetail2 from "@/views/backup/opengallery/opengalleryDetail2";
+import opengalleryLikelist from "@/views/backup/opengallery/opengalleryLikelist";
+import openGallery2 from "@/views/backup/opengallery/openGallery2";
+
 const requireAuth = () => (from, to, next) => {
   if(from.path === '/canvas' || from.path === '/pabloCanvas') {
     if(localStorage.getItem('isReload') !== 'true') localStorage.setItem('isReload', true)
@@ -132,6 +138,31 @@ export const routes = [
     name:'Error',
     component: Error
   },
+  {
+    path:'/Opengallery',
+    name:'Opengallery',
+    component: Opengallery
+  },
+  {
+    path:'/opengalleryDetail',
+    name:'opengalleryDetail',
+    component: opengalleryDetail
+  },
+  {
+    path:'/opengalleryDetail2',
+    name:'opengalleryDetail',
+    component: opengalleryDetail2
+  },
+  {
+    path:'/opengalleryLikelist',
+    name:'opengalleryLikelist',
+    component: opengalleryLikelist
+  },
+  {
+    path:'/openGallery2',
+    name:'openGallery2',
+    component: openGallery2
+  }
   // {
   //   path : '/audioTest',
   //   name : 'audioTest',

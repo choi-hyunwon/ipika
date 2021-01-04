@@ -316,11 +316,9 @@ export default {
     .btn-left {
       margin-left: 6.4rem;
       color: var(--gray-500);
-
       button {
         background-color: var(--gray-200);
         margin-right: 1.2rem;
-        color: var(--gray-500);
         min-width: auto;
         font-weight: 600;
         border: none;
@@ -328,7 +326,6 @@ export default {
         height: 6.8rem;
         line-height: 2rem;
         font-size: 2rem;
-
         img {
           width: 2rem;
           height: 2rem;
