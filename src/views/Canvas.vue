@@ -72,7 +72,7 @@ export default {
     this.$EventBus.$on('main', this.goMain)
     this.$EventBus.$on('back', this.goBack)
     this.$EventBus.$on('close', this.close)
-    this.$EventBus.$on('next', this.exportPNG)
+    this.$EventBus.$on('nextExportPNG', this.exportPNG)
     this.$EventBus.$on('free', (title) => {
       this.freeTitle = title
       this.exportPNG()

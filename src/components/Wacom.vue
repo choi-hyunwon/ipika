@@ -810,7 +810,7 @@ export default {
       this.isPickerOpen()
     },
     setEvent(){
-      this.$EventBus.$emit('next')
+      this.$EventBus.$emit('nextExportPNG')
     }
   }
 }

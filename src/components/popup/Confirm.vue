@@ -167,19 +167,17 @@ export default {
         this.goMain()
       } else if (this.type === 'refresh') {
         this.clear()
-      } else if (this.type === 'Complete' || this.type === 'diagnose' || this.type === 'refresh' || this.type === 'record' || this.type === 'Refresh') {
+      } else if (this.type === 'diagnose') {
+        this.showConfirm = false
+        this.$EventBus.$emit('nextExportPNG')
+      } else if (this.type === 'Complete' || this.type === 'refresh' || this.type === 'record' || this.type === 'Refresh') {
         this.goToNext()
       } else if (this.type === 'watchComplete') {
         this.$route.push('/Recording')
       } else if (this.type === 'success') {
         const self = this;
         if(this.canvasList.length > 1) {
-
-
           WILL.clear()
-
-          // this.canvasList = this.canvasList.splice(0,1)
-          // this.canvasList.forEach(element => console.log(element))
 
           this.canvasList = this.canvasList.forEach(function(item, index, object) {
             if (item.imageId === self.bg.imageId) {
