@@ -99,7 +99,9 @@ export default {
   },
   mounted () {
 
-    this.fnMakeSecUrl()
+
+    // this.fnMakeSecUrl() //원타임 URL적용 > 앱에서 실패로 인하여 주석처리
+
     this.player = videojs(this.$refs.videoPlayer, this.options, function onPlayerReady() {
       console.log('onPlayerReady', this);
     })
