@@ -20,6 +20,7 @@
     "vue-awesome-swiper": "^4.1.1",
     "vue-browser-detect-plugin": "^0.1.13",
     "vue-colour-picker": "0.0.5",
+    "vue-cryptojs": "^2.1.5",
     "vue-progress": "^0.2.1",
     "vue-radial-progress": "^0.3.2",
     "vue-router": "^3.4.8",

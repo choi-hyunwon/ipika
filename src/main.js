@@ -6,6 +6,7 @@ import store from './store/store'
 import { BootstrapVue } from 'bootstrap-vue'
 import { GlobalUtils } from './utils/globalUtils'
 import AudioRecorder from 'vue-audio-recorder'
+import VueCryptojs from 'vue-cryptojs'
 // import AudioVisual from 'vue-audio-visual'
 import { Android } from './assets/js/android'
 import VueProgress from 'vue-progress'
@@ -22,6 +23,7 @@ Vue.prototype.Router = new Router({ mode : 'history', routes : routes })
 Vue.use(browserDetect)
 Vue.use(BootstrapVue)
 Vue.use(AudioRecorder)
+Vue.use(VueCryptojs)
 // Vue.use(AudioVisual)
 Vue.use(Router)
 

@@ -70,7 +70,6 @@ export default {
       }
     }
   },
-
   data() {
     return {
       isStart: true,
@@ -80,9 +79,12 @@ export default {
       tapTimer: null
     }
   },
-
   created () {
     console.log('PLAYER CREATED>>>>>>>>>>>>>>>>>>>>>')
+
+
+
+
     this.$EventBus.$on('popupOpen', (val) => {
       if(this.player) {
         val && this.pause()
@@ -96,6 +98,8 @@ export default {
     })
   },
   mounted () {
+
+    this.fnMakeSecUrl()
     this.player = videojs(this.$refs.videoPlayer, this.options, function onPlayerReady() {
       console.log('onPlayerReady', this);
     })
@@ -113,6 +117,34 @@ export default {
   },
 
   methods: {
+
+    fnMakeSecUrl(){
+      let orgUrl = this.options.sources[0].src
+
+      var cdnkey = "iscreamauth";
+      var encUrl = orgUrl.substring(orgUrl.indexOf(".com")+4);
+      console.log("encUrl : " + encUrl);
+      var convurl = "https://avod.home-learn.com"+encUrl;
+
+      const jsDate = new Date();
+      var ctime = Date.now();
+      console.log(ctime);
+
+      var pxTime = parseInt(ctime/1000, 10) + (60*5);
+      console.log("pxTime : " + pxTime);
+
+      var pxHash = cdnkey + encUrl + pxTime;
+      console.log("dec hash : " + pxHash);
+      var pxHash = this.$CryptoJS.MD5(pxHash);
+
+      console.log("enc hash : " + pxHash);
+
+      var secUrl = convurl+"?px-time="+pxTime+"&px-hash="+pxHash;
+
+      console.log("k34lURL :"+ secUrl);
+
+      this.options.sources[0].src = secUrl
+    },
     // 영상 재생
     play() {
       this.player.play()
